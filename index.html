@@ -1,1 +1,62 @@
-test ez
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexHub — Your Digital Command Center</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="grid-bg"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">NexHub</span>
+      </div>
+      <div class="header-controls">
+        <div class="search-wrap">
+          <span class="search-icon">◎</span>
+          <input type="text" id="searchInput" placeholder="Search sites..." autocomplete="off" />
+          <kbd>Ctrl+K</kbd>
+        </div>
+        <div class="site-count" id="siteCount">0 sites</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATEGORY FILTERS -->
+  <nav class="cat-nav" id="catNav">
+    <div class="cat-nav-inner">
+      <button class="cat-btn active" data-cat="all">✦ All</button>
+      <!-- dynamically filled -->
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="main">
+    <div class="section-label" id="sectionLabel">All Sites</div>
+    <div class="cards-grid" id="cardsGrid">
+      <!-- cards rendered by JS -->
+    </div>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <div class="empty-icon">◌</div>
+      <p>No sites found matching "<span id="emptyQuery"></span>"</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>NexHub &mdash; Your digital command center</span>
+    <span class="footer-note">Edit <code>sites.json</code> to add or remove sites</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

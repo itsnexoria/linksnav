@@ -1,0 +1,429 @@
+{
+  "categories": [
+    {
+      "id": "server-tools",
+      "label": "Server Tools",
+      "icon": "⚙️"
+    },
+    {
+      "id": "ai",
+      "label": "AI & Chat",
+      "icon": "🤖"
+    },
+    {
+      "id": "social",
+      "label": "Social & Media",
+      "icon": "📱"
+    },
+    {
+      "id": "entertainment",
+      "label": "Entertainment",
+      "icon": "🎬"
+    },
+    {
+      "id": "dev-tools",
+      "label": "Dev Tools",
+      "icon": "🛠️"
+    },
+    {
+      "id": "design",
+      "label": "Design & Media",
+      "icon": "🎨"
+    },
+    {
+      "id": "storage",
+      "label": "Storage & Files",
+      "icon": "📁"
+    },
+    {
+      "id": "minecraft",
+      "label": "Minecraft",
+      "icon": "⛏️"
+    },
+    {
+      "id": "finance",
+      "label": "Finance",
+      "icon": "💳"
+    },
+    {
+      "id": "google",
+      "label": "Google Suite",
+      "icon": "🔵"
+    },
+    {
+      "id": "my-sites",
+      "label": "My Sites",
+      "icon": "🌐"
+    }
+  ],
+  "sites": [
+    {
+      "name": "Pterodactyl Panel",
+      "url": "https://ptero.heo-systems.com/",
+      "description": "Game server management panel. Start, stop, and configure your servers.",
+      "category": "server-tools",
+      "tags": ["free"],
+      "color": "#00b4d8"
+    },
+    {
+      "name": "TicketTool",
+      "url": "https://tickettool.xyz/dashboard/",
+      "description": "Discord ticket bot dashboard. Manage support tickets for your community.",
+      "category": "server-tools",
+      "tags": ["free", "paid"],
+      "color": "#7289da"
+    },
+    {
+      "name": "Maki Bot",
+      "url": "https://maki.gg/en-GB/dashboard",
+      "description": "All-in-one Discord bot dashboard for moderation, leveling, and more.",
+      "category": "server-tools",
+      "tags": ["free", "paid"],
+      "color": "#ff6b9d"
+    },
+    {
+      "name": "Dyno Bot",
+      "url": "https://dyno.gg/account",
+      "description": "Feature-rich Discord bot for moderation, auto-roles, and server management.",
+      "category": "server-tools",
+      "tags": ["free", "paid"],
+      "color": "#43b581"
+    },
+    {
+      "name": "Tebex Creator",
+      "url": "https://creator.tebex.io/dashboard",
+      "description": "Sell in-game items and perks for your Minecraft or game server storefront.",
+      "category": "server-tools",
+      "tags": ["free", "paid"],
+      "color": "#f5a623"
+    },
+    {
+      "name": "LootLabs",
+      "url": "https://creators.lootlabs.gg/",
+      "description": "Monetize your content with link locking and gated downloads.",
+      "category": "server-tools",
+      "tags": ["free", "paid"],
+      "color": "#ff9f43"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/",
+      "description": "Host, version control, and collaborate on code with the world's largest dev platform.",
+      "category": "dev-tools",
+      "tags": ["free", "paid"],
+      "color": "#f0f6fc"
+    },
+    {
+      "name": "Firebase",
+      "url": "https://firebase.google.com/",
+      "description": "Google's backend-as-a-service for building web and mobile apps fast.",
+      "category": "dev-tools",
+      "tags": ["free", "paid"],
+      "color": "#ffca28"
+    },
+    {
+      "name": "Cloudflare",
+      "url": "https://dash.cloudflare.com/",
+      "description": "Manage DNS, CDN, DDoS protection, and Workers for your domains.",
+      "category": "dev-tools",
+      "tags": ["free", "paid"],
+      "color": "#f6821f"
+    },
+    {
+      "name": "DNS Checker",
+      "url": "https://dnschecker.org/",
+      "description": "Check DNS propagation globally. See how your DNS changes are spreading worldwide.",
+      "category": "dev-tools",
+      "tags": ["free"],
+      "color": "#00c9ff"
+    },
+    {
+      "name": "HTML Color Codes",
+      "url": "https://htmlcolorcodes.com/",
+      "description": "Color picker, hex codes, and CSS color tools for web developers.",
+      "category": "dev-tools",
+      "tags": ["free"],
+      "color": "#ff6b6b"
+    },
+    {
+      "name": "Lucide Icons",
+      "url": "https://lucide.dev/icons/",
+      "description": "Beautiful, consistent open-source icon library for your web projects.",
+      "category": "dev-tools",
+      "tags": ["free"],
+      "color": "#6c63ff"
+    },
+    {
+      "name": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "description": "OpenAI's flagship AI assistant for writing, coding, research, and more.",
+      "category": "ai",
+      "tags": ["free", "paid"],
+      "color": "#10a37f"
+    },
+    {
+      "name": "Claude",
+      "url": "https://claude.ai/",
+      "description": "Anthropic's AI assistant — great for reasoning, writing, and long documents.",
+      "category": "ai",
+      "tags": ["free", "paid"],
+      "color": "#cc785c"
+    },
+    {
+      "name": "DeepSeek",
+      "url": "https://chat.deepseek.com/",
+      "description": "Powerful open-source AI model with strong coding and reasoning capabilities.",
+      "category": "ai",
+      "tags": ["free"],
+      "color": "#4d9fff"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/",
+      "description": "Watch, upload, and discover videos. The world's biggest video platform.",
+      "category": "social",
+      "tags": ["free", "paid"],
+      "color": "#ff0000"
+    },
+    {
+      "name": "X / Twitter",
+      "url": "https://x.com/home",
+      "description": "Real-time news, trending topics, and social conversations.",
+      "category": "social",
+      "tags": ["free", "paid"],
+      "color": "#e7e9ea"
+    },
+    {
+      "name": "TikTok",
+      "url": "https://www.tiktok.com/",
+      "description": "Short-form video entertainment and creator platform.",
+      "category": "social",
+      "tags": ["free"],
+      "color": "#ff0050"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/",
+      "description": "Share photos, reels, and stories with your followers.",
+      "category": "social",
+      "tags": ["free"],
+      "color": "#e1306c"
+    },
+    {
+      "name": "Spotify",
+      "url": "https://open.spotify.com/",
+      "description": "Stream millions of songs, podcasts, and playlists.",
+      "category": "entertainment",
+      "tags": ["free", "paid"],
+      "color": "#1db954"
+    },
+    {
+      "name": "YouTube Music",
+      "url": "https://music.youtube.com/",
+      "description": "Google's music streaming service with official tracks and covers.",
+      "category": "entertainment",
+      "tags": ["free", "paid"],
+      "color": "#ff0000"
+    },
+    {
+      "name": "AnimeHeaven",
+      "url": "https://animeheaven.me/",
+      "description": "Watch anime online for free with a huge library of titles.",
+      "category": "entertainment",
+      "tags": ["free"],
+      "color": "#e94560"
+    },
+    {
+      "name": "Animetsu",
+      "url": "https://animetsu.net/",
+      "description": "Free anime streaming site with subbed and dubbed content.",
+      "category": "entertainment",
+      "tags": ["free"],
+      "color": "#ff6b35"
+    },
+    {
+      "name": "AniKai",
+      "url": "https://www1.anikai.cc/",
+      "description": "Anime streaming platform with a clean interface and fast servers.",
+      "category": "entertainment",
+      "tags": ["free"],
+      "color": "#9b59b6"
+    },
+    {
+      "name": "WhatExps",
+      "url": "https://whatexpsare.online/",
+      "description": "Find out what's expiring soon — deals, subscriptions, and offers.",
+      "category": "entertainment",
+      "tags": ["free"],
+      "color": "#fd9644"
+    },
+    {
+      "name": "G2G",
+      "url": "https://www.g2g.com/",
+      "description": "Buy and sell in-game items, accounts, and currency across many games.",
+      "category": "entertainment",
+      "tags": ["free"],
+      "color": "#f39c12"
+    },
+    {
+      "name": "Canva",
+      "url": "https://www.canva.com/en_gb/",
+      "description": "Drag-and-drop graphic design tool for social media, presentations, and more.",
+      "category": "design",
+      "tags": ["free", "paid"],
+      "color": "#00c4cc"
+    },
+    {
+      "name": "iLoveIMG",
+      "url": "https://www.iloveimg.com/",
+      "description": "Online image tools: resize, compress, crop, convert and edit images.",
+      "category": "design",
+      "tags": ["free", "paid"],
+      "color": "#ff6584"
+    },
+    {
+      "name": "CloudConvert",
+      "url": "https://cloudconvert.com/webp-to-jpg",
+      "description": "Convert files between hundreds of formats online. Supports images, video, audio.",
+      "category": "design",
+      "tags": ["free", "paid"],
+      "color": "#3498db"
+    },
+    {
+      "name": "Font Changer",
+      "url": "https://www.fontchanger.net/",
+      "description": "Generate fancy text and Unicode font styles for social bios and posts.",
+      "category": "design",
+      "tags": ["free"],
+      "color": "#a29bfe"
+    },
+    {
+      "name": "Iconer",
+      "url": "https://iconer.app/",
+      "description": "Browse and download thousands of icons for your projects.",
+      "category": "design",
+      "tags": ["free"],
+      "color": "#fd79a8"
+    },
+    {
+      "name": "Web2PDF",
+      "url": "https://www.web2pdfconvert.com/",
+      "description": "Convert any web page to a PDF file instantly.",
+      "category": "design",
+      "tags": ["free", "paid"],
+      "color": "#d63031"
+    },
+    {
+      "name": "GitMind",
+      "url": "https://gitmind.com/",
+      "description": "Free mind mapping and brainstorming tool for ideas and flowcharts.",
+      "category": "design",
+      "tags": ["free", "paid"],
+      "color": "#00b894"
+    },
+    {
+      "name": "MediaFire",
+      "url": "https://www.mediafire.com/",
+      "description": "Free file hosting and sharing. Upload and share files easily.",
+      "category": "storage",
+      "tags": ["free", "paid"],
+      "color": "#1565c0"
+    },
+    {
+      "name": "Imgur",
+      "url": "https://imgur.com/",
+      "description": "Free image hosting and sharing community. Upload and share images instantly.",
+      "category": "storage",
+      "tags": ["free"],
+      "color": "#1bb76e"
+    },
+    {
+      "name": "Dropbox",
+      "url": "https://www.dropbox.com/",
+      "description": "Cloud storage and file sync across all your devices.",
+      "category": "storage",
+      "tags": ["free", "paid"],
+      "color": "#0061ff"
+    },
+    {
+      "name": "MC Packs",
+      "url": "https://mc-packs.net/",
+      "description": "Download Minecraft resource packs, texture packs, and shader files.",
+      "category": "minecraft",
+      "tags": ["free"],
+      "color": "#5cb85c"
+    },
+    {
+      "name": "MC Utils",
+      "url": "https://mcutils.com/",
+      "description": "Minecraft server tools: UUID lookup, skin renderer, MOTD builder.",
+      "category": "minecraft",
+      "tags": ["free"],
+      "color": "#8bc34a"
+    },
+    {
+      "name": "MC Statistics",
+      "url": "https://mcstatistics.org/",
+      "description": "Track Minecraft server statistics, player counts, and uptime history.",
+      "category": "minecraft",
+      "tags": ["free"],
+      "color": "#4caf50"
+    },
+    {
+      "name": "PayPal",
+      "url": "https://www.paypal.com/",
+      "description": "Send and receive money, pay for goods and manage your account.",
+      "category": "finance",
+      "tags": ["free"],
+      "color": "#003087"
+    },
+    {
+      "name": "Gmail",
+      "url": "https://mail.google.com/mail/u/0/#inbox",
+      "description": "Google's email service. Read, send, and organize your emails.",
+      "category": "google",
+      "tags": ["free"],
+      "color": "#ea4335"
+    },
+    {
+      "name": "Google Passwords",
+      "url": "https://passwords.google.com/",
+      "description": "View and manage passwords saved in your Google account.",
+      "category": "google",
+      "tags": ["free"],
+      "color": "#4285f4"
+    },
+    {
+      "name": "Google Search Console",
+      "url": "https://search.google.com/",
+      "description": "Monitor your site's performance and indexing in Google Search.",
+      "category": "google",
+      "tags": ["free"],
+      "color": "#34a853"
+    },
+    {
+      "name": "Google Trends",
+      "url": "https://trends.google.com/",
+      "description": "Explore trending search topics and compare keyword popularity over time.",
+      "category": "google",
+      "tags": ["free"],
+      "color": "#fbbc04"
+    },
+    {
+      "name": "NexoSites",
+      "url": "https://nexosites.xyz/",
+      "description": "My web development agency. Professional websites built fast and clean.",
+      "category": "my-sites",
+      "tags": ["paid"],
+      "color": "#7c3aed"
+    },
+    {
+      "name": "Nexoria Realm",
+      "url": "https://nexoriarealm.xyz/",
+      "description": "My Minecraft Java SMP server. Join the community at play.nexoriarealm.xyz.",
+      "category": "my-sites",
+      "tags": ["free"],
+      "color": "#10b981"
+    }
+  ]
+}
