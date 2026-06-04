@@ -1,6 +1,5 @@
 /* ============================================================
    NexHub — app.js
-   Loads sites.json, renders cards, handles search & filtering.
    ============================================================ */
 
 let allSites = [];
@@ -18,6 +17,7 @@ async function init() {
     buildCategoryNav();
     render();
     setupSearch();
+    setupScrollArrows(); // must run AFTER categories are in the DOM
   } catch (err) {
     console.error('Failed to load sites.json:', err);
     document.getElementById('cardsGrid').innerHTML =
@@ -49,6 +49,36 @@ function setActiveBtn(active) {
   active.classList.add('active');
 }
 
+// ---- Scroll arrows ----
+function setupScrollArrows() {
+  const inner = document.getElementById('catNavInner');
+  const nav   = document.getElementById('catNav');
+  const btnL  = document.getElementById('scrollLeft');
+  const btnR  = document.getElementById('scrollRight');
+  const STEP  = 220;
+
+  function updateArrows() {
+    const atStart = inner.scrollLeft <= 2;
+    const atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 2;
+    btnL.disabled = atStart;
+    btnR.disabled = atEnd;
+    nav.classList.toggle('at-start', atStart);
+    nav.classList.toggle('at-end',   atEnd);
+  }
+
+  btnL.addEventListener('click', () => {
+    inner.scrollBy({ left: -STEP, behavior: 'smooth' });
+  });
+  btnR.addEventListener('click', () => {
+    inner.scrollBy({ left: STEP, behavior: 'smooth' });
+  });
+
+  inner.addEventListener('scroll', updateArrows, { passive: true });
+
+  // Check state now that DOM is fully populated
+  updateArrows();
+}
+
 // ---- Search ----
 function setupSearch() {
   const input = document.getElementById('searchInput');
@@ -62,7 +92,6 @@ function setupSearch() {
     render();
   });
 
-  // Ctrl+K shortcut
   document.addEventListener('keydown', e => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
@@ -71,6 +100,15 @@ function setupSearch() {
     }
   });
 }
+
+// ---- All button handler ----
+document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', function () {
+  activeCategory = 'all';
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  setActiveBtn(this);
+  render();
+});
 
 // ---- Filter logic ----
 function getFiltered() {
@@ -84,14 +122,12 @@ function getFiltered() {
 
 // ---- Render ----
 function render() {
-  const grid = document.getElementById('cardsGrid');
-  const empty = document.getElementById('emptyState');
-  const label = document.getElementById('sectionLabel');
+  const grid    = document.getElementById('cardsGrid');
+  const empty   = document.getElementById('emptyState');
+  const label   = document.getElementById('sectionLabel');
   const countEl = document.getElementById('siteCount');
-
   const filtered = getFiltered();
 
-  // Update label
   if (searchQuery) {
     label.textContent = `Results for "${searchQuery}"`;
   } else if (activeCategory === 'all') {
@@ -111,18 +147,14 @@ function render() {
   }
 
   empty.style.display = 'none';
-
-  // Rebuild cards (trigger re-animation by replacing innerHTML)
-  grid.innerHTML = filtered.map((site, i) => renderCard(site, i)).join('');
+  grid.innerHTML = filtered.map(renderCard).join('');
 }
 
-function renderCard(site, index) {
+function renderCard(site) {
   const color = site.color || '#7c5cfc';
-  const tags = site.tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('');
-
+  const tags  = site.tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('');
   return `
-    <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener"
-       style="--card-color:${color}">
+    <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
       <div class="card-top">
         <div class="card-dot"></div>
         <span class="card-name">${escHtml(site.name)}</span>
@@ -130,51 +162,13 @@ function renderCard(site, index) {
       </div>
       <p class="card-desc">${escHtml(site.description)}</p>
       <div class="card-footer">${tags}</div>
-    </a>
-  `;
+    </a>`;
 }
 
 function escHtml(str) {
   return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// ---- All button handler ----
-document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', function () {
-  activeCategory = 'all';
-  searchQuery = '';
-  document.getElementById('searchInput').value = '';
-  setActiveBtn(this);
-  render();
-});
-
-// ---- Go ----
 init();
-
-// ---- Scroll arrow logic ----
-(function setupScrollArrows() {
-  const inner   = document.getElementById('catNavInner');
-  const nav     = document.getElementById('catNav');
-  const btnL    = document.getElementById('scrollLeft');
-  const btnR    = document.getElementById('scrollRight');
-  const STEP    = 200;
-
-  function updateArrows() {
-    const atStart = inner.scrollLeft <= 4;
-    const atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 4;
-    btnL.disabled = atStart;
-    btnR.disabled = atEnd;
-    nav.classList.toggle('at-start', atStart);
-    nav.classList.toggle('at-end',   atEnd);
-  }
-
-  btnL.addEventListener('click', () => { inner.scrollLeft -= STEP; });
-  btnR.addEventListener('click', () => { inner.scrollLeft += STEP; });
-  inner.addEventListener('scroll', updateArrows, { passive: true });
-
-  // Run once after categories are built
-  setTimeout(updateArrows, 100);
-})();
