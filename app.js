@@ -27,7 +27,7 @@ async function init() {
 
 // ---- Category nav ----
 function buildCategoryNav() {
-  const nav = document.querySelector('.cat-nav-inner');
+  const nav = document.getElementById('catNavInner');
   allCategories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className = 'cat-btn';
@@ -153,3 +153,28 @@ document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', fun
 
 // ---- Go ----
 init();
+
+// ---- Scroll arrow logic ----
+(function setupScrollArrows() {
+  const inner   = document.getElementById('catNavInner');
+  const nav     = document.getElementById('catNav');
+  const btnL    = document.getElementById('scrollLeft');
+  const btnR    = document.getElementById('scrollRight');
+  const STEP    = 200;
+
+  function updateArrows() {
+    const atStart = inner.scrollLeft <= 4;
+    const atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 4;
+    btnL.disabled = atStart;
+    btnR.disabled = atEnd;
+    nav.classList.toggle('at-start', atStart);
+    nav.classList.toggle('at-end',   atEnd);
+  }
+
+  btnL.addEventListener('click', () => { inner.scrollLeft -= STEP; });
+  btnR.addEventListener('click', () => { inner.scrollLeft += STEP; });
+  inner.addEventListener('scroll', updateArrows, { passive: true });
+
+  // Run once after categories are built
+  setTimeout(updateArrows, 100);
+})();
