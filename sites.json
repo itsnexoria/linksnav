@@ -22,7 +22,7 @@
   ],
   "sites": [
     {
-      "name": "Pterodactyl Panel",
+      "name": "Hoe Panel",
       "url": "https://ptero.heo-systems.com/",
       "description": "Self-hosted game server management panel. Start, stop, reinstall, and configure your game servers through a clean web UI.",
       "category": "server-tools",
@@ -36,14 +36,6 @@
       "category": "google",
       "tags": ["free", "web-app"],
       "color": "#4285f4"
-    },
-    {
-      "name": "Phind",
-      "url": "https://www.phind.com/",
-      "description": "AI search engine built for developers. Get accurate, sourced answers to technical questions without wading through irrelevant results.",
-      "category": "ai",
-      "tags": ["freemium", "developer-ai"],
-      "color": "#ff6b6b"
     },
     {
       "name": "Speedtest",
