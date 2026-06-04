@@ -1,23 +1,26 @@
 /* ============================================================
-   NexHub — app.js
+   NexHub — app.js  (updated)
    ============================================================ */
 
-let allSites = [];
+let allSites      = [];
 let allCategories = [];
 let activeCategory = 'all';
-let searchQuery = '';
+let searchQuery    = '';
+
+const PAGE_SIZE    = 12;   // cards shown per page
+let   visibleCount = PAGE_SIZE;
 
 // ---- Boot ----
 async function init() {
   try {
-    const res = await fetch('sites.json');
+    const res  = await fetch('sites.json');
     const data = await res.json();
-    allSites = data.sites;
+    allSites      = data.sites;
     allCategories = data.categories;
     buildCategoryNav();
     render();
     setupSearch();
-    setupScrollArrows(); // must run AFTER categories are in the DOM
+    setupScrollArrows();
   } catch (err) {
     console.error('Failed to load sites.json:', err);
     document.getElementById('cardsGrid').innerHTML =
@@ -30,12 +33,13 @@ function buildCategoryNav() {
   const nav = document.getElementById('catNavInner');
   allCategories.forEach(cat => {
     const btn = document.createElement('button');
-    btn.className = 'cat-btn';
-    btn.dataset.cat = cat.id;
-    btn.textContent = `${cat.icon} ${cat.label}`;
+    btn.className    = 'cat-btn';
+    btn.dataset.cat  = cat.id;
+    btn.textContent  = `${cat.icon} ${cat.label}`;
     btn.addEventListener('click', () => {
       activeCategory = cat.id;
-      searchQuery = '';
+      searchQuery    = '';
+      visibleCount   = PAGE_SIZE;
       document.getElementById('searchInput').value = '';
       setActiveBtn(btn);
       render();
@@ -66,16 +70,9 @@ function setupScrollArrows() {
     nav.classList.toggle('at-end',   atEnd);
   }
 
-  btnL.addEventListener('click', () => {
-    inner.scrollBy({ left: -STEP, behavior: 'smooth' });
-  });
-  btnR.addEventListener('click', () => {
-    inner.scrollBy({ left: STEP, behavior: 'smooth' });
-  });
-
+  btnL.addEventListener('click', () => inner.scrollBy({ left: -STEP, behavior: 'smooth' }));
+  btnR.addEventListener('click', () => inner.scrollBy({ left:  STEP, behavior: 'smooth' }));
   inner.addEventListener('scroll', updateArrows, { passive: true });
-
-  // Check state now that DOM is fully populated
   updateArrows();
 }
 
@@ -83,7 +80,8 @@ function setupScrollArrows() {
 function setupSearch() {
   const input = document.getElementById('searchInput');
   input.addEventListener('input', () => {
-    searchQuery = input.value.toLowerCase().trim();
+    searchQuery    = input.value.toLowerCase().trim();
+    visibleCount   = PAGE_SIZE;
     if (searchQuery) {
       activeCategory = 'all';
       document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -101,10 +99,11 @@ function setupSearch() {
   });
 }
 
-// ---- All button handler ----
+// ---- "All" button ----
 document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', function () {
   activeCategory = 'all';
-  searchQuery = '';
+  searchQuery    = '';
+  visibleCount   = PAGE_SIZE;
   document.getElementById('searchInput').value = '';
   setActiveBtn(this);
   render();
@@ -115,19 +114,30 @@ function getFiltered() {
   return allSites.filter(site => {
     const matchCat = activeCategory === 'all' || site.category === activeCategory;
     if (!searchQuery) return matchCat;
-    const haystack = `${site.name} ${site.description} ${site.category} ${site.tags.join(' ')}`.toLowerCase();
+    const haystack = `${site.name} ${site.description} ${site.category} ${(site.tags || []).join(' ')}`.toLowerCase();
     return matchCat && haystack.includes(searchQuery);
   });
 }
 
+// ---- Favicon helper ----
+function faviconUrl(siteUrl) {
+  try {
+    const { hostname } = new URL(siteUrl);
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
+  } catch {
+    return '';
+  }
+}
+
 // ---- Render ----
 function render() {
-  const grid    = document.getElementById('cardsGrid');
-  const empty   = document.getElementById('emptyState');
-  const label   = document.getElementById('sectionLabel');
-  const countEl = document.getElementById('siteCount');
+  const grid     = document.getElementById('cardsGrid');
+  const empty    = document.getElementById('emptyState');
+  const label    = document.getElementById('sectionLabel');
+  const countEl  = document.getElementById('siteCount');
   const filtered = getFiltered();
 
+  // Section label
   if (searchQuery) {
     label.textContent = `Results for "${searchQuery}"`;
   } else if (activeCategory === 'all') {
@@ -143,20 +153,37 @@ function render() {
     grid.innerHTML = '';
     empty.style.display = 'block';
     document.getElementById('emptyQuery').textContent = searchQuery || activeCategory;
+    removePagination();
     return;
   }
 
   empty.style.display = 'none';
-  grid.innerHTML = filtered.map(renderCard).join('');
+
+  const visible = filtered.slice(0, visibleCount);
+  grid.innerHTML = visible.map(renderCard).join('');
+
+  // Pagination
+  if (visibleCount < filtered.length) {
+    renderLoadMore(filtered.length);
+  } else {
+    removePagination();
+  }
 }
 
 function renderCard(site) {
-  const color = site.color || '#7c5cfc';
-  const tags  = site.tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('');
+  const color  = site.color || '#7c5cfc';
+  const tags   = (site.tags || []).map(t =>
+    `<span class="tag tag-${escHtml(t)}">${escHtml(t)}</span>`
+  ).join('');
+  const icon   = faviconUrl(site.url);
+  const iconHtml = icon
+    ? `<img class="card-favicon" src="${escHtml(icon)}" alt="" loading="lazy" onerror="this.style.display='none'">`
+    : '';
+
   return `
     <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
       <div class="card-top">
-        <div class="card-dot"></div>
+        ${iconHtml}
         <span class="card-name">${escHtml(site.name)}</span>
         <span class="card-arrow">↗</span>
       </div>
@@ -165,6 +192,35 @@ function renderCard(site) {
     </a>`;
 }
 
+// ---- Load More ----
+function renderLoadMore(total) {
+  removePagination();
+  const remaining = total - visibleCount;
+  const wrap = document.createElement('div');
+  wrap.id = 'loadMoreWrap';
+  wrap.className = 'load-more-wrap';
+  wrap.innerHTML = `
+    <button class="load-more-btn" id="loadMoreBtn">
+      Load more <span class="load-more-count">${remaining} remaining</span>
+    </button>`;
+  document.getElementById('main').appendChild(wrap);
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    visibleCount += PAGE_SIZE;
+    render();
+    // Scroll to where new cards start so user sees them
+    const cards = document.querySelectorAll('.card');
+    if (cards.length > visibleCount - PAGE_SIZE) {
+      cards[visibleCount - PAGE_SIZE]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}
+
+function removePagination() {
+  const existing = document.getElementById('loadMoreWrap');
+  if (existing) existing.remove();
+}
+
+// ---- Escape HTML ----
 function escHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;')

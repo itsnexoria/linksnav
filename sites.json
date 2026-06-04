@@ -1,429 +1,1289 @@
 {
   "categories": [
-    {
-      "id": "server-tools",
-      "label": "Server Tools",
-      "icon": "⚙️"
-    },
-    {
-      "id": "ai",
-      "label": "AI & Chat",
-      "icon": "🤖"
-    },
-    {
-      "id": "social",
-      "label": "Social & Media",
-      "icon": "📱"
-    },
-    {
-      "id": "entertainment",
-      "label": "Entertainment",
-      "icon": "🎬"
-    },
-    {
-      "id": "dev-tools",
-      "label": "Dev Tools",
-      "icon": "🛠️"
-    },
-    {
-      "id": "design",
-      "label": "Design & Media",
-      "icon": "🎨"
-    },
-    {
-      "id": "storage",
-      "label": "Storage & Files",
-      "icon": "📁"
-    },
-    {
-      "id": "minecraft",
-      "label": "Minecraft",
-      "icon": "⛏️"
-    },
-    {
-      "id": "finance",
-      "label": "Finance",
-      "icon": "💳"
-    },
-    {
-      "id": "google",
-      "label": "Google Suite",
-      "icon": "🔵"
-    },
-    {
-      "id": "my-sites",
-      "label": "My Sites",
-      "icon": "🌐"
-    }
+    { "id": "server-tools", "label": "Server Tools", "icon": "⚙️" },
+    { "id": "ai", "label": "AI & Chat", "icon": "🤖" },
+    { "id": "social", "label": "Social & Media", "icon": "📱" },
+    { "id": "entertainment", "label": "Entertainment", "icon": "🎬" },
+    { "id": "dev-tools", "label": "Dev Tools", "icon": "🛠️" },
+    { "id": "design", "label": "Design & Media", "icon": "🎨" },
+    { "id": "storage", "label": "Storage & Files", "icon": "📁" },
+    { "id": "minecraft", "label": "Minecraft", "icon": "⛏️" },
+    { "id": "finance", "label": "Finance", "icon": "💳" },
+    { "id": "google", "label": "Google Suite", "icon": "🔵" },
+    { "id": "my-sites", "label": "My Sites", "icon": "🌐" },
+    { "id": "productivity", "label": "Productivity", "icon": "📋" },
+    { "id": "hosting", "label": "Hosting & VPS", "icon": "☁️" },
+    { "id": "gaming", "label": "Gaming", "icon": "🎮" },
+    { "id": "security", "label": "Security", "icon": "🔒" },
+    { "id": "learning", "label": "Learning", "icon": "📚" },
+    { "id": "downloads", "label": "Downloads", "icon": "⬇️" },
+    { "id": "shopping", "label": "Shopping", "icon": "🛒" },
+    { "id": "streaming", "label": "Streaming", "icon": "📺" }
   ],
   "sites": [
     {
       "name": "Pterodactyl Panel",
       "url": "https://ptero.heo-systems.com/",
-      "description": "Game server management panel. Start, stop, and configure your servers.",
+      "description": "Self-hosted game server management panel. Start, stop, reinstall, and configure your game servers through a clean web UI.",
       "category": "server-tools",
-      "tags": ["free"],
+      "tags": ["self-hosted", "game-panel"],
       "color": "#00b4d8"
+    },
+    {
+      "name": "Google Translate",
+      "url": "https://translate.google.com/",
+      "description": "Instantly translate text, documents, and websites between 130+ languages using Google's neural machine translation.",
+      "category": "google",
+      "tags": ["free", "web-app"],
+      "color": "#4285f4"
+    },
+    {
+      "name": "Phind",
+      "url": "https://www.phind.com/",
+      "description": "AI search engine built for developers. Get accurate, sourced answers to technical questions without wading through irrelevant results.",
+      "category": "ai",
+      "tags": ["freemium", "developer-ai"],
+      "color": "#ff6b6b"
+    },
+    {
+      "name": "Speedtest",
+      "url": "https://www.speedtest.net/",
+      "description": "Test your internet connection's download, upload, and ping speeds against servers worldwide. Free and instant.",
+      "category": "downloads",
+      "tags": ["free", "network-tool"],
+      "color": "#1a73e8"
+    },
+    {
+      "name": "itch.io",
+      "url": "https://itch.io/",
+      "description": "Open marketplace for indie games, game jams, and experimental projects. Play free games or buy and support indie developers.",
+      "category": "gaming",
+      "tags": ["free", "indie-games"],
+      "color": "#fa5c5c"
+    },
+    {
+      "name": "Duolingo",
+      "url": "https://www.duolingo.com/",
+      "description": "Gamified language learning with bite-sized daily lessons. Supports 40+ languages with free and ad-free premium tiers.",
+      "category": "learning",
+      "tags": ["freemium", "language-learning"],
+      "color": "#58cc02"
+    },
+    {
+      "name": "Unsplash",
+      "url": "https://unsplash.com/",
+      "description": "Massive library of high-resolution photos contributed by photographers worldwide. Free to use with an optional paid subscription for teams.",
+      "category": "design",
+      "tags": ["freemium", "stock-photos"],
+      "color": "#111111"
+    },
+    {
+      "name": "Slack",
+      "url": "https://slack.com/",
+      "description": "Channel-based team messaging with integrations for hundreds of tools. Organise conversations, share files, and connect your workflow.",
+      "category": "productivity",
+      "tags": ["freemium", "team-chat"],
+      "color": "#4a154b"
+    },
+    {
+      "name": "Discord Devs",
+      "url": "https://discord.com/developers/applications",
+      "description": "Create and manage Discord bots and OAuth2 apps. Configure bot permissions, slash commands, webhooks, and view API documentation.",
+      "category": "dev-tools",
+      "tags": ["free", "bot-dev"],
+      "color": "#5865F2"
+    },
+    {
+      "name": "JSFiddle",
+      "url": "https://jsfiddle.net/",
+      "description": "Online editor to write, test, and share HTML, CSS, and JavaScript snippets in the browser. Great for quick prototypes and bug reports.",
+      "category": "dev-tools",
+      "tags": ["free", "browser-ide"],
+      "color": "#3fa9f5"
+    },
+    {
+      "name": "Product Hunt",
+      "url": "https://www.producthunt.com/",
+      "description": "Daily leaderboard of the best new tech products, apps, and tools. Upvote, discuss, and discover what's launching in the startup world.",
+      "category": "shopping",
+      "tags": ["free", "product-discovery"],
+      "color": "#ff6154"
     },
     {
       "name": "TicketTool",
       "url": "https://tickettool.xyz/dashboard/",
-      "description": "Discord ticket bot dashboard. Manage support tickets for your community.",
+      "description": "Discord ticket bot for running support queues on your server. Set up ticket channels, auto-responses, and claim systems from the dashboard.",
       "category": "server-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "discord-bot"],
       "color": "#7289da"
     },
     {
       "name": "Maki Bot",
       "url": "https://maki.gg/en-GB/dashboard",
-      "description": "All-in-one Discord bot dashboard for moderation, leveling, and more.",
+      "description": "All-in-one Discord bot with moderation, XP levelling, welcome messages, reaction roles, and custom commands. Managed via web dashboard.",
       "category": "server-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "discord-bot"],
       "color": "#ff6b9d"
+    },
+    {
+      "name": "Pixabay",
+      "url": "https://pixabay.com/",
+      "description": "Free stock images, videos, music, and vectors contributed by creators worldwide. No attribution required on most content.",
+      "category": "design",
+      "tags": ["freemium", "stock-media"],
+      "color": "#2ecc71"
+    },
+    {
+      "name": "Asana",
+      "url": "https://asana.com/",
+      "description": "Project management platform for teams. Track tasks, set deadlines, assign work, and visualise progress across projects.",
+      "category": "productivity",
+      "tags": ["freemium", "project-management"],
+      "color": "#f06a6a"
+    },
+    {
+      "name": "Kubernetes",
+      "url": "https://kubernetes.io/",
+      "description": "Open-source container orchestration platform. Automate the deployment, scaling, and management of containerised applications.",
+      "category": "server-tools",
+      "tags": ["open-source", "container-orchestration"],
+      "color": "#326ce5"
+    },
+    {
+      "name": "TinyURL",
+      "url": "https://tinyurl.com/",
+      "description": "Instantly shorten long URLs into compact, shareable links. Supports custom aliases and basic click tracking.",
+      "category": "dev-tools",
+      "tags": ["free", "url-shortener"],
+      "color": "#ffcc00"
     },
     {
       "name": "Dyno Bot",
       "url": "https://dyno.gg/account",
-      "description": "Feature-rich Discord bot for moderation, auto-roles, and server management.",
+      "description": "Feature-rich Discord bot for moderation, auto-roles, announcements, and server management with a web dashboard.",
       "category": "server-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "discord-bot"],
       "color": "#43b581"
     },
     {
       "name": "Tebex Creator",
       "url": "https://creator.tebex.io/dashboard",
-      "description": "Sell in-game items and perks for your Minecraft or game server storefront.",
+      "description": "Monetise your game server with a built-in storefront. Sell ranks, items, and perks — integrates with Minecraft, Rust, FiveM, and more.",
       "category": "server-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "server-monetisation"],
       "color": "#f5a623"
     },
     {
       "name": "LootLabs",
       "url": "https://creators.lootlabs.gg/",
-      "description": "Monetize your content with link locking and gated downloads.",
+      "description": "Monetise your content with link locking. Earn revenue by gating downloads or Discord invites behind short ad interactions.",
       "category": "server-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "link-monetisation"],
       "color": "#ff9f43"
     },
     {
       "name": "GitHub",
       "url": "https://github.com/",
-      "description": "Host, version control, and collaborate on code with the world's largest dev platform.",
+      "description": "The world's largest code hosting platform. Version control with Git, open-source collaboration, CI/CD with Actions, and project management.",
       "category": "dev-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "git-hosting"],
       "color": "#f0f6fc"
     },
     {
       "name": "Firebase",
       "url": "https://firebase.google.com/",
-      "description": "Google's backend-as-a-service for building web and mobile apps fast.",
+      "description": "Google's backend-as-a-service platform. Realtime database, auth, cloud functions, hosting, and analytics — all in one SDK.",
       "category": "dev-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "backend-service"],
       "color": "#ffca28"
     },
     {
       "name": "Cloudflare",
       "url": "https://dash.cloudflare.com/",
-      "description": "Manage DNS, CDN, DDoS protection, and Workers for your domains.",
+      "description": "All-in-one network dashboard. Manage DNS, CDN, DDoS protection, SSL certificates, and edge Workers for your domains.",
       "category": "dev-tools",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "dns-cdn"],
       "color": "#f6821f"
     },
     {
       "name": "DNS Checker",
       "url": "https://dnschecker.org/",
-      "description": "Check DNS propagation globally. See how your DNS changes are spreading worldwide.",
+      "description": "Verify DNS propagation from 100+ locations worldwide. Check if your A, CNAME, MX, or TXT records have updated globally.",
       "category": "dev-tools",
-      "tags": ["free"],
+      "tags": ["free", "network-tool"],
       "color": "#00c9ff"
     },
     {
       "name": "HTML Color Codes",
       "url": "https://htmlcolorcodes.com/",
-      "description": "Color picker, hex codes, and CSS color tools for web developers.",
+      "description": "Color picker with hex codes, RGB values, HSL, and CSS gradients. Includes a palette builder and named colour reference.",
       "category": "dev-tools",
-      "tags": ["free"],
+      "tags": ["free", "design-tool"],
       "color": "#ff6b6b"
     },
     {
       "name": "Lucide Icons",
       "url": "https://lucide.dev/icons/",
-      "description": "Beautiful, consistent open-source icon library for your web projects.",
+      "description": "Beautiful, consistent open-source icon set with 1,300+ icons. Available as SVG, React components, or via CDN.",
       "category": "dev-tools",
-      "tags": ["free"],
+      "tags": ["open-source", "icon-library"],
       "color": "#6c63ff"
     },
     {
       "name": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "description": "OpenAI's flagship AI assistant for writing, coding, research, and more.",
+      "description": "OpenAI's flagship AI assistant. Handles writing, coding, maths, research, image generation, and custom GPTs. Includes a free tier.",
       "category": "ai",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "ai-assistant"],
       "color": "#10a37f"
     },
     {
       "name": "Claude",
       "url": "https://claude.ai/",
-      "description": "Anthropic's AI assistant — great for reasoning, writing, and long documents.",
+      "description": "Anthropic's AI assistant with standout reasoning, long-context understanding, and careful writing. Great for documents and complex analysis.",
       "category": "ai",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "ai-assistant"],
       "color": "#cc785c"
     },
     {
       "name": "DeepSeek",
       "url": "https://chat.deepseek.com/",
-      "description": "Powerful open-source AI model with strong coding and reasoning capabilities.",
+      "description": "Open-source AI model with strong coding and maths reasoning. Competitive with top models at a fraction of the API cost.",
       "category": "ai",
-      "tags": ["free"],
+      "tags": ["free", "open-source"],
       "color": "#4d9fff"
     },
     {
       "name": "YouTube",
       "url": "https://www.youtube.com/",
-      "description": "Watch, upload, and discover videos. The world's biggest video platform.",
+      "description": "Watch, upload, and discover videos across every topic. Home to creators, music, live streams, shorts, and long-form content.",
       "category": "social",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "video-platform"],
       "color": "#ff0000"
     },
     {
       "name": "X / Twitter",
       "url": "https://x.com/home",
-      "description": "Real-time news, trending topics, and social conversations.",
+      "description": "Real-time news, trending topics, and social conversations. Follow people, post threads, and engage with the world as it happens.",
       "category": "social",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "social-network"],
       "color": "#e7e9ea"
     },
     {
       "name": "TikTok",
       "url": "https://www.tiktok.com/",
-      "description": "Short-form video entertainment and creator platform.",
+      "description": "Short-form video platform driven by a powerful algorithm. Create, explore, and share 15-second to 10-minute videos.",
       "category": "social",
-      "tags": ["free"],
+      "tags": ["free", "short-video"],
       "color": "#ff0050"
     },
     {
       "name": "Instagram",
       "url": "https://www.instagram.com/",
-      "description": "Share photos, reels, and stories with your followers.",
+      "description": "Share photos, reels, and stories with your followers. Explore trending content and connect with creators through DMs.",
       "category": "social",
-      "tags": ["free"],
+      "tags": ["free", "photo-sharing"],
       "color": "#e1306c"
     },
     {
       "name": "Spotify",
       "url": "https://open.spotify.com/",
-      "description": "Stream millions of songs, podcasts, and playlists.",
+      "description": "Stream 100M+ songs, podcasts, and audiobooks. Build playlists, explore curated mixes, and listen offline with Premium.",
       "category": "entertainment",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "music-streaming"],
       "color": "#1db954"
     },
     {
       "name": "YouTube Music",
       "url": "https://music.youtube.com/",
-      "description": "Google's music streaming service with official tracks and covers.",
+      "description": "Google's music streaming service with official tracks, covers, live sessions, and personalised mixes. Ad-free with YouTube Premium.",
       "category": "entertainment",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "music-streaming"],
       "color": "#ff0000"
     },
     {
       "name": "AnimeHeaven",
       "url": "https://animeheaven.me/",
-      "description": "Watch anime online for free with a huge library of titles.",
+      "description": "Watch anime online for free with a large library of subbed and dubbed titles. No account required.",
       "category": "entertainment",
-      "tags": ["free"],
+      "tags": ["free", "anime-streaming"],
       "color": "#e94560"
     },
     {
       "name": "Animetsu",
       "url": "https://animetsu.net/",
-      "description": "Free anime streaming site with subbed and dubbed content.",
+      "description": "Free anime streaming with a clean interface. Browse a wide range of subbed and dubbed series updated regularly.",
       "category": "entertainment",
-      "tags": ["free"],
+      "tags": ["free", "anime-streaming"],
       "color": "#ff6b35"
     },
     {
       "name": "AniKai",
       "url": "https://www1.anikai.cc/",
-      "description": "Anime streaming platform with a clean interface and fast servers.",
+      "description": "Anime streaming platform with fast servers and a minimal interface. Supports both sub and dub playback.",
       "category": "entertainment",
-      "tags": ["free"],
+      "tags": ["free", "anime-streaming"],
       "color": "#9b59b6"
     },
     {
       "name": "WhatExps",
       "url": "https://whatexpsare.online/",
-      "description": "Find out what's expiring soon — deals, subscriptions, and offers.",
+      "description": "Track expiring deals, subscription trials, and limited-time offers so you never miss a cutoff date.",
       "category": "entertainment",
-      "tags": ["free"],
+      "tags": ["free", "deal-tracker"],
       "color": "#fd9644"
     },
     {
       "name": "G2G",
       "url": "https://www.g2g.com/",
-      "description": "Buy and sell in-game items, accounts, and currency across many games.",
+      "description": "Peer-to-peer marketplace to buy and sell in-game items, accounts, currency, and boosting services across many titles.",
       "category": "entertainment",
-      "tags": ["free"],
+      "tags": ["free", "game-trading"],
       "color": "#f39c12"
     },
     {
       "name": "Canva",
       "url": "https://www.canva.com/en_gb/",
-      "description": "Drag-and-drop graphic design tool for social media, presentations, and more.",
+      "description": "Drag-and-drop design tool for social graphics, presentations, posters, videos, and more. Huge template library included.",
       "category": "design",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "graphic-design"],
       "color": "#00c4cc"
     },
     {
       "name": "iLoveIMG",
       "url": "https://www.iloveimg.com/",
-      "description": "Online image tools: resize, compress, crop, convert and edit images.",
+      "description": "Browser-based image tools: resize, compress, crop, convert formats, add watermarks, and rotate images in bulk.",
       "category": "design",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "image-editor"],
       "color": "#ff6584"
     },
     {
       "name": "CloudConvert",
       "url": "https://cloudconvert.com/webp-to-jpg",
-      "description": "Convert files between hundreds of formats online. Supports images, video, audio.",
+      "description": "Convert between 200+ file formats in the cloud. Supports images, video, audio, documents, ebooks, and more.",
       "category": "design",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "file-converter"],
       "color": "#3498db"
     },
     {
       "name": "Font Changer",
       "url": "https://www.fontchanger.net/",
-      "description": "Generate fancy text and Unicode font styles for social bios and posts.",
+      "description": "Generate stylised Unicode text and fancy fonts for social bios, Discord usernames, and posts. No install needed.",
       "category": "design",
-      "tags": ["free"],
+      "tags": ["free", "text-tool"],
       "color": "#a29bfe"
     },
     {
       "name": "Iconer",
       "url": "https://iconer.app/",
-      "description": "Browse and download thousands of icons for your projects.",
+      "description": "Browse and download thousands of icons across multiple icon packs. Filter by style, category, and export format.",
       "category": "design",
-      "tags": ["free"],
+      "tags": ["free", "icon-library"],
       "color": "#fd79a8"
     },
     {
       "name": "Web2PDF",
       "url": "https://www.web2pdfconvert.com/",
-      "description": "Convert any web page to a PDF file instantly.",
+      "description": "Paste any URL and instantly generate a PDF of the web page. Useful for saving articles, invoices, and documentation.",
       "category": "design",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "pdf-tool"],
       "color": "#d63031"
     },
     {
       "name": "GitMind",
       "url": "https://gitmind.com/",
-      "description": "Free mind mapping and brainstorming tool for ideas and flowcharts.",
+      "description": "Online mind-mapping and flowchart tool. Brainstorm ideas, plan projects, and create visual diagrams collaboratively.",
       "category": "design",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "mind-mapping"],
       "color": "#00b894"
     },
     {
       "name": "MediaFire",
       "url": "https://www.mediafire.com/",
-      "description": "Free file hosting and sharing. Upload and share files easily.",
+      "description": "Cloud file hosting for storing and sharing large files. Includes a free tier with browser upload and direct download links.",
       "category": "storage",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "file-sharing"],
       "color": "#1565c0"
     },
     {
       "name": "Imgur",
       "url": "https://imgur.com/",
-      "description": "Free image hosting and sharing community. Upload and share images instantly.",
+      "description": "Fast image and GIF hosting. Upload images, share links instantly, and browse a huge community-driven content feed.",
       "category": "storage",
-      "tags": ["free"],
+      "tags": ["free", "image-hosting"],
       "color": "#1bb76e"
     },
     {
       "name": "Dropbox",
       "url": "https://www.dropbox.com/",
-      "description": "Cloud storage and file sync across all your devices.",
+      "description": "Cloud storage with automatic device sync, shared folders, and collaboration tools for teams and individuals.",
       "category": "storage",
-      "tags": ["free", "paid"],
+      "tags": ["freemium", "cloud-storage"],
       "color": "#0061ff"
     },
     {
       "name": "MC Packs",
       "url": "https://mc-packs.net/",
-      "description": "Download Minecraft resource packs, texture packs, and shader files.",
+      "description": "Download Minecraft resource packs, texture packs, and shader files for all versions. Organised and easy to browse.",
       "category": "minecraft",
-      "tags": ["free"],
+      "tags": ["free", "resource-packs"],
       "color": "#5cb85c"
     },
     {
       "name": "MC Utils",
       "url": "https://mcutils.com/",
-      "description": "Minecraft server tools: UUID lookup, skin renderer, MOTD builder.",
+      "description": "Toolkit for Minecraft server admins. Features UUID lookup, skin renderer, MOTD builder, and server status checker.",
       "category": "minecraft",
-      "tags": ["free"],
+      "tags": ["free", "server-tools"],
       "color": "#8bc34a"
     },
     {
       "name": "MC Statistics",
       "url": "https://mcstatistics.org/",
-      "description": "Track Minecraft server statistics, player counts, and uptime history.",
+      "description": "Monitor Minecraft server player counts, version history, and uptime statistics over time. Great for tracking growth.",
       "category": "minecraft",
-      "tags": ["free"],
+      "tags": ["free", "server-analytics"],
       "color": "#4caf50"
     },
     {
       "name": "PayPal",
       "url": "https://www.paypal.com/",
-      "description": "Send and receive money, pay for goods and manage your account.",
+      "description": "Send and receive money, pay online, and manage your balance. Widely accepted for personal transfers and business payments.",
       "category": "finance",
-      "tags": ["free"],
+      "tags": ["free", "payments"],
       "color": "#003087"
     },
     {
       "name": "Gmail",
       "url": "https://mail.google.com/mail/u/0/#inbox",
-      "description": "Google's email service. Read, send, and organize your emails.",
+      "description": "Google's email service with 15GB free storage, smart filtering, integrated chat, and powerful search.",
       "category": "google",
-      "tags": ["free"],
+      "tags": ["free", "email"],
       "color": "#ea4335"
     },
     {
       "name": "Google Passwords",
       "url": "https://passwords.google.com/",
-      "description": "View and manage passwords saved in your Google account.",
+      "description": "View, manage, and audit passwords saved in your Google account across Chrome and Android devices.",
       "category": "google",
-      "tags": ["free"],
+      "tags": ["free", "password-manager"],
       "color": "#4285f4"
     },
     {
       "name": "Google Search Console",
       "url": "https://search.google.com/",
-      "description": "Monitor your site's performance and indexing in Google Search.",
+      "description": "Monitor your website's performance in Google Search. Check indexing status, core web vitals, and fix coverage errors.",
       "category": "google",
-      "tags": ["free"],
+      "tags": ["free", "seo-tool"],
       "color": "#34a853"
     },
     {
       "name": "Google Trends",
       "url": "https://trends.google.com/",
-      "description": "Explore trending search topics and compare keyword popularity over time.",
+      "description": "Explore trending topics and compare keyword search interest over time. Useful for content ideas and market research.",
       "category": "google",
-      "tags": ["free"],
+      "tags": ["free", "analytics"],
       "color": "#fbbc04"
     },
     {
       "name": "NexoSites",
       "url": "https://nexosites.xyz/",
-      "description": "My web development agency. Professional websites built fast and clean.",
+      "description": "My web development agency. Professional, fast, and clean websites built to order. Get in touch for a quote.",
       "category": "my-sites",
-      "tags": ["paid"],
+      "tags": ["agency", "web-dev"],
       "color": "#7c3aed"
     },
     {
       "name": "Nexoria Realm",
       "url": "https://nexoriarealm.xyz/",
-      "description": "My Minecraft Java SMP server. Join the community at play.nexoriarealm.xyz.",
+      "description": "My Minecraft Java SMP server. Community-driven survival with custom plugins. Connect at play.nexoriarealm.xyz.",
       "category": "my-sites",
-      "tags": ["free"],
+      "tags": ["community", "minecraft-smp"],
       "color": "#10b981"
+    },
+    {
+      "name": "Google Gemini",
+      "url": "https://gemini.google.com/",
+      "description": "Google's multimodal AI assistant with live search integration, image understanding, and deep Google Workspace connections.",
+      "category": "ai",
+      "tags": ["freemium", "ai-assistant"],
+      "color": "#4285F4"
+    },
+    {
+      "name": "Perplexity",
+      "url": "https://www.perplexity.ai/",
+      "description": "AI-powered answer engine that cites its sources. Ask any question and get a researched response with live web references.",
+      "category": "ai",
+      "tags": ["freemium", "ai-search"],
+      "color": "#20B2AA"
+    },
+    {
+      "name": "Grok",
+      "url": "https://grok.com/",
+      "description": "xAI's conversational AI with real-time X/Twitter data access, strong reasoning, and image generation capabilities.",
+      "category": "ai",
+      "tags": ["freemium", "ai-assistant"],
+      "color": "#e7e9ea"
+    },
+    {
+      "name": "Vercel",
+      "url": "https://vercel.com/",
+      "description": "Zero-config deployment platform for frontend frameworks. Push to Git and your app is live in seconds with global CDN.",
+      "category": "dev-tools",
+      "tags": ["freemium", "deployment"],
+      "color": "#e7e9ea"
+    },
+    {
+      "name": "Netlify",
+      "url": "https://netlify.com/",
+      "description": "Static site and serverless hosting with CI/CD, form handling, edge functions, and branch deploy previews built in.",
+      "category": "dev-tools",
+      "tags": ["freemium", "deployment"],
+      "color": "#00C7B7"
+    },
+    {
+      "name": "Stack Overflow",
+      "url": "https://stackoverflow.com/",
+      "description": "The go-to Q&A site for developers. Search millions of answered questions or post your own to the global dev community.",
+      "category": "dev-tools",
+      "tags": ["free", "q&a"],
+      "color": "#F48024"
+    },
+    {
+      "name": "Hetzner",
+      "url": "https://www.hetzner.com/",
+      "description": "German cloud provider with some of Europe's best VPS prices. Dedicated servers, cloud instances, and object storage.",
+      "category": "hosting",
+      "tags": ["paid", "vps-hosting"],
+      "color": "#D50C2D"
+    },
+    {
+      "name": "DigitalOcean",
+      "url": "https://cloud.digitalocean.com/",
+      "description": "Developer-friendly cloud platform. Deploy Droplets, managed databases, Kubernetes clusters, and app platforms easily.",
+      "category": "hosting",
+      "tags": ["paid", "cloud-hosting"],
+      "color": "#0080FF"
+    },
+    {
+      "name": "Oracle Cloud",
+      "url": "https://cloud.oracle.com/",
+      "description": "Enterprise cloud platform with a generous always-free tier including 2 AMD VMs, object storage, and a managed database.",
+      "category": "hosting",
+      "tags": ["freemium", "cloud-hosting"],
+      "color": "#F80000"
+    },
+    {
+      "name": "Steam",
+      "url": "https://store.steampowered.com/",
+      "description": "The biggest PC gaming storefront. Thousands of games, reviews, community features, Steam Workshop, and cloud saves.",
+      "category": "gaming",
+      "tags": ["free", "game-store"],
+      "color": "#1B2838"
+    },
+    {
+      "name": "Epic Games",
+      "url": "https://store.epicgames.com/",
+      "description": "PC game launcher and store. Famous for weekly free game giveaways and exclusives like Fortnite and major AAA titles.",
+      "category": "gaming",
+      "tags": ["free", "game-store"],
+      "color": "#313131"
+    },
+    {
+      "name": "Roblox",
+      "url": "https://www.roblox.com/",
+      "description": "Massively multiplayer platform where users create and play user-generated games. Popular with all ages, huge library of experiences.",
+      "category": "gaming",
+      "tags": ["free", "game-platform"],
+      "color": "#E2231A"
+    },
+    {
+      "name": "VirusTotal",
+      "url": "https://www.virustotal.com/",
+      "description": "Scan files and URLs against 70+ antivirus engines and threat intelligence tools. Free and no account required.",
+      "category": "security",
+      "tags": ["free", "malware-scanner"],
+      "color": "#394EFF"
+    },
+    {
+      "name": "Have I Been Pwned",
+      "url": "https://haveibeenpwned.com/",
+      "description": "Check if your email or phone number has appeared in a known data breach. Covers billions of leaked credentials.",
+      "category": "security",
+      "tags": ["free", "breach-checker"],
+      "color": "#FF6B00"
+    },
+    {
+      "name": "W3Schools",
+      "url": "https://www.w3schools.com/",
+      "description": "Beginner-friendly web development tutorials for HTML, CSS, JavaScript, SQL, Python, and more. Includes interactive editors.",
+      "category": "learning",
+      "tags": ["free", "web-tutorials"],
+      "color": "#04AA6D"
+    },
+    {
+      "name": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/",
+      "description": "Mozilla's authoritative reference for HTML, CSS, and JavaScript. The definitive docs every web developer bookmarks.",
+      "category": "learning",
+      "tags": ["free", "web-reference"],
+      "color": "#1a1a1a"
+    },
+    {
+      "name": "FileHippo",
+      "url": "https://filehippo.com/",
+      "description": "Safe, verified Windows software downloads. Browse thousands of apps with version history and clean installers.",
+      "category": "downloads",
+      "tags": ["free", "software-library"],
+      "color": "#0078D7"
+    },
+    {
+      "name": "Ninite",
+      "url": "https://ninite.com/",
+      "description": "Install and update multiple Windows apps in one click with no toolbars or junk. The fastest way to set up a new PC.",
+      "category": "downloads",
+      "tags": ["free", "bulk-installer"],
+      "color": "#2E86C1"
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.com",
+      "description": "Voice, video, and text platform for communities. Create servers with channels, roles, bots, and live stage events.",
+      "category": "social",
+      "tags": ["freemium", "community-chat"],
+      "color": "#5865F2"
+    },
+    {
+      "name": "Reddit",
+      "url": "https://reddit.com",
+      "description": "Network of communities for any interest. Upvote posts, join subreddits, and dive into discussions on virtually any topic.",
+      "category": "social",
+      "tags": ["freemium", "forums"],
+      "color": "#FF4500"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://facebook.com",
+      "description": "The world's largest social network. Connect with friends and family, join groups, sell in Marketplace, and follow pages.",
+      "category": "social",
+      "tags": ["free", "social-network"],
+      "color": "#1877F2"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com",
+      "description": "Professional networking platform. Build your career profile, connect with industry peers, and find job opportunities.",
+      "category": "social",
+      "tags": ["freemium", "professional-network"],
+      "color": "#0A66C2"
+    },
+    {
+      "name": "Twitch",
+      "url": "https://twitch.tv",
+      "description": "Live streaming platform dominated by gaming, esports, and IRL content. Watch, chat, and subscribe to your favourite streamers.",
+      "category": "streaming",
+      "tags": ["free", "live-streaming"],
+      "color": "#9146FF"
+    },
+    {
+      "name": "Kick",
+      "url": "https://kick.com",
+      "description": "Streaming platform with creator-friendly terms and a 95/5 revenue split. Growing community for gaming and IRL streams.",
+      "category": "streaming",
+      "tags": ["free", "live-streaming"],
+      "color": "#53FC18"
+    },
+    {
+      "name": "Netflix",
+      "url": "https://netflix.com",
+      "description": "On-demand streaming service for movies, series, documentaries, and Netflix Originals. No ads on any plan.",
+      "category": "streaming",
+      "tags": ["subscription", "on-demand"],
+      "color": "#E50914"
+    },
+    {
+      "name": "Crunchyroll",
+      "url": "https://crunchyroll.com",
+      "description": "The biggest dedicated anime streaming service. Watch simulcasts hours after Japan, plus classic series and manga.",
+      "category": "streaming",
+      "tags": ["freemium", "anime-streaming"],
+      "color": "#F47521"
+    },
+    {
+      "name": "Prime Video",
+      "url": "https://primevideo.com",
+      "description": "Amazon's streaming service with originals, blockbusters, live sports, and add-on channels. Included with Prime.",
+      "category": "streaming",
+      "tags": ["subscription", "on-demand"],
+      "color": "#00A8E1"
+    },
+    {
+      "name": "Disney+",
+      "url": "https://disneyplus.com",
+      "description": "Stream Disney, Pixar, Marvel, Star Wars, and National Geographic content. Includes 4K HDR and downloads for offline viewing.",
+      "category": "streaming",
+      "tags": ["subscription", "on-demand"],
+      "color": "#113CCF"
+    },
+    {
+      "name": "GitLab",
+      "url": "https://gitlab.com",
+      "description": "Git-based code hosting with a built-in CI/CD pipeline, issue tracker, container registry, and DevSecOps toolchain.",
+      "category": "dev-tools",
+      "tags": ["freemium", "git-hosting"],
+      "color": "#FC6D26"
+    },
+    {
+      "name": "Replit",
+      "url": "https://replit.com",
+      "description": "Browser-based IDE for coding, running, and hosting projects without any local setup. Supports 50+ programming languages.",
+      "category": "dev-tools",
+      "tags": ["freemium", "browser-ide"],
+      "color": "#F26207"
+    },
+    {
+      "name": "CodeSandbox",
+      "url": "https://codesandbox.io",
+      "description": "Instant online development environment for web apps. Fork templates, collaborate in real-time, and deploy instantly.",
+      "category": "dev-tools",
+      "tags": ["freemium", "browser-ide"],
+      "color": "#151515"
+    },
+    {
+      "name": "Railway",
+      "url": "https://railway.app",
+      "description": "Modern cloud deployment with minimal config. Deploy apps, databases, and cron jobs directly from a GitHub repo.",
+      "category": "hosting",
+      "tags": ["freemium", "cloud-hosting"],
+      "color": "#7c5cfc"
+    },
+    {
+      "name": "Render",
+      "url": "https://render.com",
+      "description": "Simple cloud hosting for web services, static sites, APIs, and background workers with automatic Git deployments.",
+      "category": "hosting",
+      "tags": ["freemium", "cloud-hosting"],
+      "color": "#46E3B7"
+    },
+    {
+      "name": "AWS",
+      "url": "https://aws.amazon.com",
+      "description": "Amazon's industry-leading cloud platform with 200+ services including EC2, S3, Lambda, RDS, and a 12-month free tier.",
+      "category": "hosting",
+      "tags": ["freemium", "cloud-platform"],
+      "color": "#FF9900"
+    },
+    {
+      "name": "Microsoft Azure",
+      "url": "https://azure.microsoft.com",
+      "description": "Microsoft's enterprise cloud platform. Virtual machines, AI services, DevOps pipelines, and deep Microsoft 365 integration.",
+      "category": "hosting",
+      "tags": ["freemium", "cloud-platform"],
+      "color": "#0078D4"
+    },
+    {
+      "name": "Namecheap",
+      "url": "https://namecheap.com",
+      "description": "Affordable domain registration and shared hosting. Includes free WhoisGuard privacy and one-click WordPress installs.",
+      "category": "hosting",
+      "tags": ["paid", "domain-registrar"],
+      "color": "#DE3723"
+    },
+    {
+      "name": "Porkbun",
+      "url": "https://porkbun.com",
+      "description": "Budget-friendly domain registrar with free WHOIS privacy, SSL certificates, and competitive renewal rates.",
+      "category": "hosting",
+      "tags": ["paid", "domain-registrar"],
+      "color": "#EF7878"
+    },
+    {
+      "name": "SteamDB",
+      "url": "https://steamdb.info",
+      "description": "Detailed stats and historical data for Steam. Track price history, player counts, achievement percentages, and sale dates.",
+      "category": "gaming",
+      "tags": ["free", "steam-analytics"],
+      "color": "#1B2838"
+    },
+    {
+      "name": "CurseForge",
+      "url": "https://curseforge.com",
+      "description": "The largest platform for game mods and addons. Covers Minecraft, WoW, Sims, and dozens of other titles.",
+      "category": "gaming",
+      "tags": ["free", "mods"],
+      "color": "#F16436"
+    },
+    {
+      "name": "Modrinth",
+      "url": "https://modrinth.com",
+      "description": "Open-source Minecraft mod repository with fast downloads, a clean interface, and support for Fabric, Forge, and Quilt.",
+      "category": "minecraft",
+      "tags": ["open-source", "mods"],
+      "color": "#1BD96A"
+    },
+    {
+      "name": "Planet Minecraft",
+      "url": "https://planetminecraft.com",
+      "description": "Community hub for Minecraft content. Download maps, skins, texture packs, and servers shared by creators worldwide.",
+      "category": "minecraft",
+      "tags": ["free", "community"],
+      "color": "#62B047"
+    },
+    {
+      "name": "SpigotMC",
+      "url": "https://spigotmc.org",
+      "description": "The largest source of Minecraft server plugins. Browse, download, and publish plugins for Spigot and Bukkit servers.",
+      "category": "minecraft",
+      "tags": ["free", "plugins"],
+      "color": "#ED8106"
+    },
+    {
+      "name": "Hangar",
+      "url": "https://hangar.papermc.io",
+      "description": "Official PaperMC plugin repository. Browse and publish plugins specifically verified for Paper and Velocity servers.",
+      "category": "minecraft",
+      "tags": ["free", "plugins"],
+      "color": "#F6C343"
+    },
+    {
+      "name": "PaperMC",
+      "url": "https://papermc.io",
+      "description": "High-performance Minecraft server software built on Spigot. Faster, more configurable, and with better plugin API.",
+      "category": "minecraft",
+      "tags": ["open-source", "server-software"],
+      "color": "#e7e9ea"
+    },
+    {
+      "name": "Notion",
+      "url": "https://notion.so",
+      "description": "All-in-one workspace combining notes, databases, wikis, and project boards. Highly customisable for individuals and teams.",
+      "category": "productivity",
+      "tags": ["freemium", "notes-wiki"],
+      "color": "#1a1a1a"
+    },
+    {
+      "name": "Trello",
+      "url": "https://trello.com",
+      "description": "Visual project management with Kanban boards. Drag cards through columns to track tasks and workflows at a glance.",
+      "category": "productivity",
+      "tags": ["freemium", "kanban"],
+      "color": "#0079BF"
+    },
+    {
+      "name": "Google Drive",
+      "url": "https://drive.google.com",
+      "description": "Google's cloud storage with 15GB free. Stores files, Docs, Sheets, and Slides — accessible and shareable from anywhere.",
+      "category": "storage",
+      "tags": ["freemium", "cloud-storage"],
+      "color": "#34A853"
+    },
+    {
+      "name": "OneDrive",
+      "url": "https://onedrive.live.com",
+      "description": "Microsoft's cloud storage with 5GB free. Syncs seamlessly with Windows and Microsoft 365 apps.",
+      "category": "storage",
+      "tags": ["freemium", "cloud-storage"],
+      "color": "#0078D4"
+    },
+    {
+      "name": "MEGA",
+      "url": "https://mega.nz",
+      "description": "End-to-end encrypted cloud storage with 20GB free. Strong privacy focus with zero-knowledge architecture.",
+      "category": "storage",
+      "tags": ["freemium", "encrypted-storage"],
+      "color": "#D9272E"
+    },
+    {
+      "name": "freeCodeCamp",
+      "url": "https://freecodecamp.org",
+      "description": "Free, self-paced coding curriculum covering web dev, data science, and machine learning with certifications.",
+      "category": "learning",
+      "tags": ["free", "coding-courses"],
+      "color": "#0A0A23"
+    },
+    {
+      "name": "Khan Academy",
+      "url": "https://khanacademy.org",
+      "description": "Completely free education platform covering maths, science, computing, history, and test prep for all ages.",
+      "category": "learning",
+      "tags": ["free", "education"],
+      "color": "#14BF96"
+    },
+    {
+      "name": "Figma",
+      "url": "https://figma.com",
+      "description": "Collaborative UI/UX design tool for web and mobile. Build wireframes, prototypes, and design systems with your team in real-time.",
+      "category": "design",
+      "tags": ["freemium", "ui-design"],
+      "color": "#A259FF"
+    },
+    {
+      "name": "Photopea",
+      "url": "https://photopea.com",
+      "description": "Free browser-based photo editor that supports PSD, XCF, and Sketch files. A capable Photoshop alternative with no install.",
+      "category": "design",
+      "tags": ["free", "photo-editor"],
+      "color": "#18A497"
+    },
+    {
+      "name": "Remove.bg",
+      "url": "https://remove.bg",
+      "description": "AI-powered background remover. Upload any photo and get a clean cutout in seconds. Free previews, paid for full resolution.",
+      "category": "design",
+      "tags": ["freemium", "ai-image-tool"],
+      "color": "#5F6FFF"
+    },
+    {
+      "name": "Amazon",
+      "url": "https://amazon.com",
+      "description": "The world's largest online retailer. Shop millions of products with fast delivery, customer reviews, and Prime benefits.",
+      "category": "shopping",
+      "tags": ["free", "online-retail"],
+      "color": "#FF9900"
+    },
+    {
+      "name": "Takealot",
+      "url": "https://takealot.com",
+      "description": "South Africa's leading online store. Shop electronics, fashion, home goods, and more with local delivery.",
+      "category": "shopping",
+      "tags": ["free", "south-african-retail"],
+      "color": "#0E7CC1"
+    },
+    {
+      "name": "AliExpress",
+      "url": "https://aliexpress.com",
+      "description": "Global marketplace for budget-friendly products shipped from China. Electronics, clothing, home goods, and more.",
+      "category": "shopping",
+      "tags": ["free", "global-marketplace"],
+      "color": "#FF4747"
+    },
+    {
+      "name": "OpenAI",
+      "url": "https://openai.com",
+      "description": "AI research company behind ChatGPT and the GPT-4 API. Access models, DALL·E image generation, and Sora video AI.",
+      "category": "ai",
+      "tags": ["freemium", "ai-research"],
+      "color": "#10A37F"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co",
+      "description": "The hub for open-source AI. Browse, download, and deploy thousands of models, datasets, and Spaces demos.",
+      "category": "ai",
+      "tags": ["freemium", "open-source"],
+      "color": "#FFD21E"
+    },
+    {
+      "name": "Leonardo AI",
+      "url": "https://leonardo.ai",
+      "description": "AI image generation platform tailored for game assets, concept art, and illustrations with fine-tuned style models.",
+      "category": "ai",
+      "tags": ["freemium", "ai-image-gen"],
+      "color": "#6C5CE7"
+    },
+    {
+      "name": "Midjourney",
+      "url": "https://midjourney.com",
+      "description": "Premium AI art generator producing highly detailed, stylised images from text prompts. Runs through Discord or the web app.",
+      "category": "ai",
+      "tags": ["subscription", "ai-image-gen"],
+      "color": "#3d3d3d"
+    },
+    {
+      "name": "Pinterest",
+      "url": "https://pinterest.com",
+      "description": "Visual discovery platform for ideas, inspiration, and mood boards. Save and organise pins for recipes, fashion, design, and more.",
+      "category": "social",
+      "tags": ["free", "inspiration"],
+      "color": "#E60023"
+    },
+    {
+      "name": "Snapchat",
+      "url": "https://snapchat.com",
+      "description": "Ephemeral photo and video messaging with AR lenses, stories, and Spotlight. Messages disappear after viewing by default.",
+      "category": "social",
+      "tags": ["free", "messaging"],
+      "color": "#FFFC00"
+    },
+    {
+      "name": "Threads",
+      "url": "https://threads.net",
+      "description": "Meta's text-based social platform integrated with Instagram. Post updates, follow accounts, and join public conversations.",
+      "category": "social",
+      "tags": ["free", "social-network"],
+      "color": "#1a1a1a"
+    },
+    {
+      "name": "Messenger",
+      "url": "https://messenger.com",
+      "description": "Facebook's messaging app for chats, voice and video calls, and group conversations — accessible from your browser.",
+      "category": "social",
+      "tags": ["free", "messaging"],
+      "color": "#0084FF"
+    },
+    {
+      "name": "WhatsApp Web",
+      "url": "https://web.whatsapp.com",
+      "description": "Use WhatsApp in your browser. Sync chats from your phone in real-time for messages, calls, and file sharing.",
+      "category": "social",
+      "tags": ["free", "messaging"],
+      "color": "#25D366"
+    },
+    {
+      "name": "Telegram",
+      "url": "https://web.telegram.org",
+      "description": "Fast, privacy-focused messaging with bots, channels, group chats up to 200,000 members, and powerful file sharing.",
+      "category": "social",
+      "tags": ["free", "messaging"],
+      "color": "#229ED9"
+    },
+    {
+      "name": "OBS",
+      "url": "https://obsproject.com",
+      "description": "Industry-standard open-source streaming and recording software. Supports scenes, overlays, and multiple output formats.",
+      "category": "downloads",
+      "tags": ["open-source", "streaming-software"],
+      "color": "#302E31"
+    },
+    {
+      "name": "VLC",
+      "url": "https://videolan.org",
+      "description": "Free, open-source media player that plays virtually any video or audio format. Lightweight, cross-platform, no codecs needed.",
+      "category": "downloads",
+      "tags": ["open-source", "media-player"],
+      "color": "#F57C00"
+    },
+    {
+      "name": "7-Zip",
+      "url": "https://7-zip.org",
+      "description": "Free, open-source archive utility for Windows. Compresses and extracts ZIP, RAR, 7z, tar, ISO, and many more formats.",
+      "category": "downloads",
+      "tags": ["open-source", "archive-tool"],
+      "color": "#2c2c2c"
+    },
+    {
+      "name": "Audacity",
+      "url": "https://audacityteam.org",
+      "description": "Free, open-source audio editor for recording, trimming, mixing, and mastering audio files. Supports VST plugins.",
+      "category": "downloads",
+      "tags": ["open-source", "audio-editor"],
+      "color": "#2A5CAA"
+    },
+    {
+      "name": "GIMP",
+      "url": "https://gimp.org",
+      "description": "Free and open-source image editor with layer support, filters, and scripting. A capable alternative to Adobe Photoshop.",
+      "category": "downloads",
+      "tags": ["open-source", "image-editor"],
+      "color": "#5C5543"
+    },
+    {
+      "name": "Bitwarden",
+      "url": "https://bitwarden.com",
+      "description": "Open-source password manager with end-to-end encryption. Sync logins across all devices with a generous free tier.",
+      "category": "security",
+      "tags": ["freemium", "password-manager"],
+      "color": "#175DDC"
+    },
+    {
+      "name": "Proton Mail",
+      "url": "https://proton.me",
+      "description": "End-to-end encrypted email based in Switzerland. Zero-knowledge architecture means even Proton can't read your messages.",
+      "category": "security",
+      "tags": ["freemium", "encrypted-email"],
+      "color": "#6D4AFF"
+    },
+    {
+      "name": "Cisco",
+      "url": "https://cisco.com",
+      "description": "Enterprise networking and security vendor. Offers routers, switches, firewalls, and cloud security solutions for businesses.",
+      "category": "security",
+      "tags": ["enterprise", "networking"],
+      "color": "#049FD9"
+    },
+    {
+      "name": "Udemy",
+      "url": "https://udemy.com",
+      "description": "Marketplace of 200,000+ online courses in tech, business, design, and more. Frequent deep discounts bring most courses under $15.",
+      "category": "learning",
+      "tags": ["paid", "online-courses"],
+      "color": "#A435F0"
+    },
+    {
+      "name": "Coursera",
+      "url": "https://coursera.org",
+      "description": "University-backed online courses and degrees from top institutions like Google, Stanford, and IBM. Audit most for free.",
+      "category": "learning",
+      "tags": ["freemium", "online-courses"],
+      "color": "#0056D2"
+    },
+    {
+      "name": "edX",
+      "url": "https://edx.org",
+      "description": "Free online courses and verified certificates from 160+ universities and companies. Covers STEM, humanities, and business.",
+      "category": "learning",
+      "tags": ["freemium", "online-courses"],
+      "color": "#02262B"
+    },
+    {
+      "name": "Wikipedia",
+      "url": "https://wikipedia.org",
+      "description": "The world's largest free online encyclopaedia. Over 60 million articles in 300+ languages, maintained by volunteers.",
+      "category": "learning",
+      "tags": ["free", "encyclopaedia"],
+      "color": "#1a1a1a"
+    },
+    {
+      "name": "GeeksForGeeks",
+      "url": "https://geeksforgeeks.org",
+      "description": "Computer science portal with programming tutorials, DSA explanations, interview prep, and hands-on coding exercises.",
+      "category": "learning",
+      "tags": ["freemium", "cs-tutorials"],
+      "color": "#2F8D46"
+    },
+    {
+      "name": "LeetCode",
+      "url": "https://leetcode.com",
+      "description": "Platform for coding interview prep. Solve algorithm and data structure challenges ranked by difficulty across many languages.",
+      "category": "learning",
+      "tags": ["freemium", "coding-challenges"],
+      "color": "#FFA116"
+    },
+    {
+      "name": "Docker Hub",
+      "url": "https://hub.docker.com",
+      "description": "The world's largest container image registry. Pull official images, push your own, and manage private repositories.",
+      "category": "dev-tools",
+      "tags": ["freemium", "containers"],
+      "color": "#2496ED"
+    },
+    {
+      "name": "Postman",
+      "url": "https://postman.com",
+      "description": "API development platform for building, testing, mocking, and documenting REST, GraphQL, and SOAP APIs.",
+      "category": "dev-tools",
+      "tags": ["freemium", "api-testing"],
+      "color": "#FF6C37"
+    },
+    {
+      "name": "Supabase",
+      "url": "https://supabase.com",
+      "description": "Open-source Firebase alternative. Postgres database, realtime subscriptions, auth, storage, and edge functions.",
+      "category": "dev-tools",
+      "tags": ["freemium", "backend-service"],
+      "color": "#3ECF8E"
+    },
+    {
+      "name": "MongoDB Atlas",
+      "url": "https://mongodb.com/atlas",
+      "description": "Fully managed cloud MongoDB hosting. Deploy on AWS, Azure, or GCP with built-in search, charts, and a free 512MB cluster.",
+      "category": "dev-tools",
+      "tags": ["freemium", "database-hosting"],
+      "color": "#00ED64"
+    },
+    {
+      "name": "Linode",
+      "url": "https://linode.com",
+      "description": "Akamai's cloud platform with affordable Linux VPS, Kubernetes, object storage, and managed databases.",
+      "category": "hosting",
+      "tags": ["paid", "vps-hosting"],
+      "color": "#00A95C"
+    },
+    {
+      "name": "Vultr",
+      "url": "https://vultr.com",
+      "description": "High-performance cloud compute, bare metal, and object storage starting at $2.50/mo. 32 global data centre locations.",
+      "category": "hosting",
+      "tags": ["paid", "cloud-hosting"],
+      "color": "#007BFC"
+    },
+    {
+      "name": "Hostinger",
+      "url": "https://hostinger.com",
+      "description": "Affordable shared and VPS hosting with hPanel control panel, one-click WordPress, and fast NVMe servers.",
+      "category": "hosting",
+      "tags": ["paid", "web-hosting"],
+      "color": "#673DE6"
+    },
+    {
+      "name": "Aternos",
+      "url": "https://aternos.org",
+      "description": "Completely free Minecraft server hosting. Supports vanilla, Spigot, Paper, Forge, Fabric, and Bedrock — no credit card needed.",
+      "category": "minecraft",
+      "tags": ["free", "server-hosting"],
+      "color": "#00AF5C"
+    },
+    {
+      "name": "Minehut",
+      "url": "https://minehut.com",
+      "description": "Free Minecraft server hosting with an online community. Quick setup for Java edition servers with plugin support.",
+      "category": "minecraft",
+      "tags": ["freemium", "server-hosting"],
+      "color": "#F7A800"
+    },
+    {
+      "name": "Hypixel",
+      "url": "https://hypixel.net",
+      "description": "The largest Minecraft network. Play BedWars, SkyWars, SkyBlock, and dozens of other minigames on hypixel.net.",
+      "category": "minecraft",
+      "tags": ["free", "minecraft-network"],
+      "color": "#F5A623"
+    },
+    {
+      "name": "IMDb",
+      "url": "https://imdb.com",
+      "description": "The internet's go-to database for movies, TV shows, actors, and ratings. Check scores, read reviews, and explore filmographies.",
+      "category": "entertainment",
+      "tags": ["free", "movie-database"],
+      "color": "#F5C518"
+    },
+    {
+      "name": "Letterboxd",
+      "url": "https://letterboxd.com",
+      "description": "Social platform for film lovers. Log films you've watched, rate them, write reviews, and follow friends' watchlists.",
+      "category": "entertainment",
+      "tags": ["freemium", "film-logging"],
+      "color": "#00E054"
+    },
+    {
+      "name": "SoundCloud",
+      "url": "https://soundcloud.com",
+      "description": "Upload and discover audio from independent artists worldwide. Great for finding emerging music, mixes, and podcasts.",
+      "category": "entertainment",
+      "tags": ["freemium", "music-platform"],
+      "color": "#FF5500"
+    },
+    {
+      "name": "Apple Music",
+      "url": "https://music.apple.com",
+      "description": "Subscription music streaming with 100M+ songs, spatial audio, lossless quality, and seamless Apple device integration.",
+      "category": "entertainment",
+      "tags": ["subscription", "music-streaming"],
+      "color": "#FA243C"
+    },
+    {
+      "name": "eBay",
+      "url": "https://ebay.com",
+      "description": "Global online marketplace to buy and sell new, used, and vintage items through auction or fixed-price listings.",
+      "category": "shopping",
+      "tags": ["free", "marketplace"],
+      "color": "#E53238"
+    },
+    {
+      "name": "Etsy",
+      "url": "https://etsy.com",
+      "description": "Marketplace for handmade, vintage, and unique craft items. Support small creators and find one-of-a-kind gifts.",
+      "category": "shopping",
+      "tags": ["free", "handmade-marketplace"],
+      "color": "#F1641E"
+    },
+    {
+      "name": "Temu",
+      "url": "https://temu.com",
+      "description": "Budget-friendly global shopping marketplace with a huge range of products shipped directly from manufacturers.",
+      "category": "shopping",
+      "tags": ["free", "budget-shopping"],
+      "color": "#FF7300"
     }
   ]
 }
