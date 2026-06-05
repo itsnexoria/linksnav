@@ -562,6 +562,126 @@ body {
 .tag-agency           { background: rgba(124,58,237,0.12); color: #c084fc; border-color: rgba(124,58,237,0.25); }
 .tag-web-dev          { background: rgba(124,58,237,0.12); color: #c084fc; border-color: rgba(124,58,237,0.25); }
 
+/* ---- FAVOURITES NAV BUTTON ---- */
+.cat-btn.fav-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffd700;
+  border-color: rgba(255,215,0,0.2);
+}
+.cat-btn.fav-cat-btn:hover {
+  border-color: rgba(255,215,0,0.5);
+  background: rgba(255,215,0,0.08);
+  color: #ffd700;
+}
+.cat-btn.fav-cat-btn.active {
+  background: linear-gradient(135deg, rgba(255,215,0,0.25), rgba(255,165,0,0.15));
+  border-color: rgba(255,215,0,0.6);
+  color: #ffd700;
+  box-shadow: 0 0 16px rgba(255,215,0,0.25);
+}
+
+.fav-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: rgba(255,215,0,0.3);
+  color: #ffd700;
+  font-size: 0.6rem;
+  font-weight: 700;
+  border-radius: 100px;
+  line-height: 1;
+}
+
+/* ---- CARD FAV BUTTON ---- */
+.card-fav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.18s, transform 0.18s;
+  position: relative;
+  z-index: 2;
+  opacity: 0.4;
+}
+.card-fav-btn:hover,
+.card:hover .card-fav-btn {
+  opacity: 1;
+  color: #ffd700;
+  transform: scale(1.25);
+}
+.card-fav-btn.active {
+  color: #ffd700;
+  opacity: 1;
+}
+.card-fav-btn.active:hover {
+  color: #ffaa00;
+  transform: scale(1.15);
+}
+
+/* ---- VISIT COUNT BADGE ---- */
+.visit-count {
+  font-size: 0.62rem;
+  color: var(--muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 2px 7px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.visit-count.hidden {
+  display: none;
+}
+.card:hover .visit-count {
+  color: var(--text);
+}
+
+/* ---- PINNED SECTION ---- */
+#pinnedSection {
+  margin-bottom: 4px;
+}
+
+.pinned-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffd700;
+  opacity: 0.75;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pinned-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,215,0,0.2), transparent);
+  margin: 20px 0 18px;
+}
+
+#pinnedGrid .card {
+  border-color: rgba(255,215,0,0.12);
+}
+#pinnedGrid .card::before {
+  background: #ffd700;
+}
+#pinnedGrid .card:hover {
+  border-color: rgba(255,215,0,0.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,215,0,0.2);
+}
+
 /* ---- LOAD MORE ---- */
 .load-more-wrap {
   display: flex;

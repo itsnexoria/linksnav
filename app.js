@@ -1,26 +1,40 @@
 /* ============================================================
-   NexHub — app.js  (updated)
+   NexHub — app.js
    ============================================================ */
 
 let allSites      = [];
 let allCategories = [];
 let activeCategory = 'all';
 let searchQuery    = '';
+let favorites      = new Set(JSON.parse(localStorage.getItem('nexo_favorites') || '[]'));
+let clickCounts    = {};
 
-const PAGE_SIZE    = 12;   // cards shown per page
+const PAGE_SIZE    = 12;
 let   visibleCount = PAGE_SIZE;
 
 // ---- Boot ----
 async function init() {
   try {
-    const res  = await fetch('sites.json');
-    const data = await res.json();
+    const [sitesRes, statsRes] = await Promise.all([
+      fetch('sites.json'),
+      fetch('/api/site-stats').catch(() => null)
+    ]);
+
+    const data = await sitesRes.json();
     allSites      = data.sites;
     allCategories = data.categories;
+
+    if (statsRes && statsRes.ok) {
+      const stats = await statsRes.json();
+      stats.forEach(s => { clickCounts[s.site_url] = s.click_count; });
+    }
+
     buildCategoryNav();
+    updateFavCount();
     render();
     setupSearch();
     setupScrollArrows();
+    setupGridEvents();
   } catch (err) {
     console.error('Failed to load sites.json:', err);
     document.getElementById('cardsGrid').innerHTML =
@@ -28,9 +42,89 @@ async function init() {
   }
 }
 
+// ---- Favorites ----
+function saveFavorites() {
+  localStorage.setItem('nexo_favorites', JSON.stringify([...favorites]));
+}
+
+function toggleFav(url) {
+  if (favorites.has(url)) {
+    favorites.delete(url);
+  } else {
+    favorites.add(url);
+  }
+  saveFavorites();
+  updateFavCount();
+  render();
+}
+
+function updateFavCount() {
+  const badge = document.getElementById('favCount');
+  if (badge) {
+    badge.textContent = favorites.size;
+    badge.style.display = favorites.size > 0 ? 'inline-flex' : 'none';
+  }
+}
+
+// ---- Click tracking ----
+async function trackClick(url) {
+  clickCounts[url] = (clickCounts[url] || 0) + 1;
+  document.querySelectorAll(`.visit-count[data-url="${CSS.escape(url)}"]`).forEach(el => {
+    el.textContent = `↗ ${clickCounts[url]}`;
+    el.classList.remove('hidden');
+  });
+
+  try {
+    const res = await fetch('/api/site-stats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      clickCounts[url] = data.click_count;
+      document.querySelectorAll(`.visit-count[data-url="${CSS.escape(url)}"]`).forEach(el => {
+        el.textContent = `↗ ${data.click_count}`;
+      });
+    }
+  } catch { /* silently fail */ }
+}
+
+// ---- Grid event delegation ----
+function setupGridEvents() {
+  document.getElementById('main').addEventListener('click', e => {
+    const favBtn = e.target.closest('.card-fav-btn');
+    if (favBtn) {
+      e.preventDefault();
+      toggleFav(favBtn.dataset.url);
+      return;
+    }
+
+    const card = e.target.closest('a.card');
+    if (card) {
+      trackClick(card.getAttribute('href'));
+    }
+  });
+}
+
 // ---- Category nav ----
 function buildCategoryNav() {
   const nav = document.getElementById('catNavInner');
+
+  const favBtn = document.createElement('button');
+  favBtn.className  = 'cat-btn fav-cat-btn';
+  favBtn.dataset.cat = 'favorites';
+  favBtn.innerHTML  = `★ Favourites <span id="favCount" class="fav-count-badge" style="display:none">0</span>`;
+  favBtn.addEventListener('click', () => {
+    activeCategory = 'favorites';
+    searchQuery    = '';
+    visibleCount   = PAGE_SIZE;
+    document.getElementById('searchInput').value = '';
+    setActiveBtn(favBtn);
+    render();
+  });
+  nav.appendChild(favBtn);
+
   allCategories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className    = 'cat-btn';
@@ -80,8 +174,8 @@ function setupScrollArrows() {
 function setupSearch() {
   const input = document.getElementById('searchInput');
   input.addEventListener('input', () => {
-    searchQuery    = input.value.toLowerCase().trim();
-    visibleCount   = PAGE_SIZE;
+    searchQuery  = input.value.toLowerCase().trim();
+    visibleCount = PAGE_SIZE;
     if (searchQuery) {
       activeCategory = 'all';
       document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -111,6 +205,15 @@ document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', fun
 
 // ---- Filter logic ----
 function getFiltered() {
+  if (activeCategory === 'favorites') {
+    return allSites.filter(site => {
+      if (!favorites.has(site.url)) return false;
+      if (!searchQuery) return true;
+      const haystack = `${site.name} ${site.description} ${site.category} ${(site.tags || []).join(' ')}`.toLowerCase();
+      return haystack.includes(searchQuery);
+    });
+  }
+
   return allSites.filter(site => {
     const matchCat = activeCategory === 'all' || site.category === activeCategory;
     if (!searchQuery) return matchCat;
@@ -131,14 +234,18 @@ function faviconUrl(siteUrl) {
 
 // ---- Render ----
 function render() {
-  const grid     = document.getElementById('cardsGrid');
-  const empty    = document.getElementById('emptyState');
-  const label    = document.getElementById('sectionLabel');
-  const countEl  = document.getElementById('siteCount');
-  const filtered = getFiltered();
+  const pinnedSection = document.getElementById('pinnedSection');
+  const pinnedGrid    = document.getElementById('pinnedGrid');
+  const grid          = document.getElementById('cardsGrid');
+  const empty         = document.getElementById('emptyState');
+  const label         = document.getElementById('sectionLabel');
+  const countEl       = document.getElementById('siteCount');
+  const filtered      = getFiltered();
 
   // Section label
-  if (searchQuery) {
+  if (activeCategory === 'favorites') {
+    label.textContent = '★ Favourites';
+  } else if (searchQuery) {
     label.textContent = `Results for "${searchQuery}"`;
   } else if (activeCategory === 'all') {
     label.textContent = 'All Sites';
@@ -150,8 +257,10 @@ function render() {
   countEl.textContent = `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
 
   if (filtered.length === 0) {
-    grid.innerHTML = '';
-    empty.style.display = 'block';
+    grid.innerHTML        = '';
+    pinnedGrid.innerHTML  = '';
+    pinnedSection.style.display = 'none';
+    empty.style.display   = 'block';
     document.getElementById('emptyQuery').textContent = searchQuery || activeCategory;
     removePagination();
     return;
@@ -159,36 +268,67 @@ function render() {
 
   empty.style.display = 'none';
 
-  const visible = filtered.slice(0, visibleCount);
-  grid.innerHTML = visible.map(renderCard).join('');
+  if (activeCategory === 'favorites') {
+    pinnedSection.style.display = 'none';
+    pinnedGrid.innerHTML = '';
+    const visible = filtered.slice(0, visibleCount);
+    grid.innerHTML = visible.map(renderCard).join('');
 
-  // Pagination
-  if (visibleCount < filtered.length) {
-    renderLoadMore(filtered.length);
+    if (visibleCount < filtered.length) {
+      renderLoadMore(filtered.length);
+    } else {
+      removePagination();
+    }
   } else {
-    removePagination();
+    const pinned = filtered.filter(s => favorites.has(s.url));
+    const rest   = filtered.filter(s => !favorites.has(s.url));
+
+    if (pinned.length > 0) {
+      pinnedSection.style.display = 'block';
+      pinnedGrid.innerHTML = pinned.map(renderCard).join('');
+    } else {
+      pinnedSection.style.display = 'none';
+      pinnedGrid.innerHTML = '';
+    }
+
+    const visible = rest.slice(0, visibleCount);
+    grid.innerHTML = visible.map(renderCard).join('');
+
+    if (visibleCount < rest.length) {
+      renderLoadMore(rest.length);
+    } else {
+      removePagination();
+    }
   }
 }
 
 function renderCard(site) {
-  const color  = site.color || '#7c5cfc';
-  const tags   = (site.tags || []).map(t =>
+  const color    = site.color || '#7c5cfc';
+  const tags     = (site.tags || []).map(t =>
     `<span class="tag tag-${escHtml(t)}">${escHtml(t)}</span>`
   ).join('');
-  const icon   = faviconUrl(site.url);
+  const icon     = faviconUrl(site.url);
   const iconHtml = icon
     ? `<img class="card-favicon" src="${escHtml(icon)}" alt="" loading="lazy" onerror="this.style.display='none'">`
     : '';
+  const isFav  = favorites.has(site.url);
+  const count  = clickCounts[site.url] || 0;
 
   return `
     <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
       <div class="card-top">
         ${iconHtml}
         <span class="card-name">${escHtml(site.name)}</span>
-        <span class="card-arrow">↗</span>
+        <button class="card-fav-btn${isFav ? ' active' : ''}"
+                data-url="${escHtml(site.url)}"
+                title="${isFav ? 'Remove from favourites' : 'Add to favourites'}"
+                aria-label="${isFav ? 'Remove from favourites' : 'Add to favourites'}">★</button>
       </div>
       <p class="card-desc">${escHtml(site.description)}</p>
-      <div class="card-footer">${tags}</div>
+      <div class="card-footer">
+        ${tags}
+        <span class="visit-count${count > 0 ? '' : ' hidden'}" data-url="${escHtml(site.url)}">↗ ${count || 0}</span>
+      </div>
     </a>`;
 }
 
@@ -207,8 +347,7 @@ function renderLoadMore(total) {
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
     visibleCount += PAGE_SIZE;
     render();
-    // Scroll to where new cards start so user sees them
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('#cardsGrid .card');
     if (cards.length > visibleCount - PAGE_SIZE) {
       cards[visibleCount - PAGE_SIZE]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }

@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS site_stats (
+  site_url TEXT PRIMARY KEY,
+  click_count INTEGER NOT NULL DEFAULT 0,
+  updated_at TIMESTAMP DEFAULT NOW()
+);
