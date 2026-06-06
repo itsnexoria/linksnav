@@ -496,25 +496,6 @@
     },
     {
       "name": "AniKai",
-      "url": "https://anikai.to/",
-      "description": "Modern anime streaming platform gaining popularity for clean interface and minimal buffering. Features good performance across different regions with user-friendly design.",
-      "category": "anime",
-      "tags": [
-        "free",
-        "ad-supported",
-        "modern-ui",
-        "fast-streaming"
-      ],
-      "color": "#3498DB",
-      "tag_colors": {
-        "free": "#22c55e",
-        "ad-supported": "#f59e0b",
-        "modern-ui": "#9b59b6",
-        "fast-streaming": "#3498db"
-      }
-    },
-    {
-      "name": "AniKai",
       "url": "https://www1.anikai.cc/",
       "description": "Anime streaming platform with fast servers and a minimal interface. Supports both sub and dub playback.",
       "category": "anime",

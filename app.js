@@ -1,5 +1,5 @@
 /* ============================================================
-   NexHub — app.js  (v2 — with Favorites)
+   NexHub — app.js  (v3 — fixed favorites layout)
    ============================================================ */
 
 let allSites      = [];
@@ -8,7 +8,7 @@ let activeCategory = 'all';
 let searchQuery    = '';
 let favorites      = loadFavorites();
 
-const PAGE_SIZE    = 12;
+const PAGE_SIZE    = 24;
 let   visibleCount = PAGE_SIZE;
 
 // ---- Favorites persistence ----
@@ -56,7 +56,7 @@ async function init() {
 function buildCategoryNav() {
   const nav = document.getElementById('catNavInner');
 
-  // Favorites button — inserted FIRST before category buttons
+  // Favorites button — FIRST (after "All")
   const favBtn = document.createElement('button');
   favBtn.className   = 'cat-btn cat-btn-fav';
   favBtn.dataset.cat = '__favorites__';
@@ -69,7 +69,6 @@ function buildCategoryNav() {
     setActiveBtn(favBtn);
     render();
   });
-  // Insert after the "All" button (first child)
   const allBtn = nav.querySelector('[data-cat="all"]');
   allBtn.insertAdjacentElement('afterend', favBtn);
 
@@ -164,14 +163,6 @@ function getFiltered() {
   });
 }
 
-// ---- Sort: favorites pinned on top ----
-function getSorted(sites) {
-  if (activeCategory === '__favorites__') return sites;
-  const favs = sites.filter(s => favorites.has(s.url));
-  const rest  = sites.filter(s => !favorites.has(s.url));
-  return [...favs, ...rest];
-}
-
 // ---- Favicon helper ----
 function faviconUrl(siteUrl) {
   try {
@@ -184,16 +175,14 @@ function faviconUrl(siteUrl) {
 
 // ---- Render ----
 function render() {
-  const grid     = document.getElementById('cardsGrid');
-  const empty    = document.getElementById('emptyState');
+  const main     = document.getElementById('main');
   const label    = document.getElementById('sectionLabel');
   const countEl  = document.getElementById('siteCount');
   const filtered = getFiltered();
-  const sorted   = getSorted(filtered);
 
   // Section label
   if (activeCategory === '__favorites__') {
-    label.textContent = `★ Favorites`;
+    label.textContent = '★ Favorites';
   } else if (searchQuery) {
     label.textContent = `Results for "${searchQuery}"`;
   } else if (activeCategory === 'all') {
@@ -205,71 +194,64 @@ function render() {
 
   countEl.textContent = `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
 
+  // Clear everything below the label inside main
+  const grid  = document.getElementById('cardsGrid');
+  const empty = document.getElementById('emptyState');
+
+  // Remove any previously injected pinned header or load-more
+  document.getElementById('pinnedHeader')?.remove();
+  document.getElementById('dividerRow')?.remove();
+  document.getElementById('loadMoreWrap')?.remove();
+
   if (filtered.length === 0) {
     grid.innerHTML = '';
+    grid.style.display = 'none';
     empty.style.display = 'block';
-    if (activeCategory === '__favorites__') {
-      document.getElementById('emptyQuery').textContent = 'your favorites yet — click ★ on any card!';
-    } else {
-      document.getElementById('emptyQuery').textContent = searchQuery || activeCategory;
-    }
-    removePagination();
-    removeFavsSection();
+    document.getElementById('emptyQuery').textContent =
+      activeCategory === '__favorites__'
+        ? 'your favorites yet — click ★ on any card!'
+        : (searchQuery || activeCategory);
     return;
   }
 
   empty.style.display = 'none';
+  grid.style.display  = '';
 
-  // Split: pinned favorites section + rest (only on "All" view)
-  const showPinnedSection = activeCategory === 'all' && !searchQuery && favorites.size > 0;
+  // On "All" view: show pinned favorites at top as a separate labeled row
+  const showPinned = activeCategory === 'all' && !searchQuery && favorites.size > 0;
 
-  if (showPinnedSection) {
-    const pinnedSites = allSites.filter(s => favorites.has(s.url));
-    const restSites   = sorted.filter(s => !favorites.has(s.url)).slice(0, visibleCount);
+  if (showPinned) {
+    const pinned = allSites.filter(s => favorites.has(s.url));
+    const rest   = filtered.filter(s => !favorites.has(s.url));
 
-    let html = '';
+    // Inject pinned header BEFORE cardsGrid
+    const hdr = document.createElement('div');
+    hdr.id = 'pinnedHeader';
+    hdr.className = 'pinned-header';
+    hdr.innerHTML = `<span class="pinned-header-icon">★</span> Pinned Favorites <span class="pinned-header-count">${pinned.length}</span>`;
+    grid.insertAdjacentElement('beforebegin', hdr);
 
-    // Pinned favorites banner
-    html += `<div class="favorites-section-header">
-      <span class="fav-section-icon">★</span>
-      <span>Pinned Favorites</span>
-      <span class="fav-section-count">${pinnedSites.length}</span>
-    </div>`;
-    html += `<div class="cards-grid favorites-row" id="favsRow">`;
-    html += pinnedSites.map(s => renderCard(s, true)).join('');
-    html += `</div>`;
+    // Render pinned + divider + rest ALL as flat card-wraps inside the ONE grid
+    const restSlice = rest.slice(0, visibleCount);
+    grid.innerHTML =
+      pinned.map(s => renderCard(s)).join('') +
+      `<div id="dividerRow" class="grid-divider-cell"><div class="grid-divider"><span>All Sites</span></div></div>` +
+      restSlice.map(s => renderCard(s)).join('');
 
-    html += `<div class="section-divider"></div>`;
-    html += `<div class="rest-grid" id="restGrid">`;
-    html += restSites.map(s => renderCard(s, false)).join('');
-    html += `</div>`;
-
-    grid.innerHTML = html;
-
-    const total = allSites.filter(s => !favorites.has(s.url)).length;
-    if (visibleCount < total) {
-      renderLoadMore(total);
-    } else {
-      removePagination();
+    if (visibleCount < rest.length) {
+      renderLoadMore(rest.length, rest.length - visibleCount);
     }
   } else {
-    const visible = sorted.slice(0, visibleCount);
-    grid.innerHTML = visible.map(s => renderCard(s, false)).join('');
+    const slice = filtered.slice(0, visibleCount);
+    grid.innerHTML = slice.map(s => renderCard(s)).join('');
 
-    if (visibleCount < sorted.length) {
-      renderLoadMore(sorted.length);
-    } else {
-      removePagination();
+    if (visibleCount < filtered.length) {
+      renderLoadMore(filtered.length, filtered.length - visibleCount);
     }
   }
 }
 
-function removeFavsSection() {
-  const el = document.getElementById('favsSectionWrap');
-  if (el) el.remove();
-}
-
-function renderCard(site, pinned = false) {
+function renderCard(site) {
   const color     = site.color || '#7c5cfc';
   const isFav     = favorites.has(site.url);
   const tagColors = site.tag_colors || {};
@@ -284,46 +266,37 @@ function renderCard(site, pinned = false) {
     : '';
 
   const favClass = isFav ? 'fav-btn fav-btn--active' : 'fav-btn';
-  const favTitle = isFav ? 'Remove from favorites' : 'Add to favorites';
-  const pinnedBadge = pinned ? '' : (isFav ? '<span class="pinned-badge">★ Pinned</span>' : '');
+  const favTitle = isFav ? 'Unfavorite' : 'Favorite';
+  const favLabel = isFav ? '★ Saved' : '☆ Save';
 
-  return `
-    <div class="card-wrap${isFav && !pinned ? ' card-wrap--fav' : ''}">
-      <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
-        <div class="card-top">
-          ${iconHtml}
-          <span class="card-name">${escHtml(site.name)}</span>
-          ${pinnedBadge}
-          <span class="card-arrow">↗</span>
-        </div>
-        <p class="card-desc">${escHtml(site.description)}</p>
-        <div class="card-footer">${tags}</div>
-      </a>
-      <button class="${favClass}" title="${favTitle}" onclick="toggleFavorite('${escHtml(site.url)}', event)"></button>
-    </div>`;
+  return `<div class="card-wrap${isFav ? ' card-wrap--fav' : ''}">
+    <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
+      <div class="card-top">
+        ${iconHtml}
+        <span class="card-name">${escHtml(site.name)}</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <p class="card-desc">${escHtml(site.description)}</p>
+      <div class="card-footer">${tags}</div>
+    </a>
+    <button class="${favClass}" title="${favTitle}" onclick="toggleFavorite('${escHtml(site.url)}', event)">${escHtml(favLabel)}</button>
+  </div>`;
 }
 
 // ---- Load More ----
-function renderLoadMore(total) {
-  removePagination();
-  const remaining = total - visibleCount;
+function renderLoadMore(total, remaining) {
+  document.getElementById('loadMoreWrap')?.remove();
   const wrap = document.createElement('div');
   wrap.id = 'loadMoreWrap';
   wrap.className = 'load-more-wrap';
-  wrap.innerHTML = `
-    <button class="load-more-btn" id="loadMoreBtn">
-      Load more <span class="load-more-count">${remaining} remaining</span>
-    </button>`;
+  wrap.innerHTML = `<button class="load-more-btn" id="loadMoreBtn">
+    Load more <span class="load-more-count">${remaining} remaining</span>
+  </button>`;
   document.getElementById('main').appendChild(wrap);
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
     visibleCount += PAGE_SIZE;
     render();
   });
-}
-
-function removePagination() {
-  const existing = document.getElementById('loadMoreWrap');
-  if (existing) existing.remove();
 }
 
 // ---- Escape HTML ----
