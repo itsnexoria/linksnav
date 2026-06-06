@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Gmail",
+    "url": "https://mail.google.com/mail/u/0/#inbox",
+    "description": "Google's email service with 15GB free storage, smart filtering, integrated chat, and powerful search.",
+    "category": "google",
+    "tags": [
+      "free",
+      "email"
+    ],
+    "color": "#ea4335",
+    "tag_colors": {
+      "free": "#22c55e",
+      "email": "#ea4335"
+    }
+  },
+  {
+    "name": "Google Passwords",
+    "url": "https://passwords.google.com/",
+    "description": "View, manage, and audit passwords saved in your Google account across Chrome and Android devices.",
+    "category": "google",
+    "tags": [
+      "free",
+      "password-manager"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "password-manager": "#1a73e8"
+    }
+  },
+  {
+    "name": "Google Search Console",
+    "url": "https://search.google.com/",
+    "description": "Monitor your website's performance in Google Search. Check indexing status, core web vitals, and fix coverage errors.",
+    "category": "google",
+    "tags": [
+      "free",
+      "seo-tool"
+    ],
+    "color": "#34a853",
+    "tag_colors": {
+      "free": "#22c55e",
+      "seo-tool": "#4285f4"
+    }
+  },
+  {
+    "name": "Google Translate",
+    "url": "https://translate.google.com/",
+    "description": "Instantly translate text, documents, and websites between 130+ languages using Google's neural machine translation.",
+    "category": "google",
+    "tags": [
+      "free",
+      "web-app"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "web-app": "#6366f1"
+    }
+  },
+  {
+    "name": "Google Trends",
+    "url": "https://trends.google.com/",
+    "description": "Explore trending topics and compare keyword search interest over time. Useful for content ideas and market research.",
+    "category": "google",
+    "tags": [
+      "free",
+      "analytics"
+    ],
+    "color": "#fbbc04",
+    "tag_colors": {
+      "free": "#22c55e",
+      "analytics": "#4285f4"
+    }
+  }
+]

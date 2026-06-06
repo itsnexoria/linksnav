@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Asana",
+    "url": "https://asana.com/",
+    "description": "Project management platform for teams. Track tasks, set deadlines, assign work, and visualise progress across projects.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "project-management"
+    ],
+    "color": "#f06a6a",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "project-management": "#fc636b"
+    }
+  },
+  {
+    "name": "Cal.com",
+    "url": "https://cal.com/",
+    "description": "Open-source Calendly alternative. Scheduling infrastructure for individuals and teams. Self-host or use the cloud version. Integrates with Google, Outlook, Zoom.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "open-source"
+    ],
+    "color": "#111827",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "open-source": "#06b6d4"
+    }
+  },
+  {
+    "name": "Excalidraw",
+    "url": "https://excalidraw.com/",
+    "description": "Virtual whiteboard for sketching diagrams with a hand-drawn feel. Collaborative, real-time, and privacy-first. Perfect for system diagrams and brainstorming.",
+    "category": "productivity",
+    "tags": [
+      "free",
+      "open-source"
+    ],
+    "color": "#6965db",
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#06b6d4"
+    }
+  },
+  {
+    "name": "Notion",
+    "url": "https://notion.so",
+    "description": "All-in-one workspace combining notes, databases, wikis, and project boards. Highly customisable for individuals and teams.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "notes-wiki"
+    ],
+    "color": "#1a1a1a",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "notes-wiki": "#000000"
+    }
+  },
+  {
+    "name": "Obsidian",
+    "url": "https://obsidian.md/",
+    "description": "Local-first knowledge base and note-taking app built on Markdown files. Graph view, plugins, and bidirectional links make it the ultimate second brain tool.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "notes-wiki"
+    ],
+    "color": "#7c3aed",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "notes-wiki": "#7c3aed"
+    }
+  },
+  {
+    "name": "Slack",
+    "url": "https://slack.com/",
+    "description": "Channel-based team messaging with integrations for hundreds of tools. Organise conversations, share files, and connect your workflow.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "team-chat"
+    ],
+    "color": "#4a154b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "team-chat": "#4a154b"
+    }
+  },
+  {
+    "name": "Todoist",
+    "url": "https://todoist.com/",
+    "description": "Clean, powerful task manager available on every platform. Natural language input, recurring tasks, project boards, and productivity tracking built in.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "task-manager"
+    ],
+    "color": "#db4035",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "task-manager": "#db4035"
+    }
+  },
+  {
+    "name": "Trello",
+    "url": "https://trello.com",
+    "description": "Visual project management with Kanban boards. Drag cards through columns to track tasks and workflows at a glance.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "kanban"
+    ],
+    "color": "#0079BF",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "kanban": "#0079bf"
+    }
+  }
+]

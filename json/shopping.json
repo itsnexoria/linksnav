@@ -1,0 +1,152 @@
+[
+  {
+    "name": "AliExpress",
+    "url": "https://aliexpress.com",
+    "description": "Global marketplace for budget-friendly products shipped from China. Electronics, clothing, home goods, and more.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "global-marketplace"
+    ],
+    "color": "#FF4747",
+    "tag_colors": {
+      "free": "#22c55e",
+      "global-marketplace": "#e8192c"
+    }
+  },
+  {
+    "name": "Amazon",
+    "url": "https://amazon.com",
+    "description": "The world's largest online retailer. Shop millions of products with fast delivery, customer reviews, and Prime benefits.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "online-retail"
+    ],
+    "color": "#FF9900",
+    "tag_colors": {
+      "free": "#22c55e",
+      "online-retail": "#ff9900"
+    }
+  },
+  {
+    "name": "CamelCamelCamel",
+    "url": "https://camelcamelcamel.com/",
+    "description": "Amazon price history tracker. See how a product's price has changed over time before buying. Set price alerts to get notified when items drop to your target.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "price-tracker"
+    ],
+    "color": "#fc8f10",
+    "tag_colors": {
+      "free": "#22c55e",
+      "price-tracker": "#fc8f10"
+    }
+  },
+  {
+    "name": "eBay",
+    "url": "https://ebay.com",
+    "description": "Global online marketplace to buy and sell new, used, and vintage items through auction or fixed-price listings.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "marketplace"
+    ],
+    "color": "#E53238",
+    "tag_colors": {
+      "free": "#22c55e",
+      "marketplace": "#e53238"
+    }
+  },
+  {
+    "name": "Etsy",
+    "url": "https://etsy.com",
+    "description": "Marketplace for handmade, vintage, and unique craft items. Support small creators and find one-of-a-kind gifts.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "handmade-marketplace"
+    ],
+    "color": "#F1641E",
+    "tag_colors": {
+      "free": "#22c55e",
+      "handmade-marketplace": "#f45800"
+    }
+  },
+  {
+    "name": "Honey",
+    "url": "https://www.joinhoney.com/",
+    "description": "Browser extension that automatically finds and applies coupon codes at checkout. Backed by PayPal. Tracks price history and alerts you to drops.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "deal-finder"
+    ],
+    "color": "#ff8c00",
+    "tag_colors": {
+      "free": "#22c55e",
+      "deal-finder": "#ff8c00"
+    }
+  },
+  {
+    "name": "Product Hunt",
+    "url": "https://www.producthunt.com/",
+    "description": "Daily leaderboard of the best new tech products, apps, and tools. Upvote, discuss, and discover what's launching in the startup world.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "product-discovery"
+    ],
+    "color": "#ff6154",
+    "tag_colors": {
+      "free": "#22c55e",
+      "product-discovery": "#da552f"
+    }
+  },
+  {
+    "name": "Skinport",
+    "url": "https://skinport.com/",
+    "description": "Marketplace for buying and selling CS2 and other game skins at below-market prices. Secure escrow system, low fees, and instant payouts.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "game-trading"
+    ],
+    "color": "#e91e63",
+    "tag_colors": {
+      "free": "#22c55e",
+      "game-trading": "#e91e63"
+    }
+  },
+  {
+    "name": "Takealot",
+    "url": "https://takealot.com",
+    "description": "South Africa's leading online store. Shop electronics, fashion, home goods, and more with local delivery.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "south-african-retail"
+    ],
+    "color": "#0E7CC1",
+    "tag_colors": {
+      "free": "#22c55e",
+      "south-african-retail": "#0056a2"
+    }
+  },
+  {
+    "name": "Temu",
+    "url": "https://temu.com",
+    "description": "Budget-friendly global shopping marketplace with a huge range of products shipped directly from manufacturers.",
+    "category": "shopping",
+    "tags": [
+      "free",
+      "budget-shopping"
+    ],
+    "color": "#FF7300",
+    "tag_colors": {
+      "free": "#22c55e",
+      "budget-shopping": "#ff6161"
+    }
+  }
+]

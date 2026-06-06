@@ -1,5 +1,5 @@
 /* ============================================================
-   NexHub — app.js  (v3 — fixed favorites layout)
+   NexHub — app.js  (v4 — per-category JSON files)
    ============================================================ */
 
 let allSites      = [];
@@ -10,6 +10,40 @@ let favorites      = loadFavorites();
 
 const PAGE_SIZE    = 24;
 let   visibleCount = PAGE_SIZE;
+
+// Categories metadata — icons/labels defined here so we don't need
+// to keep a separate categories array in every JSON file.
+const CATEGORIES_META = [
+  { id: 'ai',           label: 'AI',           icon: '🤖' },
+  { id: 'anime',        label: 'Anime',         icon: '🧸' },
+  { id: 'apis',         label: 'APIs',           icon: '🔌' },
+  { id: 'business',     label: 'Business',       icon: '🏢' },
+  { id: 'crypto',       label: 'Crypto',         icon: '💰' },
+  { id: 'databases',    label: 'Databases',      icon: '🗄️' },
+  { id: 'design',       label: 'Design',         icon: '🎨' },
+  { id: 'dev-tools',    label: 'Dev Tools',      icon: '🛠️' },
+  { id: 'downloads',    label: 'Downloads',      icon: '⬇️' },
+  { id: 'finance',      label: 'Finance',        icon: '💳' },
+  { id: 'gaming',       label: 'Gaming',         icon: '🎮' },
+  { id: 'google',       label: 'Google',         icon: '🔵' },
+  { id: 'hosting',      label: 'Hosting',        icon: '☁️' },
+  { id: 'jobs',         label: 'Jobs',           icon: '💼' },
+  { id: 'learning',     label: 'Learning',       icon: '📚' },
+  { id: 'minecraft',    label: 'Minecraft',      icon: '⛏️' },
+  { id: 'movies',       label: 'Movies',         icon: '🎬' },
+  { id: 'music',        label: 'Music',          icon: '🎵' },
+  { id: 'my-sites',     label: 'My Sites',       icon: '🌐' },
+  { id: 'news',         label: 'News',           icon: '📰' },
+  { id: 'os',           label: 'OS Files',       icon: '💻' },
+  { id: 'productivity', label: 'Productivity',   icon: '📋' },
+  { id: 'search',       label: 'Search',         icon: '🔍' },
+  { id: 'security',     label: 'Security',       icon: '🔒' },
+  { id: 'shopping',     label: 'Shopping',       icon: '🛒' },
+  { id: 'social',       label: 'Social',         icon: '📱' },
+  { id: 'storage',      label: 'Storage',        icon: '📁' },
+  { id: 'streaming',    label: 'Streaming',      icon: '📺' },
+  { id: 'tools',        label: 'Tools',          icon: '⚙️' },
+];
 
 // ---- Favorites persistence ----
 function loadFavorites() {
@@ -37,18 +71,33 @@ function toggleFavorite(url, e) {
 // ---- Boot ----
 async function init() {
   try {
-    const res  = await fetch('sites.json');
-    const data = await res.json();
-    allSites      = data.sites;
-    allCategories = data.categories;
+    // Discover which category JSON files actually exist by trying to fetch each one.
+    // We filter CATEGORIES_META to only those with a matching json/ file.
+    const fetches = CATEGORIES_META.map(cat =>
+      fetch(`json/${cat.id}.json`)
+        .then(r => r.ok ? r.json().then(sites => ({ cat, sites })) : null)
+        .catch(() => null)
+    );
+
+    const results = await Promise.all(fetches);
+
+    allCategories = [];
+    allSites = [];
+
+    for (const result of results) {
+      if (!result) continue;
+      allCategories.push(result.cat);
+      allSites.push(...result.sites);
+    }
+
     buildCategoryNav();
     render();
     setupSearch();
     setupScrollArrows();
   } catch (err) {
-    console.error('Failed to load sites.json:', err);
+    console.error('Failed to load category JSON files:', err);
     document.getElementById('cardsGrid').innerHTML =
-      '<p style="color:#ff4b8a;font-size:.85rem">⚠ Could not load sites.json</p>';
+      '<p style="color:#ff4b8a;font-size:.85rem">⚠ Could not load site data from json/ folder</p>';
   }
 }
 
@@ -194,11 +243,9 @@ function render() {
 
   countEl.textContent = `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
 
-  // Clear everything below the label inside main
   const grid  = document.getElementById('cardsGrid');
   const empty = document.getElementById('emptyState');
 
-  // Remove any previously injected pinned header or load-more
   document.getElementById('pinnedHeader')?.remove();
   document.getElementById('dividerRow')?.remove();
   document.getElementById('loadMoreWrap')?.remove();
@@ -217,21 +264,18 @@ function render() {
   empty.style.display = 'none';
   grid.style.display  = '';
 
-  // On "All" view: show pinned favorites at top as a separate labeled row
   const showPinned = activeCategory === 'all' && !searchQuery && favorites.size > 0;
 
   if (showPinned) {
     const pinned = allSites.filter(s => favorites.has(s.url));
     const rest   = filtered.filter(s => !favorites.has(s.url));
 
-    // Inject pinned header BEFORE cardsGrid
     const hdr = document.createElement('div');
     hdr.id = 'pinnedHeader';
     hdr.className = 'pinned-header';
     hdr.innerHTML = `<span class="pinned-header-icon">★</span> Pinned Favorites <span class="pinned-header-count">${pinned.length}</span>`;
     grid.insertAdjacentElement('beforebegin', hdr);
 
-    // Render pinned + divider + rest ALL as flat card-wraps inside the ONE grid
     const restSlice = rest.slice(0, visibleCount);
     grid.innerHTML =
       pinned.map(s => renderCard(s)).join('') +

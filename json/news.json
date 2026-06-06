@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Ars Technica",
+    "url": "https://arstechnica.com/",
+    "description": "In-depth technology journalism covering science, hardware, software, policy, and culture. Known for detailed technical analysis and long-form investigative pieces.",
+    "category": "news",
+    "tags": [
+      "free",
+      "tech-news"
+    ],
+    "color": "#ff4e00",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tech-news": "#ff4e00"
+    }
+  },
+  {
+    "name": "Hacker News",
+    "url": "https://news.ycombinator.com/",
+    "description": "Tech and startup news aggregator run by Y Combinator. Upvote-driven discussion on programming, AI, startups, and science. The internet's best comment section.",
+    "category": "news",
+    "tags": [
+      "free",
+      "tech-news"
+    ],
+    "color": "#ff6600",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tech-news": "#ff6600"
+    }
+  },
+  {
+    "name": "TechCrunch",
+    "url": "https://techcrunch.com/",
+    "description": "Breaking news on tech startups, venture capital, and the global tech industry. Covers fundraising rounds, acquisitions, IPOs, and product launches.",
+    "category": "news",
+    "tags": [
+      "free",
+      "tech-news"
+    ],
+    "color": "#0a9e3f",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tech-news": "#0a9e3f"
+    }
+  },
+  {
+    "name": "The Verge",
+    "url": "https://www.theverge.com/",
+    "description": "Technology, science, and culture news. In-depth reviews, original reporting, and video content covering consumer tech, gaming, AI, and science.",
+    "category": "news",
+    "tags": [
+      "free",
+      "tech-news"
+    ],
+    "color": "#fa4d56",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tech-news": "#fa4d56"
+    }
+  }
+]

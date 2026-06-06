@@ -1,0 +1,32 @@
+[
+  {
+    "name": "LootLabs",
+    "url": "https://creators.lootlabs.gg/",
+    "description": "Monetise your content with link locking. Earn revenue by gating downloads or Discord invites behind short ad interactions.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "link-monetisation"
+    ],
+    "color": "#ff9f43",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "link-monetisation": "#f39c12"
+    }
+  },
+  {
+    "name": "Tebex Creator",
+    "url": "https://creator.tebex.io/dashboard",
+    "description": "Monetise your game server with a built-in storefront. Sell ranks, items, and perks \u2014 integrates with Minecraft, Rust, FiveM, and more.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "server-monetisation"
+    ],
+    "color": "#f5a623",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "server-monetisation": "#1abc9c"
+    }
+  }
+]

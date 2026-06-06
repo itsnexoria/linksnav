@@ -1,0 +1,349 @@
+[
+  {
+    "name": "Bolt.new",
+    "url": "https://bolt.new/",
+    "description": "Full-stack AI app builder. Describe any web app and get a live, deployable project in seconds. Built on StackBlitz with Claude and GPT support.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-coding"
+    ],
+    "color": "#7c3aed",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-coding": "#7c3aed"
+    }
+  },
+  {
+    "name": "ChatGPT",
+    "url": "https://chatgpt.com/",
+    "description": "OpenAI's flagship AI assistant. Handles writing, coding, maths, research, image generation, and custom GPTs. Includes a free tier.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-assistant"
+    ],
+    "color": "#10a37f",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-assistant": "#10a37f"
+    }
+  },
+  {
+    "name": "Claude",
+    "url": "https://claude.ai/",
+    "description": "Anthropic's AI assistant with standout reasoning, long-context understanding, and careful writing. Great for documents and complex analysis.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-assistant"
+    ],
+    "color": "#cc785c",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-assistant": "#10a37f"
+    }
+  },
+  {
+    "name": "Cursor",
+    "url": "https://cursor.sh/",
+    "description": "AI-first code editor built on VS Code. Chat with your codebase, auto-complete entire functions, and fix bugs instantly with GPT-4 integration.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-coding"
+    ],
+    "color": "#1d4ed8",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-coding": "#1d4ed8"
+    }
+  },
+  {
+    "name": "DeepSeek",
+    "url": "https://chat.deepseek.com/",
+    "description": "Open-source AI model with strong coding and maths reasoning. Competitive with top models at a fraction of the API cost.",
+    "category": "ai",
+    "tags": [
+      "free",
+      "open-source"
+    ],
+    "color": "#4d9fff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#06b6d4"
+    }
+  },
+  {
+    "name": "ElevenLabs",
+    "url": "https://elevenlabs.io/",
+    "description": "Realistic AI voice synthesis and cloning. Generate natural-sounding speech in any language from text, or clone your own voice with a short sample.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-voice"
+    ],
+    "color": "#f59e0b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-voice": "#f59e0b"
+    }
+  },
+  {
+    "name": "Google Gemini",
+    "url": "https://gemini.google.com/",
+    "description": "Google's multimodal AI assistant with live search integration, image understanding, and deep Google Workspace connections.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-assistant"
+    ],
+    "color": "#4285F4",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-assistant": "#10a37f"
+    }
+  },
+  {
+    "name": "Grok",
+    "url": "https://grok.com/",
+    "description": "xAI's conversational AI with real-time X/Twitter data access, strong reasoning, and image generation capabilities.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-assistant"
+    ],
+    "color": "#e7e9ea",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-assistant": "#10a37f"
+    }
+  },
+  {
+    "name": "Hugging Face",
+    "url": "https://huggingface.co",
+    "description": "The hub for open-source AI. Browse, download, and deploy thousands of models, datasets, and Spaces demos.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "open-source"
+    ],
+    "color": "#FFD21E",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "open-source": "#06b6d4"
+    }
+  },
+  {
+    "name": "Ideogram",
+    "url": "https://ideogram.ai/",
+    "description": "AI image generator with best-in-class text rendering inside images. Perfect for logos, posters, and designs that need readable text in the visual.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-image-gen"
+    ],
+    "color": "#3b82f6",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-image-gen": "#ec4899"
+    }
+  },
+  {
+    "name": "Kling AI",
+    "url": "https://klingai.com/",
+    "description": "High-quality text-to-video and image-to-video AI from Kuaishou. Generates up to 2-minute realistic video clips with strong motion consistency.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-video-gen"
+    ],
+    "color": "#8b5cf6",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-video-gen": "#8b5cf6"
+    }
+  },
+  {
+    "name": "Leonardo AI",
+    "url": "https://leonardo.ai",
+    "description": "AI image generation platform tailored for game assets, concept art, and illustrations with fine-tuned style models.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-image-gen"
+    ],
+    "color": "#6C5CE7",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-image-gen": "#ec4899"
+    }
+  },
+  {
+    "name": "Luma AI",
+    "url": "https://lumalabs.ai/",
+    "description": "AI video generation (Dream Machine) and 3D scene capture. Generate cinematic videos from text/images and create interactive 3D NeRF captures.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-video-gen"
+    ],
+    "color": "#a855f7",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-video-gen": "#a855f7"
+    }
+  },
+  {
+    "name": "Midjourney",
+    "url": "https://midjourney.com",
+    "description": "Premium AI art generator producing highly detailed, stylised images from text prompts. Runs through Discord or the web app.",
+    "category": "ai",
+    "tags": [
+      "subscription",
+      "ai-image-gen"
+    ],
+    "color": "#3d3d3d",
+    "tag_colors": {
+      "subscription": "#8b5cf6",
+      "ai-image-gen": "#ec4899"
+    }
+  },
+  {
+    "name": "Mistral AI",
+    "url": "https://mistral.ai/",
+    "description": "European open-source AI lab producing high-efficiency language models. Mistral and Mixtral models rival GPT-4 while being faster and cheaper to run.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "open-source"
+    ],
+    "color": "#ff7000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "open-source": "#06b6d4"
+    }
+  },
+  {
+    "name": "NotebookLM",
+    "url": "https://notebooklm.google.com/",
+    "description": "Google's AI research assistant. Upload docs, PDFs, and notes, then ask questions and generate summaries grounded in your own sources. Includes Audio Overview podcast mode.",
+    "category": "ai",
+    "tags": [
+      "free",
+      "ai-assistant"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "ai-assistant": "#4285f4"
+    }
+  },
+  {
+    "name": "OpenAI",
+    "url": "https://openai.com",
+    "description": "AI research company behind ChatGPT and the GPT-4 API. Access models, DALL\u00b7E image generation, and Sora video AI.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-research"
+    ],
+    "color": "#10A37F",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-research": "#10a37f"
+    }
+  },
+  {
+    "name": "Perplexity",
+    "url": "https://www.perplexity.ai/",
+    "description": "AI-powered answer engine that cites its sources. Ask any question and get a researched response with live web references.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-search"
+    ],
+    "color": "#20B2AA",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-search": "#6366f1"
+    }
+  },
+  {
+    "name": "Pika Labs",
+    "url": "https://pika.art/",
+    "description": "AI video generation platform that turns text, images, and video clips into creative short videos. Great for content creators and social media.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-video-gen"
+    ],
+    "color": "#ec4899",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-video-gen": "#ec4899"
+    }
+  },
+  {
+    "name": "Runway ML",
+    "url": "https://runwayml.com/",
+    "description": "Professional AI creative suite for video generation, image editing, and motion. Used by filmmakers and designers for next-gen content production.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-video-gen"
+    ],
+    "color": "#6366f1",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-video-gen": "#6366f1"
+    }
+  },
+  {
+    "name": "Sora",
+    "url": "https://sora.com/",
+    "description": "OpenAI's text-to-video AI. Generate high-quality cinematic video clips from text prompts. One of the most advanced video generation models available.",
+    "category": "ai",
+    "tags": [
+      "subscription",
+      "ai-video-gen"
+    ],
+    "color": "#10a37f",
+    "tag_colors": {
+      "subscription": "#8b5cf6",
+      "ai-video-gen": "#10a37f"
+    }
+  },
+  {
+    "name": "Stable Diffusion",
+    "url": "https://stability.ai/",
+    "description": "Stability AI's open-source image generation model. Run locally or via API. The backbone behind countless AI art tools and workflows.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "open-source",
+      "ai-image-gen"
+    ],
+    "color": "#7c3aed",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "open-source": "#06b6d4",
+      "ai-image-gen": "#7c3aed"
+    }
+  },
+  {
+    "name": "v0 by Vercel",
+    "url": "https://v0.dev/",
+    "description": "Generate React UI components from text prompts. Describe a UI, get production-ready shadcn/Tailwind code instantly. Built by Vercel.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "ai-coding"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-coding": "#6366f1"
+    }
+  }
+]

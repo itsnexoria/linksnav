@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Nexoria Realm",
+    "url": "https://nexoriarealm.xyz/",
+    "description": "My Minecraft Java SMP server. Community-driven survival with custom plugins. Connect at play.nexoriarealm.xyz.",
+    "category": "my-sites",
+    "tags": [
+      "community",
+      "minecraft-smp"
+    ],
+    "color": "#10b981",
+    "tag_colors": {
+      "community": "#e91e63",
+      "minecraft-smp": "#4caf50"
+    }
+  },
+  {
+    "name": "NexoSites",
+    "url": "https://nexosites.xyz/",
+    "description": "My web development agency. Professional, fast, and clean websites built to order. Get in touch for a quote.",
+    "category": "my-sites",
+    "tags": [
+      "agency",
+      "web-dev"
+    ],
+    "color": "#7c3aed",
+    "tag_colors": {
+      "agency": "#6c3483",
+      "web-dev": "#2980b9"
+    }
+  }
+]

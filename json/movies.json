@@ -1,0 +1,32 @@
+[
+  {
+    "name": "IMDb",
+    "url": "https://imdb.com",
+    "description": "The internet's go-to database for movies, TV shows, actors, and ratings. Check scores, read reviews, and explore filmographies.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "movie-database"
+    ],
+    "color": "#F5C518",
+    "tag_colors": {
+      "free": "#22c55e",
+      "movie-database": "#01b4e4"
+    }
+  },
+  {
+    "name": "Letterboxd",
+    "url": "https://letterboxd.com",
+    "description": "Social platform for film lovers. Log films you've watched, rate them, write reviews, and follow friends' watchlists.",
+    "category": "movies",
+    "tags": [
+      "freemium",
+      "film-logging"
+    ],
+    "color": "#00E054",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "film-logging": "#00e054"
+    }
+  }
+]

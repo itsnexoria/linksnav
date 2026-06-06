@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Dyno Bot",
+    "url": "https://dyno.gg/account",
+    "description": "Feature-rich Discord bot for moderation, auto-roles, announcements, and server management with a web dashboard.",
+    "category": "tools",
+    "tags": [
+      "freemium",
+      "discord-bot"
+    ],
+    "color": "#43b581",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "discord-bot": "#5865f2"
+    }
+  },
+  {
+    "name": "Hoe Panel",
+    "url": "https://ptero.heo-systems.com/",
+    "description": "Self-hosted game server management panel. Start, stop, reinstall, and configure your game servers through a clean web UI.",
+    "category": "tools",
+    "tags": [
+      "self-hosted",
+      "game-panel"
+    ],
+    "color": "#00b4d8",
+    "tag_colors": {
+      "self-hosted": "#f97316",
+      "game-panel": "#00b4d8"
+    }
+  },
+  {
+    "name": "Maki Bot",
+    "url": "https://maki.gg/en-GB/dashboard",
+    "description": "All-in-one Discord bot with moderation, XP levelling, welcome messages, reaction roles, and custom commands. Managed via web dashboard.",
+    "category": "tools",
+    "tags": [
+      "freemium",
+      "discord-bot"
+    ],
+    "color": "#ff6b9d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "discord-bot": "#5865f2"
+    }
+  },
+  {
+    "name": "TicketTool",
+    "url": "https://tickettool.xyz/dashboard/",
+    "description": "Discord ticket bot for running support queues on your server. Set up ticket channels, auto-responses, and claim systems from the dashboard.",
+    "category": "tools",
+    "tags": [
+      "freemium",
+      "discord-bot"
+    ],
+    "color": "#7289da",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "discord-bot": "#5865f2"
+    }
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "name": "1Password",
+    "url": "https://1password.com/",
+    "description": "Premium password manager trusted by millions. Stores passwords, passkeys, secure notes, and 2FA codes across all devices with end-to-end encryption.",
+    "category": "security",
+    "tags": [
+      "paid",
+      "password-manager"
+    ],
+    "color": "#1a8cff",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "password-manager": "#1a8cff"
+    }
+  },
+  {
+    "name": "Bitwarden",
+    "url": "https://bitwarden.com",
+    "description": "Open-source password manager with end-to-end encryption. Sync logins across all devices with a generous free tier.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "password-manager"
+    ],
+    "color": "#175DDC",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "password-manager": "#1a73e8"
+    }
+  },
+  {
+    "name": "Cisco",
+    "url": "https://cisco.com",
+    "description": "Enterprise networking and security vendor. Offers routers, switches, firewalls, and cloud security solutions for businesses.",
+    "category": "security",
+    "tags": [
+      "enterprise",
+      "networking"
+    ],
+    "color": "#049FD9",
+    "tag_colors": {
+      "enterprise": "#64748b",
+      "networking": "#1ba0d7"
+    }
+  },
+  {
+    "name": "Cloudflare WARP",
+    "url": "https://1.1.1.1/",
+    "description": "Free VPN and DNS resolver from Cloudflare. WARP replaces your ISP's DNS with 1.1.1.1 and encrypts traffic for faster, safer browsing. Completely free.",
+    "category": "security",
+    "tags": [
+      "free",
+      "vpn"
+    ],
+    "color": "#f38020",
+    "tag_colors": {
+      "free": "#22c55e",
+      "vpn": "#f38020"
+    }
+  },
+  {
+    "name": "Have I Been Pwned",
+    "url": "https://haveibeenpwned.com/",
+    "description": "Check if your email or phone number has appeared in a known data breach. Covers billions of leaked credentials.",
+    "category": "security",
+    "tags": [
+      "free",
+      "breach-checker"
+    ],
+    "color": "#FF6B00",
+    "tag_colors": {
+      "free": "#22c55e",
+      "breach-checker": "#ff1a1a"
+    }
+  },
+  {
+    "name": "KeyBase",
+    "url": "https://keybase.io/",
+    "description": "End-to-end encrypted messaging, file sharing, and crypto wallet. Verify identities across social platforms and communicate securely with teams.",
+    "category": "security",
+    "tags": [
+      "free",
+      "encrypted-messaging"
+    ],
+    "color": "#ff6f21",
+    "tag_colors": {
+      "free": "#22c55e",
+      "encrypted-messaging": "#ff6f21"
+    }
+  },
+  {
+    "name": "Mullvad VPN",
+    "url": "https://mullvad.net/",
+    "description": "Privacy-first VPN that requires no account or personal info \u2014 pay anonymously. Audited, open-source clients, and a strict no-logs policy.",
+    "category": "security",
+    "tags": [
+      "paid",
+      "vpn"
+    ],
+    "color": "#ffbd36",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "vpn": "#ffbd36"
+    }
+  },
+  {
+    "name": "Proton Mail",
+    "url": "https://proton.me",
+    "description": "End-to-end encrypted email based in Switzerland. Zero-knowledge architecture means even Proton can't read your messages.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "encrypted-email"
+    ],
+    "color": "#6D4AFF",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "encrypted-email": "#6d4aff"
+    }
+  },
+  {
+    "name": "VirusTotal",
+    "url": "https://www.virustotal.com/",
+    "description": "Scan files and URLs against 70+ antivirus engines and threat intelligence tools. Free and no account required.",
+    "category": "security",
+    "tags": [
+      "free",
+      "malware-scanner"
+    ],
+    "color": "#394EFF",
+    "tag_colors": {
+      "free": "#22c55e",
+      "malware-scanner": "#394efa"
+    }
+  }
+]

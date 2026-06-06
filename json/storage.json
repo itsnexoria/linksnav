@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Backblaze B2",
+    "url": "https://www.backblaze.com/cloud-storage",
+    "description": "S3-compatible cloud storage at a fraction of AWS costs. $6/TB/month with free egress to Cloudflare. Ideal for backups, media, and app storage.",
+    "category": "storage",
+    "tags": [
+      "paid",
+      "object-storage"
+    ],
+    "color": "#d00000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "object-storage": "#d00000"
+    }
+  },
+  {
+    "name": "Dropbox",
+    "url": "https://www.dropbox.com/",
+    "description": "Cloud storage with automatic device sync, shared folders, and collaboration tools for teams and individuals.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "cloud-storage"
+    ],
+    "color": "#0061ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "cloud-storage": "#4285f4"
+    }
+  },
+  {
+    "name": "Google Drive",
+    "url": "https://drive.google.com",
+    "description": "Google's cloud storage with 15GB free. Stores files, Docs, Sheets, and Slides \u2014 accessible and shareable from anywhere.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "cloud-storage"
+    ],
+    "color": "#34A853",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "cloud-storage": "#4285f4"
+    }
+  },
+  {
+    "name": "Imgur",
+    "url": "https://imgur.com/",
+    "description": "Fast image and GIF hosting. Upload images, share links instantly, and browse a huge community-driven content feed.",
+    "category": "storage",
+    "tags": [
+      "free",
+      "image-hosting"
+    ],
+    "color": "#1bb76e",
+    "tag_colors": {
+      "free": "#22c55e",
+      "image-hosting": "#1bb76e"
+    }
+  },
+  {
+    "name": "MediaFire",
+    "url": "https://www.mediafire.com/",
+    "description": "Cloud file hosting for storing and sharing large files. Includes a free tier with browser upload and direct download links.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "file-sharing"
+    ],
+    "color": "#1565c0",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "file-sharing": "#3c86ff"
+    }
+  },
+  {
+    "name": "MEGA",
+    "url": "https://mega.nz",
+    "description": "End-to-end encrypted cloud storage with 20GB free. Strong privacy focus with zero-knowledge architecture.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "encrypted-storage"
+    ],
+    "color": "#D9272E",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "encrypted-storage": "#d9272e"
+    }
+  },
+  {
+    "name": "OneDrive",
+    "url": "https://onedrive.live.com",
+    "description": "Microsoft's cloud storage with 5GB free. Syncs seamlessly with Windows and Microsoft 365 apps.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "cloud-storage"
+    ],
+    "color": "#0078D4",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "cloud-storage": "#4285f4"
+    }
+  },
+  {
+    "name": "Storj",
+    "url": "https://www.storj.io/",
+    "description": "Decentralized, S3-compatible cloud storage. Files are encrypted client-side and distributed across a global network of nodes. 25GB free tier.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "object-storage"
+    ],
+    "color": "#2683ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "object-storage": "#2683ff"
+    }
+  }
+]

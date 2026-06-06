@@ -1,0 +1,62 @@
+[
+  {
+    "name": "PayPal",
+    "url": "https://www.paypal.com/",
+    "description": "Send and receive money, pay online, and manage your balance. Widely accepted for personal transfers and business payments.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "payments"
+    ],
+    "color": "#003087",
+    "tag_colors": {
+      "free": "#22c55e",
+      "payments": "#003087"
+    }
+  },
+  {
+    "name": "Revolut",
+    "url": "https://www.revolut.com/",
+    "description": "All-in-one finance app with multi-currency accounts, stock trading, crypto, and budgeting. Free tier with interbank exchange rates and instant payments.",
+    "category": "finance",
+    "tags": [
+      "freemium",
+      "banking"
+    ],
+    "color": "#0075eb",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "banking": "#0075eb"
+    }
+  },
+  {
+    "name": "Stripe",
+    "url": "https://stripe.com/",
+    "description": "Developer-first payment processing platform. Accept cards, bank transfers, and 100+ payment methods globally. Powers millions of businesses from startups to Fortune 500.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "payments"
+    ],
+    "color": "#635bff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "payments": "#635bff"
+    }
+  },
+  {
+    "name": "Wise",
+    "url": "https://wise.com/",
+    "description": "International money transfers at real exchange rates. Send money abroad with fees up to 8x cheaper than banks. Multi-currency accounts and debit card included.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "money-transfer"
+    ],
+    "color": "#00b9ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "money-transfer": "#00b9ff"
+    }
+  }
+]

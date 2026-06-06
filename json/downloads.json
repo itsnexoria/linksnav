@@ -1,0 +1,122 @@
+[
+  {
+    "name": "7-Zip",
+    "url": "https://7-zip.org",
+    "description": "Free, open-source archive utility for Windows. Compresses and extracts ZIP, RAR, 7z, tar, ISO, and many more formats.",
+    "category": "downloads",
+    "tags": [
+      "open-source",
+      "archive-tool"
+    ],
+    "color": "#2c2c2c",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "archive-tool": "#009a44"
+    }
+  },
+  {
+    "name": "Audacity",
+    "url": "https://audacityteam.org",
+    "description": "Free, open-source audio editor for recording, trimming, mixing, and mastering audio files. Supports VST plugins.",
+    "category": "downloads",
+    "tags": [
+      "open-source",
+      "audio-editor"
+    ],
+    "color": "#2A5CAA",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "audio-editor": "#f5a623"
+    }
+  },
+  {
+    "name": "FileHippo",
+    "url": "https://filehippo.com/",
+    "description": "Safe, verified Windows software downloads. Browse thousands of apps with version history and clean installers.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "software-library"
+    ],
+    "color": "#0078D7",
+    "tag_colors": {
+      "free": "#22c55e",
+      "software-library": "#009900"
+    }
+  },
+  {
+    "name": "GIMP",
+    "url": "https://gimp.org",
+    "description": "Free and open-source image editor with layer support, filters, and scripting. A capable alternative to Adobe Photoshop.",
+    "category": "downloads",
+    "tags": [
+      "open-source",
+      "image-editor"
+    ],
+    "color": "#5C5543",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "image-editor": "#0078d7"
+    }
+  },
+  {
+    "name": "Ninite",
+    "url": "https://ninite.com/",
+    "description": "Install and update multiple Windows apps in one click with no toolbars or junk. The fastest way to set up a new PC.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "bulk-installer"
+    ],
+    "color": "#2E86C1",
+    "tag_colors": {
+      "free": "#22c55e",
+      "bulk-installer": "#0078d7"
+    }
+  },
+  {
+    "name": "OBS",
+    "url": "https://obsproject.com",
+    "description": "Industry-standard open-source streaming and recording software. Supports scenes, overlays, and multiple output formats.",
+    "category": "downloads",
+    "tags": [
+      "open-source",
+      "streaming-software"
+    ],
+    "color": "#302E31",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "streaming-software": "#302e31"
+    }
+  },
+  {
+    "name": "Speedtest",
+    "url": "https://www.speedtest.net/",
+    "description": "Test your internet connection's download, upload, and ping speeds against servers worldwide. Free and instant.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "network-tool"
+    ],
+    "color": "#1a73e8",
+    "tag_colors": {
+      "free": "#22c55e",
+      "network-tool": "#00b4d8"
+    }
+  },
+  {
+    "name": "VLC",
+    "url": "https://videolan.org",
+    "description": "Free, open-source media player that plays virtually any video or audio format. Lightweight, cross-platform, no codecs needed.",
+    "category": "downloads",
+    "tags": [
+      "open-source",
+      "media-player"
+    ],
+    "color": "#F57C00",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "media-player": "#f07b2e"
+    }
+  }
+]

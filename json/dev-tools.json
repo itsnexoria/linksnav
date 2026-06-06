@@ -1,0 +1,482 @@
+[
+  {
+    "name": "Bun",
+    "url": "https://bun.sh/",
+    "description": "Extremely fast JavaScript runtime, bundler, test runner, and package manager all-in-one. Drop-in Node.js replacement with 3x+ speed improvements.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "runtime"
+    ],
+    "color": "#fbf0df",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "runtime": "#f59e0b"
+    }
+  },
+  {
+    "name": "Cloudflare",
+    "url": "https://dash.cloudflare.com/",
+    "description": "All-in-one network dashboard. Manage DNS, CDN, DDoS protection, SSL certificates, and edge Workers for your domains.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "dns-cdn"
+    ],
+    "color": "#f6821f",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "dns-cdn": "#f38020"
+    }
+  },
+  {
+    "name": "CodeSandbox",
+    "url": "https://codesandbox.io",
+    "description": "Instant online development environment for web apps. Fork templates, collaborate in real-time, and deploy instantly.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "browser-ide"
+    ],
+    "color": "#151515",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "browser-ide": "#0079d3"
+    }
+  },
+  {
+    "name": "Coolify",
+    "url": "https://coolify.io/",
+    "description": "Open-source, self-hostable Heroku/Netlify alternative. Deploy apps, databases, and services on your own VPS with a beautiful UI. Full Docker support.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "self-hosted"
+    ],
+    "color": "#6d28d9",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "self-hosted": "#f97316"
+    }
+  },
+  {
+    "name": "Discord Devs",
+    "url": "https://discord.com/developers/applications",
+    "description": "Create and manage Discord bots and OAuth2 apps. Configure bot permissions, slash commands, webhooks, and view API documentation.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "bot-dev"
+    ],
+    "color": "#5865F2",
+    "tag_colors": {
+      "free": "#22c55e",
+      "bot-dev": "#5865f2"
+    }
+  },
+  {
+    "name": "DNS Checker",
+    "url": "https://dnschecker.org/",
+    "description": "Verify DNS propagation from 100+ locations worldwide. Check if your A, CNAME, MX, or TXT records have updated globally.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "network-tool"
+    ],
+    "color": "#00c9ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "network-tool": "#00b4d8"
+    }
+  },
+  {
+    "name": "Docker Hub",
+    "url": "https://hub.docker.com",
+    "description": "The world's largest container image registry. Pull official images, push your own, and manage private repositories.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "containers"
+    ],
+    "color": "#2496ED",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "containers": "#2496ed"
+    }
+  },
+  {
+    "name": "Firebase",
+    "url": "https://firebase.google.com/",
+    "description": "Google's backend-as-a-service platform. Realtime database, auth, cloud functions, hosting, and analytics \u2014 all in one SDK.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "backend-service"
+    ],
+    "color": "#ffca28",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "backend-service": "#ff6f00"
+    }
+  },
+  {
+    "name": "GitHub",
+    "url": "https://github.com/",
+    "description": "The world's largest code hosting platform. Version control with Git, open-source collaboration, CI/CD with Actions, and project management.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "git-hosting"
+    ],
+    "color": "#f0f6fc",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "git-hosting": "#171515"
+    }
+  },
+  {
+    "name": "GitLab",
+    "url": "https://gitlab.com",
+    "description": "Git-based code hosting with a built-in CI/CD pipeline, issue tracker, container registry, and DevSecOps toolchain.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "git-hosting"
+    ],
+    "color": "#FC6D26",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "git-hosting": "#171515"
+    }
+  },
+  {
+    "name": "Hono",
+    "url": "https://hono.dev/",
+    "description": "Ultra-fast web framework for the edge. Runs on Cloudflare Workers, Deno, Bun, and Node. Tiny footprint with Express-like API.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "framework"
+    ],
+    "color": "#e36002",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "framework": "#e36002"
+    }
+  },
+  {
+    "name": "HTML Color Codes",
+    "url": "https://htmlcolorcodes.com/",
+    "description": "Color picker with hex codes, RGB values, HSL, and CSS gradients. Includes a palette builder and named colour reference.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "design-tool"
+    ],
+    "color": "#ff6b6b",
+    "tag_colors": {
+      "free": "#22c55e",
+      "design-tool": "#6b7280"
+    }
+  },
+  {
+    "name": "JSFiddle",
+    "url": "https://jsfiddle.net/",
+    "description": "Online editor to write, test, and share HTML, CSS, and JavaScript snippets in the browser. Great for quick prototypes and bug reports.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "browser-ide"
+    ],
+    "color": "#3fa9f5",
+    "tag_colors": {
+      "free": "#22c55e",
+      "browser-ide": "#0079d3"
+    }
+  },
+  {
+    "name": "Kubernetes",
+    "url": "https://kubernetes.io/",
+    "description": "Open-source container orchestration platform. Automate the deployment, scaling, and management of containerised applications.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "container-orchestration"
+    ],
+    "color": "#326ce5",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "container-orchestration": "#326ce5"
+    }
+  },
+  {
+    "name": "Linear",
+    "url": "https://linear.app/",
+    "description": "Fast, streamlined issue tracker for software teams. Loved by engineers for its keyboard-first design, speed, and deep GitHub/GitLab integration.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "project-management"
+    ],
+    "color": "#5e6ad2",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "project-management": "#5e6ad2"
+    }
+  },
+  {
+    "name": "Lucide Icons",
+    "url": "https://lucide.dev/icons/",
+    "description": "Beautiful, consistent open-source icon set with 1,300+ icons. Available as SVG, React components, or via CDN.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "icon-library"
+    ],
+    "color": "#6c63ff",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "icon-library": "#000000"
+    }
+  },
+  {
+    "name": "MongoDB Atlas",
+    "url": "https://mongodb.com/atlas",
+    "description": "Fully managed cloud MongoDB hosting. Deploy on AWS, Azure, or GCP with built-in search, charts, and a free 512MB cluster.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "database-hosting"
+    ],
+    "color": "#00ED64",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "database-hosting": "#47a248"
+    }
+  },
+  {
+    "name": "Netlify",
+    "url": "https://netlify.com/",
+    "description": "Static site and serverless hosting with CI/CD, form handling, edge functions, and branch deploy previews built in.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "deployment"
+    ],
+    "color": "#00C7B7",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "deployment": "#000000"
+    }
+  },
+  {
+    "name": "ngrok",
+    "url": "https://ngrok.com/",
+    "description": "Instantly expose localhost to the internet. Create secure tunnels for webhooks, API testing, demos, and remote access without firewall changes.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "tunneling"
+    ],
+    "color": "#1f2d3d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "tunneling": "#10b981"
+    }
+  },
+  {
+    "name": "PlanetScale",
+    "url": "https://planetscale.com/",
+    "description": "Serverless MySQL database platform with branching. Deploy schema changes like code branches \u2014 no downtime, no locks. Built on Vitess.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "database-hosting"
+    ],
+    "color": "#f4ccff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "database-hosting": "#a855f7"
+    }
+  },
+  {
+    "name": "Postman",
+    "url": "https://postman.com",
+    "description": "API development platform for building, testing, mocking, and documenting REST, GraphQL, and SOAP APIs.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "api-testing"
+    ],
+    "color": "#FF6C37",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "api-testing": "#ff6c37"
+    }
+  },
+  {
+    "name": "Replit",
+    "url": "https://replit.com",
+    "description": "Browser-based IDE for coding, running, and hosting projects without any local setup. Supports 50+ programming languages.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "browser-ide"
+    ],
+    "color": "#F26207",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "browser-ide": "#0079d3"
+    }
+  },
+  {
+    "name": "Sentry",
+    "url": "https://sentry.io/",
+    "description": "Application monitoring and error tracking. Catch crashes, performance issues, and regressions in real-time across web, mobile, and backend services.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "monitoring"
+    ],
+    "color": "#362d59",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "monitoring": "#fb923c"
+    }
+  },
+  {
+    "name": "Stack Overflow",
+    "url": "https://stackoverflow.com/",
+    "description": "The go-to Q&A site for developers. Search millions of answered questions or post your own to the global dev community.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "q&a"
+    ],
+    "color": "#F48024",
+    "tag_colors": {
+      "free": "#22c55e",
+      "q&a": "#f48024"
+    }
+  },
+  {
+    "name": "Supabase",
+    "url": "https://supabase.com",
+    "description": "Open-source Firebase alternative. Postgres database, realtime subscriptions, auth, storage, and edge functions.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "backend-service"
+    ],
+    "color": "#3ECF8E",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "backend-service": "#ff6f00"
+    }
+  },
+  {
+    "name": "Tauri",
+    "url": "https://tauri.app/",
+    "description": "Build tiny, blazing-fast desktop apps with web technologies. Uses Rust backend instead of Electron's Chromium \u2014 produces apps 10x smaller.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "desktop-dev"
+    ],
+    "color": "#ffc131",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "desktop-dev": "#ffc131"
+    }
+  },
+  {
+    "name": "TinyURL",
+    "url": "https://tinyurl.com/",
+    "description": "Instantly shorten long URLs into compact, shareable links. Supports custom aliases and basic click tracking.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "url-shortener"
+    ],
+    "color": "#ffcc00",
+    "tag_colors": {
+      "free": "#22c55e",
+      "url-shortener": "#5865f2"
+    }
+  },
+  {
+    "name": "Turso",
+    "url": "https://turso.tech/",
+    "description": "Edge SQLite database powered by libSQL. Deploy databases close to your users globally with sub-millisecond reads. Generous free tier.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "database-hosting"
+    ],
+    "color": "#4ff8d2",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "database-hosting": "#4ff8d2"
+    }
+  },
+  {
+    "name": "Vercel",
+    "url": "https://vercel.com/",
+    "description": "Zero-config deployment platform for frontend frameworks. Push to Git and your app is live in seconds with global CDN.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "deployment"
+    ],
+    "color": "#e7e9ea",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "deployment": "#000000"
+    }
+  },
+  {
+    "name": "Vercel Analytics",
+    "url": "https://vercel.com/analytics",
+    "description": "Real user monitoring and web analytics built into Vercel. Track Core Web Vitals, page performance, and visitor data with zero config.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "analytics"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "analytics": "#6366f1"
+    }
+  },
+  {
+    "name": "Vite",
+    "url": "https://vitejs.dev/",
+    "description": "Next-generation frontend build tool. Blazing-fast HMR, instant server start, and optimized production builds using native ES modules.",
+    "category": "dev-tools",
+    "tags": [
+      "open-source",
+      "build-tool"
+    ],
+    "color": "#646cff",
+    "tag_colors": {
+      "open-source": "#06b6d4",
+      "build-tool": "#646cff"
+    }
+  },
+  {
+    "name": "Warp",
+    "url": "https://www.warp.dev/",
+    "description": "Modern AI-powered terminal built in Rust. Features command autocomplete, AI command search, shared runbooks, and a block-based output model.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "terminal"
+    ],
+    "color": "#01a4ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "terminal": "#01a4ff"
+    }
+  }
+]

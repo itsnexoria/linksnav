@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Apple Music",
+    "url": "https://music.apple.com",
+    "description": "Subscription music streaming with 100M+ songs, spatial audio, lossless quality, and seamless Apple device integration.",
+    "category": "music",
+    "tags": [
+      "subscription",
+      "music-streaming"
+    ],
+    "color": "#FA243C",
+    "tag_colors": {
+      "subscription": "#8b5cf6",
+      "music-streaming": "#1db954"
+    }
+  },
+  {
+    "name": "Bandcamp",
+    "url": "https://bandcamp.com/",
+    "description": "Direct-to-fan music platform. Buy albums, tracks, and merch directly from artists. Artists keep 82-85% of revenue. Free to stream before you buy.",
+    "category": "music",
+    "tags": [
+      "free",
+      "music-platform"
+    ],
+    "color": "#1da0c3",
+    "tag_colors": {
+      "free": "#22c55e",
+      "music-platform": "#1da0c3"
+    }
+  },
+  {
+    "name": "Last.fm",
+    "url": "https://www.last.fm/",
+    "description": "Music tracking and discovery platform. Scrobble songs from Spotify, Apple Music, and more to build your listening history and discover new artists via recommendations.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "music-platform"
+    ],
+    "color": "#d51007",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music-platform": "#d51007"
+    }
+  },
+  {
+    "name": "SoundCloud",
+    "url": "https://soundcloud.com",
+    "description": "Upload and discover audio from independent artists worldwide. Great for finding emerging music, mixes, and podcasts.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "music-platform"
+    ],
+    "color": "#FF5500",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music-platform": "#ff5500"
+    }
+  },
+  {
+    "name": "Spotify",
+    "url": "https://open.spotify.com/",
+    "description": "Stream 100M+ songs, podcasts, and audiobooks. Build playlists, explore curated mixes, and listen offline with Premium.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "music-streaming"
+    ],
+    "color": "#1db954",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music-streaming": "#1db954"
+    }
+  },
+  {
+    "name": "Tidal",
+    "url": "https://tidal.com/",
+    "description": "High-fidelity music streaming with lossless and Dolby Atmos audio. Jay-Z's platform offers MQA and 360 Reality Audio \u2014 the audiophile's streaming choice.",
+    "category": "music",
+    "tags": [
+      "subscription",
+      "music-streaming"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "subscription": "#8b5cf6",
+      "music-streaming": "#1db954"
+    }
+  },
+  {
+    "name": "YouTube Music",
+    "url": "https://music.youtube.com/",
+    "description": "Google's music streaming service with official tracks, covers, live sessions, and personalised mixes. Ad-free with YouTube Premium.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "music-streaming"
+    ],
+    "color": "#ff0000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music-streaming": "#1db954"
+    }
+  }
+]
