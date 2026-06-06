@@ -1,14 +1,38 @@
 /* ============================================================
-   NexHub — app.js  (updated)
+   NexHub — app.js  (v2 — with Favorites)
    ============================================================ */
 
 let allSites      = [];
 let allCategories = [];
 let activeCategory = 'all';
 let searchQuery    = '';
+let favorites      = loadFavorites();
 
-const PAGE_SIZE    = 12;   // cards shown per page
+const PAGE_SIZE    = 12;
 let   visibleCount = PAGE_SIZE;
+
+// ---- Favorites persistence ----
+function loadFavorites() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem('nexhub_favorites') || '[]'));
+  } catch { return new Set(); }
+}
+
+function saveFavorites() {
+  localStorage.setItem('nexhub_favorites', JSON.stringify([...favorites]));
+}
+
+function toggleFavorite(url, e) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (favorites.has(url)) {
+    favorites.delete(url);
+  } else {
+    favorites.add(url);
+  }
+  saveFavorites();
+  render();
+}
 
 // ---- Boot ----
 async function init() {
@@ -46,6 +70,21 @@ function buildCategoryNav() {
     });
     nav.appendChild(btn);
   });
+
+  // Add Favorites button
+  const favBtn = document.createElement('button');
+  favBtn.className   = 'cat-btn cat-btn-fav';
+  favBtn.dataset.cat = '__favorites__';
+  favBtn.innerHTML   = '★ Favorites';
+  favBtn.addEventListener('click', () => {
+    activeCategory = '__favorites__';
+    searchQuery    = '';
+    visibleCount   = PAGE_SIZE;
+    document.getElementById('searchInput').value = '';
+    setActiveBtn(favBtn);
+    render();
+  });
+  nav.appendChild(favBtn);
 }
 
 function setActiveBtn(active) {
@@ -111,12 +150,23 @@ document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', fun
 
 // ---- Filter logic ----
 function getFiltered() {
+  if (activeCategory === '__favorites__') {
+    return allSites.filter(site => favorites.has(site.url));
+  }
   return allSites.filter(site => {
     const matchCat = activeCategory === 'all' || site.category === activeCategory;
     if (!searchQuery) return matchCat;
     const haystack = `${site.name} ${site.description} ${site.category} ${(site.tags || []).join(' ')}`.toLowerCase();
     return matchCat && haystack.includes(searchQuery);
   });
+}
+
+// ---- Sort: favorites pinned on top ----
+function getSorted(sites) {
+  if (activeCategory === '__favorites__') return sites;
+  const favs = sites.filter(s => favorites.has(s.url));
+  const rest  = sites.filter(s => !favorites.has(s.url));
+  return [...favs, ...rest];
 }
 
 // ---- Favicon helper ----
@@ -136,9 +186,12 @@ function render() {
   const label    = document.getElementById('sectionLabel');
   const countEl  = document.getElementById('siteCount');
   const filtered = getFiltered();
+  const sorted   = getSorted(filtered);
 
   // Section label
-  if (searchQuery) {
+  if (activeCategory === '__favorites__') {
+    label.textContent = `★ Favorites`;
+  } else if (searchQuery) {
     label.textContent = `Results for "${searchQuery}"`;
   } else if (activeCategory === 'all') {
     label.textContent = 'All Sites';
@@ -152,44 +205,101 @@ function render() {
   if (filtered.length === 0) {
     grid.innerHTML = '';
     empty.style.display = 'block';
-    document.getElementById('emptyQuery').textContent = searchQuery || activeCategory;
+    if (activeCategory === '__favorites__') {
+      document.getElementById('emptyQuery').textContent = 'your favorites yet — click ★ on any card!';
+    } else {
+      document.getElementById('emptyQuery').textContent = searchQuery || activeCategory;
+    }
     removePagination();
+    removeFavsSection();
     return;
   }
 
   empty.style.display = 'none';
 
-  const visible = filtered.slice(0, visibleCount);
-  grid.innerHTML = visible.map(renderCard).join('');
+  // Split: pinned favorites section + rest (only on "All" view)
+  const showPinnedSection = activeCategory === 'all' && !searchQuery && favorites.size > 0;
 
-  // Pagination
-  if (visibleCount < filtered.length) {
-    renderLoadMore(filtered.length);
+  if (showPinnedSection) {
+    const pinnedSites = allSites.filter(s => favorites.has(s.url));
+    const restSites   = sorted.filter(s => !favorites.has(s.url)).slice(0, visibleCount);
+
+    let html = '';
+
+    // Pinned favorites banner
+    html += `<div class="favorites-section-header">
+      <span class="fav-section-icon">★</span>
+      <span>Pinned Favorites</span>
+      <span class="fav-section-count">${pinnedSites.length}</span>
+    </div>`;
+    html += `<div class="cards-grid favorites-row" id="favsRow">`;
+    html += pinnedSites.map(s => renderCard(s, true)).join('');
+    html += `</div>`;
+
+    html += `<div class="section-divider"></div>`;
+    html += `<div class="rest-grid" id="restGrid">`;
+    html += restSites.map(s => renderCard(s, false)).join('');
+    html += `</div>`;
+
+    grid.innerHTML = html;
+
+    const total = allSites.filter(s => !favorites.has(s.url)).length;
+    if (visibleCount < total) {
+      renderLoadMore(total);
+    } else {
+      removePagination();
+    }
   } else {
-    removePagination();
+    const visible = sorted.slice(0, visibleCount);
+    grid.innerHTML = visible.map(s => renderCard(s, false)).join('');
+
+    if (visibleCount < sorted.length) {
+      renderLoadMore(sorted.length);
+    } else {
+      removePagination();
+    }
   }
 }
 
-function renderCard(site) {
-  const color  = site.color || '#7c5cfc';
-  const tags   = (site.tags || []).map(t =>
-    `<span class="tag tag-${escHtml(t)}">${escHtml(t)}</span>`
-  ).join('');
-  const icon   = faviconUrl(site.url);
+function removeFavsSection() {
+  const el = document.getElementById('favsSectionWrap');
+  if (el) el.remove();
+}
+
+function renderCard(site, pinned = false) {
+  const color     = site.color || '#7c5cfc';
+  const isFav     = favorites.has(site.url);
+  const tagColors = site.tag_colors || {};
+  const tags      = (site.tags || []).map(t => {
+    const bg = tagColors[t] || '#6b7280';
+    return `<span class="tag" style="--tag-bg:${escHtml(bg)}">${escHtml(t)}</span>`;
+  }).join('');
+
+  const icon = faviconUrl(site.url);
   const iconHtml = icon
     ? `<img class="card-favicon" src="${escHtml(icon)}" alt="" loading="lazy" onerror="this.style.display='none'">`
     : '';
 
+  const favClass = isFav ? 'fav-btn fav-btn--active' : 'fav-btn';
+  const favTitle = isFav ? 'Remove from favorites' : 'Add to favorites';
+  const pinnedBadge = pinned ? '' : (isFav ? '<span class="pinned-badge">★ Pinned</span>' : '');
+
   return `
-    <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
-      <div class="card-top">
-        ${iconHtml}
-        <span class="card-name">${escHtml(site.name)}</span>
-        <span class="card-arrow">↗</span>
-      </div>
-      <p class="card-desc">${escHtml(site.description)}</p>
-      <div class="card-footer">${tags}</div>
-    </a>`;
+    <div class="card-wrap${isFav && !pinned ? ' card-wrap--fav' : ''}">
+      <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener" style="--card-color:${color}">
+        <div class="card-top">
+          ${iconHtml}
+          <span class="card-name">${escHtml(site.name)}</span>
+          ${pinnedBadge}
+          <span class="card-arrow">↗</span>
+        </div>
+        <p class="card-desc">${escHtml(site.description)}</p>
+        <div class="card-footer">${tags}</div>
+      </a>
+      <button class="${favClass}" title="${favTitle}" onclick="toggleFavorite('${escHtml(site.url)}', event)">
+        ${isFav ? '★' : '☆'}
+      </button>
+    </div>`;
 }
 
 // ---- Load More ----
@@ -207,11 +317,6 @@ function renderLoadMore(total) {
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
     visibleCount += PAGE_SIZE;
     render();
-    // Scroll to where new cards start so user sees them
-    const cards = document.querySelectorAll('.card');
-    if (cards.length > visibleCount - PAGE_SIZE) {
-      cards[visibleCount - PAGE_SIZE]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
   });
 }
 

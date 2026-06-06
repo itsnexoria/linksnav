@@ -600,3 +600,184 @@ body {
   border-radius: 100px;
   padding: 2px 8px;
 }
+
+/* ================================================================
+   FAVORITES SYSTEM
+   ================================================================ */
+
+/* Card wrapper — needed to position the fav button */
+.card-wrap {
+  position: relative;
+}
+
+.card-wrap--fav .card {
+  border-color: rgba(250, 204, 21, 0.35) !important;
+  box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.15), 0 4px 24px rgba(0,0,0,0.35);
+}
+
+/* Favorite star button */
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.35);
+  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
+  backdrop-filter: blur(4px);
+  line-height: 1;
+  padding: 0;
+}
+
+.fav-btn:hover {
+  background: rgba(250, 204, 21, 0.15);
+  border-color: rgba(250, 204, 21, 0.45);
+  color: #facc15;
+  transform: scale(1.15);
+}
+
+.fav-btn--active {
+  background: rgba(250, 204, 21, 0.18);
+  border-color: rgba(250, 204, 21, 0.5);
+  color: #facc15;
+}
+
+.fav-btn--active:hover {
+  background: rgba(250, 204, 21, 0.08);
+  color: rgba(250, 204, 21, 0.5);
+}
+
+/* Pinned badge on cards in "All" view */
+.pinned-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  border-radius: 100px;
+  padding: 1px 7px;
+  margin-left: auto;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+/* Favorites section header (pinned section in "All" view) */
+.favorites-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 2px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #facc15;
+  text-transform: uppercase;
+}
+
+.fav-section-icon {
+  font-size: 0.9rem;
+}
+
+.fav-section-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  border-radius: 100px;
+  font-size: 0.68rem;
+  padding: 0 6px;
+  color: #facc15;
+}
+
+/* Favorites grid row — horizontal scroll for pinned */
+.favorites-row {
+  margin-bottom: 4px;
+}
+
+/* Divider between pinned and rest */
+.section-divider {
+  margin: 20px 0 18px;
+  border: none;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.section-divider::after {
+  content: 'All Sites';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg1);
+  padding: 0 12px;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Favorites category button */
+.cat-btn-fav {
+  color: #facc15 !important;
+  border-color: rgba(250, 204, 21, 0.25) !important;
+}
+
+.cat-btn-fav:hover,
+.cat-btn-fav.active {
+  background: rgba(250, 204, 21, 0.12) !important;
+  border-color: rgba(250, 204, 21, 0.5) !important;
+  color: #facc15 !important;
+}
+
+/* ================================================================
+   DYNAMIC TAG COLORS (via CSS variable --tag-bg)
+   Replaces all the old .tag-xxx classes
+   ================================================================ */
+.tag {
+  /* Fall back to the original muted style if no --tag-bg */
+  --tag-bg: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 100px;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--tag-bg) 18%, transparent);
+  color: color-mix(in srgb, var(--tag-bg) 85%, white 40%);
+  border: 1px solid color-mix(in srgb, var(--tag-bg) 40%, transparent);
+  transition: opacity 0.15s;
+}
+
+.card:hover .tag {
+  opacity: 0.9;
+}
+
+/* Cards grid also used for the rest section */
+.rest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
