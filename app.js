@@ -55,6 +55,24 @@ async function init() {
 // ---- Category nav ----
 function buildCategoryNav() {
   const nav = document.getElementById('catNavInner');
+
+  // Favorites button — inserted FIRST before category buttons
+  const favBtn = document.createElement('button');
+  favBtn.className   = 'cat-btn cat-btn-fav';
+  favBtn.dataset.cat = '__favorites__';
+  favBtn.textContent = '★ Favorites';
+  favBtn.addEventListener('click', () => {
+    activeCategory = '__favorites__';
+    searchQuery    = '';
+    visibleCount   = PAGE_SIZE;
+    document.getElementById('searchInput').value = '';
+    setActiveBtn(favBtn);
+    render();
+  });
+  // Insert after the "All" button (first child)
+  const allBtn = nav.querySelector('[data-cat="all"]');
+  allBtn.insertAdjacentElement('afterend', favBtn);
+
   allCategories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className    = 'cat-btn';
@@ -70,21 +88,6 @@ function buildCategoryNav() {
     });
     nav.appendChild(btn);
   });
-
-  // Add Favorites button
-  const favBtn = document.createElement('button');
-  favBtn.className   = 'cat-btn cat-btn-fav';
-  favBtn.dataset.cat = '__favorites__';
-  favBtn.innerHTML   = '★ Favorites';
-  favBtn.addEventListener('click', () => {
-    activeCategory = '__favorites__';
-    searchQuery    = '';
-    visibleCount   = PAGE_SIZE;
-    document.getElementById('searchInput').value = '';
-    setActiveBtn(favBtn);
-    render();
-  });
-  nav.appendChild(favBtn);
 }
 
 function setActiveBtn(active) {
@@ -296,9 +299,7 @@ function renderCard(site, pinned = false) {
         <p class="card-desc">${escHtml(site.description)}</p>
         <div class="card-footer">${tags}</div>
       </a>
-      <button class="${favClass}" title="${favTitle}" onclick="toggleFavorite('${escHtml(site.url)}', event)">
-        ${isFav ? '★' : '☆'}
-      </button>
+      <button class="${favClass}" title="${favTitle}" onclick="toggleFavorite('${escHtml(site.url)}', event)"></button>
     </div>`;
 }
 

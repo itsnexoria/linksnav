@@ -148,6 +148,21 @@
   ],
   "sites": [
     {
+      "name": "Bolt.new",
+      "url": "https://bolt.new/",
+      "description": "Full-stack AI app builder. Describe any web app and get a live, deployable project in seconds. Built on StackBlitz with Claude and GPT support.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-coding"
+      ],
+      "color": "#7c3aed",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-coding": "#7c3aed"
+      }
+    },
+    {
       "name": "ChatGPT",
       "url": "https://chatgpt.com/",
       "description": "OpenAI's flagship AI assistant. Handles writing, coding, maths, research, image generation, and custom GPTs. Includes a free tier.",
@@ -178,6 +193,21 @@
       }
     },
     {
+      "name": "Cursor",
+      "url": "https://cursor.sh/",
+      "description": "AI-first code editor built on VS Code. Chat with your codebase, auto-complete entire functions, and fix bugs instantly with GPT-4 integration.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-coding"
+      ],
+      "color": "#1d4ed8",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-coding": "#1d4ed8"
+      }
+    },
+    {
       "name": "DeepSeek",
       "url": "https://chat.deepseek.com/",
       "description": "Open-source AI model with strong coding and maths reasoning. Competitive with top models at a fraction of the API cost.",
@@ -190,6 +220,21 @@
       "tag_colors": {
         "free": "#22c55e",
         "open-source": "#06b6d4"
+      }
+    },
+    {
+      "name": "ElevenLabs",
+      "url": "https://elevenlabs.io/",
+      "description": "Realistic AI voice synthesis and cloning. Generate natural-sounding speech in any language from text, or clone your own voice with a short sample.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-voice"
+      ],
+      "color": "#f59e0b",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-voice": "#f59e0b"
       }
     },
     {
@@ -238,6 +283,36 @@
       }
     },
     {
+      "name": "Ideogram",
+      "url": "https://ideogram.ai/",
+      "description": "AI image generator with best-in-class text rendering inside images. Perfect for logos, posters, and designs that need readable text in the visual.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-image-gen"
+      ],
+      "color": "#3b82f6",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-image-gen": "#ec4899"
+      }
+    },
+    {
+      "name": "Kling AI",
+      "url": "https://klingai.com/",
+      "description": "High-quality text-to-video and image-to-video AI from Kuaishou. Generates up to 2-minute realistic video clips with strong motion consistency.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-video-gen"
+      ],
+      "color": "#8b5cf6",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-video-gen": "#8b5cf6"
+      }
+    },
+    {
       "name": "Leonardo AI",
       "url": "https://leonardo.ai",
       "description": "AI image generation platform tailored for game assets, concept art, and illustrations with fine-tuned style models.",
@@ -253,6 +328,21 @@
       }
     },
     {
+      "name": "Luma AI",
+      "url": "https://lumalabs.ai/",
+      "description": "AI video generation (Dream Machine) and 3D scene capture. Generate cinematic videos from text/images and create interactive 3D NeRF captures.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-video-gen"
+      ],
+      "color": "#a855f7",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-video-gen": "#a855f7"
+      }
+    },
+    {
       "name": "Midjourney",
       "url": "https://midjourney.com",
       "description": "Premium AI art generator producing highly detailed, stylised images from text prompts. Runs through Discord or the web app.",
@@ -265,6 +355,36 @@
       "tag_colors": {
         "subscription": "#8b5cf6",
         "ai-image-gen": "#ec4899"
+      }
+    },
+    {
+      "name": "Mistral AI",
+      "url": "https://mistral.ai/",
+      "description": "European open-source AI lab producing high-efficiency language models. Mistral and Mixtral models rival GPT-4 while being faster and cheaper to run.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "open-source"
+      ],
+      "color": "#ff7000",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "open-source": "#06b6d4"
+      }
+    },
+    {
+      "name": "NotebookLM",
+      "url": "https://notebooklm.google.com/",
+      "description": "Google's AI research assistant. Upload docs, PDFs, and notes, then ask questions and generate summaries grounded in your own sources. Includes Audio Overview podcast mode.",
+      "category": "ai",
+      "tags": [
+        "free",
+        "ai-assistant"
+      ],
+      "color": "#4285f4",
+      "tag_colors": {
+        "free": "#22c55e",
+        "ai-assistant": "#4285f4"
       }
     },
     {
@@ -295,6 +415,83 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "ai-search": "#6366f1"
+      }
+    },
+    {
+      "name": "Pika Labs",
+      "url": "https://pika.art/",
+      "description": "AI video generation platform that turns text, images, and video clips into creative short videos. Great for content creators and social media.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-video-gen"
+      ],
+      "color": "#ec4899",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-video-gen": "#ec4899"
+      }
+    },
+    {
+      "name": "Runway ML",
+      "url": "https://runwayml.com/",
+      "description": "Professional AI creative suite for video generation, image editing, and motion. Used by filmmakers and designers for next-gen content production.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-video-gen"
+      ],
+      "color": "#6366f1",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-video-gen": "#6366f1"
+      }
+    },
+    {
+      "name": "Sora",
+      "url": "https://sora.com/",
+      "description": "OpenAI's text-to-video AI. Generate high-quality cinematic video clips from text prompts. One of the most advanced video generation models available.",
+      "category": "ai",
+      "tags": [
+        "subscription",
+        "ai-video-gen"
+      ],
+      "color": "#10a37f",
+      "tag_colors": {
+        "subscription": "#8b5cf6",
+        "ai-video-gen": "#10a37f"
+      }
+    },
+    {
+      "name": "Stable Diffusion",
+      "url": "https://stability.ai/",
+      "description": "Stability AI's open-source image generation model. Run locally or via API. The backbone behind countless AI art tools and workflows.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "open-source",
+        "ai-image-gen"
+      ],
+      "color": "#7c3aed",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "open-source": "#06b6d4",
+        "ai-image-gen": "#7c3aed"
+      }
+    },
+    {
+      "name": "v0 by Vercel",
+      "url": "https://v0.dev/",
+      "description": "Generate React UI components from text prompts. Describe a UI, get production-ready shadcn/Tailwind code instantly. Built by Vercel.",
+      "category": "ai",
+      "tags": [
+        "freemium",
+        "ai-coding"
+      ],
+      "color": "#000000",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "ai-coding": "#6366f1"
       }
     },
     {
@@ -785,6 +982,21 @@
       }
     },
     {
+      "name": "Coolors",
+      "url": "https://coolors.co/",
+      "description": "Fast color palette generator. Hit spacebar to generate harmonious palettes, extract colors from images, or browse trending palettes from the community.",
+      "category": "design",
+      "tags": [
+        "free",
+        "color-tool"
+      ],
+      "color": "#1c2b33",
+      "tag_colors": {
+        "free": "#22c55e",
+        "color-tool": "#f59e0b"
+      }
+    },
+    {
       "name": "Figma",
       "url": "https://figma.com",
       "description": "Collaborative UI/UX design tool for web and mobile. Build wireframes, prototypes, and design systems with your team in real-time.",
@@ -812,6 +1024,36 @@
       "tag_colors": {
         "free": "#22c55e",
         "text-tool": "#8b5cf6"
+      }
+    },
+    {
+      "name": "Fontshare",
+      "url": "https://www.fontshare.com/",
+      "description": "Free, high-quality fonts from Indian Type Foundry. Professional-grade typefaces completely free for personal and commercial use. No attribution required.",
+      "category": "design",
+      "tags": [
+        "free",
+        "fonts"
+      ],
+      "color": "#ff4545",
+      "tag_colors": {
+        "free": "#22c55e",
+        "fonts": "#ff4545"
+      }
+    },
+    {
+      "name": "Framer",
+      "url": "https://www.framer.com/",
+      "description": "Design and publish production-ready websites with zero code. The go-to tool for interactive prototypes, portfolios, and landing pages that actually ship.",
+      "category": "design",
+      "tags": [
+        "freemium",
+        "web-design"
+      ],
+      "color": "#0055ff",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "web-design": "#0055ff"
       }
     },
     {
@@ -860,6 +1102,21 @@
       }
     },
     {
+      "name": "Lottie Files",
+      "url": "https://lottiefiles.com/",
+      "description": "Library of lightweight, scalable JSON animations for web and mobile. Download free Lottie files or create your own. Embed animations without video files.",
+      "category": "design",
+      "tags": [
+        "freemium",
+        "animations"
+      ],
+      "color": "#00c4a7",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "animations": "#00c4a7"
+      }
+    },
+    {
       "name": "Photopea",
       "url": "https://photopea.com",
       "description": "Free browser-based photo editor that supports PSD, XCF, and Sketch files. A capable Photoshop alternative with no install.",
@@ -905,6 +1162,51 @@
       }
     },
     {
+      "name": "Rive",
+      "url": "https://rive.app/",
+      "description": "Design and ship interactive animations to any platform. Create state machines, game UI, and micro-interactions that respond to user input in real time.",
+      "category": "design",
+      "tags": [
+        "freemium",
+        "animations"
+      ],
+      "color": "#ff3d00",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "animations": "#ff3d00"
+      }
+    },
+    {
+      "name": "Shots.so",
+      "url": "https://shots.so/",
+      "description": "Create stunning mockups for screenshots and designs. Choose from 500+ device frames, backgrounds, and styles. Perfect for app store previews and social posts.",
+      "category": "design",
+      "tags": [
+        "freemium",
+        "mockup-tool"
+      ],
+      "color": "#ff5b5b",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "mockup-tool": "#ff5b5b"
+      }
+    },
+    {
+      "name": "Spline",
+      "url": "https://spline.design/",
+      "description": "3D design tool for the web. Create interactive 3D scenes, animations, and games that run directly in the browser. No 3D experience needed.",
+      "category": "design",
+      "tags": [
+        "freemium",
+        "3d-design"
+      ],
+      "color": "#0d6efd",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "3d-design": "#0d6efd"
+      }
+    },
+    {
       "name": "Unsplash",
       "url": "https://unsplash.com/",
       "description": "Massive library of high-resolution photos contributed by photographers worldwide. Free to use with an optional paid subscription for teams.",
@@ -935,6 +1237,21 @@
       }
     },
     {
+      "name": "Bun",
+      "url": "https://bun.sh/",
+      "description": "Extremely fast JavaScript runtime, bundler, test runner, and package manager all-in-one. Drop-in Node.js replacement with 3x+ speed improvements.",
+      "category": "dev-tools",
+      "tags": [
+        "open-source",
+        "runtime"
+      ],
+      "color": "#fbf0df",
+      "tag_colors": {
+        "open-source": "#06b6d4",
+        "runtime": "#f59e0b"
+      }
+    },
+    {
       "name": "Cloudflare",
       "url": "https://dash.cloudflare.com/",
       "description": "All-in-one network dashboard. Manage DNS, CDN, DDoS protection, SSL certificates, and edge Workers for your domains.",
@@ -962,6 +1279,21 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "browser-ide": "#0079d3"
+      }
+    },
+    {
+      "name": "Coolify",
+      "url": "https://coolify.io/",
+      "description": "Open-source, self-hostable Heroku/Netlify alternative. Deploy apps, databases, and services on your own VPS with a beautiful UI. Full Docker support.",
+      "category": "dev-tools",
+      "tags": [
+        "open-source",
+        "self-hosted"
+      ],
+      "color": "#6d28d9",
+      "tag_colors": {
+        "open-source": "#06b6d4",
+        "self-hosted": "#f97316"
       }
     },
     {
@@ -1055,6 +1387,21 @@
       }
     },
     {
+      "name": "Hono",
+      "url": "https://hono.dev/",
+      "description": "Ultra-fast web framework for the edge. Runs on Cloudflare Workers, Deno, Bun, and Node. Tiny footprint with Express-like API.",
+      "category": "dev-tools",
+      "tags": [
+        "open-source",
+        "framework"
+      ],
+      "color": "#e36002",
+      "tag_colors": {
+        "open-source": "#06b6d4",
+        "framework": "#e36002"
+      }
+    },
+    {
       "name": "HTML Color Codes",
       "url": "https://htmlcolorcodes.com/",
       "description": "Color picker with hex codes, RGB values, HSL, and CSS gradients. Includes a palette builder and named colour reference.",
@@ -1097,6 +1444,21 @@
       "tag_colors": {
         "open-source": "#06b6d4",
         "container-orchestration": "#326ce5"
+      }
+    },
+    {
+      "name": "Linear",
+      "url": "https://linear.app/",
+      "description": "Fast, streamlined issue tracker for software teams. Loved by engineers for its keyboard-first design, speed, and deep GitHub/GitLab integration.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "project-management"
+      ],
+      "color": "#5e6ad2",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "project-management": "#5e6ad2"
       }
     },
     {
@@ -1145,6 +1507,36 @@
       }
     },
     {
+      "name": "ngrok",
+      "url": "https://ngrok.com/",
+      "description": "Instantly expose localhost to the internet. Create secure tunnels for webhooks, API testing, demos, and remote access without firewall changes.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "tunneling"
+      ],
+      "color": "#1f2d3d",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "tunneling": "#10b981"
+      }
+    },
+    {
+      "name": "PlanetScale",
+      "url": "https://planetscale.com/",
+      "description": "Serverless MySQL database platform with branching. Deploy schema changes like code branches — no downtime, no locks. Built on Vitess.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "database-hosting"
+      ],
+      "color": "#f4ccff",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "database-hosting": "#a855f7"
+      }
+    },
+    {
       "name": "Postman",
       "url": "https://postman.com",
       "description": "API development platform for building, testing, mocking, and documenting REST, GraphQL, and SOAP APIs.",
@@ -1172,6 +1564,21 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "browser-ide": "#0079d3"
+      }
+    },
+    {
+      "name": "Sentry",
+      "url": "https://sentry.io/",
+      "description": "Application monitoring and error tracking. Catch crashes, performance issues, and regressions in real-time across web, mobile, and backend services.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "monitoring"
+      ],
+      "color": "#362d59",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "monitoring": "#fb923c"
       }
     },
     {
@@ -1205,6 +1612,21 @@
       }
     },
     {
+      "name": "Tauri",
+      "url": "https://tauri.app/",
+      "description": "Build tiny, blazing-fast desktop apps with web technologies. Uses Rust backend instead of Electron's Chromium — produces apps 10x smaller.",
+      "category": "dev-tools",
+      "tags": [
+        "open-source",
+        "desktop-dev"
+      ],
+      "color": "#ffc131",
+      "tag_colors": {
+        "open-source": "#06b6d4",
+        "desktop-dev": "#ffc131"
+      }
+    },
+    {
       "name": "TinyURL",
       "url": "https://tinyurl.com/",
       "description": "Instantly shorten long URLs into compact, shareable links. Supports custom aliases and basic click tracking.",
@@ -1220,6 +1642,21 @@
       }
     },
     {
+      "name": "Turso",
+      "url": "https://turso.tech/",
+      "description": "Edge SQLite database powered by libSQL. Deploy databases close to your users globally with sub-millisecond reads. Generous free tier.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "database-hosting"
+      ],
+      "color": "#4ff8d2",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "database-hosting": "#4ff8d2"
+      }
+    },
+    {
       "name": "Vercel",
       "url": "https://vercel.com/",
       "description": "Zero-config deployment platform for frontend frameworks. Push to Git and your app is live in seconds with global CDN.",
@@ -1232,6 +1669,51 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "deployment": "#000000"
+      }
+    },
+    {
+      "name": "Vercel Analytics",
+      "url": "https://vercel.com/analytics",
+      "description": "Real user monitoring and web analytics built into Vercel. Track Core Web Vitals, page performance, and visitor data with zero config.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "analytics"
+      ],
+      "color": "#000000",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "analytics": "#6366f1"
+      }
+    },
+    {
+      "name": "Vite",
+      "url": "https://vitejs.dev/",
+      "description": "Next-generation frontend build tool. Blazing-fast HMR, instant server start, and optimized production builds using native ES modules.",
+      "category": "dev-tools",
+      "tags": [
+        "open-source",
+        "build-tool"
+      ],
+      "color": "#646cff",
+      "tag_colors": {
+        "open-source": "#06b6d4",
+        "build-tool": "#646cff"
+      }
+    },
+    {
+      "name": "Warp",
+      "url": "https://www.warp.dev/",
+      "description": "Modern AI-powered terminal built in Rust. Features command autocomplete, AI command search, shared runbooks, and a block-based output model.",
+      "category": "dev-tools",
+      "tags": [
+        "freemium",
+        "terminal"
+      ],
+      "color": "#01a4ff",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "terminal": "#01a4ff"
       }
     },
     {
@@ -1370,6 +1852,51 @@
       }
     },
     {
+      "name": "Revolut",
+      "url": "https://www.revolut.com/",
+      "description": "All-in-one finance app with multi-currency accounts, stock trading, crypto, and budgeting. Free tier with interbank exchange rates and instant payments.",
+      "category": "finance",
+      "tags": [
+        "freemium",
+        "banking"
+      ],
+      "color": "#0075eb",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "banking": "#0075eb"
+      }
+    },
+    {
+      "name": "Stripe",
+      "url": "https://stripe.com/",
+      "description": "Developer-first payment processing platform. Accept cards, bank transfers, and 100+ payment methods globally. Powers millions of businesses from startups to Fortune 500.",
+      "category": "finance",
+      "tags": [
+        "free",
+        "payments"
+      ],
+      "color": "#635bff",
+      "tag_colors": {
+        "free": "#22c55e",
+        "payments": "#635bff"
+      }
+    },
+    {
+      "name": "Wise",
+      "url": "https://wise.com/",
+      "description": "International money transfers at real exchange rates. Send money abroad with fees up to 8x cheaper than banks. Multi-currency accounts and debit card included.",
+      "category": "finance",
+      "tags": [
+        "free",
+        "money-transfer"
+      ],
+      "color": "#00b9ff",
+      "tag_colors": {
+        "free": "#22c55e",
+        "money-transfer": "#00b9ff"
+      }
+    },
+    {
       "name": "CurseForge",
       "url": "https://curseforge.com",
       "description": "The largest platform for game mods and addons. Covers Minecraft, WoW, Sims, and dozens of other titles.",
@@ -1415,6 +1942,36 @@
       }
     },
     {
+      "name": "GOG",
+      "url": "https://www.gog.com/",
+      "description": "DRM-free game store by CD Projekt. Buy games you truly own — no launchers, no online requirements. Huge library of classic PC games fully patched for modern systems.",
+      "category": "gaming",
+      "tags": [
+        "free",
+        "game-store"
+      ],
+      "color": "#86328a",
+      "tag_colors": {
+        "free": "#22c55e",
+        "game-store": "#86328a"
+      }
+    },
+    {
+      "name": "IGDB",
+      "url": "https://www.igdb.com/",
+      "description": "Internet Game Database — the most comprehensive game metadata database. Search any game for details, ratings, screenshots, videos, and release history.",
+      "category": "gaming",
+      "tags": [
+        "free",
+        "game-database"
+      ],
+      "color": "#9147ff",
+      "tag_colors": {
+        "free": "#22c55e",
+        "game-database": "#9147ff"
+      }
+    },
+    {
       "name": "itch.io",
       "url": "https://itch.io/",
       "description": "Open marketplace for indie games, game jams, and experimental projects. Play free games or buy and support indie developers.",
@@ -1427,6 +1984,51 @@
       "tag_colors": {
         "free": "#22c55e",
         "indie-games": "#fa5c5c"
+      }
+    },
+    {
+      "name": "itch.io Dev",
+      "url": "https://itch.io/developers",
+      "description": "The indie game developer platform. Sell, distribute, and host your games with flexible pricing, pay-what-you-want, and bundle support. Zero upfront cost.",
+      "category": "gaming",
+      "tags": [
+        "free",
+        "indie-games"
+      ],
+      "color": "#fa5c5c",
+      "tag_colors": {
+        "free": "#22c55e",
+        "indie-games": "#fa5c5c"
+      }
+    },
+    {
+      "name": "Nexus Mods",
+      "url": "https://www.nexusmods.com/",
+      "description": "The largest modding community for PC games. Thousands of mods for Skyrim, Fallout, Cyberpunk 2077, and hundreds more. Free to browse and download.",
+      "category": "gaming",
+      "tags": [
+        "freemium",
+        "mods"
+      ],
+      "color": "#d17f29",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "mods": "#d17f29"
+      }
+    },
+    {
+      "name": "ProtonDB",
+      "url": "https://www.protondb.com/",
+      "description": "Community-driven database of Linux gaming compatibility via Steam Proton. Check if your Windows games run on Linux/Steam Deck before buying.",
+      "category": "gaming",
+      "tags": [
+        "free",
+        "linux-gaming"
+      ],
+      "color": "#6a0dad",
+      "tag_colors": {
+        "free": "#22c55e",
+        "linux-gaming": "#6a0dad"
       }
     },
     {
@@ -1580,6 +2182,21 @@
       }
     },
     {
+      "name": "Cloudflare Pages",
+      "url": "https://pages.cloudflare.com/",
+      "description": "Free, fast static site and JAMstack hosting with unlimited bandwidth. Global CDN, zero-config deployments from Git, and serverless functions included.",
+      "category": "hosting",
+      "tags": [
+        "free",
+        "static-hosting"
+      ],
+      "color": "#f38020",
+      "tag_colors": {
+        "free": "#22c55e",
+        "static-hosting": "#f38020"
+      }
+    },
+    {
       "name": "DigitalOcean",
       "url": "https://cloud.digitalocean.com/",
       "description": "Developer-friendly cloud platform. Deploy Droplets, managed databases, Kubernetes clusters, and app platforms easily.",
@@ -1592,6 +2209,36 @@
       "tag_colors": {
         "paid": "#ef4444",
         "cloud-hosting": "#2980b9"
+      }
+    },
+    {
+      "name": "Fly.io",
+      "url": "https://fly.io/",
+      "description": "Deploy full-stack apps and databases globally close to users. Runs Docker containers on hardware VMs worldwide. Generous free tier and per-second billing.",
+      "category": "hosting",
+      "tags": [
+        "freemium",
+        "cloud-hosting"
+      ],
+      "color": "#7c3aed",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "cloud-hosting": "#7c3aed"
+      }
+    },
+    {
+      "name": "GitHub Pages",
+      "url": "https://pages.github.com/",
+      "description": "Free static site hosting straight from a GitHub repo. Perfect for portfolios, docs, and project sites. Supports custom domains and HTTPS out of the box.",
+      "category": "hosting",
+      "tags": [
+        "free",
+        "static-hosting"
+      ],
+      "color": "#171515",
+      "tag_colors": {
+        "free": "#22c55e",
+        "static-hosting": "#171515"
       }
     },
     {
@@ -1730,6 +2377,21 @@
       }
     },
     {
+      "name": "Supabase Storage",
+      "url": "https://supabase.com/storage",
+      "description": "S3-compatible object storage built into Supabase. Store, serve, and transform images and files at scale. Built-in CDN and row-level security policies.",
+      "category": "hosting",
+      "tags": [
+        "freemium",
+        "object-storage"
+      ],
+      "color": "#3ecf8e",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "object-storage": "#3ecf8e"
+      }
+    },
+    {
       "name": "Vultr",
       "url": "https://vultr.com",
       "description": "High-performance cloud compute, bare metal, and object storage starting at $2.50/mo. 32 global data centre locations.",
@@ -1745,6 +2407,21 @@
       }
     },
     {
+      "name": "Brilliant",
+      "url": "https://brilliant.org/",
+      "description": "Learn math, science, and CS through guided interactive problem solving. Covers calculus, probability, neural networks, and more with visual, hands-on lessons.",
+      "category": "learning",
+      "tags": [
+        "freemium",
+        "education"
+      ],
+      "color": "#ff6b38",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "education": "#ff6b38"
+      }
+    },
+    {
       "name": "Coursera",
       "url": "https://coursera.org",
       "description": "University-backed online courses and degrees from top institutions like Google, Stanford, and IBM. Audit most for free.",
@@ -1757,6 +2434,21 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "online-courses": "#a435f0"
+      }
+    },
+    {
+      "name": "CS50",
+      "url": "https://cs50.harvard.edu/",
+      "description": "Harvard's intro computer science course — free online. Covers C, Python, SQL, web dev, and AI. One of the most-watched MOOCs ever. Certificate available.",
+      "category": "learning",
+      "tags": [
+        "free",
+        "education"
+      ],
+      "color": "#a41034",
+      "tag_colors": {
+        "free": "#22c55e",
+        "education": "#a41034"
       }
     },
     {
@@ -1865,6 +2557,51 @@
       }
     },
     {
+      "name": "Roadmap.sh",
+      "url": "https://roadmap.sh/",
+      "description": "Community-driven developer roadmaps and learning guides. Find step-by-step paths for becoming a frontend, backend, DevOps, or AI engineer.",
+      "category": "learning",
+      "tags": [
+        "free",
+        "career-guide"
+      ],
+      "color": "#ef4444",
+      "tag_colors": {
+        "free": "#22c55e",
+        "career-guide": "#ef4444"
+      }
+    },
+    {
+      "name": "Scrimba",
+      "url": "https://scrimba.com/",
+      "description": "Interactive coding platform with scrimmages — code directly inside tutorial videos. Learn React, JavaScript, CSS, and more by editing the instructor's code live.",
+      "category": "learning",
+      "tags": [
+        "freemium",
+        "coding-courses"
+      ],
+      "color": "#8b2fc9",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "coding-courses": "#8b2fc9"
+      }
+    },
+    {
+      "name": "The Odin Project",
+      "url": "https://www.theodinproject.com/",
+      "description": "Free, open-source full-stack web development curriculum. A structured path from zero to hireable developer covering HTML, CSS, JavaScript, Node, and Rails.",
+      "category": "learning",
+      "tags": [
+        "free",
+        "open-source"
+      ],
+      "color": "#cc3433",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4"
+      }
+    },
+    {
       "name": "Udemy",
       "url": "https://udemy.com",
       "description": "Marketplace of 200,000+ online courses in tech, business, design, and more. Frequent deep discounts bring most courses under $15.",
@@ -1922,6 +2659,21 @@
       "tag_colors": {
         "free": "#22c55e",
         "server-hosting": "#1abc9c"
+      }
+    },
+    {
+      "name": "Chunky",
+      "url": "https://chunky-dev.github.io/docs/",
+      "description": "Path-tracing renderer for Minecraft. Create stunning, photorealistic screenshots and renders of your builds with accurate lighting, shadows, and reflections.",
+      "category": "minecraft",
+      "tags": [
+        "free",
+        "open-source"
+      ],
+      "color": "#f97316",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4"
       }
     },
     {
@@ -2000,6 +2752,21 @@
       }
     },
     {
+      "name": "mcsrvstat.us",
+      "url": "https://mcsrvstat.us/",
+      "description": "Minecraft server status checker API and website. Get player counts, MOTD, icon, and version info for any Java or Bedrock server. Free public API available.",
+      "category": "minecraft",
+      "tags": [
+        "free",
+        "server-tools"
+      ],
+      "color": "#22c55e",
+      "tag_colors": {
+        "free": "#22c55e",
+        "server-tools": "#22c55e"
+      }
+    },
+    {
       "name": "Minehut",
       "url": "https://minehut.com",
       "description": "Free Minecraft server hosting with an online community. Quick setup for Java edition servers with plugin support.",
@@ -2060,6 +2827,23 @@
       }
     },
     {
+      "name": "Purpur",
+      "url": "https://purpurmc.org/",
+      "description": "Highly configurable Minecraft server fork based on Paper. Adds hundreds of gameplay tweaks and performance improvements. Fully compatible with Bukkit/Paper plugins.",
+      "category": "minecraft",
+      "tags": [
+        "free",
+        "open-source",
+        "server-software"
+      ],
+      "color": "#b24be8",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4",
+        "server-software": "#b24be8"
+      }
+    },
+    {
       "name": "SpigotMC",
       "url": "https://spigotmc.org",
       "description": "The largest source of Minecraft server plugins. Browse, download, and publish plugins for Spigot and Bukkit servers.",
@@ -2072,6 +2856,21 @@
       "tag_colors": {
         "free": "#22c55e",
         "plugins": "#27ae60"
+      }
+    },
+    {
+      "name": "Velocity",
+      "url": "https://velocitypowered.com/",
+      "description": "The modern, high-performance Minecraft proxy server. Connects multiple backend servers under one IP with better performance and security than BungeeCord.",
+      "category": "minecraft",
+      "tags": [
+        "free",
+        "open-source"
+      ],
+      "color": "#38bdf8",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4"
       }
     },
     {
@@ -2120,6 +2919,36 @@
       }
     },
     {
+      "name": "Bandcamp",
+      "url": "https://bandcamp.com/",
+      "description": "Direct-to-fan music platform. Buy albums, tracks, and merch directly from artists. Artists keep 82-85% of revenue. Free to stream before you buy.",
+      "category": "music",
+      "tags": [
+        "free",
+        "music-platform"
+      ],
+      "color": "#1da0c3",
+      "tag_colors": {
+        "free": "#22c55e",
+        "music-platform": "#1da0c3"
+      }
+    },
+    {
+      "name": "Last.fm",
+      "url": "https://www.last.fm/",
+      "description": "Music tracking and discovery platform. Scrobble songs from Spotify, Apple Music, and more to build your listening history and discover new artists via recommendations.",
+      "category": "music",
+      "tags": [
+        "freemium",
+        "music-platform"
+      ],
+      "color": "#d51007",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "music-platform": "#d51007"
+      }
+    },
+    {
       "name": "SoundCloud",
       "url": "https://soundcloud.com",
       "description": "Upload and discover audio from independent artists worldwide. Great for finding emerging music, mixes, and podcasts.",
@@ -2146,6 +2975,21 @@
       "color": "#1db954",
       "tag_colors": {
         "freemium": "#3b82f6",
+        "music-streaming": "#1db954"
+      }
+    },
+    {
+      "name": "Tidal",
+      "url": "https://tidal.com/",
+      "description": "High-fidelity music streaming with lossless and Dolby Atmos audio. Jay-Z's platform offers MQA and 360 Reality Audio — the audiophile's streaming choice.",
+      "category": "music",
+      "tags": [
+        "subscription",
+        "music-streaming"
+      ],
+      "color": "#000000",
+      "tag_colors": {
+        "subscription": "#8b5cf6",
         "music-streaming": "#1db954"
       }
     },
@@ -2195,6 +3039,66 @@
       }
     },
     {
+      "name": "Ars Technica",
+      "url": "https://arstechnica.com/",
+      "description": "In-depth technology journalism covering science, hardware, software, policy, and culture. Known for detailed technical analysis and long-form investigative pieces.",
+      "category": "news",
+      "tags": [
+        "free",
+        "tech-news"
+      ],
+      "color": "#ff4e00",
+      "tag_colors": {
+        "free": "#22c55e",
+        "tech-news": "#ff4e00"
+      }
+    },
+    {
+      "name": "Hacker News",
+      "url": "https://news.ycombinator.com/",
+      "description": "Tech and startup news aggregator run by Y Combinator. Upvote-driven discussion on programming, AI, startups, and science. The internet's best comment section.",
+      "category": "news",
+      "tags": [
+        "free",
+        "tech-news"
+      ],
+      "color": "#ff6600",
+      "tag_colors": {
+        "free": "#22c55e",
+        "tech-news": "#ff6600"
+      }
+    },
+    {
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/",
+      "description": "Breaking news on tech startups, venture capital, and the global tech industry. Covers fundraising rounds, acquisitions, IPOs, and product launches.",
+      "category": "news",
+      "tags": [
+        "free",
+        "tech-news"
+      ],
+      "color": "#0a9e3f",
+      "tag_colors": {
+        "free": "#22c55e",
+        "tech-news": "#0a9e3f"
+      }
+    },
+    {
+      "name": "The Verge",
+      "url": "https://www.theverge.com/",
+      "description": "Technology, science, and culture news. In-depth reviews, original reporting, and video content covering consumer tech, gaming, AI, and science.",
+      "category": "news",
+      "tags": [
+        "free",
+        "tech-news"
+      ],
+      "color": "#fa4d56",
+      "tag_colors": {
+        "free": "#22c55e",
+        "tech-news": "#fa4d56"
+      }
+    },
+    {
       "name": "Asana",
       "url": "https://asana.com/",
       "description": "Project management platform for teams. Track tasks, set deadlines, assign work, and visualise progress across projects.",
@@ -2207,6 +3111,36 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "project-management": "#fc636b"
+      }
+    },
+    {
+      "name": "Cal.com",
+      "url": "https://cal.com/",
+      "description": "Open-source Calendly alternative. Scheduling infrastructure for individuals and teams. Self-host or use the cloud version. Integrates with Google, Outlook, Zoom.",
+      "category": "productivity",
+      "tags": [
+        "freemium",
+        "open-source"
+      ],
+      "color": "#111827",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "open-source": "#06b6d4"
+      }
+    },
+    {
+      "name": "Excalidraw",
+      "url": "https://excalidraw.com/",
+      "description": "Virtual whiteboard for sketching diagrams with a hand-drawn feel. Collaborative, real-time, and privacy-first. Perfect for system diagrams and brainstorming.",
+      "category": "productivity",
+      "tags": [
+        "free",
+        "open-source"
+      ],
+      "color": "#6965db",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4"
       }
     },
     {
@@ -2225,6 +3159,21 @@
       }
     },
     {
+      "name": "Obsidian",
+      "url": "https://obsidian.md/",
+      "description": "Local-first knowledge base and note-taking app built on Markdown files. Graph view, plugins, and bidirectional links make it the ultimate second brain tool.",
+      "category": "productivity",
+      "tags": [
+        "freemium",
+        "notes-wiki"
+      ],
+      "color": "#7c3aed",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "notes-wiki": "#7c3aed"
+      }
+    },
+    {
       "name": "Slack",
       "url": "https://slack.com/",
       "description": "Channel-based team messaging with integrations for hundreds of tools. Organise conversations, share files, and connect your workflow.",
@@ -2240,6 +3189,21 @@
       }
     },
     {
+      "name": "Todoist",
+      "url": "https://todoist.com/",
+      "description": "Clean, powerful task manager available on every platform. Natural language input, recurring tasks, project boards, and productivity tracking built in.",
+      "category": "productivity",
+      "tags": [
+        "freemium",
+        "task-manager"
+      ],
+      "color": "#db4035",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "task-manager": "#db4035"
+      }
+    },
+    {
       "name": "Trello",
       "url": "https://trello.com",
       "description": "Visual project management with Kanban boards. Drag cards through columns to track tasks and workflows at a glance.",
@@ -2252,6 +3216,21 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "kanban": "#0079bf"
+      }
+    },
+    {
+      "name": "1Password",
+      "url": "https://1password.com/",
+      "description": "Premium password manager trusted by millions. Stores passwords, passkeys, secure notes, and 2FA codes across all devices with end-to-end encryption.",
+      "category": "security",
+      "tags": [
+        "paid",
+        "password-manager"
+      ],
+      "color": "#1a8cff",
+      "tag_colors": {
+        "paid": "#ef4444",
+        "password-manager": "#1a8cff"
       }
     },
     {
@@ -2285,6 +3264,21 @@
       }
     },
     {
+      "name": "Cloudflare WARP",
+      "url": "https://1.1.1.1/",
+      "description": "Free VPN and DNS resolver from Cloudflare. WARP replaces your ISP's DNS with 1.1.1.1 and encrypts traffic for faster, safer browsing. Completely free.",
+      "category": "security",
+      "tags": [
+        "free",
+        "vpn"
+      ],
+      "color": "#f38020",
+      "tag_colors": {
+        "free": "#22c55e",
+        "vpn": "#f38020"
+      }
+    },
+    {
       "name": "Have I Been Pwned",
       "url": "https://haveibeenpwned.com/",
       "description": "Check if your email or phone number has appeared in a known data breach. Covers billions of leaked credentials.",
@@ -2297,6 +3291,36 @@
       "tag_colors": {
         "free": "#22c55e",
         "breach-checker": "#ff1a1a"
+      }
+    },
+    {
+      "name": "KeyBase",
+      "url": "https://keybase.io/",
+      "description": "End-to-end encrypted messaging, file sharing, and crypto wallet. Verify identities across social platforms and communicate securely with teams.",
+      "category": "security",
+      "tags": [
+        "free",
+        "encrypted-messaging"
+      ],
+      "color": "#ff6f21",
+      "tag_colors": {
+        "free": "#22c55e",
+        "encrypted-messaging": "#ff6f21"
+      }
+    },
+    {
+      "name": "Mullvad VPN",
+      "url": "https://mullvad.net/",
+      "description": "Privacy-first VPN that requires no account or personal info — pay anonymously. Audited, open-source clients, and a strict no-logs policy.",
+      "category": "security",
+      "tags": [
+        "paid",
+        "vpn"
+      ],
+      "color": "#ffbd36",
+      "tag_colors": {
+        "paid": "#ef4444",
+        "vpn": "#ffbd36"
       }
     },
     {
@@ -2360,6 +3384,21 @@
       }
     },
     {
+      "name": "CamelCamelCamel",
+      "url": "https://camelcamelcamel.com/",
+      "description": "Amazon price history tracker. See how a product's price has changed over time before buying. Set price alerts to get notified when items drop to your target.",
+      "category": "shopping",
+      "tags": [
+        "free",
+        "price-tracker"
+      ],
+      "color": "#fc8f10",
+      "tag_colors": {
+        "free": "#22c55e",
+        "price-tracker": "#fc8f10"
+      }
+    },
+    {
       "name": "eBay",
       "url": "https://ebay.com",
       "description": "Global online marketplace to buy and sell new, used, and vintage items through auction or fixed-price listings.",
@@ -2390,6 +3429,21 @@
       }
     },
     {
+      "name": "Honey",
+      "url": "https://www.joinhoney.com/",
+      "description": "Browser extension that automatically finds and applies coupon codes at checkout. Backed by PayPal. Tracks price history and alerts you to drops.",
+      "category": "shopping",
+      "tags": [
+        "free",
+        "deal-finder"
+      ],
+      "color": "#ff8c00",
+      "tag_colors": {
+        "free": "#22c55e",
+        "deal-finder": "#ff8c00"
+      }
+    },
+    {
       "name": "Product Hunt",
       "url": "https://www.producthunt.com/",
       "description": "Daily leaderboard of the best new tech products, apps, and tools. Upvote, discuss, and discover what's launching in the startup world.",
@@ -2402,6 +3456,21 @@
       "tag_colors": {
         "free": "#22c55e",
         "product-discovery": "#da552f"
+      }
+    },
+    {
+      "name": "Skinport",
+      "url": "https://skinport.com/",
+      "description": "Marketplace for buying and selling CS2 and other game skins at below-market prices. Secure escrow system, low fees, and instant payouts.",
+      "category": "shopping",
+      "tags": [
+        "free",
+        "game-trading"
+      ],
+      "color": "#e91e63",
+      "tag_colors": {
+        "free": "#22c55e",
+        "game-trading": "#e91e63"
       }
     },
     {
@@ -2432,6 +3501,36 @@
       "tag_colors": {
         "free": "#22c55e",
         "budget-shopping": "#ff6161"
+      }
+    },
+    {
+      "name": "BeReal",
+      "url": "https://bereal.com/",
+      "description": "Social app that randomly prompts you to take a dual-camera photo once a day. See your friends unfiltered and in real time — no edits, no filters.",
+      "category": "social",
+      "tags": [
+        "free",
+        "photo-sharing"
+      ],
+      "color": "#000000",
+      "tag_colors": {
+        "free": "#22c55e",
+        "photo-sharing": "#c13584"
+      }
+    },
+    {
+      "name": "Bluesky",
+      "url": "https://bsky.app/",
+      "description": "Decentralized social network built on the AT Protocol. An open, Twitter-like platform with algorithmic choice, custom feeds, and no algorithmic timeline lock-in.",
+      "category": "social",
+      "tags": [
+        "free",
+        "social-network"
+      ],
+      "color": "#0085ff",
+      "tag_colors": {
+        "free": "#22c55e",
+        "social-network": "#0085ff"
       }
     },
     {
@@ -2492,6 +3591,23 @@
       "tag_colors": {
         "freemium": "#3b82f6",
         "professional-network": "#0077b5"
+      }
+    },
+    {
+      "name": "Mastodon",
+      "url": "https://mastodon.social/",
+      "description": "Open-source, federated social network. No ads, no algorithm, no central server. Join any of thousands of communities or run your own instance.",
+      "category": "social",
+      "tags": [
+        "free",
+        "open-source",
+        "social-network"
+      ],
+      "color": "#6364ff",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4",
+        "social-network": "#6364ff"
       }
     },
     {
@@ -2645,6 +3761,21 @@
       }
     },
     {
+      "name": "Backblaze B2",
+      "url": "https://www.backblaze.com/cloud-storage",
+      "description": "S3-compatible cloud storage at a fraction of AWS costs. $6/TB/month with free egress to Cloudflare. Ideal for backups, media, and app storage.",
+      "category": "storage",
+      "tags": [
+        "paid",
+        "object-storage"
+      ],
+      "color": "#d00000",
+      "tag_colors": {
+        "paid": "#ef4444",
+        "object-storage": "#d00000"
+      }
+    },
+    {
       "name": "Dropbox",
       "url": "https://www.dropbox.com/",
       "description": "Cloud storage with automatic device sync, shared folders, and collaboration tools for teams and individuals.",
@@ -2735,6 +3866,36 @@
       }
     },
     {
+      "name": "Storj",
+      "url": "https://www.storj.io/",
+      "description": "Decentralized, S3-compatible cloud storage. Files are encrypted client-side and distributed across a global network of nodes. 25GB free tier.",
+      "category": "storage",
+      "tags": [
+        "freemium",
+        "object-storage"
+      ],
+      "color": "#2683ff",
+      "tag_colors": {
+        "freemium": "#3b82f6",
+        "object-storage": "#2683ff"
+      }
+    },
+    {
+      "name": "Apple TV+",
+      "url": "https://tv.apple.com/",
+      "description": "Apple's premium streaming service with award-winning originals like Severance, Ted Lasso, The Morning Show, and Slow Horses. No library filler — just originals.",
+      "category": "streaming",
+      "tags": [
+        "subscription",
+        "on-demand"
+      ],
+      "color": "#000000",
+      "tag_colors": {
+        "subscription": "#8b5cf6",
+        "on-demand": "#333333"
+      }
+    },
+    {
       "name": "Crunchyroll",
       "url": "https://crunchyroll.com",
       "description": "The biggest dedicated anime streaming service. Watch simulcasts hours after Japan, plus classic series and manga.",
@@ -2765,6 +3926,23 @@
       }
     },
     {
+      "name": "Jellyfin",
+      "url": "https://jellyfin.org/",
+      "description": "Free, open-source media server. Self-host your movie, TV, music, and photo library with a Netflix-like interface. No subscriptions, no tracking.",
+      "category": "streaming",
+      "tags": [
+        "free",
+        "open-source",
+        "self-hosted"
+      ],
+      "color": "#00a4dc",
+      "tag_colors": {
+        "free": "#22c55e",
+        "open-source": "#06b6d4",
+        "self-hosted": "#f97316"
+      }
+    },
+    {
       "name": "Kick",
       "url": "https://kick.com",
       "description": "Streaming platform with creator-friendly terms and a 95/5 revenue split. Growing community for gaming and IRL streams.",
@@ -2780,6 +3958,36 @@
       }
     },
     {
+      "name": "Max",
+      "url": "https://www.max.com/",
+      "description": "HBO Max rebranded streaming platform. Home to HBO originals, Warner Bros films, DC content, and Max Originals. Premium prestige TV in one place.",
+      "category": "streaming",
+      "tags": [
+        "subscription",
+        "on-demand"
+      ],
+      "color": "#002be7",
+      "tag_colors": {
+        "subscription": "#8b5cf6",
+        "on-demand": "#002be7"
+      }
+    },
+    {
+      "name": "Mubi",
+      "url": "https://mubi.com/",
+      "description": "Curated arthouse and independent cinema streaming. A hand-picked rotating selection of acclaimed films — perfect for cinephiles tired of algorithm-driven platforms.",
+      "category": "streaming",
+      "tags": [
+        "subscription",
+        "on-demand"
+      ],
+      "color": "#000000",
+      "tag_colors": {
+        "subscription": "#8b5cf6",
+        "on-demand": "#404040"
+      }
+    },
+    {
       "name": "Netflix",
       "url": "https://netflix.com",
       "description": "On-demand streaming service for movies, series, documentaries, and Netflix Originals. No ads on any plan.",
@@ -2792,6 +4000,21 @@
       "tag_colors": {
         "subscription": "#8b5cf6",
         "on-demand": "#e50914"
+      }
+    },
+    {
+      "name": "Paramount+",
+      "url": "https://www.paramountplus.com/",
+      "description": "Streaming platform with CBS, MTV, Nickelodeon, and Paramount films. Home to Star Trek, Yellowstone, South Park, and live sports including NFL.",
+      "category": "streaming",
+      "tags": [
+        "subscription",
+        "on-demand"
+      ],
+      "color": "#0064ff",
+      "tag_colors": {
+        "subscription": "#8b5cf6",
+        "on-demand": "#0064ff"
       }
     },
     {

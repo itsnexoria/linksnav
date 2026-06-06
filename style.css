@@ -239,6 +239,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
+  align-items: stretch;
 }
 
 /* ---- SITE CARD ---- */
@@ -247,7 +248,7 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 18px 18px 14px;
+  padding: 18px 18px 42px;
   cursor: pointer;
   transition: transform 0.22s cubic-bezier(.25,.46,.45,.94),
               border-color 0.22s,
@@ -257,6 +258,8 @@ body {
   overflow: hidden;
   opacity: 0;
   animation: fadeUp 0.4s ease forwards;
+  flex: 1;
+  height: 100%;
 }
 .card::before {
   content: '';
@@ -315,6 +318,10 @@ body {
   color: var(--muted);
   line-height: 1.55;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-footer {
@@ -608,6 +615,9 @@ body {
 /* Card wrapper — needed to position the fav button */
 .card-wrap {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card-wrap--fav .card {
@@ -615,45 +625,75 @@ body {
   box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.15), 0 4px 24px rgba(0,0,0,0.35);
 }
 
-/* Favorite star button */
+/* Favorite star button — sleek pill at bottom-right of card */
 .fav-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  bottom: 12px;
+  right: 12px;
   z-index: 10;
-  width: 28px;
-  height: 28px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 50%;
-  font-size: 0.8rem;
+  gap: 4px;
+  padding: 4px 10px 4px 8px;
+  background: rgba(15, 15, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.35);
-  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
-  backdrop-filter: blur(4px);
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.18s ease;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fav-btn::before {
+  content: '☆';
+  font-size: 0.8rem;
   line-height: 1;
-  padding: 0;
+}
+
+/* Hide the inline text, show via ::after */
+.fav-btn {
+  font-size: 0 !important;
+  letter-spacing: 0;
+}
+
+.card-wrap:hover .fav-btn {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .fav-btn:hover {
-  background: rgba(250, 204, 21, 0.15);
-  border-color: rgba(250, 204, 21, 0.45);
+  background: rgba(250, 204, 21, 0.18);
+  border-color: rgba(250, 204, 21, 0.5);
   color: #facc15;
-  transform: scale(1.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2);
 }
 
 .fav-btn--active {
-  background: rgba(250, 204, 21, 0.18);
-  border-color: rgba(250, 204, 21, 0.5);
+  background: rgba(250, 204, 21, 0.15);
+  border-color: rgba(250, 204, 21, 0.45);
+  color: #facc15;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fav-btn--active::before {
+  content: '★';
   color: #facc15;
 }
 
 .fav-btn--active:hover {
-  background: rgba(250, 204, 21, 0.08);
-  color: rgba(250, 204, 21, 0.5);
+  background: rgba(250, 204, 21, 0.05);
+  border-color: rgba(250, 204, 21, 0.25);
+  color: rgba(250, 204, 21, 0.6);
+  transform: none;
+  box-shadow: none;
 }
 
 /* Pinned badge on cards in "All" view */
@@ -738,14 +778,23 @@ body {
 /* Favorites category button */
 .cat-btn-fav {
   color: #facc15 !important;
-  border-color: rgba(250, 204, 21, 0.25) !important;
+  border-color: rgba(250, 204, 21, 0.3) !important;
+  background: rgba(250, 204, 21, 0.07) !important;
+  font-weight: 600;
 }
 
-.cat-btn-fav:hover,
-.cat-btn-fav.active {
-  background: rgba(250, 204, 21, 0.12) !important;
-  border-color: rgba(250, 204, 21, 0.5) !important;
+.cat-btn-fav:hover {
+  background: rgba(250, 204, 21, 0.15) !important;
+  border-color: rgba(250, 204, 21, 0.55) !important;
   color: #facc15 !important;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.15);
+}
+
+.cat-btn-fav.active {
+  background: rgba(250, 204, 21, 0.2) !important;
+  border-color: #facc15 !important;
+  color: #facc15 !important;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.25);
 }
 
 /* ================================================================
@@ -778,6 +827,7 @@ body {
 .rest-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  gap: 14px;
+  align-items: stretch;
 }
 
