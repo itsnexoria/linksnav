@@ -1,32 +1,74 @@
 [
   {
     "name": "IMDb",
-    "url": "https://imdb.com",
-    "description": "The internet's go-to database for movies, TV shows, actors, and ratings. Check scores, read reviews, and explore filmographies.",
+    "url": "https://www.imdb.com/",
+    "description": "The world's most authoritative source for movie, TV, and celebrity info. Ratings, trailers, cast lists, and box office data for millions of titles.",
     "category": "movies",
-    "tags": [
-      "free",
-      "movie-database"
-    ],
+    "tags": ["free", "movie-database"],
     "color": "#F5C518",
-    "tag_colors": {
-      "free": "#22c55e",
-      "movie-database": "#01b4e4"
-    }
+    "tag_colors": { "free": "#22c55e", "movie-database": "#f5c518" }
   },
   {
     "name": "Letterboxd",
-    "url": "https://letterboxd.com",
-    "description": "Social platform for film lovers. Log films you've watched, rate them, write reviews, and follow friends' watchlists.",
+    "url": "https://letterboxd.com/",
+    "description": "Social film diary and review platform. Log every movie you watch, write reviews, make lists, and follow friends' tastes.",
     "category": "movies",
-    "tags": [
-      "freemium",
-      "film-logging"
-    ],
-    "color": "#00E054",
-    "tag_colors": {
-      "freemium": "#3b82f6",
-      "film-logging": "#00e054"
-    }
+    "tags": ["freemium", "film-logging"],
+    "color": "#00e054",
+    "tag_colors": { "freemium": "#3b82f6", "film-logging": "#00e054" }
+  },
+  {
+    "name": "JustWatch",
+    "url": "https://www.justwatch.com/",
+    "description": "Streaming guide that tells you exactly where to watch any movie or show — Netflix, Prime, Disney+, and more — all in one search.",
+    "category": "movies",
+    "tags": ["free", "streaming-guide"],
+    "color": "#ff8000",
+    "tag_colors": { "free": "#22c55e", "streaming-guide": "#ff8000" }
+  },
+  {
+    "name": "Rotten Tomatoes",
+    "url": "https://www.rottentomatoes.com/",
+    "description": "Aggregated critic and audience scores for movies and TV. The Tomatometer is the industry-standard freshness rating.",
+    "category": "movies",
+    "tags": ["free", "movie-reviews"],
+    "color": "#fa320a",
+    "tag_colors": { "free": "#22c55e", "movie-reviews": "#fa320a" }
+  },
+  {
+    "name": "Metacritic",
+    "url": "https://www.metacritic.com/",
+    "description": "Weighted Metascore aggregator for movies, TV, games, and music. Combines top critic reviews into a single authoritative score.",
+    "category": "movies",
+    "tags": ["free", "movie-reviews"],
+    "color": "#6bc400",
+    "tag_colors": { "free": "#22c55e", "movie-reviews": "#6bc400" }
+  },
+  {
+    "name": "Trakt",
+    "url": "https://trakt.tv/",
+    "description": "Automatically track every movie and TV episode you watch. Syncs with Plex, Kodi, and Emby. Great for stats and recommendations.",
+    "category": "movies",
+    "tags": ["freemium", "film-logging"],
+    "color": "#ed1c24",
+    "tag_colors": { "freemium": "#3b82f6", "film-logging": "#ed1c24" }
+  },
+  {
+    "name": "FilmFreeway",
+    "url": "https://filmfreeway.com/",
+    "description": "The leading platform for film festival submissions worldwide. Browse thousands of festivals and submit your short or feature film.",
+    "category": "movies",
+    "tags": ["freemium", "film-industry"],
+    "color": "#1590d4",
+    "tag_colors": { "freemium": "#3b82f6", "film-industry": "#1590d4" }
+  },
+  {
+    "name": "The Movie DB",
+    "url": "https://www.themoviedb.org/",
+    "description": "Community-built movie and TV database. Free API access for developers, extensive metadata, and beautiful poster artwork collections.",
+    "category": "movies",
+    "tags": ["free", "movie-database"],
+    "color": "#0d253f",
+    "tag_colors": { "free": "#22c55e", "movie-database": "#01b4e4" }
   }
 ]

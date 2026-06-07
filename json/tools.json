@@ -1,62 +1,110 @@
 [
   {
-    "name": "Dyno Bot",
-    "url": "https://dyno.gg/account",
-    "description": "Feature-rich Discord bot for moderation, auto-roles, announcements, and server management with a web dashboard.",
+    "name": "Regex101",
+    "url": "https://regex101.com/",
+    "description": "The best online regex tester and debugger. Supports PCRE, JavaScript, Python, and Go. Real-time match highlighting with detailed explanations.",
     "category": "tools",
-    "tags": [
-      "freemium",
-      "discord-bot"
-    ],
-    "color": "#43b581",
-    "tag_colors": {
-      "freemium": "#3b82f6",
-      "discord-bot": "#5865f2"
-    }
+    "tags": ["free", "dev-tool"],
+    "color": "#3a95cc",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#3a95cc" }
   },
   {
-    "name": "Hoe Panel",
-    "url": "https://ptero.heo-systems.com/",
-    "description": "Self-hosted game server management panel. Start, stop, reinstall, and configure your game servers through a clean web UI.",
+    "name": "Squoosh",
+    "url": "https://squoosh.app/",
+    "description": "Google's browser-based image compression tool. Resize and convert images to WebP, AVIF, JPEG XL, and more with side-by-side comparison.",
     "category": "tools",
-    "tags": [
-      "self-hosted",
-      "game-panel"
-    ],
-    "color": "#00b4d8",
-    "tag_colors": {
-      "self-hosted": "#f97316",
-      "game-panel": "#00b4d8"
-    }
+    "tags": ["free", "image-tool"],
+    "color": "#ff6c5c",
+    "tag_colors": { "free": "#22c55e", "image-tool": "#ff6c5c" }
   },
   {
-    "name": "Maki Bot",
-    "url": "https://maki.gg/en-GB/dashboard",
-    "description": "All-in-one Discord bot with moderation, XP levelling, welcome messages, reaction roles, and custom commands. Managed via web dashboard.",
+    "name": "CyberChef",
+    "url": "https://gchq.github.io/CyberChef/",
+    "description": "GCHQ's web app for encoding, decoding, encryption, and data analysis. Chain hundreds of operations like a recipe — a hacker's Swiss Army knife.",
     "category": "tools",
-    "tags": [
-      "freemium",
-      "discord-bot"
-    ],
-    "color": "#ff6b9d",
-    "tag_colors": {
-      "freemium": "#3b82f6",
-      "discord-bot": "#5865f2"
-    }
+    "tags": ["free", "open-source"],
+    "color": "#11a683",
+    "tag_colors": { "free": "#22c55e", "open-source": "#34d399" }
   },
   {
-    "name": "TicketTool",
-    "url": "https://tickettool.xyz/dashboard/",
-    "description": "Discord ticket bot for running support queues on your server. Set up ticket channels, auto-responses, and claim systems from the dashboard.",
+    "name": "Excalidraw",
+    "url": "https://excalidraw.com/",
+    "description": "Virtual whiteboard for sketching hand-drawn-style diagrams. Perfect for wireframes, architecture diagrams, and quick brainstorming sessions.",
     "category": "tools",
-    "tags": [
-      "freemium",
-      "discord-bot"
-    ],
-    "color": "#7289da",
-    "tag_colors": {
-      "freemium": "#3b82f6",
-      "discord-bot": "#5865f2"
-    }
+    "tags": ["free", "open-source"],
+    "color": "#6965db",
+    "tag_colors": { "free": "#22c55e", "open-source": "#34d399" }
+  },
+  {
+    "name": "TinyWow",
+    "url": "https://tinywow.com/",
+    "description": "Free online toolkit with 100+ tools for PDFs, images, videos, and text. Convert, compress, merge, edit — no signup required.",
+    "category": "tools",
+    "tags": ["free", "file-converter"],
+    "color": "#4b6cf7",
+    "tag_colors": { "free": "#22c55e", "file-converter": "#4b6cf7" }
+  },
+  {
+    "name": "JSONFormatter",
+    "url": "https://jsonformatter.curiousconcept.com/",
+    "description": "Instantly format, validate, and minify JSON. Supports multiple JSON specs and highlights syntax errors with helpful messages.",
+    "category": "tools",
+    "tags": ["free", "dev-tool"],
+    "color": "#f5a623",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#f5a623" }
+  },
+  {
+    "name": "Carbon",
+    "url": "https://carbon.now.sh/",
+    "description": "Create gorgeous images of your source code. Supports 100+ languages, tons of themes, and custom backgrounds. Perfect for social sharing.",
+    "category": "tools",
+    "tags": ["free", "dev-tool"],
+    "color": "#1f1f1f",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#ffffff" }
+  },
+  {
+    "name": "Bundlephobia",
+    "url": "https://bundlephobia.com/",
+    "description": "Find the cost of adding a npm package to your bundle. Shows minified + gzipped size, download time, and composition breakdown.",
+    "category": "tools",
+    "tags": ["free", "dev-tool"],
+    "color": "#c2185b",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#c2185b" }
+  },
+  {
+    "name": "Crontab Guru",
+    "url": "https://crontab.guru/",
+    "description": "The quickest way to decode or build a cron schedule expression. Paste any cron string and get a plain-English description instantly.",
+    "category": "tools",
+    "tags": ["free", "dev-tool"],
+    "color": "#43b883",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#43b883" }
+  },
+  {
+    "name": "SmallDev.tools",
+    "url": "https://smalldev.tools/",
+    "description": "Handy collection of free developer mini-tools: encoders, formatters, generators, testers. Fast and ad-minimal.",
+    "category": "tools",
+    "tags": ["free", "dev-tool"],
+    "color": "#7c3aed",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#7c3aed" }
+  },
+  {
+    "name": "Epoch Converter",
+    "url": "https://www.epochconverter.com/",
+    "description": "Convert Unix timestamps to human-readable dates and vice versa. Also handles batch conversion, relative time, and timezone offsets.",
+    "category": "tools",
+    "tags": ["free", "dev-tool"],
+    "color": "#0ea5e9",
+    "tag_colors": { "free": "#22c55e", "dev-tool": "#0ea5e9" }
+  },
+  {
+    "name": "ScreenToGif",
+    "url": "https://www.screentogif.com/",
+    "description": "Windows tool to record your screen, webcam, or sketchboard and export as GIF, MP4, or WebM. Free and open-source.",
+    "category": "tools",
+    "tags": ["free", "open-source"],
+    "color": "#ff6c00",
+    "tag_colors": { "free": "#22c55e", "open-source": "#34d399" }
   }
 ]

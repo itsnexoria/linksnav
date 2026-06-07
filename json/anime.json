@@ -15,116 +15,6 @@
     }
   },
   {
-    "name": "Anime-Planet",
-    "url": "https://www.anime-planet.com/",
-    "description": "Legal anime streaming through Crunchyroll partnership offering thousands of episodes. Also functions as anime discovery platform with user reviews, recommendations, watchlists, and community features.",
-    "category": "anime",
-    "tags": [
-      "legal",
-      "free",
-      "ad-supported",
-      "community"
-    ],
-    "color": "#FF4500",
-    "tag_colors": {
-      "legal": "#22c55e",
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "community": "#e91e63"
-    }
-  },
-  {
-    "name": "AnimeEZ",
-    "url": "https://animeez.live/",
-    "description": "Completely ad-free anime streaming website built with HTML. Features no pop-ups, no ads, and straightforward access to anime content.",
-    "category": "anime",
-    "tags": [
-      "free",
-      "no-ads",
-      "simple",
-      "web-app"
-    ],
-    "color": "#2ECC71",
-    "tag_colors": {
-      "free": "#22c55e",
-      "no-ads": "#10b981",
-      "simple": "#95a5a6",
-      "web-app": "#6366f1"
-    }
-  },
-  {
-    "name": "Animeflv",
-    "url": "https://animeflv.net/",
-    "description": "Popular Spanish-language anime streaming platform with consistent performance across regions. Features extensive library of subbed and dubbed content with regular updates.",
-    "category": "anime",
-    "tags": [
-      "free",
-      "ad-supported",
-      "spanish",
-      "sub-dub"
-    ],
-    "color": "#F39C12",
-    "tag_colors": {
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "spanish": "#aa151b",
-      "sub-dub": "#f59e0b"
-    }
-  },
-  {
-    "name": "AnimeFreak",
-    "url": "https://animefreak.tv/",
-    "description": "Long-standing free anime platform with vast library of classic and ongoing series. Features organized categories and reliable backup servers for consistent access.",
-    "category": "anime",
-    "tags": [
-      "free",
-      "ad-supported",
-      "backup-servers",
-      "classics"
-    ],
-    "color": "#E67E22",
-    "tag_colors": {
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "backup-servers": "#3498db",
-      "classics": "#c0392b"
-    }
-  },
-  {
-    "name": "AnimeHeaven",
-    "url": "https://animeheaven.me/",
-    "description": "Watch anime online for free with a large library of subbed and dubbed titles. No account required.",
-    "category": "anime",
-    "tags": [
-      "free",
-      "anime-streaming"
-    ],
-    "color": "#e94560",
-    "tag_colors": {
-      "free": "#22c55e",
-      "anime-streaming": "#a855f7"
-    }
-  },
-  {
-    "name": "AnimePahe",
-    "url": "https://animepahe.org/",
-    "description": "Popular anime streaming platform known for ad-light experience and direct download options. Features subbed content with fast loading and clean interface for minimalist users.",
-    "category": "anime",
-    "tags": [
-      "free",
-      "ad-light",
-      "downloads",
-      "subbed"
-    ],
-    "color": "#8E44AD",
-    "tag_colors": {
-      "free": "#22c55e",
-      "ad-light": "#f39c12",
-      "downloads": "#0ea5e9",
-      "subbed": "#f59e0b"
-    }
-  },
-  {
     "name": "Animetsu",
     "url": "https://animetsu.net/",
     "description": "Free anime streaming with a clean interface. Browse a wide range of subbed and dubbed series updated regularly.",
@@ -294,25 +184,6 @@
     }
   },
   {
-    "name": "Plex",
-    "url": "https://watch.plex.tv/",
-    "description": "Free ad-supported streaming platform with a growing anime selection. Features on-demand content and live TV channels, available on all major devices.",
-    "category": "anime",
-    "tags": [
-      "legal",
-      "free",
-      "ad-supported",
-      "web-app"
-    ],
-    "color": "#E5A00D",
-    "tag_colors": {
-      "legal": "#22c55e",
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "web-app": "#6366f1"
-    }
-  },
-  {
     "name": "Pluto TV",
     "url": "https://pluto.tv/",
     "description": "Free live and on-demand anime streaming with 24/7 anime channels. Features 800+ hours of content including Naruto, Bleach, One Piece, and an 'Anime x HIDIVE' co-branded channel.",
@@ -348,63 +219,6 @@
       "free": "#22c55e",
       "ad-supported": "#f59e0b",
       "retro": "#d97706"
-    }
-  },
-  {
-    "name": "Sling TV Freestream",
-    "url": "https://www.sling.com/freestream",
-    "description": "Free platform combining multiple free streaming channels including RetroCrush. Features classic anime, sneak peeks from Cartoon Network and Adult Swim, including Uzumaki and Attack on Titan content.",
-    "category": "anime",
-    "tags": [
-      "legal",
-      "free",
-      "ad-supported",
-      "live-tv"
-    ],
-    "color": "#00B4D8",
-    "tag_colors": {
-      "legal": "#22c55e",
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "live-tv": "#0061ff"
-    }
-  },
-  {
-    "name": "Tubi TV",
-    "url": "https://tubitv.com/",
-    "description": "100% free, legal anime streaming with a huge library of classics, cult favorites, and niche titles. Features a solid anime section including Naruto, Pok\u00e9mon, Sailor Moon, Toradora!, and films by Satoshi Kon and Naoko Yamada.",
-    "category": "anime",
-    "tags": [
-      "legal",
-      "free",
-      "ad-supported",
-      "no-signup"
-    ],
-    "color": "#EE2B5A",
-    "tag_colors": {
-      "legal": "#22c55e",
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "no-signup": "#14b8a6"
-    }
-  },
-  {
-    "name": "YouTube",
-    "url": "https://www.youtube.com/",
-    "description": "Official anime uploads from distributors like Viz Media, Muse Asia, and Ani-One Asia. Free access to full episodes and movies including InuYasha, Naruto, and Sailor Moon with official subtitles.",
-    "category": "anime",
-    "tags": [
-      "legal",
-      "free",
-      "ad-supported",
-      "official"
-    ],
-    "color": "#FF0000",
-    "tag_colors": {
-      "legal": "#22c55e",
-      "free": "#22c55e",
-      "ad-supported": "#f59e0b",
-      "official": "#ff0000"
     }
   }
 ]

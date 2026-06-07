@@ -1,62 +1,74 @@
 [
   {
-    "name": "Ars Technica",
-    "url": "https://arstechnica.com/",
-    "description": "In-depth technology journalism covering science, hardware, software, policy, and culture. Known for detailed technical analysis and long-form investigative pieces.",
-    "category": "news",
-    "tags": [
-      "free",
-      "tech-news"
-    ],
-    "color": "#ff4e00",
-    "tag_colors": {
-      "free": "#22c55e",
-      "tech-news": "#ff4e00"
-    }
-  },
-  {
     "name": "Hacker News",
     "url": "https://news.ycombinator.com/",
-    "description": "Tech and startup news aggregator run by Y Combinator. Upvote-driven discussion on programming, AI, startups, and science. The internet's best comment section.",
+    "description": "Y Combinator's social news site for tech, startups, and science. The frontpage of the internet for developers and founders.",
     "category": "news",
-    "tags": [
-      "free",
-      "tech-news"
-    ],
+    "tags": ["free", "tech-news"],
     "color": "#ff6600",
-    "tag_colors": {
-      "free": "#22c55e",
-      "tech-news": "#ff6600"
-    }
-  },
-  {
-    "name": "TechCrunch",
-    "url": "https://techcrunch.com/",
-    "description": "Breaking news on tech startups, venture capital, and the global tech industry. Covers fundraising rounds, acquisitions, IPOs, and product launches.",
-    "category": "news",
-    "tags": [
-      "free",
-      "tech-news"
-    ],
-    "color": "#0a9e3f",
-    "tag_colors": {
-      "free": "#22c55e",
-      "tech-news": "#0a9e3f"
-    }
+    "tag_colors": { "free": "#22c55e", "tech-news": "#ff6600" }
   },
   {
     "name": "The Verge",
     "url": "https://www.theverge.com/",
-    "description": "Technology, science, and culture news. In-depth reviews, original reporting, and video content covering consumer tech, gaming, AI, and science.",
+    "description": "Top-tier technology and culture journalism. Covers gadgets, AI, science, and the intersection of tech and everyday life.",
     "category": "news",
-    "tags": [
-      "free",
-      "tech-news"
-    ],
-    "color": "#fa4d56",
-    "tag_colors": {
-      "free": "#22c55e",
-      "tech-news": "#fa4d56"
-    }
+    "tags": ["free", "tech-news"],
+    "color": "#e5325f",
+    "tag_colors": { "free": "#22c55e", "tech-news": "#e5325f" }
+  },
+  {
+    "name": "BBC News",
+    "url": "https://www.bbc.com/news",
+    "description": "Trusted global news from the UK's public broadcaster. Comprehensive world coverage spanning politics, business, science, and culture.",
+    "category": "news",
+    "tags": ["free", "world-news"],
+    "color": "#bb1919",
+    "tag_colors": { "free": "#22c55e", "world-news": "#bb1919" }
+  },
+  {
+    "name": "Reuters",
+    "url": "https://www.reuters.com/",
+    "description": "Straight-to-the-point global news wire. Reuters is a primary source for financial markets, geopolitics, and breaking world news.",
+    "category": "news",
+    "tags": ["free", "world-news"],
+    "color": "#ff8000",
+    "tag_colors": { "free": "#22c55e", "world-news": "#ff8000" }
+  },
+  {
+    "name": "TechCrunch",
+    "url": "https://techcrunch.com/",
+    "description": "Breaking news and analysis on startups, venture capital, and the tech industry. Essential reading for the startup ecosystem.",
+    "category": "news",
+    "tags": ["free", "startup-news"],
+    "color": "#0a8a4b",
+    "tag_colors": { "free": "#22c55e", "startup-news": "#0a8a4b" }
+  },
+  {
+    "name": "Ars Technica",
+    "url": "https://arstechnica.com/",
+    "description": "In-depth technology journalism with rigorous editorial standards. Long-form features on hardware, software, science, and policy.",
+    "category": "news",
+    "tags": ["free", "tech-news"],
+    "color": "#e84c00",
+    "tag_colors": { "free": "#22c55e", "tech-news": "#e84c00" }
+  },
+  {
+    "name": "Al Jazeera",
+    "url": "https://www.aljazeera.com/",
+    "description": "Qatar-based international news network offering underrepresented perspectives on global events, especially the Middle East and Africa.",
+    "category": "news",
+    "tags": ["free", "world-news"],
+    "color": "#f4ba02",
+    "tag_colors": { "free": "#22c55e", "world-news": "#f4ba02" }
+  },
+  {
+    "name": "Feedly",
+    "url": "https://feedly.com/",
+    "description": "Smart RSS reader that aggregates news from any website or blog. Use AI to filter out noise and surface what actually matters to you.",
+    "category": "news",
+    "tags": ["freemium", "rss-reader"],
+    "color": "#2bb24c",
+    "tag_colors": { "freemium": "#3b82f6", "rss-reader": "#2bb24c" }
   }
 ]

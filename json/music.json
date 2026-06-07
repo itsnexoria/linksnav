@@ -103,5 +103,50 @@
       "freemium": "#3b82f6",
       "music-streaming": "#1db954"
     }
+  },
+  {
+    "name": "Spotify",
+    "url": "https://www.spotify.com/",
+    "description": "Stream 100M+ songs, podcasts, and audiobooks. Discover new music with personalized playlists like Discover Weekly. Free with ads.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "music-streaming"
+    ],
+    "color": "#1db954",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music-streaming": "#1db954"
+    }
+  },
+  {
+    "name": "SoundCloud",
+    "url": "https://soundcloud.com/",
+    "description": "The internet's largest open audio platform. Discover underground artists, upload your own tracks, and follow creators worldwide.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "music-platform"
+    ],
+    "color": "#ff5500",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music-platform": "#ff5500"
+    }
+  },
+  {
+    "name": "Musescore",
+    "url": "https://musescore.org/",
+    "description": "Free and open-source music notation software. Compose, arrange, and share sheet music. Huge community library of scores.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "notation"
+    ],
+    "color": "#1e8bc3",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "notation": "#1e8bc3"
+    }
   }
 ]

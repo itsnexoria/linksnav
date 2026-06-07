@@ -193,5 +193,20 @@
       "free": "#22c55e",
       "deal-tracker": "#e74c3c"
     }
+  },
+  {
+    "name": "Xbox Game Pass",
+    "url": "https://www.xbox.com/en-US/xbox-game-pass",
+    "description": "Microsoft's subscription service with 400+ games on PC, console, and cloud. Day-one releases included for first-party Xbox titles.",
+    "category": "gaming",
+    "tags": [
+      "subscription",
+      "game-platform"
+    ],
+    "color": "#107c10",
+    "tag_colors": {
+      "subscription": "#fb923c",
+      "game-platform": "#107c10"
+    }
   }
 ]

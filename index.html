@@ -4,10 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NexHub — Your Digital Command Center</title>
+  <meta name="description" content="NexHub — a curated directory of 250+ useful sites across AI, gaming, dev tools, design, music, and more." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- Loading skeleton ---- */
+    @keyframes skeletonPulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.8; }
+    }
+    .skeleton-card {
+      background: #111122;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 18px;
+      height: 160px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
+    }
+    .skeleton-card:nth-child(2) { animation-delay: 0.1s; }
+    .skeleton-card:nth-child(3) { animation-delay: 0.2s; }
+    .skeleton-card:nth-child(4) { animation-delay: 0.3s; }
+    .skeleton-card:nth-child(5) { animation-delay: 0.4s; }
+    .skeleton-card:nth-child(6) { animation-delay: 0.5s; }
+    .skeleton-line {
+      height: 12px; border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      margin-bottom: 10px;
+    }
+    .skeleton-line.w60 { width: 60%; }
+    .skeleton-line.w80 { width: 80%; }
+    .skeleton-line.w40 { width: 40%; }
+  </style>
 </head>
 <body>
   <div class="noise-overlay"></div>
@@ -23,10 +52,10 @@
       <div class="header-controls">
         <div class="search-wrap">
           <span class="search-icon">◎</span>
-          <input type="text" id="searchInput" placeholder="Search sites..." autocomplete="off" />
+          <input type="text" id="searchInput" placeholder="Search sites..." autocomplete="off" spellcheck="false" />
           <kbd>Ctrl+K</kbd>
         </div>
-        <div class="site-count" id="siteCount">0 sites</div>
+        <div class="site-count" id="siteCount">Loading…</div>
       </div>
     </div>
   </header>
@@ -36,7 +65,6 @@
     <button class="cat-scroll-btn cat-scroll-left" id="scrollLeft" aria-label="Scroll left">‹</button>
     <div class="cat-nav-inner" id="catNavInner">
       <button class="cat-btn active" data-cat="all">✦ All</button>
-      <!-- dynamically filled -->
     </div>
     <button class="cat-scroll-btn cat-scroll-right" id="scrollRight" aria-label="Scroll right">›</button>
   </nav>
@@ -45,7 +73,13 @@
   <main class="main" id="main">
     <div class="section-label" id="sectionLabel">All Sites</div>
     <div class="cards-grid" id="cardsGrid">
-      <!-- cards rendered by JS -->
+      <!-- loading skeletons -->
+      <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w40"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
     </div>
     <div class="empty-state" id="emptyState" style="display:none">
       <div class="empty-icon">◌</div>
@@ -56,7 +90,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <span>NexHub &mdash; Your digital command center</span>
-    <span class="footer-note">Created By <code>Nexus</code> With Love!</span>
+    <span class="footer-note">Created by <code>Nexus</code> with love ♥</span>
   </footer>
 
   <script src="app.js"></script>

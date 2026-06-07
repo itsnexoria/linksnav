@@ -28,5 +28,95 @@
       "freemium": "#3b82f6",
       "server-monetisation": "#1abc9c"
     }
+  },
+  {
+    "name": "Gumroad",
+    "url": "https://gumroad.com/",
+    "description": "Sell digital products directly to your audience. No monthly fee \u2014 Gumroad takes a flat cut per sale. Great for creators selling ebooks, courses, and templates.",
+    "category": "business",
+    "tags": [
+      "free",
+      "digital-products"
+    ],
+    "color": "#ff90e8",
+    "tag_colors": {
+      "free": "#22c55e",
+      "digital-products": "#ff90e8"
+    }
+  },
+  {
+    "name": "Notion",
+    "url": "https://www.notion.so/",
+    "description": "All-in-one workspace for notes, wikis, databases, and project management. Teams use it as their company OS. Generous free tier.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "productivity"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "productivity": "#666"
+    }
+  },
+  {
+    "name": "Lemon Squeezy",
+    "url": "https://www.lemonsqueezy.com/",
+    "description": "Sell SaaS subscriptions and digital products. Handles VAT, merchant of record, affiliate management, and licensing out of the box.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "payments"
+    ],
+    "color": "#ffd100",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "payments": "#ffd100"
+    }
+  },
+  {
+    "name": "Canva",
+    "url": "https://www.canva.com/",
+    "description": "Drag-and-drop design tool for non-designers. Social posts, presentations, logos, and print-ready marketing materials with 1M+ templates.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "design-tool"
+    ],
+    "color": "#00c4cc",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "design-tool": "#00c4cc"
+    }
+  },
+  {
+    "name": "Calendly",
+    "url": "https://calendly.com/",
+    "description": "Eliminate scheduling back-and-forth. Share a link and let clients or teammates pick a time that works \u2014 automatically blocks your calendar.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "scheduling"
+    ],
+    "color": "#006bff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "scheduling": "#006bff"
+    }
+  },
+  {
+    "name": "Mailchimp",
+    "url": "https://mailchimp.com/",
+    "description": "Email marketing platform trusted by millions. Drag-and-drop email builder, audience segmentation, automations, and analytics.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "email-marketing"
+    ],
+    "color": "#ffe01b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "email-marketing": "#ffe01b"
+    }
   }
 ]

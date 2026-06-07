@@ -133,5 +133,80 @@
       "free": "#22c55e",
       "malware-scanner": "#394efa"
     }
+  },
+  {
+    "name": "Bitwarden",
+    "url": "https://bitwarden.com/",
+    "description": "Open-source password manager with end-to-end encryption. Browser extensions, mobile apps, and a self-hosting option. Best free tier in the space.",
+    "category": "security",
+    "tags": [
+      "free",
+      "password-manager"
+    ],
+    "color": "#175ddc",
+    "tag_colors": {
+      "free": "#22c55e",
+      "password-manager": "#175ddc"
+    }
+  },
+  {
+    "name": "Privacy Badger",
+    "url": "https://privacybadger.org/",
+    "description": "EFF browser extension that automatically blocks invisible trackers. Learns as you browse without needing to maintain a blocklist.",
+    "category": "security",
+    "tags": [
+      "free",
+      "open-source"
+    ],
+    "color": "#e8c419",
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#34d399"
+    }
+  },
+  {
+    "name": "Shodan",
+    "url": "https://www.shodan.io/",
+    "description": "Search engine for internet-connected devices. Security researchers use it to find exposed servers, IoT devices, and open ports worldwide.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "network-tool"
+    ],
+    "color": "#e30613",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "network-tool": "#e30613"
+    }
+  },
+  {
+    "name": "DNSChecker",
+    "url": "https://dnschecker.org/",
+    "description": "Check DNS propagation from 150+ global locations. Instantly see if your domain has updated worldwide after changing records.",
+    "category": "security",
+    "tags": [
+      "free",
+      "dns-cdn"
+    ],
+    "color": "#00a2e8",
+    "tag_colors": {
+      "free": "#22c55e",
+      "dns-cdn": "#00a2e8"
+    }
+  },
+  {
+    "name": "URLScan.io",
+    "url": "https://urlscan.io/",
+    "description": "Scan any URL for malicious content, phishing, and data exfiltration. See full screenshots, network requests, and threat intelligence.",
+    "category": "security",
+    "tags": [
+      "free",
+      "malware-scanner"
+    ],
+    "color": "#5bc0de",
+    "tag_colors": {
+      "free": "#22c55e",
+      "malware-scanner": "#5bc0de"
+    }
   }
 ]

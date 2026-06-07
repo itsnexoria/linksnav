@@ -118,5 +118,65 @@
       "freemium": "#3b82f6",
       "kanban": "#0079bf"
     }
+  },
+  {
+    "name": "Linear",
+    "url": "https://linear.app/",
+    "description": "Blazing-fast issue tracker built for modern software teams. Keyboard-first, opinionated, and beloved by devs who've used Jira.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "project-management"
+    ],
+    "color": "#5e6ad2",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "project-management": "#5e6ad2"
+    }
+  },
+  {
+    "name": "Cron",
+    "url": "https://cron.com/",
+    "description": "Next-generation calendar app for professionals. Clean UI, keyboard shortcuts, scheduling links, and team availability at a glance.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "calendar"
+    ],
+    "color": "#ff6b35",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "calendar": "#ff6b35"
+    }
+  },
+  {
+    "name": "Reclaim.ai",
+    "url": "https://reclaim.ai/",
+    "description": "AI scheduling assistant that automatically defends time for your habits, tasks, and breaks. Integrates with Google Calendar.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "ai-scheduling"
+    ],
+    "color": "#6366f1",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ai-scheduling": "#6366f1"
+    }
+  },
+  {
+    "name": "Raindrop.io",
+    "url": "https://raindrop.io/",
+    "description": "Beautiful bookmark manager. Save links from any device, organize into collections, add highlights and notes, and find anything instantly.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "bookmarks"
+    ],
+    "color": "#2196f3",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "bookmarks": "#2196f3"
+    }
   }
 ]

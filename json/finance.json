@@ -17,7 +17,7 @@
   {
     "name": "Revolut",
     "url": "https://www.revolut.com/",
-    "description": "All-in-one finance app with multi-currency accounts, stock trading, crypto, and budgeting. Free tier with interbank exchange rates and instant payments.",
+    "description": "All-in-one finance app with multi-currency accounts, stock trading, crypto, and budgeting. Free tier with interbank exchange rates.",
     "category": "finance",
     "tags": [
       "freemium",
@@ -32,7 +32,7 @@
   {
     "name": "Stripe",
     "url": "https://stripe.com/",
-    "description": "Developer-first payment processing platform. Accept cards, bank transfers, and 100+ payment methods globally. Powers millions of businesses from startups to Fortune 500.",
+    "description": "Developer-first payment processing platform. Accept cards, bank transfers, and 100+ payment methods globally.",
     "category": "finance",
     "tags": [
       "free",
@@ -47,7 +47,7 @@
   {
     "name": "Wise",
     "url": "https://wise.com/",
-    "description": "International money transfers at real exchange rates. Send money abroad with fees up to 8x cheaper than banks. Multi-currency accounts and debit card included.",
+    "description": "International money transfers at real exchange rates. Send money abroad up to 8x cheaper than banks.",
     "category": "finance",
     "tags": [
       "free",
@@ -57,6 +57,66 @@
     "tag_colors": {
       "free": "#22c55e",
       "money-transfer": "#00b9ff"
+    }
+  },
+  {
+    "name": "CoinGecko",
+    "url": "https://www.coingecko.com/",
+    "description": "Comprehensive crypto data platform tracking 10,000+ coins. Price charts, market cap rankings, DeFi data, and NFT floor prices.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "crypto"
+    ],
+    "color": "#8dc63f",
+    "tag_colors": {
+      "free": "#22c55e",
+      "crypto": "#8dc63f"
+    }
+  },
+  {
+    "name": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/",
+    "description": "Real-time stock quotes, financial news, portfolio tracking, and market analysis. One of the most visited financial sites worldwide.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "stocks"
+    ],
+    "color": "#6001d2",
+    "tag_colors": {
+      "free": "#22c55e",
+      "stocks": "#6001d2"
+    }
+  },
+  {
+    "name": "YNAB",
+    "url": "https://www.ynab.com/",
+    "description": "You Need A Budget \u2014 envelope-style budgeting app that gives every dollar a job. Proven to help users save money within months.",
+    "category": "finance",
+    "tags": [
+      "paid",
+      "budgeting"
+    ],
+    "color": "#f0a500",
+    "tag_colors": {
+      "paid": "#ff4b8a",
+      "budgeting": "#f0a500"
+    }
+  },
+  {
+    "name": "TradingView",
+    "url": "https://www.tradingview.com/",
+    "description": "Professional charting platform for stocks, forex, crypto, and futures. Social network for traders with 100+ built-in indicators.",
+    "category": "finance",
+    "tags": [
+      "freemium",
+      "trading"
+    ],
+    "color": "#2962ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "trading": "#2962ff"
     }
   }
 ]
