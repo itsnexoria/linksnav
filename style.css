@@ -221,6 +221,38 @@ body::after {
   transition: color 0.3s;
 }
 
+/* Submit nav button */
+.submit-nav-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 16px;
+  background: rgba(124,92,252,0.1);
+  border: 1px solid rgba(124,92,252,0.35);
+  border-radius: 100px;
+  color: var(--accent);
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.submit-nav-btn:hover {
+  background: rgba(124,92,252,0.2);
+  border-color: var(--accent);
+  color: #c4b5fd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(124,92,252,0.25);
+}
+.submit-nav-icon {
+  font-size: 0.7rem;
+  animation: logoSpin 8s linear infinite;
+  display: inline-block;
+}
+@media (max-width: 640px) {
+  .submit-nav-label { display: none; }
+  .submit-nav-btn { padding: 7px 10px; }
+}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CATEGORY NAV
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

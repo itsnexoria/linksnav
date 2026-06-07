@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit a Site — NexHub</title>
+  <meta name="description" content="Request to add your site to NexHub — the digital command center." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Submit page specific ── */
+    .submit-wrapper {
+      position: relative; z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 24px 100px;
+      animation: pageReveal 0.5s 0.1s ease both;
+      opacity: 0;
+    }
+
+    /* Hero header */
+    .submit-hero {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .submit-hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.68rem; font-family: var(--font-mono);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent2);
+      background: rgba(0,229,195,0.07);
+      border: 1px solid rgba(0,229,195,0.2);
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 22px;
+      animation: badgePop 0.6s 0.2s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes badgePop {
+      from { opacity: 0; transform: scale(0.85) translateY(6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .submit-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #e2e2f0 30%, var(--accent) 65%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      animation: pageReveal 0.6s 0.25s ease both;
+    }
+
+    .submit-hero p {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.7; max-width: 480px; margin: 0 auto;
+      animation: pageReveal 0.6s 0.35s ease both;
+    }
+
+    /* Stats row */
+    .submit-stats {
+      display: flex; justify-content: center; gap: 24px;
+      margin-top: 28px;
+      animation: pageReveal 0.6s 0.4s ease both;
+    }
+    .submit-stat {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted);
+    }
+    .submit-stat-num {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.4rem;
+      background: linear-gradient(120deg, var(--text), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* Form card */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+      animation: formSlide 0.7s 0.3s cubic-bezier(.25,.46,.45,.94) both;
+    }
+    @keyframes formSlide {
+      from { opacity: 0; transform: translateY(32px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Glowing top bar on card */
+    .form-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent3), var(--accent), var(--accent2));
+      background-size: 200% 100%;
+      animation: headerLine 3s linear infinite;
+    }
+    /* Ambient inner glow */
+    .form-card::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 50% -10%, rgba(124,92,252,0.07), transparent 65%);
+    }
+
+    /* Form grid */
+    .form-row {
+      display: grid; gap: 18px;
+      margin-bottom: 18px;
+    }
+    .form-row.two-col { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 540px) { .form-row.two-col { grid-template-columns: 1fr; } }
+
+    .form-group {
+      display: flex; flex-direction: column; gap: 7px;
+      animation: pageReveal 0.5s ease both;
+    }
+    .form-group:nth-child(1) { animation-delay: 0.45s; }
+    .form-group:nth-child(2) { animation-delay: 0.5s; }
+    .form-group:nth-child(3) { animation-delay: 0.55s; }
+    .form-group:nth-child(4) { animation-delay: 0.6s; }
+    .form-group:nth-child(5) { animation-delay: 0.65s; }
+    .form-group:nth-child(6) { animation-delay: 0.7s; }
+
+    label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    label .required {
+      color: var(--accent3);
+      font-size: 0.85rem; line-height: 1;
+    }
+    label .label-hint {
+      font-size: 0.65rem; color: rgba(90,90,120,0.7);
+      font-weight: 400; text-transform: none; letter-spacing: 0;
+      margin-left: auto;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    select,
+    textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      padding: 11px 14px;
+      border-radius: var(--radius);
+      outline: none;
+      width: 100%;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s, transform 0.15s;
+      appearance: none; -webkit-appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,92,252,0.18), 0 4px 20px rgba(0,0,0,0.4);
+      background: var(--surface2);
+      transform: translateY(-1px);
+    }
+
+    input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] {
+      border-color: var(--accent3);
+      box-shadow: 0 0 0 3px rgba(255,75,138,0.15);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5a78' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    select option { background: var(--bg2); }
+
+    textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+    /* Field error spans */
+    [data-fs-error] {
+      font-family: var(--font-mono); font-size: 0.68rem;
+      color: var(--accent3);
+      min-height: 16px;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    [data-fs-error]:empty { opacity: 0; }
+
+    /* Char counter */
+    .char-counter {
+      font-size: 0.65rem; color: var(--muted);
+      text-align: right; font-family: var(--font-mono);
+      transition: color 0.2s;
+    }
+    .char-counter.warn { color: var(--accent3); }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      padding: 14px 28px;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, opacity 0.2s;
+      box-shadow: 0 4px 20px rgba(124,92,252,0.4), 0 0 0 1px rgba(124,92,252,0.3);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 8px;
+      animation: pageReveal 0.5s 0.75s ease both;
+    }
+    .submit-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      pointer-events: none;
+    }
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(124,92,252,0.6), 0 0 0 1px rgba(124,92,252,0.5);
+      background: #8e6dff;
+    }
+    .submit-btn:active:not(:disabled) { transform: translateY(0); }
+    .submit-btn:disabled {
+      opacity: 0.6; cursor: not-allowed; transform: none;
+    }
+
+    .btn-icon {
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+    .submit-btn:hover:not(:disabled) .btn-icon { transform: translateX(4px) rotate(45deg); }
+
+    /* Spinner inside button */
+    .btn-spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    .submit-btn.loading .btn-spinner { display: block; }
+    .submit-btn.loading .btn-icon,
+    .submit-btn.loading .btn-label { opacity: 0.5; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success state */
+    [data-fs-success] {
+      display: none;
+    }
+    [data-fs-success].visible {
+      display: block;
+    }
+    .success-panel {
+      text-align: center;
+      padding: 48px 24px;
+      animation: successPop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes successPop {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .success-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: inline-block;
+      animation: successBounce 1s 0.1s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes successBounce {
+      from { transform: scale(0) rotate(-20deg); }
+      to   { transform: scale(1) rotate(0deg); }
+    }
+    .success-panel h2 {
+      font-family: var(--font-display); font-size: 1.8rem; font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(120deg, var(--text), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    .success-panel p {
+      color: var(--muted); font-size: 0.88rem; line-height: 1.7; max-width: 360px; margin: 0 auto 28px;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      color: var(--text);
+      font-family: var(--font-mono); font-size: 0.8rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .back-btn:hover {
+      border-color: var(--accent);
+      background: rgba(124,92,252,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Form-level error */
+    [data-fs-error="form-error"] {
+      background: rgba(255,75,138,0.07);
+      border: 1px solid rgba(255,75,138,0.25);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: var(--accent3);
+      margin-bottom: 14px;
+      display: none;
+    }
+    [data-fs-error="form-error"]:not(:empty) { display: block; }
+
+    /* Section divider inside form */
+    .form-section-title {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+      margin: 24px 0 18px;
+    }
+    .form-section-title::before, .form-section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border2), transparent);
+    }
+
+    /* Info box */
+    .info-box {
+      background: rgba(0,229,195,0.05);
+      border: 1px solid rgba(0,229,195,0.18);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-size: 0.78rem; color: rgba(0,229,195,0.7);
+      line-height: 1.6;
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: 24px;
+      animation: pageReveal 0.5s 0.8s ease both;
+    }
+    .info-box-icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+
+    /* Back to home link in header */
+    .back-home {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--muted); font-size: 0.78rem;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      transition: color 0.2s, gap 0.2s;
+      padding: 6px 0;
+    }
+    .back-home:hover { color: var(--text); gap: 10px; }
+
+    /* Progress bar at top of page */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 3px; z-index: 200;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      opacity: 0;
+    }
+    .progress-bar.active {
+      opacity: 1;
+      animation: progressPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes progressPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="grid-bg"></div>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo" style="text-decoration:none">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <a href="index.html" class="back-home">
+        ← Back to directory
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="submit-wrapper">
+
+    <!-- Hero -->
+    <div class="submit-hero">
+      <div class="submit-hero-badge">
+        <span>✦</span> Site Submission
+      </div>
+      <h1>Add Your Site<br>to NexHub</h1>
+      <p>Found a gem we're missing? Fill in the details below and we'll review your submission. Quality over quantity — every site is manually curated.</p>
+      <div class="submit-stats">
+        <div class="submit-stat">
+          <span class="submit-stat-num">250+</span>
+          <span>Sites listed</span>
+        </div>
+        <div class="submit-stat">
+          <span class="submit-stat-num">24+</span>
+          <span>Categories</span>
+        </div>
+        <div class="submit-stat">
+          <span class="submit-stat-num">Free</span>
+          <span>To submit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form card -->
+    <div class="form-card">
+
+      <!-- Success state (hidden until form submits) -->
+      <div data-fs-success id="successPanel">
+        <div class="success-panel">
+          <div class="success-icon">🚀</div>
+          <h2>Request Sent!</h2>
+          <p>Thanks for the submission! We'll review your site and add it to NexHub if it's a good fit. Usually takes a few days.</p>
+          <a href="index.html" class="back-btn">← Back to NexHub</a>
+        </div>
+      </div>
+
+      <!-- Form (hidden after submit) -->
+      <div id="formInner">
+        <div class="info-box">
+          <span class="info-box-icon">ℹ</span>
+          <span>All fields marked with <strong style="color:var(--accent3)">*</strong> are required. We'll only use your email to follow up on the submission if needed.</span>
+        </div>
+
+        <!-- Form-level error -->
+        <div data-fs-error="form-error" id="formError"></div>
+
+        <form id="submit-form">
+          <!-- Hidden field so Formspree knows it's a site submission -->
+          <input type="hidden" name="_subject" value="New NexHub Site Submission" />
+          <input type="hidden" name="form_type" value="site_submission" />
+
+          <div class="form-section-title">Your Info</div>
+
+          <div class="form-row two-col">
+            <div class="form-group">
+              <label for="name">Your Name <span class="required">*</span></label>
+              <input
+                type="text" id="name" name="name"
+                placeholder="e.g. Alex Smith"
+                required autocomplete="name"
+                data-fs-field
+              />
+              <span data-fs-error="name"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">
+                Your Email <span class="required">*</span>
+                <span class="label-hint">won't be published</span>
+              </label>
+              <input
+                type="email" id="email" name="email"
+                placeholder="you@example.com"
+                required autocomplete="email"
+                data-fs-field
+              />
+              <span data-fs-error="email"></span>
+            </div>
+          </div>
+
+          <div class="form-section-title">Site Details</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="site_name">Site Name <span class="required">*</span></label>
+              <input
+                type="text" id="site_name" name="site_name"
+                placeholder="e.g. Linear, Figma, Perplexity…"
+                required
+                data-fs-field
+              />
+              <span data-fs-error="site_name"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="site_url">Site URL <span class="required">*</span></label>
+              <input
+                type="url" id="site_url" name="site_url"
+                placeholder="https://example.com"
+                required
+                data-fs-field
+              />
+              <span data-fs-error="site_url"></span>
+            </div>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="form-group">
+              <label for="category">Category <span class="required">*</span></label>
+              <select id="category" name="category" required data-fs-field>
+                <option value="" disabled selected>Select a category…</option>
+                <option value="ai">🤖 AI</option>
+                <option value="anime">🧸 Anime</option>
+                <option value="business">🏢 Business</option>
+                <option value="design">🎨 Design</option>
+                <option value="dev-tools">🛠️ Dev Tools</option>
+                <option value="downloads">⬇️ Downloads</option>
+                <option value="finance">💳 Finance</option>
+                <option value="gaming">🎮 Gaming</option>
+                <option value="hosting">☁️ Hosting</option>
+                <option value="learning">📚 Learning</option>
+                <option value="minecraft">⛏️ Minecraft</option>
+                <option value="movies">🎬 Movies</option>
+                <option value="music">🎵 Music</option>
+                <option value="news">📰 News</option>
+                <option value="productivity">📋 Productivity</option>
+                <option value="security">🔒 Security</option>
+                <option value="shopping">🛒 Shopping</option>
+                <option value="social">📱 Social</option>
+                <option value="storage">📁 Storage</option>
+                <option value="streaming">📺 Streaming</option>
+                <option value="tools">⚙️ Tools</option>
+                <option value="other">✦ Other</option>
+              </select>
+              <span data-fs-error="category"></span>
+            </div>
+            <div class="form-group">
+              <label for="pricing">Pricing Model</label>
+              <select id="pricing" name="pricing">
+                <option value="">— optional —</option>
+                <option value="free">Free</option>
+                <option value="freemium">Freemium</option>
+                <option value="paid">Paid</option>
+                <option value="subscription">Subscription</option>
+                <option value="open-source">Open Source</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="description">
+                Description <span class="required">*</span>
+                <span class="label-hint" id="descCounter">0 / 200</span>
+              </label>
+              <textarea
+                id="description" name="description"
+                placeholder="Briefly describe what this site does and why it belongs on NexHub…"
+                required maxlength="200"
+                data-fs-field
+              ></textarea>
+              <span data-fs-error="description"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="why">Why should it be added?</label>
+              <textarea
+                id="why" name="why"
+                placeholder="What makes this site valuable? Who would use it?"
+                style="min-height:80px"
+              ></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn" data-fs-submit-btn>
+            <div class="btn-spinner"></div>
+            <span class="btn-label">Send Submission</span>
+            <span class="btn-icon">↗</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>NexHub &mdash; Your digital command center</span>
+    <span class="footer-note">Created by <code>Nexus</code> with love ♥</span>
+  </footer>
+
+  <script>
+    // ── Formspree AJAX via @formspree/ajax CDN ──
+    window.formspree = window.formspree || function () {
+      (formspree.q = formspree.q || []).push(arguments);
+    };
+    formspree('initForm', { formElement: '#submit-form', formId: 'mrevpvpq' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+  <script>
+    // ── Char counter for description ──
+    const descArea    = document.getElementById('description');
+    const descCounter = document.getElementById('descCounter');
+    descArea.addEventListener('input', () => {
+      const len = descArea.value.length;
+      descCounter.textContent = `${len} / 200`;
+      descCounter.classList.toggle('warn', len > 170);
+    });
+
+    // ── Progress bar + loading state during submission ──
+    const form       = document.getElementById('submit-form');
+    const progressBar = document.getElementById('progressBar');
+    const submitBtn  = document.getElementById('submitBtn');
+    const successPanel = document.getElementById('successPanel');
+    const formInner  = document.getElementById('formInner');
+    const formError  = document.getElementById('formError');
+
+    // Intercept submit to show progress animation
+    form.addEventListener('submit', () => {
+      progressBar.classList.add('active');
+      progressBar.style.transform = 'scaleX(0.6)';
+      submitBtn.classList.add('loading');
+    });
+
+    // Observe when success panel becomes visible (Formspree adds display)
+    const observer = new MutationObserver(() => {
+      const isVisible = successPanel.classList.contains('visible') ||
+                        successPanel.style.display === 'block' ||
+                        (successPanel.dataset.fsSuccess !== undefined && successPanel.textContent.trim() !== '');
+      // Formspree sets the [data-fs-success] element visible on success
+      if (getComputedStyle(successPanel).display !== 'none') {
+        progressBar.style.transform = 'scaleX(1)';
+        setTimeout(() => { progressBar.classList.remove('active'); progressBar.style.transform = ''; }, 500);
+        submitBtn.classList.remove('loading');
+        formInner.style.display = 'none';
+        successPanel.style.display = 'block';
+      }
+    });
+    observer.observe(successPanel, { attributes: true, childList: true, subtree: true, characterData: true });
+
+    // Also listen for Formspree errors to stop loading state
+    document.querySelectorAll('[data-fs-error]').forEach(el => {
+      new MutationObserver(() => {
+        if (el.textContent.trim()) {
+          progressBar.classList.remove('active');
+          progressBar.style.transform = '';
+          submitBtn.classList.remove('loading');
+        }
+      }).observe(el, { childList: true, characterData: true, subtree: true });
+    });
+
+    // URL validation helper
+    document.getElementById('site_url').addEventListener('blur', function() {
+      let val = this.value.trim();
+      if (val && !val.startsWith('http://') && !val.startsWith('https://')) {
+        this.value = 'https://' + val;
+      }
+    });
+
+    // Smooth stagger animation for form groups on load
+    document.querySelectorAll('.form-group').forEach((el, i) => {
+      el.style.animationDelay = `${0.45 + i * 0.06}s`;
+    });
+  </script>
+</body>
+</html>
