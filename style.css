@@ -284,17 +284,9 @@ body::after {
   padding: 6px 14px;
   border-radius: 100px; cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.2s cubic-bezier(.25,.46,.45,.94);
   position: relative;
-  overflow: hidden;
-}
-.cat-btn::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: var(--accent);
-  opacity: 0;
-  transition: opacity 0.2s;
-  border-radius: inherit;
 }
 .cat-btn:hover {
   border-color: var(--border2);
