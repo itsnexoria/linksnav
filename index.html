@@ -3,81 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY SEO ─────────────────────────────────── -->
   <title>NexHub — Your Digital Command Center</title>
-  <meta name="description" content="NexHub — a curated directory of 250+ useful sites across AI, gaming, dev tools, design, music, and more." />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="NexHub is a curated, searchable directory of 288+ essential websites across AI, gaming, dev tools, design, music, finance, security, and more. Find your next favourite tool instantly." />
+  <meta name="keywords"    content="web directory, useful websites, ai tools, dev tools, gaming sites, design resources, productivity apps, nexhub" />
+  <meta name="author"      content="Nexus" />
+  <link rel="canonical"    href="https://nexhub.nexosites.xyz/" />
+
+  <!-- ── OPEN GRAPH (FB / Discord / WhatsApp) ────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://nexhub.nexosites.xyz/" />
+  <meta property="og:title"       content="NexHub — Your Digital Command Center" />
+  <meta property="og:description" content="288+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
+  <meta property="og:image"       content="https://nexhub.nexosites.xyz/assets/logo-512.png" />
+  <meta property="og:image:width"  content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:site_name"   content="NexHub" />
+
+  <!-- ── TWITTER CARD ────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="NexHub — Your Digital Command Center" />
+  <meta name="twitter:description" content="288+ curated websites. Search, filter, favourite." />
+  <meta name="twitter:image"       content="https://nexhub.nexosites.xyz/assets/logo-512.png" />
+
+  <!-- ── FAVICONS ─────────────────────────────────────── -->
+  <link rel="icon"             href="assets/favicon-32.png" sizes="32x32"  type="image/png" />
+  <link rel="icon"             href="assets/favicon-64.png" sizes="64x64"  type="image/png" />
+  <link rel="apple-touch-icon" href="assets/logo-192.png" />
+  <meta name="theme-color"     content="#7c5cfc" />
+
+  <!-- ── JSON-LD STRUCTURED DATA ──────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NexHub",
+    "url": "https://nexhub.nexosites.xyz/",
+    "description": "Curated directory of 288+ essential websites across AI, gaming, dev tools, design, music, finance, and more.",
+    "author": { "@type": "Person", "name": "Nexus" },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://nexhub.nexosites.xyz/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ── FONTS (preconnect first, then load) ──────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- ── STYLES ───────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css" />
+
   <style>
     /* ---- Loading skeleton ---- */
     @keyframes skeletonPulse {
-      0%, 100% { opacity: 0.4; }
-      50%       { opacity: 0.8; }
+      0%, 100% { opacity: 0.35; }
+      50%       { opacity: 0.7; }
     }
     .skeleton-card {
       background: #111122;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
-      padding: 18px;
-      height: 160px;
-      animation: skeletonPulse 1.5s ease-in-out infinite;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px; padding: 18px; height: 160px;
+      animation: skeletonPulse 1.6s ease-in-out infinite;
     }
-    .skeleton-card:nth-child(2) { animation-delay: 0.1s; }
-    .skeleton-card:nth-child(3) { animation-delay: 0.2s; }
-    .skeleton-card:nth-child(4) { animation-delay: 0.3s; }
-    .skeleton-card:nth-child(5) { animation-delay: 0.4s; }
-    .skeleton-card:nth-child(6) { animation-delay: 0.5s; }
-    .skeleton-line {
-      height: 12px; border-radius: 6px;
-      background: rgba(255,255,255,0.08);
-      margin-bottom: 10px;
-    }
-    .skeleton-line.w60 { width: 60%; }
-    .skeleton-line.w80 { width: 80%; }
-    .skeleton-line.w40 { width: 40%; }
+    .skeleton-card:nth-child(2) { animation-delay:.12s }
+    .skeleton-card:nth-child(3) { animation-delay:.24s }
+    .skeleton-card:nth-child(4) { animation-delay:.36s }
+    .skeleton-card:nth-child(5) { animation-delay:.48s }
+    .skeleton-card:nth-child(6) { animation-delay:.60s }
+    .skeleton-line { height:11px; border-radius:6px; background:rgba(255,255,255,0.07); margin-bottom:10px; }
+    .skeleton-line.w60 { width:60% }
+    .skeleton-line.w80 { width:80% }
+    .skeleton-line.w40 { width:40% }
   </style>
 </head>
 <body>
-  <div class="noise-overlay"></div>
-  <div class="grid-bg"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg"       aria-hidden="true"></div>
 
-  <!-- HEADER -->
-  <header class="header">
+  <!-- ── HEADER ───────────────────────────────────────── -->
+  <header class="header" role="banner">
     <div class="header-inner">
-      <div class="logo">
-        <span class="logo-icon">⬡</span>
-        <span class="logo-text">Nexo Hub</span>
-      </div>
-      <div class="header-controls">
+
+      <!-- Logo -->
+      <a href="/" class="logo" aria-label="NexHub home">
+        <img src="assets/logo.png"
+             alt="NexHub logo"
+             class="logo-img"
+             width="36" height="36"
+             loading="eager"
+             decoding="async" />
+        <span class="logo-text">NexHub</span>
+      </a>
+
+      <!-- Controls -->
+      <div class="header-controls" role="search">
         <div class="search-wrap">
-          <span class="search-icon">◎</span>
-          <input type="text" id="searchInput" placeholder="Search sites..." autocomplete="off" spellcheck="false" />
-          <kbd>Ctrl+K</kbd>
+          <svg class="search-icon" aria-hidden="true" width="15" height="15" viewBox="0 0 20 20" fill="none">
+            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+            <path d="m15 15 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="search"
+                 id="searchInput"
+                 aria-label="Search sites"
+                 placeholder="Search 288+ sites…"
+                 autocomplete="off"
+                 spellcheck="false" />
+          <kbd aria-hidden="true">Ctrl K</kbd>
         </div>
-        <div class="site-count" id="siteCount">Loading…</div>
-        <a href="submit.html" class="submit-nav-btn">
-          <span class="submit-nav-icon">✦</span>
-          <span class="submit-nav-label">Submit a Site</span>
+        <div class="site-count" id="siteCount" aria-live="polite">Loading…</div>
+        <a href="submit.html" class="submit-nav-btn" aria-label="Submit a site">
+          <span class="submit-nav-icon" aria-hidden="true">+</span>
+          <span class="submit-nav-label">Submit</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- CATEGORY FILTERS -->
-  <nav class="cat-nav" id="catNav">
-    <button class="cat-scroll-btn cat-scroll-left" id="scrollLeft" aria-label="Scroll left">‹</button>
-    <div class="cat-nav-inner" id="catNavInner">
-      <button class="cat-btn active" data-cat="all">✦ All</button>
+  <!-- ── CATEGORY NAV ──────────────────────────────────── -->
+  <nav class="cat-nav" id="catNav" aria-label="Site categories">
+    <button class="cat-scroll-btn" id="scrollLeft"  aria-label="Scroll categories left">‹</button>
+    <div class="cat-nav-inner" id="catNavInner" role="tablist">
+      <button class="cat-btn active" data-cat="all" role="tab" aria-selected="true">✦ All</button>
     </div>
-    <button class="cat-scroll-btn cat-scroll-right" id="scrollRight" aria-label="Scroll right">›</button>
+    <button class="cat-scroll-btn" id="scrollRight" aria-label="Scroll categories right">›</button>
   </nav>
 
-  <!-- MAIN CONTENT -->
+  <!-- ── MAIN ─────────────────────────────────────────── -->
   <main class="main" id="main">
-    <div class="section-label" id="sectionLabel">All Sites</div>
-    <div class="cards-grid" id="cardsGrid">
-      <!-- loading skeletons -->
+    <div class="section-label" id="sectionLabel" aria-live="polite">All Sites</div>
+
+    <div class="cards-grid" id="cardsGrid" role="list">
       <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w40"></div></div>
       <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
       <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
@@ -85,18 +145,19 @@
       <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
       <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
     </div>
-    <div class="empty-state" id="emptyState" style="display:none">
+
+    <div class="empty-state" id="emptyState" style="display:none" role="status">
       <div class="empty-icon">◌</div>
-      <p>No sites found matching "<span id="emptyQuery"></span>"</p>
+      <p>Nothing found for "<span id="emptyQuery"></span>"</p>
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <span>NexHub &mdash; Your digital command center</span>
-    <span class="footer-note">Created by <code>Nexus</code> with love ♥</span>
+  <!-- ── FOOTER ───────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <span>NexHub — Your digital command center</span>
+    <span>Built by <code>Nexus</code> ♥</span>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
