@@ -676,28 +676,28 @@ body::after{
   font-size: .6rem;
   font-family: var(--font-m);
   color: var(--muted);
-  background: var(--bg3);
+  background: rgba(255,255,255,.04);
   border: 1px solid var(--border);
   border-radius: 100px;
-  padding: 2px 7px;
+  padding: 2px 8px;
+  margin-top: 8px;
   white-space: nowrap;
   transition: color .2s, border-color .2s, background .2s;
   user-select: none;
+  width: fit-content;
 }
-.click-count-icon { font-size: .65rem; }
 .card:hover .click-count {
   color: var(--accent2);
-  border-color: rgba(0,229,195,.25);
-  background: rgba(0,229,195,.06);
+  border-color: rgba(0,229,195,.3);
+  background: rgba(0,229,195,.07);
 }
-.click-count--bumped {
-  animation: countBump .35s cubic-bezier(.25,.46,.45,.94);
-}
-@keyframes countBump {
+[data-theme="light"] .click-count { background: rgba(0,0,0,.04); }
+@keyframes cc-bump {
   0%   { transform: scale(1); }
-  40%  { transform: scale(1.3); }
+  45%  { transform: scale(1.28); }
   100% { transform: scale(1); }
 }
+.cc-bump { animation: cc-bump .3s cubic-bezier(.25,.46,.45,.94); }
 
 /* ── FOOTER NAV LINKS ────────────────────────────────────────── */
 .footer-nav {

@@ -1,4 +1,12 @@
+# Clean URL trailing slash normalization
 /pages/contact    /pages/contact/  301
 /pages/about      /pages/about/    301
 /pages/sites      /pages/sites/    301
+
+# Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301
+/Pages/about/*    /pages/about/    301
+/Pages/sites/*    /pages/sites/    301
+
+# 404 fallback
+/*                /404.html        404
