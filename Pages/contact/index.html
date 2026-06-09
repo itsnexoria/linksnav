@@ -8,13 +8,13 @@
   <title>Submit a Site — NexHub</title>
   <meta name="description" content="Suggest a website to add to NexHub's curated directory. Fill in the details and Nexus will review it."/>
   <meta name="robots" content="noindex"/>
-  <link rel="canonical" href="https://nexhub.nexosites.xyz/submit.html"/>
+  <link rel="canonical" href="https://nexhub.nexosites.xyz/pages/contact/"/>
   <meta property="og:title"       content="Submit a Site — NexHub"/>
   <meta property="og:description" content="Suggest a site for the NexHub directory."/>
   <meta property="og:image"       content="https://nexhub.nexosites.xyz/assets/logo-512.png"/>
   <meta name="theme-color"        content="#7c5cfc"/>
-  <link rel="icon"             href="assets/favicon-32.png" sizes="32x32" type="image/png"/>
-  <link rel="apple-touch-icon" href="assets/logo-192.png"/>
+  <link rel="icon"             href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../../style.css"/>
 
   <style>
     /* ── PAGE-SPECIFIC ANIMATIONS ─────────────────────── */
@@ -269,19 +269,43 @@
   <header class="header" role="banner">
     <div class="header-inner">
       <a href="/" class="logo" aria-label="NexHub home">
-        <img src="assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <img src="../../assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
         <span class="logo-text">NexHub</span>
       </a>
-      <nav style="margin-left:auto">
-        <a href="index.html" class="submit-nav-btn" style="gap:7px">
+      <div style="margin-left:auto">
+        <a href="/" class="submit-nav-btn" style="gap:7px">
           <span aria-hidden="true">←</span> Back to Hub
         </a>
-      </nav>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
     </div>
   </header>
 
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/sites/" class="nav-link">🌐 All Sites</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
+      </nav>
+      <div class="nav-menu-footer"><span>NexHub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
   <div class="sub-wrap">
-    <a href="index.html" class="back-link">
+    <a href="/" class="back-link">
       <span class="back-arrow" aria-hidden="true">←</span> Back to NexHub
     </a>
 
@@ -423,7 +447,7 @@
         <p class="s-msg">Thanks — I'll review it soon and add it if it's a good fit for the hub.</p>
         <div class="s-btns">
           <button class="s-btn" onclick="resetForm()">Submit another</button>
-          <a href="index.html" class="s-btn">← Back to Hub</a>
+          <a href="/" class="s-btn">← Back to Hub</a>
         </div>
       </div>
     </div><!-- /form-card -->
@@ -575,6 +599,24 @@
       });
       ['l1','l2'].forEach(id=>document.getElementById(id).classList.remove('done'));
     }
+  </script>
+  <script>
+    /* Theme */
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham){ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});}
+      if(ov){ov.addEventListener('click',closeM);}
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+    });
   </script>
 </body>
 </html>

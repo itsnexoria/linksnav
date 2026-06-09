@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
   <meta name="author"      content="Nexus" />
   <link rel="canonical"    href="https://nexhub.nexosites.xyz/" />
 
-  <!-- ── OPEN GRAPH (FB / Discord / WhatsApp) ────────── -->
+  <!-- ── OPEN GRAPH ────────────────────────────────────── -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://nexhub.nexosites.xyz/" />
   <meta property="og:title"       content="NexHub — Your Digital Command Center" />
@@ -21,19 +21,19 @@
   <meta property="og:image:height" content="512" />
   <meta property="og:site_name"   content="NexHub" />
 
-  <!-- ── TWITTER CARD ────────────────────────────────── -->
+  <!-- ── TWITTER CARD ──────────────────────────────────── -->
   <meta name="twitter:card"        content="summary" />
   <meta name="twitter:title"       content="NexHub — Your Digital Command Center" />
   <meta name="twitter:description" content="288+ curated websites. Search, filter, favourite." />
   <meta name="twitter:image"       content="https://nexhub.nexosites.xyz/assets/logo-512.png" />
 
-  <!-- ── FAVICONS ─────────────────────────────────────── -->
+  <!-- ── FAVICONS ──────────────────────────────────────── -->
   <link rel="icon"             href="assets/favicon-32.png" sizes="32x32"  type="image/png" />
   <link rel="icon"             href="assets/favicon-64.png" sizes="64x64"  type="image/png" />
   <link rel="apple-touch-icon" href="assets/logo-192.png" />
   <meta name="theme-color"     content="#7c5cfc" />
 
-  <!-- ── JSON-LD STRUCTURED DATA ──────────────────────── -->
+  <!-- ── JSON-LD ───────────────────────────────────────── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -50,16 +50,18 @@
   }
   </script>
 
-  <!-- ── FONTS (preconnect first, then load) ──────────── -->
+  <!-- ── FONTS ─────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- ── STYLES ───────────────────────────────────────── -->
+  <!-- ── STYLES ────────────────────────────────────────── -->
+  <script>
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+  </script>
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* ---- Loading skeleton ---- */
     @keyframes skeletonPulse {
       0%, 100% { opacity: 0.35; }
       50%       { opacity: 0.7; }
@@ -70,12 +72,14 @@
       border-radius: 16px; padding: 18px; height: 160px;
       animation: skeletonPulse 1.6s ease-in-out infinite;
     }
+    [data-theme="light"] .skeleton-card { background: #e8e8f0; border-color: rgba(0,0,0,0.06); }
     .skeleton-card:nth-child(2) { animation-delay:.12s }
     .skeleton-card:nth-child(3) { animation-delay:.24s }
     .skeleton-card:nth-child(4) { animation-delay:.36s }
     .skeleton-card:nth-child(5) { animation-delay:.48s }
     .skeleton-card:nth-child(6) { animation-delay:.60s }
     .skeleton-line { height:11px; border-radius:6px; background:rgba(255,255,255,0.07); margin-bottom:10px; }
+    [data-theme="light"] .skeleton-line { background: rgba(0,0,0,0.1); }
     .skeleton-line.w60 { width:60% }
     .skeleton-line.w80 { width:80% }
     .skeleton-line.w40 { width:40% }
@@ -85,7 +89,7 @@
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="grid-bg"       aria-hidden="true"></div>
 
-  <!-- ── HEADER ───────────────────────────────────────── -->
+  <!-- ── HEADER ────────────────────────────────────────── -->
   <header class="header" role="banner">
     <div class="header-inner">
 
@@ -100,7 +104,7 @@
         <span class="logo-text">NexHub</span>
       </a>
 
-      <!-- Controls -->
+      <!-- Controls (search + count + submit) -->
       <div class="header-controls" role="search">
         <div class="search-wrap">
           <svg class="search-icon" aria-hidden="true" width="15" height="15" viewBox="0 0 20 20" fill="none">
@@ -116,13 +120,63 @@
           <kbd aria-hidden="true">Ctrl K</kbd>
         </div>
         <div class="site-count" id="siteCount" aria-live="polite">Loading…</div>
-        <a href="submit.html" class="submit-nav-btn" aria-label="Submit a site">
+        <a href="/pages/contact/" class="submit-nav-btn" aria-label="Submit a site">
           <span class="submit-nav-icon" aria-hidden="true">+</span>
           <span class="submit-nav-label">Submit</span>
         </a>
       </div>
+
+      <!-- Right side: theme toggle + hamburger -->
+      <div class="header-right">
+        <!-- Light/Dark toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">
+            <!-- Moon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">
+            <!-- Sun -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Hamburger button -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- ── MOBILE / DESKTOP MENU ─────────────────────────── -->
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link nav-link--active">🏠 Home</a>
+        <a href="/pages/sites/" class="nav-link">🌐 All Sites</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+      </nav>
+      <div class="nav-menu-footer">
+        <span>NexHub by <code>Nexus</code></span>
+      </div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
   <!-- ── CATEGORY NAV ──────────────────────────────────── -->
   <nav class="cat-nav" id="catNav" aria-label="Site categories">
@@ -133,7 +187,7 @@
     <button class="cat-scroll-btn" id="scrollRight" aria-label="Scroll categories right">›</button>
   </nav>
 
-  <!-- ── MAIN ─────────────────────────────────────────── -->
+  <!-- ── MAIN ──────────────────────────────────────────── -->
   <main class="main" id="main">
     <div class="section-label" id="sectionLabel" aria-live="polite">All Sites</div>
 
@@ -152,9 +206,14 @@
     </div>
   </main>
 
-  <!-- ── FOOTER ───────────────────────────────────────── -->
+  <!-- ── FOOTER ────────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
     <span>NexHub — Your digital command center</span>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/pages/about/">About</a>
+      <a href="/pages/sites/">Sites</a>
+      <a href="/pages/contact/">Submit</a>
+    </nav>
     <span>Built by <code>Nexus</code> ♥</span>
   </footer>
 

@@ -318,3 +318,185 @@ function esc(s){
 }
 
 init();
+
+/* ============================================================
+   NexHub — app.js additions v7
+   Hamburger menu, Light/Dark theme, Click counter
+   ============================================================ */
+
+/* ── THEME ──────────────────────────────────────────────────── */
+(function initTheme(){
+  const saved = localStorage.getItem('nexhub_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
+
+function setupThemeToggle(){
+  const btn  = document.getElementById('themeToggle');
+  if(!btn) return;
+  btn.addEventListener('click', () => {
+    const html  = document.documentElement;
+    const next  = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('nexhub_theme', next);
+    btn.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    /* tiny bounce */
+    btn.style.transform = 'scale(1.18) translateY(-1px)';
+    setTimeout(() => btn.style.transform = '', 200);
+  });
+}
+
+/* ── HAMBURGER ──────────────────────────────────────────────── */
+function setupHamburger(){
+  const ham     = document.getElementById('hamburger');
+  const menu    = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('navOverlay');
+  if(!ham || !menu || !overlay) return;
+
+  function openMenu(){
+    ham.classList.add('is-open');
+    menu.classList.add('is-open');
+    overlay.classList.add('is-open');
+    ham.setAttribute('aria-expanded','true');
+    menu.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu(){
+    ham.classList.remove('is-open');
+    menu.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    ham.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  ham.addEventListener('click', () => {
+    ham.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
+
+  /* Close menu when a nav link is clicked */
+  menu.querySelectorAll('.nav-link').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+}
+
+/* ── CLICK COUNTER ──────────────────────────────────────────── */
+const CLICKS_KEY = 'nexhub_clicks';
+
+function loadClicks(){
+  try{ return JSON.parse(localStorage.getItem(CLICKS_KEY) || '{}'); }
+  catch{ return {}; }
+}
+function saveClicks(map){ localStorage.setItem(CLICKS_KEY, JSON.stringify(map)); }
+function getCount(url){
+  const map = loadClicks();
+  return map[url] || 0;
+}
+function bumpCount(url){
+  const map   = loadClicks();
+  map[url]    = (map[url] || 0) + 1;
+  saveClicks(map);
+  return map[url];
+}
+
+/* Expose to cardHTML as a global so inline onclick works */
+window.trackClick = function(url, el){
+  const count = bumpCount(url);
+  /* find the counter badge on this card and animate */
+  const card  = el.closest ? el : el;
+  const badge = card.querySelector('.click-count-num');
+  if(badge){
+    badge.textContent = count;
+    const wrap = card.querySelector('.click-count');
+    if(wrap){
+      wrap.classList.remove('click-count--bumped');
+      void wrap.offsetWidth; /* reflow to restart anim */
+      wrap.classList.add('click-count--bumped');
+    }
+  }
+};
+
+/* ── PATCH cardHTML to include click counter ────────────────── */
+/* Override the original cardHTML function */
+const _origCardHTML = window.cardHTML; /* won't exist as window prop, use patch below */
+
+/* We re-declare cardHTML after init so the patched version takes over.
+   Since app.js declares cardHTML as a plain function (hoisted), we need
+   to shadow it at call-time. The simplest approach: override buildFrag
+   after load by monkey-patching cardHTML via a wrapper. */
+document.addEventListener('DOMContentLoaded', () => {
+  setupThemeToggle();
+  setupHamburger();
+});
+
+/* Because app.js uses a plain function declaration for cardHTML,
+   we patch it at module level by re-assigning to a same-name var
+   that shadows the original at runtime — we do this by appending
+   to the global scope after the file finishes. */
+window._nexhub_patchCards = function(){
+  /* Intercept every card anchor click to track it */
+  document.addEventListener('click', e => {
+    const card = e.target.closest('a.card');
+    if(!card) return;
+    const url = card.href;
+    if(!url || url.startsWith('javascript')) return;
+    const count = bumpCount(url);
+    const badge = card.querySelector('.click-count-num');
+    if(badge){
+      badge.textContent = fmtCount(count);
+      const wrap = card.querySelector('.click-count');
+      if(wrap){
+        wrap.classList.remove('click-count--bumped');
+        void wrap.offsetWidth;
+        wrap.classList.add('click-count--bumped');
+      }
+    }
+  });
+};
+
+function fmtCount(n){
+  if(n >= 1000) return (n/1000).toFixed(1)+'k';
+  return n;
+}
+
+/* ── PATCH buildFrag to inject counter into card HTML ────────── */
+/* We intercept DOM insertion by overriding the render pipeline.
+   The cleanest way without touching original code: patch after init. */
+const _patchInterval = setInterval(() => {
+  if(typeof buildFrag === 'undefined') return;
+  clearInterval(_patchInterval);
+
+  const origBuildFrag = buildFrag;
+  /* We can't reassign a function declaration, so we patch cardHTML instead
+     by wrapping the DOM creation loop. Override window.cardHTML: */
+  window._injectCounters = function(grid){
+    grid.querySelectorAll('a.card').forEach(card => {
+      if(card.querySelector('.click-count')) return; /* already injected */
+      const url   = card.href;
+      const count = getCount(url);
+      /* inject counter before the card-footer div */
+      const footer = card.querySelector('.card-footer');
+      if(!footer) return;
+      const badge = document.createElement('div');
+      badge.className = 'click-count';
+      badge.innerHTML = `<span class="click-count-icon">👁</span><span class="click-count-num">${fmtCount(count)}</span> visits`;
+      footer.insertAdjacentElement('afterend', badge);
+    });
+  };
+}, 50);
+
+/* After each render call, inject counters.
+   We do this by observing the cards grid for mutations. */
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('cardsGrid');
+  if(!grid) return;
+
+  const obs = new MutationObserver(() => {
+    if(window._injectCounters) window._injectCounters(grid);
+  });
+  obs.observe(grid, { childList: true, subtree: false });
+
+  /* patch click tracking */
+  window._nexhub_patchCards();
+});
