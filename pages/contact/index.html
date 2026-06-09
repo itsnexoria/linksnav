@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+
+  <!-- SEO -->
+  <title>Submit a Site — NexHub</title>
+  <meta name="description" content="Suggest a website to add to NexHub's curated directory. Fill in the details and Nexus will review it."/>
+  <meta name="robots" content="noindex"/>
+  <link rel="canonical" href="https://nexhub.nexosites.xyz/pages/contact/"/>
+  <meta property="og:title"       content="Submit a Site — NexHub"/>
+  <meta property="og:description" content="Suggest a site for the NexHub directory."/>
+  <meta property="og:image"       content="https://nexhub.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="theme-color"        content="#7c5cfc"/>
+  <link rel="icon"             href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <!-- Base styles -->
+  <link rel="stylesheet" href="../../style.css"/>
+
+  <style>
+    /* ── PAGE-SPECIFIC ANIMATIONS ─────────────────────── */
+    @keyframes fadeUp    { from{opacity:0;transform:translateY(20px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
+    @keyframes scaleIn   { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:none} }
+    @keyframes float     { 0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(-9px) rotate(1.5deg)} 70%{transform:translateY(-4px) rotate(-1deg)} }
+    @keyframes orbit     { from{transform:rotate(0deg) translateX(54px) rotate(0deg)} to{transform:rotate(360deg) translateX(54px) rotate(-360deg)} }
+    @keyframes pulse     { 0%,100%{opacity:.55;transform:scale(1)} 50%{opacity:.1;transform:scale(1.7)} }
+    @keyframes gradFlow  { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes checkDraw { from{stroke-dashoffset:58} to{stroke-dashoffset:0} }
+    @keyframes popIn     { 0%{opacity:0;transform:scale(.5) rotate(-8deg)} 65%{transform:scale(1.1) rotate(2deg)} 100%{opacity:1;transform:scale(1) rotate(0)} }
+    @keyframes confetti  { 0%{transform:translateY(-10px) rotate(0deg);opacity:1} 100%{transform:translateY(140px) rotate(800deg);opacity:0} }
+
+    /* ── LAYOUT ──────────────────────────────────────── */
+    .sub-wrap{
+      position:relative;z-index:1;
+      max-width:680px;margin:0 auto;
+      padding:44px 24px 90px;
+    }
+    .back-link{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:.75rem;font-family:var(--font-m);color:var(--muted);
+      text-decoration:none;margin-bottom:36px;
+      transition:color .2s,gap .2s;
+    }
+    .back-link:hover{color:var(--accent2);gap:10px}
+    .back-arrow{transition:transform .2s}
+    .back-link:hover .back-arrow{transform:translateX(-3px)}
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero{display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:44px;animation:fadeUp .5s ease both}
+    .hero-orb-wrap{position:relative;width:88px;height:88px;animation:float 7s ease-in-out infinite}
+    .hero-orb-bg{
+      position:absolute;inset:0;border-radius:24px;
+      background:linear-gradient(135deg,rgba(124,92,252,.18),rgba(0,229,195,.18));
+      border:1.5px solid rgba(124,92,252,.28);
+    }
+    .hero-orb-bg::before{
+      content:'';position:absolute;inset:0;border-radius:inherit;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      opacity:.12;background-size:200% 200%;animation:gradFlow 4s ease infinite;
+    }
+    .hero-emoji{position:relative;z-index:1;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.6rem;line-height:1}
+    /* Orbiting dots */
+    .orb-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;margin:-4px;border-radius:50%;animation:orbit 4.5s linear infinite}
+    .orb-dot::after{content:'';display:block;width:100%;height:100%;border-radius:50%;background:var(--accent2);box-shadow:0 0 7px var(--accent2)}
+    .orb-dot.b{animation-duration:7s;animation-direction:reverse}
+    .orb-dot.b::after{background:var(--accent3);box-shadow:0 0 7px var(--accent3)}
+    /* Pulse rings */
+    .pulse-ring{position:absolute;inset:-10px;border-radius:34px;border:1px solid rgba(124,92,252,.35);animation:pulse 2.8s ease-out infinite}
+    .pulse-ring:nth-child(2){animation-delay:.9s}.pulse-ring:nth-child(3){animation-delay:1.8s}
+
+    .hero-title{
+      font-family:var(--font-d);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;
+      letter-spacing:-.03em;text-align:center;
+      background:linear-gradient(120deg,#e0e0f0 15%,var(--accent) 55%,var(--accent2) 90%);
+      background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradFlow 5s ease infinite;
+    }
+    .hero-sub{font-size:.83rem;color:var(--muted);text-align:center;max-width:380px;line-height:1.65}
+    .cursor{display:inline-block;width:2px;height:.85em;background:var(--accent2);margin-left:2px;vertical-align:text-bottom;animation:dotPulse 1s step-end infinite}
+
+    /* ── PROGRESS STEPS ──────────────────────────────── */
+    .steps{display:flex;align-items:center;margin-bottom:30px;animation:fadeUp .5s .1s ease both}
+    .step{display:flex;align-items:center;gap:8px;flex:1}
+    .step-n{
+      width:26px;height:26px;border-radius:50%;border:2px solid var(--border2);
+      background:var(--bg3);display:flex;align-items:center;justify-content:center;
+      font-size:.7rem;font-family:var(--font-m);font-weight:700;color:var(--muted);
+      flex-shrink:0;transition:all .3s;
+    }
+    .step.active .step-n{border-color:var(--accent);background:rgba(124,92,252,.14);color:var(--accent);box-shadow:0 0 10px rgba(124,92,252,.28)}
+    .step.done   .step-n{border-color:var(--accent2);background:rgba(0,229,195,.12);color:var(--accent2)}
+    .step-lbl{font-size:.68rem;font-family:var(--font-m);color:var(--muted);white-space:nowrap;transition:color .3s}
+    .step.active .step-lbl{color:var(--text)}
+    .step-line{flex:1;height:1px;background:var(--border2);margin:0 8px;position:relative;overflow:hidden}
+    .step-line::after{content:'';position:absolute;inset:0;background:var(--accent2);transform:scaleX(0);transform-origin:left;transition:transform .5s ease}
+    .step-line.done::after{transform:scaleX(1)}
+
+    /* ── FORM CARD ───────────────────────────────────── */
+    .form-card{
+      background:var(--surface);border:1px solid var(--border2);border-radius:22px;
+      padding:38px;position:relative;overflow:hidden;
+      animation:scaleIn .55s .12s ease both;
+    }
+    /* Animated top-bar */
+    .form-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+      background-size:200% 100%;animation:gradFlow 3s linear infinite;
+    }
+    /* Subtle inner glow */
+    .form-card::after{
+      content:'';position:absolute;top:0;left:0;right:0;height:180px;pointer-events:none;
+      background:radial-gradient(ellipse at 50% 0%,rgba(124,92,252,.055),transparent);
+    }
+
+    /* ── FIELD GROUPS ────────────────────────────────── */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .fg{display:flex;flex-direction:column;gap:7px;animation:fadeUp .4s ease both}
+    .fg:nth-child(1){animation-delay:.18s}.fg:nth-child(2){animation-delay:.22s}
+    .fg:nth-child(3){animation-delay:.26s}.fg:nth-child(4){animation-delay:.30s}
+    .fg:nth-child(5){animation-delay:.34s}.fg:nth-child(6){animation-delay:.38s}
+    .fg.full{grid-column:1/-1}
+
+    .flabel{
+      font-size:.7rem;font-family:var(--font-m);font-weight:600;
+      letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+      display:flex;align-items:center;gap:5px;transition:color .2s;
+    }
+    .fg:focus-within .flabel{color:var(--accent2)}
+    .req{color:var(--accent3);font-size:.78rem}
+    .opt{font-size:.62rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0}
+
+    .finput,.fselect,.ftextarea{
+      background:var(--bg3);border:1px solid var(--border2);
+      color:var(--text);font-family:var(--font-m);font-size:.86rem;
+      padding:11px 15px;border-radius:var(--radius);outline:none;width:100%;
+      transition:border-color .22s,box-shadow .22s,background .22s,transform .18s;
+      -webkit-appearance:none;
+    }
+    .finput::placeholder,.ftextarea::placeholder{color:var(--muted)}
+    .finput:focus,.fselect:focus,.ftextarea:focus{
+      border-color:var(--accent);background:var(--surface2);
+      box-shadow:0 0 0 3px rgba(124,92,252,.15),0 4px 14px rgba(0,0,0,.28);
+      transform:translateY(-1px);
+    }
+    .finput.ok   {border-color:rgba(0,229,195,.45)}
+    .finput.err  {border-color:rgba(255,75,138,.55);box-shadow:0 0 0 3px rgba(255,75,138,.1)}
+    .fselect.err {border-color:rgba(255,75,138,.55)}
+    .ftextarea.ok{border-color:rgba(0,229,195,.45)}
+
+    /* Input icon wrapper */
+    .iw{position:relative}
+    .iw .ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.82rem;pointer-events:none;transition:color .2s}
+    .fg:focus-within .ico{color:var(--accent2)}
+    .iw .finput{padding-left:34px}
+    /* Checkmark badge */
+    .iw .ok-badge{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:.78rem;opacity:0;transition:opacity .25s}
+    .finput.ok~.ok-badge{opacity:1}
+
+    .fhint{font-size:.67rem;color:var(--muted);font-family:var(--font-m);line-height:1.4}
+    .ferr{font-size:.67rem;color:var(--accent3);font-family:var(--font-m);display:none}
+    .fg.has-err .ferr{display:block}.fg.has-err .fhint{display:none}
+
+    /* Dropdown arrow */
+    .fselect{
+      cursor:pointer;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235a5a78' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;
+    }
+    .fselect option{background:#10101f;color:var(--text)}
+    .ftextarea{resize:vertical;min-height:96px;line-height:1.65}
+
+    /* ── PRICING TAGS ────────────────────────────────── */
+    .tag-row{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius)}
+    .tpill{
+      display:inline-flex;align-items:center;gap:4px;
+      padding:5px 12px;background:var(--surface);border:1px solid var(--border2);
+      border-radius:100px;font-size:.68rem;font-family:var(--font-m);
+      color:var(--muted);cursor:pointer;user-select:none;
+      transition:all .16s;
+    }
+    .tpill:hover{border-color:var(--accent);color:var(--text);transform:translateY(-1px)}
+    .tpill.sel{background:rgba(124,92,252,.15);border-color:var(--accent);color:var(--text)}
+
+    /* ── SUBMIT BUTTON ───────────────────────────────── */
+    .btn-sub{
+      position:relative;width:100%;padding:14px 28px;border:none;border-radius:var(--radius);
+      background:linear-gradient(135deg,var(--accent) 0%,#9b59fc 50%,var(--accent2) 100%);
+      background-size:200% 200%;
+      color:#fff;font-family:var(--font-d);font-size:.98rem;font-weight:700;
+      letter-spacing:.01em;cursor:pointer;overflow:hidden;
+      transition:transform .2s,box-shadow .2s,opacity .2s;
+      animation:fadeUp .5s .48s ease both;
+    }
+    .btn-sub::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,var(--accent2),var(--accent));
+      opacity:0;transition:opacity .3s;
+    }
+    .btn-sub:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 40px rgba(124,92,252,.38)}
+    .btn-sub:hover::before{opacity:1}
+    .btn-sub:active{transform:translateY(0)}
+    .btn-sub:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+    .btn-txt{position:relative;z-index:1}
+    /* ripple */
+    .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);transform:scale(0);pointer-events:none;animation:rippleOut .65s ease-out forwards}
+    @keyframes rippleOut{to{transform:scale(4);opacity:0}}
+
+    /* Divider */
+    .fdiv{grid-column:1/-1;height:1px;background:var(--border);margin:2px 0}
+
+    /* ── SUCCESS ─────────────────────────────────────── */
+    .success{display:none;flex-direction:column;align-items:center;gap:18px;padding:16px 0;text-align:center}
+    .success.show{display:flex}
+    .s-icon{
+      width:84px;height:84px;border-radius:50%;
+      background:linear-gradient(135deg,rgba(0,229,195,.18),rgba(124,92,252,.18));
+      border:2px solid rgba(0,229,195,.38);
+      display:flex;align-items:center;justify-content:center;
+      animation:popIn .65s cubic-bezier(.25,.46,.45,.94) both;
+    }
+    .s-icon svg{width:38px;height:38px}
+    .s-icon path{stroke:var(--accent2);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:58;stroke-dashoffset:58;animation:checkDraw .55s .4s ease forwards}
+    .s-title{font-family:var(--font-d);font-size:1.55rem;font-weight:800;background:linear-gradient(120deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp .5s .28s ease both}
+    .s-msg{font-size:.82rem;color:var(--muted);max-width:320px;line-height:1.65;animation:fadeUp .5s .38s ease both}
+    .s-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;animation:fadeUp .5s .48s ease both}
+    .s-btn{
+      display:inline-flex;align-items:center;gap:7px;padding:9px 20px;
+      background:var(--surface2);border:1px solid var(--border2);border-radius:100px;
+      color:var(--text);font-family:var(--font-m);font-size:.78rem;text-decoration:none;cursor:pointer;
+      transition:all .2s;
+    }
+    .s-btn:hover{border-color:var(--accent2);color:var(--accent2);transform:translateY(-1px)}
+
+    /* Confetti */
+    .confetti-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:22px}
+    .cp{position:absolute;animation:confetti 1.3s ease-out both}
+
+    /* ── INFO STRIP ──────────────────────────────────── */
+    .info-strip{
+      display:flex;gap:18px;flex-wrap:wrap;justify-content:center;
+      margin-top:22px;animation:fadeUp .5s .6s ease both;
+    }
+    .info-pill{display:flex;align-items:center;gap:7px;font-size:.7rem;color:var(--muted);font-family:var(--font-m)}
+    .info-dot{color:var(--accent2);font-size:.7rem}
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media(max-width:560px){
+      .sub-wrap{padding:28px 14px 60px}
+      .form-card{padding:22px 16px}
+      .form-grid{grid-template-columns:1fr}
+      .steps{display:none}
+      .hero-title{font-size:1.5rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg"       aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="NexHub home">
+        <img src="../../assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">NexHub</span>
+      </a>
+      <div style="margin-left:auto">
+        <a href="/" class="submit-nav-btn" style="gap:7px">
+          <span aria-hidden="true">←</span> Back to Hub
+        </a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/sites/" class="nav-link">🌐 All Sites</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
+      </nav>
+      <div class="nav-menu-footer"><span>NexHub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <div class="sub-wrap">
+    <a href="/" class="back-link">
+      <span class="back-arrow" aria-hidden="true">←</span> Back to NexHub
+    </a>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-orb-wrap" aria-hidden="true">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="hero-orb-bg"></div>
+        <div class="hero-emoji">🔗</div>
+        <div class="orb-dot"></div>
+        <div class="orb-dot b"></div>
+      </div>
+      <div>
+        <h1 class="hero-title">Submit a Site</h1>
+        <p class="hero-sub">Found something worth adding to the hub? Drop the details and I'll review it.<span class="cursor" aria-hidden="true"></span></p>
+      </div>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps" aria-label="Submission progress" role="list">
+      <div class="step active" id="s1"><div class="step-n">1</div><div class="step-lbl">Details</div></div>
+      <div class="step-line"  id="l1"></div>
+      <div class="step"       id="s2"><div class="step-n">2</div><div class="step-lbl">Extra</div></div>
+      <div class="step-line"  id="l2"></div>
+      <div class="step"       id="s3"><div class="step-n">3</div><div class="step-lbl">Done ✓</div></div>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card" id="formCard">
+      <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+      <form id="subForm" novalidate>
+        <div class="form-grid" id="formGrid">
+
+          <!-- Site name -->
+          <div class="fg" id="g-name">
+            <label class="flabel" for="siteName">Site Name <span class="req">*</span></label>
+            <div class="iw">
+              <span class="ico" aria-hidden="true">◈</span>
+              <input class="finput" type="text" id="siteName" name="site_name" placeholder="e.g. Bolt.new" autocomplete="off"/>
+              <span class="ok-badge" aria-hidden="true">✓</span>
+            </div>
+            <span class="fhint">The display name of the website</span>
+            <span class="ferr">Please enter the site name</span>
+          </div>
+
+          <!-- Category -->
+          <div class="fg" id="g-cat">
+            <label class="flabel" for="siteCat">Category <span class="req">*</span></label>
+            <select class="fselect" id="siteCat" name="category">
+              <option value="">— Pick one —</option>
+              <option>AI</option><option>Anime</option><option>Business</option>
+              <option>Design</option><option>Dev Tools</option><option>Downloads</option>
+              <option>Finance</option><option>Gaming</option><option>Google</option>
+              <option>Hosting</option><option>Learning</option><option>Minecraft</option>
+              <option>Movies</option><option>Music</option><option>News</option>
+              <option>Productivity</option><option>Security</option><option>Shopping</option>
+              <option>Social</option><option>Storage</option><option>Streaming</option>
+              <option>Tools</option><option>Other</option>
+            </select>
+            <span class="fhint">Best matching category</span>
+            <span class="ferr">Please pick a category</span>
+          </div>
+
+          <!-- URL -->
+          <div class="fg full" id="g-url">
+            <label class="flabel" for="siteUrl">URL <span class="req">*</span></label>
+            <div class="iw">
+              <span class="ico" aria-hidden="true">🔗</span>
+              <input class="finput" type="url" id="siteUrl" name="url" placeholder="https://example.com" autocomplete="off"/>
+              <span class="ok-badge" aria-hidden="true">✓</span>
+            </div>
+            <span class="fhint">Full URL including https://</span>
+            <span class="ferr">Please enter a valid URL (https://…)</span>
+          </div>
+
+          <!-- Description -->
+          <div class="fg full" id="g-desc">
+            <label class="flabel" for="siteDesc">Description <span class="req">*</span></label>
+            <textarea class="ftextarea" id="siteDesc" name="description" placeholder="What does it do and why is it useful? (2–3 sentences)"></textarea>
+            <span class="fhint">Short, clear description like the cards on NexHub</span>
+            <span class="ferr">Please write a short description (10+ chars)</span>
+          </div>
+
+          <div class="fdiv"></div>
+
+          <!-- Pricing -->
+          <div class="fg full">
+            <label class="flabel">Pricing Model</label>
+            <div class="tag-row" id="pricePicker">
+              <span class="tpill" data-v="free">💚 Free</span>
+              <span class="tpill" data-v="freemium">🔵 Freemium</span>
+              <span class="tpill" data-v="paid">🔴 Paid</span>
+              <span class="tpill" data-v="subscription">🟠 Subscription</span>
+              <span class="tpill" data-v="open-source">🟢 Open Source</span>
+            </div>
+            <input type="hidden" id="pricingHidden" name="pricing"/>
+          </div>
+
+          <!-- Why add -->
+          <div class="fg full">
+            <label class="flabel" for="whyAdd">Why add it? <span class="opt">(optional)</span></label>
+            <textarea class="ftextarea" id="whyAdd" name="why_add" style="min-height:72px" placeholder="What makes it stand out from what's already in the hub?"></textarea>
+          </div>
+
+          <!-- Name + email -->
+          <div class="fg" id="g-who">
+            <label class="flabel" for="who">Your Name / Handle <span class="opt">(optional)</span></label>
+            <div class="iw">
+              <span class="ico" aria-hidden="true">@</span>
+              <input class="finput" type="text" id="who" name="submitted_by" placeholder="Nexus / @yourhandle" autocomplete="off"/>
+            </div>
+          </div>
+          <div class="fg" id="g-email">
+            <label class="flabel" for="email">Email <span class="opt">(for reply)</span></label>
+            <div class="iw">
+              <span class="ico" aria-hidden="true">✉</span>
+              <input class="finput" type="email" id="email" name="email" placeholder="you@example.com" autocomplete="off"/>
+            </div>
+          </div>
+
+        </div><!-- /form-grid -->
+
+        <div style="margin-top:26px">
+          <button type="submit" class="btn-sub" id="submitBtn">
+            <span class="btn-txt">🚀 Send Request</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- SUCCESS -->
+      <div class="success" id="successState" role="status" aria-live="polite">
+        <div class="s-icon">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 26l10 10 20-22"/></svg>
+        </div>
+        <div class="s-title">Request Sent!</div>
+        <p class="s-msg">Thanks — I'll review it soon and add it if it's a good fit for the hub.</p>
+        <div class="s-btns">
+          <button class="s-btn" onclick="resetForm()">Submit another</button>
+          <a href="/" class="s-btn">← Back to Hub</a>
+        </div>
+      </div>
+    </div><!-- /form-card -->
+
+    <!-- Info strip -->
+    <div class="info-strip" aria-hidden="true">
+      <div class="info-pill"><span class="info-dot">◎</span> Manually reviewed</div>
+      <div class="info-pill"><span class="info-dot">◎</span> Added within a few days</div>
+      <div class="info-pill"><span class="info-dot">◎</span> No spam, no SEO junk</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <span>NexHub — Your digital command center</span>
+    <span>Built by <code>Nexus</code> ♥</span>
+  </footer>
+
+  <script>
+    /* ── PRICING PILLS ───────────────────────────────── */
+    let picked = '';
+    document.querySelectorAll('.tpill').forEach(p=>{
+      p.addEventListener('click',()=>{
+        const v=p.dataset.v;
+        if(picked===v){p.classList.remove('sel');picked=''}
+        else{document.querySelectorAll('.tpill').forEach(x=>x.classList.remove('sel'));p.classList.add('sel');picked=v}
+        document.getElementById('pricingHidden').value=picked;
+        p.style.transform='scale(1.1)';setTimeout(()=>p.style.transform='',160);
+      });
+    });
+
+    /* ── VALIDATION HELPERS ──────────────────────────── */
+    function setOk(el,grp){el.classList.remove('err');el.classList.add('ok');document.getElementById(grp)?.classList.remove('has-err')}
+    function setErr(el,grp){el.classList.remove('ok');el.classList.add('err');document.getElementById(grp)?.classList.add('has-err')}
+    function clr(el,grp){el.classList.remove('ok','err');document.getElementById(grp)?.classList.remove('has-err')}
+    function validUrl(v){try{new URL(v);return true}catch{return false}}
+
+    /* Live validation */
+    const nm=document.getElementById('siteName');
+    nm.addEventListener('input', ()=>nm.value.trim()?setOk(nm,'g-name'):clr(nm,'g-name'));
+    nm.addEventListener('blur',  ()=>nm.value.trim()?setOk(nm,'g-name'):setErr(nm,'g-name'));
+
+    const ul=document.getElementById('siteUrl');
+    ul.addEventListener('input',()=>validUrl(ul.value)?setOk(ul,'g-url'):clr(ul,'g-url'));
+    ul.addEventListener('blur', ()=>{if(ul.value){validUrl(ul.value)?setOk(ul,'g-url'):setErr(ul,'g-url')}});
+
+    const ds=document.getElementById('siteDesc');
+    ds.addEventListener('input',()=>ds.value.trim().length>10?setOk(ds,'g-desc'):clr(ds,'g-desc'));
+    ds.addEventListener('blur', ()=>ds.value.trim().length>10?setOk(ds,'g-desc'):setErr(ds,'g-desc'));
+
+    const ct=document.getElementById('siteCat');
+    ct.addEventListener('change',()=>ct.value?setOk(ct,'g-cat'):setErr(ct,'g-cat'));
+
+    /* Step progress */
+    function refreshSteps(){
+      const ok1=nm.value.trim()&&validUrl(ul.value)&&ct.value;
+      const ok2=ok1&&ds.value.trim().length>10;
+      ['s1','s2','s3'].forEach((id,i)=>{
+        const el=document.getElementById(id);
+        el.classList.remove('active','done');
+        if(i===0&&!ok1){el.classList.add('active')}
+        else if(i===1&&ok1&&!ok2){el.classList.add('active')}
+        else if(i<(ok2?2:ok1?1:0)){el.classList.add('done')}
+      });
+      document.getElementById('l1')?.classList.toggle('done',ok1);
+    }
+    [nm,ul,ct,ds].forEach(el=>el.addEventListener('input',refreshSteps));
+    ct.addEventListener('change',refreshSteps);
+
+    /* ── RIPPLE ──────────────────────────────────────── */
+    document.getElementById('submitBtn').addEventListener('click',e=>{
+      const btn=e.currentTarget,r=btn.getBoundingClientRect();
+      const rp=document.createElement('span');rp.className='ripple';
+      const sz=Math.max(r.width,r.height);
+      rp.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-r.left-sz/2}px;top:${e.clientY-r.top-sz/2}px`;
+      btn.appendChild(rp);setTimeout(()=>rp.remove(),700);
+    });
+
+    /* ── CONFETTI ────────────────────────────────────── */
+    function blast(){
+      const layer=document.getElementById('confettiLayer');layer.innerHTML='';
+      const cols=['#7c5cfc','#00e5c3','#ff4b8a','#fbbf24','#60a5fa','#34d399','#f472b6'];
+      for(let i=0;i<36;i++){
+        const c=document.createElement('div');c.className='cp';
+        const sz=4+Math.random()*9;
+        c.style.cssText=`left:${Math.random()*100}%;top:${-15-Math.random()*20}px;width:${sz}px;height:${sz}px;background:${cols[i%cols.length]};border-radius:${Math.random()>.5?'50%':'3px'};animation-delay:${Math.random()*.7}s;animation-duration:${.9+Math.random()*.7}s;transform:rotate(${Math.random()*360}deg)`;
+        layer.appendChild(c);
+      }
+    }
+
+    /* ── SHAKE ───────────────────────────────────────── */
+    function shake(){
+      const c=document.getElementById('formCard');
+      const kf=[{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}];
+      c.animate(kf,{duration:360,easing:'ease'});
+    }
+
+    /* ── SUBMIT ──────────────────────────────────────── */
+    document.getElementById('subForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      let ok=true;
+      if(!nm.value.trim()){setErr(nm,'g-name');ok=false}
+      if(!ct.value)       {setErr(ct,'g-cat'); ok=false}
+      if(!validUrl(ul.value)){setErr(ul,'g-url');ok=false}
+      if(ds.value.trim().length<10){setErr(ds,'g-desc');ok=false}
+      if(!ok){shake();return}
+
+      const btn=document.getElementById('submitBtn');
+      btn.disabled=true;btn.querySelector('.btn-txt').textContent='⏳ Sending…';
+
+      try{
+        /* ⚠ Replace YOUR_FORM_ID with your Formspree form ID */
+        const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{
+          method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}
+        });
+        if(res.ok){
+          document.getElementById('s1').classList.remove('active');
+          document.getElementById('s2').classList.add('done');
+          document.getElementById('l1').classList.add('done');
+          document.getElementById('l2').classList.add('done');
+          document.getElementById('s3').classList.add('active');
+          document.getElementById('formGrid').style.display='none';
+          btn.style.display='none';
+          document.getElementById('successState').classList.add('show');
+          blast();
+        } else { throw new Error() }
+      } catch{
+        btn.disabled=false;
+        btn.querySelector('.btn-txt').textContent='🚀 Send Request';
+        alert('Something went wrong — please try again or contact me directly.');
+      }
+    });
+
+    /* ── RESET ───────────────────────────────────────── */
+    function resetForm(){
+      document.getElementById('subForm').reset();
+      document.getElementById('formGrid').style.display='';
+      const btn=document.getElementById('submitBtn');
+      btn.style.display='';btn.disabled=false;
+      btn.querySelector('.btn-txt').textContent='🚀 Send Request';
+      document.getElementById('successState').classList.remove('show');
+      document.getElementById('pricingHidden').value='';picked='';
+      document.querySelectorAll('.tpill').forEach(p=>p.classList.remove('sel'));
+      document.querySelectorAll('.finput,.ftextarea,.fselect').forEach(el=>el.classList.remove('ok','err'));
+      document.querySelectorAll('.fg').forEach(g=>g.classList.remove('has-err'));
+      ['s1','s2','s3'].forEach((id,i)=>{
+        const el=document.getElementById(id);el.classList.remove('done','active');
+        if(i===0)el.classList.add('active');
+      });
+      ['l1','l2'].forEach(id=>document.getElementById(id).classList.remove('done'));
+    }
+  </script>
+  <script>
+    /* Theme */
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham){ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});}
+      if(ov){ov.addEventListener('click',closeM);}
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+    });
+  </script>
+</body>
+</html>

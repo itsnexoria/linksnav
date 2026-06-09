@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>All Sites — NexHub</title>
+  <meta name="description" content="Browse all 288+ curated websites in the NexHub directory. Filter by category, search by name, and find your next favourite tool."/>
+  <link rel="canonical" href="https://nexhub.nexosites.xyz/pages/sites/"/>
+  <meta property="og:title" content="All Sites — NexHub"/>
+  <meta property="og:description" content="Browse all 288+ curated websites across AI, gaming, dev tools, design, music, and more."/>
+  <meta property="og:image" content="https://nexhub.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="theme-color" content="#7c5cfc"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
+    @keyframes skeletonPulse { 0%,100%{opacity:.35} 50%{opacity:.7} }
+
+    .sites-wrap {
+      position: relative; z-index: 1;
+      max-width: 1180px; margin: 0 auto;
+      padding: 36px 20px 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; font-family: var(--font-m); color: var(--muted);
+      text-decoration: none; margin-bottom: 28px;
+      transition: color .2s, gap .2s;
+    }
+    .back-link:hover { color: var(--accent2); gap: 10px; }
+
+    /* ── PAGE HEADER ─────────────────────────────────── */
+    .page-header {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      align-items: flex-start; justify-content: space-between;
+      margin-bottom: 32px;
+      animation: fadeUp .4s ease both;
+    }
+    .page-header-left {}
+    .page-title {
+      font-family: var(--font-d); font-size: clamp(1.6rem,4vw,2.4rem);
+      font-weight: 800; letter-spacing: -.04em; margin: 0 0 6px;
+    }
+    .page-title span {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-subtitle { font-size: .82rem; color: var(--muted); }
+
+    /* ── TOOLBAR ─────────────────────────────────────── */
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      margin-bottom: 20px;
+      animation: fadeUp .4s ease .08s both;
+    }
+    .search-wrap-sites {
+      position: relative; display: flex; align-items: center; flex: 1; min-width: 200px; max-width: 380px;
+    }
+    .search-wrap-sites svg { position:absolute; left:12px; color:var(--muted); pointer-events:none; }
+    .search-wrap-sites input {
+      width: 100%; padding: 9px 14px 9px 36px;
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 100px; font-family: var(--font-m); font-size: .8rem;
+      color: var(--text); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .search-wrap-sites input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,92,252,.15); }
+    .search-wrap-sites input::placeholder { color: var(--muted); }
+
+    .sort-select {
+      padding: 9px 14px; background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 100px; font-family: var(--font-m); font-size: .78rem;
+      color: var(--text); cursor: pointer; outline: none;
+      transition: border-color .2s;
+      appearance: none;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .sort-select:focus { border-color: var(--accent); }
+
+    .results-info {
+      font-size: .75rem; color: var(--muted); font-family: var(--font-m);
+      margin-left: auto; white-space: nowrap;
+    }
+
+    /* ── CATEGORY PILLS ──────────────────────────────── */
+    .cat-pills {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px;
+      animation: fadeUp .4s ease .12s both;
+    }
+    .cat-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 13px; border-radius: 100px;
+      font-family: var(--font-m); font-size: .72rem; cursor: pointer;
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--muted);
+      transition: background .18s, border-color .18s, color .18s, transform .15s;
+      user-select: none;
+    }
+    .cat-pill:hover { background: var(--surface2); border-color: var(--accent); color: var(--text); transform: translateY(-1px); }
+    .cat-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .cat-pill .pill-count {
+      background: rgba(255,255,255,.18); border-radius: 100px;
+      padding: 1px 6px; font-size: .65rem;
+    }
+    .cat-pill.active .pill-count { background: rgba(255,255,255,.25); }
+
+    /* ── GRID ────────────────────────────────────────── */
+    .sites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      animation: fadeUp .4s ease .16s both;
+    }
+    .skeleton-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; height: 150px;
+      animation: skeletonPulse 1.6s ease-in-out infinite;
+    }
+    .skeleton-line { height: 10px; border-radius: 5px; background: rgba(255,255,255,.06); margin-bottom: 9px; }
+    .skeleton-line.w60{width:60%} .skeleton-line.w80{width:80%} .skeleton-line.w40{width:40%}
+    [data-theme="light"] .skeleton-card { background: #e8e8f0; }
+    [data-theme="light"] .skeleton-line { background: rgba(0,0,0,.09); }
+
+    .empty-state {
+      grid-column: 1/-1; text-align: center; padding: 60px 20px;
+      color: var(--muted); font-family: var(--font-m); font-size: .88rem;
+    }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
+
+    /* ── LOAD MORE ───────────────────────────────────── */
+    .load-more-wrap { display: flex; justify-content: center; margin-top: 32px; }
+    .load-more-btn {
+      padding: 11px 32px; background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 100px; font-family: var(--font-m); font-size: .8rem;
+      color: var(--text); cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .load-more-btn:hover { background: var(--surface2); border-color: var(--accent); transform: translateY(-2px); }
+    .load-more-btn:disabled { opacity: .4; cursor: default; transform: none; }
+
+    /* Re-use card styles from main + counter badge */
+    .click-count {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: .6rem; font-family: var(--font-m); color: var(--muted);
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 100px; padding: 2px 7px; white-space: nowrap;
+      transition: color .2s, border-color .2s;
+    }
+    .card:hover .click-count { color: var(--accent2); border-color: rgba(0,229,195,.25); background: rgba(0,229,195,.06); }
+    @keyframes countBump { 0%{transform:scale(1)} 40%{transform:scale(1.3)} 100%{transform:scale(1)} }
+    .click-count--bumped { animation: countBump .35s cubic-bezier(.25,.46,.45,.94); }
+
+    @media(max-width:600px) {
+      .sites-wrap { padding: 20px 12px 80px; }
+      .toolbar { gap: 8px; }
+      .search-wrap-sites { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="NexHub home">
+        <img src="../../assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">NexHub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn" style="gap:7px">
+          <span aria-hidden="true">←</span> Back to Hub
+        </a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/sites/" class="nav-link nav-link--active">🌐 All Sites</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+      </nav>
+      <div class="nav-menu-footer"><span>NexHub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <div class="sites-wrap">
+    <a href="/" class="back-link">← Back to NexHub</a>
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <h1 class="page-title">All <span>Sites</span></h1>
+        <p class="page-subtitle" id="pageSubtitle">Loading directory…</p>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap-sites">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+          <path d="m15 15 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="search" id="sitesSearch" placeholder="Search all sites…" autocomplete="off" spellcheck="false" aria-label="Search sites"/>
+      </div>
+      <select class="sort-select" id="sortSelect" aria-label="Sort sites">
+        <option value="default">Sort: Default</option>
+        <option value="alpha">A → Z</option>
+        <option value="alpha-desc">Z → A</option>
+        <option value="most-visited">Most Visited</option>
+      </select>
+      <span class="results-info" id="resultsInfo" aria-live="polite">— sites</span>
+    </div>
+
+    <div class="cat-pills" id="catPills" aria-label="Category filters" role="group">
+      <button class="cat-pill active" data-cat="all">✦ All</button>
+    </div>
+
+    <div class="sites-grid" id="sitesGrid" role="list">
+      <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w40"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
+      <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+    </div>
+
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+      <button class="load-more-btn" id="loadMoreBtn">Load more</button>
+    </div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <span>NexHub — Your digital command center</span>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/pages/about/">About</a>
+      <a href="/pages/contact/">Submit</a>
+    </nav>
+    <span>Built by <code>Nexus</code> ♥</span>
+  </footer>
+
+  <script>
+  /* ── THEME ─────────────────────────────────────────── */
+  (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+
+  /* ── HAMBURGER ──────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded',function(){
+    var btn=document.getElementById('themeToggle');
+    if(btn) btn.addEventListener('click',function(){
+      var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next);
+      localStorage.setItem('nexhub_theme',next);
+    });
+    var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+    function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+    function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+    if(ham){ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});}
+    if(ov){ov.addEventListener('click',closeM);}
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+  });
+
+  /* ── DATA + RENDER ──────────────────────────────────── */
+  const BASE = '../../json/';
+  const PAGE_SIZE = 48;
+  const CLICKS_KEY = 'nexhub_clicks';
+
+  function loadClicks(){ try{ return JSON.parse(localStorage.getItem(CLICKS_KEY)||'{}'); }catch{ return {}; } }
+  function saveClicks(m){ localStorage.setItem(CLICKS_KEY,JSON.stringify(m)); }
+  function bumpClick(url){ var m=loadClicks(); m[url]=(m[url]||0)+1; saveClicks(m); return m[url]; }
+  function getCount(url){ return (loadClicks()[url]||0); }
+  function fmtCount(n){ return n>=1000?(n/1000).toFixed(1)+'k':n; }
+
+  function tagColor(tag){
+    var h=0; for(var i=0;i<tag.length;i++) h=(h*31+tag.charCodeAt(i))&0xffff;
+    var hues=[220,280,160,200,320,40,170,260];
+    var hue=hues[h%hues.length];
+    return 'hsl('+hue+',65%,62%)';
+  }
+
+  function cardHTML(site){
+    var count=getCount(site.url||site.link||'');
+    var url=site.url||site.link||'#';
+    var favicon='https://www.google.com/s2/favicons?sz=32&domain='+encodeURIComponent(url);
+    var tags=(site.tags||[]).slice(0,3).map(function(t){
+      return '<span class="card-tag" style="color:'+tagColor(t)+'">'+t+'</span>';
+    }).join('');
+    return '<a class="card" href="'+url+'" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="'+site.name+'">'
+      +'<div class="card-header">'
+      +'<img class="card-favicon" src="'+favicon+'" alt="" width="16" height="16" loading="lazy" onerror="this.style.display=\'none\'">'
+      +'<span class="card-name">'+site.name+'</span>'
+      +'</div>'
+      +'<p class="card-desc">'+site.description+'</p>'
+      +'<div class="card-footer">'
+      +'<div class="card-tags">'+tags+'</div>'
+      +'</div>'
+      +'<div class="click-count"><span>👁</span><span class="click-count-num">'+fmtCount(count)+'</span> visits</div>'
+      +'</a>';
+  }
+
+  const CATS_LIST = [
+    {id:'ai',label:'AI',icon:'🤖'},{id:'anime',label:'Anime',icon:'🧸'},
+    {id:'business',label:'Business',icon:'🏢'},{id:'design',label:'Design',icon:'🎨'},
+    {id:'dev-tools',label:'Dev Tools',icon:'🛠️'},{id:'downloads',label:'Downloads',icon:'⬇️'},
+    {id:'finance',label:'Finance',icon:'💳'},{id:'gaming',label:'Gaming',icon:'🎮'},
+    {id:'google',label:'Google',icon:'🔵'},{id:'hosting',label:'Hosting',icon:'☁️'},
+    {id:'learning',label:'Learning',icon:'📚'},{id:'minecraft',label:'Minecraft',icon:'⛏️'},
+    {id:'movies',label:'Movies',icon:'🎬'},{id:'music',label:'Music',icon:'🎵'},
+    {id:'my-sites',label:'My Sites',icon:'🌐'},{id:'news',label:'News',icon:'📰'},
+    {id:'productivity',label:'Productivity',icon:'📋'},{id:'security',label:'Security',icon:'🔒'},
+    {id:'shopping',label:'Shopping',icon:'🛒'},{id:'social',label:'Social',icon:'📱'},
+    {id:'storage',label:'Storage',icon:'📁'},{id:'streaming',label:'Streaming',icon:'📺'},
+    {id:'tools',label:'Tools',icon:'⚙️'},
+  ];
+
+  /* Load all category JSONs */
+  var allSites=[], allCats=[], filtered=[], page=0;
+  var activeCat='all', searchQ='', sortMode='default';
+
+  async function loadAll(){
+    var results = await Promise.allSettled(CATS_LIST.map(function(cat){
+      return fetch(BASE+cat.id+'.json',{cache:'force-cache'}).then(function(r){ return r.json().then(function(d){ return {cat:cat,data:d}; }); });
+    }));
+
+    allCats = [];
+    allSites = [];
+    results.forEach(function(r){
+      if(r.status!=='fulfilled') return;
+      var cat=r.value.cat, d=r.value.data;
+      var sites=d.sites||d.links||[];
+      allCats.push({name:cat.label, icon:cat.icon, count:sites.length});
+      sites.forEach(function(s){ allSites.push(Object.assign({},s,{_cat:cat.label})); });
+    });
+
+    buildCatPills();
+    applyFilters();
+    document.getElementById('pageSubtitle').textContent = allSites.length+' curated sites across '+allCats.length+' categories';
+  }
+
+  function buildCatPills(){
+    var wrap = document.getElementById('catPills');
+    var total = allSites.length;
+    var html = '<button class="cat-pill active" data-cat="all">✦ All <span class="pill-count">'+total+'</span></button>';
+    allCats.forEach(function(c){
+      html += '<button class="cat-pill" data-cat="'+c.name+'">'+c.name+' <span class="pill-count">'+c.count+'</span></button>';
+    });
+    wrap.innerHTML = html;
+    wrap.querySelectorAll('.cat-pill').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        wrap.querySelectorAll('.cat-pill').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        page = 0;
+        applyFilters();
+      });
+    });
+  }
+
+  function applyFilters(){
+    var q = searchQ.toLowerCase().trim();
+    filtered = allSites.filter(function(s){
+      var catOk = activeCat==='all' || s._cat===activeCat;
+      var searchOk = !q || s.name.toLowerCase().includes(q) || (s.description||'').toLowerCase().includes(q) || (s.tags||[]).some(function(t){ return t.toLowerCase().includes(q); });
+      return catOk && searchOk;
+    });
+    if(sortMode==='alpha') filtered.sort(function(a,b){ return a.name.localeCompare(b.name); });
+    else if(sortMode==='alpha-desc') filtered.sort(function(a,b){ return b.name.localeCompare(a.name); });
+    else if(sortMode==='most-visited'){ var cl=loadClicks(); filtered.sort(function(a,b){ return (cl[b.url||b.link||'']||0)-(cl[a.url||a.link||'']||0); }); }
+    render(true);
+  }
+
+  function render(reset){
+    if(reset) page=0;
+    var grid=document.getElementById('sitesGrid');
+    var slice=filtered.slice(0, (page+1)*PAGE_SIZE);
+    if(filtered.length===0){
+      grid.innerHTML='<div class="empty-state"><div class="empty-icon">◌</div><p>No sites found'+(searchQ?' for "'+searchQ+'"':'')+'</p></div>';
+    } else {
+      grid.innerHTML=slice.map(cardHTML).join('');
+      trackClicks(grid);
+    }
+    document.getElementById('resultsInfo').textContent = filtered.length+' site'+(filtered.length!==1?'s':'');
+    var lmw=document.getElementById('loadMoreWrap');
+    if(filtered.length > slice.length){ lmw.style.display='flex'; } else { lmw.style.display='none'; }
+  }
+
+  function trackClicks(grid){
+    grid.querySelectorAll('a.card').forEach(function(card){
+      card.addEventListener('click',function(){
+        var url=card.href;
+        var count=bumpClick(url);
+        var badge=card.querySelector('.click-count-num');
+        if(badge){ badge.textContent=fmtCount(count); }
+        var wrap=card.querySelector('.click-count');
+        if(wrap){ wrap.classList.remove('click-count--bumped'); void wrap.offsetWidth; wrap.classList.add('click-count--bumped'); }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    var si=document.getElementById('sitesSearch');
+    si.addEventListener('input',function(){ searchQ=si.value; page=0; applyFilters(); });
+    document.getElementById('sortSelect').addEventListener('change',function(e){ sortMode=e.target.value; applyFilters(); });
+    document.getElementById('loadMoreBtn').addEventListener('click',function(){ page++; render(false); trackClicks(document.getElementById('sitesGrid')); });
+    loadAll();
+  });
+  </script>
+</body>
+</html>
