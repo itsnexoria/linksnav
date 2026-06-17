@@ -54,7 +54,7 @@
   <!-- ── FONTS ─────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Preconnect to favicon CDN -->
   <link rel="preconnect" href="https://www.google.com" crossorigin/>
@@ -195,6 +195,15 @@
   <!-- ── MAIN ──────────────────────────────────────────── -->
   <main class="main" id="main">
     <div class="section-label" id="sectionLabel" aria-live="polite">All Sites</div>
+
+    <div class="sort-bar" id="sortBar" role="toolbar" aria-label="Sort options">
+      <span class="sort-label">Sort:</span>
+      <button class="sort-btn active" data-sort="default" onclick="setSort('default',this)">Default</button>
+      <button class="sort-btn" data-sort="az" onclick="setSort('az',this)">A → Z</button>
+      <button class="sort-btn" data-sort="za" onclick="setSort('za',this)">Z → A</button>
+      <button class="sort-btn" data-sort="visits" onclick="setSort('visits',this)">Most Visited</button>
+      <span class="sort-drag-hint" id="dragHint">✦ Drag cards to reorder</span>
+    </div>
 
     <div class="cards-grid" id="cardsGrid" role="list">
       <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w40"></div></div>

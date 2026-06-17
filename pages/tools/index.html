@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../style.css"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(22px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
@@ -28,7 +28,7 @@
     }
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: .75rem; font-family: var(--font-m); color: var(--muted);
+      font-size: .75rem; font-family: 'Inter', system-ui, sans-serif; color: var(--muted);
       text-decoration: none; margin-bottom: 44px;
       transition: color .2s, gap .2s;
     }
@@ -56,7 +56,7 @@
     }
     .tool-tab {
       padding: 7px 18px; border-radius: 999px; font-size: .8rem;
-      font-family: var(--font-m); border: 1px solid rgba(255,255,255,0.1);
+      font-family: 'Inter', system-ui, sans-serif; border: 1px solid rgba(255,255,255,0.1);
       background: transparent; color: var(--muted); cursor: pointer;
       transition: all .2s;
     }
@@ -88,7 +88,7 @@
       width: 100%; box-sizing: border-box;
       background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
       border-radius: 10px; color: var(--text);
-      font-family: var(--font-m); font-size: .88rem;
+      font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
       padding: 14px; resize: vertical; min-height: 130px;
       transition: border-color .2s;
     }
@@ -98,7 +98,7 @@
     .t-input {
       background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
       border-radius: 10px; color: var(--text);
-      font-family: var(--font-m); font-size: .88rem;
+      font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
       padding: 10px 14px; width: 100%; box-sizing: border-box;
       transition: border-color .2s;
     }
@@ -108,7 +108,7 @@
     .t-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
     .t-btn {
       padding: 8px 18px; border-radius: 8px; font-size: .8rem;
-      font-family: var(--font-m); border: 1px solid var(--accent2);
+      font-family: 'Inter', system-ui, sans-serif; border: 1px solid var(--accent2);
       background: transparent; color: var(--accent2); cursor: pointer;
       transition: all .2s;
     }
@@ -120,7 +120,7 @@
       margin-top: 14px; padding: 14px;
       background: rgba(124,92,252,0.07);
       border: 1px solid rgba(124,92,252,0.2);
-      border-radius: 10px; font-family: var(--font-m); font-size: .85rem;
+      border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
       line-height: 1.7; white-space: pre-wrap; word-break: break-all;
       min-height: 40px; color: var(--text);
     }
@@ -138,7 +138,7 @@
     .font-select {
       background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
       border-radius: 10px; color: var(--text);
-      font-family: var(--font-m); font-size: .88rem;
+      font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
       padding: 10px 14px; cursor: pointer;
       transition: border-color .2s;
     }
@@ -159,7 +159,7 @@
       border: 1px solid var(--card-border); cursor: pointer;
       background: none; padding: 2px;
     }
-    .color-values { font-family: var(--font-m); font-size: .85rem; line-height: 2; }
+    .color-values { font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; line-height: 2; }
     .copy-val { cursor: pointer; color: var(--accent2); }
     .copy-val:hover { text-decoration: underline; }
 
@@ -176,7 +176,7 @@
     .copied-toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
       background: var(--accent2); color: #fff; padding: 10px 22px;
-      border-radius: 999px; font-family: var(--font-m); font-size: .85rem;
+      border-radius: 999px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
       opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 999;
     }
     .copied-toast.show { opacity: 1; }
@@ -297,7 +297,7 @@
         <h2>🔤 Font Preview &amp; Changer</h2>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
           <select class="font-select" id="fontSelect" onchange="updateFont()">
-            <option value="'Syne', sans-serif">Syne (NexHub default)</option>
+            <option value="'Inter', system-ui, sans-serif">Syne (NexHub default)</option>
             <option value="'DM Mono', monospace">DM Mono</option>
             <option value="Georgia, serif">Georgia</option>
             <option value="'Times New Roman', serif">Times New Roman</option>
@@ -311,7 +311,7 @@
             <option value="Garamond, serif">Garamond</option>
           </select>
           <input type="range" id="fontSizeSlider" min="12" max="64" value="24" oninput="updateFont()" style="flex:1;min-width:120px;accent-color:var(--accent2)"/>
-          <span id="fontSizeLabel" style="font-family:var(--font-m);font-size:.85rem;color:var(--muted);min-width:36px">24px</span>
+          <span id="fontSizeLabel" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem;color:var(--muted);min-width:36px">24px</span>
         </div>
         <textarea class="t-textarea" id="fontText" oninput="updateFont()" placeholder="Type something to preview…" style="min-height:60px">The quick brown fox jumps over the lazy dog.</textarea>
         <div class="font-preview" id="fontPreview">The quick brown fox jumps over the lazy dog.</div>
@@ -346,15 +346,15 @@
         <div class="color-grid">
           <div>
             <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Foreground</p>
-            <div class="color-input-wrap"><input type="color" id="fg-color" value="#ffffff" oninput="checkContrast()"/><span id="fg-hex" style="font-family:var(--font-m);font-size:.85rem">#ffffff</span></div>
+            <div class="color-input-wrap"><input type="color" id="fg-color" value="#ffffff" oninput="checkContrast()"/><span id="fg-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#ffffff</span></div>
           </div>
           <div>
             <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Background</p>
-            <div class="color-input-wrap"><input type="color" id="bg-color" value="#7c5cfc" oninput="checkContrast()"/><span id="bg-hex" style="font-family:var(--font-m);font-size:.85rem">#7c5cfc</span></div>
+            <div class="color-input-wrap"><input type="color" id="bg-color" value="#7c5cfc" oninput="checkContrast()"/><span id="bg-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#7c5cfc</span></div>
           </div>
         </div>
         <div id="contrast-preview" style="margin-top:16px;padding:20px;border-radius:12px;text-align:center;font-size:1.1rem;font-weight:700;transition:all .2s"></div>
-        <div id="contrast-result" style="margin-top:12px;font-family:var(--font-m);font-size:.85rem;line-height:1.8"></div>
+        <div id="contrast-result" style="margin-top:12px;font-family:'Inter', system-ui, sans-serif;font-size:.85rem;line-height:1.8"></div>
       </div>
     </div>
 
@@ -365,15 +365,15 @@
         <div class="grad-row">
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
             <label style="font-size:.75rem;color:var(--muted)">Colour 1</label>
-            <div class="color-input-wrap"><input type="color" id="g1" value="#7c5cfc" oninput="updateGrad()"/><span id="g1-hex" style="font-family:var(--font-m);font-size:.85rem">#7c5cfc</span></div>
+            <div class="color-input-wrap"><input type="color" id="g1" value="#7c5cfc" oninput="updateGrad()"/><span id="g1-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#7c5cfc</span></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
             <label style="font-size:.75rem;color:var(--muted)">Colour 2</label>
-            <div class="color-input-wrap"><input type="color" id="g2" value="#a855f7" oninput="updateGrad()"/><span id="g2-hex" style="font-family:var(--font-m);font-size:.85rem">#a855f7</span></div>
+            <div class="color-input-wrap"><input type="color" id="g2" value="#a855f7" oninput="updateGrad()"/><span id="g2-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#a855f7</span></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
             <label style="font-size:.75rem;color:var(--muted)">Colour 3 (optional)</label>
-            <div class="color-input-wrap"><input type="color" id="g3" value="#06b6d4" oninput="updateGrad()"/><span id="g3-hex" style="font-family:var(--font-m);font-size:.85rem">#06b6d4</span></div>
+            <div class="color-input-wrap"><input type="color" id="g3" value="#06b6d4" oninput="updateGrad()"/><span id="g3-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#06b6d4</span></div>
           </div>
         </div>
         <div class="grad-row" style="margin-top:16px">
@@ -389,7 +389,7 @@
             <label style="font-size:.75rem;color:var(--muted)">Angle (linear)</label>
             <div style="display:flex;align-items:center;gap:10px">
               <input type="range" id="gradAngle" min="0" max="360" value="135" oninput="updateGrad()" style="flex:1;accent-color:var(--accent2)"/>
-              <span id="gradAngleLabel" style="font-family:var(--font-m);font-size:.85rem;color:var(--muted);min-width:36px">135°</span>
+              <span id="gradAngleLabel" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem;color:var(--muted);min-width:36px">135°</span>
             </div>
           </div>
         </div>
@@ -441,7 +441,7 @@
       <div class="tool-card">
         <h2>🕵️ URL Parser</h2>
         <input class="t-input" id="url-parse-input" placeholder="https://example.com/path?foo=bar&baz=qux#section" oninput="parseUrl()"/>
-        <div id="url-parse-output" style="margin-top:14px;font-family:var(--font-m);font-size:.85rem;line-height:2;display:none"></div>
+        <div id="url-parse-output" style="margin-top:14px;font-family:'Inter', system-ui, sans-serif;font-size:.85rem;line-height:2;display:none"></div>
       </div>
     </div>
   </main>
@@ -592,7 +592,7 @@
         const transformed = fn(v);
         const row = document.createElement('div');
         row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.15);border-radius:8px;gap:12px;flex-wrap:wrap';
-        row.innerHTML = `<span style="font-size:.85rem;color:var(--muted);font-family:var(--font-m);min-width:70px">${name}</span><span style="flex:1;font-size:1rem">${transformed}</span>`;
+        row.innerHTML = `<span style="font-size:.85rem;color:var(--muted);font-family:'Inter', system-ui, sans-serif;min-width:70px">${name}</span><span style="flex:1;font-size:1rem">${transformed}</span>`;
         const btn = document.createElement('button');
         btn.className = 't-btn'; btn.textContent = 'Copy';
         btn.onclick = () => { navigator.clipboard.writeText(transformed).then(() => showToast()); };
