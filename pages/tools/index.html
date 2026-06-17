@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<script>(function(){var t=localStorage.getItem("nexhub_theme")||"dark";document.documentElement.setAttribute("data-theme",t);})()</script>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Mini Tools — NexHub</title>
+  <meta name="description" content="Free browser-based mini tools — font changer, text case converter, word counter, colour picker, and more. No sign-up, instant results."/>
+  <link rel="canonical" href="https://nexhub.nexosites.xyz/pages/tools/"/>
+  <meta property="og:title" content="Mini Tools — NexHub"/>
+  <meta property="og:description" content="Free browser-based mini tools. No sign-up needed."/>
+  <meta property="og:image" content="https://nexhub.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="theme-color" content="#7c5cfc"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
+    @keyframes gradFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .tools-wrap {
+      position: relative; z-index: 1;
+      max-width: 880px; margin: 0 auto;
+      padding: 44px 24px 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; font-family: var(--font-m); color: var(--muted);
+      text-decoration: none; margin-bottom: 44px;
+      transition: color .2s, gap .2s;
+    }
+    .back-link:hover { color: var(--accent2); gap: 10px; }
+
+    .tools-hero {
+      text-align: center; margin-bottom: 56px;
+      animation: fadeUp .5s ease both;
+    }
+    .tools-hero-icon { font-size: 3rem; margin-bottom: 12px; }
+    .tools-hero h1 {
+      font-family: var(--font-d); font-size: clamp(2rem,5vw,3rem);
+      font-weight: 800; letter-spacing: -.04em;
+      background: linear-gradient(120deg, var(--text) 20%, var(--accent2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-size: 200% 100%; animation: gradFlow 6s ease infinite;
+      margin: 0 0 12px;
+    }
+    .tools-hero p { font-size: .9rem; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
+    /* Tab bar */
+    .tool-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 32px; justify-content: center;
+    }
+    .tool-tab {
+      padding: 7px 18px; border-radius: 999px; font-size: .8rem;
+      font-family: var(--font-m); border: 1px solid rgba(255,255,255,0.1);
+      background: transparent; color: var(--muted); cursor: pointer;
+      transition: all .2s;
+    }
+    .tool-tab:hover { border-color: var(--accent2); color: var(--accent2); }
+    .tool-tab.active {
+      background: var(--accent2); border-color: var(--accent2);
+      color: #fff;
+    }
+    [data-theme="light"] .tool-tab { border-color: rgba(0,0,0,0.1); }
+
+    /* Tool cards */
+    .tool-panel { display: none; animation: fadeUp .3s ease both; }
+    .tool-panel.active { display: block; }
+
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 28px;
+      margin-bottom: 20px;
+    }
+    .tool-card h2 {
+      font-family: var(--font-d); font-size: 1.1rem;
+      font-weight: 700; margin: 0 0 18px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    /* Shared inputs */
+    .t-textarea {
+      width: 100%; box-sizing: border-box;
+      background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
+      border-radius: 10px; color: var(--text);
+      font-family: var(--font-m); font-size: .88rem;
+      padding: 14px; resize: vertical; min-height: 130px;
+      transition: border-color .2s;
+    }
+    .t-textarea:focus { outline: none; border-color: var(--accent2); }
+    [data-theme="light"] .t-textarea { background: rgba(0,0,0,0.04); }
+
+    .t-input {
+      background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
+      border-radius: 10px; color: var(--text);
+      font-family: var(--font-m); font-size: .88rem;
+      padding: 10px 14px; width: 100%; box-sizing: border-box;
+      transition: border-color .2s;
+    }
+    .t-input:focus { outline: none; border-color: var(--accent2); }
+    [data-theme="light"] .t-input { background: rgba(0,0,0,0.04); }
+
+    .t-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .t-btn {
+      padding: 8px 18px; border-radius: 8px; font-size: .8rem;
+      font-family: var(--font-m); border: 1px solid var(--accent2);
+      background: transparent; color: var(--accent2); cursor: pointer;
+      transition: all .2s;
+    }
+    .t-btn:hover { background: var(--accent2); color: #fff; }
+    .t-btn.primary { background: var(--accent2); color: #fff; }
+    .t-btn.primary:hover { opacity: .85; }
+
+    .t-output {
+      margin-top: 14px; padding: 14px;
+      background: rgba(124,92,252,0.07);
+      border: 1px solid rgba(124,92,252,0.2);
+      border-radius: 10px; font-family: var(--font-m); font-size: .85rem;
+      line-height: 1.7; white-space: pre-wrap; word-break: break-all;
+      min-height: 40px; color: var(--text);
+    }
+
+    .t-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; }
+    .t-stat {
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(124,92,252,0.07); border: 1px solid rgba(124,92,252,0.2);
+      border-radius: 10px; padding: 10px 18px; min-width: 80px;
+    }
+    .t-stat-val { font-family: var(--font-d); font-size: 1.4rem; font-weight: 800; color: var(--accent2); }
+    .t-stat-label { font-size: .7rem; color: var(--muted); margin-top: 2px; }
+
+    /* Font preview */
+    .font-select {
+      background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
+      border-radius: 10px; color: var(--text);
+      font-family: var(--font-m); font-size: .88rem;
+      padding: 10px 14px; cursor: pointer;
+      transition: border-color .2s;
+    }
+    .font-select:focus { outline: none; border-color: var(--accent2); }
+    [data-theme="light"] .font-select { background: rgba(0,0,0,0.04); }
+    .font-preview {
+      margin-top: 14px; padding: 20px;
+      background: rgba(0,0,0,0.2); border-radius: 10px;
+      font-size: 1.5rem; line-height: 1.5; color: var(--text);
+    }
+    [data-theme="light"] .font-preview { background: rgba(0,0,0,0.04); }
+
+    /* Color picker */
+    .color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .color-input-wrap { display: flex; align-items: center; gap: 12px; }
+    input[type="color"] {
+      width: 48px; height: 48px; border-radius: 10px;
+      border: 1px solid var(--card-border); cursor: pointer;
+      background: none; padding: 2px;
+    }
+    .color-values { font-family: var(--font-m); font-size: .85rem; line-height: 2; }
+    .copy-val { cursor: pointer; color: var(--accent2); }
+    .copy-val:hover { text-decoration: underline; }
+
+    /* Gradient */
+    .grad-preview {
+      height: 100px; border-radius: 12px; margin-top: 14px;
+      transition: all .3s;
+    }
+    .grad-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+    /* Base64 */
+    .b64-mode-row { display: flex; gap: 8px; margin-bottom: 12px; }
+
+    .copied-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--accent2); color: #fff; padding: 10px 22px;
+      border-radius: 999px; font-family: var(--font-m); font-size: .85rem;
+      opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 999;
+    }
+    .copied-toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="NexHub home">
+        <img src="../../assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">NexHub</span>
+      </a>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/tools/" class="nav-link nav-link--active">🛠️ Mini Tools</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+      </nav>
+      <div class="nav-menu-footer"><span>NexHub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="tools-wrap">
+    <a href="/" class="back-link">← Back to NexHub</a>
+
+    <div class="tools-hero">
+      <div class="tools-hero-icon">🛠️</div>
+      <h1>Mini Tools</h1>
+      <p>Handy browser-based utilities — no sign-up, no tracking, instant results.</p>
+    </div>
+
+    <div class="tool-tabs" role="tablist">
+      <button class="tool-tab active" data-panel="text" role="tab">📝 Text</button>
+      <button class="tool-tab" data-panel="font" role="tab">🔤 Font Changer</button>
+      <button class="tool-tab" data-panel="color" role="tab">🎨 Colour Picker</button>
+      <button class="tool-tab" data-panel="gradient" role="tab">🌈 Gradient</button>
+      <button class="tool-tab" data-panel="base64" role="tab">🔐 Base64</button>
+      <button class="tool-tab" data-panel="url" role="tab">🔗 URL Encode</button>
+    </div>
+
+    <!-- TEXT TOOLS -->
+    <div class="tool-panel active" id="panel-text">
+      <div class="tool-card">
+        <h2>📊 Word &amp; Character Counter</h2>
+        <textarea class="t-textarea" id="wc-input" placeholder="Paste or type your text here…"></textarea>
+        <div class="t-stats">
+          <div class="t-stat"><span class="t-stat-val" id="wc-chars">0</span><span class="t-stat-label">Characters</span></div>
+          <div class="t-stat"><span class="t-stat-val" id="wc-words">0</span><span class="t-stat-label">Words</span></div>
+          <div class="t-stat"><span class="t-stat-val" id="wc-lines">0</span><span class="t-stat-label">Lines</span></div>
+          <div class="t-stat"><span class="t-stat-val" id="wc-sentences">0</span><span class="t-stat-label">Sentences</span></div>
+          <div class="t-stat"><span class="t-stat-val" id="wc-read">0</span><span class="t-stat-label">Min Read</span></div>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h2>🔡 Case Converter</h2>
+        <textarea class="t-textarea" id="case-input" placeholder="Enter text to convert…"></textarea>
+        <div class="t-btn-row">
+          <button class="t-btn" onclick="convertCase('upper')">UPPER</button>
+          <button class="t-btn" onclick="convertCase('lower')">lower</button>
+          <button class="t-btn" onclick="convertCase('title')">Title Case</button>
+          <button class="t-btn" onclick="convertCase('sentence')">Sentence case</button>
+          <button class="t-btn" onclick="convertCase('camel')">camelCase</button>
+          <button class="t-btn" onclick="convertCase('snake')">snake_case</button>
+          <button class="t-btn" onclick="convertCase('kebab')">kebab-case</button>
+          <button class="t-btn" onclick="convertCase('reverse')">esreveR</button>
+        </div>
+        <div class="t-output" id="case-output" style="display:none"></div>
+        <div class="t-btn-row" id="case-copy-row" style="display:none">
+          <button class="t-btn primary" onclick="copyOutput('case-output')">Copy</button>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h2>✂️ Text Cleaner</h2>
+        <textarea class="t-textarea" id="clean-input" placeholder="Paste messy text…"></textarea>
+        <div class="t-btn-row">
+          <button class="t-btn" onclick="cleanText('trim')">Trim Spaces</button>
+          <button class="t-btn" onclick="cleanText('lines')">Remove Blank Lines</button>
+          <button class="t-btn" onclick="cleanText('dupes')">Remove Duplicate Lines</button>
+          <button class="t-btn" onclick="cleanText('punctuation')">Strip Punctuation</button>
+          <button class="t-btn" onclick="cleanText('numbers')">Remove Numbers</button>
+          <button class="t-btn" onclick="cleanText('sort')">Sort Lines A–Z</button>
+        </div>
+        <div class="t-output" id="clean-output" style="display:none"></div>
+        <div class="t-btn-row" id="clean-copy-row" style="display:none">
+          <button class="t-btn primary" onclick="copyOutput('clean-output')">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FONT CHANGER -->
+    <div class="tool-panel" id="panel-font">
+      <div class="tool-card">
+        <h2>🔤 Font Preview &amp; Changer</h2>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+          <select class="font-select" id="fontSelect" onchange="updateFont()">
+            <option value="'Syne', sans-serif">Syne (NexHub default)</option>
+            <option value="'DM Mono', monospace">DM Mono</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Times New Roman', serif">Times New Roman</option>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+            <option value="Impact, fantasy">Impact</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+            <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+            <option value="Palatino, serif">Palatino</option>
+            <option value="Garamond, serif">Garamond</option>
+          </select>
+          <input type="range" id="fontSizeSlider" min="12" max="64" value="24" oninput="updateFont()" style="flex:1;min-width:120px;accent-color:var(--accent2)"/>
+          <span id="fontSizeLabel" style="font-family:var(--font-m);font-size:.85rem;color:var(--muted);min-width:36px">24px</span>
+        </div>
+        <textarea class="t-textarea" id="fontText" oninput="updateFont()" placeholder="Type something to preview…" style="min-height:60px">The quick brown fox jumps over the lazy dog.</textarea>
+        <div class="font-preview" id="fontPreview">The quick brown fox jumps over the lazy dog.</div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:10px">💡 Try pasting a logo, headline, or paragraph to see how it looks in different fonts.</p>
+      </div>
+
+      <div class="tool-card">
+        <h2>✨ Unicode Text Styles</h2>
+        <input class="t-input" id="unicode-input" placeholder="Type text to transform…" oninput="updateUnicode()"/>
+        <div id="unicode-output" style="margin-top:16px;display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+    </div>
+
+    <!-- COLOUR PICKER -->
+    <div class="tool-panel" id="panel-color">
+      <div class="tool-card">
+        <h2>🎨 Colour Picker</h2>
+        <div class="color-input-wrap" style="margin-bottom:20px">
+          <input type="color" id="colorPicker" value="#7c5cfc" oninput="updateColor()"/>
+          <div class="color-values" id="colorValues"></div>
+        </div>
+        <div style="height:80px;border-radius:12px;transition:background .2s" id="colorSwatch"></div>
+        <div class="t-btn-row" style="margin-top:14px">
+          <button class="t-btn" onclick="copyColor('hex')">Copy HEX</button>
+          <button class="t-btn" onclick="copyColor('rgb')">Copy RGB</button>
+          <button class="t-btn" onclick="copyColor('hsl')">Copy HSL</button>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h2>🎭 Contrast Checker</h2>
+        <div class="color-grid">
+          <div>
+            <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Foreground</p>
+            <div class="color-input-wrap"><input type="color" id="fg-color" value="#ffffff" oninput="checkContrast()"/><span id="fg-hex" style="font-family:var(--font-m);font-size:.85rem">#ffffff</span></div>
+          </div>
+          <div>
+            <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Background</p>
+            <div class="color-input-wrap"><input type="color" id="bg-color" value="#7c5cfc" oninput="checkContrast()"/><span id="bg-hex" style="font-family:var(--font-m);font-size:.85rem">#7c5cfc</span></div>
+          </div>
+        </div>
+        <div id="contrast-preview" style="margin-top:16px;padding:20px;border-radius:12px;text-align:center;font-size:1.1rem;font-weight:700;transition:all .2s"></div>
+        <div id="contrast-result" style="margin-top:12px;font-family:var(--font-m);font-size:.85rem;line-height:1.8"></div>
+      </div>
+    </div>
+
+    <!-- GRADIENT GENERATOR -->
+    <div class="tool-panel" id="panel-gradient">
+      <div class="tool-card">
+        <h2>🌈 CSS Gradient Generator</h2>
+        <div class="grad-row">
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
+            <label style="font-size:.75rem;color:var(--muted)">Colour 1</label>
+            <div class="color-input-wrap"><input type="color" id="g1" value="#7c5cfc" oninput="updateGrad()"/><span id="g1-hex" style="font-family:var(--font-m);font-size:.85rem">#7c5cfc</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
+            <label style="font-size:.75rem;color:var(--muted)">Colour 2</label>
+            <div class="color-input-wrap"><input type="color" id="g2" value="#a855f7" oninput="updateGrad()"/><span id="g2-hex" style="font-family:var(--font-m);font-size:.85rem">#a855f7</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
+            <label style="font-size:.75rem;color:var(--muted)">Colour 3 (optional)</label>
+            <div class="color-input-wrap"><input type="color" id="g3" value="#06b6d4" oninput="updateGrad()"/><span id="g3-hex" style="font-family:var(--font-m);font-size:.85rem">#06b6d4</span></div>
+          </div>
+        </div>
+        <div class="grad-row" style="margin-top:16px">
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px">
+            <label style="font-size:.75rem;color:var(--muted)">Type</label>
+            <select class="font-select" id="gradType" onchange="updateGrad()">
+              <option value="linear">Linear</option>
+              <option value="radial">Radial</option>
+              <option value="conic">Conic</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px">
+            <label style="font-size:.75rem;color:var(--muted)">Angle (linear)</label>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="range" id="gradAngle" min="0" max="360" value="135" oninput="updateGrad()" style="flex:1;accent-color:var(--accent2)"/>
+              <span id="gradAngleLabel" style="font-family:var(--font-m);font-size:.85rem;color:var(--muted);min-width:36px">135°</span>
+            </div>
+          </div>
+        </div>
+        <div class="grad-preview" id="gradPreview"></div>
+        <div class="t-output" id="gradCSS" style="margin-top:14px;cursor:pointer" onclick="copyOutput('gradCSS')" title="Click to copy"></div>
+        <div class="t-btn-row"><button class="t-btn primary" onclick="copyOutput('gradCSS')">Copy CSS</button></div>
+      </div>
+    </div>
+
+    <!-- BASE64 -->
+    <div class="tool-panel" id="panel-base64">
+      <div class="tool-card">
+        <h2>🔐 Base64 Encoder / Decoder</h2>
+        <div class="b64-mode-row">
+          <button class="t-btn primary" id="b64-enc-btn" onclick="setB64Mode('encode')">Encode</button>
+          <button class="t-btn" id="b64-dec-btn" onclick="setB64Mode('decode')">Decode</button>
+        </div>
+        <textarea class="t-textarea" id="b64-input" placeholder="Enter text to encode…"></textarea>
+        <div class="t-btn-row">
+          <button class="t-btn primary" onclick="runB64()">Run</button>
+          <button class="t-btn" onclick="document.getElementById('b64-input').value='';document.getElementById('b64-output').style.display='none'">Clear</button>
+        </div>
+        <div class="t-output" id="b64-output" style="display:none"></div>
+        <div class="t-btn-row" id="b64-copy-row" style="display:none">
+          <button class="t-btn primary" onclick="copyOutput('b64-output')">Copy Result</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- URL ENCODE -->
+    <div class="tool-panel" id="panel-url">
+      <div class="tool-card">
+        <h2>🔗 URL Encoder / Decoder</h2>
+        <div class="b64-mode-row">
+          <button class="t-btn primary" id="url-enc-btn" onclick="setUrlMode('encode')">Encode</button>
+          <button class="t-btn" id="url-dec-btn" onclick="setUrlMode('decode')">Decode</button>
+        </div>
+        <textarea class="t-textarea" id="url-input" placeholder="Enter URL or text to encode…"></textarea>
+        <div class="t-btn-row">
+          <button class="t-btn primary" onclick="runUrl()">Run</button>
+          <button class="t-btn" onclick="document.getElementById('url-input').value='';document.getElementById('url-output').style.display='none'">Clear</button>
+        </div>
+        <div class="t-output" id="url-output" style="display:none"></div>
+        <div class="t-btn-row" id="url-copy-row" style="display:none">
+          <button class="t-btn primary" onclick="copyOutput('url-output')">Copy Result</button>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h2>🕵️ URL Parser</h2>
+        <input class="t-input" id="url-parse-input" placeholder="https://example.com/path?foo=bar&baz=qux#section" oninput="parseUrl()"/>
+        <div id="url-parse-output" style="margin-top:14px;font-family:var(--font-m);font-size:.85rem;line-height:2;display:none"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <span>NexHub — Your digital command center</span>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/pages/about/">About</a>
+      <a href="/pages/tools/">Tools</a>
+      <a href="/pages/contact/">Submit</a>
+      <a href="/pages/donate/">Donate</a>
+    </nav>
+    <span>Built by <code>Nexus</code> ♥</span>
+  </footer>
+
+  <div class="copied-toast" id="copiedToast">Copied!</div>
+
+  <script>
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', t);
+      localStorage.setItem('nexhub_theme', t);
+    });
+
+    // Hamburger
+    const ham = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('navOverlay');
+    function closeMenu() { menu.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); ham.setAttribute('aria-expanded','false'); }
+    ham.addEventListener('click', () => {
+      const open = menu.getAttribute('aria-hidden') === 'false';
+      menu.setAttribute('aria-hidden', open ? 'true' : 'false');
+      overlay.setAttribute('aria-hidden', open ? 'true' : 'false');
+      ham.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+    overlay.addEventListener('click', closeMenu);
+
+    // Tabs
+    document.querySelectorAll('.tool-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tool-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+      });
+    });
+
+    // Toast
+    function showToast(msg = 'Copied!') {
+      const t = document.getElementById('copiedToast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+    function copyOutput(id) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent).then(() => showToast());
+    }
+
+    // ── WORD COUNTER ─────────────────────────────────────
+    const wcInput = document.getElementById('wc-input');
+    wcInput.addEventListener('input', () => {
+      const v = wcInput.value;
+      document.getElementById('wc-chars').textContent = v.length;
+      document.getElementById('wc-words').textContent = v.trim() ? v.trim().split(/\s+/).length : 0;
+      document.getElementById('wc-lines').textContent = v ? v.split('\n').length : 0;
+      document.getElementById('wc-sentences').textContent = (v.match(/[.!?]+/g) || []).length;
+      document.getElementById('wc-read').textContent = Math.max(1, Math.ceil((v.trim() ? v.trim().split(/\s+/).length : 0) / 200));
+    });
+
+    // ── CASE CONVERTER ───────────────────────────────────
+    function convertCase(mode) {
+      const v = document.getElementById('case-input').value;
+      if (!v) return;
+      let result = v;
+      if (mode === 'upper') result = v.toUpperCase();
+      else if (mode === 'lower') result = v.toLowerCase();
+      else if (mode === 'title') result = v.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
+      else if (mode === 'sentence') result = v.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
+      else if (mode === 'camel') result = v.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
+      else if (mode === 'snake') result = v.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+      else if (mode === 'kebab') result = v.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      else if (mode === 'reverse') result = v.split('').reverse().join('');
+      const out = document.getElementById('case-output');
+      out.textContent = result; out.style.display = 'block';
+      document.getElementById('case-copy-row').style.display = 'flex';
+    }
+
+    // ── TEXT CLEANER ──────────────────────────────────────
+    function cleanText(mode) {
+      const v = document.getElementById('clean-input').value;
+      if (!v) return;
+      let result = v;
+      if (mode === 'trim') result = v.split('\n').map(l => l.trim()).join('\n');
+      else if (mode === 'lines') result = v.split('\n').filter(l => l.trim()).join('\n');
+      else if (mode === 'dupes') result = [...new Set(v.split('\n'))].join('\n');
+      else if (mode === 'punctuation') result = v.replace(/[^\w\s]/g, '');
+      else if (mode === 'numbers') result = v.replace(/\d/g, '');
+      else if (mode === 'sort') result = v.split('\n').sort((a,b) => a.localeCompare(b)).join('\n');
+      const out = document.getElementById('clean-output');
+      out.textContent = result; out.style.display = 'block';
+      document.getElementById('clean-copy-row').style.display = 'flex';
+    }
+
+    // ── FONT CHANGER ──────────────────────────────────────
+    function updateFont() {
+      const font = document.getElementById('fontSelect').value;
+      const size = document.getElementById('fontSizeSlider').value;
+      const text = document.getElementById('fontText').value;
+      document.getElementById('fontSizeLabel').textContent = size + 'px';
+      const preview = document.getElementById('fontPreview');
+      preview.style.fontFamily = font;
+      preview.style.fontSize = size + 'px';
+      preview.textContent = text;
+    }
+
+    // ── UNICODE STYLES ────────────────────────────────────
+    const unicodeStyles = [
+      { name: '𝐁𝐨𝐥𝐝', fn: c => transcode(c, 'bold') },
+      { name: '𝘐𝘵𝘢𝘭𝘪𝘤', fn: c => transcode(c, 'italic') },
+      { name: '𝕯𝖔𝖚𝖇𝖑𝖊', fn: c => transcode(c, 'double') },
+      { name: '𝖒𝖊𝖉𝖎𝖊𝖛𝖆𝖑', fn: c => transcode(c, 'medieval') },
+      { name: '𝔪𝔬𝔫𝔬', fn: c => transcode(c, 'mono') },
+      { name: 'ⓈⓂⒶⓁⓁ', fn: c => transcode(c, 'circle') },
+    ];
+    const maps = {
+      bold: [0x1D400,0x1D41A], italic: [0x1D434,0x1D44E],
+      double: [0x1D538,0x1D552], medieval: [0x1D504,0x1D51E],
+      mono: [0x1D670,0x1D68A], circle: [0x24B6,0x24D0]
+    };
+    function transcode(str, style) {
+      const [upper, lower] = maps[style];
+      return str.split('').map(c => {
+        const code = c.charCodeAt(0);
+        if (code >= 65 && code <= 90) return String.fromCodePoint(upper + code - 65);
+        if (code >= 97 && code <= 122) return String.fromCodePoint(lower + code - 97);
+        return c;
+      }).join('');
+    }
+    function updateUnicode() {
+      const v = document.getElementById('unicode-input').value;
+      const container = document.getElementById('unicode-output');
+      container.innerHTML = '';
+      if (!v) return;
+      unicodeStyles.forEach(({ name, fn }) => {
+        const transformed = fn(v);
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.15);border-radius:8px;gap:12px;flex-wrap:wrap';
+        row.innerHTML = `<span style="font-size:.85rem;color:var(--muted);font-family:var(--font-m);min-width:70px">${name}</span><span style="flex:1;font-size:1rem">${transformed}</span>`;
+        const btn = document.createElement('button');
+        btn.className = 't-btn'; btn.textContent = 'Copy';
+        btn.onclick = () => { navigator.clipboard.writeText(transformed).then(() => showToast()); };
+        row.appendChild(btn);
+        container.appendChild(row);
+      });
+    }
+
+    // ── COLOUR PICKER ─────────────────────────────────────
+    function hexToRgb(hex) {
+      const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+      return { r, g, b };
+    }
+    function rgbToHsl(r,g,b) {
+      r/=255;g/=255;b/=255;
+      const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;
+      if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}
+      return {h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
+    }
+    let lastHex='#7c5cfc',lastRgb,lastHsl;
+    function updateColor() {
+      const hex = document.getElementById('colorPicker').value;
+      lastHex = hex;
+      const {r,g,b} = hexToRgb(hex);
+      lastRgb = `rgb(${r}, ${g}, ${b})`;
+      const {h,s,l} = rgbToHsl(r,g,b);
+      lastHsl = `hsl(${h}, ${s}%, ${l}%)`;
+      document.getElementById('colorSwatch').style.background = hex;
+      document.getElementById('colorValues').innerHTML =
+        `<span style="color:var(--text)">HEX: <b>${hex}</b></span><br>
+         <span style="color:var(--text)">RGB: <b>${lastRgb}</b></span><br>
+         <span style="color:var(--text)">HSL: <b>${lastHsl}</b></span>`;
+    }
+    function copyColor(type) {
+      const val = type==='hex'?lastHex:type==='rgb'?lastRgb:lastHsl;
+      navigator.clipboard.writeText(val).then(() => showToast(type.toUpperCase() + ' copied!'));
+    }
+    updateColor();
+
+    // ── CONTRAST CHECKER ──────────────────────────────────
+    function luminance(hex) {
+      const {r,g,b} = hexToRgb(hex);
+      return [r,g,b].map(v => { v/=255; return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4); }).reduce((sum,v,i) => sum+v*[0.2126,0.7152,0.0722][i],0);
+    }
+    function checkContrast() {
+      const fg = document.getElementById('fg-color').value;
+      const bg = document.getElementById('bg-color').value;
+      document.getElementById('fg-hex').textContent = fg;
+      document.getElementById('bg-hex').textContent = bg;
+      const L1 = luminance(fg), L2 = luminance(bg);
+      const ratio = (Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05);
+      const r = ratio.toFixed(2);
+      const prev = document.getElementById('contrast-preview');
+      prev.style.background = bg; prev.style.color = fg;
+      prev.textContent = `Sample Text — ${r}:1 contrast ratio`;
+      const aa = ratio >= 4.5, aaa = ratio >= 7, aaLarge = ratio >= 3;
+      document.getElementById('contrast-result').innerHTML =
+        `<b>Ratio:</b> ${r}:1<br>
+        AA Normal: ${aa?'✅ Pass':'❌ Fail'} &nbsp;|&nbsp;
+        AA Large: ${aaLarge?'✅ Pass':'❌ Fail'} &nbsp;|&nbsp;
+        AAA: ${aaa?'✅ Pass':'❌ Fail'}`;
+    }
+    checkContrast();
+
+    // ── GRADIENT ──────────────────────────────────────────
+    function updateGrad() {
+      const g1 = document.getElementById('g1').value;
+      const g2 = document.getElementById('g2').value;
+      const g3 = document.getElementById('g3').value;
+      const type = document.getElementById('gradType').value;
+      const angle = document.getElementById('gradAngle').value;
+      document.getElementById('g1-hex').textContent = g1;
+      document.getElementById('g2-hex').textContent = g2;
+      document.getElementById('g3-hex').textContent = g3;
+      document.getElementById('gradAngleLabel').textContent = angle + '°';
+      let css;
+      if (type === 'linear') css = `linear-gradient(${angle}deg, ${g1}, ${g2}, ${g3})`;
+      else if (type === 'radial') css = `radial-gradient(circle, ${g1}, ${g2}, ${g3})`;
+      else css = `conic-gradient(from ${angle}deg, ${g1}, ${g2}, ${g3})`;
+      document.getElementById('gradPreview').style.background = css;
+      document.getElementById('gradCSS').textContent = `background: ${css};`;
+    }
+    updateGrad();
+
+    // ── BASE64 ────────────────────────────────────────────
+    let b64Mode = 'encode';
+    function setB64Mode(m) {
+      b64Mode = m;
+      document.getElementById('b64-enc-btn').className = m==='encode'?'t-btn primary':'t-btn';
+      document.getElementById('b64-dec-btn').className = m==='decode'?'t-btn primary':'t-btn';
+      document.getElementById('b64-input').placeholder = m==='encode'?'Enter text to encode…':'Enter Base64 to decode…';
+    }
+    function runB64() {
+      const v = document.getElementById('b64-input').value;
+      if (!v) return;
+      let result;
+      try { result = b64Mode==='encode' ? btoa(unescape(encodeURIComponent(v))) : decodeURIComponent(escape(atob(v))); }
+      catch(e) { result = 'Error: ' + e.message; }
+      const out = document.getElementById('b64-output');
+      out.textContent = result; out.style.display = 'block';
+      document.getElementById('b64-copy-row').style.display = 'flex';
+    }
+
+    // ── URL ENCODE ────────────────────────────────────────
+    let urlMode = 'encode';
+    function setUrlMode(m) {
+      urlMode = m;
+      document.getElementById('url-enc-btn').className = m==='encode'?'t-btn primary':'t-btn';
+      document.getElementById('url-dec-btn').className = m==='decode'?'t-btn primary':'t-btn';
+      document.getElementById('url-input').placeholder = m==='encode'?'Enter URL or text to encode…':'Enter encoded URL to decode…';
+    }
+    function runUrl() {
+      const v = document.getElementById('url-input').value;
+      if (!v) return;
+      let result;
+      try { result = urlMode==='encode' ? encodeURIComponent(v) : decodeURIComponent(v); }
+      catch(e) { result = 'Error: ' + e.message; }
+      const out = document.getElementById('url-output');
+      out.textContent = result; out.style.display = 'block';
+      document.getElementById('url-copy-row').style.display = 'flex';
+    }
+    function parseUrl() {
+      const v = document.getElementById('url-parse-input').value.trim();
+      const out = document.getElementById('url-parse-output');
+      if (!v) { out.style.display='none'; return; }
+      try {
+        const u = new URL(v);
+        const params = [...u.searchParams.entries()].map(([k,v]) => `<b>${k}</b> = ${v}`).join('<br>') || '<i style="color:var(--muted)">None</i>';
+        out.innerHTML =
+          `🌐 <b>Protocol:</b> ${u.protocol}<br>
+           🖥️ <b>Host:</b> ${u.hostname}${u.port?':'+u.port:''}<br>
+           📁 <b>Path:</b> ${u.pathname}<br>
+           🔍 <b>Params:</b><br>${params}<br>
+           ⚓ <b>Hash:</b> ${u.hash || '<i style="color:var(--muted)">None</i>'}`;
+        out.style.display = 'block';
+      } catch { out.innerHTML = '❌ Invalid URL — must include protocol (https://)'; out.style.display='block'; }
+    }
+  </script>
+</body>
+</html>
