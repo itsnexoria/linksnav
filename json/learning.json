@@ -238,5 +238,50 @@
       "free": "#22c55e",
       "encyclopaedia": "#3366cc"
     }
+  },
+  {
+    "name": "freeCodeCamp",
+    "url": "https://www.freecodecamp.org/",
+    "description": "Learn to code for free with 3,000 hours of interactive curriculum covering HTML, CSS, JS, Python, and data science.",
+    "category": "learning",
+    "tags": [
+      "free",
+      "coding"
+    ],
+    "color": "#0a0a23",
+    "tag_colors": {
+      "free": "#22c55e",
+      "coding": "#0a0a23"
+    }
+  },
+  {
+    "name": "Coursera",
+    "url": "https://www.coursera.org/",
+    "description": "Online courses, certificates, and degrees from world-class universities and companies like Google, Meta, and IBM.",
+    "category": "learning",
+    "tags": [
+      "freemium",
+      "certificates"
+    ],
+    "color": "#0056d2",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "certificates": "#0056d2"
+    }
+  },
+  {
+    "name": "Exercism",
+    "url": "https://exercism.org/",
+    "description": "Practice coding in 60+ languages with mentored exercises. Real feedback from volunteer mentors on your solutions.",
+    "category": "learning",
+    "tags": [
+      "free",
+      "coding"
+    ],
+    "color": "#009cab",
+    "tag_colors": {
+      "free": "#22c55e",
+      "coding": "#009cab"
+    }
   }
 ]

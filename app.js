@@ -1,5 +1,5 @@
 /* ============================================================
-   NexHub — app.js  v8
+   Nexo Hub — app.js  v8
    + Drag & drop reorder (per-category, saved to localStorage)
    + Sort bar (Default / A→Z / Z→A / Most Visited)
    + Font: Inter

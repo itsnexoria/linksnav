@@ -118,5 +118,140 @@
       "open-source": "#06b6d4",
       "media-player": "#f07b2e"
     }
+  },
+  {
+    "name": "Internet Archive",
+    "url": "https://archive.org/",
+    "description": "Non-profit digital library with millions of free books, movies, music, software, and the Wayback Machine.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "archive"
+    ],
+    "color": "#428bca",
+    "tag_colors": {
+      "free": "#22c55e",
+      "archive": "#428bca"
+    }
+  },
+  {
+    "name": "SoundCloud",
+    "url": "https://soundcloud.com/",
+    "description": "Stream and download music from indie artists worldwide. Huge library of free-to-stream tracks and mixes.",
+    "category": "downloads",
+    "tags": [
+      "freemium",
+      "music"
+    ],
+    "color": "#ff5500",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music": "#ff5500"
+    }
+  },
+  {
+    "name": "LibreOffice",
+    "url": "https://www.libreoffice.org/",
+    "description": "Free, open-source office suite. Full replacement for Microsoft Office \u2014 Writer, Calc, Impress, and more.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "open-source"
+    ],
+    "color": "#18a303",
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#18a303"
+    }
+  },
+  {
+    "name": "OBS Studio",
+    "url": "https://obsproject.com/",
+    "description": "Free, open-source screen recording and live streaming software. Used by millions of streamers worldwide.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#302e31",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#7c5cfc"
+    }
+  },
+  {
+    "name": "VLC Media Player",
+    "url": "https://www.videolan.org/vlc/",
+    "description": "Plays virtually any video or audio format. Free, open-source, no codecs needed, works on all platforms.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "media"
+    ],
+    "color": "#ff8800",
+    "tag_colors": {
+      "free": "#22c55e",
+      "media": "#ff8800"
+    }
+  },
+  {
+    "name": "Audacity",
+    "url": "https://www.audacityteam.org/",
+    "description": "Free, open-source audio editor and recorder. Edit, mix, and master audio tracks on Windows, Mac, and Linux.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "audio"
+    ],
+    "color": "#0000cc",
+    "tag_colors": {
+      "free": "#22c55e",
+      "audio": "#0000cc"
+    }
+  },
+  {
+    "name": "GIMP",
+    "url": "https://www.gimp.org/",
+    "description": "The GNU Image Manipulation Program \u2014 a free Photoshop alternative with layers, masks, and advanced editing tools.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "image-editing"
+    ],
+    "color": "#5c5543",
+    "tag_colors": {
+      "free": "#22c55e",
+      "image-editing": "#5c5543"
+    }
+  },
+  {
+    "name": "Blender",
+    "url": "https://www.blender.org/",
+    "description": "Professional-grade free 3D creation suite covering modelling, animation, rendering, VFX, and video editing.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "3d"
+    ],
+    "color": "#ea7600",
+    "tag_colors": {
+      "free": "#22c55e",
+      "3d": "#ea7600"
+    }
+  },
+  {
+    "name": "7-Zip",
+    "url": "https://www.7-zip.org/",
+    "description": "Free file archiver supporting ZIP, RAR, 7z, and many more formats. Highest compression ratios available for free.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "utility"
+    ],
+    "color": "#0f7ccf",
+    "tag_colors": {
+      "free": "#22c55e",
+      "utility": "#0f7ccf"
+    }
   }
 ]

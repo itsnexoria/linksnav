@@ -165,5 +165,65 @@
       "free": "#22c55e",
       "live-streaming": "#ff0050"
     }
+  },
+  {
+    "name": "Twitch",
+    "url": "https://www.twitch.tv/",
+    "description": "The leading live-streaming platform for gaming, music, and creative content. Chat, subscribe, and support streamers live.",
+    "category": "streaming",
+    "tags": [
+      "free",
+      "gaming"
+    ],
+    "color": "#9146ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "gaming": "#9146ff"
+    }
+  },
+  {
+    "name": "Crunchyroll",
+    "url": "https://www.crunchyroll.com/",
+    "description": "The biggest anime and manga streaming service. Simulcasts new episodes from Japan and has a huge back-catalogue.",
+    "category": "streaming",
+    "tags": [
+      "freemium",
+      "anime"
+    ],
+    "color": "#f47521",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "anime": "#f47521"
+    }
+  },
+  {
+    "name": "Plex",
+    "url": "https://www.plex.tv/",
+    "description": "Stream your personal media library from anywhere plus free ad-supported movies, TV, and live news channels.",
+    "category": "streaming",
+    "tags": [
+      "freemium",
+      "media"
+    ],
+    "color": "#e5a00d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "media": "#e5a00d"
+    }
+  },
+  {
+    "name": "Kick",
+    "url": "https://kick.com/",
+    "description": "Creator-first live-streaming platform with a 95/5 revenue split. Fast-growing alternative to Twitch with less restrictive rules.",
+    "category": "streaming",
+    "tags": [
+      "free",
+      "gaming"
+    ],
+    "color": "#53fc18",
+    "tag_colors": {
+      "free": "#22c55e",
+      "gaming": "#53fc18"
+    }
   }
 ]

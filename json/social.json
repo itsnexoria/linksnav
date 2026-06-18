@@ -255,5 +255,35 @@
       "freemium": "#3b82f6",
       "video-platform": "#ff0000"
     }
+  },
+  {
+    "name": "Threads",
+    "url": "https://www.threads.net/",
+    "description": "Meta's text-based social app integrated with Instagram. Simple feed for following conversations and hot takes.",
+    "category": "social",
+    "tags": [
+      "free",
+      "meta"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "meta": "#0080fb"
+    }
+  },
+  {
+    "name": "Behance",
+    "url": "https://www.behance.net/",
+    "description": "Adobe's creative portfolio platform. Showcase your design, illustration, photography, and motion work to a massive audience.",
+    "category": "social",
+    "tags": [
+      "free",
+      "portfolio"
+    ],
+    "color": "#1769ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "portfolio": "#1769ff"
+    }
   }
 ]

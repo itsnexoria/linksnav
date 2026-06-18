@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Mini Tools — NexHub</title>
+  <title>Mini Tools — Nexo Hub</title>
   <meta name="description" content="Free browser-based mini tools — font changer, text case converter, word counter, colour picker, and more. No sign-up, instant results."/>
-  <link rel="canonical" href="https://nexhub.nexosites.xyz/pages/tools/"/>
-  <meta property="og:title" content="Mini Tools — NexHub"/>
+  <link rel="canonical" href="https://nexohub.nexosites.xyz/pages/tools/"/>
+  <meta property="og:title" content="Mini Tools — Nexo Hub"/>
   <meta property="og:description" content="Free browser-based mini tools. No sign-up needed."/>
-  <meta property="og:image" content="https://nexhub.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
   <meta name="theme-color" content="#7c5cfc"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -188,9 +188,9 @@
 
   <header class="header" role="banner">
     <div class="header-inner">
-      <a href="/" class="logo" aria-label="NexHub home">
-        <img src="../../assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
-        <span class="logo-text">NexHub</span>
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
       </a>
       <div class="header-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
@@ -217,13 +217,13 @@
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
       </nav>
-      <div class="nav-menu-footer"><span>NexHub by <code>Nexus</code></span></div>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
   </div>
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
   <main class="tools-wrap">
-    <a href="/" class="back-link">← Back to NexHub</a>
+    <a href="/" class="back-link">← Back to Nexo Hub</a>
 
     <div class="tools-hero">
       <div class="tools-hero-icon">🛠️</div>
@@ -236,8 +236,14 @@
       <button class="tool-tab" data-panel="font" role="tab">🔤 Font Changer</button>
       <button class="tool-tab" data-panel="color" role="tab">🎨 Colour Picker</button>
       <button class="tool-tab" data-panel="gradient" role="tab">🌈 Gradient</button>
+      <button class="tool-tab" data-panel="password" role="tab">🔑 Password</button>
+      <button class="tool-tab" data-panel="qr" role="tab">📷 QR Code</button>
+      <button class="tool-tab" data-panel="lorem" role="tab">📄 Lorem Ipsum</button>
+      <button class="tool-tab" data-panel="hash" role="tab">🔢 Hash</button>
       <button class="tool-tab" data-panel="base64" role="tab">🔐 Base64</button>
       <button class="tool-tab" data-panel="url" role="tab">🔗 URL Encode</button>
+      <button class="tool-tab" data-panel="units" role="tab">📐 Unit Converter</button>
+      <button class="tool-tab" data-panel="timestamp" role="tab">🕐 Timestamp</button>
     </div>
 
     <!-- TEXT TOOLS -->
@@ -297,7 +303,7 @@
         <h2>🔤 Font Preview &amp; Changer</h2>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
           <select class="font-select" id="fontSelect" onchange="updateFont()">
-            <option value="'Inter', system-ui, sans-serif">Syne (NexHub default)</option>
+            <option value="'Inter', system-ui, sans-serif">Syne (Nexo Hub default)</option>
             <option value="'DM Mono', monospace">DM Mono</option>
             <option value="Georgia, serif">Georgia</option>
             <option value="'Times New Roman', serif">Times New Roman</option>
@@ -444,10 +450,172 @@
         <div id="url-parse-output" style="margin-top:14px;font-family:'Inter', system-ui, sans-serif;font-size:.85rem;line-height:2;display:none"></div>
       </div>
     </div>
+
+    <!-- PASSWORD GENERATOR -->
+    <div class="tool-panel" id="panel-password">
+      <div class="tool-card">
+        <h2>🔑 Password Generator</h2>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <label style="font-size:.8rem;color:var(--muted);min-width:60px">Length: <b id="pwLenLabel">16</b></label>
+          <input type="range" id="pwLen" min="6" max="64" value="16" oninput="genPassword()" style="flex:1;min-width:120px;accent-color:var(--accent2)"/>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">
+          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwUpper" checked onchange="genPassword()"> Uppercase (A-Z)</label>
+          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwLower" checked onchange="genPassword()"> Lowercase (a-z)</label>
+          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwNums" checked onchange="genPassword()"> Numbers (0-9)</label>
+          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwSyms" checked onchange="genPassword()"> Symbols (!@#$)</label>
+        </div>
+        <div class="t-output" id="pw-output" style="font-size:1.1rem;letter-spacing:.05em;word-break:break-all;min-height:52px"></div>
+        <div id="pw-strength" style="margin-top:10px;height:6px;border-radius:3px;transition:all .3s;background:var(--card-border)"></div>
+        <p id="pw-strength-label" style="font-size:.75rem;color:var(--muted);margin-top:6px"></p>
+        <div class="t-btn-row" style="margin-top:12px">
+          <button class="t-btn primary" onclick="genPassword()">Regenerate</button>
+          <button class="t-btn" onclick="copyOutput('pw-output')">Copy</button>
+        </div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:14px">Passwords are generated in your browser and never sent to any server.</p>
+      </div>
+      <div class="tool-card">
+        <h2>🎲 Passphrase Generator</h2>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <label style="font-size:.8rem;color:var(--muted)">Words: <b id="ppCountLabel">4</b></label>
+          <input type="range" id="ppCount" min="3" max="8" value="4" oninput="genPassphrase()" style="flex:1;accent-color:var(--accent2)"/>
+          <select class="font-select" id="ppSep" onchange="genPassphrase()" style="padding:6px 10px;font-size:.8rem">
+            <option value="-">Dashes</option>
+            <option value=".">Dots</option>
+            <option value=" ">Spaces</option>
+            <option value="_">Underscores</option>
+          </select>
+        </div>
+        <div class="t-output" id="pp-output" style="font-size:1rem;min-height:52px"></div>
+        <div class="t-btn-row" style="margin-top:12px">
+          <button class="t-btn primary" onclick="genPassphrase()">Regenerate</button>
+          <button class="t-btn" onclick="copyOutput('pp-output')">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR CODE -->
+    <div class="tool-panel" id="panel-qr">
+      <div class="tool-card">
+        <h2>📷 QR Code Generator</h2>
+        <textarea class="t-textarea" id="qr-input" placeholder="Enter a URL, text, phone number, or anything…" style="min-height:80px" oninput="debounceQR()"></textarea>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:center">
+          <label style="font-size:.8rem;color:var(--muted)">Size:</label>
+          <select class="font-select" id="qr-size" onchange="renderQR()" style="padding:6px 10px;font-size:.8rem">
+            <option value="200">200x200</option>
+            <option value="300" selected>300x300</option>
+            <option value="400">400x400</option>
+          </select>
+        </div>
+        <div id="qr-output" style="margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <p style="color:var(--muted);font-size:.85rem">Enter text above to generate a QR code</p>
+        </div>
+        <div class="t-btn-row" id="qr-dl-row" style="display:none;margin-top:12px">
+          <button class="t-btn primary" onclick="downloadQR()">Download PNG</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOREM IPSUM -->
+    <div class="tool-panel" id="panel-lorem">
+      <div class="tool-card">
+        <h2>📄 Lorem Ipsum Generator</h2>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <label style="font-size:.75rem;color:var(--muted)">Type</label>
+            <select class="font-select" id="lorem-type" style="padding:8px 12px;font-size:.85rem">
+              <option value="paragraphs">Paragraphs</option>
+              <option value="sentences">Sentences</option>
+              <option value="words">Words</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <label style="font-size:.75rem;color:var(--muted)">Amount</label>
+            <input type="number" class="t-input" id="lorem-count" value="3" min="1" max="50" style="width:80px;text-align:center"/>
+          </div>
+          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer;margin-top:16px"><input type="checkbox" id="lorem-start" checked> Start with "Lorem ipsum..."</label>
+        </div>
+        <div class="t-btn-row" style="margin-bottom:14px">
+          <button class="t-btn primary" onclick="genLorem()">Generate</button>
+        </div>
+        <div class="t-output" id="lorem-output" style="display:none;min-height:120px;line-height:1.8"></div>
+        <div class="t-btn-row" id="lorem-copy-row" style="display:none;margin-top:12px">
+          <button class="t-btn primary" onclick="copyOutput('lorem-output')">Copy Text</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HASH -->
+    <div class="tool-panel" id="panel-hash">
+      <div class="tool-card">
+        <h2>🔢 Hash Generator</h2>
+        <p style="font-size:.8rem;color:var(--muted);margin:0 0 14px">Generate cryptographic hashes. Useful for checksums and data integrity checks.</p>
+        <textarea class="t-textarea" id="hash-input" placeholder="Enter text to hash…" style="min-height:80px"></textarea>
+        <div class="t-btn-row" style="margin-top:12px">
+          <button class="t-btn primary" onclick="runHash()">Generate Hashes</button>
+          <button class="t-btn" onclick="document.getElementById('hash-input').value='';document.getElementById('hash-results').style.display='none'">Clear</button>
+        </div>
+        <div id="hash-results" style="margin-top:16px;flex-direction:column;gap:10px"></div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:14px">Never use MD5 or SHA-1 for passwords — use bcrypt/argon2. These are for checksums only.</p>
+      </div>
+    </div>
+
+    <!-- UNIT CONVERTER -->
+    <div class="tool-panel" id="panel-units">
+      <div class="tool-card">
+        <h2>📐 Unit Converter</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+          <button class="t-btn active" id="unit-cat-btn-length" onclick="setUnitCat('length',this)">Length</button>
+          <button class="t-btn" id="unit-cat-btn-weight" onclick="setUnitCat('weight',this)">Weight</button>
+          <button class="t-btn" id="unit-cat-btn-temp" onclick="setUnitCat('temp',this)">Temperature</button>
+          <button class="t-btn" id="unit-cat-btn-data" onclick="setUnitCat('data',this)">Data</button>
+          <button class="t-btn" id="unit-cat-btn-speed" onclick="setUnitCat('speed',this)">Speed</button>
+          <button class="t-btn" id="unit-cat-btn-area" onclick="setUnitCat('area',this)">Area</button>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
+          <div style="flex:1;min-width:140px">
+            <label style="font-size:.75rem;color:var(--muted);display:block;margin-bottom:6px">From</label>
+            <select class="font-select" id="unit-from" style="width:100%" onchange="convertUnit()"></select>
+          </div>
+          <div style="padding-bottom:8px"><button class="t-btn" onclick="swapUnits()" style="padding:8px 12px">swap</button></div>
+          <div style="flex:1;min-width:140px">
+            <label style="font-size:.75rem;color:var(--muted);display:block;margin-bottom:6px">To</label>
+            <select class="font-select" id="unit-to" style="width:100%" onchange="convertUnit()"></select>
+          </div>
+        </div>
+        <input type="number" class="t-input" id="unit-input" placeholder="Enter value…" oninput="convertUnit()" style="margin-top:14px"/>
+        <div class="t-output" id="unit-output" style="display:none;font-size:1.2rem;font-weight:700;text-align:center;margin-top:14px"></div>
+      </div>
+    </div>
+
+    <!-- TIMESTAMP -->
+    <div class="tool-panel" id="panel-timestamp">
+      <div class="tool-card">
+        <h2>🕐 Timestamp Converter</h2>
+        <div style="text-align:center;padding:20px;background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.2);border-radius:12px;margin-bottom:20px">
+          <div style="font-size:2rem;font-weight:800;color:var(--accent2)" id="live-clock"></div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:4px" id="live-unix"></div>
+        </div>
+        <div class="tool-card" style="margin-bottom:14px;padding:20px">
+          <h2 style="font-size:.95rem;margin-bottom:12px">Unix to Human</h2>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input type="number" class="t-input" id="unix-input" placeholder="e.g. 1700000000" style="flex:1" oninput="unixToHuman()"/>
+            <button class="t-btn" onclick="document.getElementById('unix-input').value=Math.floor(Date.now()/1000);unixToHuman()">Now</button>
+          </div>
+          <div class="t-output" id="unix-output" style="display:none;margin-top:12px"></div>
+        </div>
+        <div class="tool-card" style="padding:20px">
+          <h2 style="font-size:.95rem;margin-bottom:12px">Human to Unix</h2>
+          <input type="datetime-local" class="t-input" id="dt-input" oninput="humanToUnix()" style="margin-bottom:10px"/>
+          <div class="t-output" id="dt-output" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <footer class="footer" role="contentinfo">
-    <span>NexHub — Your digital command center</span>
+    <span>Nexo Hub — Your digital command center</span>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/pages/about/">About</a>
       <a href="/pages/tools/">Tools</a>
@@ -730,6 +898,214 @@
         out.style.display = 'block';
       } catch { out.innerHTML = '❌ Invalid URL — must include protocol (https://)'; out.style.display='block'; }
     }
+
+    // ── PASSWORD GENERATOR ────────────────────────────────
+    function genPassword() {
+      const len = +document.getElementById('pwLen').value;
+      document.getElementById('pwLenLabel').textContent = len;
+      const sets = [];
+      if (document.getElementById('pwUpper').checked) sets.push('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+      if (document.getElementById('pwLower').checked) sets.push('abcdefghijklmnopqrstuvwxyz');
+      if (document.getElementById('pwNums').checked)  sets.push('0123456789');
+      if (document.getElementById('pwSyms').checked)  sets.push('!@#$%^&*()_+-=[]{}|;:,.<>?');
+      if (!sets.length) { document.getElementById('pw-output').textContent = 'Select at least one character type'; return; }
+      const pool = sets.join('');
+      let pw = '';
+      // Guarantee at least one char from each selected set
+      sets.forEach(s => pw += s[Math.floor(Math.random() * s.length)]);
+      const arr = new Uint32Array(len - sets.length);
+      crypto.getRandomValues(arr);
+      arr.forEach(n => pw += pool[n % pool.length]);
+      pw = pw.split('').sort(() => Math.random() - 0.5).join('');
+      document.getElementById('pw-output').textContent = pw;
+      // Strength
+      let score = 0;
+      if (len >= 12) score++; if (len >= 16) score++; if (len >= 20) score++;
+      if (sets.length >= 2) score++; if (sets.length >= 3) score++; if (sets.length === 4) score++;
+      const colours = ['#ef4444','#f97316','#eab308','#22c55e','#10b981'];
+      const labels  = ['Very Weak','Weak','Fair','Strong','Very Strong'];
+      const idx = Math.min(score - 1, 4);
+      document.getElementById('pw-strength').style.background = colours[Math.max(0,idx)];
+      document.getElementById('pw-strength').style.width = `${((idx+1)/5)*100}%`;
+      document.getElementById('pw-strength-label').textContent = 'Strength: ' + labels[Math.max(0,idx)];
+    }
+    genPassword();
+
+    // ── PASSPHRASE GENERATOR ──────────────────────────────
+    const wordList = ['apple','brave','cloud','delta','eagle','flame','grace','honey','ivory','jade','karma','lemon','magic','noble','ocean','pearl','quest','river','solar','tiger','ultra','vivid','water','xenon','yacht','zephyr','amber','brush','coral','dusty','ember','frost','globe','hatch','index','jolly','knack','lunar','marsh','nexus','orbit','pixel','quirk','rocky','storm','trace','unity','vapor','waltz','extra','young','zippy','abbey','bloom','crisp','derby','elite','forge','glyph','harsh','irony','joint','kingpin','lance','manor','nerve','optic','prism','quota','realm','swift','trend','urban','venom','wrath','xerox','yield','zones','acorn','bison','cedar','disco','epoch','fable','ghost','hyper','input','jewel','kiosk','latch','mango','niche','onion','piano','quartz','radar','slate','talon','ultra','vista','witch','xray','yeast','zebra'];
+    function genPassphrase() {
+      const count = +document.getElementById('ppCount').value;
+      document.getElementById('ppCountLabel').textContent = count;
+      const sep = document.getElementById('ppSep').value;
+      const words = [];
+      const arr = new Uint32Array(count);
+      crypto.getRandomValues(arr);
+      arr.forEach(n => words.push(wordList[n % wordList.length]));
+      // Add a random 2-digit number
+      const num = new Uint32Array(1);
+      crypto.getRandomValues(num);
+      words.push(String(10 + num[0] % 90));
+      document.getElementById('pp-output').textContent = words.join(sep);
+    }
+    genPassphrase();
+
+    // ── QR CODE ────────────────────────────────────────────
+    let qrDebounce;
+    function debounceQR() { clearTimeout(qrDebounce); qrDebounce = setTimeout(renderQR, 400); }
+    function renderQR() {
+      const v = document.getElementById('qr-input').value.trim();
+      const out = document.getElementById('qr-output');
+      const dlRow = document.getElementById('qr-dl-row');
+      if (!v) { out.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Enter text above to generate a QR code</p>'; dlRow.style.display='none'; return; }
+      const size = document.getElementById('qr-size').value;
+      const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(v)}&format=png&margin=10`;
+      out.innerHTML = `<img src="${url}" alt="QR Code" style="border-radius:12px;max-width:100%;border:1px solid var(--card-border)" width="${size}" height="${size}" id="qr-img"/>`;
+      dlRow.style.display = 'flex';
+    }
+    function downloadQR() {
+      const img = document.getElementById('qr-img');
+      if (!img) return;
+      const a = document.createElement('a');
+      a.href = img.src; a.download = 'qrcode.png'; a.click();
+    }
+
+    // ── LOREM IPSUM ────────────────────────────────────────
+    const loremWords = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa deserunt mollit anim id est laborum'.split(' ');
+    function pickWords(n) { return Array.from({length:n},()=>loremWords[Math.floor(Math.random()*loremWords.length)]).join(' '); }
+    function makeSentence() { const w=pickWords(6+Math.floor(Math.random()*12)); return w[0].toUpperCase()+w.slice(1)+'.'; }
+    function makeParagraph(first=false) {
+      const sCount = 4+Math.floor(Math.random()*4);
+      const sents = Array.from({length:sCount},(_,i)=>i===0&&first?'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '+makeSentence():makeSentence());
+      return sents.join(' ');
+    }
+    function genLorem() {
+      const type = document.getElementById('lorem-type').value;
+      const count = Math.min(50, Math.max(1, +document.getElementById('lorem-count').value || 1));
+      const startLoremIpsum = document.getElementById('lorem-start').checked;
+      let result = '';
+      if (type === 'paragraphs') result = Array.from({length:count},(_,i)=>makeParagraph(i===0&&startLoremIpsum)).join('\n\n');
+      else if (type === 'sentences') { const s=Array.from({length:count},(_,i)=>i===0&&startLoremIpsum?'Lorem ipsum dolor sit amet.':makeSentence()); result=s.join(' '); }
+      else { result=(startLoremIpsum?'lorem ipsum dolor sit amet ':'')+pickWords(count-(startLoremIpsum?5:0)); }
+      const out = document.getElementById('lorem-output');
+      out.textContent = result; out.style.display = 'block';
+      document.getElementById('lorem-copy-row').style.display = 'flex';
+    }
+
+    // ── HASH GENERATOR ────────────────────────────────────
+    async function runHash() {
+      const v = document.getElementById('hash-input').value;
+      if (!v) return;
+      const container = document.getElementById('hash-results');
+      container.style.display = 'flex';
+      container.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Computing…</p>';
+      const enc = new TextEncoder().encode(v);
+      async function digest(algo) {
+        const buf = await crypto.subtle.digest(algo, enc);
+        return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      }
+      const hashes = [
+        { label: 'SHA-256', val: await digest('SHA-256') },
+        { label: 'SHA-384', val: await digest('SHA-384') },
+        { label: 'SHA-512', val: await digest('SHA-512') },
+        { label: 'SHA-1 (weak)', val: await digest('SHA-1') },
+      ];
+      container.innerHTML = hashes.map(h => `
+        <div style="background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.2);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-size:.78rem;color:var(--accent2);font-weight:700;min-width:90px">${h.label}</span>
+          <span style="font-family:monospace;font-size:.75rem;flex:1;word-break:break-all">${h.val}</span>
+          <button class="t-btn" style="flex-shrink:0" onclick="navigator.clipboard.writeText('${h.val}').then(()=>showToast())">Copy</button>
+        </div>`).join('');
+    }
+
+    // ── UNIT CONVERTER ────────────────────────────────────
+    const unitDefs = {
+      length: { m:'Metres',km:'Kilometres',cm:'Centimetres',mm:'Millimetres',mi:'Miles',yd:'Yards',ft:'Feet',in:'Inches',nm:'Nautical Miles' },
+      weight: { kg:'Kilograms',g:'Grams',mg:'Milligrams',lb:'Pounds',oz:'Ounces',t:'Metric Tonnes',st:'Stones' },
+      temp:   { C:'Celsius',F:'Fahrenheit',K:'Kelvin' },
+      data:   { B:'Bytes',KB:'Kilobytes',MB:'Megabytes',GB:'Gigabytes',TB:'Terabytes',PB:'Petabytes',Kib:'Kibibytes',Mib:'Mebibytes',Gib:'Gibibytes' },
+      speed:  { 'km/h':'km/h','m/s':'m/s',mph:'mph',kn:'Knots','ft/s':'ft/s' },
+      area:   { 'm²':'m²','km²':'km²','cm²':'cm²','ft²':'ft²','in²':'in²','ac':'Acres','ha':'Hectares','mi²':'mi²' },
+    };
+    const toBase = {
+      length:{m:1,km:1000,cm:0.01,mm:0.001,mi:1609.344,yd:0.9144,ft:0.3048,in:0.0254,nm:1852},
+      weight:{kg:1,g:0.001,mg:0.000001,lb:0.45359237,oz:0.028349523125,t:1000,st:6.35029318},
+      data:{B:1,KB:1000,MB:1e6,GB:1e9,TB:1e12,PB:1e15,Kib:1024,Mib:1048576,Gib:1073741824},
+      speed:{'km/h':1,'m/s':3.6,mph:1.60934,kn:1.852,'ft/s':1.09728},
+      area:{'m²':1,'km²':1e6,'cm²':0.0001,'ft²':0.092903,'in²':0.00064516,ac:4046.86,ha:10000,'mi²':2589988},
+    };
+    let currentUnitCat = 'length';
+    function setUnitCat(cat, btn) {
+      currentUnitCat = cat;
+      document.querySelectorAll('[id^="unit-cat-btn-"]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      populateUnitSelects(cat);
+      convertUnit();
+    }
+    function populateUnitSelects(cat) {
+      const units = unitDefs[cat];
+      const keys = Object.keys(units);
+      ['unit-from','unit-to'].forEach((id,i) => {
+        const sel = document.getElementById(id);
+        sel.innerHTML = keys.map(k => `<option value="${k}">${units[k]}</option>`).join('');
+        sel.value = keys[i === 0 ? 0 : 1];
+      });
+    }
+    function convertUnit() {
+      const from = document.getElementById('unit-from').value;
+      const to   = document.getElementById('unit-to').value;
+      const val  = parseFloat(document.getElementById('unit-input').value);
+      const out  = document.getElementById('unit-output');
+      if (isNaN(val)) { out.style.display='none'; return; }
+      let result;
+      if (currentUnitCat === 'temp') {
+        let c;
+        if (from==='C') c=val; else if (from==='F') c=(val-32)*5/9; else c=val-273.15;
+        if (to==='C') result=c; else if (to==='F') result=c*9/5+32; else result=c+273.15;
+      } else {
+        const base = toBase[currentUnitCat];
+        result = (val * base[from]) / base[to];
+      }
+      const display = result % 1 === 0 ? result : parseFloat(result.toPrecision(8));
+      out.textContent = `${val} ${from} = ${display} ${to}`;
+      out.style.display = 'block';
+    }
+    function swapUnits() {
+      const f = document.getElementById('unit-from');
+      const t = document.getElementById('unit-to');
+      const tmp = f.value; f.value = t.value; t.value = tmp;
+      convertUnit();
+    }
+    populateUnitSelects('length');
+
+    // ── TIMESTAMP ─────────────────────────────────────────
+    function updateLiveClock() {
+      const now = new Date();
+      document.getElementById('live-clock').textContent = now.toLocaleTimeString('en-GB', {hour12:false}) + ' ' + now.toLocaleDateString('en-GB');
+      document.getElementById('live-unix').textContent = 'Unix: ' + Math.floor(Date.now()/1000);
+    }
+    updateLiveClock();
+    setInterval(updateLiveClock, 1000);
+    function unixToHuman() {
+      const v = document.getElementById('unix-input').value;
+      const out = document.getElementById('unix-output');
+      if (!v) { out.style.display='none'; return; }
+      const d = new Date(+v * 1000);
+      if (isNaN(d)) { out.textContent='Invalid timestamp'; out.style.display='block'; return; }
+      out.innerHTML = `UTC: <b>${d.toUTCString()}</b><br>Local: <b>${d.toLocaleString()}</b><br>ISO: <b>${d.toISOString()}</b>`;
+      out.style.display = 'block';
+    }
+    function humanToUnix() {
+      const v = document.getElementById('dt-input').value;
+      const out = document.getElementById('dt-output');
+      if (!v) { out.style.display='none'; return; }
+      const d = new Date(v);
+      out.innerHTML = `Unix timestamp: <b>${Math.floor(d.getTime()/1000)}</b><br>Milliseconds: <b>${d.getTime()}</b>`;
+      out.style.display = 'block';
+    }
+    // Set datetime-local default to now
+    const now = new Date(); now.setSeconds(0,0);
+    document.getElementById('dt-input').value = now.toISOString().slice(0,16);
+    humanToUnix();
   </script>
 </body>
 </html>

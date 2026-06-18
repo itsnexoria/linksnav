@@ -118,5 +118,35 @@
       "freemium": "#3b82f6",
       "trading": "#2962ff"
     }
+  },
+  {
+    "name": "CoinMarketCap",
+    "url": "https://coinmarketcap.com/",
+    "description": "Crypto prices, market caps, charts, and rankings for thousands of cryptocurrencies. The go-to crypto tracker.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "crypto"
+    ],
+    "color": "#3861fb",
+    "tag_colors": {
+      "free": "#22c55e",
+      "crypto": "#f7931a"
+    }
+  },
+  {
+    "name": "Splitwise",
+    "url": "https://www.splitwise.com/",
+    "description": "Track shared expenses and IOUs with friends and housemates. Automatically calculates who owes what.",
+    "category": "finance",
+    "tags": [
+      "freemium",
+      "expenses"
+    ],
+    "color": "#5bc5a7",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "expenses": "#5bc5a7"
+    }
   }
 ]

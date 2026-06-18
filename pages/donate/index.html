@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Donate — NexHub</title>
-  <meta name="description" content="Support NexHub — help keep the directory free, fast, and growing. Every donation helps cover hosting costs and new features."/>
-  <link rel="canonical" href="https://nexhub.nexosites.xyz/pages/donate/"/>
-  <meta property="og:title" content="Donate — NexHub"/>
-  <meta property="og:description" content="Support NexHub and keep the directory free for everyone."/>
-  <meta property="og:image" content="https://nexhub.nexosites.xyz/assets/logo-512.png"/>
+  <title>Donate — Nexo Hub</title>
+  <meta name="description" content="Support Nexo Hub — help keep the directory free, fast, and growing. Every donation helps cover hosting costs and new features."/>
+  <link rel="canonical" href="https://nexohub.nexosites.xyz/pages/donate/"/>
+  <meta property="og:title" content="Donate — Nexo Hub"/>
+  <meta property="og:description" content="Support Nexo Hub and keep the directory free for everyone."/>
+  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
   <meta name="theme-color" content="#7c5cfc"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -172,9 +172,9 @@
 
   <header class="header" role="banner">
     <div class="header-inner">
-      <a href="/" class="logo" aria-label="NexHub home">
-        <img src="../../assets/logo.png" alt="NexHub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
-        <span class="logo-text">NexHub</span>
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
       </a>
       <div class="header-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
@@ -201,24 +201,24 @@
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/donate/" class="nav-link nav-link--active">💜 Donate</a>
       </nav>
-      <div class="nav-menu-footer"><span>NexHub by <code>Nexus</code></span></div>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
   </div>
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
   <main class="donate-wrap">
-    <a href="/" class="back-link">← Back to NexHub</a>
+    <a href="/" class="back-link">← Back to Nexo Hub</a>
 
     <div class="donate-hero">
       <span class="heart-icon">💜</span>
-      <h1>Support NexHub</h1>
-      <p>NexHub is completely free with no ads, no paywalls, and no tracking. If it's saved you time or helped you discover something useful, consider buying me a coffee — it keeps the lights on.</p>
+      <h1>Support Nexo Hub</h1>
+      <p>Nexo Hub is completely free with no ads, no paywalls, and no tracking. If it's saved you time or helped you discover something useful, consider buying me a coffee — it keeps the lights on.</p>
     </div>
 
     <div class="perks">
       <h2>✨ What your support pays for</h2>
       <ul class="perk-list">
-        <li><span>🌐</span><span>Domain renewals and Cloudflare hosting — keeping NexHub fast and always online.</span></li>
+        <li><span>🌐</span><span>Domain renewals and Cloudflare hosting — keeping Nexo Hub fast and always online.</span></li>
         <li><span>🔍</span><span>Ongoing curation — manually reviewing and adding new sites across all 23 categories.</span></li>
         <li><span>🛠️</span><span>New features — more tools, better search, dark/light polish, and whatever you suggest.</span></li>
         <li><span>🚫</span><span>Ad-free forever — donations mean I never need to sell your attention to advertisers.</span></li>
@@ -279,7 +279,7 @@
   </main>
 
   <footer class="footer" role="contentinfo">
-    <span>NexHub — Your digital command center</span>
+    <span>Nexo Hub — Your digital command center</span>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/pages/about/">About</a>
       <a href="/pages/tools/">Tools</a>
@@ -312,8 +312,8 @@
     overlay.addEventListener('click', closeMenu);
 
     // Donation logic
-    // IMPORTANT: Replace YOUR_PAYPAL_EMAIL below with your actual PayPal email
-    const PAYPAL_EMAIL = 'YOUR_PAYPAL_EMAIL@example.com';
+    // ← Change 'nexus' to your actual PayPal.me username
+    const PAYPAL_ME = 'nexus';
     let currentAmount = 5;
 
     function selectAmount(val) {
@@ -344,7 +344,7 @@
         return;
       }
       const amt = parseFloat(currentAmount).toFixed(2);
-      const url = `https://www.paypal.com/donate/?business=${encodeURIComponent(PAYPAL_EMAIL)}&amount=${amt}&currency_code=USD&item_name=NexHub+Support`;
+      const url = `https://www.paypal.me/${PAYPAL_ME}/${amt}`;
       link.href = url;
       label.textContent = `Donate $${amt} via PayPal`;
     }

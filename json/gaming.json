@@ -208,5 +208,35 @@
       "subscription": "#fb923c",
       "game-platform": "#107c10"
     }
+  },
+  {
+    "name": "Game Rant",
+    "url": "https://gamerant.com/",
+    "description": "Gaming news, reviews, guides, and opinion pieces. Comprehensive coverage across PC, console, and mobile gaming.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "news"
+    ],
+    "color": "#e63012",
+    "tag_colors": {
+      "free": "#22c55e",
+      "news": "#e63012"
+    }
+  },
+  {
+    "name": "ProGameGuides",
+    "url": "https://progameguides.com/",
+    "description": "Detailed guides, tier lists, and walkthroughs for popular games. Covers Roblox, Minecraft, Genshin, and hundreds more.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "guides"
+    ],
+    "color": "#7c5cfc",
+    "tag_colors": {
+      "free": "#22c55e",
+      "guides": "#7c5cfc"
+    }
   }
 ]

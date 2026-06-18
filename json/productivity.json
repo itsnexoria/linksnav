@@ -178,5 +178,35 @@
       "freemium": "#3b82f6",
       "bookmarks": "#2196f3"
     }
+  },
+  {
+    "name": "Readwise",
+    "url": "https://readwise.io/",
+    "description": "Resurface your highlights from Kindle, Instapaper, and web articles daily. Spaced repetition for things you've read.",
+    "category": "productivity",
+    "tags": [
+      "paid",
+      "reading"
+    ],
+    "color": "#ff4c00",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "reading": "#ff4c00"
+    }
+  },
+  {
+    "name": "Logseq",
+    "url": "https://logseq.com/",
+    "description": "Open-source outliner and knowledge base. Block-based note-taking with bi-directional links, local storage by default.",
+    "category": "productivity",
+    "tags": [
+      "free",
+      "notes"
+    ],
+    "color": "#475bc8",
+    "tag_colors": {
+      "free": "#22c55e",
+      "notes": "#475bc8"
+    }
   }
 ]

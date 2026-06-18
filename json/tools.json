@@ -4,107 +4,254 @@
     "url": "https://regex101.com/",
     "description": "The best online regex tester and debugger. Supports PCRE, JavaScript, Python, and Go. Real-time match highlighting with detailed explanations.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#3a95cc",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#3a95cc" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#3a95cc"
+    }
   },
   {
     "name": "Squoosh",
     "url": "https://squoosh.app/",
     "description": "Google's browser-based image compression tool. Resize and convert images to WebP, AVIF, JPEG XL, and more with side-by-side comparison.",
     "category": "tools",
-    "tags": ["free", "image-tool"],
+    "tags": [
+      "free",
+      "image-tool"
+    ],
     "color": "#ff6c5c",
-    "tag_colors": { "free": "#22c55e", "image-tool": "#ff6c5c" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "image-tool": "#ff6c5c"
+    }
   },
   {
     "name": "CyberChef",
     "url": "https://gchq.github.io/CyberChef/",
-    "description": "GCHQ's web app for encoding, decoding, encryption, and data analysis. Chain hundreds of operations like a recipe — a hacker's Swiss Army knife.",
+    "description": "GCHQ's web app for encoding, decoding, encryption, and data analysis. Chain hundreds of operations like a recipe \u2014 a hacker's Swiss Army knife.",
     "category": "tools",
-    "tags": ["free", "open-source"],
+    "tags": [
+      "free",
+      "open-source"
+    ],
     "color": "#11a683",
-    "tag_colors": { "free": "#22c55e", "open-source": "#34d399" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#34d399"
+    }
   },
   {
     "name": "Excalidraw",
     "url": "https://excalidraw.com/",
     "description": "Virtual whiteboard for sketching hand-drawn-style diagrams. Perfect for wireframes, architecture diagrams, and quick brainstorming sessions.",
     "category": "tools",
-    "tags": ["free", "open-source"],
+    "tags": [
+      "free",
+      "open-source"
+    ],
     "color": "#6965db",
-    "tag_colors": { "free": "#22c55e", "open-source": "#34d399" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#34d399"
+    }
   },
   {
     "name": "TinyWow",
     "url": "https://tinywow.com/",
-    "description": "Free online toolkit with 100+ tools for PDFs, images, videos, and text. Convert, compress, merge, edit — no signup required.",
+    "description": "Free online toolkit with 100+ tools for PDFs, images, videos, and text. Convert, compress, merge, edit \u2014 no signup required.",
     "category": "tools",
-    "tags": ["free", "file-converter"],
+    "tags": [
+      "free",
+      "file-converter"
+    ],
     "color": "#4b6cf7",
-    "tag_colors": { "free": "#22c55e", "file-converter": "#4b6cf7" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "file-converter": "#4b6cf7"
+    }
   },
   {
     "name": "JSONFormatter",
     "url": "https://jsonformatter.curiousconcept.com/",
     "description": "Instantly format, validate, and minify JSON. Supports multiple JSON specs and highlights syntax errors with helpful messages.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#f5a623",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#f5a623" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#f5a623"
+    }
   },
   {
     "name": "Carbon",
     "url": "https://carbon.now.sh/",
     "description": "Create gorgeous images of your source code. Supports 100+ languages, tons of themes, and custom backgrounds. Perfect for social sharing.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#1f1f1f",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#ffffff" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#ffffff"
+    }
   },
   {
     "name": "Bundlephobia",
     "url": "https://bundlephobia.com/",
     "description": "Find the cost of adding a npm package to your bundle. Shows minified + gzipped size, download time, and composition breakdown.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#c2185b",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#c2185b" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#c2185b"
+    }
   },
   {
     "name": "Crontab Guru",
     "url": "https://crontab.guru/",
     "description": "The quickest way to decode or build a cron schedule expression. Paste any cron string and get a plain-English description instantly.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#43b883",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#43b883" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#43b883"
+    }
   },
   {
     "name": "SmallDev.tools",
     "url": "https://smalldev.tools/",
     "description": "Handy collection of free developer mini-tools: encoders, formatters, generators, testers. Fast and ad-minimal.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#7c3aed",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#7c3aed" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#7c3aed"
+    }
   },
   {
     "name": "Epoch Converter",
     "url": "https://www.epochconverter.com/",
     "description": "Convert Unix timestamps to human-readable dates and vice versa. Also handles batch conversion, relative time, and timezone offsets.",
     "category": "tools",
-    "tags": ["free", "dev-tool"],
+    "tags": [
+      "free",
+      "dev-tool"
+    ],
     "color": "#0ea5e9",
-    "tag_colors": { "free": "#22c55e", "dev-tool": "#0ea5e9" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev-tool": "#0ea5e9"
+    }
   },
   {
     "name": "ScreenToGif",
     "url": "https://www.screentogif.com/",
     "description": "Windows tool to record your screen, webcam, or sketchboard and export as GIF, MP4, or WebM. Free and open-source.",
     "category": "tools",
-    "tags": ["free", "open-source"],
+    "tags": [
+      "free",
+      "open-source"
+    ],
     "color": "#ff6c00",
-    "tag_colors": { "free": "#22c55e", "open-source": "#34d399" }
+    "tag_colors": {
+      "free": "#22c55e",
+      "open-source": "#34d399"
+    }
+  },
+  {
+    "name": "Whois Lookup",
+    "url": "https://who.is/",
+    "description": "Look up domain ownership, registration dates, nameservers, and contact information for any domain name.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "network"
+    ],
+    "color": "#336791",
+    "tag_colors": {
+      "free": "#22c55e",
+      "network": "#336791"
+    }
+  },
+  {
+    "name": "SSL Checker",
+    "url": "https://www.sslshopper.com/ssl-checker.html",
+    "description": "Verify SSL certificate installation, expiry date, and chain of trust for any domain. Instant results.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "security"
+    ],
+    "color": "#4caf50",
+    "tag_colors": {
+      "free": "#22c55e",
+      "security": "#4caf50"
+    }
+  },
+  {
+    "name": "DNS Checker",
+    "url": "https://dnschecker.org/",
+    "description": "Check DNS propagation across 22+ global servers. Verify if DNS changes have propagated worldwide in real time.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "network"
+    ],
+    "color": "#2196f3",
+    "tag_colors": {
+      "free": "#22c55e",
+      "network": "#2196f3"
+    }
+  },
+  {
+    "name": "Responsively",
+    "url": "https://responsively.app/",
+    "description": "Browser DevTool that shows your site on multiple screen sizes simultaneously. Speeds up responsive web design.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "dev"
+    ],
+    "color": "#7c5cfc",
+    "tag_colors": {
+      "free": "#22c55e",
+      "dev": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Meta Tags",
+    "url": "https://metatags.io/",
+    "description": "Preview and generate meta tags for your site. See exactly how your page appears on Google, Twitter, Facebook, and more.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "seo"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "seo": "#4285f4"
+    }
   }
 ]

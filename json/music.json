@@ -148,5 +148,50 @@
       "freemium": "#3b82f6",
       "notation": "#1e8bc3"
     }
+  },
+  {
+    "name": "Genius",
+    "url": "https://genius.com/",
+    "description": "Song lyrics, annotations, and meaning breakdowns. Community-annotated database covering virtually every song ever released.",
+    "category": "music",
+    "tags": [
+      "free",
+      "lyrics"
+    ],
+    "color": "#ffff64",
+    "tag_colors": {
+      "free": "#22c55e",
+      "lyrics": "#ffff64"
+    }
+  },
+  {
+    "name": "Shazam",
+    "url": "https://www.shazam.com/",
+    "description": "Identify any song playing around you. Also works as a music discovery tool with charts and artist radio.",
+    "category": "music",
+    "tags": [
+      "free",
+      "discovery"
+    ],
+    "color": "#0d67fe",
+    "tag_colors": {
+      "free": "#22c55e",
+      "discovery": "#0d67fe"
+    }
+  },
+  {
+    "name": "Musixmatch",
+    "url": "https://www.musixmatch.com/",
+    "description": "The world's largest lyrics platform. Synced lyrics in music apps, translation in 40+ languages, and a lyrics API.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "lyrics"
+    ],
+    "color": "#ff4f60",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "lyrics": "#ff4f60"
+    }
   }
 ]

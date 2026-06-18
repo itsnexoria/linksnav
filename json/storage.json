@@ -118,5 +118,95 @@
       "freemium": "#3b82f6",
       "object-storage": "#2683ff"
     }
+  },
+  {
+    "name": "Google Drive",
+    "url": "https://drive.google.com/",
+    "description": "15GB free cloud storage from Google. Integrated with Docs, Sheets, Slides, and the entire Google ecosystem.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "google"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "google": "#4285f4"
+    }
+  },
+  {
+    "name": "MEGA",
+    "url": "https://mega.io/",
+    "description": "20GB free encrypted cloud storage. End-to-end encryption means only you can access your files \u2014 not even MEGA.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "encrypted"
+    ],
+    "color": "#d9272e",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "encrypted": "#d9272e"
+    }
+  },
+  {
+    "name": "OneDrive",
+    "url": "https://onedrive.live.com/",
+    "description": "Microsoft's cloud storage, integrated with Windows and Office 365. 5GB free, seamless Office file editing.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "microsoft"
+    ],
+    "color": "#0078d4",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "microsoft": "#0078d4"
+    }
+  },
+  {
+    "name": "Pastebin",
+    "url": "https://pastebin.com/",
+    "description": "Store and share text snippets, code, logs, or any text publicly or privately with a simple shareable link.",
+    "category": "storage",
+    "tags": [
+      "free",
+      "snippets"
+    ],
+    "color": "#02a7f5",
+    "tag_colors": {
+      "free": "#22c55e",
+      "snippets": "#02a7f5"
+    }
+  },
+  {
+    "name": "WeTransfer",
+    "url": "https://wetransfer.com/",
+    "description": "Send large files up to 2GB for free without sign-up. Just upload, share the link, and files expire in 7 days.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "transfer"
+    ],
+    "color": "#111111",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "transfer": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Box",
+    "url": "https://www.box.com/",
+    "description": "Enterprise-grade cloud storage with strong compliance and security features. 10GB free for personal use.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "enterprise"
+    ],
+    "color": "#0061d5",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "enterprise": "#0061d5"
+    }
   }
 ]

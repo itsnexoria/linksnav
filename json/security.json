@@ -208,5 +208,20 @@
       "free": "#22c55e",
       "malware-scanner": "#5bc0de"
     }
+  },
+  {
+    "name": "ProtonMail",
+    "url": "https://proton.me/mail",
+    "description": "End-to-end encrypted email from CERN scientists. Zero-access encryption means even Proton can't read your emails.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "email"
+    ],
+    "color": "#6d4aff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "email": "#6d4aff"
+    }
   }
 ]

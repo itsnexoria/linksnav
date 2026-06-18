@@ -118,5 +118,125 @@
       "freemium": "#3b82f6",
       "email-marketing": "#ffe01b"
     }
+  },
+  {
+    "name": "Slack",
+    "url": "https://slack.com/",
+    "description": "Team messaging and collaboration hub. Channels, threads, file sharing, and thousands of app integrations.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "communication"
+    ],
+    "color": "#4a154b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "communication": "#4a154b"
+    }
+  },
+  {
+    "name": "Trello",
+    "url": "https://trello.com/",
+    "description": "Visual kanban board for tracking tasks and projects. Drag cards across columns to manage your workflow.",
+    "category": "business",
+    "tags": [
+      "free",
+      "project-management"
+    ],
+    "color": "#0052cc",
+    "tag_colors": {
+      "free": "#22c55e",
+      "project-management": "#0052cc"
+    }
+  },
+  {
+    "name": "HubSpot",
+    "url": "https://www.hubspot.com/",
+    "description": "Free CRM with marketing, sales, and support tools. Track leads, manage contacts, and automate emails.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "crm"
+    ],
+    "color": "#ff7a59",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "crm": "#ff7a59"
+    }
+  },
+  {
+    "name": "Loom",
+    "url": "https://www.loom.com/",
+    "description": "Record and share quick video messages instead of meetings. Screen + camera capture, instant shareable link.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "video"
+    ],
+    "color": "#625df5",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "video": "#625df5"
+    }
+  },
+  {
+    "name": "HubSpot CRM",
+    "url": "https://www.hubspot.com/products/crm",
+    "description": "Free CRM for managing contacts, deals, and pipelines. Track leads, log emails, and automate follow-ups at no cost.",
+    "category": "business",
+    "tags": [
+      "free",
+      "crm"
+    ],
+    "color": "#ff7a59",
+    "tag_colors": {
+      "free": "#22c55e",
+      "crm": "#ff7a59"
+    }
+  },
+  {
+    "name": "Airtable",
+    "url": "https://airtable.com/",
+    "description": "Spreadsheet-database hybrid. Build databases, trackers, and CRMs with a familiar grid interface plus automations.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "database"
+    ],
+    "color": "#fcb400",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "database": "#fcb400"
+    }
+  },
+  {
+    "name": "Docusign",
+    "url": "https://www.docusign.com/",
+    "description": "The standard for electronic signatures. Send, sign, and manage contracts and agreements from anywhere.",
+    "category": "business",
+    "tags": [
+      "paid",
+      "e-signature"
+    ],
+    "color": "#ffb600",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "e-signature": "#ffb600"
+    }
+  },
+  {
+    "name": "Typeform",
+    "url": "https://www.typeform.com/",
+    "description": "Conversational forms and surveys that feel like a chat. Higher completion rates than traditional form builders.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "forms"
+    ],
+    "color": "#262627",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "forms": "#7c5cfc"
+    }
   }
 ]
