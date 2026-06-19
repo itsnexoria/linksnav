@@ -67,23 +67,21 @@
 
   <style>
     @keyframes skeletonPulse {
-      0%, 100% { opacity: 0.35; }
-      50%       { opacity: 0.7; }
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.8; }
     }
     .skeleton-card {
-      background: #111122;
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 16px; padding: 18px; height: 160px;
-      animation: skeletonPulse 1.6s ease-in-out infinite;
+      background: var(--surface, #1c2030);
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      border-radius: 14px; padding: 18px; height: 148px;
+      animation: skeletonPulse 1.5s ease-in-out infinite;
     }
-    [data-theme="light"] .skeleton-card { background: #e8e8f0; border-color: rgba(0,0,0,0.06); }
-    .skeleton-card:nth-child(2) { animation-delay:.12s }
-    .skeleton-card:nth-child(3) { animation-delay:.24s }
-    .skeleton-card:nth-child(4) { animation-delay:.36s }
-    .skeleton-card:nth-child(5) { animation-delay:.48s }
-    .skeleton-card:nth-child(6) { animation-delay:.60s }
-    .skeleton-line { height:11px; border-radius:6px; background:rgba(255,255,255,0.07); margin-bottom:10px; }
-    [data-theme="light"] .skeleton-line { background: rgba(0,0,0,0.1); }
+    .skeleton-card:nth-child(2) { animation-delay:.1s }
+    .skeleton-card:nth-child(3) { animation-delay:.2s }
+    .skeleton-card:nth-child(4) { animation-delay:.3s }
+    .skeleton-card:nth-child(5) { animation-delay:.4s }
+    .skeleton-card:nth-child(6) { animation-delay:.5s }
+    .skeleton-line { height:10px; border-radius:5px; background:var(--border2, rgba(255,255,255,0.1)); margin-bottom:10px; }
     .skeleton-line.w60 { width:60% }
     .skeleton-line.w80 { width:80% }
     .skeleton-line.w40 { width:40% }
@@ -196,13 +194,23 @@
   <main class="main" id="main">
     <div class="section-label" id="sectionLabel" aria-live="polite">All Sites</div>
 
-    <div class="sort-bar" id="sortBar" role="toolbar" aria-label="Sort options">
-      <span class="sort-label">Sort:</span>
-      <button class="sort-btn active" data-sort="default" onclick="setSort('default',this)">Default</button>
-      <button class="sort-btn" data-sort="az" onclick="setSort('az',this)">A → Z</button>
-      <button class="sort-btn" data-sort="za" onclick="setSort('za',this)">Z → A</button>
-      <button class="sort-btn" data-sort="visits" onclick="setSort('visits',this)">Most Visited</button>
-      <span class="sort-drag-hint" id="dragHint">✦ Drag cards to reorder</span>
+    <div class="filter-bar" id="filterBar" role="toolbar" aria-label="Filter and sort options">
+      <span class="filter-bar-label">Sort</span>
+      <select class="filter-select" id="sortSelect" onchange="onSortChange(this.value)" aria-label="Sort order">
+        <option value="default">Default</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="visits">Most Visited</option>
+      </select>
+      <div class="filter-sep"></div>
+      <span class="filter-bar-label">Price</span>
+      <select class="filter-select" id="priceSelect" onchange="onPriceChange(this.value)" aria-label="Price filter">
+        <option value="all">All</option>
+        <option value="free">Free</option>
+        <option value="freemium">Freemium</option>
+        <option value="paid">Paid</option>
+      </select>
+      <span class="filter-drag-hint" id="dragHint">Drag to reorder</span>
     </div>
 
     <div class="cards-grid" id="cardsGrid" role="list">

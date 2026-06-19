@@ -18,6 +18,7 @@ let activeCategory = 'all';
 let searchQuery    = '';
 let favorites      = loadFavs();
 let currentSort    = 'default';
+let currentPrice   = 'all';
 const PAGE_SIZE    = 24;
 let visibleCount   = PAGE_SIZE;
 
@@ -139,6 +140,9 @@ function switchCat(id,btn){
   activeCategory=id;searchQuery='';visibleCount=PAGE_SIZE;
   const inp=document.getElementById('searchInput');
   if(inp)inp.value='';
+  /* Reset price filter */
+  const ps=document.getElementById('priceSelect');
+  if(ps){ps.value='all';currentPrice='all';}
   setActive(btn);render();
 }
 function setActive(btn){
@@ -185,12 +189,16 @@ function setupSearch(){
 }
 
 /* ── SORT ───────────────────────────────────────────────────── */
-window.setSort=function(mode,btn){
-  currentSort=mode;visibleCount=PAGE_SIZE;
-  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const hint=document.getElementById('dragHint');
-  if(hint)hint.classList.toggle('visible',mode==='default'&&!searchQuery);
+/* ── SORT & PRICE FILTER HANDLERS ───────────────────────────── */
+window.onSortChange = function(mode) {
+  currentSort = mode; visibleCount = PAGE_SIZE;
+  const hint = document.getElementById('dragHint');
+  if (hint) hint.classList.toggle('visible', mode === 'default' && !searchQuery);
+  render();
+};
+
+window.onPriceChange = function(price) {
+  currentPrice = price; visibleCount = PAGE_SIZE;
   render();
 };
 
@@ -213,6 +221,18 @@ function getFiltered(){
       return `${s.name} ${s.description} ${s.category} ${(s.tags||[]).join(' ')}`.toLowerCase().includes(searchQuery);
     });
   }
+
+  /* Price filter — match against tags array */
+  if(currentPrice!=='all'){
+    base=base.filter(s=>{
+      const tags=(s.tags||[]).map(t=>t.toLowerCase());
+      if(currentPrice==='free')    return tags.includes('free');
+      if(currentPrice==='freemium')return tags.includes('freemium');
+      if(currentPrice==='paid')    return tags.includes('paid');
+      return true;
+    });
+  }
+
   /* Apply saved drag order only in default sort and no search */
   if(currentSort==='default'&&!searchQuery&&activeCategory!=='__favorites__'){
     base=applyOrder(base,activeCategory);
@@ -256,8 +276,8 @@ function render(){
   document.getElementById('dividerRow')?.remove();
   document.getElementById('loadMoreWrap')?.remove();
 
-  /* Show drag hint only when sort=default, no search, not fav */
-  const canDrag=currentSort==='default'&&!searchQuery&&activeCategory!=='__favorites__';
+  /* Show drag hint only when sort=default, no search, not fav, no price filter */
+  const canDrag=currentSort==='default'&&!searchQuery&&activeCategory!=='__favorites__'&&currentPrice==='all';
   if(hint)hint.classList.toggle('visible',canDrag&&filtered.length>1);
 
   if(filtered.length===0){

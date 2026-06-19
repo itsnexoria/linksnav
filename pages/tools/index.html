@@ -10,7 +10,7 @@
   <meta property="og:title" content="Mini Tools — Nexo Hub"/>
   <meta property="og:description" content="Free browser-based mini tools. No sign-up needed."/>
   <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
-  <meta name="theme-color" content="#7c5cfc"/>
+  <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -32,22 +32,19 @@
       text-decoration: none; margin-bottom: 44px;
       transition: color .2s, gap .2s;
     }
-    .back-link:hover { color: var(--accent2); gap: 10px; }
+    .back-link:hover { color: var(--accent); gap: 10px; }
 
     .tools-hero {
-      text-align: center; margin-bottom: 56px;
-      animation: fadeUp .5s ease both;
+      text-align: center; margin-bottom: 48px;
+      animation: fadeUp .4s ease both;
     }
-    .tools-hero-icon { font-size: 3rem; margin-bottom: 12px; }
+    .tools-hero-icon { font-size: 2.6rem; margin-bottom: 10px; }
     .tools-hero h1 {
-      font-family: var(--font-d); font-size: clamp(2rem,5vw,3rem);
-      font-weight: 800; letter-spacing: -.04em;
-      background: linear-gradient(120deg, var(--text) 20%, var(--accent2) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-size: 200% 100%; animation: gradFlow 6s ease infinite;
-      margin: 0 0 12px;
+      font-family: var(--font-d); font-size: clamp(1.8rem,5vw,2.6rem);
+      font-weight: 800; letter-spacing: -.04em; color: var(--text);
+      margin: 0 0 10px;
     }
-    .tools-hero p { font-size: .9rem; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+    .tools-hero p { font-size: .85rem; color: var(--text2); line-height: 1.7; max-width: 500px; margin: 0 auto; }
 
     /* Tab bar */
     .tool-tabs {
@@ -60,9 +57,9 @@
       background: transparent; color: var(--muted); cursor: pointer;
       transition: all .2s;
     }
-    .tool-tab:hover { border-color: var(--accent2); color: var(--accent2); }
+    .tool-tab:hover { border-color: var(--accent); color: var(--accent); }
     .tool-tab.active {
-      background: var(--accent2); border-color: var(--accent2);
+      background: var(--accent); border-color: var(--accent);
       color: #fff;
     }
     [data-theme="light"] .tool-tab { border-color: rgba(0,0,0,0.1); }
@@ -72,8 +69,8 @@
     .tool-panel.active { display: block; }
 
     .tool-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 16px; padding: 28px;
       margin-bottom: 20px;
     }
@@ -86,40 +83,40 @@
     /* Shared inputs */
     .t-textarea {
       width: 100%; box-sizing: border-box;
-      background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
+      background: rgba(0,0,0,0.25); border: 1px solid var(--border);
       border-radius: 10px; color: var(--text);
       font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
       padding: 14px; resize: vertical; min-height: 130px;
       transition: border-color .2s;
     }
-    .t-textarea:focus { outline: none; border-color: var(--accent2); }
+    .t-textarea:focus { outline: none; border-color: var(--accent); }
     [data-theme="light"] .t-textarea { background: rgba(0,0,0,0.04); }
 
     .t-input {
-      background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
+      background: rgba(0,0,0,0.25); border: 1px solid var(--border);
       border-radius: 10px; color: var(--text);
       font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
       padding: 10px 14px; width: 100%; box-sizing: border-box;
       transition: border-color .2s;
     }
-    .t-input:focus { outline: none; border-color: var(--accent2); }
+    .t-input:focus { outline: none; border-color: var(--accent); }
     [data-theme="light"] .t-input { background: rgba(0,0,0,0.04); }
 
     .t-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
     .t-btn {
       padding: 8px 18px; border-radius: 8px; font-size: .8rem;
-      font-family: 'Inter', system-ui, sans-serif; border: 1px solid var(--accent2);
-      background: transparent; color: var(--accent2); cursor: pointer;
+      font-family: 'Inter', system-ui, sans-serif; border: 1px solid var(--accent);
+      background: transparent; color: var(--accent); cursor: pointer;
       transition: all .2s;
     }
-    .t-btn:hover { background: var(--accent2); color: #fff; }
-    .t-btn.primary { background: var(--accent2); color: #fff; }
+    .t-btn:hover { background: var(--accent); color: #fff; }
+    .t-btn.primary { background: var(--accent); color: #fff; }
     .t-btn.primary:hover { opacity: .85; }
 
     .t-output {
       margin-top: 14px; padding: 14px;
-      background: rgba(124,92,252,0.07);
-      border: 1px solid rgba(124,92,252,0.2);
+      background: rgba(79,127,255,0.07);
+      border: 1px solid rgba(79,127,255,0.2);
       border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
       line-height: 1.7; white-space: pre-wrap; word-break: break-all;
       min-height: 40px; color: var(--text);
@@ -128,21 +125,21 @@
     .t-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; }
     .t-stat {
       display: flex; flex-direction: column; align-items: center;
-      background: rgba(124,92,252,0.07); border: 1px solid rgba(124,92,252,0.2);
+      background: rgba(79,127,255,0.07); border: 1px solid rgba(79,127,255,0.2);
       border-radius: 10px; padding: 10px 18px; min-width: 80px;
     }
-    .t-stat-val { font-family: var(--font-d); font-size: 1.4rem; font-weight: 800; color: var(--accent2); }
+    .t-stat-val { font-family: var(--font-d); font-size: 1.4rem; font-weight: 800; color: var(--accent); }
     .t-stat-label { font-size: .7rem; color: var(--muted); margin-top: 2px; }
 
     /* Font preview */
     .font-select {
-      background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);
+      background: rgba(0,0,0,0.25); border: 1px solid var(--border);
       border-radius: 10px; color: var(--text);
       font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
       padding: 10px 14px; cursor: pointer;
       transition: border-color .2s;
     }
-    .font-select:focus { outline: none; border-color: var(--accent2); }
+    .font-select:focus { outline: none; border-color: var(--accent); }
     [data-theme="light"] .font-select { background: rgba(0,0,0,0.04); }
     .font-preview {
       margin-top: 14px; padding: 20px;
@@ -156,11 +153,11 @@
     .color-input-wrap { display: flex; align-items: center; gap: 12px; }
     input[type="color"] {
       width: 48px; height: 48px; border-radius: 10px;
-      border: 1px solid var(--card-border); cursor: pointer;
+      border: 1px solid var(--border); cursor: pointer;
       background: none; padding: 2px;
     }
     .color-values { font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; line-height: 2; }
-    .copy-val { cursor: pointer; color: var(--accent2); }
+    .copy-val { cursor: pointer; color: var(--accent); }
     .copy-val:hover { text-decoration: underline; }
 
     /* Gradient */
@@ -175,7 +172,7 @@
 
     .copied-toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: var(--accent2); color: #fff; padding: 10px 22px;
+      background: var(--accent); color: #fff; padding: 10px 22px;
       border-radius: 999px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
       opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 999;
     }
@@ -316,7 +313,7 @@
             <option value="Palatino, serif">Palatino</option>
             <option value="Garamond, serif">Garamond</option>
           </select>
-          <input type="range" id="fontSizeSlider" min="12" max="64" value="24" oninput="updateFont()" style="flex:1;min-width:120px;accent-color:var(--accent2)"/>
+          <input type="range" id="fontSizeSlider" min="12" max="64" value="24" oninput="updateFont()" style="flex:1;min-width:120px;accent-color:var(--accent)"/>
           <span id="fontSizeLabel" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem;color:var(--muted);min-width:36px">24px</span>
         </div>
         <textarea class="t-textarea" id="fontText" oninput="updateFont()" placeholder="Type something to preview…" style="min-height:60px">The quick brown fox jumps over the lazy dog.</textarea>
@@ -336,7 +333,7 @@
       <div class="tool-card">
         <h2>🎨 Colour Picker</h2>
         <div class="color-input-wrap" style="margin-bottom:20px">
-          <input type="color" id="colorPicker" value="#7c5cfc" oninput="updateColor()"/>
+          <input type="color" id="colorPicker" value="#4f7fff" oninput="updateColor()"/>
           <div class="color-values" id="colorValues"></div>
         </div>
         <div style="height:80px;border-radius:12px;transition:background .2s" id="colorSwatch"></div>
@@ -356,7 +353,7 @@
           </div>
           <div>
             <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Background</p>
-            <div class="color-input-wrap"><input type="color" id="bg-color" value="#7c5cfc" oninput="checkContrast()"/><span id="bg-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#7c5cfc</span></div>
+            <div class="color-input-wrap"><input type="color" id="bg-color" value="#4f7fff" oninput="checkContrast()"/><span id="bg-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#4f7fff</span></div>
           </div>
         </div>
         <div id="contrast-preview" style="margin-top:16px;padding:20px;border-radius:12px;text-align:center;font-size:1.1rem;font-weight:700;transition:all .2s"></div>
@@ -371,11 +368,11 @@
         <div class="grad-row">
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
             <label style="font-size:.75rem;color:var(--muted)">Colour 1</label>
-            <div class="color-input-wrap"><input type="color" id="g1" value="#7c5cfc" oninput="updateGrad()"/><span id="g1-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#7c5cfc</span></div>
+            <div class="color-input-wrap"><input type="color" id="g1" value="#4f7fff" oninput="updateGrad()"/><span id="g1-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#4f7fff</span></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
             <label style="font-size:.75rem;color:var(--muted)">Colour 2</label>
-            <div class="color-input-wrap"><input type="color" id="g2" value="#a855f7" oninput="updateGrad()"/><span id="g2-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#a855f7</span></div>
+            <div class="color-input-wrap"><input type="color" id="g2" value="#4f7fff" oninput="updateGrad()"/><span id="g2-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#4f7fff</span></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
             <label style="font-size:.75rem;color:var(--muted)">Colour 3 (optional)</label>
@@ -394,7 +391,7 @@
           <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px">
             <label style="font-size:.75rem;color:var(--muted)">Angle (linear)</label>
             <div style="display:flex;align-items:center;gap:10px">
-              <input type="range" id="gradAngle" min="0" max="360" value="135" oninput="updateGrad()" style="flex:1;accent-color:var(--accent2)"/>
+              <input type="range" id="gradAngle" min="0" max="360" value="135" oninput="updateGrad()" style="flex:1;accent-color:var(--accent)"/>
               <span id="gradAngleLabel" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem;color:var(--muted);min-width:36px">135°</span>
             </div>
           </div>
@@ -457,7 +454,7 @@
         <h2>🔑 Password Generator</h2>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
           <label style="font-size:.8rem;color:var(--muted);min-width:60px">Length: <b id="pwLenLabel">16</b></label>
-          <input type="range" id="pwLen" min="6" max="64" value="16" oninput="genPassword()" style="flex:1;min-width:120px;accent-color:var(--accent2)"/>
+          <input type="range" id="pwLen" min="6" max="64" value="16" oninput="genPassword()" style="flex:1;min-width:120px;accent-color:var(--accent)"/>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">
           <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwUpper" checked onchange="genPassword()"> Uppercase (A-Z)</label>
@@ -466,7 +463,7 @@
           <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwSyms" checked onchange="genPassword()"> Symbols (!@#$)</label>
         </div>
         <div class="t-output" id="pw-output" style="font-size:1.1rem;letter-spacing:.05em;word-break:break-all;min-height:52px"></div>
-        <div id="pw-strength" style="margin-top:10px;height:6px;border-radius:3px;transition:all .3s;background:var(--card-border)"></div>
+        <div id="pw-strength" style="margin-top:10px;height:6px;border-radius:3px;transition:all .3s;background:var(--border)"></div>
         <p id="pw-strength-label" style="font-size:.75rem;color:var(--muted);margin-top:6px"></p>
         <div class="t-btn-row" style="margin-top:12px">
           <button class="t-btn primary" onclick="genPassword()">Regenerate</button>
@@ -478,7 +475,7 @@
         <h2>🎲 Passphrase Generator</h2>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
           <label style="font-size:.8rem;color:var(--muted)">Words: <b id="ppCountLabel">4</b></label>
-          <input type="range" id="ppCount" min="3" max="8" value="4" oninput="genPassphrase()" style="flex:1;accent-color:var(--accent2)"/>
+          <input type="range" id="ppCount" min="3" max="8" value="4" oninput="genPassphrase()" style="flex:1;accent-color:var(--accent)"/>
           <select class="font-select" id="ppSep" onchange="genPassphrase()" style="padding:6px 10px;font-size:.8rem">
             <option value="-">Dashes</option>
             <option value=".">Dots</option>
@@ -592,8 +589,8 @@
     <div class="tool-panel" id="panel-timestamp">
       <div class="tool-card">
         <h2>🕐 Timestamp Converter</h2>
-        <div style="text-align:center;padding:20px;background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.2);border-radius:12px;margin-bottom:20px">
-          <div style="font-size:2rem;font-weight:800;color:var(--accent2)" id="live-clock"></div>
+        <div style="text-align:center;padding:20px;background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.2);border-radius:12px;margin-bottom:20px">
+          <div style="font-size:2rem;font-weight:800;color:var(--accent)" id="live-clock"></div>
           <div style="font-size:.8rem;color:var(--muted);margin-top:4px" id="live-unix"></div>
         </div>
         <div class="tool-card" style="margin-bottom:14px;padding:20px">
@@ -759,7 +756,7 @@
       unicodeStyles.forEach(({ name, fn }) => {
         const transformed = fn(v);
         const row = document.createElement('div');
-        row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.15);border-radius:8px;gap:12px;flex-wrap:wrap';
+        row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.15);border-radius:8px;gap:12px;flex-wrap:wrap';
         row.innerHTML = `<span style="font-size:.85rem;color:var(--muted);font-family:'Inter', system-ui, sans-serif;min-width:70px">${name}</span><span style="flex:1;font-size:1rem">${transformed}</span>`;
         const btn = document.createElement('button');
         btn.className = 't-btn'; btn.textContent = 'Copy';
@@ -780,7 +777,7 @@
       if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}
       return {h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
     }
-    let lastHex='#7c5cfc',lastRgb,lastHsl;
+    let lastHex='#4f7fff',lastRgb,lastHsl;
     function updateColor() {
       const hex = document.getElementById('colorPicker').value;
       lastHex = hex;
@@ -959,7 +956,7 @@
       if (!v) { out.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Enter text above to generate a QR code</p>'; dlRow.style.display='none'; return; }
       const size = document.getElementById('qr-size').value;
       const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(v)}&format=png&margin=10`;
-      out.innerHTML = `<img src="${url}" alt="QR Code" style="border-radius:12px;max-width:100%;border:1px solid var(--card-border)" width="${size}" height="${size}" id="qr-img"/>`;
+      out.innerHTML = `<img src="${url}" alt="QR Code" style="border-radius:12px;max-width:100%;border:1px solid var(--border)" width="${size}" height="${size}" id="qr-img"/>`;
       dlRow.style.display = 'flex';
     }
     function downloadQR() {
@@ -1010,8 +1007,8 @@
         { label: 'SHA-1 (weak)', val: await digest('SHA-1') },
       ];
       container.innerHTML = hashes.map(h => `
-        <div style="background:rgba(124,92,252,0.07);border:1px solid rgba(124,92,252,0.2);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-          <span style="font-size:.78rem;color:var(--accent2);font-weight:700;min-width:90px">${h.label}</span>
+        <div style="background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.2);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-size:.78rem;color:var(--accent);font-weight:700;min-width:90px">${h.label}</span>
           <span style="font-family:monospace;font-size:.75rem;flex:1;word-break:break-all">${h.val}</span>
           <button class="t-btn" style="flex-shrink:0" onclick="navigator.clipboard.writeText('${h.val}').then(()=>showToast())">Copy</button>
         </div>`).join('');
