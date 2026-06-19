@@ -50,22 +50,25 @@
     .tool-tabs {
       display: flex; gap: 8px; flex-wrap: wrap;
       margin-bottom: 32px; justify-content: center;
+      animation: slideDown .35s ease both;
     }
     .tool-tab {
       padding: 7px 18px; border-radius: 999px; font-size: .8rem;
       font-family: 'Inter', system-ui, sans-serif; border: 1px solid rgba(255,255,255,0.1);
       background: transparent; color: var(--muted); cursor: pointer;
-      transition: all .2s;
+      transition: border-color .18s, color .18s, background .18s, transform .15s;
     }
-    .tool-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .tool-tab:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .tool-tab:active { transform: translateY(0) scale(.95); }
     .tool-tab.active {
       background: var(--accent); border-color: var(--accent);
       color: #fff;
+      animation: popScale .25s cubic-bezier(.34,1.56,.64,1);
     }
     [data-theme="light"] .tool-tab { border-color: rgba(0,0,0,0.1); }
 
     /* Tool cards */
-    .tool-panel { display: none; animation: fadeUp .3s ease both; }
+    .tool-panel { display: none; animation: heroEnter .35s ease both; }
     .tool-panel.active { display: block; }
 
     .tool-card {
@@ -73,7 +76,10 @@
       border: 1px solid var(--border);
       border-radius: 16px; padding: 28px;
       margin-bottom: 20px;
+      animation: cardIn .35s ease both;
+      transition: border-color .2s, box-shadow .2s;
     }
+    .tool-card:hover { border-color: var(--border2); box-shadow: var(--shadow-sm); }
     .tool-card h2 {
       font-family: var(--font-d); font-size: 1.1rem;
       font-weight: 700; margin: 0 0 18px;
@@ -107,9 +113,10 @@
       padding: 8px 18px; border-radius: 8px; font-size: .8rem;
       font-family: 'Inter', system-ui, sans-serif; border: 1px solid var(--accent);
       background: transparent; color: var(--accent); cursor: pointer;
-      transition: all .2s;
+      transition: background .18s, color .18s, transform .15s, box-shadow .18s;
     }
-    .t-btn:hover { background: var(--accent); color: #fff; }
+    .t-btn:hover { background: var(--accent); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .t-btn:active { transform: translateY(0) scale(.95); }
     .t-btn.primary { background: var(--accent); color: #fff; }
     .t-btn.primary:hover { opacity: .85; }
 
@@ -120,6 +127,7 @@
       border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
       line-height: 1.7; white-space: pre-wrap; word-break: break-all;
       min-height: 40px; color: var(--text);
+      animation: cardIn .25s ease both;
     }
 
     .t-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; }
@@ -171,12 +179,13 @@
     .b64-mode-row { display: flex; gap: 8px; margin-bottom: 12px; }
 
     .copied-toast {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
       background: var(--accent); color: #fff; padding: 10px 22px;
       border-radius: 999px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
-      opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 999;
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1); z-index: 999;
+      box-shadow: var(--shadow-md);
     }
-    .copied-toast.show { opacity: 1; }
+    .copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -233,6 +242,7 @@
       <button class="tool-tab" data-panel="font" role="tab">🔤 Font Changer</button>
       <button class="tool-tab" data-panel="color" role="tab">🎨 Colour Picker</button>
       <button class="tool-tab" data-panel="gradient" role="tab">🌈 Gradient</button>
+      <button class="tool-tab" data-panel="palette" role="tab">🎭 Palette Generator</button>
       <button class="tool-tab" data-panel="password" role="tab">🔑 Password</button>
       <button class="tool-tab" data-panel="qr" role="tab">📷 QR Code</button>
       <button class="tool-tab" data-panel="lorem" role="tab">📄 Lorem Ipsum</button>
@@ -241,6 +251,10 @@
       <button class="tool-tab" data-panel="url" role="tab">🔗 URL Encode</button>
       <button class="tool-tab" data-panel="units" role="tab">📐 Unit Converter</button>
       <button class="tool-tab" data-panel="timestamp" role="tab">🕐 Timestamp</button>
+      <button class="tool-tab" data-panel="markdown" role="tab">📝 Markdown Preview</button>
+      <button class="tool-tab" data-panel="diff" role="tab">🔍 Text Diff</button>
+      <button class="tool-tab" data-panel="dice" role="tab">🎲 Dice Roller</button>
+      <button class="tool-tab" data-panel="imgb64" role="tab">🖼️ Image to Base64</button>
     </div>
 
     <!-- TEXT TOOLS -->
@@ -609,6 +623,112 @@
       </div>
     </div>
 
+    <!-- PALETTE GENERATOR -->
+    <div class="tool-panel" id="panel-palette">
+      <div class="tool-card">
+        <h2>🎭 Colour Palette Generator</h2>
+        <p style="font-size:.8rem;color:var(--text2);margin:0 0 16px">Generate a harmonious 5-colour palette from a base colour, or roll a random one.</p>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap">
+          <input type="color" id="palette-base" value="#4f7fff" oninput="genPalette()"/>
+          <select class="font-select" id="palette-mode" onchange="genPalette()" style="padding:8px 12px;font-size:.85rem">
+            <option value="analogous">Analogous</option>
+            <option value="complementary">Complementary</option>
+            <option value="monochrome">Monochrome</option>
+            <option value="triadic">Triadic</option>
+          </select>
+          <button class="t-btn primary" onclick="randomPalette()">🎲 Random</button>
+        </div>
+        <div id="palette-output" style="display:flex;gap:6px;border-radius:12px;overflow:hidden;height:120px"></div>
+        <p style="font-size:.72rem;color:var(--text2);margin-top:10px;text-align:center">Click any swatch to copy its hex code</p>
+      </div>
+    </div>
+
+    <!-- MARKDOWN PREVIEW -->
+    <div class="tool-panel" id="panel-markdown">
+      <div class="tool-card">
+        <h2>📝 Markdown Previewer</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Markdown</p>
+            <textarea class="t-textarea" id="md-input" style="min-height:280px;font-family:monospace" placeholder="# Heading&#10;&#10;**Bold** and *italic* text.&#10;&#10;- List item one&#10;- List item two&#10;&#10;[A link](https://example.com)" oninput="renderMarkdown()"></textarea>
+          </div>
+          <div>
+            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Preview</p>
+            <div id="md-output" style="min-height:280px;background:rgba(79,127,255,0.05);border:1px solid rgba(79,127,255,0.15);border-radius:10px;padding:16px;font-size:.85rem;line-height:1.7;overflow-y:auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEXT DIFF -->
+    <div class="tool-panel" id="panel-diff">
+      <div class="tool-card">
+        <h2>🔍 Text Diff Checker</h2>
+        <p style="font-size:.8rem;color:var(--text2);margin:0 0 14px">Compare two pieces of text line by line. Added, removed, and unchanged lines are highlighted.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <div>
+            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Original</p>
+            <textarea class="t-textarea" id="diff-a" style="min-height:160px" placeholder="Paste original text…"></textarea>
+          </div>
+          <div>
+            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Changed</p>
+            <textarea class="t-textarea" id="diff-b" style="min-height:160px" placeholder="Paste changed text…"></textarea>
+          </div>
+        </div>
+        <div class="t-btn-row">
+          <button class="t-btn primary" onclick="runDiff()">Compare</button>
+        </div>
+        <div id="diff-output" style="margin-top:14px;font-family:monospace;font-size:.8rem;line-height:1.7;display:none"></div>
+      </div>
+    </div>
+
+    <!-- DICE ROLLER -->
+    <div class="tool-panel" id="panel-dice">
+      <div class="tool-card">
+        <h2>🎲 Dice Roller &amp; Random Number Generator</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+          <button class="t-btn" onclick="rollDice(4)">d4</button>
+          <button class="t-btn" onclick="rollDice(6)">d6</button>
+          <button class="t-btn" onclick="rollDice(8)">d8</button>
+          <button class="t-btn" onclick="rollDice(10)">d10</button>
+          <button class="t-btn" onclick="rollDice(12)">d12</button>
+          <button class="t-btn" onclick="rollDice(20)">d20</button>
+          <button class="t-btn" onclick="rollDice(100)">d100</button>
+        </div>
+        <div id="dice-result" style="text-align:center;padding:30px;background:rgba(79,127,255,0.06);border:1px solid rgba(79,127,255,0.2);border-radius:14px;margin-bottom:20px">
+          <div style="font-family:var(--font-d);font-size:3rem;font-weight:800;color:var(--accent)" id="dice-num">—</div>
+          <div style="font-size:.75rem;color:var(--text2);margin-top:4px" id="dice-label">Roll a die above</div>
+        </div>
+        <h2 style="font-size:.95rem">🔢 Random Number Range</h2>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap">
+          <input type="number" class="t-input" id="rand-min" value="1" placeholder="Min" style="max-width:100px"/>
+          <span style="color:var(--text2)">to</span>
+          <input type="number" class="t-input" id="rand-max" value="100" placeholder="Max" style="max-width:100px"/>
+          <button class="t-btn primary" onclick="rollRandom()">Generate</button>
+        </div>
+        <div class="t-output" id="rand-output" style="display:none;text-align:center;font-size:1.3rem;font-weight:700;margin-top:14px"></div>
+      </div>
+    </div>
+
+    <!-- IMAGE TO BASE64 -->
+    <div class="tool-panel" id="panel-imgb64">
+      <div class="tool-card">
+        <h2>🖼️ Image to Base64 Converter</h2>
+        <p style="font-size:.8rem;color:var(--text2);margin:0 0 16px">Convert an image to a Base64 data URI for embedding directly in HTML/CSS. Processed entirely in your browser — nothing uploads anywhere.</p>
+        <div id="imgb64-drop" style="border:2px dashed var(--border2);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s">
+          <p style="color:var(--text2);font-size:.85rem">📁 Click to choose an image or drag and drop</p>
+          <input type="file" id="imgb64-input" accept="image/*" style="display:none" onchange="handleImgFile(this.files[0])"/>
+        </div>
+        <div id="imgb64-preview" style="display:none;margin-top:16px;text-align:center">
+          <img id="imgb64-img" style="max-width:100%;max-height:200px;border-radius:10px;border:1px solid var(--border)"/>
+        </div>
+        <div class="t-output" id="imgb64-output" style="display:none;max-height:160px;overflow-y:auto;font-size:.7rem"></div>
+        <div class="t-btn-row" id="imgb64-copy-row" style="display:none;margin-top:12px">
+          <button class="t-btn primary" onclick="copyOutput('imgb64-output')">Copy Data URI</button>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <footer class="footer" role="contentinfo">
@@ -638,14 +758,12 @@
     const ham = document.getElementById('hamburger');
     const menu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('navOverlay');
-    function closeMenu() { menu.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); ham.setAttribute('aria-expanded','false'); }
-    ham.addEventListener('click', () => {
-      const open = menu.getAttribute('aria-hidden') === 'false';
-      menu.setAttribute('aria-hidden', open ? 'true' : 'false');
-      overlay.setAttribute('aria-hidden', open ? 'true' : 'false');
-      ham.setAttribute('aria-expanded', open ? 'false' : 'true');
-    });
+    function openMenu() { ham.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); ham.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { ham.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); ham.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    ham.addEventListener('click', () => ham.classList.contains('is-open') ? closeMenu() : openMenu());
     overlay.addEventListener('click', closeMenu);
+    menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
     // Tabs
     document.querySelectorAll('.tool-tab').forEach(btn => {
@@ -1103,6 +1221,139 @@
     const now = new Date(); now.setSeconds(0,0);
     document.getElementById('dt-input').value = now.toISOString().slice(0,16);
     humanToUnix();
+
+    // ── PALETTE GENERATOR ──────────────────────────────────
+    function hexToHsl(hex) {
+      const r = parseInt(hex.slice(1,3),16)/255, g = parseInt(hex.slice(3,5),16)/255, b = parseInt(hex.slice(5,7),16)/255;
+      const max=Math.max(r,g,b), min=Math.min(r,g,b); let h,s,l=(max+min)/2;
+      if(max===min){h=s=0} else { const d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
+        switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;} }
+      return [h*360, s*100, l*100];
+    }
+    function hslToHex(h,s,l) {
+      h=((h%360)+360)%360; s/=100; l/=100;
+      const c=(1-Math.abs(2*l-1))*s, x=c*(1-Math.abs((h/60)%2-1)), m=l-c/2;
+      let r,g,b;
+      if(h<60){r=c;g=x;b=0} else if(h<120){r=x;g=c;b=0} else if(h<180){r=0;g=c;b=x}
+      else if(h<240){r=0;g=x;b=c} else if(h<300){r=x;g=0;b=c} else {r=c;g=0;b=x}
+      const toHex=v=>Math.round((v+m)*255).toString(16).padStart(2,'0');
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+    function genPalette() {
+      const base = document.getElementById('palette-base').value;
+      const mode = document.getElementById('palette-mode').value;
+      const [h,s,l] = hexToHsl(base);
+      let colours = [];
+      if (mode === 'analogous') colours = [-40,-20,0,20,40].map(d => hslToHex(h+d, s, l));
+      else if (mode === 'complementary') colours = [0,0,0,180,180].map((d,i) => hslToHex(h+d, s, i%2===0?l+(i*5-5):l-(i*5)));
+      else if (mode === 'monochrome') colours = [-30,-15,0,15,30].map(d => hslToHex(h, s, Math.min(95,Math.max(8,l+d))));
+      else colours = [0,0,120,120,240].map((d,i) => hslToHex(h+d, s, i%2===0?l:Math.max(10,l-15)));
+      renderPalette(colours);
+    }
+    function randomPalette() {
+      document.getElementById('palette-base').value = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+      const modes = ['analogous','complementary','monochrome','triadic'];
+      document.getElementById('palette-mode').value = modes[Math.floor(Math.random()*modes.length)];
+      genPalette();
+    }
+    function renderPalette(colours) {
+      const out = document.getElementById('palette-output');
+      out.innerHTML = colours.map(c => `
+        <div style="flex:1;background:${c};display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;transition:flex .2s"
+             onclick="navigator.clipboard.writeText('${c}').then(()=>showToast('${c} copied!'))"
+             onmouseover="this.style.flex='1.3'" onmouseout="this.style.flex='1'">
+          <span style="background:rgba(0,0,0,0.55);color:#fff;font-family:monospace;font-size:.68rem;padding:3px 7px;border-radius:5px">${c}</span>
+        </div>`).join('');
+    }
+    genPalette();
+
+    // ── MARKDOWN PREVIEW ───────────────────────────────────
+    function renderMarkdown() {
+      let md = document.getElementById('md-input').value;
+      let html = md
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+        .replace(/\*(.*?)\*/g, '<i>$1</i>')
+        .replace(/`(.*?)`/g, '<code style="background:rgba(0,0,0,.2);padding:2px 5px;border-radius:4px;font-size:.85em">$1</code>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" style="color:var(--accent)" target="_blank">$1</a>')
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>)/gims, '<ul style="margin-left:18px">$1</ul>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+      document.getElementById('md-output').innerHTML = `<p>${html}</p>`;
+    }
+    document.getElementById('md-input').value = '# Hello World\n\nThis is **bold** and this is *italic*.\n\n- First item\n- Second item\n\n[Visit Nexo Hub](https://nexohub.nexosites.xyz)';
+    renderMarkdown();
+
+    // ── TEXT DIFF ──────────────────────────────────────────
+    function runDiff() {
+      const a = document.getElementById('diff-a').value.split('\n');
+      const b = document.getElementById('diff-b').value.split('\n');
+      const out = document.getElementById('diff-output');
+      const max = Math.max(a.length, b.length);
+      let html = '';
+      for (let i = 0; i < max; i++) {
+        const la = a[i], lb = b[i];
+        if (la === lb) html += `<div style="padding:2px 8px;color:var(--text2)">  ${esc(la||'')}</div>`;
+        else {
+          if (la !== undefined) html += `<div style="padding:2px 8px;background:rgba(239,68,68,.12);color:#ef4444">- ${esc(la)}</div>`;
+          if (lb !== undefined) html += `<div style="padding:2px 8px;background:rgba(34,197,94,.12);color:#22c55e">+ ${esc(lb)}</div>`;
+        }
+      }
+      out.innerHTML = html || '<p style="color:var(--text2)">No differences found.</p>';
+      out.style.display = 'block';
+    }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // ── DICE ROLLER ────────────────────────────────────────
+    function rollDice(sides) {
+      const arr = new Uint32Array(1);
+      crypto.getRandomValues(arr);
+      const result = (arr[0] % sides) + 1;
+      const el = document.getElementById('dice-num');
+      el.style.transform = 'scale(0.7) rotate(-10deg)';
+      el.textContent = result;
+      document.getElementById('dice-label').textContent = `d${sides} roll`;
+      setTimeout(() => { el.style.transition='transform .3s cubic-bezier(.34,1.56,.64,1)'; el.style.transform='scale(1) rotate(0)'; }, 20);
+    }
+    function rollRandom() {
+      const min = parseInt(document.getElementById('rand-min').value) || 0;
+      const max = parseInt(document.getElementById('rand-max').value) || 100;
+      const arr = new Uint32Array(1);
+      crypto.getRandomValues(arr);
+      const result = min + (arr[0] % (max - min + 1));
+      const out = document.getElementById('rand-output');
+      out.textContent = result;
+      out.style.display = 'block';
+    }
+
+    // ── IMAGE TO BASE64 ────────────────────────────────────
+    const imgDrop = document.getElementById('imgb64-drop');
+    imgDrop.addEventListener('click', () => document.getElementById('imgb64-input').click());
+    imgDrop.addEventListener('dragover', e => { e.preventDefault(); imgDrop.style.borderColor='var(--accent)'; imgDrop.style.background='var(--accent-dim)'; });
+    imgDrop.addEventListener('dragleave', () => { imgDrop.style.borderColor='var(--border2)'; imgDrop.style.background='transparent'; });
+    imgDrop.addEventListener('drop', e => {
+      e.preventDefault();
+      imgDrop.style.borderColor='var(--border2)'; imgDrop.style.background='transparent';
+      if (e.dataTransfer.files[0]) handleImgFile(e.dataTransfer.files[0]);
+    });
+    function handleImgFile(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const dataUri = e.target.result;
+        document.getElementById('imgb64-img').src = dataUri;
+        document.getElementById('imgb64-preview').style.display = 'block';
+        const out = document.getElementById('imgb64-output');
+        out.textContent = dataUri;
+        out.style.display = 'block';
+        document.getElementById('imgb64-copy-row').style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
   </script>
 </body>
 </html>

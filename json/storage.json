@@ -208,5 +208,35 @@
       "freemium": "#3b82f6",
       "enterprise": "#0061d5"
     }
+  },
+  {
+    "name": "iCloud",
+    "url": "https://www.icloud.com/",
+    "description": "Apple's cloud storage and sync service. 5GB free, tightly integrated with iPhone, iPad, and Mac.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "apple"
+    ],
+    "color": "#3693f3",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "apple": "#3693f3"
+    }
+  },
+  {
+    "name": "pCloud",
+    "url": "https://www.pcloud.com/",
+    "description": "Lifetime cloud storage plans \u2014 pay once, own it forever. Includes built-in media player and client-side encryption option.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "lifetime"
+    ],
+    "color": "#19b5fe",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "lifetime": "#19b5fe"
+    }
   }
 ]

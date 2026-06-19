@@ -148,5 +148,20 @@
       "free": "#22c55e",
       "streaming": "#7c5cfc"
     }
+  },
+  {
+    "name": "Tubi",
+    "url": "https://tubi.tv/",
+    "description": "100% free ad-supported movie and TV streaming with thousands of titles. No subscription or credit card required.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#fa382b",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#fa382b"
+    }
   }
 ]

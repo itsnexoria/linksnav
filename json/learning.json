@@ -283,5 +283,35 @@
       "free": "#22c55e",
       "coding": "#009cab"
     }
+  },
+  {
+    "name": "Khan Academy",
+    "url": "https://www.khanacademy.org/",
+    "description": "Completely free education from K-12 through early college. Maths, science, economics, and SAT prep with no ads.",
+    "category": "learning",
+    "tags": [
+      "free",
+      "general"
+    ],
+    "color": "#14bf96",
+    "tag_colors": {
+      "free": "#22c55e",
+      "general": "#14bf96"
+    }
+  },
+  {
+    "name": "edX",
+    "url": "https://www.edx.org/",
+    "description": "University-level courses from Harvard, MIT, and Berkeley. Audit most courses for free or pay for a certificate.",
+    "category": "learning",
+    "tags": [
+      "freemium",
+      "university"
+    ],
+    "color": "#02262b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "university": "#02262b"
+    }
   }
 ]

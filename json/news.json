@@ -148,5 +148,35 @@
       "freemium": "#3b82f6",
       "bias-check": "#7c5cfc"
     }
+  },
+  {
+    "name": "NPR",
+    "url": "https://www.npr.org/",
+    "description": "Non-profit public radio news with in-depth reporting on politics, culture, and science. Strong audio journalism and podcasts.",
+    "category": "news",
+    "tags": [
+      "free",
+      "world"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "world": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Axios",
+    "url": "https://www.axios.com/",
+    "description": "Concise, no-fluff news in a smart-brevity format. Get the key facts on politics, tech, and business in seconds.",
+    "category": "news",
+    "tags": [
+      "free",
+      "politics"
+    ],
+    "color": "#eb1700",
+    "tag_colors": {
+      "free": "#22c55e",
+      "politics": "#eb1700"
+    }
   }
 ]

@@ -148,5 +148,65 @@
       "freemium": "#3b82f6",
       "expenses": "#5bc5a7"
     }
+  },
+  {
+    "name": "Robinhood",
+    "url": "https://robinhood.com/",
+    "description": "Commission-free stock, ETF, options, and crypto trading app. Simple interface aimed at first-time investors.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "trading"
+    ],
+    "color": "#00c805",
+    "tag_colors": {
+      "free": "#22c55e",
+      "trading": "#00c805"
+    }
+  },
+  {
+    "name": "Mint",
+    "url": "https://mint.intuit.com/",
+    "description": "Free budgeting and net worth tracker that links to your bank accounts. Automatically categorises every transaction.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "budgeting"
+    ],
+    "color": "#00b94f",
+    "tag_colors": {
+      "free": "#22c55e",
+      "budgeting": "#00b94f"
+    }
+  },
+  {
+    "name": "NerdWallet",
+    "url": "https://www.nerdwallet.com/",
+    "description": "Compare credit cards, loans, and insurance with unbiased reviews. Calculators for mortgages, retirement, and taxes.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "comparison"
+    ],
+    "color": "#9013fe",
+    "tag_colors": {
+      "free": "#22c55e",
+      "comparison": "#9013fe"
+    }
+  },
+  {
+    "name": "Investopedia",
+    "url": "https://www.investopedia.com/",
+    "description": "The internet's go-to financial dictionary and education hub. Clear explanations of every investing term and strategy.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "education"
+    ],
+    "color": "#3a8b3a",
+    "tag_colors": {
+      "free": "#22c55e",
+      "education": "#3a8b3a"
+    }
   }
 ]

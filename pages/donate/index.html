@@ -91,18 +91,25 @@
       padding: 14px 10px; border-radius: 12px;
       font-family: var(--font-d); font-size: 1rem; font-weight: 700;
       border: 2px solid var(--border); background: transparent;
-      color: var(--text); cursor: pointer; transition: all .2s;
+      color: var(--text); cursor: pointer; transition: transform .15s, border-color .2s, background .2s, color .2s;
       text-align: center;
+      animation: cardIn .35s ease both;
     }
-    .amount-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .amount-btn:nth-child(1){animation-delay:.02s} .amount-btn:nth-child(2){animation-delay:.05s}
+    .amount-btn:nth-child(3){animation-delay:.08s} .amount-btn:nth-child(4){animation-delay:.11s}
+    .amount-btn:nth-child(5){animation-delay:.14s} .amount-btn:nth-child(6){animation-delay:.17s}
+    .amount-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .amount-btn:active { transform: translateY(0) scale(.95); }
     .amount-btn.selected {
       border-color: var(--accent); background: rgba(79,127,255,0.15); color: var(--accent);
+      animation: popScale .25s cubic-bezier(.34,1.56,.64,1);
     }
     .amount-btn .amount-label { font-size: .7rem; font-family: 'Inter', system-ui, sans-serif; font-weight: 400; color: var(--muted); display: block; margin-top: 2px; }
 
     /* Custom amount */
     .custom-amount-wrap {
       display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+      animation: slideDown .3s ease both;
     }
     .custom-prefix {
       font-family: var(--font-d); font-size: 1.2rem; font-weight: 700;
@@ -112,9 +119,9 @@
       flex: 1; background: rgba(0,0,0,0.25); border: 2px solid var(--border);
       border-radius: 10px; color: var(--text); font-family: var(--font-d);
       font-size: 1.1rem; font-weight: 700; padding: 12px 14px;
-      transition: border-color .2s; text-align: center;
+      transition: border-color .2s, box-shadow .2s; text-align: center;
     }
-    .custom-amount-input:focus { outline: none; border-color: var(--accent); }
+    .custom-amount-input:focus { outline: none; border-color: var(--accent); box-shadow:0 0 0 3px var(--accent-dim); }
     [data-theme="light"] .custom-amount-input { background: rgba(0,0,0,0.04); }
 
     /* PayPal button */
@@ -124,13 +131,15 @@
       background: #0070ba; border: none; cursor: pointer;
       font-family: var(--font-d); font-size: 1rem; font-weight: 700;
       color: #fff; text-decoration: none;
-      transition: all .2s; position: relative; overflow: hidden;
+      transition: background .2s, transform .15s, box-shadow .2s; position: relative; overflow: hidden;
     }
-    .paypal-btn:hover { background: #005ea6; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,112,186,0.4); }
-    .paypal-btn:active { transform: translateY(0); }
+    .paypal-btn:hover { background: #005ea6; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,112,186,0.4); }
+    .paypal-btn:active { transform: translateY(0) scale(.98); }
     .paypal-logo {
       display: flex; align-items: center; gap: 3px;
+      transition: transform .2s;
     }
+    .paypal-btn:hover .paypal-logo { transform: scale(1.1) rotate(-4deg); }
     .paypal-logo svg { width: 20px; height: 20px; }
 
     .donate-note {
@@ -143,13 +152,16 @@
     .tiers {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 14px; margin-top: 28px;
-      animation: fadeUp .5s .3s ease both;
+      animation: fadeUp .4s .15s ease both;
     }
     .tier-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 20px; text-align: center;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
     }
-    .tier-icon { font-size: 2rem; margin-bottom: 8px; }
+    .tier-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-sm); }
+    .tier-icon { font-size: 2rem; margin-bottom: 8px; display:inline-block; transition: transform .3s; }
+    .tier-card:hover .tier-icon { transform: scale(1.2) rotate(-6deg); }
     .tier-name { font-family: var(--font-d); font-size: .9rem; font-weight: 700; margin-bottom: 4px; }
     .tier-amount { font-family: 'Inter', system-ui, sans-serif; font-size: .8rem; color: var(--accent); margin-bottom: 8px; }
     .tier-desc { font-size: .75rem; color: var(--muted); line-height: 1.5; }
@@ -291,14 +303,12 @@
     const ham = document.getElementById('hamburger');
     const menu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('navOverlay');
-    function closeMenu() { menu.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); ham.setAttribute('aria-expanded','false'); }
-    ham.addEventListener('click', () => {
-      const open = menu.getAttribute('aria-hidden') === 'false';
-      menu.setAttribute('aria-hidden', open ? 'true' : 'false');
-      overlay.setAttribute('aria-hidden', open ? 'true' : 'false');
-      ham.setAttribute('aria-expanded', open ? 'false' : 'true');
-    });
+    function openMenu() { ham.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); ham.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { ham.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); ham.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    ham.addEventListener('click', () => ham.classList.contains('is-open') ? closeMenu() : openMenu());
     overlay.addEventListener('click', closeMenu);
+    menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
     // Donation logic
     // ← Change 'nexus' to your actual PayPal.me username

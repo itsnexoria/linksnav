@@ -238,5 +238,35 @@
       "freemium": "#3b82f6",
       "forms": "#7c5cfc"
     }
+  },
+  {
+    "name": "Zapier",
+    "url": "https://zapier.com/",
+    "description": "Connect thousands of apps without code. Automate repetitive tasks between Gmail, Slack, Sheets, and 6000+ other tools.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "automation"
+    ],
+    "color": "#ff4a00",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "automation": "#ff4a00"
+    }
+  },
+  {
+    "name": "Stripe",
+    "url": "https://stripe.com/",
+    "description": "The developer-friendly payments platform powering millions of businesses. Accept cards, subscriptions, and invoicing.",
+    "category": "business",
+    "tags": [
+      "paid",
+      "payments"
+    ],
+    "color": "#635bff",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "payments": "#635bff"
+    }
   }
 ]

@@ -148,5 +148,35 @@
       "free": "#22c55e",
       "budget-shopping": "#ff6161"
     }
+  },
+  {
+    "name": "Amazon",
+    "url": "https://www.amazon.com/",
+    "description": "The world's largest online marketplace. Millions of products with fast shipping, reviews, and price tracking.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "marketplace"
+    ],
+    "color": "#ff9900",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "marketplace": "#ff9900"
+    }
+  },
+  {
+    "name": "AliExpress",
+    "url": "https://www.aliexpress.com/",
+    "description": "Direct-from-manufacturer marketplace with extremely low prices. Huge selection, longer shipping times from China.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "marketplace"
+    ],
+    "color": "#e62e04",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "marketplace": "#e62e04"
+    }
   }
 ]

@@ -285,5 +285,35 @@
       "free": "#22c55e",
       "portfolio": "#1769ff"
     }
+  },
+  {
+    "name": "Discord",
+    "url": "https://discord.com/",
+    "description": "Voice, video, and text chat for communities. Originally built for gamers, now used by every kind of online group.",
+    "category": "social",
+    "tags": [
+      "free",
+      "chat"
+    ],
+    "color": "#5865f2",
+    "tag_colors": {
+      "free": "#22c55e",
+      "chat": "#5865f2"
+    }
+  },
+  {
+    "name": "Reddit",
+    "url": "https://www.reddit.com/",
+    "description": "Thousands of communities discussing every topic imaginable. Anonymous, upvote-driven discussion at massive scale.",
+    "category": "social",
+    "tags": [
+      "free",
+      "forums"
+    ],
+    "color": "#ff4500",
+    "tag_colors": {
+      "free": "#22c55e",
+      "forums": "#ff4500"
+    }
   }
 ]

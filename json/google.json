@@ -73,5 +73,80 @@
       "free": "#22c55e",
       "analytics": "#4285f4"
     }
+  },
+  {
+    "name": "Google Photos",
+    "url": "https://photos.google.com/",
+    "description": "Free photo and video backup with AI-powered search. Find any photo by typing what's in it \u2014 no manual tagging needed.",
+    "category": "google",
+    "tags": [
+      "freemium",
+      "photos"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "photos": "#4285f4"
+    }
+  },
+  {
+    "name": "Google Keep",
+    "url": "https://keep.google.com/",
+    "description": "Simple note-taking app with checklists, voice memos, and colour labels. Syncs instantly across all your devices.",
+    "category": "google",
+    "tags": [
+      "free",
+      "notes"
+    ],
+    "color": "#fbbc05",
+    "tag_colors": {
+      "free": "#22c55e",
+      "notes": "#fbbc05"
+    }
+  },
+  {
+    "name": "Google Forms",
+    "url": "https://forms.google.com/",
+    "description": "Free survey and form builder with instant response analytics. Great for quizzes, RSVPs, and data collection.",
+    "category": "google",
+    "tags": [
+      "free",
+      "forms"
+    ],
+    "color": "#673ab7",
+    "tag_colors": {
+      "free": "#22c55e",
+      "forms": "#673ab7"
+    }
+  },
+  {
+    "name": "Google Earth",
+    "url": "https://earth.google.com/",
+    "description": "Explore a photorealistic 3D globe of the entire planet. Fly anywhere, view street-level imagery, and take guided tours.",
+    "category": "google",
+    "tags": [
+      "free",
+      "maps"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "maps": "#4285f4"
+    }
+  },
+  {
+    "name": "Google Scholar",
+    "url": "https://scholar.google.com/",
+    "description": "Search academic papers, theses, and citations across disciplines. The default starting point for serious research.",
+    "category": "google",
+    "tags": [
+      "free",
+      "research"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "research": "#4285f4"
+    }
   }
 ]

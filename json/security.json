@@ -223,5 +223,35 @@
       "freemium": "#3b82f6",
       "email": "#6d4aff"
     }
+  },
+  {
+    "name": "NordVPN",
+    "url": "https://nordvpn.com/",
+    "description": "One of the largest VPN networks with strong no-logs policy. Threat protection and double VPN encryption available.",
+    "category": "security",
+    "tags": [
+      "paid",
+      "vpn"
+    ],
+    "color": "#4687ff",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "vpn": "#4687ff"
+    }
+  },
+  {
+    "name": "Signal",
+    "url": "https://signal.org/",
+    "description": "The gold standard for private messaging. End-to-end encrypted by default with no ads, trackers, or data collection.",
+    "category": "security",
+    "tags": [
+      "free",
+      "messaging"
+    ],
+    "color": "#3a76f0",
+    "tag_colors": {
+      "free": "#22c55e",
+      "messaging": "#3a76f0"
+    }
   }
 ]

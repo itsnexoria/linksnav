@@ -208,5 +208,50 @@
       "free": "#22c55e",
       "notes": "#475bc8"
     }
+  },
+  {
+    "name": "Google Keep",
+    "url": "https://keep.google.com/",
+    "description": "Quick notes, checklists, and reminders that sync everywhere. Minimal and fast for capturing thoughts on the go.",
+    "category": "productivity",
+    "tags": [
+      "free",
+      "notes"
+    ],
+    "color": "#fbbc05",
+    "tag_colors": {
+      "free": "#22c55e",
+      "notes": "#fbbc05"
+    }
+  },
+  {
+    "name": "RescueTime",
+    "url": "https://www.rescuetime.com/",
+    "description": "Automatic time tracking that shows exactly where your hours go. Identify distractions and build better focus habits.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "time-tracking"
+    ],
+    "color": "#23bc87",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "time-tracking": "#23bc87"
+    }
+  },
+  {
+    "name": "Forest",
+    "url": "https://www.forestapp.cc/",
+    "description": "Gamified focus timer \u2014 plant a virtual tree that grows while you stay off your phone. Kill the tree, lose your focus streak.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "focus"
+    ],
+    "color": "#3a7c3f",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "focus": "#3a7c3f"
+    }
   }
 ]

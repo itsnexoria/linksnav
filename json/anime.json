@@ -220,5 +220,65 @@
       "ad-supported": "#f59e0b",
       "retro": "#d97706"
     }
+  },
+  {
+    "name": "MyAnimeList",
+    "url": "https://myanimelist.org/",
+    "description": "The largest anime and manga database and community. Track what you're watching, rate series, and get recommendations.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "tracking"
+    ],
+    "color": "#2e51a2",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tracking": "#2e51a2"
+    }
+  },
+  {
+    "name": "AniList",
+    "url": "https://anilist.co/",
+    "description": "Modern anime and manga tracker with a clean interface and powerful stats. A popular alternative to MyAnimeList.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "tracking"
+    ],
+    "color": "#02a9ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tracking": "#02a9ff"
+    }
+  },
+  {
+    "name": "Crunchyroll",
+    "url": "https://www.crunchyroll.com/",
+    "description": "Official simulcasts of the newest anime episodes from Japan plus a massive back-catalogue and manga library.",
+    "category": "anime",
+    "tags": [
+      "freemium",
+      "streaming"
+    ],
+    "color": "#f47521",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "streaming": "#f47521"
+    }
+  },
+  {
+    "name": "Mangadex",
+    "url": "https://mangadex.org/",
+    "description": "Community-driven manga reader with thousands of titles translated by fan scanlation groups across many languages.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "manga"
+    ],
+    "color": "#ff6740",
+    "tag_colors": {
+      "free": "#22c55e",
+      "manga": "#ff6740"
+    }
   }
 ]
