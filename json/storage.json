@@ -268,5 +268,35 @@
       "freemium": "#3b82f6",
       "encrypted": "#03cf91"
     }
+  },
+  {
+    "name": "Backblaze",
+    "url": "https://www.backblaze.com/",
+    "description": "Unlimited personal cloud backup for a flat monthly fee. Set-and-forget protection for your entire computer.",
+    "category": "storage",
+    "tags": [
+      "paid",
+      "backup"
+    ],
+    "color": "#e21e29",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "backup": "#e21e29"
+    }
+  },
+  {
+    "name": "Sync.com",
+    "url": "https://www.sync.com/",
+    "description": "Zero-knowledge encrypted cloud storage based in Canada. Strong privacy guarantees with generous free storage.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "encrypted"
+    ],
+    "color": "#0e62fe",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "encrypted": "#0e62fe"
+    }
   }
 ]

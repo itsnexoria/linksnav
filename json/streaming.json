@@ -255,5 +255,50 @@
       "paid": "#ef4444",
       "family": "#113ccf"
     }
+  },
+  {
+    "name": "Hulu",
+    "url": "https://www.hulu.com/",
+    "description": "Next-day access to current network TV shows plus a large back-catalogue and originals. Popular US-only service.",
+    "category": "streaming",
+    "tags": [
+      "paid",
+      "tv"
+    ],
+    "color": "#1ce783",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "tv": "#1ce783"
+    }
+  },
+  {
+    "name": "Peacock",
+    "url": "https://www.peacocktv.com/",
+    "description": "NBCUniversal's streaming service with live sports, news, and a free ad-supported tier.",
+    "category": "streaming",
+    "tags": [
+      "freemium",
+      "tv"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "tv": "#7c5cfc"
+    }
+  },
+  {
+    "name": "YouTube TV",
+    "url": "https://tv.youtube.com/",
+    "description": "Live TV streaming bundle covering major networks and sports as a cable replacement, with cloud DVR included.",
+    "category": "streaming",
+    "tags": [
+      "paid",
+      "live-tv"
+    ],
+    "color": "#ff0000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "live-tv": "#ff0000"
+    }
   }
 ]

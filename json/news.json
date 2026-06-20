@@ -208,5 +208,35 @@
       "freemium": "#3b82f6",
       "business": "#7c5cfc"
     }
+  },
+  {
+    "name": "AP News",
+    "url": "https://apnews.com/",
+    "description": "The Associated Press wire service \u2014 fast, neutral, fact-first reporting used as a source by most other outlets.",
+    "category": "news",
+    "tags": [
+      "free",
+      "world"
+    ],
+    "color": "#fa4516",
+    "tag_colors": {
+      "free": "#22c55e",
+      "world": "#fa4516"
+    }
+  },
+  {
+    "name": "Politico",
+    "url": "https://www.politico.com/",
+    "description": "In-depth US political journalism and policy coverage, widely read inside Washington D.C. itself.",
+    "category": "news",
+    "tags": [
+      "free",
+      "politics"
+    ],
+    "color": "#a5141e",
+    "tag_colors": {
+      "free": "#22c55e",
+      "politics": "#a5141e"
+    }
   }
 ]

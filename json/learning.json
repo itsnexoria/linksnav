@@ -313,5 +313,65 @@
       "freemium": "#3b82f6",
       "university": "#02262b"
     }
+  },
+  {
+    "name": "Codecademy",
+    "url": "https://www.codecademy.com/",
+    "description": "Interactive coding courses across dozens of languages and frameworks with hands-on browser exercises.",
+    "category": "learning",
+    "tags": [
+      "freemium",
+      "coding"
+    ],
+    "color": "#1e1e1e",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "coding": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Udemy",
+    "url": "https://www.udemy.com/",
+    "description": "Massive library of paid video courses on every topic imaginable, frequently discounted to under $15.",
+    "category": "learning",
+    "tags": [
+      "paid",
+      "courses"
+    ],
+    "color": "#a435f0",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "courses": "#a435f0"
+    }
+  },
+  {
+    "name": "Skillshare",
+    "url": "https://www.skillshare.com/",
+    "description": "Creative skills courses in design, illustration, video, and business taught by working professionals.",
+    "category": "learning",
+    "tags": [
+      "paid",
+      "creative"
+    ],
+    "color": "#00ff84",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "creative": "#00ff84"
+    }
+  },
+  {
+    "name": "Codewars",
+    "url": "https://www.codewars.com/",
+    "description": "Sharpen coding skills through community-created challenges ranked by difficulty, with solutions in any language.",
+    "category": "learning",
+    "tags": [
+      "free",
+      "coding"
+    ],
+    "color": "#b1361e",
+    "tag_colors": {
+      "free": "#22c55e",
+      "coding": "#b1361e"
+    }
   }
 ]

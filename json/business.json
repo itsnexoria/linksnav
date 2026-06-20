@@ -298,5 +298,110 @@
       "freemium": "#3b82f6",
       "project-management": "#ff3d57"
     }
+  },
+  {
+    "name": "Linktree",
+    "url": "https://linktr.ee/",
+    "description": "One link for all your social profiles and content. The standard bio-link tool for creators and small businesses.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "bio-link"
+    ],
+    "color": "#39e09b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "bio-link": "#39e09b"
+    }
+  },
+  {
+    "name": "Wave",
+    "url": "https://www.waveapps.com/",
+    "description": "Free accounting and invoicing software for small businesses. Track income, expenses, and send professional invoices.",
+    "category": "business",
+    "tags": [
+      "free",
+      "accounting"
+    ],
+    "color": "#5f5fff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "accounting": "#5f5fff"
+    }
+  },
+  {
+    "name": "Canny",
+    "url": "https://canny.io/",
+    "description": "Collect and prioritise customer feedback in one place. Build a public roadmap so users see what's coming next.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "feedback"
+    ],
+    "color": "#5e5ce6",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "feedback": "#5e5ce6"
+    }
+  },
+  {
+    "name": "Crisp",
+    "url": "https://crisp.chat/",
+    "description": "Live chat, shared inbox, and chatbot builder for customer support. Free tier covers small teams comfortably.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "support"
+    ],
+    "color": "#1972f5",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "support": "#1972f5"
+    }
+  },
+  {
+    "name": "Squarespace",
+    "url": "https://www.squarespace.com/",
+    "description": "All-in-one website builder with polished templates for portfolios, stores, and small business sites.",
+    "category": "business",
+    "tags": [
+      "paid",
+      "website-builder"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "website-builder": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Wix",
+    "url": "https://www.wix.com/",
+    "description": "Drag-and-drop website builder with AI site generation, e-commerce, and a huge app marketplace.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "website-builder"
+    ],
+    "color": "#0c6efc",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "website-builder": "#0c6efc"
+    }
+  },
+  {
+    "name": "Shopify",
+    "url": "https://www.shopify.com/",
+    "description": "The leading e-commerce platform for launching and scaling an online store, from solo sellers to major brands.",
+    "category": "business",
+    "tags": [
+      "paid",
+      "ecommerce"
+    ],
+    "color": "#95bf47",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "ecommerce": "#95bf47"
+    }
   }
 ]

@@ -208,5 +208,20 @@
       "paid": "#ef4444",
       "streaming": "#fa233b"
     }
+  },
+  {
+    "name": "Deezer",
+    "url": "https://www.deezer.com/",
+    "description": "Music streaming with Flow personalised radio and strong lyrics integration. Popular alternative outside the US.",
+    "category": "music",
+    "tags": [
+      "freemium",
+      "streaming"
+    ],
+    "color": "#a238ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "streaming": "#a238ff"
+    }
   }
 ]

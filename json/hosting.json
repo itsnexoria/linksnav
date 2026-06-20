@@ -268,5 +268,80 @@
       "freemium": "#3b82f6",
       "cloud": "#7c5cfc"
     }
+  },
+  {
+    "name": "Vercel",
+    "url": "https://vercel.com/",
+    "description": "The platform for frontend frameworks like Next.js. Instant deploys, preview URLs for every PR, global edge network.",
+    "category": "hosting",
+    "tags": [
+      "freemium",
+      "frontend"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "frontend": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Netlify",
+    "url": "https://www.netlify.com/",
+    "description": "Deploy static sites and serverless functions straight from Git. Built-in forms, identity, and edge functions.",
+    "category": "hosting",
+    "tags": [
+      "freemium",
+      "static-sites"
+    ],
+    "color": "#00ad9f",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "static-sites": "#00ad9f"
+    }
+  },
+  {
+    "name": "DigitalOcean",
+    "url": "https://www.digitalocean.com/",
+    "description": "Developer-friendly cloud infrastructure with simple, predictable pricing. Droplets, managed databases, and Kubernetes.",
+    "category": "hosting",
+    "tags": [
+      "paid",
+      "cloud"
+    ],
+    "color": "#0080ff",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "cloud": "#0080ff"
+    }
+  },
+  {
+    "name": "Heroku",
+    "url": "https://www.heroku.com/",
+    "description": "One of the original platform-as-a-service providers. Push code, get a running app \u2014 no server config required.",
+    "category": "hosting",
+    "tags": [
+      "paid",
+      "paas"
+    ],
+    "color": "#430098",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "paas": "#430098"
+    }
+  },
+  {
+    "name": "AWS Free Tier",
+    "url": "https://aws.amazon.com/free/",
+    "description": "Amazon's cloud computing platform with a 12-month free tier covering compute, storage, and databases.",
+    "category": "hosting",
+    "tags": [
+      "freemium",
+      "cloud"
+    ],
+    "color": "#ff9900",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "cloud": "#ff9900"
+    }
   }
 ]

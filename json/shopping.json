@@ -208,5 +208,65 @@
       "paid": "#ef4444",
       "handmade": "#f1641e"
     }
+  },
+  {
+    "name": "Walmart",
+    "url": "https://www.walmart.com/",
+    "description": "Massive US retailer with online ordering, same-day pickup, and competitive prices across nearly every category.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "retail"
+    ],
+    "color": "#0071ce",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "retail": "#0071ce"
+    }
+  },
+  {
+    "name": "Temu",
+    "url": "https://www.temu.com/",
+    "description": "Ultra-low-price marketplace shipping direct from manufacturers, similar to AliExpress with aggressive promotions.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "marketplace"
+    ],
+    "color": "#ff6000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "marketplace": "#ff6000"
+    }
+  },
+  {
+    "name": "Best Buy",
+    "url": "https://www.bestbuy.com/",
+    "description": "Major US electronics retailer with in-store pickup, price matching, and a large open-box deals section.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "electronics"
+    ],
+    "color": "#0046be",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "electronics": "#0046be"
+    }
+  },
+  {
+    "name": "StockX",
+    "url": "https://stockx.com/",
+    "description": "Marketplace for sneakers, streetwear, and collectibles with authentication and live bid/ask pricing like a stock market.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "resale"
+    ],
+    "color": "#006340",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "resale": "#006340"
+    }
   }
 ]

@@ -238,5 +238,80 @@
       "free": "#22c55e",
       "crypto": "#f0b90b"
     }
+  },
+  {
+    "name": "Coinbase",
+    "url": "https://www.coinbase.com/",
+    "description": "User-friendly cryptocurrency exchange popular with beginners. Buy, sell, and store crypto with strong regulatory compliance.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "crypto"
+    ],
+    "color": "#0052ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "crypto": "#0052ff"
+    }
+  },
+  {
+    "name": "Credit Karma",
+    "url": "https://www.creditkarma.com/",
+    "description": "Free credit score monitoring and personalised credit card and loan recommendations based on your profile.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "credit"
+    ],
+    "color": "#06d6a0",
+    "tag_colors": {
+      "free": "#22c55e",
+      "credit": "#06d6a0"
+    }
+  },
+  {
+    "name": "Zillow",
+    "url": "https://www.zillow.com/",
+    "description": "Browse home listings, estimated values, and rental prices across the US. The default starting point for house hunting.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "real-estate"
+    ],
+    "color": "#006aff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "real-estate": "#006aff"
+    }
+  },
+  {
+    "name": "Kraken",
+    "url": "https://www.kraken.com/",
+    "description": "Established crypto exchange known for security and a wide range of supported coins and staking options.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "crypto"
+    ],
+    "color": "#5741d9",
+    "tag_colors": {
+      "free": "#22c55e",
+      "crypto": "#5741d9"
+    }
+  },
+  {
+    "name": "Experian",
+    "url": "https://www.experian.com/",
+    "description": "Free credit report and score monitoring from one of the three major US credit bureaus.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "credit"
+    ],
+    "color": "#5c068c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "credit": "#5c068c"
+    }
   }
 ]

@@ -238,5 +238,80 @@
       "free": "#22c55e",
       "guides": "#7c5cfc"
     }
+  },
+  {
+    "name": "HowLongToBeat",
+    "url": "https://howlongtobeat.com/",
+    "description": "Community-sourced completion times for thousands of games. Plan exactly how much time a game will actually take.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "reference"
+    ],
+    "color": "#0e0e0e",
+    "tag_colors": {
+      "free": "#22c55e",
+      "reference": "#7c5cfc"
+    }
+  },
+  {
+    "name": "PCGamingWiki",
+    "url": "https://www.pcgamingwiki.com/",
+    "description": "Detailed technical wiki for PC game compatibility, fixes, and settings. Essential for troubleshooting older titles.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "wiki"
+    ],
+    "color": "#2a3b4d",
+    "tag_colors": {
+      "free": "#22c55e",
+      "wiki": "#2a3b4d"
+    }
+  },
+  {
+    "name": "IsThereAnyDeal",
+    "url": "https://isthereanydeal.com/",
+    "description": "Tracks game prices across every major storefront. Get notified the moment a game drops to your target price.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "price-tracking"
+    ],
+    "color": "#41b883",
+    "tag_colors": {
+      "free": "#22c55e",
+      "price-tracking": "#41b883"
+    }
+  },
+  {
+    "name": "Humble Bundle",
+    "url": "https://www.humblebundle.com/",
+    "description": "Pay-what-you-want game bundles that support charity. Also sells individual games and a monthly subscription.",
+    "category": "gaming",
+    "tags": [
+      "paid",
+      "bundles"
+    ],
+    "color": "#cc1d1d",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "bundles": "#cc1d1d"
+    }
+  },
+  {
+    "name": "Speedrun.com",
+    "url": "https://www.speedrun.com/",
+    "description": "Leaderboards and communities for game speedrunning. Submit runs, watch world records, and find route guides.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "community"
+    ],
+    "color": "#3fb5fd",
+    "tag_colors": {
+      "free": "#22c55e",
+      "community": "#3fb5fd"
+    }
   }
 ]

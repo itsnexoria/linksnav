@@ -253,5 +253,80 @@
       "free": "#22c55e",
       "utility": "#0f7ccf"
     }
+  },
+  {
+    "name": "qBittorrent",
+    "url": "https://www.qbittorrent.org/",
+    "description": "Free, open-source BitTorrent client with no ads or bundled bloatware. Lightweight and cross-platform.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "torrent"
+    ],
+    "color": "#1e88e5",
+    "tag_colors": {
+      "free": "#22c55e",
+      "torrent": "#1e88e5"
+    }
+  },
+  {
+    "name": "HandBrake",
+    "url": "https://handbrake.fr/",
+    "description": "Free, open-source video transcoder. Convert any video format to MP4 or MKV with extensive quality controls.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "video"
+    ],
+    "color": "#1c1c1c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "video": "#7c5cfc"
+    }
+  },
+  {
+    "name": "FileZilla",
+    "url": "https://filezilla-project.org/",
+    "description": "Free, open-source FTP/SFTP client for uploading and managing files on remote servers. The classic choice.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "ftp"
+    ],
+    "color": "#bf0000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "ftp": "#bf0000"
+    }
+  },
+  {
+    "name": "PortableApps",
+    "url": "https://portableapps.com/",
+    "description": "Hundreds of apps that run from a USB drive with no installation. Great for shared or locked-down computers.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "portable"
+    ],
+    "color": "#0a5ca8",
+    "tag_colors": {
+      "free": "#22c55e",
+      "portable": "#0a5ca8"
+    }
+  },
+  {
+    "name": "Notepad++",
+    "url": "https://notepad-plus-plus.org/",
+    "description": "Free, lightweight text and code editor for Windows with syntax highlighting for dozens of languages.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "editor"
+    ],
+    "color": "#90c53f",
+    "tag_colors": {
+      "free": "#22c55e",
+      "editor": "#90c53f"
+    }
   }
 ]

@@ -345,5 +345,65 @@
       "free": "#22c55e",
       "local": "#8ed500"
     }
+  },
+  {
+    "name": "X (Twitter)",
+    "url": "https://x.com/",
+    "description": "Real-time short-form posting and news. Still the fastest place to see breaking events as they unfold.",
+    "category": "social",
+    "tags": [
+      "free",
+      "microblogging"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "microblogging": "#7c5cfc"
+    }
+  },
+  {
+    "name": "LinkedIn",
+    "url": "https://www.linkedin.com/",
+    "description": "Professional networking, job hunting, and industry news. The default platform for career-focused content.",
+    "category": "social",
+    "tags": [
+      "freemium",
+      "professional"
+    ],
+    "color": "#0a66c2",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "professional": "#0a66c2"
+    }
+  },
+  {
+    "name": "Snapchat",
+    "url": "https://www.snapchat.com/",
+    "description": "Disappearing photo and video messaging with AR filters, Stories, and Discover content from publishers.",
+    "category": "social",
+    "tags": [
+      "free",
+      "messaging"
+    ],
+    "color": "#fffc00",
+    "tag_colors": {
+      "free": "#22c55e",
+      "messaging": "#1a1a1a"
+    }
+  },
+  {
+    "name": "Tumblr",
+    "url": "https://www.tumblr.com/",
+    "description": "Microblogging and multimedia platform with a strong fandom and artist community, known for its quirky culture.",
+    "category": "social",
+    "tags": [
+      "free",
+      "blogging"
+    ],
+    "color": "#36465d",
+    "tag_colors": {
+      "free": "#22c55e",
+      "blogging": "#36465d"
+    }
   }
 ]

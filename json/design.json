@@ -328,5 +328,80 @@
       "free": "#22c55e",
       "illustrations": "#0ea5e9"
     }
+  },
+  {
+    "name": "Pexels",
+    "url": "https://www.pexels.com/",
+    "description": "Free stock photos and videos with no attribution required. High-quality images for any commercial project.",
+    "category": "design",
+    "tags": [
+      "free",
+      "stock-photos"
+    ],
+    "color": "#05a081",
+    "tag_colors": {
+      "free": "#22c55e",
+      "stock-photos": "#05a081"
+    }
+  },
+  {
+    "name": "Penpot",
+    "url": "https://penpot.app/",
+    "description": "Open-source design and prototyping tool, fully web-based. A free alternative to Figma with no vendor lock-in.",
+    "category": "design",
+    "tags": [
+      "free",
+      "ui-design"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "ui-design": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Fontjoy",
+    "url": "https://fontjoy.com/",
+    "description": "Generate font pairings using deep learning. Find combinations you'd never think to try yourself.",
+    "category": "design",
+    "tags": [
+      "free",
+      "fonts"
+    ],
+    "color": "#171717",
+    "tag_colors": {
+      "free": "#22c55e",
+      "fonts": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Mockuuups Studio",
+    "url": "https://mockuuups.studio/",
+    "description": "Generate realistic product and device mockups in seconds. Great for showcasing apps, packaging, and print designs.",
+    "category": "design",
+    "tags": [
+      "freemium",
+      "mockups"
+    ],
+    "color": "#ff4785",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "mockups": "#ff4785"
+    }
+  },
+  {
+    "name": "Iconify",
+    "url": "https://icon-sets.iconify.design/",
+    "description": "Search over 200,000 open-source icons from 150+ icon sets in one unified, framework-agnostic library.",
+    "category": "design",
+    "tags": [
+      "free",
+      "icons"
+    ],
+    "color": "#16b0fd",
+    "tag_colors": {
+      "free": "#22c55e",
+      "icons": "#16b0fd"
+    }
   }
 ]

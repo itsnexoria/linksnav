@@ -270,5 +270,80 @@
       "free": "#22c55e",
       "mapping": "#1a73e8"
     }
+  },
+  {
+    "name": "CurseForge",
+    "url": "https://www.curseforge.com/minecraft",
+    "description": "Largest hub for Minecraft mods, modpacks, and resource packs. The standard download source for modded play.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "mods"
+    ],
+    "color": "#f16436",
+    "tag_colors": {
+      "free": "#22c55e",
+      "mods": "#f16436"
+    }
+  },
+  {
+    "name": "Modrinth",
+    "url": "https://modrinth.com/",
+    "description": "Fast, modern, open-source mod platform for Minecraft. Cleaner interface and better search than older alternatives.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "mods"
+    ],
+    "color": "#1bd96a",
+    "tag_colors": {
+      "free": "#22c55e",
+      "mods": "#1bd96a"
+    }
+  },
+  {
+    "name": "Planet Minecraft",
+    "url": "https://www.planetminecraft.com/",
+    "description": "Community hub for skins, maps, builds, and texture packs. Browse and download thousands of fan creations.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "community"
+    ],
+    "color": "#5b8731",
+    "tag_colors": {
+      "free": "#22c55e",
+      "community": "#5b8731"
+    }
+  },
+  {
+    "name": "Aternos",
+    "url": "https://aternos.org/",
+    "description": "Free Minecraft server hosting with no time limits. Great for casual servers without monthly hosting costs.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "hosting"
+    ],
+    "color": "#5cb85c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "hosting": "#5cb85c"
+    }
+  },
+  {
+    "name": "NameMC",
+    "url": "https://namemc.com/",
+    "description": "Look up Minecraft usernames, skins, and capes. Track name history and find available names to claim.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "lookup"
+    ],
+    "color": "#39a845",
+    "tag_colors": {
+      "free": "#22c55e",
+      "lookup": "#39a845"
+    }
   }
 ]

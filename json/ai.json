@@ -360,5 +360,125 @@
       "free": "#22c55e",
       "generators": "#8b5cf6"
     }
+  },
+  {
+    "name": "Midjourney",
+    "url": "https://www.midjourney.com/",
+    "description": "The most artistically refined AI image generator. Generate via Discord or the web app with consistently striking results.",
+    "category": "ai",
+    "tags": [
+      "paid",
+      "image"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "image": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Hugging Face",
+    "url": "https://huggingface.co/",
+    "description": "The GitHub of machine learning. Host, share, and run thousands of open-source AI models directly in the browser.",
+    "category": "ai",
+    "tags": [
+      "free",
+      "models"
+    ],
+    "color": "#ffd21e",
+    "tag_colors": {
+      "free": "#22c55e",
+      "models": "#ffd21e"
+    }
+  },
+  {
+    "name": "Character.AI",
+    "url": "https://character.ai/",
+    "description": "Chat with AI characters built by the community or create your own. Roleplay, companionship, and creative writing.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "chat"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "chat": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Suno",
+    "url": "https://suno.com/",
+    "description": "Generate full songs with lyrics and vocals from a text prompt. Pick a genre, describe the vibe, get a finished track.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "music"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "music": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Pi",
+    "url": "https://pi.ai/",
+    "description": "A conversational AI built to be supportive and emotionally aware rather than purely task-focused. Voice mode included.",
+    "category": "ai",
+    "tags": [
+      "free",
+      "chat"
+    ],
+    "color": "#6c4ee3",
+    "tag_colors": {
+      "free": "#22c55e",
+      "chat": "#6c4ee3"
+    }
+  },
+  {
+    "name": "Poe",
+    "url": "https://poe.com/",
+    "description": "Access GPT, Claude, Gemini, and dozens of other AI models in one subscription and one chat interface.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "aggregator"
+    ],
+    "color": "#5d39ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "aggregator": "#5d39ff"
+    }
+  },
+  {
+    "name": "Leonardo AI",
+    "url": "https://leonardo.ai/",
+    "description": "AI image generation with fine-tuned models for game assets, product shots, and consistent character design.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "image"
+    ],
+    "color": "#0d1117",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "image": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Notion AI",
+    "url": "https://www.notion.so/product/ai",
+    "description": "AI writing assistant built into Notion. Summarise pages, draft content, and translate without leaving your workspace.",
+    "category": "ai",
+    "tags": [
+      "paid",
+      "writing"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "writing": "#7c5cfc"
+    }
   }
 ]

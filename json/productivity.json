@@ -283,5 +283,65 @@
       "freemium": "#3b82f6",
       "time-tracking": "#e01b5d"
     }
+  },
+  {
+    "name": "ClickUp",
+    "url": "https://clickup.com/",
+    "description": "All-in-one productivity platform combining tasks, docs, goals, and chat. Highly customisable, generous free tier.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "project-management"
+    ],
+    "color": "#7b68ee",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "project-management": "#7b68ee"
+    }
+  },
+  {
+    "name": "Any.do",
+    "url": "https://www.any.do/",
+    "description": "Simple task manager with calendar integration and daily planning reminders. Clean cross-platform syncing.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "tasks"
+    ],
+    "color": "#ed3850",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "tasks": "#ed3850"
+    }
+  },
+  {
+    "name": "Microsoft To Do",
+    "url": "https://to-do.office.com/",
+    "description": "Free task manager from Microsoft with smart lists, daily planning, and deep Outlook integration.",
+    "category": "productivity",
+    "tags": [
+      "free",
+      "tasks"
+    ],
+    "color": "#2564cf",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tasks": "#2564cf"
+    }
+  },
+  {
+    "name": "Miro",
+    "url": "https://miro.com/",
+    "description": "Online collaborative whiteboard for brainstorming, planning, and visual workshops with remote teams.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "whiteboard"
+    ],
+    "color": "#ffd02f",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "whiteboard": "#050038"
+    }
   }
 ]

@@ -148,5 +148,80 @@
       "free": "#22c55e",
       "research": "#4285f4"
     }
+  },
+  {
+    "name": "Google Maps",
+    "url": "https://maps.google.com/",
+    "description": "Navigation, transit times, and local business info worldwide. The most-used mapping service on the planet.",
+    "category": "google",
+    "tags": [
+      "free",
+      "maps"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "maps": "#4285f4"
+    }
+  },
+  {
+    "name": "Google Docs",
+    "url": "https://docs.google.com/",
+    "description": "Free real-time collaborative word processor. Auto-saves to Drive and works seamlessly across any device.",
+    "category": "google",
+    "tags": [
+      "free",
+      "documents"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "documents": "#4285f4"
+    }
+  },
+  {
+    "name": "Google Sheets",
+    "url": "https://sheets.google.com/",
+    "description": "Free spreadsheet app with real-time collaboration and powerful formula support, fully compatible with Excel files.",
+    "category": "google",
+    "tags": [
+      "free",
+      "spreadsheets"
+    ],
+    "color": "#0f9d58",
+    "tag_colors": {
+      "free": "#22c55e",
+      "spreadsheets": "#0f9d58"
+    }
+  },
+  {
+    "name": "Google Search",
+    "url": "https://www.google.com/",
+    "description": "The world's most-used search engine. Instant answers, images, news, and the foundational tool of the internet.",
+    "category": "google",
+    "tags": [
+      "free",
+      "search"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "search": "#4285f4"
+    }
+  },
+  {
+    "name": "Google One",
+    "url": "https://one.google.com/",
+    "description": "Paid storage upgrade across Gmail, Photos, and Drive with extra perks like VPN and family sharing.",
+    "category": "google",
+    "tags": [
+      "paid",
+      "storage"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "storage": "#4285f4"
+    }
   }
 ]

@@ -283,5 +283,65 @@
       "free": "#22c55e",
       "passwords": "#6dc174"
     }
+  },
+  {
+    "name": "Tor Browser",
+    "url": "https://www.torproject.org/",
+    "description": "Anonymised browsing through the Tor network. Routes traffic through multiple relays to protect identity and location.",
+    "category": "security",
+    "tags": [
+      "free",
+      "privacy"
+    ],
+    "color": "#7d4698",
+    "tag_colors": {
+      "free": "#22c55e",
+      "privacy": "#7d4698"
+    }
+  },
+  {
+    "name": "DuckDuckGo",
+    "url": "https://duckduckgo.com/",
+    "description": "Privacy-focused search engine that doesn't track or profile you. No personalised ads, no search history stored.",
+    "category": "security",
+    "tags": [
+      "free",
+      "search"
+    ],
+    "color": "#de5833",
+    "tag_colors": {
+      "free": "#22c55e",
+      "search": "#de5833"
+    }
+  },
+  {
+    "name": "ProtonVPN",
+    "url": "https://protonvpn.com/",
+    "description": "VPN from the makers of ProtonMail with a genuinely useful free tier and strong Swiss privacy laws.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "vpn"
+    ],
+    "color": "#6d4aff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "vpn": "#6d4aff"
+    }
+  },
+  {
+    "name": "Malwarebytes",
+    "url": "https://www.malwarebytes.com/",
+    "description": "Anti-malware tool that complements traditional antivirus. Strong at catching adware and PUPs other tools miss.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "antivirus"
+    ],
+    "color": "#0d3ecc",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "antivirus": "#0d3ecc"
+    }
   }
 ]

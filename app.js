@@ -12,7 +12,7 @@ const FAVS_KEY   = 'nexhub_favs';
 const ORDER_KEY  = 'nexhub_order';
 /* Bump this any time json/*.json content changes, so cached copies
    on the CDN / browser don't hide newly-added sites. */
-const BUILD_VERSION = '20260620-2';
+const BUILD_VERSION = '20260620-3';
 
 /* ── STATE ──────────────────────────────────────────────────── */
 let allSites       = [];
@@ -275,8 +275,6 @@ function render(){
   else{const c=allCategories.find(c=>c.id===activeCategory);label.textContent=c?`${c.icon} ${c.label}`:activeCategory}
   countEl.textContent=`${filtered.length} site${filtered.length!==1?'s':''}`;
 
-  document.getElementById('pinnedHeader')?.remove();
-  document.getElementById('dividerRow')?.remove();
   document.getElementById('loadMoreWrap')?.remove();
 
   /* Show drag hint only when sort=default, no search, no price filter (favorites included) */
@@ -291,22 +289,8 @@ function render(){
   }
   empty.style.display='none';grid.style.display='';
 
-  const showPinned=activeCategory==='all'&&!searchQuery&&favorites.size>0&&currentSort==='default';
-
-  if(showPinned){
-    const pinned=allSites.filter(s=>favorites.has(s.url));
-    const rest=filtered.filter(s=>!favorites.has(s.url));
-    const hdr=document.createElement('div');
-    hdr.id='pinnedHeader';hdr.className='pinned-header';
-    hdr.innerHTML=`<span>★</span> Pinned Favorites <span class="pinned-header-count">${pinned.length}</span>`;
-    grid.insertAdjacentElement('beforebegin',hdr);
-    const slice=rest.slice(0,visibleCount);
-    grid.replaceChildren(buildFrag([...pinned,{_divider:true},...slice],canDrag));
-    if(visibleCount<rest.length)mkLoadMore(rest.length,rest.length-visibleCount);
-  } else {
-    grid.replaceChildren(buildFrag(filtered.slice(0,visibleCount),canDrag));
-    if(visibleCount<filtered.length)mkLoadMore(filtered.length,filtered.length-visibleCount);
-  }
+  grid.replaceChildren(buildFrag(filtered.slice(0,visibleCount),canDrag));
+  if(visibleCount<filtered.length)mkLoadMore(filtered.length,filtered.length-visibleCount);
 
   if(canDrag)initDrag(grid);
   observeFavicons(grid);
@@ -316,12 +300,6 @@ function render(){
 function buildFrag(sites,draggable=false){
   const frag=document.createDocumentFragment();
   sites.forEach(s=>{
-    if(s._divider){
-      const div=document.createElement('div');
-      div.id='dividerRow';div.className='grid-divider-cell';
-      div.innerHTML='<div class="grid-divider"><span>All Sites</span></div>';
-      frag.appendChild(div);return;
-    }
     const tmp=document.createElement('div');
     tmp.innerHTML=cardHTML(s,draggable);
     frag.appendChild(tmp.firstElementChild);

@@ -310,5 +310,80 @@
       "free": "#22c55e",
       "database": "#80b637"
     }
+  },
+  {
+    "name": "Zoro.to",
+    "url": "https://zoro.to/",
+    "description": "Free anime streaming with both subbed and dubbed releases. Fast updates and a large back-catalogue of series.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#f47521",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#7c5cfc"
+    }
+  },
+  {
+    "name": "HiAnime",
+    "url": "https://hianime.to/",
+    "description": "Popular free anime streaming site with frequent simulcast updates and a clean ad-light player.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#1f2937",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Funimation",
+    "url": "https://www.funimation.com/",
+    "description": "Long-running anime streaming service now merged into Crunchyroll, still referenced for its dub catalogue.",
+    "category": "anime",
+    "tags": [
+      "paid",
+      "streaming"
+    ],
+    "color": "#5b0bb5",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "streaming": "#5b0bb5"
+    }
+  },
+  {
+    "name": "VIZ",
+    "url": "https://www.viz.com/",
+    "description": "Official English publisher of manga like One Piece and Naruto. Read the latest chapters legally and support creators.",
+    "category": "anime",
+    "tags": [
+      "freemium",
+      "manga"
+    ],
+    "color": "#ffffff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "manga": "#1f2937"
+    }
+  },
+  {
+    "name": "Anime Trending",
+    "url": "https://anitrendz.com/",
+    "description": "Anime news, award shows, and community voting events. Stay current on industry announcements and fan polls.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "news"
+    ],
+    "color": "#ff0050",
+    "tag_colors": {
+      "free": "#22c55e",
+      "news": "#ff0050"
+    }
   }
 ]

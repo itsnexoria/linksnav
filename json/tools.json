@@ -253,5 +253,65 @@
       "free": "#22c55e",
       "seo": "#4285f4"
     }
+  },
+  {
+    "name": "TinyPNG",
+    "url": "https://tinypng.com/",
+    "description": "Compress PNG and JPEG images with minimal quality loss. Drag and drop, download in seconds, no account needed.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "images"
+    ],
+    "color": "#1f6feb",
+    "tag_colors": {
+      "free": "#22c55e",
+      "images": "#1f6feb"
+    }
+  },
+  {
+    "name": "Remove.bg",
+    "url": "https://www.remove.bg/",
+    "description": "Automatically remove image backgrounds in one click using AI. Free for standard resolution downloads.",
+    "category": "tools",
+    "tags": [
+      "freemium",
+      "images"
+    ],
+    "color": "#23b26d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "images": "#23b26d"
+    }
+  },
+  {
+    "name": "Speedtest",
+    "url": "https://www.speedtest.net/",
+    "description": "The standard internet speed test for download, upload, and ping. Test against thousands of servers worldwide.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "network"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "network": "#7c5cfc"
+    }
+  },
+  {
+    "name": "TinyURL",
+    "url": "https://tinyurl.com/",
+    "description": "Free link shortener with custom aliases. No account required for basic shortening.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "url-shortener"
+    ],
+    "color": "#2c4870",
+    "tag_colors": {
+      "free": "#22c55e",
+      "url-shortener": "#2c4870"
+    }
   }
 ]

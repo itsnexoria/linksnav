@@ -538,5 +538,95 @@
       "free": "#22c55e",
       "compatibility": "#e84e1b"
     }
+  },
+  {
+    "name": "GitLab",
+    "url": "https://gitlab.com/",
+    "description": "Complete DevOps platform with Git hosting, CI/CD, and issue tracking built in. Strong self-hosting option too.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "git"
+    ],
+    "color": "#fc6d26",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "git": "#fc6d26"
+    }
+  },
+  {
+    "name": "StackBlitz",
+    "url": "https://stackblitz.com/",
+    "description": "Full dev environments that boot instantly in the browser. No install needed for React, Vue, Node, and more.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "online-ide"
+    ],
+    "color": "#1389fd",
+    "tag_colors": {
+      "free": "#22c55e",
+      "online-ide": "#1389fd"
+    }
+  },
+  {
+    "name": "CodeSandbox",
+    "url": "https://codesandbox.io/",
+    "description": "Instant web-based dev environments for prototyping and sharing code. Great for bug reports and quick demos.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "online-ide"
+    ],
+    "color": "#151515",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "online-ide": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Replit",
+    "url": "https://replit.com/",
+    "description": "Collaborative browser-based coding for 50+ languages. Build, run, and deploy apps without setting up anything locally.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "online-ide"
+    ],
+    "color": "#f26207",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "online-ide": "#f26207"
+    }
+  },
+  {
+    "name": "Insomnia",
+    "url": "https://insomnia.rest/",
+    "description": "Open-source API client similar to Postman. Test REST, GraphQL, and gRPC endpoints with a clean desktop app.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "api"
+    ],
+    "color": "#4000bf",
+    "tag_colors": {
+      "free": "#22c55e",
+      "api": "#4000bf"
+    }
+  },
+  {
+    "name": "Lighthouse",
+    "url": "https://developer.chrome.com/docs/lighthouse/",
+    "description": "Google's automated tool for measuring web page quality \u2014 performance, accessibility, SEO, and best practices.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "performance"
+    ],
+    "color": "#f63",
+    "tag_colors": {
+      "free": "#22c55e",
+      "performance": "#f44b21"
+    }
   }
 ]

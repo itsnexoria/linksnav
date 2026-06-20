@@ -193,5 +193,35 @@
       "free": "#22c55e",
       "discovery": "#3d9970"
     }
+  },
+  {
+    "name": "FlixHQ",
+    "url": "https://flixhq.to/",
+    "description": "Free movie and TV streaming aggregator with a large catalogue and minimal sign-up friction.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#e50914",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#e50914"
+    }
+  },
+  {
+    "name": "Vudu",
+    "url": "https://www.vudu.com/",
+    "description": "Buy or rent digital movies with no subscription needed. Also has a free ad-supported library.",
+    "category": "movies",
+    "tags": [
+      "freemium",
+      "rentals"
+    ],
+    "color": "#3399ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "rentals": "#3399ff"
+    }
   }
 ]
