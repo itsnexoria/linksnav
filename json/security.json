@@ -253,5 +253,35 @@
       "free": "#22c55e",
       "messaging": "#3a76f0"
     }
+  },
+  {
+    "name": "Mozilla Monitor",
+    "url": "https://monitor.mozilla.org/",
+    "description": "Free breach monitoring from Mozilla. Scans known data breaches and alerts you if your email is compromised.",
+    "category": "security",
+    "tags": [
+      "free",
+      "breach-check"
+    ],
+    "color": "#ff4f5e",
+    "tag_colors": {
+      "free": "#22c55e",
+      "breach-check": "#ff4f5e"
+    }
+  },
+  {
+    "name": "KeePassXC",
+    "url": "https://keepassxc.org/",
+    "description": "Free, open-source, offline password manager. Your encrypted vault never touches the cloud unless you choose to sync it.",
+    "category": "security",
+    "tags": [
+      "free",
+      "passwords"
+    ],
+    "color": "#6dc174",
+    "tag_colors": {
+      "free": "#22c55e",
+      "passwords": "#6dc174"
+    }
   }
 ]

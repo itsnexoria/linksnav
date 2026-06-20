@@ -69,7 +69,29 @@ body {
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
   opacity:.4;
 }
-.grid-bg { display:none } /* removed animated grid */
+.grid-bg {
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.grid-bg::before, .grid-bg::after {
+  content:''; position:absolute; border-radius:50%; filter:blur(80px);
+  opacity:.06; will-change:transform;
+}
+.grid-bg::before {
+  width:420px; height:420px; top:-10%; left:8%;
+  background:var(--accent);
+  animation:driftSlow 22s ease-in-out infinite;
+}
+.grid-bg::after {
+  width:380px; height:380px; bottom:-12%; right:6%;
+  background:#22c55e;
+  animation:driftSlow2 26s ease-in-out infinite;
+}
+[data-theme="light"] .grid-bg::before,
+[data-theme="light"] .grid-bg::after { opacity:.04 }
+@media(max-width:680px){ .grid-bg::before,.grid-bg::after{ display:none } }
+@media(prefers-reduced-motion:reduce){
+  .grid-bg::before,.grid-bg::after{ animation:none }
+}
 
 /* ── KEYFRAMES ──────────────────────────────────────────────── */
 @keyframes fadeIn   { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
@@ -91,6 +113,13 @@ body {
 @keyframes menuSlide   { from{transform:translateX(24px);opacity:0} to{transform:none;opacity:1} }
 @keyframes barFill     { from{width:0} to{width:var(--fill,100%)} }
 @keyframes wiggle      { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-3deg)} 75%{transform:rotate(3deg)} }
+@keyframes breathe     { 0%,100%{opacity:.6} 50%{opacity:1} }
+@keyframes driftSlow   { 0%{transform:translate(0,0)} 50%{transform:translate(6px,-8px)} 100%{transform:translate(0,0)} }
+@keyframes driftSlow2  { 0%{transform:translate(0,0)} 50%{transform:translate(-8px,6px)} 100%{transform:translate(0,0)} }
+@keyframes haloPulse   { 0%,100%{box-shadow:0 0 0 0 var(--accent-dim)} 50%{box-shadow:0 0 0 6px transparent} }
+@keyframes faviconIdle { 0%,100%{transform:rotate(0)} 50%{transform:rotate(4deg)} }
+@keyframes glintSweep  { 0%{transform:translateX(-120%) skewX(-15deg)} 100%{transform:translateX(220%) skewX(-15deg)} }
+@keyframes borderGlow  { 0%,100%{border-color:var(--border)} 50%{border-color:var(--border2)} }
 
 /* ── HEADER ─────────────────────────────────────────────────── */
 .header {
@@ -390,7 +419,9 @@ body {
   padding:0 2px 12px;
   font-family:var(--font-m); font-size:.68rem; font-weight:700;
   letter-spacing:.1em; color:#f59e0b; text-transform:uppercase;
+  animation:fadeIn .3s ease both;
 }
+.pinned-header span:first-child { display:inline-block; animation:wiggle 3.5s ease-in-out infinite }
 .pinned-header-count {
   display:inline-flex; align-items:center; justify-content:center;
   min-width:18px; height:18px; padding:0 5px;

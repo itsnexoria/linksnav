@@ -178,5 +178,35 @@
       "free": "#22c55e",
       "politics": "#eb1700"
     }
+  },
+  {
+    "name": "The Guardian",
+    "url": "https://www.theguardian.com/",
+    "description": "Independent British journalism with strong investigative reporting. Free to read with no hard paywall.",
+    "category": "news",
+    "tags": [
+      "free",
+      "world"
+    ],
+    "color": "#052962",
+    "tag_colors": {
+      "free": "#22c55e",
+      "world": "#052962"
+    }
+  },
+  {
+    "name": "Bloomberg",
+    "url": "https://www.bloomberg.com/",
+    "description": "Financial markets, business, and economic news with real-time data. The standard source for institutional investors.",
+    "category": "news",
+    "tags": [
+      "freemium",
+      "business"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "business": "#7c5cfc"
+    }
   }
 ]

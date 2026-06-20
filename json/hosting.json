@@ -238,5 +238,35 @@
       "paid": "#ef4444",
       "cloud-hosting": "#2980b9"
     }
+  },
+  {
+    "name": "Render",
+    "url": "https://render.com/",
+    "description": "Modern cloud hosting for web apps, APIs, and static sites with free tiers. Simple Git-based deploys, no DevOps needed.",
+    "category": "hosting",
+    "tags": [
+      "freemium",
+      "cloud"
+    ],
+    "color": "#46e3b7",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "cloud": "#46e3b7"
+    }
+  },
+  {
+    "name": "Railway",
+    "url": "https://railway.app/",
+    "description": "Deploy apps, databases, and cron jobs in seconds. Developer-friendly infrastructure with usage-based pricing.",
+    "category": "hosting",
+    "tags": [
+      "freemium",
+      "cloud"
+    ],
+    "color": "#0b0d0e",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "cloud": "#7c5cfc"
+    }
   }
 ]

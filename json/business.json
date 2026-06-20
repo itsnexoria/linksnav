@@ -268,5 +268,35 @@
       "paid": "#ef4444",
       "payments": "#635bff"
     }
+  },
+  {
+    "name": "Asana",
+    "url": "https://asana.com/",
+    "description": "Work management platform for teams to track projects, tasks, and goals. Timeline, board, and list views included.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "project-management"
+    ],
+    "color": "#f06a6a",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "project-management": "#f06a6a"
+    }
+  },
+  {
+    "name": "Monday.com",
+    "url": "https://monday.com/",
+    "description": "Colourful, flexible work OS for managing any kind of workflow. Highly visual boards with automation and integrations.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "project-management"
+    ],
+    "color": "#ff3d57",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "project-management": "#ff3d57"
+    }
   }
 ]

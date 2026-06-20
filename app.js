@@ -233,8 +233,8 @@ function getFiltered(){
     });
   }
 
-  /* Apply saved drag order only in default sort and no search */
-  if(currentSort==='default'&&!searchQuery&&activeCategory!=='__favorites__'){
+  /* Apply saved drag order only in default sort and no search (favorites included) */
+  if(currentSort==='default'&&!searchQuery){
     base=applyOrder(base,activeCategory);
   }
   return sortSites(base);
@@ -276,8 +276,8 @@ function render(){
   document.getElementById('dividerRow')?.remove();
   document.getElementById('loadMoreWrap')?.remove();
 
-  /* Show drag hint only when sort=default, no search, not fav, no price filter */
-  const canDrag=currentSort==='default'&&!searchQuery&&activeCategory!=='__favorites__'&&currentPrice==='all';
+  /* Show drag hint only when sort=default, no search, no price filter (favorites included) */
+  const canDrag=currentSort==='default'&&!searchQuery&&currentPrice==='all';
   if(hint)hint.classList.toggle('visible',canDrag&&filtered.length>1);
 
   if(filtered.length===0){

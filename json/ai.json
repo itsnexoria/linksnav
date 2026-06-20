@@ -345,5 +345,20 @@
       "freemium": "#3b82f6",
       "ai-coding": "#6366f1"
     }
+  },
+  {
+    "name": "Perchance",
+    "url": "https://perchance.org/",
+    "description": "Build and share random generators, AI chat characters, and text-to-image tools without writing code.",
+    "category": "ai",
+    "tags": [
+      "free",
+      "generators"
+    ],
+    "color": "#8b5cf6",
+    "tag_colors": {
+      "free": "#22c55e",
+      "generators": "#8b5cf6"
+    }
   }
 ]

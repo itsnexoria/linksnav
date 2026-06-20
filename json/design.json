@@ -283,5 +283,50 @@
       "freemium": "#3b82f6",
       "pdf-tool": "#e74c3c"
     }
+  },
+  {
+    "name": "Figma",
+    "url": "https://www.figma.com/",
+    "description": "The industry-standard collaborative design tool. Real-time multiplayer editing for UI, prototypes, and design systems.",
+    "category": "design",
+    "tags": [
+      "freemium",
+      "ui-design"
+    ],
+    "color": "#a259ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "ui-design": "#a259ff"
+    }
+  },
+  {
+    "name": "Haikei",
+    "url": "https://haikei.app/",
+    "description": "Generate unique SVG backgrounds, blobs, and patterns for design projects. Fully customisable and free to export.",
+    "category": "design",
+    "tags": [
+      "free",
+      "backgrounds"
+    ],
+    "color": "#6366f1",
+    "tag_colors": {
+      "free": "#22c55e",
+      "backgrounds": "#6366f1"
+    }
+  },
+  {
+    "name": "unDraw",
+    "url": "https://undraw.co/",
+    "description": "Open-source illustrations that update their colour to match your brand. Hundreds of free vector graphics for any project.",
+    "category": "design",
+    "tags": [
+      "free",
+      "illustrations"
+    ],
+    "color": "#0ea5e9",
+    "tag_colors": {
+      "free": "#22c55e",
+      "illustrations": "#0ea5e9"
+    }
   }
 ]

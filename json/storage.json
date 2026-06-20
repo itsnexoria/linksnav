@@ -238,5 +238,35 @@
       "freemium": "#3b82f6",
       "lifetime": "#19b5fe"
     }
+  },
+  {
+    "name": "Internxt",
+    "url": "https://internxt.com/",
+    "description": "Zero-knowledge encrypted cloud storage based in the EU. Privacy-first alternative with a generous free tier.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "encrypted"
+    ],
+    "color": "#0a0e17",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "encrypted": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Filen",
+    "url": "https://filen.io/",
+    "description": "End-to-end encrypted cloud storage with a clean interface. 10GB free, zero-knowledge architecture by default.",
+    "category": "storage",
+    "tags": [
+      "freemium",
+      "encrypted"
+    ],
+    "color": "#03cf91",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "encrypted": "#03cf91"
+    }
   }
 ]

@@ -225,5 +225,50 @@
       "free": "#22c55e",
       "open-source": "#06b6d4"
     }
+  },
+  {
+    "name": "SpigotMC",
+    "url": "https://www.spigotmc.org/",
+    "description": "The primary marketplace for Minecraft server plugins and resources. Thousands of free and premium plugins for any gamemode.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "plugins"
+    ],
+    "color": "#fb7813",
+    "tag_colors": {
+      "free": "#22c55e",
+      "plugins": "#fb7813"
+    }
+  },
+  {
+    "name": "PaperMC",
+    "url": "https://papermc.io/",
+    "description": "High-performance Minecraft server software, a fork of Spigot. Faster, more stable, and the standard choice for modern servers.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "server-software"
+    ],
+    "color": "#3b88c3",
+    "tag_colors": {
+      "free": "#22c55e",
+      "server-software": "#3b88c3"
+    }
+  },
+  {
+    "name": "BlueMap",
+    "url": "https://bluemap.bluecolored.de/",
+    "description": "Free 3D web map of your Minecraft server in real time. View your world from any browser without launching the game.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "mapping"
+    ],
+    "color": "#1a73e8",
+    "tag_colors": {
+      "free": "#22c55e",
+      "mapping": "#1a73e8"
+    }
   }
 ]

@@ -208,5 +208,35 @@
       "free": "#22c55e",
       "education": "#3a8b3a"
     }
+  },
+  {
+    "name": "Personal Capital",
+    "url": "https://www.empower.com/",
+    "description": "Free wealth management dashboard combining all your accounts. Net worth tracking, retirement planner, and fee analyzer.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "wealth"
+    ],
+    "color": "#1a5d8a",
+    "tag_colors": {
+      "free": "#22c55e",
+      "wealth": "#1a5d8a"
+    }
+  },
+  {
+    "name": "Binance",
+    "url": "https://www.binance.com/",
+    "description": "The world's largest cryptocurrency exchange by volume. Spot trading, futures, staking, and a built-in Web3 wallet.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "crypto"
+    ],
+    "color": "#f0b90b",
+    "tag_colors": {
+      "free": "#22c55e",
+      "crypto": "#f0b90b"
+    }
   }
 ]

@@ -163,5 +163,35 @@
       "free": "#22c55e",
       "streaming": "#fa382b"
     }
+  },
+  {
+    "name": "123Movies Alternative \u2014 SoapTV",
+    "url": "https://soaptv.io/",
+    "description": "Free streaming aggregator for movies and TV shows. Ad-supported with no account required.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#2c2c2c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Letterboxd Lists",
+    "url": "https://letterboxd.com/films/popular/",
+    "description": "Browse the most popular films on Letterboxd this week, curated by the community's ratings and watch activity.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "discovery"
+    ],
+    "color": "#202830",
+    "tag_colors": {
+      "free": "#22c55e",
+      "discovery": "#3d9970"
+    }
   }
 ]

@@ -178,5 +178,35 @@
       "paid": "#ef4444",
       "marketplace": "#e62e04"
     }
+  },
+  {
+    "name": "eBay",
+    "url": "https://www.ebay.com/",
+    "description": "Online auction and marketplace for new and used goods. Bid, buy now, or sell your own items globally.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "marketplace"
+    ],
+    "color": "#e53238",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "marketplace": "#e53238"
+    }
+  },
+  {
+    "name": "Etsy",
+    "url": "https://www.etsy.com/",
+    "description": "Marketplace for handmade, vintage, and unique craft goods from independent sellers worldwide.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "handmade"
+    ],
+    "color": "#f1641e",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "handmade": "#f1641e"
+    }
   }
 ]

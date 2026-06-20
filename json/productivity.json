@@ -253,5 +253,35 @@
       "freemium": "#3b82f6",
       "focus": "#3a7c3f"
     }
+  },
+  {
+    "name": "Pomofocus",
+    "url": "https://pomofocus.io/",
+    "description": "Clean, distraction-free Pomodoro timer with task lists. Customisable work/break intervals and browser notifications.",
+    "category": "productivity",
+    "tags": [
+      "free",
+      "focus"
+    ],
+    "color": "#e6473b",
+    "tag_colors": {
+      "free": "#22c55e",
+      "focus": "#e6473b"
+    }
+  },
+  {
+    "name": "Toggl",
+    "url": "https://toggl.com/",
+    "description": "Simple one-click time tracker for freelancers and teams. Detailed reports show where every billable hour went.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "time-tracking"
+    ],
+    "color": "#e01b5d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "time-tracking": "#e01b5d"
+    }
   }
 ]

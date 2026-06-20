@@ -225,5 +225,35 @@
       "free": "#22c55e",
       "gaming": "#53fc18"
     }
+  },
+  {
+    "name": "Netflix",
+    "url": "https://www.netflix.com/",
+    "description": "The world's leading subscription streaming service for movies, originals, and documentaries across every genre.",
+    "category": "streaming",
+    "tags": [
+      "paid",
+      "movies"
+    ],
+    "color": "#e50914",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "movies": "#e50914"
+    }
+  },
+  {
+    "name": "Disney+",
+    "url": "https://www.disneyplus.com/",
+    "description": "Home of Disney, Pixar, Marvel, Star Wars, and National Geographic content. Family-friendly streaming bundle.",
+    "category": "streaming",
+    "tags": [
+      "paid",
+      "family"
+    ],
+    "color": "#113ccf",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "family": "#113ccf"
+    }
   }
 ]

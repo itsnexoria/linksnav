@@ -193,5 +193,20 @@
       "freemium": "#3b82f6",
       "lyrics": "#ff4f60"
     }
+  },
+  {
+    "name": "Apple Music",
+    "url": "https://music.apple.com/",
+    "description": "100M+ song streaming library with lossless and spatial audio. Deeply integrated with iPhone and Mac.",
+    "category": "music",
+    "tags": [
+      "paid",
+      "streaming"
+    ],
+    "color": "#fa233b",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "streaming": "#fa233b"
+    }
   }
 ]

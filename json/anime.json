@@ -280,5 +280,35 @@
       "free": "#22c55e",
       "manga": "#ff6740"
     }
+  },
+  {
+    "name": "9anime",
+    "url": "https://9animetv.to/",
+    "description": "Free anime streaming site with subbed and dubbed episodes. Large library updated quickly after Japanese air dates.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#ff9a3c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Anime-Planet",
+    "url": "https://www.anime-planet.com/",
+    "description": "Anime and manga recommendations database with legal streaming links. One of the oldest anime communities online.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "database"
+    ],
+    "color": "#80b637",
+    "tag_colors": {
+      "free": "#22c55e",
+      "database": "#80b637"
+    }
   }
 ]

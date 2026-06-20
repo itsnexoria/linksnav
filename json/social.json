@@ -315,5 +315,35 @@
       "free": "#22c55e",
       "forums": "#ff4500"
     }
+  },
+  {
+    "name": "Pinterest",
+    "url": "https://www.pinterest.com/",
+    "description": "Visual discovery engine for ideas, recipes, fashion, and design inspiration. Save pins to boards for later.",
+    "category": "social",
+    "tags": [
+      "free",
+      "visual"
+    ],
+    "color": "#e60023",
+    "tag_colors": {
+      "free": "#22c55e",
+      "visual": "#e60023"
+    }
+  },
+  {
+    "name": "Nextdoor",
+    "url": "https://nextdoor.com/",
+    "description": "Hyperlocal social network for neighbourhoods. Local news, recommendations, lost pets, and community marketplace.",
+    "category": "social",
+    "tags": [
+      "free",
+      "local"
+    ],
+    "color": "#8ed500",
+    "tag_colors": {
+      "free": "#22c55e",
+      "local": "#8ed500"
+    }
   }
 ]

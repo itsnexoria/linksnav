@@ -478,5 +478,65 @@
       "freemium": "#3b82f6",
       "terminal": "#01a4ff"
     }
+  },
+  {
+    "name": "Postman",
+    "url": "https://www.postman.com/",
+    "description": "The standard tool for building, testing, and documenting APIs. Collections, environments, and automated test runs.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "api"
+    ],
+    "color": "#ff6c37",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "api": "#ff6c37"
+    }
+  },
+  {
+    "name": "DBeaver",
+    "url": "https://dbeaver.io/",
+    "description": "Free universal database GUI supporting MySQL, Postgres, SQLite, and dozens more. Browse, query, and edit data visually.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "database"
+    ],
+    "color": "#382923",
+    "tag_colors": {
+      "free": "#22c55e",
+      "database": "#382923"
+    }
+  },
+  {
+    "name": "DevDocs",
+    "url": "https://devdocs.io/",
+    "description": "Fast, searchable, offline-capable documentation for hundreds of APIs and languages combined into one interface.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "documentation"
+    ],
+    "color": "#21252b",
+    "tag_colors": {
+      "free": "#22c55e",
+      "documentation": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Can I Use",
+    "url": "https://caniuse.com/",
+    "description": "Browser compatibility tables for HTML5, CSS3, and JS features. Check support before you ship a new feature.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "compatibility"
+    ],
+    "color": "#e84e1b",
+    "tag_colors": {
+      "free": "#22c55e",
+      "compatibility": "#e84e1b"
+    }
   }
 ]
