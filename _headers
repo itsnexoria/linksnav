@@ -1,6 +1,6 @@
-# JSON data files — cache for 1 hour, stale-while-revalidate
+# JSON data files — short cache, always check for updates
 /json/*.json
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=300, must-revalidate
 
 # Assets — cache for 1 year
 /assets/*

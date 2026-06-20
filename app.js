@@ -10,6 +10,9 @@
 const CLICKS_KEY = 'nexhub_clicks';
 const FAVS_KEY   = 'nexhub_favs';
 const ORDER_KEY  = 'nexhub_order';
+/* Bump this any time json/*.json content changes, so cached copies
+   on the CDN / browser don't hide newly-added sites. */
+const BUILD_VERSION = '20260620-2';
 
 /* ── STATE ──────────────────────────────────────────────────── */
 let allSites       = [];
@@ -87,7 +90,7 @@ function fmtCount(n){return n>=1000?(n/1000).toFixed(1)+'k':n||0}
 async function init(){
   const settled=await Promise.allSettled(
     CATS.map(cat=>
-      fetch(`json/${cat.id}.json`,{cache:'force-cache'})
+      fetch(`json/${cat.id}.json?v=${BUILD_VERSION}`,{cache:'no-cache'})
         .then(r=>r.ok?r.json().then(sites=>({cat,sites})):null)
         .catch(()=>null)
     )
