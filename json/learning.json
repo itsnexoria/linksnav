@@ -373,5 +373,35 @@
       "free": "#22c55e",
       "coding": "#b1361e"
     }
+  },
+  {
+    "name": "Pluralsight",
+    "url": "https://www.pluralsight.com/",
+    "description": "Tech-focused video courses with skill assessments to identify gaps and track your learning progress over time.",
+    "category": "learning",
+    "tags": [
+      "paid",
+      "tech"
+    ],
+    "color": "#f15b2a",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "tech": "#f15b2a"
+    }
+  },
+  {
+    "name": "Codepip",
+    "url": "https://codepip.com/",
+    "description": "Learn to code through actual games \u2014 solve puzzles using real programming concepts instead of dry tutorials.",
+    "category": "learning",
+    "tags": [
+      "free",
+      "coding"
+    ],
+    "color": "#222a35",
+    "tag_colors": {
+      "free": "#22c55e",
+      "coding": "#222a35"
+    }
   }
 ]

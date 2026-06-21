@@ -328,5 +328,50 @@
       "free": "#22c55e",
       "editor": "#90c53f"
     }
+  },
+  {
+    "name": "Krita",
+    "url": "https://krita.org/",
+    "description": "Free, open-source digital painting software designed by artists for illustration and concept art.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "art"
+    ],
+    "color": "#3bafda",
+    "tag_colors": {
+      "free": "#22c55e",
+      "art": "#3bafda"
+    }
+  },
+  {
+    "name": "Inkscape",
+    "url": "https://inkscape.org/",
+    "description": "Free, open-source vector graphics editor \u2014 a capable alternative to Adobe Illustrator for SVG and print work.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "vector"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "vector": "#7c5cfc"
+    }
+  },
+  {
+    "name": "ShareX",
+    "url": "https://getsharex.com/",
+    "description": "Free, open-source screenshot and screen recording tool for Windows with extensive upload destinations.",
+    "category": "downloads",
+    "tags": [
+      "free",
+      "screenshots"
+    ],
+    "color": "#2952a3",
+    "tag_colors": {
+      "free": "#22c55e",
+      "screenshots": "#2952a3"
+    }
   }
 ]

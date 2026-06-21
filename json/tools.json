@@ -313,5 +313,50 @@
       "free": "#22c55e",
       "url-shortener": "#2c4870"
     }
+  },
+  {
+    "name": "PDF24",
+    "url": "https://tools.pdf24.org/",
+    "description": "Free online PDF toolkit \u2014 merge, split, compress, convert, and edit PDFs with no software install needed.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "pdf"
+    ],
+    "color": "#e63946",
+    "tag_colors": {
+      "free": "#22c55e",
+      "pdf": "#e63946"
+    }
+  },
+  {
+    "name": "Calculator.net",
+    "url": "https://www.calculator.net/",
+    "description": "Hundreds of free calculators for finance, health, maths, and everyday conversions all in one place.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "calculators"
+    ],
+    "color": "#2d6ca2",
+    "tag_colors": {
+      "free": "#22c55e",
+      "calculators": "#2d6ca2"
+    }
+  },
+  {
+    "name": "It's FOSS",
+    "url": "https://itsfoss.com/",
+    "description": "Linux news, tutorials, and open-source software recommendations for beginners and enthusiasts alike.",
+    "category": "tools",
+    "tags": [
+      "free",
+      "linux"
+    ],
+    "color": "#f47421",
+    "tag_colors": {
+      "free": "#22c55e",
+      "linux": "#f47421"
+    }
   }
 ]

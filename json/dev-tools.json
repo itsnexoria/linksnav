@@ -628,5 +628,50 @@
       "free": "#22c55e",
       "performance": "#f44b21"
     }
+  },
+  {
+    "name": "Bitbucket",
+    "url": "https://bitbucket.org/",
+    "description": "Git repository hosting from Atlassian with built-in CI/CD pipelines and tight Jira integration.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "git"
+    ],
+    "color": "#0052cc",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "git": "#0052cc"
+    }
+  },
+  {
+    "name": "npm",
+    "url": "https://www.npmjs.com/",
+    "description": "The default package registry for JavaScript and Node.js. Search, install, and publish packages.",
+    "category": "dev-tools",
+    "tags": [
+      "free",
+      "packages"
+    ],
+    "color": "#cb3837",
+    "tag_colors": {
+      "free": "#22c55e",
+      "packages": "#cb3837"
+    }
+  },
+  {
+    "name": "Swagger",
+    "url": "https://swagger.io/",
+    "description": "Design, document, and test REST APIs with the OpenAPI specification. Auto-generates interactive API docs.",
+    "category": "dev-tools",
+    "tags": [
+      "freemium",
+      "api"
+    ],
+    "color": "#85ea2d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "api": "#85ea2d"
+    }
   }
 ]

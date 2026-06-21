@@ -223,5 +223,35 @@
       "paid": "#ef4444",
       "storage": "#4285f4"
     }
+  },
+  {
+    "name": "Google Slides",
+    "url": "https://slides.google.com/",
+    "description": "Free collaborative presentation software that works in any browser, with templates and real-time editing.",
+    "category": "google",
+    "tags": [
+      "free",
+      "presentations"
+    ],
+    "color": "#fbbc05",
+    "tag_colors": {
+      "free": "#22c55e",
+      "presentations": "#fbbc05"
+    }
+  },
+  {
+    "name": "Google AI Studio",
+    "url": "https://aistudio.google.com/",
+    "description": "Free playground for building with Gemini models. Test prompts, tune parameters, and grab API keys for free.",
+    "category": "google",
+    "tags": [
+      "free",
+      "ai"
+    ],
+    "color": "#4285f4",
+    "tag_colors": {
+      "free": "#22c55e",
+      "ai": "#4285f4"
+    }
   }
 ]

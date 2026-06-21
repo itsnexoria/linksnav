@@ -343,5 +343,35 @@
       "freemium": "#3b82f6",
       "whiteboard": "#050038"
     }
+  },
+  {
+    "name": "Evernote",
+    "url": "https://evernote.com/",
+    "description": "Long-running note-taking app with powerful search, web clipping, and document scanning features.",
+    "category": "productivity",
+    "tags": [
+      "freemium",
+      "notes"
+    ],
+    "color": "#00a82d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "notes": "#00a82d"
+    }
+  },
+  {
+    "name": "Habitica",
+    "url": "https://habitica.com/",
+    "description": "Gamify your to-do list \u2014 earn XP and loot for completing real tasks, lose health for missing habits.",
+    "category": "productivity",
+    "tags": [
+      "free",
+      "gamification"
+    ],
+    "color": "#925cea",
+    "tag_colors": {
+      "free": "#22c55e",
+      "gamification": "#925cea"
+    }
   }
 ]

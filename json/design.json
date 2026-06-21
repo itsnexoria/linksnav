@@ -403,5 +403,50 @@
       "free": "#22c55e",
       "icons": "#16b0fd"
     }
+  },
+  {
+    "name": "Dribbble",
+    "url": "https://dribbble.com/",
+    "description": "The leading showcase platform for designers. Browse shots for inspiration or hire talent for your next project.",
+    "category": "design",
+    "tags": [
+      "freemium",
+      "inspiration"
+    ],
+    "color": "#ea4c89",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "inspiration": "#ea4c89"
+    }
+  },
+  {
+    "name": "Looka",
+    "url": "https://looka.com/",
+    "description": "AI logo maker that generates dozens of brand-ready logo options based on your style preferences in seconds.",
+    "category": "design",
+    "tags": [
+      "paid",
+      "logo"
+    ],
+    "color": "#6c5ce7",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "logo": "#6c5ce7"
+    }
+  },
+  {
+    "name": "Blendswap",
+    "url": "https://www.blendswap.com/",
+    "description": "Free community library of Blender 3D models, scenes, and materials shared by other artists.",
+    "category": "design",
+    "tags": [
+      "free",
+      "3d"
+    ],
+    "color": "#ea7600",
+    "tag_colors": {
+      "free": "#22c55e",
+      "3d": "#ea7600"
+    }
   }
 ]

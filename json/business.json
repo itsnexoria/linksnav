@@ -403,5 +403,65 @@
       "paid": "#ef4444",
       "ecommerce": "#95bf47"
     }
+  },
+  {
+    "name": "Webflow",
+    "url": "https://webflow.com/",
+    "description": "Visual web design tool that exports clean, production-ready code. Popular with designers who want pixel control.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "website-builder"
+    ],
+    "color": "#4353ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "website-builder": "#4353ff"
+    }
+  },
+  {
+    "name": "Carrd",
+    "url": "https://carrd.co/",
+    "description": "Build simple, beautiful one-page sites in minutes. Perfect for landing pages, bio sites, and portfolios.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "website-builder"
+    ],
+    "color": "#0a0a0a",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "website-builder": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Buffer",
+    "url": "https://buffer.com/",
+    "description": "Schedule and publish social media posts across platforms from one dashboard, with basic analytics included.",
+    "category": "business",
+    "tags": [
+      "freemium",
+      "social-media"
+    ],
+    "color": "#168eea",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "social-media": "#168eea"
+    }
+  },
+  {
+    "name": "Intercom",
+    "url": "https://www.intercom.com/",
+    "description": "Customer messaging platform combining live chat, help centre, and AI-powered support resolution.",
+    "category": "business",
+    "tags": [
+      "paid",
+      "support"
+    ],
+    "color": "#1f2937",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "support": "#1f2937"
+    }
   }
 ]

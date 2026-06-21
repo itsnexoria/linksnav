@@ -385,5 +385,35 @@
       "free": "#22c55e",
       "news": "#ff0050"
     }
+  },
+  {
+    "name": "AnimeFLV",
+    "url": "https://animeflv.net/",
+    "description": "Spanish-language anime streaming site with subtitled episodes updated quickly after Japanese air dates.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#0099ff",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Kitsu",
+    "url": "https://kitsu.app/",
+    "description": "Anime and manga tracking app with a clean modern interface, recommendations, and an open public API.",
+    "category": "anime",
+    "tags": [
+      "free",
+      "tracking"
+    ],
+    "color": "#fb7c1c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tracking": "#fb7c1c"
+    }
   }
 ]

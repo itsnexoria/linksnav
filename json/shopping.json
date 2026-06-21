@@ -268,5 +268,35 @@
       "paid": "#ef4444",
       "resale": "#006340"
     }
+  },
+  {
+    "name": "Target",
+    "url": "https://www.target.com/",
+    "description": "US retail chain with strong own-brand products, easy returns, and convenient same-day delivery options.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "retail"
+    ],
+    "color": "#cc0000",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "retail": "#cc0000"
+    }
+  },
+  {
+    "name": "Depop",
+    "url": "https://www.depop.com/",
+    "description": "Peer-to-peer marketplace for secondhand and vintage fashion, popular with a younger, style-focused audience.",
+    "category": "shopping",
+    "tags": [
+      "paid",
+      "fashion"
+    ],
+    "color": "#ff2300",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "fashion": "#ff2300"
+    }
   }
 ]

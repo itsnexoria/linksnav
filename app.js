@@ -10,9 +10,11 @@
 const CLICKS_KEY = 'nexhub_clicks';
 const FAVS_KEY   = 'nexhub_favs';
 const ORDER_KEY  = 'nexhub_order';
+const RECENTS_KEY = 'nexhub_recents';
+const MAX_RECENTS = 24;
 /* Bump this any time json/*.json content changes, so cached copies
    on the CDN / browser don't hide newly-added sites. */
-const BUILD_VERSION = '20260620-3';
+const BUILD_VERSION = '20260620-4';
 
 /* ── STATE ──────────────────────────────────────────────────── */
 let allSites       = [];
@@ -86,6 +88,15 @@ function getCount(url){return loadClicks()[url]||0}
 function bumpCount(url){const m=loadClicks();m[url]=(m[url]||0)+1;saveClicks(m);return m[url]}
 function fmtCount(n){return n>=1000?(n/1000).toFixed(1)+'k':n||0}
 
+/* ── RECENTLY VISITED ───────────────────────────────────────── */
+function loadRecents(){try{return JSON.parse(localStorage.getItem(RECENTS_KEY)||'[]')}catch{return[]}}
+function saveRecents(arr){localStorage.setItem(RECENTS_KEY,JSON.stringify(arr.slice(0,MAX_RECENTS)))}
+function addRecent(url){
+  let arr=loadRecents().filter(u=>u!==url);
+  arr.unshift(url);
+  saveRecents(arr);
+}
+
 /* ── BOOT ───────────────────────────────────────────────────── */
 async function init(){
   const settled=await Promise.allSettled(
@@ -127,6 +138,8 @@ function buildNav(){
   const inner=document.getElementById('catNavInner');
   const favBtn=mkBtn('cat-btn cat-btn-fav','__favorites__','★ Favorites');
   inner.querySelector('[data-cat="all"]').insertAdjacentElement('afterend',favBtn);
+  const recentBtn=mkBtn('cat-btn cat-btn-recent','__recent__','🕓 Recent');
+  favBtn.insertAdjacentElement('afterend',recentBtn);
   const frag=document.createDocumentFragment();
   allCategories.forEach(cat=>frag.appendChild(mkBtn('cat-btn',cat.id,`${cat.icon} ${cat.label}`)));
   inner.appendChild(frag);
@@ -188,10 +201,24 @@ function setupSearch(){
   document.addEventListener('keydown',e=>{
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();inp.focus();inp.select()}
     if(e.key==='Escape'&&document.activeElement===inp){inp.blur();inp.value='';searchQuery='';visibleCount=PAGE_SIZE;render()}
+    /* [ and ] cycle through category tabs when not typing in an input */
+    if((e.key==='['||e.key===']')&&document.activeElement!==inp&&document.activeElement.tagName!=='SELECT'){
+      e.preventDefault();
+      const btns=[...document.querySelectorAll('.cat-btn')];
+      const curIdx=btns.findIndex(b=>b.classList.contains('active'));
+      let nextIdx=e.key===']'?curIdx+1:curIdx-1;
+      if(nextIdx<0)nextIdx=btns.length-1;
+      if(nextIdx>=btns.length)nextIdx=0;
+      btns[nextIdx]?.click();
+      btns[nextIdx]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+    }
+    /* r = open a random site (when not typing) */
+    if(e.key==='r'&&document.activeElement!==inp&&document.activeElement.tagName!=='SELECT'){
+      document.getElementById('randomBtn')?.click();
+    }
   });
 }
 
-/* ── SORT ───────────────────────────────────────────────────── */
 /* ── SORT & PRICE FILTER HANDLERS ───────────────────────────── */
 window.onSortChange = function(mode) {
   currentSort = mode; visibleCount = PAGE_SIZE;
@@ -217,6 +244,10 @@ function getFiltered(){
   let base;
   if(activeCategory==='__favorites__'){
     base=allSites.filter(s=>favorites.has(s.url));
+  } else if(activeCategory==='__recent__'){
+    const recents=loadRecents();
+    const map=new Map(allSites.map(s=>[s.url,s]));
+    base=recents.map(u=>map.get(u)).filter(Boolean);
   } else {
     base=allSites.filter(s=>{
       if(activeCategory!=='all'&&s.category!==activeCategory)return false;
@@ -236,8 +267,8 @@ function getFiltered(){
     });
   }
 
-  /* Apply saved drag order only in default sort and no search (favorites included) */
-  if(currentSort==='default'&&!searchQuery){
+  /* Apply saved drag order only in default sort and no search (favorites included, recent excluded) */
+  if(currentSort==='default'&&!searchQuery&&activeCategory!=='__recent__'){
     base=applyOrder(base,activeCategory);
   }
   return sortSites(base);
@@ -270,6 +301,7 @@ function render(){
   const hint=document.getElementById('dragHint');
 
   if(activeCategory==='__favorites__') label.textContent='★ Favorites';
+  else if(activeCategory==='__recent__') label.textContent='🕓 Recently Visited';
   else if(searchQuery) label.textContent=`Results for "${searchQuery}"`;
   else if(activeCategory==='all') label.textContent='All Sites';
   else{const c=allCategories.find(c=>c.id===activeCategory);label.textContent=c?`${c.icon} ${c.label}`:activeCategory}
@@ -277,14 +309,19 @@ function render(){
 
   document.getElementById('loadMoreWrap')?.remove();
 
-  /* Show drag hint only when sort=default, no search, no price filter (favorites included) */
-  const canDrag=currentSort==='default'&&!searchQuery&&currentPrice==='all';
+  /* Show drag hint only when sort=default, no search, no price filter, not recent tab */
+  const canDrag=currentSort==='default'&&!searchQuery&&currentPrice==='all'&&activeCategory!=='__recent__';
   if(hint)hint.classList.toggle('visible',canDrag&&filtered.length>1);
+
+  const clearBtn=document.getElementById('clearRecentsBtn');
+  if(clearBtn)clearBtn.style.display=(activeCategory==='__recent__'&&filtered.length>0)?'inline-block':'none';
 
   if(filtered.length===0){
     grid.innerHTML='';grid.style.display='none';empty.style.display='block';
     document.getElementById('emptyQuery').textContent=
-      activeCategory==='__favorites__'?'your favorites yet — star any card!':(searchQuery||activeCategory);
+      activeCategory==='__favorites__'?'your favorites yet — star any card!':
+      activeCategory==='__recent__'?'sites visited yet — click any card to start tracking':
+      (searchQuery||activeCategory);
     return;
   }
   empty.style.display='none';grid.style.display='';
@@ -336,6 +373,12 @@ function cardHTML(s,draggable=false){
             onclick="toggleFav('${esc(s.url)}',event)"
             aria-label="${isFav?'Remove from':'Add to'} favorites">
       ${isFav?'★ Saved':'☆ Save'}
+    </button>
+    <button class="copy-link-btn"
+            onclick="copyCardLink('${esc(s.url)}',event)"
+            aria-label="Copy link to ${esc(s.name)}"
+            title="Copy link">
+      🔗
     </button>
   </div>`;
 }
@@ -431,6 +474,7 @@ document.getElementById('cardsGrid').addEventListener('click',e=>{
   const card=e.target.closest('a.card');
   if(!card)return;
   const count=bumpCount(card.href);
+  addRecent(card.href);
   const badge=card.querySelector('.click-count-num');
   if(badge){
     badge.textContent=fmtCount(count);
@@ -438,6 +482,45 @@ document.getElementById('cardsGrid').addEventListener('click',e=>{
     if(wrap){wrap.classList.remove('cc-bump');void wrap.offsetWidth;wrap.classList.add('cc-bump')}
   }
 });
+
+/* ── CLEAR RECENTS ─────────────────────────────────────────────── */
+window.clearRecents=function(){
+  saveRecents([]);
+  if(activeCategory==='__recent__')render();
+};
+
+/* ── COPY LINK ──────────────────────────────────────────────────── */
+let _toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  if(!t)return;
+  clearTimeout(_toastTimer);
+  t.textContent=msg;
+  t.classList.add('show');
+  _toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
+}
+window.copyCardLink=function(url,e){
+  e.preventDefault();e.stopPropagation();
+  navigator.clipboard.writeText(url).then(()=>{
+    showToast('Link copied!');
+    const btn=e.currentTarget;
+    btn.classList.remove('copied');void btn.offsetWidth;btn.classList.add('copied');
+  }).catch(()=>showToast('Could not copy link'));
+};
+
+/* ── RANDOM SITE ────────────────────────────────────────────────── */
+(function setupRandomBtn(){
+  const btn=document.getElementById('randomBtn');
+  if(!btn)return;
+  btn.addEventListener('click',()=>{
+    if(!allSites.length)return;
+    btn.classList.remove('rolling');void btn.offsetWidth;btn.classList.add('rolling');
+    const pick=allSites[Math.floor(Math.random()*allSites.length)];
+    bumpCount(pick.url);
+    addRecent(pick.url);
+    setTimeout(()=>window.open(pick.url,'_blank','noopener,noreferrer'),180);
+  });
+})();
 
 /* ── THEME ──────────────────────────────────────────────────── */
 (function initTheme(){

@@ -313,5 +313,35 @@
       "free": "#22c55e",
       "credit": "#5c068c"
     }
+  },
+  {
+    "name": "eToro",
+    "url": "https://www.etoro.com/",
+    "description": "Social trading platform where you can copy successful traders' portfolios automatically. Stocks, crypto, and forex.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "trading"
+    ],
+    "color": "#65c062",
+    "tag_colors": {
+      "free": "#22c55e",
+      "trading": "#65c062"
+    }
+  },
+  {
+    "name": "Plaid",
+    "url": "https://plaid.com/",
+    "description": "The infrastructure behind most fintech apps' bank connections. Not consumer-facing but powers your favourite money apps.",
+    "category": "finance",
+    "tags": [
+      "free",
+      "infrastructure"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "infrastructure": "#7c5cfc"
+    }
   }
 ]

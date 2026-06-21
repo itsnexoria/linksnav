@@ -300,5 +300,35 @@
       "paid": "#ef4444",
       "live-tv": "#ff0000"
     }
+  },
+  {
+    "name": "BBC iPlayer",
+    "url": "https://www.bbc.co.uk/iplayer",
+    "description": "Free UK streaming for BBC shows, documentaries, and live channels, available to anyone with a TV licence.",
+    "category": "streaming",
+    "tags": [
+      "free",
+      "tv"
+    ],
+    "color": "#fc2e1c",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tv": "#fc2e1c"
+    }
+  },
+  {
+    "name": "DAZN",
+    "url": "https://www.dazn.com/",
+    "description": "Sports streaming service with a focus on boxing, combat sports, and football leagues around the world.",
+    "category": "streaming",
+    "tags": [
+      "paid",
+      "sports"
+    ],
+    "color": "#fff200",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "sports": "#1a1a1a"
+    }
   }
 ]

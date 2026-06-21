@@ -238,5 +238,35 @@
       "free": "#22c55e",
       "politics": "#a5141e"
     }
+  },
+  {
+    "name": "Vox",
+    "url": "https://www.vox.com/",
+    "description": "Explanatory journalism that breaks down complex news topics into accessible, well-researched articles.",
+    "category": "news",
+    "tags": [
+      "free",
+      "explainers"
+    ],
+    "color": "#fff200",
+    "tag_colors": {
+      "free": "#22c55e",
+      "explainers": "#1a1a1a"
+    }
+  },
+  {
+    "name": "Wired",
+    "url": "https://www.wired.com/",
+    "description": "Technology and culture journalism covering science, gadgets, and the future of how we live and work.",
+    "category": "news",
+    "tags": [
+      "freemium",
+      "tech"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "tech": "#7c5cfc"
+    }
   }
 ]

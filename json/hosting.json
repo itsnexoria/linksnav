@@ -343,5 +343,35 @@
       "freemium": "#3b82f6",
       "cloud": "#ff9900"
     }
+  },
+  {
+    "name": "Linode",
+    "url": "https://www.linode.com/",
+    "description": "Simple, affordable cloud computing now part of Akamai. Straightforward VPS pricing with strong documentation.",
+    "category": "hosting",
+    "tags": [
+      "paid",
+      "vps"
+    ],
+    "color": "#00a95c",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "vps": "#00a95c"
+    }
+  },
+  {
+    "name": "Namecheap",
+    "url": "https://www.namecheap.com/",
+    "description": "Affordable domain registration and hosting with free WHOIS privacy and a reputation for good customer support.",
+    "category": "hosting",
+    "tags": [
+      "paid",
+      "domains"
+    ],
+    "color": "#de3723",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "domains": "#de3723"
+    }
   }
 ]

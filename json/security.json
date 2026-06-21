@@ -343,5 +343,35 @@
       "freemium": "#3b82f6",
       "antivirus": "#0d3ecc"
     }
+  },
+  {
+    "name": "Dashlane",
+    "url": "https://www.dashlane.com/",
+    "description": "Password manager with a built-in VPN and dark web monitoring, known for a polished autofill experience.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "passwords"
+    ],
+    "color": "#0e353d",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "passwords": "#0e353d"
+    }
+  },
+  {
+    "name": "Tutanota",
+    "url": "https://tuta.com/",
+    "description": "End-to-end encrypted email and calendar with a strong focus on privacy, based in Germany.",
+    "category": "security",
+    "tags": [
+      "freemium",
+      "email"
+    ],
+    "color": "#a01b1b",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "email": "#a01b1b"
+    }
   }
 ]

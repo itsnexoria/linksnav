@@ -480,5 +480,80 @@
       "paid": "#ef4444",
       "writing": "#7c5cfc"
     }
+  },
+  {
+    "name": "DeepSeek",
+    "url": "https://www.deepseek.com/",
+    "description": "Open-weight AI models with strong reasoning and coding performance, competitive with top closed-source models.",
+    "category": "ai",
+    "tags": [
+      "free",
+      "chat"
+    ],
+    "color": "#4d6bfe",
+    "tag_colors": {
+      "free": "#22c55e",
+      "chat": "#4d6bfe"
+    }
+  },
+  {
+    "name": "Krea",
+    "url": "https://www.krea.ai/",
+    "description": "Real-time AI image and video generation canvas. Sketch, enhance, and upscale visuals as you draw.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "image"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "image": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Otter.ai",
+    "url": "https://otter.ai/",
+    "description": "AI meeting assistant that transcribes calls in real time and generates summaries and action items automatically.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "transcription"
+    ],
+    "color": "#1167ff",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "transcription": "#1167ff"
+    }
+  },
+  {
+    "name": "Synthesia",
+    "url": "https://www.synthesia.io/",
+    "description": "Create AI avatar videos from text scripts in over 140 languages. Popular for training and marketing videos.",
+    "category": "ai",
+    "tags": [
+      "paid",
+      "video"
+    ],
+    "color": "#1a1a2e",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "video": "#7c5cfc"
+    }
+  },
+  {
+    "name": "Cursor",
+    "url": "https://www.cursor.com/",
+    "description": "AI-first code editor built on VS Code. Predicts edits, writes whole functions, and chats with your codebase.",
+    "category": "ai",
+    "tags": [
+      "freemium",
+      "coding"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "coding": "#7c5cfc"
+    }
   }
 ]

@@ -345,5 +345,35 @@
       "free": "#22c55e",
       "lookup": "#39a845"
     }
+  },
+  {
+    "name": "Minecraft Wiki",
+    "url": "https://minecraft.wiki/",
+    "description": "The definitive community-edited wiki covering every block, mob, mechanic, and update in Minecraft.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "wiki"
+    ],
+    "color": "#5b8731",
+    "tag_colors": {
+      "free": "#22c55e",
+      "wiki": "#5b8731"
+    }
+  },
+  {
+    "name": "Chunkbase",
+    "url": "https://www.chunkbase.com/",
+    "description": "Seed map viewer and generator tools for finding biomes, structures, and slime chunks before you even load the world.",
+    "category": "minecraft",
+    "tags": [
+      "free",
+      "tools"
+    ],
+    "color": "#5a8f3d",
+    "tag_colors": {
+      "free": "#22c55e",
+      "tools": "#5a8f3d"
+    }
   }
 ]

@@ -223,5 +223,35 @@
       "freemium": "#3b82f6",
       "streaming": "#a238ff"
     }
+  },
+  {
+    "name": "Audiomack",
+    "url": "https://audiomack.com/",
+    "description": "Free music streaming popular for hip-hop and African music, with direct artist uploads and offline downloads.",
+    "category": "music",
+    "tags": [
+      "free",
+      "streaming"
+    ],
+    "color": "#ffa200",
+    "tag_colors": {
+      "free": "#22c55e",
+      "streaming": "#ffa200"
+    }
+  },
+  {
+    "name": "Songkick",
+    "url": "https://www.songkick.com/",
+    "description": "Track your favourite artists' tour dates and get alerts when they're playing near you.",
+    "category": "music",
+    "tags": [
+      "free",
+      "concerts"
+    ],
+    "color": "#f80046",
+    "tag_colors": {
+      "free": "#22c55e",
+      "concerts": "#f80046"
+    }
   }
 ]

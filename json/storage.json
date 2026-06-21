@@ -298,5 +298,20 @@
       "freemium": "#3b82f6",
       "encrypted": "#0e62fe"
     }
+  },
+  {
+    "name": "Tresorit",
+    "url": "https://tresorit.com/",
+    "description": "Zero-knowledge encrypted cloud storage built for business compliance, based in Switzerland and Hungary.",
+    "category": "storage",
+    "tags": [
+      "paid",
+      "encrypted"
+    ],
+    "color": "#1c75bc",
+    "tag_colors": {
+      "paid": "#ef4444",
+      "encrypted": "#1c75bc"
+    }
   }
 ]

@@ -405,5 +405,35 @@
       "free": "#22c55e",
       "blogging": "#36465d"
     }
+  },
+  {
+    "name": "BeReal",
+    "url": "https://bere.al/",
+    "description": "Daily prompt-based photo sharing meant to capture authentic, unfiltered moments instead of curated highlights.",
+    "category": "social",
+    "tags": [
+      "free",
+      "photos"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "free": "#22c55e",
+      "photos": "#7c5cfc"
+    }
+  },
+  {
+    "name": "VSCO",
+    "url": "https://vsco.co/",
+    "description": "Photo editing and sharing app known for its film-like filters and a community without likes or comments.",
+    "category": "social",
+    "tags": [
+      "freemium",
+      "photos"
+    ],
+    "color": "#000000",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "photos": "#7c5cfc"
+    }
   }
 ]

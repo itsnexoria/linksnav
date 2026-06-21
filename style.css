@@ -198,6 +198,18 @@ body {
 }
 .site-count.updated { color:var(--accent); animation:popScale .3s cubic-bezier(.34,1.56,.64,1) }
 
+.random-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; flex-shrink:0;
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:var(--radius); cursor:pointer; font-size:1rem;
+  transition:background .2s, border-color .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.random-btn:hover { background:var(--surface2); border-color:var(--accent); transform:rotate(-12deg) scale(1.08) }
+.random-btn:active { transform:rotate(10deg) scale(.9) }
+.random-btn.rolling { animation:diceRoll .5s ease }
+@keyframes diceRoll { 0%{transform:rotate(0)} 25%{transform:rotate(-25deg) scale(1.1)} 50%{transform:rotate(20deg) scale(1.15)} 75%{transform:rotate(-10deg) scale(1.05)} 100%{transform:rotate(0) scale(1)} }
+
 .submit-nav-btn {
   display:inline-flex; align-items:center; gap:5px;
   padding:7px 14px;
@@ -265,6 +277,9 @@ body {
 .cat-btn-fav { color:#f59e0b !important }
 .cat-btn-fav:hover { background:rgba(245,158,11,0.1) !important; border-color:rgba(245,158,11,0.3) !important }
 .cat-btn-fav.active { background:rgba(245,158,11,0.15) !important; border-color:#f59e0b !important; color:#f59e0b !important }
+.cat-btn-recent { color:#06b6d4 !important }
+.cat-btn-recent:hover { background:rgba(6,182,212,0.1) !important; border-color:rgba(6,182,212,0.3) !important }
+.cat-btn-recent.active { background:rgba(6,182,212,0.15) !important; border-color:#06b6d4 !important; color:#06b6d4 !important }
 
 /* ── MAIN ───────────────────────────────────────────────────── */
 .main {
@@ -311,6 +326,14 @@ body {
   font-weight:500; display:none; white-space:nowrap;
 }
 .filter-drag-hint.visible { display:inline }
+.clear-recents-btn {
+  margin-left:auto; padding:5px 12px; border-radius:var(--radius);
+  background:transparent; border:1px solid var(--border2);
+  color:var(--muted); font-family:var(--font-m); font-size:.72rem; font-weight:500;
+  cursor:pointer; transition:border-color .18s, color .18s, transform .15s;
+}
+.clear-recents-btn:hover { border-color:#ef4444; color:#ef4444; transform:translateY(-1px) }
+.clear-recents-btn:active { transform:translateY(0) scale(.96) }
 
 /* ── CARDS GRID ─────────────────────────────────────────────── */
 .cards-grid {
@@ -625,3 +648,28 @@ body {
 /* ── SECTION LABEL OVERRIDES ─────────────────────────────────── */
 .section-label { letter-spacing:.14em; font-weight:700 }
 .load-more-btn  { font-weight:600 }
+
+/* ── COPY LINK BUTTON ────────────────────────────────────────── */
+.copy-link-btn {
+  position:absolute; bottom:10px; left:10px; z-index:10;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:24px; height:24px;
+  background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
+  font-size:.72rem; cursor:pointer; color:var(--muted);
+  transition:all .2s, transform .15s cubic-bezier(.34,1.56,.64,1);
+  opacity:0; pointer-events:none;
+}
+.card-wrap:hover .copy-link-btn { opacity:1; pointer-events:auto }
+.copy-link-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); transform:scale(1.1) }
+.copy-link-btn:active { transform:scale(.88) }
+.copy-link-btn.copied { animation:popScale .3s cubic-bezier(.34,1.56,.64,1); color:#22c55e; border-color:#22c55e }
+
+/* ── TOAST ───────────────────────────────────────────────────── */
+.toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(12px);
+  background:var(--accent); color:#fff; padding:10px 22px;
+  border-radius:100px; font-family:var(--font-m); font-size:.82rem; font-weight:500;
+  opacity:0; pointer-events:none; transition:opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1);
+  z-index:999; box-shadow:var(--shadow-md); white-space:nowrap;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0) }

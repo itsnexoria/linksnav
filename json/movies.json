@@ -223,5 +223,35 @@
       "freemium": "#3b82f6",
       "rentals": "#3399ff"
     }
+  },
+  {
+    "name": "Letterboxd Year in Review",
+    "url": "https://letterboxd.com/year/2025/",
+    "description": "See the most-watched, most-loved films of the year as tracked by the Letterboxd community.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "yearly-charts"
+    ],
+    "color": "#202830",
+    "tag_colors": {
+      "free": "#22c55e",
+      "yearly-charts": "#3d9970"
+    }
+  },
+  {
+    "name": "Moviefone",
+    "url": "https://www.moviefone.com/",
+    "description": "Movie showtimes, trailers, and release date tracking for theatrical and streaming releases.",
+    "category": "movies",
+    "tags": [
+      "free",
+      "showtimes"
+    ],
+    "color": "#f93822",
+    "tag_colors": {
+      "free": "#22c55e",
+      "showtimes": "#f93822"
+    }
   }
 ]

@@ -313,5 +313,50 @@
       "free": "#22c55e",
       "community": "#3fb5fd"
     }
+  },
+  {
+    "name": "Chess.com",
+    "url": "https://www.chess.com/",
+    "description": "The largest online chess platform. Play, learn with lessons, and analyse games with a powerful engine.",
+    "category": "gaming",
+    "tags": [
+      "freemium",
+      "chess"
+    ],
+    "color": "#7fa650",
+    "tag_colors": {
+      "freemium": "#3b82f6",
+      "chess": "#7fa650"
+    }
+  },
+  {
+    "name": "Lichess",
+    "url": "https://lichess.org/",
+    "description": "Completely free, ad-free, open-source chess server with no account required to play instantly.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "chess"
+    ],
+    "color": "#3a3a3a",
+    "tag_colors": {
+      "free": "#22c55e",
+      "chess": "#3a3a3a"
+    }
+  },
+  {
+    "name": "Poki",
+    "url": "https://poki.com/",
+    "description": "Free browser games playable instantly with no download or sign-up. Huge casual game library.",
+    "category": "gaming",
+    "tags": [
+      "free",
+      "browser-games"
+    ],
+    "color": "#ff5722",
+    "tag_colors": {
+      "free": "#22c55e",
+      "browser-games": "#ff5722"
+    }
   }
 ]
