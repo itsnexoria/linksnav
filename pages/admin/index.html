@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin — Nexo Hub</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css?v=20260622-1"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+    @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+    .admin-wrap {
+      position: relative; z-index: 1;
+      max-width: 880px; margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; color: var(--muted); text-decoration: none;
+      margin-bottom: 32px; transition: color .18s, gap .18s;
+    }
+    .back-link:hover { color: var(--accent); gap: 10px; }
+
+    /* ── LOGIN GATE ──────────────────────────────────── */
+    .gate {
+      max-width: 380px; margin: 80px auto 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px;
+      text-align: center; animation: fadeUp .4s ease both;
+    }
+    .gate-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .gate h1 { font-family: var(--font-d); font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .gate p { font-size: .8rem; color: var(--text2); margin-bottom: 20px; line-height: 1.6; }
+    .gate input {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: var(--radius); color: var(--text); font-family: monospace;
+      font-size: .85rem; padding: 10px 14px; margin-bottom: 12px;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    .gate input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    .gate button {
+      width: 100%; padding: 10px; border-radius: var(--radius);
+      background: var(--accent); border: none; color: #fff;
+      font-family: var(--font-m); font-size: .85rem; font-weight: 600;
+      cursor: pointer; transition: background .18s, transform .15s;
+    }
+    .gate button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .gate-error { color: #ef4444; font-size: .75rem; margin-top: 10px; display: none; }
+
+    /* ── ADMIN HEADER ────────────────────────────────── */
+    .admin-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+      animation: fadeUp .4s ease both;
+    }
+    .admin-title { font-family: var(--font-d); font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em; }
+    .admin-sub { font-size: .8rem; color: var(--text2); margin-top: 4px; }
+    .logout-btn {
+      padding: 7px 14px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--text2); font-family: var(--font-m); font-size: .75rem;
+      cursor: pointer; transition: border-color .18s, color .18s;
+    }
+    .logout-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+    /* ── PENDING LIST ────────────────────────────────── */
+    .pending-list { display: flex; flex-direction: column; gap: 12px; }
+    .pending-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px;
+      animation: cardIn .3s ease both;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .pending-card:hover { border-color: var(--border2); box-shadow: var(--shadow-sm); }
+    .pc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+    .pc-name { font-family: var(--font-d); font-size: 1.05rem; font-weight: 700; }
+    .pc-cat {
+      font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+      padding: 3px 9px; border-radius: 100px;
+      background: var(--accent-dim); color: var(--accent); white-space: nowrap;
+    }
+    .pc-url {
+      font-size: .78rem; color: var(--accent); text-decoration: none;
+      display: block; margin-bottom: 8px; word-break: break-all;
+    }
+    .pc-url:hover { text-decoration: underline; }
+    .pc-desc { font-size: .82rem; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+    .pc-meta {
+      display: flex; flex-wrap: wrap; gap: 14px; font-size: .72rem; color: var(--muted);
+      margin-bottom: 14px; padding-top: 10px; border-top: 1px solid var(--border);
+    }
+    .pc-meta span b { color: var(--text2); }
+    .pc-note {
+      font-size: .78rem; color: var(--text2); background: var(--bg2);
+      border-radius: var(--radius); padding: 10px 12px; margin-bottom: 14px;
+      font-style: italic; line-height: 1.5;
+    }
+    .pc-actions { display: flex; gap: 8px; }
+    .pc-btn {
+      flex: 1; padding: 9px; border-radius: var(--radius); border: none;
+      font-family: var(--font-m); font-size: .8rem; font-weight: 600;
+      cursor: pointer; transition: transform .15s, opacity .18s;
+    }
+    .pc-btn:active { transform: scale(.97); }
+    .pc-btn.approve { background: #22c55e; color: #fff; }
+    .pc-btn.approve:hover { opacity: .88; }
+    .pc-btn.reject { background: transparent; border: 1px solid #ef4444; color: #ef4444; }
+    .pc-btn.reject:hover { background: rgba(239,68,68,.1); }
+    .pc-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .empty-pending {
+      text-align: center; padding: 60px 20px; color: var(--muted);
+      animation: fadeUp .4s ease both;
+    }
+    .empty-pending-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
+      background: var(--accent); color: #fff; padding: 10px 22px;
+      border-radius: 100px; font-family: var(--font-m); font-size: .82rem; font-weight: 500;
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1);
+      z-index: 999; box-shadow: var(--shadow-md);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { background: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <main class="admin-wrap">
+    <a href="/" class="back-link">← Back to Nexo Hub</a>
+
+    <!-- LOGIN GATE -->
+    <div class="gate" id="gate">
+      <div class="gate-icon">🔐</div>
+      <h1>Admin Access</h1>
+      <p>Enter your admin key to review pending site submissions.</p>
+      <input type="password" id="adminKeyInput" placeholder="Admin key" autocomplete="off"/>
+      <button onclick="tryLogin()">Unlock</button>
+      <p class="gate-error" id="gateError">Invalid admin key. Please try again.</p>
+    </div>
+
+    <!-- ADMIN PANEL (hidden until unlocked) -->
+    <div id="adminPanel" style="display:none">
+      <div class="admin-header">
+        <div>
+          <div class="admin-title">📋 Pending Submissions</div>
+          <div class="admin-sub" id="pendingCount">Loading…</div>
+        </div>
+        <button class="logout-btn" onclick="logout()">Log out</button>
+      </div>
+      <div class="pending-list" id="pendingList"></div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    const KEY_STORAGE = 'nexohub_admin_key';
+
+    // Theme (match the rest of the site)
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('nexhub_theme') || 'dark');
+
+    function showToast(msg, isError=false) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    function esc(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    async function rpc(fnName, body) {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fnName}`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || 'Request failed');
+      }
+      return res.status === 204 ? null : res.json();
+    }
+
+    function getKey() { return sessionStorage.getItem(KEY_STORAGE) || localStorage.getItem(KEY_STORAGE); }
+    function setKey(k, remember) {
+      if (remember) localStorage.setItem(KEY_STORAGE, k);
+      else sessionStorage.setItem(KEY_STORAGE, k);
+    }
+    function clearKey() {
+      sessionStorage.removeItem(KEY_STORAGE);
+      localStorage.removeItem(KEY_STORAGE);
+    }
+
+    async function tryLogin() {
+      const input = document.getElementById('adminKeyInput');
+      const key = input.value.trim();
+      if (!key) return;
+      const errEl = document.getElementById('gateError');
+      errEl.style.display = 'none';
+      try {
+        const pending = await rpc('admin_list_pending', { input_key: key });
+        setKey(key, true);
+        showAdmin(pending);
+      } catch (e) {
+        errEl.style.display = 'block';
+      }
+    }
+
+    function logout() {
+      clearKey();
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('gate').style.display = 'block';
+      document.getElementById('adminKeyInput').value = '';
+    }
+
+    function showAdmin(pending) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      renderPending(pending);
+    }
+
+    function renderPending(items) {
+      const list = document.getElementById('pendingList');
+      const count = document.getElementById('pendingCount');
+      count.textContent = `${items.length} site${items.length !== 1 ? 's' : ''} waiting for review`;
+
+      if (items.length === 0) {
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✨</div><p>All caught up — no pending submissions.</p></div>`;
+        return;
+      }
+
+      list.innerHTML = items.map(item => {
+        const date = new Date(item.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+        const tags = (item.tags || []).join(', ') || '—';
+        return `
+        <div class="pending-card" data-id="${esc(item.id)}">
+          <div class="pc-top">
+            <div class="pc-name">${esc(item.name)}</div>
+            <div class="pc-cat">${esc(item.category)}</div>
+          </div>
+          <a class="pc-url" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">${esc(item.url)}</a>
+          <p class="pc-desc">${esc(item.description)}</p>
+          <div class="pc-meta">
+            <span><b>Tags:</b> ${esc(tags)}</span>
+            <span><b>Submitted:</b> ${esc(date)}</span>
+            ${item.submitted_by_name ? `<span><b>By:</b> ${esc(item.submitted_by_name)}</span>` : ''}
+            ${item.submitted_by_email ? `<span><b>Email:</b> ${esc(item.submitted_by_email)}</span>` : ''}
+          </div>
+          ${item.submitted_note ? `<div class="pc-note">"${esc(item.submitted_note)}"</div>` : ''}
+          <div class="pc-actions">
+            <button class="pc-btn approve" onclick="approveSite('${esc(item.id)}')">✓ Approve</button>
+            <button class="pc-btn reject" onclick="rejectSite('${esc(item.id)}')">✕ Reject</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    async function approveSite(id) {
+      const card = document.querySelector(`.pending-card[data-id="${id}"]`);
+      const btns = card.querySelectorAll('.pc-btn');
+      btns.forEach(b => b.disabled = true);
+      try {
+        await rpc('admin_approve_site', { input_key: getKey(), site_id: id });
+        showToast('Site approved and live!');
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(20px)';
+        setTimeout(() => refreshPending(), 250);
+      } catch (e) {
+        showToast(e.message || 'Failed to approve', true);
+        btns.forEach(b => b.disabled = false);
+      }
+    }
+
+    async function rejectSite(id) {
+      const card = document.querySelector(`.pending-card[data-id="${id}"]`);
+      const btns = card.querySelectorAll('.pc-btn');
+      btns.forEach(b => b.disabled = true);
+      try {
+        await rpc('admin_reject_site', { input_key: getKey(), site_id: id });
+        showToast('Site rejected');
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(20px)';
+        setTimeout(() => refreshPending(), 250);
+      } catch (e) {
+        showToast(e.message || 'Failed to reject', true);
+        btns.forEach(b => b.disabled = false);
+      }
+    }
+
+    async function refreshPending() {
+      try {
+        const pending = await rpc('admin_list_pending', { input_key: getKey() });
+        renderPending(pending);
+      } catch (e) {
+        showToast('Session expired — please log in again', true);
+        logout();
+      }
+    }
+
+    // Auto-login if key already stored
+    (async function autoLogin() {
+      const key = getKey();
+      if (!key) return;
+      try {
+        const pending = await rpc('admin_list_pending', { input_key: key });
+        showAdmin(pending);
+      } catch {
+        clearKey();
+      }
+    })();
+
+    document.getElementById('adminKeyInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') tryLogin();
+    });
+  </script>
+</body>
+</html>

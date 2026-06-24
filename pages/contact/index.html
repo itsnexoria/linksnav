@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="../../style.css?v=20260620-4"/>
+  <link rel="stylesheet" href="../../style.css?v=20260622-1"/>
 
   <style>
     /* ── PAGE-SPECIFIC ANIMATIONS ─────────────────────── */
@@ -410,8 +410,8 @@
         <div class="s-icon">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 26l10 10 20-22"/></svg>
         </div>
-        <div class="s-title">Request Sent!</div>
-        <p class="s-msg">Thanks — I'll review it soon and add it if it's a good fit for the hub.</p>
+        <div class="s-title">Submitted for Review!</div>
+        <p class="s-msg">Thanks — your submission is in the review queue. I'll check it out and it'll go live on the hub once approved.</p>
         <div class="s-btns">
           <button class="s-btn" onclick="resetForm()">Submit another</button>
           <a href="/" class="s-btn">← Back to Hub</a>
@@ -513,6 +513,18 @@
     }
 
     /* ── SUBMIT ──────────────────────────────────────── */
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+
+    /* Map the form's display category labels to the DB's lowercase category ids */
+    const CATEGORY_ID_MAP = {
+      'AI':'ai','Anime':'anime','Business':'business','Design':'design','Dev Tools':'dev-tools',
+      'Downloads':'downloads','Finance':'finance','Gaming':'gaming','Google':'google','Hosting':'hosting',
+      'Learning':'learning','Minecraft':'minecraft','Movies':'movies','Music':'music','News':'news',
+      'Productivity':'productivity','Security':'security','Shopping':'shopping','Social':'social',
+      'Storage':'storage','Streaming':'streaming','Tools':'tools','Other':'tools'
+    };
+
     document.getElementById('subForm').addEventListener('submit',async e=>{
       e.preventDefault();
       let ok=true;
@@ -525,10 +537,36 @@
       const btn=document.getElementById('submitBtn');
       btn.disabled=true;btn.querySelector('.btn-txt').textContent='⏳ Sending…';
 
+      const pricing = document.getElementById('pricingHidden').value || null;
+      const whyAdd = document.getElementById('whyAdd').value.trim();
+      const submittedBy = document.getElementById('who').value.trim() || null;
+      const email = document.getElementById('email').value.trim() || null;
+      const categoryId = CATEGORY_ID_MAP[ct.value] || 'tools';
+
+      const payload = {
+        name: nm.value.trim(),
+        url: ul.value.trim(),
+        description: ds.value.trim(),
+        category: categoryId,
+        tags: pricing ? [pricing] : [],
+        tag_colors: pricing ? { [pricing]: pricing==='free'?'#22c55e':pricing==='paid'?'#ef4444':'#3b82f6' } : {},
+        color: '#4f7fff',
+        status: 'pending',
+        submitted_by_name: submittedBy,
+        submitted_by_email: email,
+        submitted_note: whyAdd || null
+      };
+
       try{
-        /* ⚠ Replace YOUR_FORM_ID with your Formspree form ID */
-        const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{
-          method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}
+        const res=await fetch(`${SUPABASE_URL}/rest/v1/sites`,{
+          method:'POST',
+          headers:{
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
         });
         if(res.ok){
           document.getElementById('s1').classList.remove('active');
@@ -540,11 +578,17 @@
           btn.style.display='none';
           document.getElementById('successState').classList.add('show');
           blast();
-        } else { throw new Error() }
-      } catch{
+        } else {
+          const errBody = await res.json().catch(()=>({}));
+          if (errBody.message && errBody.message.includes('duplicate')) {
+            throw new Error('That URL has already been submitted or added to the hub.');
+          }
+          throw new Error('Something went wrong — please try again.');
+        }
+      } catch(err){
         btn.disabled=false;
         btn.querySelector('.btn-txt').textContent='🚀 Send Request';
-        alert('Something went wrong — please try again or contact me directly.');
+        alert(err.message || 'Something went wrong — please try again or contact me directly.');
       }
     });
 

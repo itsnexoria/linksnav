@@ -12,9 +12,20 @@ const FAVS_KEY   = 'nexhub_favs';
 const ORDER_KEY  = 'nexhub_order';
 const RECENTS_KEY = 'nexhub_recents';
 const MAX_RECENTS = 24;
-/* Bump this any time json/*.json content changes, so cached copies
-   on the CDN / browser don't hide newly-added sites. */
-const BUILD_VERSION = '20260620-4';
+/* Bump this any time you need to bust the browser/CDN cache on app.js/style.css. */
+const BUILD_VERSION = '20260622-1';
+
+/* ── SUPABASE CONFIG ────────────────────────────────────────── */
+const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+function sbHeaders(extra={}){
+  return {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json',
+    ...extra
+  };
+}
 
 /* ── STATE ──────────────────────────────────────────────────── */
 let allSites       = [];
@@ -28,31 +39,15 @@ const PAGE_SIZE    = 24;
 let visibleCount   = PAGE_SIZE;
 
 /* ── CATEGORY MANIFEST ──────────────────────────────────────── */
-const CATS = [
-  {id:'ai',          label:'AI',          icon:'🤖'},
-  {id:'anime',       label:'Anime',       icon:'🧸'},
-  {id:'business',    label:'Business',    icon:'🏢'},
-  {id:'design',      label:'Design',      icon:'🎨'},
-  {id:'dev-tools',   label:'Dev Tools',   icon:'🛠️'},
-  {id:'downloads',   label:'Downloads',   icon:'⬇️'},
-  {id:'finance',     label:'Finance',     icon:'💳'},
-  {id:'gaming',      label:'Gaming',      icon:'🎮'},
-  {id:'google',      label:'Google',      icon:'🔵'},
-  {id:'hosting',     label:'Hosting',     icon:'☁️'},
-  {id:'learning',    label:'Learning',    icon:'📚'},
-  {id:'minecraft',   label:'Minecraft',   icon:'⛏️'},
-  {id:'movies',      label:'Movies',      icon:'🎬'},
-  {id:'music',       label:'Music',       icon:'🎵'},
-  {id:'my-sites',    label:'My Sites',    icon:'🌐'},
-  {id:'news',        label:'News',        icon:'📰'},
-  {id:'productivity',label:'Productivity',icon:'📋'},
-  {id:'security',    label:'Security',    icon:'🔒'},
-  {id:'shopping',    label:'Shopping',    icon:'🛒'},
-  {id:'social',      label:'Social',      icon:'📱'},
-  {id:'storage',     label:'Storage',     icon:'📁'},
-  {id:'streaming',   label:'Streaming',   icon:'📺'},
-  {id:'tools',       label:'Tools',       icon:'⚙️'},
-];
+/* Fallback icons in case the categories table is briefly unreachable.
+   The DB is still the source of truth — these are just visual fallbacks. */
+const CAT_ICON_FALLBACK = {
+  'ai':'🤖','anime':'🧸','business':'🏢','design':'🎨','dev-tools':'🛠️',
+  'downloads':'⬇️','finance':'💳','gaming':'🎮','google':'🔵','hosting':'☁️',
+  'learning':'📚','minecraft':'⛏️','movies':'🎬','music':'🎵','my-sites':'🌐',
+  'news':'📰','productivity':'📋','security':'🔒','shopping':'🛒','social':'📱',
+  'storage':'📁','streaming':'📺','tools':'⚙️'
+};
 
 /* ── FAVOURITES ─────────────────────────────────────────────── */
 function loadFavs(){ try{return new Set(JSON.parse(localStorage.getItem(FAVS_KEY)||'[]'))}catch{return new Set()} }
@@ -99,24 +94,46 @@ function addRecent(url){
 
 /* ── BOOT ───────────────────────────────────────────────────── */
 async function init(){
-  const settled=await Promise.allSettled(
-    CATS.map(cat=>
-      fetch(`json/${cat.id}.json?v=${BUILD_VERSION}`,{cache:'no-cache'})
-        .then(r=>r.ok?r.json().then(sites=>({cat,sites})):null)
-        .catch(()=>null)
-    )
-  );
-  allCategories=[];allSites=[];
-  for(const {value} of settled){
-    if(!value)continue;
-    allCategories.push(value.cat);
-    allSites.push(...value.sites);
+  try {
+    const [catsRes, sitesRes] = await Promise.all([
+      fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label,icon,sort_order&order=sort_order.asc`, { headers: sbHeaders() }),
+      fetch(`${SUPABASE_URL}/rest/v1/sites?select=*&status=eq.approved&order=name.asc`, { headers: sbHeaders() })
+    ]);
+
+    if (!catsRes.ok || !sitesRes.ok) throw new Error('Supabase fetch failed');
+
+    const cats = await catsRes.json();
+    const sites = await sitesRes.json();
+
+    allCategories = cats.map(c => ({ id: c.id, label: c.label, icon: c.icon || CAT_ICON_FALLBACK[c.id] || '🔗' }));
+    allSites = sites.map(s => ({
+      name: s.name,
+      url: s.url,
+      description: s.description,
+      category: s.category,
+      tags: s.tags || [],
+      tag_colors: s.tag_colors || {},
+      color: s.color || '#4f7fff'
+    }));
+  } catch (err) {
+    console.error('Failed to load sites from Supabase:', err);
+    allCategories = [];
+    allSites = [];
+    const empty = document.getElementById('emptyState');
+    const grid = document.getElementById('cardsGrid');
+    if (grid) grid.style.display = 'none';
+    if (empty) {
+      empty.style.display = 'block';
+      const q = document.getElementById('emptyQuery');
+      if (q) q.textContent = 'sites right now — please refresh or try again shortly';
+    }
   }
+
   buildNav();
   render();
   setupSearch();
   setupScrollArrows();
-  rollCount(0,allSites.length);
+  rollCount(0, allSites.length);
 }
 
 /* Rolling count */

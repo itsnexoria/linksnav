@@ -3,12 +3,14 @@
 /pages/about      /pages/about/    301
 /pages/tools      /pages/tools/    301
 /pages/donate     /pages/donate/   301
+/pages/admin      /pages/admin/    301
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301
 /Pages/about/*    /pages/about/    301
 /Pages/tools/*    /pages/tools/    301
 /Pages/donate/*   /pages/donate/   301
+/Pages/admin/*    /pages/admin/    301
 
 # 404 fallback
 /*                /404.html        404
