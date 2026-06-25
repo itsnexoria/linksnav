@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260622-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260623-1"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
 
@@ -203,6 +203,7 @@
         <a href="/pages/about/" class="nav-link nav-link--active">👤 About</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -363,6 +364,29 @@
       if(ov){ov.addEventListener('click',closeM);}
       document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
     });
+
+    /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+    (function(){
+      var link = document.getElementById('adminNavLink');
+      if(!link) return;
+      var key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(function(res){
+        if(!res.ok) return;
+        return res.json();
+      }).then(function(ok){
+        if(ok === true) link.style.display = '';
+      }).catch(function(){});
+    })();
   </script>
 </body>
 </html>

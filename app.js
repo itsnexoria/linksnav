@@ -13,7 +13,7 @@ const ORDER_KEY  = 'nexhub_order';
 const RECENTS_KEY = 'nexhub_recents';
 const MAX_RECENTS = 24;
 /* Bump this any time you need to bust the browser/CDN cache on app.js/style.css. */
-const BUILD_VERSION = '20260622-1';
+const BUILD_VERSION = '20260623-1';
 
 /* ── SUPABASE CONFIG ────────────────────────────────────────── */
 const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
@@ -134,6 +134,18 @@ async function init(){
   setupSearch();
   setupScrollArrows();
   rollCount(0, allSites.length);
+  recordVisit();
+}
+
+/* Fire-and-forget visit counter — never blocks rendering, never throws */
+function recordVisit(){
+  try {
+    fetch(`${SUPABASE_URL}/rest/v1/rpc/record_visit`, {
+      method: 'POST',
+      headers: sbHeaders(),
+      body: '{}'
+    }).catch(()=>{});
+  } catch {}
 }
 
 /* Rolling count */
@@ -568,5 +580,29 @@ document.getElementById('themeToggle')?.addEventListener('click',()=>{
 function esc(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+/* ── ADMIN SIDEBAR LINK ─────────────────────────────────────────
+   If a valid admin key is already stored in this browser (from a
+   previous login on /pages/admin/), quietly reveal an Admin link in
+   the sidebar. Public visitors who've never logged in never see it —
+   we verify the key against the server rather than trusting its mere
+   presence, so a stale/cleared key won't show a dead link. */
+(async function revealAdminLinkIfAuthenticated(){
+  const link = document.getElementById('adminNavLink');
+  if(!link) return;
+  const key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+  if(!key) return;
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/check_admin_key_status`, {
+      method: 'POST',
+      headers: sbHeaders(),
+      body: JSON.stringify({ input_key: key })
+    });
+    if(res.ok){
+      const ok = await res.json();
+      if(ok === true) link.style.display = '';
+    }
+  }catch{}
+})();
 
 init();

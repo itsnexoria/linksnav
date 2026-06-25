@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="../../style.css?v=20260622-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260623-1"/>
 
   <style>
     /* ── PAGE-SPECIFIC ANIMATIONS ─────────────────────── */
@@ -134,6 +134,17 @@
     /* Checkmark badge */
     .iw .ok-badge{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:.78rem;opacity:0;transition:opacity .25s}
     .finput.ok~.ok-badge{opacity:1}
+    .dup-warning{
+      display:none;align-items:flex-start;gap:8px;margin-top:8px;
+      padding:10px 12px;border-radius:10px;
+      background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);
+      font-size:.78rem;color:#ef4444;line-height:1.5;
+    }
+    .dup-warning.show{display:flex;animation:fadeUp .3s ease both}
+    .dup-warning .dup-icon{flex-shrink:0;font-size:.95rem;line-height:1.3}
+    .finput.dup{border-color:#ef4444 !important}
+    .finput.checking~.ok-badge{opacity:1;animation:spin 1s linear infinite}
+    @keyframes spin{from{transform:translateY(-50%) rotate(0)}to{transform:translateY(-50%) rotate(360deg)}}
 
     .fhint{font-size:.67rem;color:var(--muted);font-family:'Inter', system-ui, sans-serif;line-height:1.4}
     .ferr{font-size:.67rem;color:#ef4444;font-family:'Inter', system-ui, sans-serif;display:none}
@@ -270,6 +281,7 @@
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -349,6 +361,10 @@
             </div>
             <span class="fhint">Full URL including https://</span>
             <span class="ferr">Please enter a valid URL (https://…)</span>
+            <div class="dup-warning" id="dupWarning">
+              <span class="dup-icon">⚠️</span>
+              <span id="dupWarningText">This site is already in the directory.</span>
+            </div>
           </div>
 
           <!-- Description -->
@@ -434,6 +450,10 @@
   </footer>
 
   <script>
+    /* ── SUPABASE CONFIG (used for both duplicate-checking and submission) ── */
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+
     /* ── PRICING PILLS ───────────────────────────────── */
     let picked = '';
     document.querySelectorAll('.tpill').forEach(p=>{
@@ -447,10 +467,71 @@
     });
 
     /* ── VALIDATION HELPERS ──────────────────────────── */
-    function setOk(el,grp){el.classList.remove('err');el.classList.add('ok');document.getElementById(grp)?.classList.remove('has-err')}
-    function setErr(el,grp){el.classList.remove('ok');el.classList.add('err');document.getElementById(grp)?.classList.add('has-err')}
-    function clr(el,grp){el.classList.remove('ok','err');document.getElementById(grp)?.classList.remove('has-err')}
+    function setOk(el,grp){el.classList.remove('err','dup','checking');el.classList.add('ok');document.getElementById(grp)?.classList.remove('has-err')}
+    function setErr(el,grp){el.classList.remove('ok','dup','checking');el.classList.add('err');document.getElementById(grp)?.classList.add('has-err')}
+    function clr(el,grp){el.classList.remove('ok','err','dup','checking');document.getElementById(grp)?.classList.remove('has-err')}
     function validUrl(v){try{new URL(v);return true}catch{return false}}
+
+    /* ── DUPLICATE URL CHECK ──────────────────────────── */
+    let isDuplicateUrl = false;
+    let dupCheckTimer = null;
+    let dupCheckInFlight = null;
+
+    function hideDupWarning(){
+      document.getElementById('dupWarning').classList.remove('show');
+      isDuplicateUrl = false;
+    }
+    function showDupWarning(name, status){
+      const warn = document.getElementById('dupWarning');
+      const text = document.getElementById('dupWarningText');
+      text.textContent = status === 'pending'
+        ? `"${name}" is already awaiting review — no need to submit it again.`
+        : `"${name}" is already in the directory.`;
+      warn.classList.add('show');
+      isDuplicateUrl = true;
+      setErr(ul, 'g-url');
+      ul.classList.add('dup');
+    }
+
+    async function checkDuplicateUrl(url){
+      if (!validUrl(url)) { hideDupWarning(); return; }
+      ul.classList.add('checking');
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/rpc/check_url_exists`,
+          {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input_url: url })
+          }
+        );
+        ul.classList.remove('checking');
+        if (!res.ok) { hideDupWarning(); return; }
+        const rows = await res.json();
+        const row = Array.isArray(rows) ? rows[0] : rows;
+        if (row && row.exists_already) {
+          showDupWarning(row.existing_name, row.existing_status);
+        } else {
+          hideDupWarning();
+          if (validUrl(url)) setOk(ul, 'g-url');
+        }
+      } catch {
+        ul.classList.remove('checking');
+        // Network hiccup — don't block the user, let server-side constraint catch true dupes
+        hideDupWarning();
+      }
+    }
+
+    function scheduleDuplicateCheck(url){
+      clearTimeout(dupCheckTimer);
+      hideDupWarning();
+      if (!validUrl(url)) return;
+      dupCheckTimer = setTimeout(() => checkDuplicateUrl(url), 500);
+    }
 
     /* Live validation */
     const nm=document.getElementById('siteName');
@@ -458,7 +539,10 @@
     nm.addEventListener('blur',  ()=>nm.value.trim()?setOk(nm,'g-name'):setErr(nm,'g-name'));
 
     const ul=document.getElementById('siteUrl');
-    ul.addEventListener('input',()=>validUrl(ul.value)?setOk(ul,'g-url'):clr(ul,'g-url'));
+    ul.addEventListener('input',()=>{
+      validUrl(ul.value)?setOk(ul,'g-url'):clr(ul,'g-url');
+      scheduleDuplicateCheck(ul.value);
+    });
     ul.addEventListener('blur', ()=>{if(ul.value){validUrl(ul.value)?setOk(ul,'g-url'):setErr(ul,'g-url')}});
 
     const ds=document.getElementById('siteDesc');
@@ -470,7 +554,7 @@
 
     /* Step progress */
     function refreshSteps(){
-      const ok1=nm.value.trim()&&validUrl(ul.value)&&ct.value;
+      const ok1=nm.value.trim()&&validUrl(ul.value)&&!isDuplicateUrl&&ct.value;
       const ok2=ok1&&ds.value.trim().length>10;
       ['s1','s2','s3'].forEach((id,i)=>{
         const el=document.getElementById(id);
@@ -513,9 +597,6 @@
     }
 
     /* ── SUBMIT ──────────────────────────────────────── */
-    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
-
     /* Map the form's display category labels to the DB's lowercase category ids */
     const CATEGORY_ID_MAP = {
       'AI':'ai','Anime':'anime','Business':'business','Design':'design','Dev Tools':'dev-tools',
@@ -532,10 +613,38 @@
       if(!ct.value)       {setErr(ct,'g-cat'); ok=false}
       if(!validUrl(ul.value)){setErr(ul,'g-url');ok=false}
       if(ds.value.trim().length<10){setErr(ds,'g-desc');ok=false}
+      if(isDuplicateUrl){setErr(ul,'g-url');ul.classList.add('dup');ok=false}
       if(!ok){shake();return}
 
       const btn=document.getElementById('submitBtn');
-      btn.disabled=true;btn.querySelector('.btn-txt').textContent='⏳ Sending…';
+      btn.disabled=true;btn.querySelector('.btn-txt').textContent='⏳ Checking…';
+
+      /* Final duplicate re-check right before insert — covers the case where
+         someone else submitted the same URL in the seconds since the user typed it. */
+      try {
+        const dupRes = await fetch(`${SUPABASE_URL}/rest/v1/rpc/check_url_exists`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ input_url: ul.value.trim() })
+        });
+        if (dupRes.ok) {
+          const rows = await dupRes.json();
+          const row = Array.isArray(rows) ? rows[0] : rows;
+          if (row && row.exists_already) {
+            showDupWarning(row.existing_name, row.existing_status);
+            btn.disabled=false;
+            btn.querySelector('.btn-txt').textContent='🚀 Send Request';
+            shake();
+            return;
+          }
+        }
+      } catch { /* if the check itself fails, fall through — the DB constraint is the final backstop */ }
+
+      btn.querySelector('.btn-txt').textContent='⏳ Sending…';
 
       const pricing = document.getElementById('pricingHidden').value || null;
       const whyAdd = document.getElementById('whyAdd').value.trim();
@@ -580,7 +689,8 @@
           blast();
         } else {
           const errBody = await res.json().catch(()=>({}));
-          if (errBody.message && errBody.message.includes('duplicate')) {
+          if (errBody.message && (errBody.message.includes('duplicate') || errBody.code === '23505')) {
+            showDupWarning(nm.value.trim() || 'This site', 'approved');
             throw new Error('That URL has already been submitted or added to the hub.');
           }
           throw new Error('Something went wrong — please try again.');
@@ -628,6 +738,29 @@
       if(ov){ov.addEventListener('click',closeM);}
       document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
     });
+
+    /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+    (function(){
+      var link = document.getElementById('adminNavLink');
+      if(!link) return;
+      var key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(function(res){
+        if(!res.ok) return;
+        return res.json();
+      }).then(function(ok){
+        if(ok === true) link.style.display = '';
+      }).catch(function(){});
+    })();
   </script>
 </body>
 </html>

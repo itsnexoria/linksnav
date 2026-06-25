@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260622-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260623-1"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(22px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
     @keyframes gradFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
@@ -223,6 +223,7 @@
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -765,6 +766,26 @@
     overlay.addEventListener('click', closeMenu);
     menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+    (function(){
+      const link = document.getElementById('adminNavLink');
+      if(!link) return;
+      const key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(res => res.ok ? res.json() : null)
+        .then(ok => { if(ok === true) link.style.display = ''; })
+        .catch(()=>{});
+    })();
 
     // Tabs
     document.querySelectorAll('.tool-tab').forEach(btn => {

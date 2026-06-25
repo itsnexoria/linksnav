@@ -9,14 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260622-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260623-1"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
     @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+    @keyframes popScale { 0%{transform:scale(.9);opacity:0} 100%{transform:scale(1);opacity:1} }
 
     .admin-wrap {
       position: relative; z-index: 1;
-      max-width: 880px; margin: 0 auto;
+      max-width: 980px; margin: 0 auto;
       padding: 40px 24px 100px;
     }
     .back-link {
@@ -55,7 +56,7 @@
     /* ── ADMIN HEADER ────────────────────────────────── */
     .admin-header {
       display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
       animation: fadeUp .4s ease both;
     }
     .admin-title { font-family: var(--font-d); font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em; }
@@ -68,15 +69,74 @@
     }
     .logout-btn:hover { border-color: #ef4444; color: #ef4444; }
 
+    /* ── TABS ────────────────────────────────────────── */
+    .admin-tabs {
+      display: flex; gap: 6px; margin-bottom: 24px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border); padding-bottom: 0;
+      animation: fadeUp .4s .05s ease both;
+    }
+    .admin-tab {
+      padding: 9px 16px; border: none; background: transparent;
+      color: var(--text2); font-family: var(--font-m); font-size: .82rem; font-weight: 600;
+      cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color .18s, border-color .18s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .admin-tab:hover { color: var(--text); }
+    .admin-tab.active { color: var(--accent); border-color: var(--accent); }
+    .admin-tab .tab-badge {
+      background: var(--accent); color: #fff; font-size: .65rem; font-weight: 700;
+      padding: 1px 6px; border-radius: 100px; min-width: 16px; text-align: center;
+    }
+    .admin-tab:not(.active) .tab-badge { background: var(--muted); }
+    .admin-panel-section { display: none; }
+    .admin-panel-section.active { display: block; animation: fadeUp .3s ease both; }
+
+    /* ── STATS GRID ──────────────────────────────────── */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px; margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 18px;
+      animation: cardIn .3s ease both;
+    }
+    .stat-card-label {
+      font-size: .68rem; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .06em; font-weight: 700; margin-bottom: 6px;
+    }
+    .stat-card-value {
+      font-family: var(--font-d); font-size: 1.8rem; font-weight: 800;
+      color: var(--text); letter-spacing: -.02em;
+    }
+    .stat-card-value.accent { color: var(--accent); }
+
+    .chart-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;
+      animation: cardIn .3s .1s ease both;
+    }
+    .chart-title { font-family: var(--font-d); font-size: .95rem; font-weight: 700; margin-bottom: 16px; }
+    .chart-bars { display: flex; align-items: flex-end; gap: 4px; height: 120px; }
+    .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+    .chart-bar {
+      width: 100%; background: var(--accent); border-radius: 4px 4px 0 0;
+      min-height: 3px; transition: height .4s ease;
+      position: relative;
+    }
+    .chart-bar:hover { background: var(--accent-hover); }
+    .chart-bar-label { font-size: .6rem; color: var(--muted); white-space: nowrap; }
+
     /* ── PENDING LIST ────────────────────────────────── */
-    .pending-list { display: flex; flex-direction: column; gap: 12px; }
-    .pending-card {
+    .pending-list, .manage-list { display: flex; flex-direction: column; gap: 12px; }
+    .pending-card, .manage-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius-lg); padding: 20px;
       animation: cardIn .3s ease both;
       transition: border-color .2s, box-shadow .2s;
     }
-    .pending-card:hover { border-color: var(--border2); box-shadow: var(--shadow-sm); }
+    .pending-card:hover, .manage-card:hover { border-color: var(--border2); box-shadow: var(--shadow-sm); }
     .pc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
     .pc-name { font-family: var(--font-d); font-size: 1.05rem; font-weight: 700; }
     .pc-cat {
@@ -119,6 +179,58 @@
     }
     .empty-pending-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
 
+    /* ── MANAGE SITES TAB ────────────────────────────── */
+    .manage-controls {
+      display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;
+      animation: fadeUp .4s ease both;
+    }
+    .manage-search {
+      flex: 1; min-width: 200px; background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius); color: var(--text); font-family: var(--font-m);
+      font-size: .85rem; padding: 9px 14px; transition: border-color .18s, box-shadow .18s;
+    }
+    .manage-search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    .manage-cat-filter {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius); color: var(--text); font-family: var(--font-m);
+      font-size: .82rem; padding: 9px 12px; cursor: pointer;
+    }
+    .manage-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 14px 18px;
+    }
+    .manage-card-info { flex: 1; min-width: 0; }
+    .manage-card-name { font-family: var(--font-d); font-weight: 700; font-size: .92rem; margin-bottom: 2px; }
+    .manage-card-url { font-size: .75rem; color: var(--muted); word-break: break-all; }
+    .manage-card-cat {
+      font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+      padding: 2px 8px; border-radius: 100px; background: var(--bg2); color: var(--text2);
+      flex-shrink: 0;
+    }
+    .delete-btn {
+      flex-shrink: 0; padding: 7px 14px; border-radius: var(--radius);
+      background: transparent; border: 1px solid #ef4444; color: #ef4444;
+      font-family: var(--font-m); font-size: .75rem; font-weight: 600;
+      cursor: pointer; transition: background .18s, transform .15s;
+    }
+    .delete-btn:hover { background: rgba(239,68,68,.1); }
+    .delete-btn:active { transform: scale(.95); }
+    .delete-btn.confirm { background: #ef4444; color: #fff; }
+    .delete-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .pagination {
+      display: flex; justify-content: center; align-items: center; gap: 12px;
+      margin-top: 20px; font-size: .8rem; color: var(--text2);
+    }
+    .page-btn {
+      padding: 7px 14px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--text); font-family: var(--font-m); font-size: .78rem;
+      cursor: pointer; transition: border-color .18s;
+    }
+    .page-btn:hover:not(:disabled) { border-color: var(--accent); }
+    .page-btn:disabled { opacity: .4; cursor: not-allowed; }
+
     .toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
       background: var(--accent); color: #fff; padding: 10px 22px;
@@ -128,6 +240,13 @@
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .toast.error { background: #ef4444; }
+
+    .loading-spin {
+      display: inline-block; width: 16px; height: 16px;
+      border: 2px solid var(--border2); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
@@ -141,7 +260,7 @@
     <div class="gate" id="gate">
       <div class="gate-icon">🔐</div>
       <h1>Admin Access</h1>
-      <p>Enter your admin key to review pending site submissions.</p>
+      <p>Enter your admin key to manage Nexo Hub.</p>
       <input type="password" id="adminKeyInput" placeholder="Admin key" autocomplete="off"/>
       <button onclick="tryLogin()">Unlock</button>
       <p class="gate-error" id="gateError">Invalid admin key. Please try again.</p>
@@ -151,12 +270,58 @@
     <div id="adminPanel" style="display:none">
       <div class="admin-header">
         <div>
-          <div class="admin-title">📋 Pending Submissions</div>
-          <div class="admin-sub" id="pendingCount">Loading…</div>
+          <div class="admin-title">⚙️ Nexo Hub Admin</div>
+          <div class="admin-sub" id="adminSub">Loading…</div>
         </div>
         <button class="logout-btn" onclick="logout()">Log out</button>
       </div>
-      <div class="pending-list" id="pendingList"></div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="pending" onclick="switchTab('pending')">
+          📋 Pending <span class="tab-badge" id="pendingBadge">0</span>
+        </button>
+        <button class="admin-tab" data-tab="manage" onclick="switchTab('manage')">
+          🗂️ Manage Sites
+        </button>
+        <button class="admin-tab" data-tab="stats" onclick="switchTab('stats')">
+          📊 Visitor Stats
+        </button>
+      </div>
+
+      <!-- PENDING TAB -->
+      <div class="admin-panel-section active" id="tab-pending">
+        <div class="pending-list" id="pendingList"></div>
+      </div>
+
+      <!-- MANAGE SITES TAB -->
+      <div class="admin-panel-section" id="tab-manage">
+        <div class="manage-controls">
+          <input type="text" class="manage-search" id="manageSearch" placeholder="Search by name, URL, or description…"/>
+          <select class="manage-cat-filter" id="manageCatFilter">
+            <option value="">All categories</option>
+          </select>
+        </div>
+        <div class="manage-list" id="manageList"></div>
+        <div class="pagination" id="managePagination" style="display:none">
+          <button class="page-btn" id="prevPageBtn" onclick="changePage(-1)">← Prev</button>
+          <span id="pageInfo">Page 1</span>
+          <button class="page-btn" id="nextPageBtn" onclick="changePage(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- STATS TAB -->
+      <div class="admin-panel-section" id="tab-stats">
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card"><div class="stat-card-label">Total Visits</div><div class="stat-card-value accent" id="statTotal">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Today</div><div class="stat-card-value" id="statToday">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Last 7 Days</div><div class="stat-card-value" id="statWeek">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Last 30 Days</div><div class="stat-card-value" id="statMonth">—</div></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Last 14 Days</div>
+          <div class="chart-bars" id="chartBars"></div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -167,7 +332,6 @@
     const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
     const KEY_STORAGE = 'nexohub_admin_key';
 
-    // Theme (match the rest of the site)
     document.documentElement.setAttribute('data-theme', localStorage.getItem('nexhub_theme') || 'dark');
 
     function showToast(msg, isError=false) {
@@ -233,13 +397,22 @@
     function showAdmin(pending) {
       document.getElementById('gate').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
+      document.getElementById('adminSub').textContent = 'Logged in — full access enabled';
       renderPending(pending);
+      loadCategoriesForFilter();
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+      document.querySelectorAll('.admin-panel-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(`tab-${tab}`).classList.add('active');
+      if (tab === 'manage' && !manageLoadedOnce) { manageLoadedOnce = true; loadManageSites(); }
+      if (tab === 'stats') loadStats();
     }
 
     function renderPending(items) {
       const list = document.getElementById('pendingList');
-      const count = document.getElementById('pendingCount');
-      count.textContent = `${items.length} site${items.length !== 1 ? 's' : ''} waiting for review`;
+      document.getElementById('pendingBadge').textContent = items.length;
 
       if (items.length === 0) {
         list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✨</div><p>All caught up — no pending submissions.</p></div>`;
@@ -314,7 +487,169 @@
       }
     }
 
-    // Auto-login if key already stored
+    let manageLoadedOnce = false;
+    let managePage = 0;
+    const MANAGE_PAGE_SIZE = 25;
+    let manageTotal = 0;
+    let manageSearchTimer = null;
+
+    async function loadCategoriesForFilter() {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label&order=label.asc`, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        const cats = await res.json();
+        const sel = document.getElementById('manageCatFilter');
+        cats.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.label;
+          sel.appendChild(opt);
+        });
+      } catch {}
+    }
+
+    async function loadManageSites() {
+      const list = document.getElementById('manageList');
+      list.innerHTML = `<div style="text-align:center;padding:40px"><span class="loading-spin"></span></div>`;
+      const search = document.getElementById('manageSearch').value.trim() || null;
+      const cat = document.getElementById('manageCatFilter').value || null;
+
+      try {
+        const [sites, total] = await Promise.all([
+          rpc('admin_list_sites', {
+            input_key: getKey(),
+            search_term: search,
+            filter_category: cat,
+            page_limit: MANAGE_PAGE_SIZE,
+            page_offset: managePage * MANAGE_PAGE_SIZE
+          }),
+          rpc('admin_count_sites', { input_key: getKey(), search_term: search, filter_category: cat })
+        ]);
+        manageTotal = total;
+        renderManageList(sites);
+        updatePagination();
+      } catch (e) {
+        list.innerHTML = `<div class="empty-pending"><p>Failed to load sites.</p></div>`;
+        showToast(e.message || 'Failed to load sites', true);
+      }
+    }
+
+    function renderManageList(sites) {
+      const list = document.getElementById('manageList');
+      if (sites.length === 0) {
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">🔍</div><p>No sites match your search.</p></div>`;
+        return;
+      }
+      list.innerHTML = sites.map(s => `
+        <div class="manage-card" data-id="${esc(s.id)}">
+          <div class="manage-card-info">
+            <div class="manage-card-name">${esc(s.name)}</div>
+            <div class="manage-card-url">${esc(s.url)}</div>
+          </div>
+          <div class="manage-card-cat">${esc(s.category)}</div>
+          <button class="delete-btn" onclick="confirmDelete(this, '${esc(s.id)}')">🗑 Delete</button>
+        </div>
+      `).join('');
+    }
+
+    function confirmDelete(btn, id) {
+      if (btn.dataset.confirming === 'true') {
+        deleteSite(btn, id);
+        return;
+      }
+      btn.dataset.confirming = 'true';
+      btn.textContent = 'Confirm?';
+      btn.classList.add('confirm');
+      setTimeout(() => {
+        if (btn.dataset.confirming === 'true') {
+          btn.dataset.confirming = 'false';
+          btn.textContent = '🗑 Delete';
+          btn.classList.remove('confirm');
+        }
+      }, 3000);
+    }
+
+    async function deleteSite(btn, id) {
+      btn.disabled = true;
+      btn.textContent = 'Deleting…';
+      try {
+        await rpc('admin_delete_site', { input_key: getKey(), site_id: id });
+        showToast('Site deleted');
+        const card = document.querySelector(`.manage-card[data-id="${id}"]`);
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(20px)';
+        setTimeout(() => loadManageSites(), 250);
+      } catch (e) {
+        showToast(e.message || 'Failed to delete', true);
+        btn.disabled = false;
+        btn.textContent = '🗑 Delete';
+        btn.classList.remove('confirm');
+        btn.dataset.confirming = 'false';
+      }
+    }
+
+    function updatePagination() {
+      const pag = document.getElementById('managePagination');
+      const totalPages = Math.max(1, Math.ceil(manageTotal / MANAGE_PAGE_SIZE));
+      pag.style.display = totalPages > 1 ? 'flex' : 'none';
+      document.getElementById('pageInfo').textContent = `Page ${managePage + 1} of ${totalPages}`;
+      document.getElementById('prevPageBtn').disabled = managePage === 0;
+      document.getElementById('nextPageBtn').disabled = managePage >= totalPages - 1;
+    }
+
+    function changePage(delta) {
+      managePage = Math.max(0, managePage + delta);
+      loadManageSites();
+    }
+
+    document.getElementById('manageSearch').addEventListener('input', () => {
+      clearTimeout(manageSearchTimer);
+      manageSearchTimer = setTimeout(() => { managePage = 0; loadManageSites(); }, 400);
+    });
+    document.getElementById('manageCatFilter').addEventListener('change', () => { managePage = 0; loadManageSites(); });
+
+    let statsLoadedOnce = false;
+    async function loadStats() {
+      try {
+        const [stats, history] = await Promise.all([
+          rpc('admin_get_visit_stats', { input_key: getKey() }),
+          rpc('admin_get_visit_history', { input_key: getKey(), days_back: 14 })
+        ]);
+        const s = Array.isArray(stats) ? stats[0] : stats;
+        document.getElementById('statTotal').textContent = (s.total_visits || 0).toLocaleString();
+        document.getElementById('statToday').textContent = (s.today_visits || 0).toLocaleString();
+        document.getElementById('statWeek').textContent = (s.last_7_days || 0).toLocaleString();
+        document.getElementById('statMonth').textContent = (s.last_30_days || 0).toLocaleString();
+        renderChart(history);
+        statsLoadedOnce = true;
+      } catch (e) {
+        showToast(e.message || 'Failed to load stats', true);
+      }
+    }
+
+    function renderChart(history) {
+      const container = document.getElementById('chartBars');
+      const days = [];
+      for (let i = 13; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dayStr = d.toISOString().slice(0, 10);
+        const found = history.find(h => h.day === dayStr);
+        days.push({ day: dayStr, count: found ? found.count : 0 });
+      }
+      const max = Math.max(1, ...days.map(d => d.count));
+      container.innerHTML = days.map(d => {
+        const heightPct = Math.max(3, Math.round((d.count / max) * 100));
+        const label = new Date(d.day).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+        return `
+          <div class="chart-bar-wrap">
+            <div class="chart-bar" style="height:${heightPct}%" title="${d.count} visit${d.count!==1?'s':''} on ${label}"></div>
+            <div class="chart-bar-label">${label.split(' ')[0]}</div>
+          </div>`;
+      }).join('');
+    }
+
     (async function autoLogin() {
       const key = getKey();
       if (!key) return;
