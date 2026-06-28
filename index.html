@@ -63,7 +63,7 @@
   <script>
     (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260623-1" />
+  <link rel="stylesheet" href="style.css?v=20260626-1" />
 
   <style>
     @keyframes skeletonPulse {
@@ -172,10 +172,13 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link nav-link--active">🏠 Home</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/api/" class="nav-link">⚡ API</a>
         <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
       </nav>
       <div class="nav-menu-footer">
@@ -214,6 +217,11 @@
         <option value="freemium">Freemium</option>
         <option value="paid">Paid</option>
       </select>
+      <div class="filter-sep"></div>
+      <span class="filter-bar-label">Tag</span>
+      <select class="filter-select" id="tagSelect" onchange="onTagChange(this.value)" aria-label="Tag filter">
+        <option value="">All tags</option>
+      </select>
       <span class="filter-drag-hint" id="dragHint">Drag to reorder</span>
       <button class="clear-recents-btn" id="clearRecentsBtn" onclick="clearRecents()" style="display:none">Clear history</button>
     </div>
@@ -245,8 +253,17 @@
     <span>Built by <code>Nexus</code> ♥</span>
   </footer>
 
+  <!-- ── SITE DETAIL MODAL ───────────────────────────────── -->
+  <div class="detail-overlay" id="detailOverlay" aria-hidden="true"></div>
+  <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="detail-close" id="detailClose" aria-label="Close">✕</button>
+    <div class="detail-body" id="detailBody">
+      <div class="detail-loading"><span class="loading-spin"></span></div>
+    </div>
+  </div>
+
   <div class="toast" id="toast" aria-live="polite"></div>
 
-  <script src="app.js?v=20260623-1" defer></script>
+  <script src="app.js?v=20260626-1" defer></script>
 </body>
 </html>

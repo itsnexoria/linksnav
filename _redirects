@@ -4,6 +4,9 @@
 /pages/tools      /pages/tools/    301
 /pages/donate     /pages/donate/   301
 /pages/admin      /pages/admin/    301
+/pages/new        /pages/new/      301
+/pages/leaderboard /pages/leaderboard/ 301
+/pages/api        /pages/api/      301
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260623-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260626-1"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
     @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
@@ -280,6 +280,9 @@
         <button class="admin-tab active" data-tab="pending" onclick="switchTab('pending')">
           📋 Pending <span class="tab-badge" id="pendingBadge">0</span>
         </button>
+        <button class="admin-tab" data-tab="reports" onclick="switchTab('reports')">
+          ⚠️ Reports <span class="tab-badge" id="reportsBadge">0</span>
+        </button>
         <button class="admin-tab" data-tab="manage" onclick="switchTab('manage')">
           🗂️ Manage Sites
         </button>
@@ -291,6 +294,19 @@
       <!-- PENDING TAB -->
       <div class="admin-panel-section active" id="tab-pending">
         <div class="pending-list" id="pendingList"></div>
+      </div>
+
+      <!-- REPORTS TAB -->
+      <div class="admin-panel-section" id="tab-reports">
+        <div class="manage-controls">
+          <select class="manage-cat-filter" id="reportStatusFilter" onchange="loadReports()">
+            <option value="open">Open</option>
+            <option value="resolved">Resolved</option>
+            <option value="dismissed">Dismissed</option>
+            <option value="">All</option>
+          </select>
+        </div>
+        <div class="pending-list" id="reportsList"></div>
       </div>
 
       <!-- MANAGE SITES TAB -->
@@ -400,6 +416,14 @@
       document.getElementById('adminSub').textContent = 'Logged in — full access enabled';
       renderPending(pending);
       loadCategoriesForFilter();
+      refreshReportsBadge();
+    }
+
+    async function refreshReportsBadge(){
+      try{
+        const count = await rpc('admin_count_open_reports', { input_key: getKey() });
+        document.getElementById('reportsBadge').textContent = count;
+      }catch{}
     }
 
     function switchTab(tab) {
@@ -408,6 +432,7 @@
       document.getElementById(`tab-${tab}`).classList.add('active');
       if (tab === 'manage' && !manageLoadedOnce) { manageLoadedOnce = true; loadManageSites(); }
       if (tab === 'stats') loadStats();
+      if (tab === 'reports') loadReports();
     }
 
     function renderPending(items) {
@@ -484,6 +509,77 @@
       } catch (e) {
         showToast('Session expired — please log in again', true);
         logout();
+      }
+    }
+
+    /* ── REPORTS TAB ─────────────────────────────────── */
+    async function loadReports(){
+      const list = document.getElementById('reportsList');
+      list.innerHTML = `<div style="text-align:center;padding:40px"><span class="loading-spin"></span></div>`;
+      const statusFilter = document.getElementById('reportStatusFilter').value || null;
+      try{
+        const reports = await rpc('admin_list_reports', { input_key: getKey(), status_filter: statusFilter });
+        renderReports(reports);
+        refreshReportsBadge();
+      }catch(e){
+        list.innerHTML = `<div class="empty-pending"><p>Failed to load reports.</p></div>`;
+        showToast(e.message || 'Failed to load reports', true);
+      }
+    }
+
+    const REASON_LABELS = {
+      broken_link: '🔗 Broken link',
+      wrong_info: '📝 Wrong info',
+      spam_or_scam: '🚫 Spam/scam',
+      duplicate: '📋 Duplicate',
+      other: '❓ Other'
+    };
+
+    function renderReports(reports){
+      const list = document.getElementById('reportsList');
+      if(!reports.length){
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✨</div><p>No reports here.</p></div>`;
+        return;
+      }
+      list.innerHTML = reports.map(r => {
+        const date = new Date(r.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+        const reasonLabel = REASON_LABELS[r.reason] || r.reason;
+        return `
+        <div class="pending-card" data-report-id="${esc(r.report_id)}">
+          <div class="pc-top">
+            <div class="pc-name">${esc(r.site_name)}</div>
+            <div class="pc-cat">${esc(reasonLabel)}</div>
+          </div>
+          <a class="pc-url" href="${esc(r.site_url)}" target="_blank" rel="noopener noreferrer">${esc(r.site_url)}</a>
+          ${r.note ? `<div class="pc-note">"${esc(r.note)}"</div>` : ''}
+          <div class="pc-meta">
+            <span><b>Status:</b> ${esc(r.status)}</span>
+            <span><b>Reported:</b> ${esc(date)}</span>
+          </div>
+          ${r.status === 'open' ? `
+          <div class="pc-actions">
+            <button class="pc-btn approve" onclick="updateReportStatus('${esc(r.report_id)}','resolved')">✓ Resolve</button>
+            <button class="pc-btn reject" onclick="updateReportStatus('${esc(r.report_id)}','dismissed')">✕ Dismiss</button>
+          </div>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    async function updateReportStatus(reportId, newStatus){
+      const card = document.querySelector(`[data-report-id="${reportId}"]`);
+      const btns = card?.querySelectorAll('.pc-btn');
+      btns?.forEach(b => b.disabled = true);
+      try{
+        await rpc('admin_update_report_status', { input_key: getKey(), input_report_id: reportId, new_status: newStatus });
+        showToast(newStatus === 'resolved' ? 'Marked as resolved' : 'Dismissed');
+        if(card){
+          card.style.opacity = '0';
+          card.style.transform = 'translateX(20px)';
+        }
+        setTimeout(() => loadReports(), 250);
+      }catch(e){
+        showToast(e.message || 'Failed to update report', true);
+        btns?.forEach(b => b.disabled = false);
       }
     }
 

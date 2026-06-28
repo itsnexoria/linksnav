@@ -13,7 +13,7 @@ const ORDER_KEY  = 'nexhub_order';
 const RECENTS_KEY = 'nexhub_recents';
 const MAX_RECENTS = 24;
 /* Bump this any time you need to bust the browser/CDN cache on app.js/style.css. */
-const BUILD_VERSION = '20260623-1';
+const BUILD_VERSION = '20260626-1';
 
 /* ── SUPABASE CONFIG ────────────────────────────────────────── */
 const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
@@ -35,6 +35,7 @@ let searchQuery    = '';
 let favorites      = loadFavs();
 let currentSort    = 'default';
 let currentPrice   = 'all';
+let currentTag     = '';
 const PAGE_SIZE    = 24;
 let visibleCount   = PAGE_SIZE;
 
@@ -107,13 +108,15 @@ async function init(){
 
     allCategories = cats.map(c => ({ id: c.id, label: c.label, icon: c.icon || CAT_ICON_FALLBACK[c.id] || '🔗' }));
     allSites = sites.map(s => ({
+      id: s.id,
       name: s.name,
       url: s.url,
       description: s.description,
       category: s.category,
       tags: s.tags || [],
       tag_colors: s.tag_colors || {},
-      color: s.color || '#4f7fff'
+      color: s.color || '#4f7fff',
+      created_at: s.created_at
     }));
   } catch (err) {
     console.error('Failed to load sites from Supabase:', err);
@@ -133,8 +136,36 @@ async function init(){
   render();
   setupSearch();
   setupScrollArrows();
+  populateTagFilter();
   rollCount(0, allSites.length);
   recordVisit();
+}
+
+/* Populate the tag filter dropdown from the get_all_tags RPC, falling back
+   to deriving tags client-side from allSites if the call fails. */
+async function populateTagFilter(){
+  const sel = document.getElementById('tagSelect');
+  if(!sel) return;
+  let tags = [];
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_all_tags`, { headers: sbHeaders() });
+    if(res.ok) tags = await res.json();
+  } catch {}
+  if(!tags.length){
+    const counts = {};
+    allSites.forEach(s => (s.tags||[]).forEach(t => counts[t] = (counts[t]||0)+1));
+    tags = Object.entries(counts).map(([tag,site_count])=>({tag,site_count})).sort((a,b)=>b.site_count-a.site_count);
+  }
+  /* Skip the price tags since they already have their own dedicated dropdown */
+  const priceTags = new Set(['free','freemium','paid']);
+  const frag = document.createDocumentFragment();
+  tags.filter(t=>!priceTags.has(t.tag)).forEach(t=>{
+    const opt = document.createElement('option');
+    opt.value = t.tag;
+    opt.textContent = `${t.tag} (${t.site_count})`;
+    frag.appendChild(opt);
+  });
+  sel.appendChild(frag);
 }
 
 /* Fire-and-forget visit counter — never blocks rendering, never throws */
@@ -261,6 +292,11 @@ window.onPriceChange = function(price) {
   render();
 };
 
+window.onTagChange = function(tag) {
+  currentTag = tag; visibleCount = PAGE_SIZE;
+  render();
+};
+
 function sortSites(sites){
   if(currentSort==='az') return [...sites].sort((a,b)=>a.name.localeCompare(b.name));
   if(currentSort==='za') return [...sites].sort((a,b)=>b.name.localeCompare(a.name));
@@ -294,6 +330,11 @@ function getFiltered(){
       if(currentPrice==='paid')    return tags.includes('paid');
       return true;
     });
+  }
+
+  /* General tag filter (anything in the tags array, not just price tags) */
+  if(currentTag){
+    base=base.filter(s=>(s.tags||[]).includes(currentTag));
   }
 
   /* Apply saved drag order only in default sort and no search (favorites included, recent excluded) */
@@ -339,7 +380,7 @@ function render(){
   document.getElementById('loadMoreWrap')?.remove();
 
   /* Show drag hint only when sort=default, no search, no price filter, not recent tab */
-  const canDrag=currentSort==='default'&&!searchQuery&&currentPrice==='all'&&activeCategory!=='__recent__';
+  const canDrag=currentSort==='default'&&!searchQuery&&currentPrice==='all'&&!currentTag&&activeCategory!=='__recent__';
   if(hint)hint.classList.toggle('visible',canDrag&&filtered.length>1);
 
   const clearBtn=document.getElementById('clearRecentsBtn');
@@ -385,7 +426,7 @@ function cardHTML(s,draggable=false){
   const dragAttr=draggable?'draggable="true"':'';
   const handleHTML=draggable?'<span class="drag-handle" aria-hidden="true">⠿</span>':'';
 
-  return `<div class="card-wrap${isFav?' card-wrap--fav':''}" data-url="${esc(s.url)}" ${dragAttr}>
+  return `<div class="card-wrap${isFav?' card-wrap--fav':''}" data-url="${esc(s.url)}" data-id="${esc(s.id||'')}" ${dragAttr}>
     ${handleHTML}
     <a class="card" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer"
        style="--card-color:${color}" aria-label="${esc(s.name)}">
@@ -409,6 +450,7 @@ function cardHTML(s,draggable=false){
             title="Copy link">
       🔗
     </button>
+    ${s.id?`<button class="info-btn" onclick="openSiteDetail('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}" title="More info">ⓘ</button>`:''}
   </div>`;
 }
 
@@ -520,12 +562,12 @@ window.clearRecents=function(){
 
 /* ── COPY LINK ──────────────────────────────────────────────────── */
 let _toastTimer;
-function showToast(msg){
+function showToast(msg, isError=false){
   const t=document.getElementById('toast');
   if(!t)return;
   clearTimeout(_toastTimer);
   t.textContent=msg;
-  t.classList.add('show');
+  t.className='toast show'+(isError?' error':'');
   _toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
 }
 window.copyCardLink=function(url,e){
@@ -536,6 +578,145 @@ window.copyCardLink=function(url,e){
     btn.classList.remove('copied');void btn.offsetWidth;btn.classList.add('copied');
   }).catch(()=>showToast('Could not copy link'));
 };
+
+/* ── SITE DETAIL MODAL ────────────────────────────────────────────── */
+let _currentDetailSiteId = null;
+let _currentDetailReason = null;
+
+function esc2(s){ return esc(s); } // alias for clarity in template strings below
+
+function openDetailModal(){
+  document.getElementById('detailOverlay').classList.add('show');
+  document.getElementById('detailModal').classList.add('show');
+  document.getElementById('detailOverlay').setAttribute('aria-hidden','false');
+  document.getElementById('detailModal').setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeDetailModal(){
+  document.getElementById('detailOverlay').classList.remove('show');
+  document.getElementById('detailModal').classList.remove('show');
+  document.getElementById('detailOverlay').setAttribute('aria-hidden','true');
+  document.getElementById('detailModal').setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  _currentDetailSiteId=null;
+  _currentDetailReason=null;
+}
+
+window.openSiteDetail = async function(siteId, e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  const site = allSites.find(s=>s.id===siteId);
+  if(!site) return;
+  _currentDetailSiteId = siteId;
+
+  const body = document.getElementById('detailBody');
+  body.innerHTML = `<div class="detail-loading"><span class="loading-spin"></span></div>`;
+  openDetailModal();
+
+  const tagHTML = (site.tags||[]).map(t=>{
+    const bg=(site.tag_colors||{})[t]||'#6b7280';
+    return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+  }).join('');
+  const cat = allCategories.find(c=>c.id===site.category);
+  const catLabel = cat ? `${cat.icon} ${cat.label}` : site.category;
+  const faviconUrl = fav(site.url);
+
+  body.innerHTML = `
+    <div class="detail-header">
+      <img class="detail-favicon" src="${esc(faviconUrl)}" alt="" onerror="this.style.display='none'"/>
+      <div class="detail-title-wrap">
+        <div class="detail-name">${esc(site.name)}</div>
+        <span class="detail-cat-badge">${catLabel}</span>
+      </div>
+    </div>
+    <p class="detail-desc">${esc(site.description)}</p>
+    <div class="detail-tags">${tagHTML}</div>
+    <a class="detail-visit-btn" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(site.url)}');addRecent('${esc(site.url)}')">
+      Visit Site ↗
+    </a>
+    <div class="detail-action-row">
+      <button class="detail-action-btn" onclick="copyCardLink('${esc(site.url)}', event)">🔗 Copy Link</button>
+      <button class="detail-action-btn" onclick="toggleFav('${esc(site.url)}', event); this.textContent = favorites.has('${esc(site.url)}') ? '★ Saved' : '☆ Save'">${favorites.has(site.url)?'★ Saved':'☆ Save'}</button>
+      <button class="detail-action-btn danger" onclick="toggleReportForm()">⚠️ Report</button>
+    </div>
+
+    <div class="report-form" id="reportForm">
+      <div class="detail-section-label">What's wrong with this site?</div>
+      <div class="report-reason-grid">
+        <button class="report-reason-btn" data-reason="broken_link" onclick="selectReportReason(this)">🔗 Broken link</button>
+        <button class="report-reason-btn" data-reason="wrong_info" onclick="selectReportReason(this)">📝 Wrong info</button>
+        <button class="report-reason-btn" data-reason="spam_or_scam" onclick="selectReportReason(this)">🚫 Spam/scam</button>
+        <button class="report-reason-btn" data-reason="duplicate" onclick="selectReportReason(this)">📋 Duplicate</button>
+        <button class="report-reason-btn" data-reason="other" onclick="selectReportReason(this)" style="grid-column:1/-1">❓ Other</button>
+      </div>
+      <textarea class="report-note" id="reportNote" placeholder="Optional details…" maxlength="500"></textarea>
+      <button class="report-submit-btn" id="reportSubmitBtn" onclick="submitSiteReport()" disabled>Submit Report</button>
+    </div>
+
+    <div class="detail-section-label" style="margin-top:24px">You might also like</div>
+    <div class="similar-grid" id="similarGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:14px 0"><span class="loading-spin"></span></div>
+    </div>
+  `;
+
+  loadSimilarSites(siteId);
+};
+
+async function loadSimilarSites(siteId){
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_similar_sites`, {
+      method:'POST', headers: sbHeaders(),
+      body: JSON.stringify({ input_site_id: siteId, result_limit: 4 })
+    });
+    const grid = document.getElementById('similarGrid');
+    if(!grid) return; // modal may have closed already
+    if(!res.ok){ grid.innerHTML=''; return; }
+    const similar = await res.json();
+    if(!similar.length){ grid.innerHTML = `<p style="grid-column:1/-1;color:var(--muted);font-size:.78rem">No similar sites found.</p>`; return; }
+    grid.innerHTML = similar.map(s => `
+      <a class="similar-card" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(s.url)}')">
+        <img class="similar-card-favicon" src="${esc(fav(s.url))}" alt="" onerror="this.style.display='none'"/>
+        <span class="similar-card-name">${esc(s.name)}</span>
+      </a>
+    `).join('');
+  }catch{
+    const grid = document.getElementById('similarGrid');
+    if(grid) grid.innerHTML = '';
+  }
+}
+
+window.toggleReportForm = function(){
+  document.getElementById('reportForm').classList.toggle('show');
+};
+window.selectReportReason = function(btn){
+  document.querySelectorAll('.report-reason-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  _currentDetailReason = btn.dataset.reason;
+  document.getElementById('reportSubmitBtn').disabled = false;
+};
+window.submitSiteReport = async function(){
+  if(!_currentDetailSiteId || !_currentDetailReason) return;
+  const btn = document.getElementById('reportSubmitBtn');
+  const note = document.getElementById('reportNote').value.trim();
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_report`, {
+      method:'POST', headers: sbHeaders(),
+      body: JSON.stringify({ input_site_id: _currentDetailSiteId, input_reason: _currentDetailReason, input_note: note||null })
+    });
+    if(!res.ok) throw new Error();
+    document.getElementById('reportForm').innerHTML = `<div class="report-success">✓ Thanks — we'll take a look.</div>`;
+    showToast('Report submitted — thank you!');
+  }catch{
+    btn.disabled = false;
+    btn.textContent = 'Submit Report';
+    showToast('Failed to submit report', true);
+  }
+};
+
+document.getElementById('detailClose')?.addEventListener('click', closeDetailModal);
+document.getElementById('detailOverlay')?.addEventListener('click', closeDetailModal);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDetailModal(); });
 
 /* ── RANDOM SITE ────────────────────────────────────────────────── */
 (function setupRandomBtn(){

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Leaderboard — Nexo Hub</title>
+  <meta name="description" content="Top contributors to Nexo Hub — the people who've submitted the most approved sites to the directory."/>
+  <link rel="canonical" href="https://nexohub.nexosites.xyz/pages/leaderboard/"/>
+  <meta property="og:title" content="Leaderboard — Nexo Hub"/>
+  <meta property="og:description" content="Top contributors to Nexo Hub."/>
+  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="theme-color" content="#4f7fff"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css?v=20260626-1"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+    @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+    @keyframes spin { to { transform:rotate(360deg) } }
+    @keyframes popScale { 0%{transform:scale(.85);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+    .lb-wrap {
+      position: relative; z-index: 1;
+      max-width: 680px; margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; color: var(--muted);
+      text-decoration: none; margin-bottom: 36px;
+      transition: color .18s, gap .18s;
+    }
+    .back-link:hover { color: var(--accent); gap: 10px; }
+
+    .lb-hero { text-align: center; margin-bottom: 36px; animation: fadeUp .4s ease both; }
+    .lb-icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .lb-title {
+      font-family: var(--font-d); font-size: clamp(1.7rem,4vw,2.3rem);
+      font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px;
+    }
+    .lb-sub { font-size: .85rem; color: var(--text2); line-height: 1.6; max-width: 460px; margin: 0 auto; }
+
+    .lb-list { display: flex; flex-direction: column; gap: 8px; }
+    .lb-row {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 14px 18px;
+      animation: cardIn .3s ease both;
+      transition: border-color .2s, transform .15s;
+    }
+    .lb-row:hover { border-color: var(--border2); transform: translateY(-1px); }
+    .lb-row.top3 { border-color: var(--accent-dim2); background: var(--accent-dim); }
+
+    .lb-rank {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-d); font-weight: 800; font-size: .95rem;
+      background: var(--bg3); color: var(--text2);
+    }
+    .lb-row.rank-1 .lb-rank { background: linear-gradient(135deg,#ffd700,#ffb700); color: #1a1a1a; animation: popScale .4s cubic-bezier(.34,1.56,.64,1) both; }
+    .lb-row.rank-2 .lb-rank { background: linear-gradient(135deg,#e8e8e8,#c0c0c0); color: #1a1a1a; }
+    .lb-row.rank-3 .lb-rank { background: linear-gradient(135deg,#cd7f32,#b06a2a); color: #fff; }
+
+    .lb-name { flex: 1; font-family: var(--font-d); font-weight: 700; font-size: .95rem; }
+    .lb-count {
+      font-family: var(--font-m); font-size: .8rem; color: var(--accent); font-weight: 700;
+      background: var(--accent-dim); padding: 4px 12px; border-radius: 100px; white-space: nowrap;
+    }
+
+    .lb-loading { display: flex; justify-content: center; padding: 60px 0; }
+    .loading-spin {
+      display: inline-block; width: 24px; height: 24px;
+      border: 3px solid var(--border2); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin .7s linear infinite;
+    }
+    .lb-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+    .lb-empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
+
+    .lb-cta {
+      margin-top: 32px; text-align: center; padding: 24px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); animation: fadeUp .4s .1s ease both;
+    }
+    .lb-cta p { font-size: .82rem; color: var(--text2); margin-bottom: 14px; }
+    .lb-cta a {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; border-radius: 100px;
+      background: var(--accent); color: #fff; text-decoration: none;
+      font-family: var(--font-m); font-size: .82rem; font-weight: 700;
+      transition: background .18s, transform .15s;
+    }
+    .lb-cta a:hover { background: var(--accent-hover); transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn" style="gap:7px">
+          <span aria-hidden="true">←</span> Back to Hub
+        </a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/leaderboard/" class="nav-link nav-link--active">🏆 Leaderboard</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/api/" class="nav-link">⚡ API</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="lb-wrap">
+    <a href="/" class="back-link">← Back to Nexo Hub</a>
+
+    <div class="lb-hero">
+      <div class="lb-icon">🏆</div>
+      <div class="lb-title">Top Contributors</div>
+      <p class="lb-sub">Honoring the people who've submitted the most approved sites to Nexo Hub. Submit your own to climb the board!</p>
+    </div>
+
+    <div id="lbList">
+      <div class="lb-loading"><span class="loading-spin"></span></div>
+    </div>
+
+    <div class="lb-cta">
+      <p>Know a great site that's not listed yet?</p>
+      <a href="/pages/contact/">📬 Submit a Site</a>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+
+    function esc(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    async function loadLeaderboard(){
+      const list = document.getElementById('lbList');
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_submitter_leaderboard`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ result_limit: 25 })
+        });
+        if(!res.ok) throw new Error();
+        const rows = await res.json();
+        renderLeaderboard(rows);
+      }catch{
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">⚠️</div><p>Failed to load — please refresh.</p></div>`;
+      }
+    }
+
+    function renderLeaderboard(rows){
+      const list = document.getElementById('lbList');
+      if(!rows.length){
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">🌱</div><p>No contributors yet — be the first to submit a site!</p></div>`;
+        return;
+      }
+      list.innerHTML = `<div class="lb-list">${rows.map((r,i) => {
+        const rank = i+1;
+        const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
+        const top3 = rank<=3 ? ' top3' : '';
+        return `
+        <div class="lb-row rank-${rank}${top3}">
+          <div class="lb-rank">${medal}</div>
+          <div class="lb-name">${esc(r.submitted_by_name)}</div>
+          <div class="lb-count">${r.approved_count} site${r.approved_count!==1?'s':''}</div>
+        </div>`;
+      }).join('')}</div>`;
+    }
+
+    loadLeaderboard();
+  </script>
+
+  <script>
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham){ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});}
+      if(ov){ov.addEventListener('click',closeM);}
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+    });
+
+    /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+    (function(){
+      var link = document.getElementById('adminNavLink');
+      if(!link) return;
+      var key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(function(res){
+        if(!res.ok) return;
+        return res.json();
+      }).then(function(ok){
+        if(ok === true) link.style.display = '';
+      }).catch(function(){});
+    })();
+  </script>
+</body>
+</html>

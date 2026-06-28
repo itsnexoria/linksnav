@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>API — Nexo Hub</title>
+  <meta name="description" content="Free public API for Nexo Hub. Query sites, categories, and tags programmatically — no API key required."/>
+  <link rel="canonical" href="https://nexohub.nexosites.xyz/pages/api/"/>
+  <meta property="og:title" content="API — Nexo Hub"/>
+  <meta property="og:description" content="Free public API for Nexo Hub's directory of curated sites."/>
+  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="theme-color" content="#4f7fff"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css?v=20260626-1"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+    @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+    .api-wrap {
+      position: relative; z-index: 1;
+      max-width: 760px; margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; color: var(--muted);
+      text-decoration: none; margin-bottom: 36px;
+      transition: color .18s, gap .18s;
+    }
+    .back-link:hover { color: var(--accent); gap: 10px; }
+
+    .api-hero { margin-bottom: 36px; animation: fadeUp .4s ease both; }
+    .api-title {
+      font-family: var(--font-d); font-size: clamp(1.7rem,4vw,2.3rem);
+      font-weight: 800; letter-spacing: -.03em; margin-bottom: 10px;
+    }
+    .api-sub { font-size: .85rem; color: var(--text2); line-height: 1.7; }
+    .api-sub code { background: var(--bg2); padding: 2px 6px; border-radius: 5px; color: var(--accent); font-size: .82em; }
+
+    .api-badges { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .api-badge {
+      font-size: .68rem; font-weight: 700; padding: 4px 11px; border-radius: 100px;
+      background: var(--accent-dim); color: var(--accent);
+    }
+
+    .endpoint-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
+      animation: cardIn .3s ease both;
+    }
+    .endpoint-method {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-d); font-size: .95rem; font-weight: 700; margin-bottom: 6px;
+    }
+    .endpoint-method .verb {
+      background: #22c55e; color: #fff; font-size: .68rem; font-weight: 800;
+      padding: 3px 9px; border-radius: 6px; letter-spacing: .03em;
+    }
+    .endpoint-path { font-family: monospace; font-size: .85rem; color: var(--accent); word-break: break-all; }
+    .endpoint-desc { font-size: .82rem; color: var(--text2); margin: 10px 0 16px; line-height: 1.6; }
+
+    .params-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: .8rem; }
+    .params-table th {
+      text-align: left; padding: 7px 10px; color: var(--muted);
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .05em;
+      border-bottom: 1px solid var(--border);
+    }
+    .params-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text2); }
+    .params-table td:first-child { font-family: monospace; color: var(--text); white-space: nowrap; }
+    .params-table tr:last-child td { border-bottom: none; }
+
+    .code-block {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+      font-family: monospace; font-size: .76rem; color: var(--text2);
+      overflow-x: auto; white-space: pre; line-height: 1.6; position: relative;
+    }
+    .copy-code-btn {
+      position: absolute; top: 8px; right: 8px;
+      padding: 4px 10px; border-radius: 6px;
+      background: var(--surface2); border: 1px solid var(--border2); color: var(--text2);
+      font-family: var(--font-m); font-size: .68rem; cursor: pointer;
+      transition: border-color .18s, color .18s;
+    }
+    .copy-code-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .api-note {
+      background: var(--accent-dim); border: 1px solid var(--accent-dim2);
+      border-radius: var(--radius-lg); padding: 16px 20px; margin-top: 8px;
+      font-size: .8rem; color: var(--text2); line-height: 1.7;
+    }
+    .api-note b { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn" style="gap:7px">
+          <span aria-hidden="true">←</span> Back to Hub
+        </a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/api/" class="nav-link nav-link--active">⚡ API</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="api-wrap">
+    <a href="/" class="back-link">← Back to Nexo Hub</a>
+
+    <div class="api-hero">
+      <div class="api-title">⚡ Nexo Hub API</div>
+      <p class="api-sub">A free, read-only public API for the Nexo Hub directory. No API key, no sign-up, no rate-limit headaches — just <code>fetch()</code> and go.</p>
+      <div class="api-badges">
+        <span class="api-badge">No auth required</span>
+        <span class="api-badge">JSON responses</span>
+        <span class="api-badge">CORS enabled</span>
+      </div>
+    </div>
+
+    <div class="endpoint-card">
+      <div class="endpoint-method"><span class="verb">POST</span></div>
+      <div class="endpoint-path">https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/api_get_sites</div>
+      <p class="endpoint-desc">Search and filter sites in the directory. All parameters are optional.</p>
+      <table class="params-table">
+        <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+        <tr><td>category_filter</td><td>text</td><td>Filter by category id (e.g. "ai")</td></tr>
+        <tr><td>tag_filter</td><td>text</td><td>Filter by a single tag (e.g. "free")</td></tr>
+        <tr><td>search_term</td><td>text</td><td>Search name + description</td></tr>
+        <tr><td>result_limit</td><td>int</td><td>Max results, capped at 100 (default 50)</td></tr>
+        <tr><td>result_offset</td><td>int</td><td>Pagination offset (default 0)</td></tr>
+      </table>
+      <div class="code-block" id="code-sites">fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/api_get_sites', {
+  method: 'POST',
+  headers: {
+    'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ category_filter: 'ai', result_limit: 10 })
+})
+  .then(res => res.json())
+  .then(data => console.log(data));</div>
+    </div>
+
+    <div class="endpoint-card">
+      <div class="endpoint-method"><span class="verb">POST</span></div>
+      <div class="endpoint-path">https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/api_get_categories</div>
+      <p class="endpoint-desc">Returns every category with its icon, label, and live site count. No parameters needed.</p>
+      <div class="code-block" id="code-cats">fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/api_get_categories', {
+  method: 'POST',
+  headers: {
+    'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+    'Content-Type': 'application/json'
+  },
+  body: '{}'
+})
+  .then(res => res.json())
+  .then(data => console.log(data));</div>
+    </div>
+
+    <div class="api-note">
+      <b>Heads up:</b> this API only ever returns publicly approved sites — pending submissions and admin data are never exposed. The key shown above is a public, read-only anon key; it's safe to use client-side and doesn't need to be kept secret.
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('.endpoint-card').forEach(function(card){
+      var block = card.querySelector('.code-block');
+      if(!block) return;
+      var rawCode = block.textContent;
+      var btn = document.createElement('button');
+      btn.className = 'copy-code-btn';
+      btn.textContent = 'Copy';
+      btn.onclick = function(){
+        navigator.clipboard.writeText(rawCode).then(function(){
+          btn.textContent = 'Copied!';
+          setTimeout(function(){ btn.textContent = 'Copy'; }, 1500);
+        });
+      };
+      block.appendChild(btn);
+    });
+  </script>
+
+  <script>
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham){ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});}
+      if(ov){ov.addEventListener('click',closeM);}
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+    });
+
+    (function(){
+      var link = document.getElementById('adminNavLink');
+      if(!link) return;
+      var key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(function(res){
+        if(!res.ok) return;
+        return res.json();
+      }).then(function(ok){
+        if(ok === true) link.style.display = '';
+      }).catch(function(){});
+    })();
+  </script>
+</body>
+</html>
