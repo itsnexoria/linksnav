@@ -3,48 +3,44 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>404 — Nexo Hub</title>
+  <title>You're offline — Nexo Hub</title>
   <meta name="robots" content="noindex"/>
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/style.css"/>
   <style>
-    .notfound-wrap {
+    .offline-wrap {
       min-height: 100vh; display:flex; flex-direction:column;
       align-items:center; justify-content:center;
       padding: 40px 24px; text-align:center; position:relative; z-index:1;
     }
-    .notfound-code {
-      font-family:var(--font-d); font-size:clamp(5rem,20vw,9rem); font-weight:800;
-      letter-spacing:-.05em; line-height:1;
-      background:linear-gradient(120deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      margin-bottom:8px;
+    .offline-icon {
+      font-size:clamp(3.5rem,14vw,5.5rem); line-height:1; margin-bottom:8px;
+      filter:drop-shadow(0 4px 18px rgba(124,92,252,.35));
     }
-    .notfound-title { font-family:var(--font-d); font-size:1.5rem; font-weight:700; margin-bottom:12px; }
-    .notfound-sub { font-size:.85rem; color:var(--muted); margin-bottom:32px; line-height:1.7; }
-    .notfound-btn {
+    .offline-title { font-family:var(--font-d); font-size:1.5rem; font-weight:700; margin-bottom:12px; }
+    .offline-sub { font-size:.85rem; color:var(--muted); margin-bottom:32px; line-height:1.7; }
+    .offline-btn {
       display:inline-flex; align-items:center; gap:8px;
       padding:11px 28px; border-radius:100px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#fff; text-decoration:none;
+      color:#fff; text-decoration:none; border:none; cursor:pointer;
       font-family:var(--font-m); font-size:.82rem;
       transition:transform .2s,box-shadow .2s;
     }
-    .notfound-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,92,252,.35); }
+    .offline-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,92,252,.35); }
   </style>
 </head>
 <body>
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="grid-bg" aria-hidden="true"></div>
-  <div class="notfound-wrap">
-    <div class="notfound-code">404</div>
-    <h1 class="notfound-title">Page not found</h1>
-    <p class="notfound-sub">Looks like this URL doesn't exist.<br/>Let's get you back to the hub.</p>
-    <a href="/" class="notfound-btn">← Back to Nexo Hub</a>
+  <div class="offline-wrap">
+    <div class="offline-icon">📡</div>
+    <h1 class="offline-title">You're offline</h1>
+    <p class="offline-sub">Nexo Hub couldn't reach the network.<br/>Check your connection and try again — anything you'd already opened may still be cached.</p>
+    <button class="offline-btn" onclick="location.reload()">↻ Try again</button>
   </div>
   <script>(function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();</script>
-  <script src="/pwa-register.js" defer></script>
 </body>
 </html>

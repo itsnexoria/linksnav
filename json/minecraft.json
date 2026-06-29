@@ -375,5 +375,20 @@
       "free": "#22c55e",
       "tools": "#5a8f3d"
     }
+  },
+  {
+    "name": "Nexoria Realm",
+    "url": "https://nexoriarealm.xyz/",
+    "description": "My Minecraft Java SMP server. Community-driven survival with custom plugins. Connect at play.nexoriarealm.xyz.",
+    "category": "minecraft",
+    "tags": [
+      "community",
+      "minecraft-smp"
+    ],
+    "color": "#10b981",
+    "tag_colors": {
+      "community": "#e91e63",
+      "minecraft-smp": "#4caf50"
+    }
   }
 ]

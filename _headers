@@ -23,3 +23,17 @@
 /pages/admin/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
+
+# Service worker — must always be revalidated so updates roll out promptly
+/sw.js
+  Cache-Control: no-cache
+
+# Manifest — cache for a day like other static assets
+/manifest.webmanifest
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Sitemap / robots — short cache so crawlers see updates reasonably fast
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pages/admin/
+Disallow: /pages/contact/
+
+Sitemap: https://nexohub.nexosites.xyz/sitemap.xml

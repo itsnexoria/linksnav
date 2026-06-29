@@ -83,6 +83,15 @@ function saveClicks(m){localStorage.setItem(CLICKS_KEY,JSON.stringify(m))}
 function getCount(url){return loadClicks()[url]||0}
 function bumpCount(url){const m=loadClicks();m[url]=(m[url]||0)+1;saveClicks(m);return m[url]}
 function fmtCount(n){return n>=1000?(n/1000).toFixed(1)+'k':n||0}
+function timeAgo(iso){
+  const diffMs=Date.now()-new Date(iso).getTime();
+  const mins=Math.round(diffMs/60000);
+  if(mins<1)return'just now';
+  if(mins<60)return mins+'m ago';
+  const hrs=Math.round(mins/60);
+  if(hrs<24)return hrs+'h ago';
+  return Math.round(hrs/24)+'d ago';
+}
 
 /* ── RECENTLY VISITED ───────────────────────────────────────── */
 function loadRecents(){try{return JSON.parse(localStorage.getItem(RECENTS_KEY)||'[]')}catch{return[]}}
@@ -417,6 +426,7 @@ function buildFrag(sites,draggable=false){
 function cardHTML(s,draggable=false){
   const color=s.color||'#7c5cfc';
   const isFav=favorites.has(s.url);
+  const isDown=s.health_status==='down';
   const tagHTML=(s.tags||[]).map(t=>{
     const bg=(s.tag_colors||{})[t]||'#6b7280';
     return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
@@ -425,8 +435,9 @@ function cardHTML(s,draggable=false){
   const imgTag=imgSrc?`<img class="card-favicon" data-src="${esc(imgSrc)}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAI=" alt="" decoding="async" onerror="this.style.display='none'" width="22" height="22">`:'';
   const dragAttr=draggable?'draggable="true"':'';
   const handleHTML=draggable?'<span class="drag-handle" aria-hidden="true">⠿</span>':'';
+  const downBadge=isDown?`<span class="health-badge" title="This site failed its last automatic health check${s.last_checked_at?' ('+timeAgo(s.last_checked_at)+')':''} and may be temporarily down.">⚠ May be down</span>`:'';
 
-  return `<div class="card-wrap${isFav?' card-wrap--fav':''}" data-url="${esc(s.url)}" data-id="${esc(s.id||'')}" ${dragAttr}>
+  return `<div class="card-wrap${isFav?' card-wrap--fav':''}${isDown?' card-wrap--down':''}" data-url="${esc(s.url)}" data-id="${esc(s.id||'')}" ${dragAttr}>
     ${handleHTML}
     <a class="card" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer"
        style="--card-color:${color}" aria-label="${esc(s.name)}">
@@ -436,7 +447,7 @@ function cardHTML(s,draggable=false){
         <span class="card-arrow" aria-hidden="true">↗</span>
       </div>
       <p class="card-desc">${esc(s.description)}</p>
-      <div class="card-footer">${tagHTML}</div>
+      <div class="card-footer">${tagHTML}${downBadge}</div>
       <div class="click-count" aria-label="Visit count"><span aria-hidden="true">👁</span><span class="click-count-num">${fmtCount(getCount(s.url))}</span></div>
     </a>
     <button class="fav-btn${isFav?' fav-btn--active':''}"
@@ -572,11 +583,33 @@ function showToast(msg, isError=false){
 }
 window.copyCardLink=function(url,e){
   e.preventDefault();e.stopPropagation();
-  navigator.clipboard.writeText(url).then(()=>{
+  const btn=e.currentTarget;
+  function onSuccess(){
     showToast('Link copied!');
-    const btn=e.currentTarget;
     btn.classList.remove('copied');void btn.offsetWidth;btn.classList.add('copied');
-  }).catch(()=>showToast('Could not copy link'));
+  }
+  function legacyCopy(){
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=url;
+      ta.setAttribute('readonly','');
+      ta.style.position='fixed';
+      ta.style.top='0';
+      ta.style.left='-9999px';
+      document.body.appendChild(ta);
+      ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+      const ok=document.execCommand('copy');
+      document.body.removeChild(ta);
+      ok?onSuccess():showToast('Could not copy link',true);
+    }catch{
+      showToast('Could not copy link',true);
+    }
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(onSuccess).catch(legacyCopy);
+  }else{
+    legacyCopy();
+  }
 };
 
 /* ── SITE DETAIL MODAL ────────────────────────────────────────────── */
