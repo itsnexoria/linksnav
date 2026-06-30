@@ -85,8 +85,8 @@ self.addEventListener('fetch', (event) => {
   // Never touch cross-origin requests (Supabase, fonts, favicon CDN, ads, etc.)
   if (url.origin !== self.location.origin) return;
 
-  // Never cache the JSON data snapshots or the admin panel.
-  if (url.pathname.startsWith('/json/') || url.pathname.startsWith('/pages/admin/')) return;
+  // Never cache the admin panel.
+  if (url.pathname.startsWith('/pages/admin/')) return;
 
   if (isStaticAsset(url)) {
     event.respondWith(staleWhileRevalidate(request));

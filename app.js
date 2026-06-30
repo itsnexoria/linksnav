@@ -151,35 +151,6 @@ async function init(){
   populateTagFilter();
   rollCount(0, allSites.length);
   recordVisit();
-  loadCollectionsStrip();
-}
-
-/* Small teaser strip linking into /pages/collections/ — failure is silent
-   since this is a non-critical homepage enhancement. */
-async function loadCollectionsStrip(){
-  const wrap = document.getElementById('collectionsStrip');
-  if(!wrap) return;
-  try{
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/collections?select=slug,title,icon,color,collection_sites(count)&order=sort_order.asc&limit=6`, { headers: sbHeaders() });
-    if(!res.ok) throw new Error();
-    const rows = await res.json();
-    if(!rows.length){ wrap.style.display='none'; return; }
-    wrap.innerHTML = `
-      <div class="collections-strip-head">
-        <span class="collections-strip-label">🗂️ Collections</span>
-        <a href="/pages/collections/" class="collections-strip-all">See all →</a>
-      </div>
-      <div class="collections-strip-row">
-        ${rows.map(c=>{
-          const count = (c.collection_sites && c.collection_sites[0] && c.collection_sites[0].count) || 0;
-          return `<a class="collections-pill" style="--pill-color:${esc(c.color||'#7c5cfc')}" href="/pages/collections/?slug=${encodeURIComponent(c.slug)}">
-            <span>${esc(c.icon||'🗂️')}</span> ${esc(c.title)} <span class="collections-pill-count">${count}</span>
-          </a>`;
-        }).join('')}
-      </div>`;
-  }catch{
-    wrap.style.display='none';
-  }
 }
 
 /* Populate the tag filter dropdown from the get_all_tags RPC, falling back
