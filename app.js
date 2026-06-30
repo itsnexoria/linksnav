@@ -125,7 +125,10 @@ async function init(){
       tags: s.tags || [],
       tag_colors: s.tag_colors || {},
       color: s.color || '#4f7fff',
-      created_at: s.created_at
+      created_at: s.created_at,
+      health_status: s.health_status,
+      http_status: s.http_status,
+      last_checked_at: s.last_checked_at
     }));
   } catch (err) {
     console.error('Failed to load sites from Supabase:', err);
@@ -148,6 +151,35 @@ async function init(){
   populateTagFilter();
   rollCount(0, allSites.length);
   recordVisit();
+  loadCollectionsStrip();
+}
+
+/* Small teaser strip linking into /pages/collections/ — failure is silent
+   since this is a non-critical homepage enhancement. */
+async function loadCollectionsStrip(){
+  const wrap = document.getElementById('collectionsStrip');
+  if(!wrap) return;
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/collections?select=slug,title,icon,color,collection_sites(count)&order=sort_order.asc&limit=6`, { headers: sbHeaders() });
+    if(!res.ok) throw new Error();
+    const rows = await res.json();
+    if(!rows.length){ wrap.style.display='none'; return; }
+    wrap.innerHTML = `
+      <div class="collections-strip-head">
+        <span class="collections-strip-label">🗂️ Collections</span>
+        <a href="/pages/collections/" class="collections-strip-all">See all →</a>
+      </div>
+      <div class="collections-strip-row">
+        ${rows.map(c=>{
+          const count = (c.collection_sites && c.collection_sites[0] && c.collection_sites[0].count) || 0;
+          return `<a class="collections-pill" style="--pill-color:${esc(c.color||'#7c5cfc')}" href="/pages/collections/?slug=${encodeURIComponent(c.slug)}">
+            <span>${esc(c.icon||'🗂️')}</span> ${esc(c.title)} <span class="collections-pill-count">${count}</span>
+          </a>`;
+        }).join('')}
+      </div>`;
+  }catch{
+    wrap.style.display='none';
+  }
 }
 
 /* Populate the tag filter dropdown from the get_all_tags RPC, falling back
@@ -455,13 +487,7 @@ function cardHTML(s,draggable=false){
             aria-label="${isFav?'Remove from':'Add to'} favorites">
       ${isFav?'★ Saved':'☆ Save'}
     </button>
-    <button class="copy-link-btn"
-            onclick="copyCardLink('${esc(s.url)}',event)"
-            aria-label="Copy link to ${esc(s.name)}"
-            title="Copy link">
-      🔗
-    </button>
-    ${s.id?`<button class="info-btn" onclick="openSiteDetail('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}" title="More info">ⓘ</button>`:''}
+    ${s.id?`<button class="info-btn" onclick="openSiteDetail('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}" title="More info"><span class="info-btn-label">Info</span></button>`:''}
   </div>`;
 }
 
@@ -652,6 +678,12 @@ window.openSiteDetail = async function(siteId, e){
   const cat = allCategories.find(c=>c.id===site.category);
   const catLabel = cat ? `${cat.icon} ${cat.label}` : site.category;
   const faviconUrl = fav(site.url);
+  const healthHTML = (()=>{
+    if(!site.last_checked_at) return `<span class="detail-health-badge detail-health-badge--unknown">○ Not checked yet</span>`;
+    const ago = timeAgo(site.last_checked_at);
+    if(site.health_status==='up') return `<span class="detail-health-badge detail-health-badge--up" title="HTTP ${site.http_status||'—'}">● Healthy — checked ${esc(ago)}</span>`;
+    return `<span class="detail-health-badge detail-health-badge--down" title="HTTP ${site.http_status||'no response'}">⚠ May be down — checked ${esc(ago)}</span>`;
+  })();
 
   body.innerHTML = `
     <div class="detail-header">
@@ -659,6 +691,7 @@ window.openSiteDetail = async function(siteId, e){
       <div class="detail-title-wrap">
         <div class="detail-name">${esc(site.name)}</div>
         <span class="detail-cat-badge">${catLabel}</span>
+        ${healthHTML}
       </div>
     </div>
     <p class="detail-desc">${esc(site.description)}</p>

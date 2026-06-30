@@ -231,6 +231,70 @@
     .page-btn:hover:not(:disabled) { border-color: var(--accent); }
     .page-btn:disabled { opacity: .4; cursor: not-allowed; }
 
+    /* ── HEALTH TAB ──────────────────────────────────── */
+    .health-down-card { padding: 16px 20px !important; }
+    .hdc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:6px; }
+    .hdc-name { font-family: var(--font-d); font-weight: 700; font-size: .92rem; }
+    .hdc-status { font-size:.65rem; font-weight:700; padding:2px 8px; border-radius:100px; background:rgba(239,68,68,.12); color:#ef4444; white-space:nowrap; }
+    .hdc-url { font-size: .75rem; color: var(--accent); text-decoration: none; display:block; margin-bottom:6px; word-break:break-all; }
+    .hdc-url:hover { text-decoration: underline; }
+    .hdc-meta { font-size: .7rem; color: var(--muted); }
+    #runHealthBtn:disabled { opacity:.6; cursor:not-allowed; }
+
+    /* ── COLLECTIONS TAB ─────────────────────────────── */
+    .new-collection-form {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 16px; margin-bottom: 18px;
+      display: flex; flex-direction: column; gap: 10px;
+      animation: cardIn .25s ease both;
+    }
+    .collections-admin-list { display: flex; flex-direction: column; gap: 12px; }
+    .collection-admin-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 16px 18px;
+      animation: cardIn .3s ease both;
+    }
+    .cac-top { display: flex; align-items: center; gap: 12px; }
+    .cac-icon {
+      width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .cac-info { flex: 1; min-width: 0; }
+    .cac-title { font-family: var(--font-d); font-weight: 700; font-size: .92rem; }
+    .cac-meta { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+    .cac-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .cac-btn {
+      padding: 7px 13px; border-radius: var(--radius); border: 1px solid var(--border2);
+      background: var(--bg2); color: var(--text2); font-family: var(--font-m);
+      font-size: .73rem; font-weight: 600; cursor: pointer; transition: border-color .18s, color .18s;
+      white-space: nowrap;
+    }
+    .cac-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .cac-sites-panel { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .cac-add-row { position: relative; margin-bottom: 10px; }
+    .cac-suggestions {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 5;
+      background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--radius);
+      max-height: 220px; overflow-y: auto; display: none; box-shadow: var(--shadow-md);
+    }
+    .cac-suggestions.show { display: block; }
+    .cac-suggestion-item {
+      padding: 9px 12px; font-size: .8rem; cursor: pointer;
+      display: flex; justify-content: space-between; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cac-suggestion-item:last-child { border-bottom: none; }
+    .cac-suggestion-item:hover { background: var(--accent-dim); }
+    .cac-suggestion-item span { color: var(--muted); font-size: .7rem; flex-shrink: 0; }
+    .cac-site-row {
+      display: flex; align-items: center; gap: 10px; padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cac-site-row:last-child { border-bottom: none; }
+    .cac-site-row img { width: 20px; height: 20px; border-radius: 5px; flex-shrink: 0; background: var(--bg3); }
+    .cac-site-row-name { flex: 1; min-width: 0; font-size: .82rem; font-weight: 600; }
+    .cac-empty-sites { font-size: .78rem; color: var(--muted); padding: 8px 0; }
+
     .toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
       background: var(--accent); color: #fff; padding: 10px 22px;
@@ -289,6 +353,12 @@
         <button class="admin-tab" data-tab="stats" onclick="switchTab('stats')">
           📊 Visitor Stats
         </button>
+        <button class="admin-tab" data-tab="health" onclick="switchTab('health')">
+          🩺 Health <span class="tab-badge" id="healthBadge">0</span>
+        </button>
+        <button class="admin-tab" data-tab="collections" onclick="switchTab('collections')">
+          🗂️ Collections
+        </button>
       </div>
 
       <!-- PENDING TAB -->
@@ -337,6 +407,38 @@
           <div class="chart-title">Last 14 Days</div>
           <div class="chart-bars" id="chartBars"></div>
         </div>
+      </div>
+
+      <!-- HEALTH TAB -->
+      <div class="admin-panel-section" id="tab-health">
+        <div class="stats-grid" id="healthStatsGrid">
+          <div class="stat-card"><div class="stat-card-label">Total Sites</div><div class="stat-card-value" id="healthTotal">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Healthy</div><div class="stat-card-value" style="color:#22c55e" id="healthUp">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">May Be Down</div><div class="stat-card-value" style="color:#ef4444" id="healthDown">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Not Checked Yet</div><div class="stat-card-value" id="healthUnknown">—</div></div>
+        </div>
+        <div class="manage-controls">
+          <span style="font-size:.78rem;color:var(--muted)">Last run: <span id="healthLastRun">—</span></span>
+          <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" id="runHealthBtn" onclick="runHealthCheckNow()">▶ Run Check Now</button>
+        </div>
+        <div class="pending-list" id="healthDownList"></div>
+      </div>
+
+      <!-- COLLECTIONS TAB -->
+      <div class="admin-panel-section" id="tab-collections">
+        <div class="manage-controls">
+          <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" onclick="toggleNewCollectionForm()">+ New Collection</button>
+        </div>
+        <div class="new-collection-form" id="newCollectionForm" style="display:none">
+          <input type="text" class="manage-search" id="ncTitle" placeholder="Title (e.g. Best Free AI Tools)"/>
+          <input type="text" class="manage-search" id="ncDesc" placeholder="Short description"/>
+          <div style="display:flex;gap:10px">
+            <input type="text" class="manage-search" id="ncIcon" placeholder="Icon emoji" value="🗂️" style="max-width:90px;text-align:center"/>
+            <input type="color" id="ncColor" value="#7c5cfc" style="height:40px;width:54px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--surface);cursor:pointer"/>
+            <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" onclick="createCollection()" id="ncCreateBtn">Create</button>
+          </div>
+        </div>
+        <div class="collections-admin-list" id="collectionsAdminList"></div>
       </div>
     </div>
   </main>
@@ -433,6 +535,8 @@
       if (tab === 'manage' && !manageLoadedOnce) { manageLoadedOnce = true; loadManageSites(); }
       if (tab === 'stats') loadStats();
       if (tab === 'reports') loadReports();
+      if (tab === 'health') loadHealth();
+      if (tab === 'collections' && !collectionsLoadedOnce) { collectionsLoadedOnce = true; loadCollectionsAdmin(); }
     }
 
     function renderPending(items) {
@@ -588,6 +692,8 @@
     const MANAGE_PAGE_SIZE = 25;
     let manageTotal = 0;
     let manageSearchTimer = null;
+    let collectionsLoadedOnce = false;
+    let collectionSearchTimers = {};
 
     async function loadCategoriesForFilter() {
       try {
@@ -744,6 +850,240 @@
             <div class="chart-bar-label">${label.split(' ')[0]}</div>
           </div>`;
       }).join('');
+    }
+
+    /* ── HEALTH TAB ────────────────────────────────────────────── */
+    async function loadHealth() {
+      const list = document.getElementById('healthDownList');
+      list.innerHTML = `<div style="text-align:center;padding:40px"><span class="loading-spin"></span></div>`;
+      try {
+        const [summary, downSites] = await Promise.all([
+          rpc('admin_health_summary', { input_key: getKey() }),
+          rpc('admin_list_down_sites', { input_key: getKey() })
+        ]);
+        document.getElementById('healthTotal').textContent = (summary.total || 0).toLocaleString();
+        document.getElementById('healthUp').textContent = (summary.up || 0).toLocaleString();
+        document.getElementById('healthDown').textContent = (summary.down || 0).toLocaleString();
+        document.getElementById('healthUnknown').textContent = (summary.unknown || 0).toLocaleString();
+        document.getElementById('healthLastRun').textContent = summary.last_checked_at
+          ? new Date(summary.last_checked_at).toLocaleString() : 'never';
+        document.getElementById('healthBadge').textContent = summary.down || 0;
+        renderHealthDownList(downSites || []);
+      } catch (e) {
+        list.innerHTML = `<div class="empty-pending"><p>Failed to load health data.</p></div>`;
+        showToast(e.message || 'Failed to load health data', true);
+      }
+    }
+
+    function renderHealthDownList(sites) {
+      const list = document.getElementById('healthDownList');
+      if (!sites.length) {
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✅</div><p>No sites are currently flagged as down.</p></div>`;
+        return;
+      }
+      list.innerHTML = sites.map(s => `
+        <div class="pending-card health-down-card">
+          <div class="hdc-top">
+            <span class="hdc-name">${esc(s.name)}</span>
+            <span class="hdc-status">HTTP ${s.http_status || 'no response'}</span>
+          </div>
+          <a class="hdc-url" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.url)}</a>
+          <div class="hdc-meta">Last checked ${s.last_checked_at ? new Date(s.last_checked_at).toLocaleString() : 'never'} · ${esc(s.category)}</div>
+        </div>
+      `).join('');
+    }
+
+    async function runHealthCheckNow() {
+      const btn = document.getElementById('runHealthBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading-spin"></span> Running…';
+      try {
+        await rpc('admin_trigger_health_check', { input_key: getKey(), p_limit: 60 });
+        showToast('Health check started — refreshing in a few seconds…');
+        setTimeout(() => { loadHealth(); btn.disabled = false; btn.textContent = '▶ Run Check Now'; }, 6000);
+      } catch (e) {
+        showToast(e.message || 'Failed to trigger health check', true);
+        btn.disabled = false;
+        btn.textContent = '▶ Run Check Now';
+      }
+    }
+
+    /* ── COLLECTIONS TAB ───────────────────────────────────────── */
+    async function loadCollectionsAdmin() {
+      const list = document.getElementById('collectionsAdminList');
+      list.innerHTML = `<div style="text-align:center;padding:40px"><span class="loading-spin"></span></div>`;
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/collections?select=*,collection_sites(site_id,sort_order,sites(id,name,url))&order=sort_order.asc`, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        if (!res.ok) throw new Error('Failed to load collections');
+        const collections = await res.json();
+        renderCollectionsAdmin(collections);
+      } catch (e) {
+        list.innerHTML = `<div class="empty-pending"><p>Failed to load collections.</p></div>`;
+        showToast(e.message || 'Failed to load collections', true);
+      }
+    }
+
+    function renderCollectionsAdmin(collections) {
+      const list = document.getElementById('collectionsAdminList');
+      if (!collections.length) {
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">🗂️</div><p>No collections yet — create one above.</p></div>`;
+        return;
+      }
+      list.innerHTML = collections.map(c => {
+        const sites = (c.collection_sites || []).slice().sort((a,b)=>a.sort_order-b.sort_order).filter(cs=>cs.sites);
+        return `
+        <div class="collection-admin-card" data-id="${esc(c.id)}">
+          <div class="cac-top">
+            <span class="cac-icon" style="background:color-mix(in srgb, ${esc(c.color||'#7c5cfc')} 16%, transparent)">${esc(c.icon||'🗂️')}</span>
+            <div class="cac-info">
+              <div class="cac-title">${esc(c.title)}</div>
+              <div class="cac-meta">${sites.length} site${sites.length!==1?'s':''} · /${esc(c.slug)}</div>
+            </div>
+            <div class="cac-actions">
+              <button class="cac-btn" onclick="toggleManageSites('${esc(c.id)}')">Manage sites</button>
+              <button class="delete-btn" onclick="confirmDeleteCollection(this,'${esc(c.id)}')">🗑 Delete</button>
+            </div>
+          </div>
+          <div class="cac-sites-panel" id="sites-panel-${esc(c.id)}" style="display:none">
+            <div class="cac-add-row">
+              <input type="text" class="manage-search" placeholder="Search approved sites to add…"
+                     oninput="searchSitesForCollection(this,'${esc(c.id)}')"/>
+              <div class="cac-suggestions" id="suggest-${esc(c.id)}"></div>
+            </div>
+            <div class="cac-site-list" id="cac-site-list-${esc(c.id)}">${renderCacSiteList(c.id, sites)}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderCacSiteList(collectionId, sites) {
+      if (!sites.length) return `<div class="cac-empty-sites">No sites in this collection yet.</div>`;
+      return sites.map(cs => `
+        <div class="cac-site-row" data-site-id="${esc(cs.sites.id)}">
+          <span class="cac-site-row-name">${esc(cs.sites.name)}</span>
+          <button class="cac-btn" onclick="removeSiteFromCollection('${esc(collectionId)}','${esc(cs.sites.id)}',this)">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    function toggleNewCollectionForm() {
+      const form = document.getElementById('newCollectionForm');
+      form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function slugify(text) {
+      return text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+
+    async function createCollection() {
+      const title = document.getElementById('ncTitle').value.trim();
+      const description = document.getElementById('ncDesc').value.trim();
+      const icon = document.getElementById('ncIcon').value.trim() || '🗂️';
+      const color = document.getElementById('ncColor').value || '#7c5cfc';
+      if (!title) { showToast('Title is required', true); return; }
+      const btn = document.getElementById('ncCreateBtn');
+      btn.disabled = true; btn.textContent = 'Creating…';
+      try {
+        await rpc('admin_create_collection', {
+          input_key: getKey(), p_slug: slugify(title), p_title: title,
+          p_description: description, p_icon: icon, p_color: color
+        });
+        showToast('Collection created');
+        document.getElementById('ncTitle').value = '';
+        document.getElementById('ncDesc').value = '';
+        toggleNewCollectionForm();
+        loadCollectionsAdmin();
+      } catch (e) {
+        showToast(e.message || 'Failed to create collection', true);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Create';
+      }
+    }
+
+    function confirmDeleteCollection(btn, id) {
+      if (btn.dataset.confirming === 'true') { deleteCollection(btn, id); return; }
+      btn.dataset.confirming = 'true';
+      btn.textContent = 'Confirm?';
+      btn.classList.add('confirm');
+      setTimeout(() => {
+        if (btn.dataset.confirming === 'true') {
+          btn.dataset.confirming = 'false';
+          btn.textContent = '🗑 Delete';
+          btn.classList.remove('confirm');
+        }
+      }, 3000);
+    }
+
+    async function deleteCollection(btn, id) {
+      btn.disabled = true; btn.textContent = 'Deleting…';
+      try {
+        await rpc('admin_delete_collection', { input_key: getKey(), p_id: id });
+        showToast('Collection deleted');
+        loadCollectionsAdmin();
+      } catch (e) {
+        showToast(e.message || 'Failed to delete', true);
+        btn.disabled = false; btn.textContent = '🗑 Delete';
+        btn.classList.remove('confirm'); btn.dataset.confirming = 'false';
+      }
+    }
+
+    function toggleManageSites(id) {
+      const panel = document.getElementById(`sites-panel-${id}`);
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function searchSitesForCollection(input, collectionId) {
+      clearTimeout(collectionSearchTimers[collectionId]);
+      const query = input.value.trim();
+      const box = document.getElementById(`suggest-${collectionId}`);
+      if (!query) { box.classList.remove('show'); box.innerHTML = ''; return; }
+      collectionSearchTimers[collectionId] = setTimeout(async () => {
+        try {
+          const results = await rpc('admin_list_sites', {
+            input_key: getKey(), search_term: query, filter_category: null,
+            page_limit: 8, page_offset: 0
+          });
+          if (!results.length) {
+            box.innerHTML = `<div class="cac-suggestion-item" style="color:var(--muted)">No matches</div>`;
+            box.classList.add('show');
+            return;
+          }
+          box.innerHTML = results.map(s => `
+            <div class="cac-suggestion-item" onclick="addSiteToCollection('${esc(collectionId)}','${esc(s.id)}','${esc(s.name).replace(/'/g,"\\'")}',this)">
+              ${esc(s.name)} <span>${esc(s.category)}</span>
+            </div>
+          `).join('');
+          box.classList.add('show');
+        } catch (e) {
+          box.classList.remove('show');
+        }
+      }, 350);
+    }
+
+    async function addSiteToCollection(collectionId, siteId, siteName, el) {
+      try {
+        await rpc('admin_add_site_to_collection', { input_key: getKey(), p_collection_id: collectionId, p_site_id: siteId });
+        showToast(`Added "${siteName}" to collection`);
+        document.getElementById(`suggest-${collectionId}`).classList.remove('show');
+        const card = document.querySelector(`.collection-admin-card[data-id="${collectionId}"]`);
+        if (card) card.querySelector('.manage-search').value = '';
+        loadCollectionsAdmin();
+      } catch (e) {
+        showToast(e.message || 'Failed to add site', true);
+      }
+    }
+
+    async function removeSiteFromCollection(collectionId, siteId, btn) {
+      btn.disabled = true; btn.textContent = 'Removing…';
+      try {
+        await rpc('admin_remove_site_from_collection', { input_key: getKey(), p_collection_id: collectionId, p_site_id: siteId });
+        loadCollectionsAdmin();
+      } catch (e) {
+        showToast(e.message || 'Failed to remove site', true);
+        btn.disabled = false; btn.textContent = 'Remove';
+      }
     }
 
     (async function autoLogin() {

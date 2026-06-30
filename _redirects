@@ -7,6 +7,8 @@
 /pages/new        /pages/new/      301
 /pages/leaderboard /pages/leaderboard/ 301
 /pages/api        /pages/api/      301
+/pages/sites      /pages/sites/    301
+/pages/collections /pages/collections/ 301
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301

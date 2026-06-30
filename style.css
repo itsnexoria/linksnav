@@ -151,6 +151,7 @@ body {
 .logo:hover .logo-img { transform:rotate(-8deg) scale(1.08); border-color:var(--accent) }
 .logo-text {
   color:var(--text);
+  margin:0; padding:0; font:inherit; line-height:1;
   /* no gradient animation */
   -webkit-text-fill-color:unset;
   background:none;
@@ -228,6 +229,41 @@ body {
 .submit-nav-btn:hover .submit-nav-icon { animation:wiggle .4s ease }
 .submit-nav-icon { font-size:.9rem; line-height:1; display:inline-block }
 
+/* ── COLLECTIONS STRIP ───────────────────────────────────────── */
+.collections-strip {
+  max-width:1280px; margin:0 auto; padding:18px 24px 4px;
+  position:relative; z-index:5;
+}
+.collections-strip:empty { display:none }
+.collections-strip-head {
+  display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px;
+}
+.collections-strip-label { font-family:var(--font-d); font-weight:800; font-size:.92rem; letter-spacing:-.01em }
+.collections-strip-all {
+  font-size:.74rem; color:var(--muted); text-decoration:none; font-family:var(--font-m);
+  transition:color .18s;
+}
+.collections-strip-all:hover { color:var(--accent) }
+.collections-strip-row {
+  display:flex; gap:8px; overflow-x:auto; padding-bottom:6px;
+  scrollbar-width:none;
+}
+.collections-strip-row::-webkit-scrollbar { display:none }
+.collections-pill {
+  --pill-color:#7c5cfc;
+  display:inline-flex; align-items:center; gap:6px; flex-shrink:0;
+  padding:8px 14px; border-radius:100px; white-space:nowrap; text-decoration:none;
+  font-family:var(--font-m); font-size:.78rem; font-weight:600; color:var(--text);
+  background:color-mix(in srgb,var(--pill-color) 10%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--pill-color) 30%,var(--border));
+  transition:transform .15s, border-color .18s;
+}
+.collections-pill:hover { transform:translateY(-1px); border-color:var(--pill-color) }
+.collections-pill-count {
+  font-size:.66rem; color:var(--muted); background:var(--bg3);
+  padding:1px 6px; border-radius:100px;
+}
+
 /* ── CAT NAV ─────────────────────────────────────────────────── */
 .cat-nav {
   position:sticky; top:var(--hdr); z-index:90;
@@ -290,7 +326,7 @@ body {
 .section-label {
   font-family:var(--font-d); font-size:.65rem; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
-  margin-bottom:16px; display:flex; align-items:center; gap:10px;
+  margin:0 0 16px; display:flex; align-items:center; gap:10px;
   animation:fadeIn .3s ease both;
 }
 .section-label::after { content:''; flex:1; height:1px; background:var(--border) }
@@ -659,34 +695,28 @@ body {
 .section-label { letter-spacing:.14em; font-weight:700 }
 .load-more-btn  { font-weight:600 }
 
-/* ── COPY LINK BUTTON ────────────────────────────────────────── */
-.copy-link-btn {
-  position:absolute; bottom:10px; left:10px; z-index:10;
-  display:inline-flex; align-items:center; justify-content:center;
-  width:24px; height:24px;
-  background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
-  font-size:.72rem; cursor:pointer; color:var(--muted);
-  transition:all .2s, transform .15s cubic-bezier(.34,1.56,.64,1);
-  opacity:0; pointer-events:none;
-}
-.card-wrap:hover .copy-link-btn { opacity:1; pointer-events:auto }
-.copy-link-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); transform:scale(1.1) }
-.copy-link-btn:active { transform:scale(.88) }
-.copy-link-btn.copied { animation:popScale .3s cubic-bezier(.34,1.56,.64,1); color:#22c55e; border-color:#22c55e }
-
 /* ── INFO BUTTON ─────────────────────────────────────────────── */
 .info-btn {
-  position:absolute; bottom:10px; right:10px; z-index:10;
-  display:inline-flex; align-items:center; justify-content:center;
-  width:22px; height:22px;
+  position:absolute; bottom:9px; right:9px; z-index:10;
+  display:inline-flex; align-items:center; justify-content:center; gap:4px;
+  height:24px; min-width:24px; padding:0 8px;
   background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
-  font-size:.78rem; cursor:pointer; color:var(--muted); font-weight:700;
-  transition:all .2s, transform .15s cubic-bezier(.34,1.56,.64,1);
-  opacity:0; pointer-events:none;
+  font-size:.72rem; font-family:var(--font-m); font-weight:600; letter-spacing:.01em;
+  cursor:pointer; color:var(--muted);
+  transition:all .2s cubic-bezier(.34,1.56,.64,1);
+  opacity:0; pointer-events:none; transform:scale(.9);
 }
-.card-wrap:hover .info-btn { opacity:1; pointer-events:auto }
-.info-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); transform:scale(1.1) }
-.info-btn:active { transform:scale(.88) }
+.info-btn::before {
+  content:'ⓘ'; font-size:.85rem; line-height:1; font-weight:400;
+}
+.info-btn .info-btn-label {
+  max-width:0; margin-left:0; overflow:hidden; white-space:nowrap;
+  transition:max-width .22s ease, margin-left .22s ease;
+}
+.card-wrap:hover .info-btn { opacity:1; pointer-events:auto; transform:scale(1) }
+.info-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent) }
+.info-btn:hover .info-btn-label { max-width:30px; margin-left:4px }
+.info-btn:active { transform:scale(.9) }
 
 /* ── TOAST ───────────────────────────────────────────────────── */
 .toast {
@@ -747,6 +777,14 @@ body {
   font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
   padding:3px 10px; border-radius:100px; background:var(--accent-dim); color:var(--accent);
 }
+.detail-health-badge {
+  display:inline-flex; align-items:center; gap:4px; margin-left:6px;
+  font-size:.66rem; font-weight:600; letter-spacing:.01em;
+  padding:3px 9px; border-radius:100px; cursor:default;
+}
+.detail-health-badge--up { background:rgba(34,197,94,0.1); color:#22c55e; border:1px solid rgba(34,197,94,0.25) }
+.detail-health-badge--down { background:rgba(239,68,68,0.1); color:#ef4444; border:1px solid rgba(239,68,68,0.3) }
+.detail-health-badge--unknown { background:var(--surface2); color:var(--muted); border:1px solid var(--border2) }
 .detail-desc { font-size:.88rem; color:var(--text2); line-height:1.75; margin-bottom:18px; }
 .detail-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; }
 

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /pages/admin/
 Disallow: /pages/contact/
 
-Sitemap: https://app.nexosites.xyz/sitemap.xml
+Sitemap: https://nexohub.nexosites.xyz/sitemap.xml

@@ -23,6 +23,7 @@ const CORE_ASSETS = [
   '/assets/favicon-32.png',
   '/assets/favicon-64.png',
   '/pages/tools/',
+  '/pages/collections/',
   '/pages/about/',
   '/pages/new/',
   '/pages/leaderboard/',

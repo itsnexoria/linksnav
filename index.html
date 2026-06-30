@@ -7,7 +7,7 @@
 
   <!-- ── PRIMARY SEO ─────────────────────────────────── -->
   <title>Nexo Hub — Your Digital Command Center</title>
-  <meta name="description" content="Nexo Hub is a curated, searchable directory of 480+ essential websites across AI, gaming, dev tools, design, music, finance, security, and more. Find your next favourite tool instantly." />
+  <meta name="description" content="Nexo Hub is a curated, searchable directory of 460+ essential websites across AI, gaming, dev tools, design, music, and finance." />
   <meta name="keywords"    content="web directory, useful websites, ai tools, dev tools, gaming sites, design resources, productivity apps, nexhub" />
   <meta name="author"      content="Nexus" />
   <link rel="canonical"    href="https://nexohub.nexosites.xyz/" />
@@ -16,16 +16,17 @@
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://nexohub.nexosites.xyz/" />
   <meta property="og:title"       content="Nexo Hub — Your Digital Command Center" />
-  <meta property="og:description" content="480+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
+  <meta property="og:description" content="460+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
   <meta property="og:image"       content="https://nexohub.nexosites.xyz/assets/logo-512.png" />
   <meta property="og:image:width"  content="512" />
   <meta property="og:image:height" content="512" />
   <meta property="og:site_name"   content="Nexo Hub" />
+  <meta property="og:locale"      content="en_US" />
 
   <!-- ── TWITTER CARD ──────────────────────────────────── -->
   <meta name="twitter:card"        content="summary" />
   <meta name="twitter:title"       content="Nexo Hub — Your Digital Command Center" />
-  <meta name="twitter:description" content="480+ curated websites. Search, filter, favourite." />
+  <meta name="twitter:description" content="460+ curated websites. Search, filter, favourite." />
   <meta name="twitter:image"       content="https://nexohub.nexosites.xyz/assets/logo-512.png" />
 
   <!-- ── FAVICONS ──────────────────────────────────────── -->
@@ -42,13 +43,26 @@
     "@type": "WebSite",
     "name": "Nexo Hub",
     "url": "https://nexohub.nexosites.xyz/",
-    "description": "Curated directory of 480+ essential websites across AI, gaming, dev tools, design, music, finance, and more.",
+    "description": "Curated directory of 460+ essential websites across AI, gaming, dev tools, design, music, finance, and more.",
     "author": { "@type": "Person", "name": "Nexus" },
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://nexohub.nexosites.xyz/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Nexo Hub",
+    "url": "https://nexohub.nexosites.xyz/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "description": "A curated, searchable directory of 460+ essential websites across AI, gaming, dev tools, design, and more — installable as a free progressive web app.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "creator": { "@type": "Person", "name": "Nexus" }
   }
   </script>
 
@@ -64,7 +78,7 @@
   <script>
     (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260629-1" />
+  <link rel="stylesheet" href="style.css?v=20260629-3" />
 
   <style>
     @keyframes skeletonPulse {
@@ -104,7 +118,7 @@
              width="36" height="36"
              loading="eager"
              decoding="async" />
-        <span class="logo-text">Nexo Hub</span>
+        <h1 class="logo-text">Nexo Hub</h1>
       </a>
 
       <!-- Controls (search + count + submit) -->
@@ -117,7 +131,7 @@
           <input type="search"
                  id="searchInput"
                  aria-label="Search sites"
-                 placeholder="Search 480+ sites…"
+                 placeholder="Search 460+ sites…"
                  autocomplete="off"
                  spellcheck="false" />
           <kbd aria-hidden="true">Ctrl K</kbd>
@@ -174,6 +188,7 @@
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link nav-link--active">🏠 Home</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/collections/" class="nav-link">🗂️ Collections</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
@@ -189,6 +204,9 @@
   </div>
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
+  <!-- ── COLLECTIONS TEASER ───────────────────────────────── -->
+  <div class="collections-strip" id="collectionsStrip"></div>
+
   <!-- ── CATEGORY NAV ──────────────────────────────────── -->
   <nav class="cat-nav" id="catNav" aria-label="Site categories">
     <button class="cat-scroll-btn" id="scrollLeft"  aria-label="Scroll categories left">‹</button>
@@ -200,7 +218,7 @@
 
   <!-- ── MAIN ──────────────────────────────────────────── -->
   <main class="main" id="main">
-    <div class="section-label" id="sectionLabel" aria-live="polite">All Sites</div>
+    <h2 class="section-label" id="sectionLabel" aria-live="polite">All Sites</h2>
 
     <div class="filter-bar" id="filterBar" role="toolbar" aria-label="Filter and sort options">
       <span class="filter-bar-label">Sort</span>
@@ -265,7 +283,7 @@
 
   <div class="toast" id="toast" aria-live="polite"></div>
 
-  <script src="app.js?v=20260629-1" defer></script>
+  <script src="app.js?v=20260629-3" defer></script>
   <script src="/pwa-register.js" defer></script>
 </body>
 </html>

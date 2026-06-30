@@ -37,7 +37,7 @@
     .api-hero { margin-bottom: 36px; animation: fadeUp .4s ease both; }
     .api-title {
       font-family: var(--font-d); font-size: clamp(1.7rem,4vw,2.3rem);
-      font-weight: 800; letter-spacing: -.03em; margin-bottom: 10px;
+      font-weight: 800; letter-spacing: -.03em; margin:0 0 10px;
     }
     .api-sub { font-size: .85rem; color: var(--text2); line-height: 1.7; }
     .api-sub code { background: var(--bg2); padding: 2px 6px; border-radius: 5px; color: var(--accent); font-size: .82em; }
@@ -131,6 +131,7 @@
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/collections/" class="nav-link">🗂️ Collections</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
@@ -148,7 +149,7 @@
     <a href="/" class="back-link">← Back to Nexo Hub</a>
 
     <div class="api-hero">
-      <div class="api-title">⚡ Nexo Hub API</div>
+      <h1 class="api-title">⚡ Nexo Hub API</h1>
       <p class="api-sub">A free, read-only public API for the Nexo Hub directory. No API key, no sign-up, no rate-limit headaches — just <code>fetch()</code> and go.</p>
       <div class="api-badges">
         <span class="api-badge">No auth required</span>
