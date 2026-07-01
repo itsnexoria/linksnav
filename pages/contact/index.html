@@ -279,13 +279,13 @@
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
-        <a href="/pages/collections/" class="nav-link">🗂️ Collections</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
         <a href="/pages/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/api/" class="nav-link">⚡ API</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/settings/" class="nav-link">⚙️ Settings</a>
         <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
@@ -418,6 +418,12 @@
           </div>
 
         </div><!-- /form-grid -->
+
+        <!-- Honeypot — hidden from real users, filled by bots -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none;tab-index:-1">
+          <label for="hp_website">Website (leave blank)</label>
+          <input type="text" id="hp_website" name="website" tabindex="-1" autocomplete="off"/>
+        </div>
 
         <div style="margin-top:26px">
           <button type="submit" class="btn-sub" id="submitBtn">
@@ -651,38 +657,67 @@
 
       btn.querySelector('.btn-txt').textContent='⏳ Sending…';
 
+      /* Honeypot check — if the hidden field was filled, silently fake success */
+      if(document.getElementById('hp_website').value.trim()){
+        /* Fake a delay then show success — bot thinks it worked */
+        await new Promise(r=>setTimeout(r,800));
+        document.getElementById('s1').classList.remove('active');
+        document.getElementById('s2').classList.add('done');
+        document.getElementById('l1').classList.add('done');
+        document.getElementById('l2').classList.add('done');
+        document.getElementById('s3').classList.add('active');
+        document.getElementById('formGrid').style.display='none';
+        btn.style.display='none';
+        document.getElementById('successState').classList.add('show');
+        return;
+      }
+
       const pricing = document.getElementById('pricingHidden').value || null;
       const whyAdd = document.getElementById('whyAdd').value.trim();
       const submittedBy = document.getElementById('who').value.trim() || null;
       const email = document.getElementById('email').value.trim() || null;
       const categoryId = CATEGORY_ID_MAP[ct.value] || 'tools';
 
-      const payload = {
-        name: nm.value.trim(),
-        url: ul.value.trim(),
-        description: ds.value.trim(),
-        category: categoryId,
-        tags: pricing ? [pricing] : [],
-        tag_colors: pricing ? { [pricing]: pricing==='free'?'#22c55e':pricing==='paid'?'#ef4444':'#3b82f6' } : {},
-        color: '#4f7fff',
-        status: 'pending',
-        submitted_by_name: submittedBy,
-        submitted_by_email: email,
-        submitted_note: whyAdd || null
-      };
+      /* Browser fingerprint — lightweight, no personal data.
+         Used only for rate-limiting on the server side. */
+      const fp = btoa([
+        navigator.language,
+        screen.width+'x'+screen.height,
+        new Date().getTimezoneOffset(),
+        navigator.hardwareConcurrency||0,
+        navigator.platform||''
+      ].join('|')).slice(0,32);
 
       try{
-        const res=await fetch(`${SUPABASE_URL}/rest/v1/sites`,{
+        const res=await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_site_safe`,{
           method:'POST',
           headers:{
             'apikey': SUPABASE_ANON_KEY,
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            p_name: nm.value.trim(),
+            p_url: ul.value.trim(),
+            p_description: ds.value.trim(),
+            p_category: categoryId,
+            p_tags: pricing ? [pricing] : [],
+            p_tag_colors: pricing ? { [pricing]: pricing==='free'?'#22c55e':pricing==='paid'?'#ef4444':'#3b82f6' } : {},
+            p_color: '#4f7fff',
+            p_submitted_by_name: submittedBy,
+            p_submitted_by_email: email,
+            p_submitted_note: whyAdd || null,
+            p_fingerprint: fp
+          })
         });
         if(res.ok){
+          // Save to My Submissions history for the Settings page
+          try{
+            const subs = JSON.parse(localStorage.getItem('nexhub_my_submissions')||'[]');
+            subs.unshift({ name: nm.value.trim(), url: ul.value.trim(), submittedAt: new Date().toISOString() });
+            localStorage.setItem('nexhub_my_submissions', JSON.stringify(subs.slice(0,50)));
+          }catch{}
+
           document.getElementById('s1').classList.remove('active');
           document.getElementById('s2').classList.add('done');
           document.getElementById('l1').classList.add('done');
@@ -694,9 +729,14 @@
           blast();
         } else {
           const errBody = await res.json().catch(()=>({}));
-          if (errBody.message && (errBody.message.includes('duplicate') || errBody.code === '23505')) {
+          const msg = errBody.message || '';
+          if(msg.includes('rate_limited')){
+            throw new Error('You\'ve submitted several sites recently — please wait an hour before submitting again.');
+          } else if(msg.includes('duplicate_url')){
             showDupWarning(nm.value.trim() || 'This site', 'approved');
             throw new Error('That URL has already been submitted or added to the hub.');
+          } else if(msg.includes('spam_detected')){
+            throw new Error('Submission blocked. If you\'re seeing this in error, please try refreshing the page.');
           }
           throw new Error('Something went wrong — please try again.');
         }

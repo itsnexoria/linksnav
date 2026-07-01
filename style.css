@@ -432,18 +432,16 @@ body {
 
 /* ── FAVOURITES ─────────────────────────────────────────────── */
 .fav-btn {
-  position:absolute; bottom:10px; right:10px; z-index:10;
   display:inline-flex; align-items:center; gap:4px;
-  padding:4px 10px;
+  padding:5px 11px;
   background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
   font-size:.65rem; font-family:var(--font-m); font-weight:600;
   cursor:pointer; color:var(--muted);
-  transition:all .2s, transform .15s cubic-bezier(.34,1.56,.64,1); opacity:0; pointer-events:none;
+  transition:all .18s, transform .15s cubic-bezier(.34,1.56,.64,1);
 }
-.card-wrap:hover .fav-btn { opacity:1; pointer-events:auto }
-.fav-btn:hover { background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.4); color:#f59e0b; transform:scale(1.06) }
+.fav-btn:hover { background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.4); color:#f59e0b; transform:scale(1.04) }
 .fav-btn:active { transform:scale(.92) }
-.fav-btn--active { opacity:1; pointer-events:auto; background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.3); color:#f59e0b; animation:popScale .3s cubic-bezier(.34,1.56,.64,1) }
+.fav-btn--active { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.3); color:#f59e0b; animation:popScale .3s cubic-bezier(.34,1.56,.64,1) }
 .fav-btn--active:hover { background:rgba(245,158,11,0.04); border-color:rgba(245,158,11,0.15); color:var(--muted) }
 
 /* Pinned header */
@@ -653,35 +651,26 @@ body {
   border-radius:5px; background:var(--bg3); border:1px solid var(--border2);
   line-height:1; user-select:none;
 }
-.card-wrap:hover .drag-handle { opacity:1 }
-.card-wrap .fav-btn { right:34px }
-
-/* ── SECTION LABEL OVERRIDES ─────────────────────────────────── */
-.section-label { letter-spacing:.14em; font-weight:700 }
-.load-more-btn  { font-weight:600 }
+/* ── CARD ACTIONS ROW (fav + info — always visible, no overlap) ─ */
+.card-actions {
+  display:flex; align-items:center; gap:6px;
+  padding:8px 12px 10px; margin-top:auto;
+  border-top:1px solid var(--border);
+}
+.card-wrap[draggable="true"] .card-actions { padding-left:38px }
 
 /* ── INFO BUTTON ─────────────────────────────────────────────── */
 .info-btn {
-  position:absolute; bottom:9px; right:9px; z-index:10;
-  display:inline-flex; align-items:center; justify-content:center; gap:4px;
-  height:24px; min-width:24px; padding:0 8px;
+  display:inline-flex; align-items:center; gap:4px; margin-left:auto;
+  height:26px; padding:0 10px;
   background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
-  font-size:.72rem; font-family:var(--font-m); font-weight:600; letter-spacing:.01em;
+  font-size:.72rem; font-family:var(--font-m); font-weight:600;
   cursor:pointer; color:var(--muted);
-  transition:all .2s cubic-bezier(.34,1.56,.64,1);
-  opacity:0; pointer-events:none; transform:scale(.9);
+  transition:all .18s;
 }
-.info-btn::before {
-  content:'ⓘ'; font-size:.85rem; line-height:1; font-weight:400;
-}
-.info-btn .info-btn-label {
-  max-width:0; margin-left:0; overflow:hidden; white-space:nowrap;
-  transition:max-width .22s ease, margin-left .22s ease;
-}
-.card-wrap:hover .info-btn { opacity:1; pointer-events:auto; transform:scale(1) }
+.info-btn::before { content:'ⓘ'; font-size:.85rem; font-weight:400; }
 .info-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent) }
-.info-btn:hover .info-btn-label { max-width:30px; margin-left:4px }
-.info-btn:active { transform:scale(.9) }
+.info-btn:active { transform:scale(.92) }
 
 /* ── TOAST ───────────────────────────────────────────────────── */
 .toast {
@@ -815,3 +804,14 @@ body {
 .report-submit-btn:hover { opacity:.88 }
 .report-submit-btn:disabled { opacity:.5; cursor:not-allowed }
 .report-success { text-align:center; padding:20px 0; color:#22c55e; font-size:.85rem; font-weight:600; }
+
+/* ── USER PREFERENCE OVERRIDES ───────────────────────────────── */
+/* Compact cards mode — tighter cards, less padding */
+.compact-cards .card { padding:12px 14px 10px }
+.compact-cards .card-desc { -webkit-line-clamp:2; font-size:.75rem; margin-bottom:6px; }
+.compact-cards .card-top { margin-bottom:4px }
+
+/* Disable ambient background animations */
+.no-animations .ambient-bg,
+.no-animations .particle,
+.no-animations .grid-bg { animation:none !important; opacity:.05 !important }

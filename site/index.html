@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <!-- Meta tags are written dynamically by JS once the site data loads -->
+  <title>Loading… — Nexo Hub</title>
+  <meta name="description" content="Nexo Hub — a curated directory of 460+ essential websites."/>
+  <link rel="canonical" href="https://nexohub.nexosites.xyz/site/"/>
+  <meta property="og:title" content="Nexo Hub"/>
+  <meta property="og:description" content="Curated directory of 460+ essential websites."/>
+  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="theme-color" content="#7c5cfc"/>
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css?v=20260629-5"/>
+  <style>
+    .site-detail-wrap {
+      max-width: 760px; margin: 0 auto; padding: 40px 24px 80px;
+      position: relative; z-index: 1;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .78rem; color: var(--muted); text-decoration: none;
+      margin-bottom: 32px; transition: color .18s, gap .18s;
+    }
+    .back-link:hover { color: var(--accent); gap: 10px; }
+
+    .sd-hero {
+      display: flex; align-items: flex-start; gap: 20px;
+      margin-bottom: 28px;
+      animation: fadeUp .4s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+    .sd-favicon {
+      width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+      background: var(--surface); border: 1px solid var(--border);
+      object-fit: contain; padding: 4px;
+    }
+    .sd-title { font-family: var(--font-d); font-size: clamp(1.5rem,4vw,2rem); font-weight: 800; letter-spacing: -.03em; margin: 0 0 6px; }
+    .sd-url { font-size: .78rem; color: var(--accent); text-decoration: none; word-break: break-all; }
+    .sd-url:hover { text-decoration: underline; }
+    .sd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+
+    .sd-body {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
+      animation: fadeUp .45s .05s ease both; opacity: 0; animation-fill-mode: both;
+    }
+    .sd-desc { font-size: .9rem; line-height: 1.75; color: var(--text2); }
+    .sd-section-label { font-family: var(--font-d); font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 20px 0 10px; }
+    .sd-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sd-health {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .72rem; font-family: var(--font-m); font-weight: 600;
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .sd-health--up { background: rgba(34,197,94,.1); color: #22c55e; border: 1px solid rgba(34,197,94,.25) }
+    .sd-health--down { background: rgba(239,68,68,.1); color: #ef4444; border: 1px solid rgba(239,68,68,.3) }
+    .sd-health--unknown { background: var(--surface2); color: var(--muted); border: 1px solid var(--border2) }
+
+    .sd-actions {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      animation: fadeUp .5s .1s ease both; opacity: 0; animation-fill-mode: both;
+    }
+    .sd-action-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 11px 22px; border-radius: 100px; text-decoration: none;
+      font-family: var(--font-m); font-size: .82rem; font-weight: 600;
+      transition: transform .18s, box-shadow .18s;
+      border: 1px solid var(--border2); cursor: pointer;
+    }
+    .sd-action-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; border-color: transparent;
+    }
+    .sd-action-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,92,252,.35); }
+    .sd-action-secondary { background: var(--surface); color: var(--text2); }
+    .sd-action-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .sd-meta-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      animation: fadeUp .5s .15s ease both; opacity: 0; animation-fill-mode: both;
+    }
+    .sd-meta-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+    }
+    .sd-meta-label { font-size: .65rem; font-family: var(--font-m); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 4px; }
+    .sd-meta-value { font-size: .86rem; font-weight: 600; }
+
+    .sd-loading { display: flex; justify-content: center; padding: 80px 0; }
+    .sd-not-found { text-align: center; padding: 80px 20px; }
+    .sd-not-found h1 { font-family: var(--font-d); font-size: 1.5rem; margin: 12px 0 8px; }
+    .sd-not-found p { color: var(--muted); font-size: .85rem; }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    .loading-spin { display:inline-block; width:24px; height:24px; border:3px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/api/" class="nav-link">⚡ API</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="site-detail-wrap">
+    <a href="/" class="back-link">← All Sites</a>
+    <div id="sdContent">
+      <div class="sd-loading"><span class="loading-spin"></span></div>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    const BASE = 'https://nexohub.nexosites.xyz';
+
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function fav(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=64'; }catch{ return ''; } }
+    function timeAgo(iso){
+      const m=Math.round((Date.now()-new Date(iso).getTime())/60000);
+      if(m<1) return 'just now'; if(m<60) return m+'m ago';
+      const h=Math.round(m/60); if(h<24) return h+'h ago';
+      return Math.round(h/24)+'d ago';
+    }
+
+    function setMeta(site, catLabel){
+      document.title = `${site.name} — Nexo Hub`;
+      const desc = `${site.name}: ${(site.description||'').slice(0,140)}`;
+      document.querySelector('meta[name="description"]').content = desc;
+      document.querySelector('meta[property="og:title"]').content = `${site.name} — Nexo Hub`;
+      document.querySelector('meta[property="og:description"]').content = desc;
+      const canonical = `${BASE}/site/${site.slug}/`;
+      document.querySelector('link[rel="canonical"]').href = canonical;
+      document.querySelector('meta[property="og:type"]').content = 'website';
+
+      const jsonld = document.createElement('script');
+      jsonld.type = 'application/ld+json';
+      jsonld.textContent = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"WebPage",
+        "name": site.name,
+        "description": site.description,
+        "url": site.url,
+        "isPartOf": { "@type":"WebSite", "name":"Nexo Hub", "url":BASE+"/"},
+        "breadcrumb": {
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Nexo Hub","item":BASE+"/"},
+            {"@type":"ListItem","position":2,"name":catLabel||site.category,"item":BASE+"/?cat="+site.category},
+            {"@type":"ListItem","position":3,"name":site.name,"item":canonical}
+          ]
+        }
+      });
+      document.head.appendChild(jsonld);
+    }
+
+    async function load(){
+      const slug = location.pathname.replace(/\/site\//,'').replace(/\//g,'');
+      if(!slug){ renderNotFound(); return; }
+
+      try{
+        const [siteRes, catRes] = await Promise.all([
+          fetch(`${SUPABASE_URL}/rest/v1/rpc/get_site_by_slug`, {
+            method:'POST',
+            headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+            body: JSON.stringify({ p_slug: slug })
+          }),
+          fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label,icon`, { headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}` } })
+        ]);
+
+        const sites = await siteRes.json();
+        const cats = await catRes.json();
+        const site = Array.isArray(sites) ? sites[0] : sites;
+        if(!site){ renderNotFound(); return; }
+
+        const cat = cats.find(c=>c.id===site.category);
+        const catLabel = cat ? `${cat.icon} ${cat.label}` : site.category;
+        setMeta(site, cat ? cat.label : site.category);
+        renderSite(site, catLabel);
+      }catch(e){
+        renderNotFound();
+      }
+    }
+
+    function renderSite(site, catLabel){
+      const faviconUrl = fav(site.url);
+      const tags = (site.tags||[]).map(t=>{
+        const bg=(site.tag_colors||{})[t]||'#6b7280';
+        return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+      }).join('');
+
+      const health = (()=>{
+        if(!site.last_checked_at) return `<span class="sd-health sd-health--unknown">○ Not yet checked</span>`;
+        if(site.health_status==='up') return `<span class="sd-health sd-health--up">● Healthy · checked ${esc(timeAgo(site.last_checked_at))}</span>`;
+        return `<span class="sd-health sd-health--down">⚠ May be down · HTTP ${site.http_status||'no response'} · checked ${esc(timeAgo(site.last_checked_at))}</span>`;
+      })();
+
+      const addedDate = site.created_at ? new Date(site.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '—';
+
+      document.getElementById('sdContent').innerHTML = `
+        <div class="sd-hero">
+          ${faviconUrl ? `<img class="sd-favicon" src="${esc(faviconUrl)}" alt="${esc(site.name)} favicon" onerror="this.style.display='none'"/>` : ''}
+          <div>
+            <h1 class="sd-title">${esc(site.name)}</h1>
+            <a class="sd-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>
+            <div class="sd-badges">
+              <span class="detail-cat-badge">${esc(catLabel)}</span>
+              ${health}
+            </div>
+          </div>
+        </div>
+
+        <div class="sd-body">
+          <p class="sd-desc">${esc(site.description)}</p>
+          ${tags ? `<div class="sd-section-label">Tags</div><div class="sd-tags">${tags}</div>` : ''}
+        </div>
+
+        <div class="sd-actions">
+          <a class="sd-action-btn sd-action-primary" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">
+            ↗ Visit Site
+          </a>
+          <button class="sd-action-btn sd-action-secondary" onclick="copyLink()">
+            🔗 Copy Link
+          </button>
+          <a class="sd-action-btn sd-action-secondary" href="/">
+            ← Back to Hub
+          </a>
+        </div>
+
+        <div class="sd-section-label" style="margin-top:28px">About this listing</div>
+        <div class="sd-meta-grid">
+          <div class="sd-meta-card">
+            <div class="sd-meta-label">Category</div>
+            <div class="sd-meta-value">${esc(catLabel)}</div>
+          </div>
+          <div class="sd-meta-card">
+            <div class="sd-meta-label">Added to Nexo Hub</div>
+            <div class="sd-meta-value">${esc(addedDate)}</div>
+          </div>
+        </div>`;
+    }
+
+    function renderNotFound(){
+      document.title = 'Site not found — Nexo Hub';
+      document.getElementById('sdContent').innerHTML = `
+        <div class="sd-not-found">
+          <div style="font-size:3rem">🔍</div>
+          <h1>Site not found</h1>
+          <p>This listing may have been removed or the URL is incorrect.</p>
+          <a class="sd-action-btn sd-action-primary" href="/" style="margin-top:20px;display:inline-flex">← Browse all sites</a>
+        </div>`;
+    }
+
+    function copyLink(){
+      const url = location.href;
+      if(navigator.clipboard) navigator.clipboard.writeText(url).then(()=>alert('Link copied!')).catch(legacyCopy);
+      else legacyCopy();
+      function legacyCopy(){
+        const ta=document.createElement('textarea'); ta.value=url;
+        ta.style.position='fixed'; ta.style.left='-9999px';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); alert('Link copied!');
+      }
+    }
+
+    load();
+
+    /* Theme + nav */
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham) ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});
+      if(ov) ov.addEventListener('click',closeM);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+    });
+  </script>
+  <script src="/pwa-register.js" defer></script>
+</body>
+</html>

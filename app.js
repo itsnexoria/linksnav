@@ -6,6 +6,20 @@
    ============================================================ */
 'use strict';
 
+/* Apply saved user preferences from Settings page before first render */
+(function applyPrefs(){
+  try{
+    const p = JSON.parse(localStorage.getItem('nexhub_prefs')||'{}');
+    if(p.accent){
+      document.documentElement.style.setProperty('--accent', p.accent);
+      document.documentElement.style.setProperty('--accent2', p.accent2||p.accent);
+      document.documentElement.style.setProperty('--accent-dim', p.accent+'22');
+    }
+    if(p.compact) document.documentElement.classList.add('compact-cards');
+    if(p.animations===false) document.documentElement.classList.add('no-animations');
+  }catch{}
+})();
+
 /* ── CONSTANTS ──────────────────────────────────────────────── */
 const CLICKS_KEY = 'nexhub_clicks';
 const FAVS_KEY   = 'nexhub_favs';
@@ -126,6 +140,7 @@ async function init(){
       tag_colors: s.tag_colors || {},
       color: s.color || '#4f7fff',
       created_at: s.created_at,
+      slug: s.slug,
       health_status: s.health_status,
       http_status: s.http_status,
       last_checked_at: s.last_checked_at
@@ -453,12 +468,14 @@ function cardHTML(s,draggable=false){
       <div class="card-footer">${tagHTML}${downBadge}</div>
       <div class="click-count" aria-label="Visit count"><span aria-hidden="true">👁</span><span class="click-count-num">${fmtCount(getCount(s.url))}</span></div>
     </a>
-    <button class="fav-btn${isFav?' fav-btn--active':''}"
-            onclick="toggleFav('${esc(s.url)}',event)"
-            aria-label="${isFav?'Remove from':'Add to'} favorites">
-      ${isFav?'★ Saved':'☆ Save'}
-    </button>
-    ${s.id?`<button class="info-btn" onclick="openSiteDetail('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}" title="More info"><span class="info-btn-label">Info</span></button>`:''}
+    <div class="card-actions">
+      <button class="fav-btn${isFav?' fav-btn--active':''}"
+              onclick="toggleFav('${esc(s.url)}',event)"
+              aria-label="${isFav?'Remove from':'Add to'} favorites">
+        ${isFav?'★ Saved':'☆ Save'}
+      </button>
+      ${s.id?`<button class="info-btn" onclick="openSiteDetail('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}"><span>Info</span></button>`:''}
+    </div>
   </div>`;
 }
 
@@ -673,6 +690,7 @@ window.openSiteDetail = async function(siteId, e){
     <div class="detail-action-row">
       <button class="detail-action-btn" onclick="copyCardLink('${esc(site.url)}', event)">🔗 Copy Link</button>
       <button class="detail-action-btn" onclick="toggleFav('${esc(site.url)}', event); this.textContent = favorites.has('${esc(site.url)}') ? '★ Saved' : '☆ Save'">${favorites.has(site.url)?'★ Saved':'☆ Save'}</button>
+      ${site.slug?`<a class="detail-action-btn" href="/site/${esc(site.slug)}/" style="text-decoration:none">📄 Full Page</a>`:''}
       <button class="detail-action-btn danger" onclick="toggleReportForm()">⚠️ Report</button>
     </div>
 

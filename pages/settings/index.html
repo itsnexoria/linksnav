@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Settings — Nexo Hub</title>
+  <meta name="description" content="Customise your Nexo Hub experience — theme, display preferences, and view sites you've submitted."/>
+  <meta name="robots" content="noindex"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css?v=20260629-5"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+    @keyframes spin { to { transform:rotate(360deg) } }
+
+    .settings-wrap {
+      max-width: 680px; margin: 0 auto; padding: 40px 24px 100px;
+      position: relative; z-index: 1;
+    }
+    .settings-hero { margin-bottom: 36px; animation: fadeUp .35s ease both; }
+    .settings-title { font-family: var(--font-d); font-size: clamp(1.5rem,4vw,2rem); font-weight: 800; letter-spacing: -.03em; margin: 0 0 6px; }
+    .settings-sub { font-size: .84rem; color: var(--text2); }
+
+    .settings-section { margin-bottom: 32px; animation: fadeUp .4s ease both; }
+    .settings-section-title {
+      font-family: var(--font-d); font-size: .6rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .settings-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .settings-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px; gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .settings-row:last-child { border-bottom: none; }
+    .settings-row-info { flex: 1; min-width: 0; }
+    .settings-row-label { font-weight: 600; font-size: .88rem; margin-bottom: 2px; }
+    .settings-row-desc { font-size: .74rem; color: var(--muted); line-height: 1.5; }
+
+    /* Theme picker */
+    .theme-options { display: flex; gap: 8px; }
+    .theme-opt {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      cursor: pointer; padding: 8px 12px; border-radius: var(--radius);
+      border: 2px solid var(--border); background: var(--bg2);
+      transition: border-color .18s; font-size: .7rem; font-family: var(--font-m); font-weight: 600; color: var(--muted);
+    }
+    .theme-opt:hover { border-color: var(--border2); }
+    .theme-opt.active { border-color: var(--accent); color: var(--accent); }
+    .theme-swatch {
+      width: 40px; height: 28px; border-radius: 6px; overflow: hidden;
+      display: flex; gap: 3px; padding: 4px;
+    }
+    .theme-swatch-dark { background: #0d0f17; }
+    .theme-swatch-light { background: #f5f5f7; }
+    .theme-swatch-bar { flex: 1; border-radius: 2px; }
+
+    /* Toggle switch */
+    .toggle-switch { position: relative; width: 42px; height: 24px; flex-shrink: 0; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; inset: 0; background: var(--border2); border-radius: 100px;
+      cursor: pointer; transition: background .2s;
+    }
+    .toggle-slider::before {
+      content: ''; position: absolute; width: 18px; height: 18px;
+      left: 3px; top: 3px; background: #fff; border-radius: 50%;
+      transition: transform .2s;
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+    /* Accent color picker */
+    .accent-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .accent-opt {
+      width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+      border: 3px solid transparent; transition: border-color .15s, transform .15s;
+    }
+    .accent-opt:hover { transform: scale(1.15); }
+    .accent-opt.active { border-color: var(--text); }
+
+    /* My Submissions */
+    .submissions-list { display: flex; flex-direction: column; }
+    .sub-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+    }
+    .sub-item:last-child { border-bottom: none; }
+    .sub-favicon { width: 28px; height: 28px; border-radius: 7px; background: var(--bg3); flex-shrink: 0; }
+    .sub-info { flex: 1; min-width: 0; }
+    .sub-name { font-weight: 600; font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sub-url { font-size: .72rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sub-status {
+      font-size: .65rem; font-family: var(--font-m); font-weight: 700;
+      padding: 2px 8px; border-radius: 100px; flex-shrink: 0;
+    }
+    .sub-status--pending { background: rgba(245,158,11,.12); color: #f59e0b; }
+    .sub-status--approved { background: rgba(34,197,94,.1); color: #22c55e; }
+    .sub-empty { padding: 28px 18px; color: var(--muted); font-size: .82rem; text-align: center; }
+
+    .clear-btn {
+      padding: 8px 16px; border-radius: var(--radius); background: transparent;
+      border: 1px solid var(--border2); color: var(--muted); font-family: var(--font-m);
+      font-size: .73rem; font-weight: 600; cursor: pointer; transition: border-color .18s, color .18s;
+    }
+    .clear-btn:hover { border-color: #ef4444; color: #ef4444; }
+    .loading-spin { display:inline-block; width:16px; height:16px; border:2px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/api/" class="nav-link">⚡ API</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/settings/" class="nav-link nav-link--active">⚙️ Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">🔐 Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="settings-wrap">
+    <div class="settings-hero">
+      <h1 class="settings-title">⚙️ Settings</h1>
+      <p class="settings-sub">Your preferences are saved locally in this browser.</p>
+    </div>
+
+    <!-- APPEARANCE -->
+    <div class="settings-section">
+      <div class="settings-section-title">Appearance</div>
+      <div class="settings-card">
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Theme</div>
+            <div class="settings-row-desc">Choose how Nexo Hub looks to you</div>
+          </div>
+          <div class="theme-options">
+            <button class="theme-opt" id="themeDark" onclick="setTheme('dark')">
+              <div class="theme-swatch theme-swatch-dark">
+                <div class="theme-swatch-bar" style="background:#7c5cfc"></div>
+                <div class="theme-swatch-bar" style="background:#1e2030"></div>
+              </div>
+              Dark
+            </button>
+            <button class="theme-opt" id="themeLight" onclick="setTheme('light')">
+              <div class="theme-swatch theme-swatch-light">
+                <div class="theme-swatch-bar" style="background:#7c5cfc"></div>
+                <div class="theme-swatch-bar" style="background:#e5e7eb"></div>
+              </div>
+              Light
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Accent Colour</div>
+            <div class="settings-row-desc">The purple highlight used throughout the site</div>
+          </div>
+          <div class="accent-options" id="accentPicker">
+            <button class="accent-opt" data-accent="#7c5cfc" style="background:#7c5cfc" title="Purple (default)" onclick="setAccent('#7c5cfc','#ec4899')"></button>
+            <button class="accent-opt" data-accent="#3b82f6" style="background:#3b82f6" title="Blue" onclick="setAccent('#3b82f6','#06b6d4')"></button>
+            <button class="accent-opt" data-accent="#22c55e" style="background:#22c55e" title="Green" onclick="setAccent('#22c55e','#10b981')"></button>
+            <button class="accent-opt" data-accent="#f59e0b" style="background:#f59e0b" title="Amber" onclick="setAccent('#f59e0b','#ef4444')"></button>
+            <button class="accent-opt" data-accent="#ef4444" style="background:#ef4444" title="Red" onclick="setAccent('#ef4444','#f97316')"></button>
+            <button class="accent-opt" data-accent="#ec4899" style="background:#ec4899" title="Pink" onclick="setAccent('#ec4899','#a855f7')"></button>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Compact Cards</div>
+            <div class="settings-row-desc">Reduce card height — fit more sites on screen at once</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="compactToggle" onchange="setSetting('compact', this.checked)"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Ambient Animations</div>
+            <div class="settings-row-desc">The floating particle effects in the background</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="animToggle" onchange="setSetting('animations', this.checked)" checked/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA & PRIVACY -->
+    <div class="settings-section" style="animation-delay:.05s">
+      <div class="settings-section-title">Data & Privacy</div>
+      <div class="settings-card">
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Favourites</div>
+            <div class="settings-row-desc" id="favCount">Loading…</div>
+          </div>
+          <button class="clear-btn" onclick="clearFavourites()">Clear</button>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Recently Visited</div>
+            <div class="settings-row-desc" id="recentCount">Loading…</div>
+          </div>
+          <button class="clear-btn" onclick="clearRecents()">Clear</button>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Click Counts</div>
+            <div class="settings-row-desc" id="clickCount">Loading…</div>
+          </div>
+          <button class="clear-btn" onclick="clearClicks()">Clear</button>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">All Local Data</div>
+            <div class="settings-row-desc">Reset everything — favourites, recents, preferences, click history</div>
+          </div>
+          <button class="clear-btn" id="clearAllBtn" onclick="clearAll()">Reset All</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MY SUBMISSIONS -->
+    <div class="settings-section" style="animation-delay:.1s">
+      <div class="settings-section-title">My Submissions</div>
+      <div class="settings-card">
+        <div id="subList"><div class="sub-empty"><span class="loading-spin"></span></div></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    const PREFS_KEY = 'nexhub_prefs';
+    const FAVS_KEY = 'nexhub_favs';
+    const RECENTS_KEY = 'nexhub_recents';
+    const CLICKS_KEY = 'nexhub_clicks';
+    const SUBS_KEY = 'nexhub_my_submissions'; // array of {name, url, submittedAt}
+
+    function getPrefs(){ try{ return JSON.parse(localStorage.getItem(PREFS_KEY)||'{}'); }catch{ return {}; } }
+    function savePrefs(p){ localStorage.setItem(PREFS_KEY, JSON.stringify(p)); }
+
+    /* ── THEME ─────────────────────────────────────────── */
+    function setTheme(t){
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('nexhub_theme', t);
+      const prefs = getPrefs(); prefs.theme = t; savePrefs(prefs);
+      updateThemeUI(t);
+    }
+    function updateThemeUI(t){
+      document.getElementById('themeDark').classList.toggle('active', t==='dark');
+      document.getElementById('themeLight').classList.toggle('active', t==='light');
+    }
+
+    /* ── ACCENT COLOUR ─────────────────────────────────── */
+    function setAccent(color, color2){
+      document.documentElement.style.setProperty('--accent', color);
+      document.documentElement.style.setProperty('--accent2', color2 || color);
+      document.documentElement.style.setProperty('--accent-dim', color+'22');
+      document.documentElement.style.setProperty('--accent-hover', color);
+      const prefs = getPrefs(); prefs.accent = color; prefs.accent2 = color2||color; savePrefs(prefs);
+      document.querySelectorAll('.accent-opt').forEach(b => b.classList.toggle('active', b.dataset.accent===color));
+    }
+    function applyAccent(color, color2){
+      if(!color) return;
+      document.documentElement.style.setProperty('--accent', color);
+      document.documentElement.style.setProperty('--accent2', color2||color);
+      document.documentElement.style.setProperty('--accent-dim', color+'22');
+      document.documentElement.style.setProperty('--accent-hover', color);
+    }
+
+    /* ── GENERIC TOGGLE SETTINGS ───────────────────────── */
+    function setSetting(key, val){
+      const prefs = getPrefs(); prefs[key] = val; savePrefs(prefs);
+      if(key==='compact') document.documentElement.classList.toggle('compact-cards', val);
+      if(key==='animations') document.documentElement.classList.toggle('no-animations', !val);
+    }
+
+    /* ── DATA STATS ─────────────────────────────────────── */
+    function updateStats(){
+      try{
+        const favs = JSON.parse(localStorage.getItem(FAVS_KEY)||'[]');
+        document.getElementById('favCount').textContent = `${favs.length} saved site${favs.length!==1?'s':''}`;
+      }catch{ document.getElementById('favCount').textContent = '0 saved sites'; }
+
+      try{
+        const recents = JSON.parse(localStorage.getItem(RECENTS_KEY)||'[]');
+        document.getElementById('recentCount').textContent = `${recents.length} recent site${recents.length!==1?'s':''}`;
+      }catch{ document.getElementById('recentCount').textContent = '0 recent sites'; }
+
+      try{
+        const clicks = JSON.parse(localStorage.getItem(CLICKS_KEY)||'{}');
+        const total = Object.values(clicks).reduce((a,b)=>a+b,0);
+        document.getElementById('clickCount').textContent = `${total.toLocaleString()} total click${total!==1?'s':''} across ${Object.keys(clicks).length} sites`;
+      }catch{ document.getElementById('clickCount').textContent = '—'; }
+    }
+
+    function clearFavourites(){
+      if(!confirm('Clear all saved favourites?')) return;
+      localStorage.removeItem(FAVS_KEY);
+      updateStats();
+      showToast('Favourites cleared');
+    }
+    function clearRecents(){
+      if(!confirm('Clear recently visited history?')) return;
+      localStorage.removeItem(RECENTS_KEY);
+      updateStats();
+      showToast('Recents cleared');
+    }
+    function clearClicks(){
+      if(!confirm('Clear click count history?')) return;
+      localStorage.removeItem(CLICKS_KEY);
+      updateStats();
+      showToast('Click counts cleared');
+    }
+    function clearAll(){
+      if(!confirm('Reset ALL local data — favourites, recents, preferences, click history, submissions? This cannot be undone.')) return;
+      ['nexhub_theme','nexhub_favs','nexhub_recents','nexhub_clicks',PREFS_KEY,SUBS_KEY].forEach(k=>localStorage.removeItem(k));
+      location.reload();
+    }
+
+    /* ── MY SUBMISSIONS ─────────────────────────────────── */
+    async function loadSubmissions(){
+      const list = document.getElementById('subList');
+      const subs = JSON.parse(localStorage.getItem(SUBS_KEY)||'[]');
+      if(!subs.length){
+        list.innerHTML = `<div class="sub-empty">You haven't submitted any sites from this browser yet.<br/><a href="/pages/contact/" style="color:var(--accent)">Submit a site →</a></div>`;
+        return;
+      }
+
+      // Check live status against Supabase
+      try{
+        const urls = subs.map(s=>s.url);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=url,status,name&url=in.(${urls.map(u=>`"${encodeURIComponent(u)}"`).join(',')})`, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        const liveData = res.ok ? await res.json() : [];
+        const liveByUrl = {};
+        liveData.forEach(s=>{ liveByUrl[s.url]=s; });
+
+        list.innerHTML = subs.map(s=>{
+          const live = liveByUrl[s.url];
+          const status = live ? live.status : 'pending';
+          const favicon = 'https://www.google.com/s2/favicons?sz=32&domain='+encodeURIComponent(s.url);
+          const date = new Date(s.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+          return `
+          <div class="sub-item">
+            <img class="sub-favicon" src="${favicon}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+            <div class="sub-info">
+              <div class="sub-name">${escHtml(s.name||s.url)}</div>
+              <div class="sub-url">${escHtml(s.url)} · Submitted ${escHtml(date)}</div>
+            </div>
+            <span class="sub-status sub-status--${status}">${status}</span>
+          </div>`;
+        }).join('');
+      }catch{
+        list.innerHTML = subs.map(s=>`
+          <div class="sub-item">
+            <img class="sub-favicon" src="https://www.google.com/s2/favicons?sz=32&domain=${encodeURIComponent(s.url)}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+            <div class="sub-info">
+              <div class="sub-name">${escHtml(s.name||s.url)}</div>
+              <div class="sub-url">${escHtml(s.url)}</div>
+            </div>
+            <span class="sub-status sub-status--pending">pending</span>
+          </div>`).join('');
+      }
+    }
+
+    function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    /* ── TOAST ──────────────────────────────────────────── */
+    let toastTimer;
+    function showToast(msg){
+      let t = document.getElementById('settingsToast');
+      if(!t){
+        t = document.createElement('div');
+        t.id = 'settingsToast';
+        t.className = 'toast';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+    }
+
+    /* ── INIT ───────────────────────────────────────────── */
+    (function init(){
+      const theme = localStorage.getItem('nexhub_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      updateThemeUI(theme);
+
+      const prefs = getPrefs();
+      if(prefs.accent) applyAccent(prefs.accent, prefs.accent2);
+
+      // Mark active accent
+      const accent = prefs.accent || '#7c5cfc';
+      document.querySelectorAll('.accent-opt').forEach(b => b.classList.toggle('active', b.dataset.accent===accent));
+
+      // Compact cards
+      if(prefs.compact){
+        document.getElementById('compactToggle').checked = true;
+        document.documentElement.classList.add('compact-cards');
+      }
+      // Animations (default on)
+      const animOn = prefs.animations !== false;
+      document.getElementById('animToggle').checked = animOn;
+      if(!animOn) document.documentElement.classList.add('no-animations');
+
+      updateStats();
+      loadSubmissions();
+    })();
+
+    /* ── NAV / THEME TOGGLE ─────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        setTheme(next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham) ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});
+      if(ov) ov.addEventListener('click',closeM);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+
+      /* Admin nav reveal */
+      (function(){
+        var link=document.getElementById('adminNavLink');
+        if(!link) return;
+        var key=sessionStorage.getItem('nexohub_admin_key')||localStorage.getItem('nexohub_admin_key');
+        if(!key) return;
+        fetch(SUPABASE_URL+'/rest/v1/rpc/check_admin_key_status',{method:'POST',headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({input_key:key})})
+          .then(r=>r.json()).then(ok=>{ if(ok===true) link.style.display=''; }).catch(()=>{});
+      })();
+    });
+  </script>
+  <script src="/pwa-register.js" defer></script>
+</body>
+</html>
