@@ -474,7 +474,7 @@ function cardHTML(s,draggable=false){
               aria-label="${isFav?'Remove from':'Add to'} favorites">
         ${isFav?'★ Saved':'☆ Save'}
       </button>
-      ${s.id?`<button class="info-btn" onclick="openSiteDetail('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}"><span>Info</span></button>`:''}
+      ${s.slug?`<a class="info-btn" href="/site/${esc(s.slug)}/" aria-label="View details for ${esc(s.name)}"><span>Info</span></a>`:''}
     </div>
   </div>`;
 }

@@ -345,43 +345,50 @@ body {
 }
 
 /* ── CARD ───────────────────────────────────────────────────── */
-.card-wrap { position:relative; display:flex; flex-direction:column; height:100% }
-.card-wrap--fav>.card { border-color:rgba(245,158,11,0.3) !important }
-
-.card {
-  position:relative;
+.card-wrap {
+  position:relative; display:flex; flex-direction:column;
   background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-lg); padding:16px 16px 44px;
-  cursor:pointer; text-decoration:none;
-  display:flex; flex-direction:column; gap:7px;
-  overflow:hidden; height:100%;
+  border-radius:var(--radius-lg); overflow:hidden;
   opacity:0; animation:cardIn .3s ease both;
   transition:transform .2s ease, border-color .2s, box-shadow .2s, background .2s;
+  height:100%;
 }
-/* Left colour stripe */
-.card::before {
-  content:''; position:absolute; top:0; left:0; bottom:0; width:3px;
-  background:var(--card-color, var(--accent));
-  opacity:0; transition:opacity .2s;
-  border-radius:var(--radius-lg) 0 0 var(--radius-lg);
-}
-.card:hover {
+.card-wrap:hover {
   transform:translateY(-3px);
   background:var(--surface2);
   border-color:var(--border2);
   box-shadow:var(--shadow-md);
 }
-.card:hover::before { opacity:1 }
-.card:active { transform:translateY(-1px) }
+.card-wrap:hover::before { opacity:1 }
+.card-wrap::before {
+  content:''; position:absolute; top:0; left:0; bottom:0; width:3px;
+  background:var(--card-color, var(--accent));
+  opacity:0; transition:opacity .2s;
+}
+.card-wrap--fav { border-color:rgba(245,158,11,0.3) }
+.card-wrap--down { border-color:rgba(239,68,68,0.25) }
 
-/* Stagger */
-.card:nth-child(1){animation-delay:.02s}.card:nth-child(2){animation-delay:.04s}
-.card:nth-child(3){animation-delay:.06s}.card:nth-child(4){animation-delay:.08s}
-.card:nth-child(5){animation-delay:.10s}.card:nth-child(6){animation-delay:.12s}
-.card:nth-child(7){animation-delay:.14s}.card:nth-child(8){animation-delay:.16s}
-.card:nth-child(9){animation-delay:.18s}.card:nth-child(10){animation-delay:.20s}
-.card:nth-child(11){animation-delay:.22s}.card:nth-child(12){animation-delay:.24s}
-.card:nth-child(n+13){animation-delay:.26s}
+/* Stagger animation on the wrap, not the inner card */
+.card-wrap:nth-child(1){animation-delay:.02s}.card-wrap:nth-child(2){animation-delay:.04s}
+.card-wrap:nth-child(3){animation-delay:.06s}.card-wrap:nth-child(4){animation-delay:.08s}
+.card-wrap:nth-child(5){animation-delay:.10s}.card-wrap:nth-child(6){animation-delay:.12s}
+.card-wrap:nth-child(7){animation-delay:.14s}.card-wrap:nth-child(8){animation-delay:.16s}
+.card-wrap:nth-child(9){animation-delay:.18s}.card-wrap:nth-child(10){animation-delay:.20s}
+.card-wrap:nth-child(11){animation-delay:.22s}.card-wrap:nth-child(12){animation-delay:.24s}
+.card-wrap:nth-child(n+13){animation-delay:.26s}
+
+.card {
+  position:relative;
+  padding:14px 14px 10px;
+  cursor:pointer; text-decoration:none;
+  display:flex; flex-direction:column; gap:7px;
+  flex:1;
+  transition:color .18s;
+}
+/* Remove old card-level border/bg/shadow — all on card-wrap now */
+.card:hover { background:none; transform:none; box-shadow:none; border-color:unset }
+.card:active { opacity:.85 }
+.card:hover .card-favicon { transform:scale(1.08) }
 
 .card-top { display:flex; align-items:center; justify-content:space-between; gap:8px }
 .card-favicon {
@@ -428,20 +435,20 @@ body {
   padding:2px 7px; border-radius:100px; white-space:nowrap; cursor:default;
   background:rgba(239,68,68,0.1); color:#ef4444; border:1px solid rgba(239,68,68,0.3);
 }
-.card-wrap--down>.card { border-color:rgba(239,68,68,0.25) !important }
+/* ── HEALTH BADGE (on card footer) ──────────────────────────── */
 
 /* ── FAVOURITES ─────────────────────────────────────────────── */
 .fav-btn {
   display:inline-flex; align-items:center; gap:4px;
-  padding:5px 11px;
-  background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
+  padding:4px 10px; height:24px;
+  background:transparent; border:1px solid var(--border2); border-radius:100px;
   font-size:.65rem; font-family:var(--font-m); font-weight:600;
   cursor:pointer; color:var(--muted);
   transition:all .18s, transform .15s cubic-bezier(.34,1.56,.64,1);
 }
 .fav-btn:hover { background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.4); color:#f59e0b; transform:scale(1.04) }
 .fav-btn:active { transform:scale(.92) }
-.fav-btn--active { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.3); color:#f59e0b; animation:popScale .3s cubic-bezier(.34,1.56,.64,1) }
+.fav-btn--active { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.3); color:#f59e0b }
 .fav-btn--active:hover { background:rgba(245,158,11,0.04); border-color:rgba(245,158,11,0.15); color:var(--muted) }
 
 /* Pinned header */
@@ -651,24 +658,25 @@ body {
   border-radius:5px; background:var(--bg3); border:1px solid var(--border2);
   line-height:1; user-select:none;
 }
-/* ── CARD ACTIONS ROW (fav + info — always visible, no overlap) ─ */
+/* ── CARD ACTIONS ROW (integrated footer bar inside card-wrap) ─ */
 .card-actions {
   display:flex; align-items:center; gap:6px;
-  padding:8px 12px 10px; margin-top:auto;
+  padding:7px 12px 9px;
   border-top:1px solid var(--border);
+  background:color-mix(in srgb, var(--bg3) 50%, transparent);
 }
 .card-wrap[draggable="true"] .card-actions { padding-left:38px }
 
-/* ── INFO BUTTON ─────────────────────────────────────────────── */
+/* ── INFO LINK (navigates to /site/[slug]/) ──────────────────── */
 .info-btn {
   display:inline-flex; align-items:center; gap:4px; margin-left:auto;
-  height:26px; padding:0 10px;
-  background:var(--bg3); border:1px solid var(--border2); border-radius:100px;
-  font-size:.72rem; font-family:var(--font-m); font-weight:600;
-  cursor:pointer; color:var(--muted);
+  height:24px; padding:0 10px;
+  background:transparent; border:1px solid var(--border2); border-radius:100px;
+  font-size:.65rem; font-family:var(--font-m); font-weight:600;
+  cursor:pointer; color:var(--muted); text-decoration:none;
   transition:all .18s;
 }
-.info-btn::before { content:'ⓘ'; font-size:.85rem; font-weight:400; }
+.info-btn::before { content:'ⓘ'; font-size:.8rem; font-weight:400; }
 .info-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent) }
 .info-btn:active { transform:scale(.92) }
 
@@ -806,10 +814,10 @@ body {
 .report-success { text-align:center; padding:20px 0; color:#22c55e; font-size:.85rem; font-weight:600; }
 
 /* ── USER PREFERENCE OVERRIDES ───────────────────────────────── */
-/* Compact cards mode — tighter cards, less padding */
-.compact-cards .card { padding:12px 14px 10px }
-.compact-cards .card-desc { -webkit-line-clamp:2; font-size:.75rem; margin-bottom:6px; }
-.compact-cards .card-top { margin-bottom:4px }
+/* Compact cards mode */
+.compact-cards .card { padding:10px 12px 8px }
+.compact-cards .card-desc { -webkit-line-clamp:2; font-size:.74rem; }
+.compact-cards .card-top { margin-bottom:2px }
 
 /* Disable ambient background animations */
 .no-animations .ambient-bg,

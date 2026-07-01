@@ -10,8 +10,8 @@
 /pages/sites      /pages/sites/    301
 /pages/settings   /pages/settings/ 301
 
-# Site detail pages — wildcard route to the single-page detail handler
-/site/*           /site/           200
+# Site detail pages — wildcard rewrite to the single-page detail handler
+/site/*           /site/index.html 200
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301
