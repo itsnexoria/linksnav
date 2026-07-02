@@ -10,8 +10,10 @@
   <meta property="og:title" content="Nexo Hub"/>
   <meta property="og:description" content="Curated directory of 460+ essential websites."/>
   <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
   <meta property="og:type" content="website"/>
-  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:card" content="summary_large_image"/>
   <meta name="theme-color" content="#7c5cfc"/>
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
@@ -20,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../style.css?v=20260629-6"/>
+  <link rel="stylesheet" href="../style.css?v=20260629-8"/>
   <style>
     .site-detail-wrap {
       max-width: 760px; margin: 0 auto; padding: 40px 24px 80px;
@@ -100,9 +102,26 @@
     .sd-not-found { text-align: center; padding: 80px 20px; }
     .sd-not-found h1 { font-family: var(--font-d); font-size: 1.5rem; margin: 12px 0 8px; }
     .sd-not-found p { color: var(--muted); font-size: .85rem; }
+
+    .sd-similar-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      animation: fadeUp .5s .2s ease both; opacity: 0; animation-fill-mode: both;
+    }
+    .sd-similar-card {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--border);
+      text-decoration: none; color: var(--text);
+      font-size: .82rem; font-weight: 600;
+      transition: border-color .18s, transform .15s;
+    }
+    .sd-similar-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .sd-similar-fav { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; background: var(--bg3); }
+    .sd-similar-arrow { margin-left: auto; color: var(--muted); font-size: .75rem; flex-shrink: 0; }
     @keyframes spin { to { transform: rotate(360deg) } }
     .loading-spin { display:inline-block; width:24px; height:24px; border:3px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
   </style>
+  <script src="/nexo-prefs.js"></script>
 </head>
 <body>
   <div class="noise-overlay" aria-hidden="true"></div>
@@ -133,6 +152,7 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/search/" class="nav-link">🔍 Search</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
@@ -174,6 +194,8 @@
       document.querySelector('meta[name="description"]').content = desc;
       document.querySelector('meta[property="og:title"]').content = `${site.name} — Nexo Hub`;
       document.querySelector('meta[property="og:description"]').content = desc;
+      document.querySelector('meta[property="og:image"]').content =
+        `https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/og-image?slug=${encodeURIComponent(site.slug)}`;
       const canonical = `${BASE}/site/${site.slug}/`;
       document.querySelector('link[rel="canonical"]').href = canonical;
       document.querySelector('meta[property="og:type"]').content = 'website';
@@ -200,7 +222,8 @@
     }
 
     async function load(){
-      const slug = location.pathname.replace(/\/site\//,'').replace(/\//g,'');
+      /* Extract slug from any /site/[slug] or /site/[slug]/ URL */
+      const slug = location.pathname.split('/').filter(p => p && p !== 'site')[0] || '';
       if(!slug){ renderNotFound(); return; }
 
       try{
@@ -222,8 +245,33 @@
         const catLabel = cat ? `${cat.icon} ${cat.label}` : site.category;
         setMeta(site, cat ? cat.label : site.category);
         renderSite(site, catLabel);
+        loadSimilarSites(site.id);
       }catch(e){
         renderNotFound();
+      }
+    }
+
+    async function loadSimilarSites(siteId){
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_similar_sites`, {
+          method:'POST',
+          headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({ input_site_id: siteId, result_limit: 4 })
+        });
+        const grid = document.getElementById('similarGrid');
+        if(!grid || !res.ok){ if(grid) grid.style.display='none'; return; }
+        const similar = await res.json();
+        if(!similar.length){ grid.style.display='none'; return; }
+        grid.innerHTML = similar.map(s=>`
+          <a class="sd-similar-card" href="${esc(s.slug ? '/site/'+s.slug+'/' : s.url)}" ${!s.slug?'target="_blank" rel="noopener noreferrer"':''}>
+            <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(new URL(s.url||'https://x.com').hostname)}&sz=32" alt="" loading="lazy" onerror="this.style.display='none'" class="sd-similar-fav"/>
+            <span>${esc(s.name)}</span>
+            <span class="sd-similar-arrow">↗</span>
+          </a>
+        `).join('');
+      }catch{
+        const grid = document.getElementById('similarGrid');
+        if(grid) grid.style.display='none';
       }
     }
 
@@ -282,6 +330,11 @@
             <div class="sd-meta-label">Added to Nexo Hub</div>
             <div class="sd-meta-value">${esc(addedDate)}</div>
           </div>
+        </div>
+
+        <div class="sd-section-label" style="margin-top:28px">You might also like</div>
+        <div class="sd-similar-grid" id="similarGrid">
+          <div style="grid-column:1/-1;text-align:center;padding:20px"><span class="loading-spin"></span></div>
         </div>`;
     }
 

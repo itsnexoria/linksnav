@@ -9,9 +9,17 @@
 /pages/api        /pages/api/      301
 /pages/sites      /pages/sites/    301
 /pages/settings   /pages/settings/ 301
+/search           /search/         301
 
-# Site detail pages — wildcard rewrite to the single-page detail handler
-/site/*           /site/index.html 200
+# RSS feed
+/feed.xml         https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/rss-feed 302
+
+# Site detail pages — SPA rewrite: serves /site/index.html for any /site/* URL
+# Must come BEFORE any catch-all. No 404 fallback needed — Cloudflare auto-serves 404.html.
+/site             /site/           301
+/site/            /site/index.html 200
+/site/:slug       /site/index.html 200
+/site/:slug/      /site/index.html 200
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301
@@ -19,6 +27,3 @@
 /Pages/tools/*    /pages/tools/    301
 /Pages/donate/*   /pages/donate/   301
 /Pages/admin/*    /pages/admin/    301
-
-# 404 fallback
-/*                /404.html        404

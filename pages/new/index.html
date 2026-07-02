@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260626-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260629-8"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
     @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
@@ -85,6 +85,7 @@
     .new-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
     .new-empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
   </style>
+  <script src="/nexo-prefs.js"></script>
 </head>
 <body>
   <div class="noise-overlay" aria-hidden="true"></div>
@@ -119,6 +120,7 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/search/" class="nav-link">🔍 Search</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link nav-link--active">🆕 What's New</a>
@@ -139,7 +141,7 @@
 
     <div class="new-hero">
       <h1 class="new-title">🆕 What's New</h1>
-      <p class="new-sub">The newest additions to Nexo Hub, freshest first.</p>
+      <p class="new-sub">The newest additions to Nexo Hub, freshest first. <a href="/feed.xml" style="color:var(--accent);text-decoration:none;font-size:.8rem;margin-left:6px">🔔 RSS Feed →</a></p>
     </div>
 
     <div class="range-tabs">

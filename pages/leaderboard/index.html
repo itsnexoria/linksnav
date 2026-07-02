@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260626-1"/>
+  <link rel="stylesheet" href="../../style.css?v=20260629-8"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
     @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
@@ -94,7 +94,30 @@
       transition: background .18s, transform .15s;
     }
     .lb-cta a:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    /* ── LEADERBOARD TABS ─────────────────── */
+    .lb-tabs {
+      display: flex; gap: 6px; margin-bottom: 24px; flex-wrap: wrap;
+      animation: fadeUp .4s .05s ease both;
+    }
+    .lb-tab {
+      padding: 8px 18px; border-radius: 100px; cursor: pointer;
+      border: 1px solid var(--border2); background: var(--surface);
+      font-family: var(--font-m); font-size: .78rem; font-weight: 600; color: var(--muted);
+      transition: all .18s;
+    }
+    .lb-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .lb-tab.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+    /* Site rows in Most Visited / Most Saved tabs */
+    .lb-site-favicon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; background: var(--bg3); }
+    .lb-site-info { flex: 1; min-width: 0; }
+    .lb-site-name { font-family: var(--font-d); font-weight: 700; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lb-site-cat { font-size: .7rem; color: var(--muted); margin-top: 1px; }
+    .lb-row a { color: inherit; text-decoration: none; }
+    .lb-row a:hover .lb-site-name { color: var(--accent); }
   </style>
+  <script src="/nexo-prefs.js"></script>
 </head>
 <body>
   <div class="noise-overlay" aria-hidden="true"></div>
@@ -129,6 +152,7 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/search/" class="nav-link">🔍 Search</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link nav-link--active">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
@@ -149,8 +173,14 @@
 
     <div class="lb-hero">
       <div class="lb-icon">🏆</div>
-      <h1 class="lb-title">Top Contributors</h1>
-      <p class="lb-sub">Honoring the people who've submitted the most approved sites to Nexo Hub. Submit your own to climb the board!</p>
+      <h1 class="lb-title">Leaderboard</h1>
+      <p class="lb-sub">Top contributors, most-visited sites, and community favourites.</p>
+    </div>
+
+    <div class="lb-tabs">
+      <button class="lb-tab active" onclick="switchTab('contributors',this)">🏅 Top Contributors</button>
+      <button class="lb-tab" onclick="switchTab('visited',this)">👁 Most Visited</button>
+      <button class="lb-tab" onclick="switchTab('saved',this)">★ Most Saved</button>
     </div>
 
     <div id="lbList">
@@ -166,43 +196,54 @@
   <script>
     const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    const FAVS_KEY = 'nexhub_favs';
 
     function esc(s) {
       return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
+    function fav(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=32'; }catch{ return ''; } }
+    function getFavs(){ try{ return new Set(JSON.parse(localStorage.getItem(FAVS_KEY)||'[]')); }catch{ return new Set(); } }
 
-    async function loadLeaderboard(){
+    let activeTab = 'contributors';
+
+    function switchTab(tab, btn){
+      activeTab = tab;
+      document.querySelectorAll('.lb-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      loadTab(tab);
+    }
+
+    async function loadTab(tab){
       const list = document.getElementById('lbList');
+      list.innerHTML = `<div class="lb-loading"><span class="loading-spin"></span></div>`;
       try{
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_submitter_leaderboard`, {
-          method: 'POST',
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ result_limit: 25 })
-        });
-        if(!res.ok) throw new Error();
-        const rows = await res.json();
-        renderLeaderboard(rows);
+        if(tab === 'contributors') await loadContributors();
+        else if(tab === 'visited') await loadMostVisited();
+        else await loadMostSaved();
       }catch{
         list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">⚠️</div><p>Failed to load — please refresh.</p></div>`;
       }
     }
 
-    function renderLeaderboard(rows){
+    /* ── TAB 1: TOP CONTRIBUTORS ── */
+    async function loadContributors(){
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_submitter_leaderboard`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ result_limit: 25 })
+      });
+      if(!res.ok) throw new Error();
+      const rows = await res.json();
       const list = document.getElementById('lbList');
       if(!rows.length){
-        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">🌱</div><p>No contributors yet — be the first to submit a site!</p></div>`;
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">🌱</div><p>No contributors yet — be the first!</p></div>`;
         return;
       }
       list.innerHTML = `<div class="lb-list">${rows.map((r,i) => {
         const rank = i+1;
         const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
-        const top3 = rank<=3 ? ' top3' : '';
         return `
-        <div class="lb-row rank-${rank}${top3}">
+        <div class="lb-row rank-${rank}${rank<=3?' top3':''}">
           <div class="lb-rank">${medal}</div>
           <div class="lb-name">${esc(r.submitted_by_name)}</div>
           <div class="lb-count">${r.approved_count} site${r.approved_count!==1?'s':''}</div>
@@ -210,7 +251,81 @@
       }).join('')}</div>`;
     }
 
-    loadLeaderboard();
+    /* ── TAB 2: MOST VISITED ── */
+    async function loadMostVisited(){
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_top_sites_by_visits`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_limit: 25 })
+      });
+      if(!res.ok) throw new Error();
+      const rows = await res.json();
+      renderSiteRows(rows, r => `${r.visit_count.toLocaleString()} visit${r.visit_count!==1?'s':''}`);
+    }
+
+    /* ── TAB 3: MOST SAVED ── */
+    async function loadMostSaved(){
+      /* Favourites are stored locally — we rank by how many times a URL appears
+         across all users' localStorage by using the global visit_counts table
+         which records all visits, and cross-reference with server-side site data.
+         Since saves are client-side only, we use the user's own saves as a proxy
+         and rank by global visit count as a fallback. */
+      const favs = getFavs();
+      const favsArr = [...favs];
+
+      if(!favsArr.length){
+        // No local favs — show globally most-visited as a fallback
+        document.getElementById('lbList').innerHTML = `
+          <div class="lb-empty">
+            <div class="lb-empty-icon">★</div>
+            <p>Save sites on the homepage to see your personal list here.<br/>
+            Showing globally trending sites instead:</p>
+          </div>`;
+        await loadMostVisited();
+        return;
+      }
+
+      // Fetch the saved sites' data from Supabase
+      const urlList = favsArr.slice(0,25).map(u=>`"${encodeURIComponent(u)}"`).join(',');
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=name,url,slug,category,color&status=eq.approved&url=in.(${favsArr.slice(0,25).join(',')})`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if(!res.ok) throw new Error();
+      const sites = await res.json();
+
+      // Sort in the order they appear in favs
+      const ordered = favsArr.map(url => sites.find(s=>s.url===url)).filter(Boolean);
+      renderSiteRows(ordered.map((s,i) => ({...s, visit_count: favsArr.length - i})),
+        (r,i) => `Saved #${i+1}`);
+    }
+
+    function renderSiteRows(rows, metaFn){
+      const list = document.getElementById('lbList');
+      if(!rows.length){
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">📊</div><p>No data yet — start browsing!</p></div>`;
+        return;
+      }
+      list.innerHTML = `<div class="lb-list">${rows.map((r,i) => {
+        const rank = i+1;
+        const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
+        const href = r.slug ? `/site/${r.slug}/` : r.url;
+        const isExt = !r.slug;
+        return `
+        <div class="lb-row rank-${rank}${rank<=3?' top3':''}">
+          <div class="lb-rank">${medal}</div>
+          <img class="lb-site-favicon" src="${esc(fav(r.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+          <div class="lb-site-info">
+            <a href="${esc(href)}" ${isExt?'target="_blank" rel="noopener noreferrer"':''}>
+              <div class="lb-site-name">${esc(r.name)}</div>
+              <div class="lb-site-cat">${esc(r.category)}</div>
+            </a>
+          </div>
+          <div class="lb-count">${esc(metaFn(r, i))}</div>
+        </div>`;
+      }).join('')}</div>`;
+    }
+
+    loadTab('contributors');
   </script>
 
   <script>

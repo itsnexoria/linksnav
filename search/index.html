@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Search — Nexo Hub</title>
+  <meta name="description" content="Search Nexo Hub's curated directory of 460+ websites across AI, dev tools, design, gaming, and more."/>
+  <link rel="canonical" href="https://nexohub.nexosites.xyz/search/"/>
+  <meta property="og:title" content="Search — Nexo Hub"/>
+  <meta property="og:description" content="Search 460+ curated websites."/>
+  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="theme-color" content="#7c5cfc"/>
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="alternate" type="application/rss+xml" title="Nexo Hub — What's New" href="/feed.xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="/nexo-prefs.js"></script>
+  <link rel="stylesheet" href="../style.css?v=20260629-8"/>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+    @keyframes spin { to { transform:rotate(360deg) } }
+
+    .search-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; position:relative; z-index:1; }
+    .search-hero { text-align: center; margin-bottom: 32px; animation: fadeUp .35s ease both; }
+    .search-hero h1 { font-family: var(--font-d); font-size: clamp(1.6rem,4vw,2.2rem); font-weight: 800; letter-spacing: -.03em; margin: 0 0 10px; }
+    .search-hero p { font-size: .85rem; color: var(--text2); }
+
+    .search-bar-wrap {
+      position: relative; max-width: 600px; margin: 0 auto 28px;
+      animation: fadeUp .4s .05s ease both; opacity: 0; animation-fill-mode: both;
+    }
+    .search-bar-icon {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 1rem; pointer-events: none; color: var(--muted);
+    }
+    .search-bar-input {
+      width: 100%; padding: 14px 16px 14px 44px; box-sizing: border-box;
+      background: var(--surface); border: 1px solid var(--border2); border-radius: 100px;
+      font-size: .95rem; font-family: var(--font-m); color: var(--text);
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .search-bar-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    .search-bar-input::placeholder { color: var(--muted); }
+
+    .search-meta { font-size: .78rem; color: var(--muted); margin-bottom: 16px; min-height: 1.2em; }
+    .search-meta strong { color: var(--text); }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .search-empty { text-align: center; padding: 60px 20px; }
+    .search-empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
+    .search-empty p { color: var(--muted); font-size: .85rem; }
+
+    .loading-spin { display:inline-block; width:22px; height:22px; border:3px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/search/" class="nav-link nav-link--active">🔍 Search</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/api/" class="nav-link">⚡ API</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/settings/" class="nav-link">⚙️ Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">🔐 Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="search-wrap">
+    <div class="search-hero">
+      <h1>🔍 Search Nexo Hub</h1>
+      <p>460+ curated websites across AI, dev tools, design, gaming, and more</p>
+    </div>
+
+    <div class="search-bar-wrap">
+      <span class="search-bar-icon">🔍</span>
+      <input type="search" class="search-bar-input" id="searchInput"
+             placeholder="Search sites, tags, categories…"
+             autocomplete="off" spellcheck="false" autofocus/>
+    </div>
+
+    <div class="search-meta" id="searchMeta"></div>
+    <div id="searchResults" class="search-grid"></div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    const CLICKS_KEY = 'nexhub_clicks';
+
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function fav(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=32'; }catch{ return ''; } }
+    function getClicks(){ try{ return JSON.parse(localStorage.getItem(CLICKS_KEY)||'{}'); }catch{ return {}; } }
+    function fmtCount(n){ return n>=1000?(n/1000).toFixed(1)+'k':n||0; }
+
+    let allSites = [];
+    let debounceTimer;
+
+    /* Load all approved sites once, then filter client-side for instant results */
+    async function init(){
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=id,name,url,description,slug,category,tags,tag_colors,color,health_status&status=eq.approved&order=name.asc`, {
+        headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if(res.ok) allSites = await res.json();
+
+      /* Read initial query from URL */
+      const q = new URLSearchParams(location.search).get('q') || '';
+      const input = document.getElementById('searchInput');
+      input.value = q;
+      if(q) search(q);
+      else renderEmpty();
+    }
+
+    function search(q){
+      const clean = q.toLowerCase().trim();
+      /* Update URL without reloading */
+      const url = new URL(location.href);
+      if(clean) url.searchParams.set('q', q);
+      else url.searchParams.delete('q');
+      history.replaceState({}, '', url);
+
+      /* Update page title for shareable links */
+      document.title = clean ? `"${q}" — Nexo Hub Search` : 'Search — Nexo Hub';
+
+      if(!clean){ renderEmpty(); return; }
+
+      const results = allSites.filter(s =>
+        s.name.toLowerCase().includes(clean) ||
+        (s.description||'').toLowerCase().includes(clean) ||
+        (s.category||'').toLowerCase().includes(clean) ||
+        (s.tags||[]).some(t => t.toLowerCase().includes(clean))
+      );
+
+      const meta = document.getElementById('searchMeta');
+      meta.innerHTML = results.length
+        ? `<strong>${results.length}</strong> result${results.length!==1?'s':''} for "<strong>${esc(q)}</strong>"`
+        : `No results for "<strong>${esc(q)}</strong>"`;
+
+      const clicks = getClicks();
+      const grid = document.getElementById('searchResults');
+      if(!results.length){
+        grid.innerHTML = `<div class="search-empty" style="grid-column:1/-1">
+          <div class="search-empty-icon">🔍</div>
+          <p>No sites match that search.<br/>Try a broader term or <a href="/pages/contact/" style="color:var(--accent)">submit a site</a>.</p>
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = results.map(s => {
+        const tags = (s.tags||[]).slice(0,2).map(t=>{
+          const bg=(s.tag_colors||{})[t]||'#6b7280';
+          return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+        }).join('');
+        const count = clicks[s.url]||0;
+        const isDown = s.health_status==='down';
+        const downBadge = isDown ? `<span class="health-badge">⚠ May be down</span>` : '';
+        const href = s.slug ? `/site/${s.slug}/` : s.url;
+        const isExternal = !s.slug;
+        return `
+        <div class="card-wrap${isDown?' card-wrap--down':''}">
+          <a class="card" href="${esc(href)}" ${isExternal?'target="_blank" rel="noopener noreferrer"':''} style="--card-color:${esc(s.color||'#4f7fff')}">
+            <div class="card-top">
+              <img class="card-favicon" src="${esc(fav(s.url))}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'" width="22" height="22"/>
+              <span class="card-name">${esc(s.name)}</span>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="card-desc">${esc(s.description||'')}</p>
+            <div class="card-footer">${tags}${downBadge}</div>
+            ${count?`<div class="click-count"><span aria-hidden="true">👁</span><span class="click-count-num">${fmtCount(count)}</span></div>`:''}
+          </a>
+          <div class="card-actions">
+            <span style="font-size:.68rem;color:var(--muted);font-family:var(--font-m)">${esc(s.category)}</span>
+            ${s.slug?`<a class="info-btn" href="${esc(href)}">Info</a>`:''}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderEmpty(){
+      document.getElementById('searchMeta').innerHTML = '';
+      document.getElementById('searchResults').innerHTML = `<div class="search-empty" style="grid-column:1/-1">
+        <div class="search-empty-icon">🔍</div>
+        <p>Start typing to search across 460+ curated sites.</p>
+      </div>`;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function(){
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => search(this.value), 200);
+    });
+
+    /* Standard nav */
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+        try{ var p=JSON.parse(localStorage.getItem('nexhub_prefs')||'{}'); p.theme=next; localStorage.setItem('nexhub_prefs',JSON.stringify(p)); }catch{}
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham) ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});
+      if(ov) ov.addEventListener('click',closeM);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+    });
+
+    init();
+  </script>
+  <script src="/pwa-register.js" defer></script>
+</body>
+</html>
