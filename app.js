@@ -698,10 +698,26 @@ window.openSiteModal = function(siteId, e){
       ${tagHTML?`<div class="site-modal-tags">${tagHTML}</div>`:''}
       <div class="site-modal-actions">
         <a class="site-modal-visit" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(site.url)}');addRecent('${esc(site.url)}')">↗ Visit Site</a>
-        <button class="site-modal-btn" onclick="toggleFav('${esc(site.url)}',event)">
+        <button class="site-modal-btn" id="smFavBtn" onclick="toggleFav('${esc(site.url)}',event);this.textContent=favorites.has('${esc(site.url)}')?'★ Saved':'☆ Save'">
           ${favorites.has(site.url)?'★ Saved':'☆ Save'}
         </button>
-        ${site.slug?`<a class="site-modal-btn" href="/site/${esc(site.slug)}/" style="text-decoration:none">📄 Full Page</a>`:''}
+        <button class="site-modal-btn" id="smCopyBtn" onclick="smCopyLink('${esc(site.url)}')">🔗 Copy Link</button>
+        <button class="site-modal-btn site-modal-btn--danger" id="smReportBtn" onclick="smToggleReport()">⚠ Report</button>
+      </div>
+
+      <!-- Inline report form — hidden until Report is clicked -->
+      <div class="sm-report-form" id="smReportForm" style="display:none">
+        <div class="sm-report-label">What's the issue?</div>
+        <div class="sm-report-reasons">
+          <button class="sm-reason-btn" data-reason="broken_link" onclick="smSelectReason(this)">🔗 Broken link</button>
+          <button class="sm-reason-btn" data-reason="wrong_info" onclick="smSelectReason(this)">📝 Wrong info</button>
+          <button class="sm-reason-btn" data-reason="spam_or_scam" onclick="smSelectReason(this)">🚫 Spam/scam</button>
+          <button class="sm-reason-btn" data-reason="duplicate" onclick="smSelectReason(this)">📋 Duplicate</button>
+          <button class="sm-reason-btn" data-reason="site_down" onclick="smSelectReason(this)">⛔ Site is down</button>
+          <button class="sm-reason-btn" data-reason="other" onclick="smSelectReason(this)">❓ Other</button>
+        </div>
+        <textarea class="sm-report-note" id="smReportNote" placeholder="Optional details… (max 500 chars)" maxlength="500"></textarea>
+        <button class="sm-report-submit" id="smReportSubmit" onclick="smSubmitReport('${esc(site.id)}')" disabled>Submit Report</button>
       </div>
     </div>`;
 
@@ -722,6 +738,48 @@ function closeModal(){
   document.removeEventListener('keydown', _escClose);
   setTimeout(()=>{ m.remove(); document.body.style.overflow=''; }, 220);
 }
+
+window.smCopyLink = function(url){
+  const btn = document.getElementById('smCopyBtn');
+  function onCopied(){ showToast('Link copied!'); if(btn){ btn.textContent='✓ Copied'; setTimeout(()=>btn.textContent='🔗 Copy Link',2000); } }
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(onCopied).catch(()=>legacyCopy(url,onCopied)); }
+  else legacyCopy(url, onCopied);
+  function legacyCopy(u,cb){ const ta=document.createElement('textarea');ta.value=u;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);cb(); }
+};
+
+window.smToggleReport = function(){
+  const form = document.getElementById('smReportForm');
+  const btn = document.getElementById('smReportBtn');
+  const open = form.style.display === 'none';
+  form.style.display = open ? 'block' : 'none';
+  btn.classList.toggle('active', open);
+};
+
+window.smSelectReason = function(btn){
+  document.querySelectorAll('.sm-reason-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('smReportSubmit').disabled = false;
+};
+
+window.smSubmitReport = async function(siteId){
+  const reason = document.querySelector('.sm-reason-btn.selected')?.dataset.reason;
+  if(!reason) return;
+  const note = document.getElementById('smReportNote')?.value.trim() || null;
+  const btn = document.getElementById('smReportSubmit');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_report`, {
+      method:'POST', headers: sbHeaders(),
+      body: JSON.stringify({ input_site_id: siteId, input_reason: reason, input_note: note })
+    });
+    if(!res.ok) throw new Error();
+    document.getElementById('smReportForm').innerHTML = '<div class="sm-report-success">✓ Thanks — we\'ll look into it.</div>';
+    showToast('Report submitted — thank you!');
+  }catch{
+    btn.disabled = false; btn.textContent = 'Submit Report';
+    showToast('Failed to send report — please try again.', true);
+  }
+};
 
 /* ── RANDOM SITE ────────────────────────────────────────────────── */
 (function setupRandomBtn(){

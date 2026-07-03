@@ -795,3 +795,36 @@ body {
   transition:border-color .18s, color .18s;
 }
 .site-modal-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ── MODAL REPORT FORM ──────────────────────────────────────── */
+.site-modal-btn--danger { color:#ef4444; border-color:rgba(239,68,68,.3) }
+.site-modal-btn--danger:hover { background:rgba(239,68,68,.1); border-color:#ef4444 }
+.site-modal-btn--danger.active { background:rgba(239,68,68,.1); border-color:#ef4444 }
+.sm-report-form {
+  margin-top:16px; padding-top:16px; border-top:1px solid var(--border);
+  animation:fadeUp .2s ease both;
+}
+.sm-report-label { font-size:.7rem; font-family:var(--font-m); font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:10px; }
+.sm-report-reasons { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+.sm-reason-btn {
+  padding:5px 12px; border-radius:100px; border:1px solid var(--border2);
+  background:var(--bg3); color:var(--text2); font-family:var(--font-m);
+  font-size:.72rem; font-weight:600; cursor:pointer; transition:all .15s;
+}
+.sm-reason-btn:hover { border-color:var(--accent); color:var(--accent); }
+.sm-reason-btn.selected { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); }
+.sm-report-note {
+  width:100%; padding:9px 12px; border-radius:var(--radius);
+  background:var(--bg3); border:1px solid var(--border2); color:var(--text);
+  font-family:var(--font-m); font-size:.8rem; resize:vertical; min-height:64px;
+  margin-bottom:10px; box-sizing:border-box; transition:border-color .18s; outline:none;
+}
+.sm-report-note:focus { border-color:var(--accent); }
+.sm-report-submit {
+  padding:8px 20px; border-radius:100px; border:1px solid rgba(239,68,68,.35);
+  background:rgba(239,68,68,.1); color:#ef4444; font-family:var(--font-m);
+  font-size:.78rem; font-weight:600; cursor:pointer; transition:all .18s;
+}
+.sm-report-submit:hover:not(:disabled) { background:rgba(239,68,68,.2); border-color:#ef4444; }
+.sm-report-submit:disabled { opacity:.5; cursor:not-allowed; }
+.sm-report-success { font-size:.82rem; color:#22c55e; font-weight:600; padding:6px 0; }
