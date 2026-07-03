@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260629-8"/>
+  <link rel="stylesheet" href="../../style.css?v=20260629-9"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
     @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
@@ -162,15 +162,17 @@
     }
     .pc-actions { display: flex; gap: 8px; }
     .pc-btn {
-      flex: 1; padding: 9px; border-radius: var(--radius); border: none;
-      font-family: var(--font-m); font-size: .8rem; font-weight: 600;
-      cursor: pointer; transition: transform .15s, opacity .18s;
+      padding: 8px 16px; border-radius: var(--radius); border: 1px solid var(--border2);
+      background: var(--surface2); color: var(--text); font-family: var(--font-m);
+      font-size: .78rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+      transition: all .18s; display: inline-flex; align-items: center; gap: 5px;
     }
+    .pc-btn:hover { border-color: var(--accent); color: var(--accent); }
     .pc-btn:active { transform: scale(.97); }
-    .pc-btn.approve { background: #22c55e; color: #fff; }
-    .pc-btn.approve:hover { opacity: .88; }
-    .pc-btn.reject { background: transparent; border: 1px solid #ef4444; color: #ef4444; }
-    .pc-btn.reject:hover { background: rgba(239,68,68,.1); }
+    .pc-btn.approve { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.35); color: #22c55e; }
+    .pc-btn.approve:hover { background: rgba(34,197,94,.2); border-color: #22c55e; }
+    .pc-btn.reject { background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.3); color: #ef4444; }
+    .pc-btn.reject:hover { background: rgba(239,68,68,.16); border-color: #ef4444; }
     .pc-btn:disabled { opacity: .5; cursor: not-allowed; }
 
     .empty-pending {
@@ -374,10 +376,14 @@
       <!-- STATS TAB -->
       <div class="admin-panel-section" id="tab-stats">
         <div class="stats-grid" id="statsGrid">
+          <div class="stat-card"><div class="stat-card-label">🟢 Active Now</div><div class="stat-card-value" style="color:#22c55e" id="statLive">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Total Visits</div><div class="stat-card-value accent" id="statTotal">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Today</div><div class="stat-card-value" id="statToday">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Last 7 Days</div><div class="stat-card-value" id="statWeek">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Last 30 Days</div><div class="stat-card-value" id="statMonth">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Last Hour</div><div class="stat-card-value" id="statHour">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Approved Sites</div><div class="stat-card-value" id="statSites">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Pending</div><div class="stat-card-value" id="statPending">—</div></div>
         </div>
         <div class="chart-card">
           <div class="chart-title">Last 14 Days</div>
@@ -890,17 +896,49 @@
     let statsLoadedOnce = false;
     async function loadStats() {
       try {
-        const [stats, history] = await Promise.all([
+        const [stats, history, liveData, siteCounts] = await Promise.all([
           rpc('admin_get_visit_stats', { input_key: getKey() }),
-          rpc('admin_get_visit_history', { input_key: getKey(), days_back: 14 })
+          rpc('admin_get_visit_history', { input_key: getKey(), days_back: 14 }),
+          rpc('admin_get_active_visitors', { input_key: getKey() }),
+          fetch(`${SUPABASE_URL}/rest/v1/sites?select=status&status=in.(approved,pending)`, {
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-0' }
+          })
         ]);
         const s = Array.isArray(stats) ? stats[0] : stats;
+        const live = Array.isArray(liveData) ? liveData[0] : liveData;
+        document.getElementById('statLive').textContent = (live?.active_now || 0).toLocaleString();
+        document.getElementById('statHour').textContent = (live?.last_hour || 0).toLocaleString();
         document.getElementById('statTotal').textContent = (s.total_visits || 0).toLocaleString();
         document.getElementById('statToday').textContent = (s.today_visits || 0).toLocaleString();
         document.getElementById('statWeek').textContent = (s.last_7_days || 0).toLocaleString();
         document.getElementById('statMonth').textContent = (s.last_30_days || 0).toLocaleString();
+
+        // Parse content-range header for site counts
+        const range = siteCounts.headers.get('content-range') || '';
+        const total = parseInt(range.split('/')[1] || '0');
+        const body = await siteCounts.json();
+        const approved = body.filter ? body.length : 0;
+        // Fetch proper counts
+        const [approvedRes, pendingRes] = await Promise.all([
+          fetch(`${SUPABASE_URL}/rest/v1/sites?select=id&status=eq.approved`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Prefer': 'count=exact', 'Range': '0-0', 'Range-Unit': 'items' } }),
+          fetch(`${SUPABASE_URL}/rest/v1/sites?select=id&status=eq.pending`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Prefer': 'count=exact', 'Range': '0-0', 'Range-Unit': 'items' } })
+        ]);
+        const aCount = parseInt((approvedRes.headers.get('content-range')||'').split('/')[1]||'0');
+        const pCount = parseInt((pendingRes.headers.get('content-range')||'').split('/')[1]||'0');
+        document.getElementById('statSites').textContent = aCount.toLocaleString();
+        document.getElementById('statPending').textContent = pCount.toLocaleString();
+
         renderChart(history);
         statsLoadedOnce = true;
+
+        // Auto-refresh live count every 30s while on this tab
+        clearInterval(window._liveTimer);
+        window._liveTimer = setInterval(async ()=>{
+          if(document.querySelector('.admin-tab[data-tab="stats"]')?.classList.contains('active')){
+            const ld = await rpc('admin_get_active_visitors', { input_key: getKey() }).catch(()=>null);
+            if(ld){ const l = Array.isArray(ld)?ld[0]:ld; document.getElementById('statLive').textContent=(l?.active_now||0).toLocaleString(); }
+          }
+        }, 30000);
       } catch (e) {
         showToast(e.message || 'Failed to load stats', true);
       }
@@ -958,15 +996,35 @@
         return;
       }
       list.innerHTML = sites.map(s => `
-        <div class="pending-card health-down-card">
+        <div class="pending-card health-down-card" id="hdc-${esc(s.id)}">
           <div class="hdc-top">
             <span class="hdc-name">${esc(s.name)}</span>
             <span class="hdc-status">HTTP ${s.http_status || 'no response'}</span>
           </div>
           <a class="hdc-url" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.url)}</a>
           <div class="hdc-meta">Last checked ${s.last_checked_at ? new Date(s.last_checked_at).toLocaleString() : 'never'} · ${esc(s.category)}</div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" class="pc-btn" style="text-decoration:none">↗ Check site</a>
+            <button class="pc-btn reject" onclick="deleteDownSite('${esc(s.id)}','${esc(s.name)}')">🗑 Delete listing</button>
+          </div>
         </div>
       `).join('');
+    }
+
+    async function deleteDownSite(id, name) {
+      if (!confirm(`Permanently delete "${name}" from the directory?`)) return;
+      try {
+        await rpc('admin_bulk_reject', { input_key: getKey(), p_ids: [id] });
+        showToast(`Deleted "${name}"`);
+        document.getElementById(`hdc-${id}`)?.remove();
+        // Update badge
+        const badge = document.getElementById('healthBadge');
+        if(badge) badge.textContent = Math.max(0, (parseInt(badge.textContent)||1)-1);
+        const downEl = document.getElementById('healthDown');
+        if(downEl) downEl.textContent = Math.max(0, (parseInt(downEl.textContent)||1)-1);
+      } catch (e) {
+        showToast(e.message || 'Delete failed', true);
+      }
     }
 
     async function runHealthCheckNow() {

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260629-8"/>
+  <link rel="stylesheet" href="../../style.css?v=20260629-9"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
     @keyframes spin { to { transform:rotate(360deg) } }
@@ -145,7 +145,6 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/search/" class="nav-link">🔍 Search</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
@@ -191,6 +190,20 @@
               </div>
               Light
             </button>
+            <button class="theme-opt" id="themeMidnight" onclick="setTheme('midnight')">
+              <div class="theme-swatch" style="background:#050508">
+                <div class="theme-swatch-bar" style="background:#7c5cfc"></div>
+                <div class="theme-swatch-bar" style="background:#0f0f18"></div>
+              </div>
+              Midnight
+            </button>
+            <button class="theme-opt" id="themeSlate" onclick="setTheme('slate')">
+              <div class="theme-swatch" style="background:#1e2535">
+                <div class="theme-swatch-bar" style="background:#7c5cfc"></div>
+                <div class="theme-swatch-bar" style="background:#252d3d"></div>
+              </div>
+              Slate
+            </button>
           </div>
         </div>
 
@@ -202,10 +215,16 @@
           <div class="accent-options" id="accentPicker">
             <button class="accent-opt" data-accent="#7c5cfc" style="background:#7c5cfc" title="Purple (default)" onclick="setAccent('#7c5cfc','#ec4899')"></button>
             <button class="accent-opt" data-accent="#3b82f6" style="background:#3b82f6" title="Blue" onclick="setAccent('#3b82f6','#06b6d4')"></button>
+            <button class="accent-opt" data-accent="#06b6d4" style="background:#06b6d4" title="Cyan" onclick="setAccent('#06b6d4','#3b82f6')"></button>
             <button class="accent-opt" data-accent="#22c55e" style="background:#22c55e" title="Green" onclick="setAccent('#22c55e','#10b981')"></button>
+            <button class="accent-opt" data-accent="#10b981" style="background:#10b981" title="Teal" onclick="setAccent('#10b981','#06b6d4')"></button>
             <button class="accent-opt" data-accent="#f59e0b" style="background:#f59e0b" title="Amber" onclick="setAccent('#f59e0b','#ef4444')"></button>
+            <button class="accent-opt" data-accent="#f97316" style="background:#f97316" title="Orange" onclick="setAccent('#f97316','#ef4444')"></button>
             <button class="accent-opt" data-accent="#ef4444" style="background:#ef4444" title="Red" onclick="setAccent('#ef4444','#f97316')"></button>
             <button class="accent-opt" data-accent="#ec4899" style="background:#ec4899" title="Pink" onclick="setAccent('#ec4899','#a855f7')"></button>
+            <button class="accent-opt" data-accent="#a855f7" style="background:#a855f7" title="Violet" onclick="setAccent('#a855f7','#ec4899')"></button>
+            <button class="accent-opt" data-accent="#64748b" style="background:#64748b" title="Slate" onclick="setAccent('#64748b','#94a3b8')"></button>
+            <button class="accent-opt" data-accent="#ffffff" style="background:#ffffff;border:2px solid #444" title="White" onclick="setAccent('#ffffff','#cccccc')"></button>
           </div>
         </div>
 
@@ -297,8 +316,10 @@
       updateThemeUI(t);
     }
     function updateThemeUI(t){
-      document.getElementById('themeDark').classList.toggle('active', t==='dark');
-      document.getElementById('themeLight').classList.toggle('active', t==='light');
+      document.querySelectorAll('.theme-opt').forEach(b => b.classList.remove('active'));
+      const map = { dark:'themeDark', light:'themeLight', midnight:'themeMidnight', slate:'themeSlate' };
+      const el = document.getElementById(map[t]);
+      if(el) el.classList.add('active');
     }
 
     /* ── ACCENT COLOUR ─────────────────────────────────── */
@@ -438,7 +459,6 @@
       const theme = localStorage.getItem('nexhub_theme') || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
       updateThemeUI(theme);
-
       const prefs = getPrefs();
       if(prefs.accent) applyAccent(prefs.accent, prefs.accent2);
 
@@ -464,7 +484,8 @@
     document.addEventListener('DOMContentLoaded', function(){
       var btn=document.getElementById('themeToggle');
       if(btn) btn.addEventListener('click',function(){
-        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        var cur=document.documentElement.getAttribute('data-theme');
+        var next = cur==='dark'?'light':cur==='light'?'midnight':cur==='midnight'?'slate':'dark';
         setTheme(next);
       });
       var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');

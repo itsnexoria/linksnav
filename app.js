@@ -204,6 +204,33 @@ function recordVisit(){
       body: '{}'
     }).catch(()=>{});
   } catch {}
+  pingPresence();
+}
+
+/* Presence heartbeat — lets admin panel show live active user count */
+(function setupPresence(){
+  let _sessionId = sessionStorage.getItem('nexhub_sid');
+  if(!_sessionId){
+    _sessionId = Math.random().toString(36).slice(2)+Date.now().toString(36);
+    sessionStorage.setItem('nexhub_sid', _sessionId);
+  }
+  window._nexhubSid = _sessionId;
+})();
+
+function pingPresence(){
+  try{
+    fetch(`${SUPABASE_URL}/rest/v1/rpc/ping_visitor`, {
+      method:'POST', headers: sbHeaders(),
+      body: JSON.stringify({ p_session_id: window._nexhubSid||'anon', p_page:'/' })
+    }).catch(()=>{});
+    // Re-ping every 30s to maintain presence
+    setInterval(()=>{
+      fetch(`${SUPABASE_URL}/rest/v1/rpc/ping_visitor`, {
+        method:'POST', headers: sbHeaders(),
+        body: JSON.stringify({ p_session_id: window._nexhubSid||'anon', p_page:'/' })
+      }).catch(()=>{});
+    }, 30000);
+  }catch{}
 }
 
 /* Rolling count */
@@ -474,7 +501,7 @@ function cardHTML(s,draggable=false){
               aria-label="${isFav?'Remove from':'Add to'} favorites">
         ${isFav?'★ Saved':'☆ Save'}
       </button>
-      ${s.slug?`<a class="info-btn" href="/site/${esc(s.slug)}/" aria-label="View details for ${esc(s.name)}"><span>Info</span></a>`:''}
+      ${s.id?`<button class="info-btn" onclick="openSiteModal('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}">ⓘ Info</button>`:''}
     </div>
   </div>`;
 }
@@ -626,6 +653,75 @@ window.copyCardLink=function(url,e){
   }
 };
 
+
+/* ── SITE DETAIL MODAL ───────────────────────────────────────── */
+window.openSiteModal = function(siteId, e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+  const site = allSites.find(s=>s.id===siteId);
+  if(!site) return;
+
+  /* Remove existing modal if any */
+  document.getElementById('siteModal')?.remove();
+
+  const tagHTML = (site.tags||[]).map(t=>{
+    const bg=(site.tag_colors||{})[t]||'#6b7280';
+    return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+  }).join('');
+  const cat = allCategories.find(c=>c.id===site.category);
+  const catLabel = cat?`${cat.icon} ${cat.label}`:site.category;
+  const faviconUrl = fav(site.url);
+  const healthHTML = (()=>{
+    if(!site.last_checked_at) return `<span class="modal-health unknown">○ Not checked</span>`;
+    const ago = timeAgo(site.last_checked_at);
+    if(site.health_status==='up') return `<span class="modal-health up">● Healthy · ${esc(ago)}</span>`;
+    return `<span class="modal-health down">⚠ May be down · ${esc(ago)}</span>`;
+  })();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'siteModal';
+  overlay.className = 'site-modal-overlay';
+  overlay.innerHTML = `
+    <div class="site-modal" role="dialog" aria-modal="true" aria-label="${esc(site.name)} details">
+      <button class="site-modal-close" aria-label="Close">✕</button>
+      <div class="site-modal-header">
+        ${faviconUrl?`<img class="site-modal-favicon" src="${esc(faviconUrl)}" alt="" onerror="this.style.display='none'"/>`:''}
+        <div>
+          <div class="site-modal-name">${esc(site.name)}</div>
+          <a class="site-modal-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>
+          <div class="site-modal-badges">
+            <span class="detail-cat-badge">${esc(catLabel)}</span>
+            ${healthHTML}
+          </div>
+        </div>
+      </div>
+      <p class="site-modal-desc">${esc(site.description)}</p>
+      ${tagHTML?`<div class="site-modal-tags">${tagHTML}</div>`:''}
+      <div class="site-modal-actions">
+        <a class="site-modal-visit" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(site.url)}');addRecent('${esc(site.url)}')">↗ Visit Site</a>
+        <button class="site-modal-btn" onclick="toggleFav('${esc(site.url)}',event)">
+          ${favorites.has(site.url)?'★ Saved':'☆ Save'}
+        </button>
+        ${site.slug?`<a class="site-modal-btn" href="/site/${esc(site.slug)}/" style="text-decoration:none">📄 Full Page</a>`:''}
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(()=>overlay.classList.add('show'));
+
+  overlay.querySelector('.site-modal-close').onclick = closeModal;
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown', _escClose);
+};
+
+function _escClose(e){ if(e.key==='Escape') closeModal(); }
+function closeModal(){
+  const m = document.getElementById('siteModal');
+  if(!m) return;
+  m.classList.remove('show');
+  document.removeEventListener('keydown', _escClose);
+  setTimeout(()=>{ m.remove(); document.body.style.overflow=''; }, 220);
+}
 
 /* ── RANDOM SITE ────────────────────────────────────────────────── */
 (function setupRandomBtn(){
