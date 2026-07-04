@@ -4,10 +4,13 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Search — Nexo Hub</title>
-  <meta name="description" content="Search Nexo Hub's curated directory of 460+ websites across AI, dev tools, design, gaming, and more."/>
+  <meta name="description" content="Search Nexo Hub's curated directory of 490+ websites across AI, dev tools, design, gaming, music, and more."/>
   <link rel="canonical" href="https://nexohub.nexosites.xyz/search/"/>
   <meta property="og:title" content="Search — Nexo Hub"/>
-  <meta property="og:description" content="Search 460+ curated websites."/>
+  <meta property="og:description" content="Search 490+ curated websites."/>
+  <meta property="og:image:width" content="512"/>
+  <meta property="og:image:height" content="512"/>
+  <meta property="og:image:alt" content="Nexo Hub Search"/>
   <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
   <meta name="theme-color" content="#7c5cfc"/>
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
@@ -19,7 +22,7 @@
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script src="/nexo-prefs.js"></script>
-  <link rel="stylesheet" href="../style.css?v=20260629-9"/>
+  <link rel="stylesheet" href="../style.css?v=20260629-12"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
     @keyframes spin { to { transform:rotate(360deg) } }
@@ -94,6 +97,7 @@
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/import/" class="nav-link">📥 Import Bookmarks</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/api/" class="nav-link">⚡ API</a>
@@ -109,7 +113,7 @@
   <main class="search-wrap">
     <div class="search-hero">
       <h1>🔍 Search Nexo Hub</h1>
-      <p>460+ curated websites across AI, dev tools, design, gaming, and more</p>
+      <p>490+ curated websites across AI, dev tools, design, gaming, and more</p>
     </div>
 
     <div class="search-bar-wrap">
@@ -220,7 +224,7 @@
       document.getElementById('searchMeta').innerHTML = '';
       document.getElementById('searchResults').innerHTML = `<div class="search-empty" style="grid-column:1/-1">
         <div class="search-empty-icon">🔍</div>
-        <p>Start typing to search across 460+ curated sites.</p>
+        <p>Start typing to search across 490+ curated sites.</p>
       </div>`;
     }
 

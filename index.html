@@ -7,7 +7,7 @@
 
   <!-- ── PRIMARY SEO ─────────────────────────────────── -->
   <title>Nexo Hub — Your Digital Command Center</title>
-  <meta name="description" content="Nexo Hub is a curated, searchable directory of 460+ essential websites across AI, gaming, dev tools, design, music, and finance." />
+  <meta name="description" content="A curated, searchable directory of 490+ essential websites across AI, gaming, dev tools, design, music, finance, and more." />
   <meta name="keywords"    content="web directory, useful websites, ai tools, dev tools, gaming sites, design resources, productivity apps, nexhub" />
   <meta name="author"      content="Nexus" />
   <link rel="canonical"    href="https://nexohub.nexosites.xyz/" />
@@ -16,7 +16,8 @@
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://nexohub.nexosites.xyz/" />
   <meta property="og:title"       content="Nexo Hub — Your Digital Command Center" />
-  <meta property="og:description" content="460+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
+  <meta property="og:description" content="490+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
+  <meta property="og:image:alt" content="Nexo Hub logo — curated web directory"/>
   <meta property="og:image"       content="https://nexohub.nexosites.xyz/assets/logo-512.png" />
   <meta property="og:image:width"  content="512" />
   <meta property="og:image:height" content="512" />
@@ -26,7 +27,7 @@
   <!-- ── TWITTER CARD ──────────────────────────────────── -->
   <meta name="twitter:card"        content="summary" />
   <meta name="twitter:title"       content="Nexo Hub — Your Digital Command Center" />
-  <meta name="twitter:description" content="460+ curated websites. Search, filter, favourite." />
+  <meta name="twitter:description" content="490+ curated websites. Search, filter, favourite." />
   <meta name="twitter:image"       content="https://nexohub.nexosites.xyz/assets/logo-512.png" />
 
   <!-- ── FAVICONS ──────────────────────────────────────── -->
@@ -34,6 +35,7 @@
   <link rel="icon"             href="assets/favicon-64.png" sizes="64x64"  type="image/png" />
   <link rel="apple-touch-icon" href="assets/logo-192.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="Nexo Hub — What's New" href="/feed.xml"/>
   <meta name="theme-color"     content="#7c5cfc" />
 
   <!-- ── JSON-LD ───────────────────────────────────────── -->
@@ -43,11 +45,11 @@
     "@type": "WebSite",
     "name": "Nexo Hub",
     "url": "https://nexohub.nexosites.xyz/",
-    "description": "Curated directory of 460+ essential websites across AI, gaming, dev tools, design, music, finance, and more.",
+    "description": "Curated directory of 490+ essential websites across AI, gaming, dev tools, design, music, finance, health, travel, writing, and photography.",
     "author": { "@type": "Person", "name": "Nexus" },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://nexohub.nexosites.xyz/?q={search_term_string}",
+      "target": { "@type": "EntryPoint", "urlTemplate": "https://nexohub.nexosites.xyz/search/?q={search_term_string}" },
       "query-input": "required name=search_term_string"
     }
   }
@@ -60,7 +62,7 @@
     "url": "https://nexohub.nexosites.xyz/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
-    "description": "A curated, searchable directory of 460+ essential websites across AI, gaming, dev tools, design, and more — installable as a free progressive web app.",
+    "description": "A curated, searchable directory of 490+ essential websites across AI, gaming, dev tools, design, and more — installable as a free progressive web app.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "creator": { "@type": "Person", "name": "Nexus" }
   }
@@ -78,7 +80,8 @@
   <script>
     (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260629-11" />
+  <script src="/nexo-prefs.js"></script>
+  <link rel="stylesheet" href="style.css?v=20260629-12" />
 
   <style>
     @keyframes skeletonPulse {
@@ -131,7 +134,7 @@
           <input type="search"
                  id="searchInput"
                  aria-label="Search sites"
-                 placeholder="Search 460+ sites…"
+                 placeholder="Search 490+ sites…"
                  autocomplete="off"
                  spellcheck="false" />
           <kbd aria-hidden="true">Ctrl K</kbd>
@@ -190,6 +193,7 @@
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/import/" class="nav-link">📥 Import Bookmarks</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/api/" class="nav-link">⚡ API</a>
@@ -272,7 +276,7 @@
 
   <div class="toast" id="toast" aria-live="polite"></div>
 
-  <script src="app.js?v=20260629-11" defer></script>
+  <script src="app.js?v=20260629-12" defer></script>
   <script src="/pwa-register.js" defer></script>
 </body>
 </html>

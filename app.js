@@ -6,20 +6,6 @@
    ============================================================ */
 'use strict';
 
-/* Apply saved user preferences from Settings page before first render */
-(function applyPrefs(){
-  try{
-    const p = JSON.parse(localStorage.getItem('nexhub_prefs')||'{}');
-    if(p.accent){
-      document.documentElement.style.setProperty('--accent', p.accent);
-      document.documentElement.style.setProperty('--accent2', p.accent2||p.accent);
-      document.documentElement.style.setProperty('--accent-dim', p.accent+'22');
-    }
-    if(p.compact) document.documentElement.classList.add('compact-cards');
-    if(p.animations===false) document.documentElement.classList.add('no-animations');
-  }catch{}
-})();
-
 /* ── CONSTANTS ──────────────────────────────────────────────── */
 const CLICKS_KEY = 'nexhub_clicks';
 const FAVS_KEY   = 'nexhub_favs';
@@ -702,6 +688,8 @@ window.openSiteModal = function(siteId, e){
           ${favorites.has(site.url)?'★ Saved':'☆ Save'}
         </button>
         <button class="site-modal-btn" id="smCopyBtn" onclick="smCopyLink('${esc(site.url)}')">🔗 Copy Link</button>
+        <button class="site-modal-btn" onclick="smShareTwitter('${esc(site.url)}','${esc(site.name)}')">𝕏 Share</button>
+        <button class="site-modal-btn" onclick="smShareWhatsApp('${esc(site.url)}','${esc(site.name)}')">💬 WhatsApp</button>
         <button class="site-modal-btn site-modal-btn--danger" id="smReportBtn" onclick="smToggleReport()">⚠ Report</button>
       </div>
 
@@ -739,6 +727,14 @@ function closeModal(){
   setTimeout(()=>{ m.remove(); document.body.style.overflow=''; }, 220);
 }
 
+window.smShareTwitter = function(url, name){
+  const text = `🔗 Just found "${name}" on Nexo Hub — check it out`;
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400,noopener');
+};
+window.smShareWhatsApp = function(url, name){
+  const text = `🔗 Check out "${name}" — ${url}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+};
 window.smCopyLink = function(url){
   const btn = document.getElementById('smCopyBtn');
   function onCopied(){ showToast('Link copied!'); if(btn){ btn.textContent='✓ Copied'; setTimeout(()=>btn.textContent='🔗 Copy Link',2000); } }
