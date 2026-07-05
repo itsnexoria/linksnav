@@ -828,3 +828,62 @@ body {
 .sm-report-submit:hover:not(:disabled) { background:rgba(239,68,68,.2); border-color:#ef4444; }
 .sm-report-submit:disabled { opacity:.5; cursor:not-allowed; }
 .sm-report-success { font-size:.82rem; color:#22c55e; font-weight:600; padding:6px 0; }
+
+/* ── KEYBOARD SHORTCUTS MODAL ──────────────────────────────── */
+.shortcuts-overlay {
+  position:fixed; inset:0; z-index:9100;
+  background:rgba(0,0,0,.65); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; opacity:0; transition:opacity .2s;
+}
+.shortcuts-overlay.show { opacity:1; }
+.shortcuts-modal {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:var(--radius-lg); padding:0;
+  width:100%; max-width:460px; overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.5);
+  transform:translateY(10px) scale(.98); transition:transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.shortcuts-overlay.show .shortcuts-modal { transform:none; }
+.shortcuts-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 20px 14px; border-bottom:1px solid var(--border);
+}
+.shortcuts-title { font-family:var(--font-d); font-weight:800; font-size:.95rem; letter-spacing:-.01em; }
+.shortcuts-close {
+  width:26px; height:26px; border-radius:50%; border:1px solid var(--border2);
+  background:var(--bg3); color:var(--muted); font-size:.75rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:all .15s;
+}
+.shortcuts-close:hover { background:var(--surface2); color:var(--text); }
+.shortcuts-list { padding:8px 0; }
+.shortcuts-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 20px; transition:background .15s;
+}
+.shortcuts-row:hover { background:var(--surface2); }
+.shortcuts-keys { display:flex; align-items:center; gap:4px; }
+kbd {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:28px; height:26px; padding:0 8px;
+  background:var(--bg3); border:1px solid var(--border2);
+  border-bottom:3px solid var(--border2); border-radius:6px;
+  font-family:var(--font-m); font-size:.72rem; font-weight:700; color:var(--text2);
+}
+.shortcuts-plus { color:var(--muted); font-size:.7rem; font-weight:600; }
+.shortcuts-desc { font-size:.82rem; color:var(--text2); }
+.shortcuts-footer {
+  padding:12px 20px; border-top:1px solid var(--border);
+  font-size:.72rem; color:var(--muted); text-align:center;
+}
+.shortcuts-footer kbd { min-width:22px; height:20px; font-size:.64rem; }
+
+/* ── SHORTCUTS HINT BUTTON (header) ─────────────────────────── */
+.shortcuts-hint-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:8px;
+  border:1px solid var(--border2); background:var(--bg3);
+  color:var(--muted); font-family:var(--font-m); font-size:.75rem; font-weight:700;
+  cursor:pointer; transition:all .18s;
+}
+.shortcuts-hint-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); }

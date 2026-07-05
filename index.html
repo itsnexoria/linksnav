@@ -10,15 +10,15 @@
   <meta name="description" content="A curated, searchable directory of 490+ essential websites across AI, gaming, dev tools, design, music, finance, and more." />
   <meta name="keywords"    content="web directory, useful websites, ai tools, dev tools, gaming sites, design resources, productivity apps, nexhub" />
   <meta name="author"      content="Nexus" />
-  <link rel="canonical"    href="https://nexohub.nexosites.xyz/" />
+  <link rel="canonical"    href="https://app.nexosites.xyz/" />
 
   <!-- ── OPEN GRAPH ────────────────────────────────────── -->
   <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://nexohub.nexosites.xyz/" />
+  <meta property="og:url"         content="https://app.nexosites.xyz/" />
   <meta property="og:title"       content="Nexo Hub — Your Digital Command Center" />
   <meta property="og:description" content="490+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
   <meta property="og:image:alt" content="Nexo Hub logo — curated web directory"/>
-  <meta property="og:image"       content="https://nexohub.nexosites.xyz/assets/logo-512.png" />
+  <meta property="og:image"       content="https://app.nexosites.xyz/assets/logo-512.png" />
   <meta property="og:image:width"  content="512" />
   <meta property="og:image:height" content="512" />
   <meta property="og:site_name"   content="Nexo Hub" />
@@ -28,7 +28,7 @@
   <meta name="twitter:card"        content="summary" />
   <meta name="twitter:title"       content="Nexo Hub — Your Digital Command Center" />
   <meta name="twitter:description" content="490+ curated websites. Search, filter, favourite." />
-  <meta name="twitter:image"       content="https://nexohub.nexosites.xyz/assets/logo-512.png" />
+  <meta name="twitter:image"       content="https://app.nexosites.xyz/assets/logo-512.png" />
 
   <!-- ── FAVICONS ──────────────────────────────────────── -->
   <link rel="icon"             href="assets/favicon-32.png" sizes="32x32"  type="image/png" />
@@ -44,12 +44,12 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Nexo Hub",
-    "url": "https://nexohub.nexosites.xyz/",
+    "url": "https://app.nexosites.xyz/",
     "description": "Curated directory of 490+ essential websites across AI, gaming, dev tools, design, music, finance, health, travel, writing, and photography.",
     "author": { "@type": "Person", "name": "Nexus" },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": { "@type": "EntryPoint", "urlTemplate": "https://nexohub.nexosites.xyz/search/?q={search_term_string}" },
+      "target": { "@type": "EntryPoint", "urlTemplate": "https://app.nexosites.xyz/search/?q={search_term_string}" },
       "query-input": "required name=search_term_string"
     }
   }
@@ -59,7 +59,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Nexo Hub",
-    "url": "https://nexohub.nexosites.xyz/",
+    "url": "https://app.nexosites.xyz/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
     "description": "A curated, searchable directory of 490+ essential websites across AI, gaming, dev tools, design, and more — installable as a free progressive web app.",
@@ -81,7 +81,7 @@
     (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
   </script>
   <script src="/nexo-prefs.js"></script>
-  <link rel="stylesheet" href="style.css?v=20260629-12" />
+  <link rel="stylesheet" href="style.css?v=20260629-14" />
 
   <style>
     @keyframes skeletonPulse {
@@ -151,6 +151,7 @@
 
       <!-- Right side: theme toggle + hamburger -->
       <div class="header-right">
+        <button class="shortcuts-hint-btn" onclick="openShortcutsModal()" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">?</button>
         <!-- Light/Dark toggle -->
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
           <span class="theme-icon theme-icon-dark" aria-hidden="true">
@@ -190,6 +191,8 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link nav-link--active">🏠 Home</a>
+        <a href="/category/" class="nav-link">🗂️ Categories</a>
+        <a href="/tag/" class="nav-link">🏷️ Tags</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
@@ -266,6 +269,8 @@
     <span>Nexo Hub — Your digital command center</span>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/pages/sites/">All Sites</a>
+      <a href="/category/">Categories</a>
+      <a href="/tag/">Tags</a>
       <a href="/pages/about/">About</a>
       <a href="/pages/tools/">Tools</a>
       <a href="/pages/contact/">Submit</a>
@@ -276,7 +281,7 @@
 
   <div class="toast" id="toast" aria-live="polite"></div>
 
-  <script src="app.js?v=20260629-12" defer></script>
+  <script src="app.js?v=20260629-14" defer></script>
   <script src="/pwa-register.js" defer></script>
 </body>
 </html>

@@ -10,6 +10,8 @@
 /pages/sites      /pages/sites/    301
 /pages/settings   /pages/settings/ 301
 /pages/import     /pages/import/   301
+/category         /category/       301
+/tag              /tag/            301
 /search           /search/         301
 
 # RSS feed

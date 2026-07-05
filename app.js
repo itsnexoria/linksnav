@@ -299,10 +299,15 @@ function setupSearch(){
     },130);
   });
   document.addEventListener('keydown',e=>{
+    const typing = document.activeElement===inp || document.activeElement.tagName==='SELECT' || document.activeElement.tagName==='TEXTAREA' || document.activeElement.isContentEditable;
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();inp.focus();inp.select()}
-    if(e.key==='Escape'&&document.activeElement===inp){inp.blur();inp.value='';searchQuery='';visibleCount=PAGE_SIZE;render()}
-    /* [ and ] cycle through category tabs when not typing in an input */
-    if((e.key==='['||e.key===']')&&document.activeElement!==inp&&document.activeElement.tagName!=='SELECT'){
+    if(e.key==='Escape'){
+      if(document.getElementById('shortcutsModal')){closeShortcutsModal();return;}
+      if(document.activeElement===inp){inp.blur();inp.value='';searchQuery='';visibleCount=PAGE_SIZE;render();}
+    }
+    if(e.key==='?'&&!typing){e.preventDefault();openShortcutsModal();return;}
+    /* [ and ] cycle through category tabs when not typing */
+    if((e.key==='['||e.key===']')&&!typing){
       e.preventDefault();
       const btns=[...document.querySelectorAll('.cat-btn')];
       const curIdx=btns.findIndex(b=>b.classList.contains('active'));
@@ -312,12 +317,54 @@ function setupSearch(){
       btns[nextIdx]?.click();
       btns[nextIdx]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
     }
-    /* r = open a random site (when not typing) */
-    if(e.key==='r'&&document.activeElement!==inp&&document.activeElement.tagName!=='SELECT'){
-      document.getElementById('randomBtn')?.click();
+    if(e.key==='r'&&!typing){document.getElementById('randomBtn')?.click();}
+    if(e.key==='f'&&!typing){
+      const favBtn=document.querySelector('.cat-btn[data-cat="favs"]');
+      if(favBtn){favBtn.click();favBtn.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
     }
   });
 }
+
+/* ── KEYBOARD SHORTCUTS MODAL ──────────────────────────────── */
+function openShortcutsModal(){
+  if(document.getElementById('shortcutsModal')) return;
+  const SHORTCUTS = [
+    ['Ctrl K', 'Open search'],
+    ['?', 'Show this panel'],
+    ['R', 'Open a random site'],
+    ['F', 'Jump to Favourites'],
+    ['[ ]', 'Cycle categories left / right'],
+    ['Escape', 'Close panel / clear search'],
+  ];
+  const overlay = document.createElement('div');
+  overlay.id = 'shortcutsModal';
+  overlay.className = 'shortcuts-overlay';
+  overlay.innerHTML = `
+    <div class="shortcuts-modal" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+      <div class="shortcuts-header">
+        <span class="shortcuts-title">⌨️ Keyboard Shortcuts</span>
+        <button class="shortcuts-close" onclick="closeShortcutsModal()" aria-label="Close">✕</button>
+      </div>
+      <div class="shortcuts-list">
+        ${SHORTCUTS.map(([key,desc])=>`
+          <div class="shortcuts-row">
+            <div class="shortcuts-keys">${key.split(' ').map(k=>`<kbd>${esc(k)}</kbd>`).join('<span class="shortcuts-plus">+</span>')}</div>
+            <span class="shortcuts-desc">${esc(desc)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="shortcuts-footer">Press <kbd>Esc</kbd> or <kbd>?</kbd> to close</div>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(()=>overlay.classList.add('show'));
+  overlay.addEventListener('click',e=>{ if(e.target===overlay) closeShortcutsModal(); });
+}
+function closeShortcutsModal(){
+  const m=document.getElementById('shortcutsModal');
+  if(!m) return;
+  m.classList.remove('show');
+  setTimeout(()=>m.remove(), 200);
+}
+window.closeShortcutsModal = closeShortcutsModal;
 
 /* ── SORT & PRICE FILTER HANDLERS ───────────────────────────── */
 window.onSortChange = function(mode) {

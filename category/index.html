@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>All Categories — Nexo Hub</title>
+  <meta name="description" content="Browse all 25 categories on Nexo Hub — AI, gaming, dev tools, design, music, health, travel, writing, photography, and more."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/category/"/>
+  <meta property="og:title" content="All Categories — Nexo Hub"/>
+  <meta property="og:description" content="Browse 490+ curated sites across 25 categories including AI, gaming, dev tools, design, music, health, and travel."/>
+  <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:image:alt" content="Nexo Hub Categories"/>
+  <meta name="theme-color" content="#7c5cfc"/>
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="alternate" type="application/rss+xml" title="Nexo Hub — What's New" href="/feed.xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="/nexo-prefs.js"></script>
+  <link rel="stylesheet" href="../style.css?v=20260629-14"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "All Categories — Nexo Hub",
+    "url": "https://app.nexosites.xyz/category/",
+    "description": "Browse 490+ curated websites organised across 25 categories.",
+    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexosites.xyz/" }
+  }
+  </script>
+  <style>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .cat-index-wrap { max-width:1080px; margin:0 auto; padding:40px 24px 80px; position:relative; z-index:1; }
+    .cat-index-hero { margin-bottom:36px; animation:fadeUp .35s ease both; }
+    .cat-index-title { font-family:var(--font-d); font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; letter-spacing:-.03em; margin:0 0 8px; }
+    .cat-index-sub { font-size:.85rem; color:var(--text2); }
+    .cat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+    .cat-card {
+      display:flex; align-items:center; gap:14px; padding:18px 16px;
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+      text-decoration:none; color:var(--text); animation:fadeUp .35s ease both;
+      transition:border-color .2s, transform .18s, box-shadow .2s;
+    }
+    .cat-card:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+    .cat-icon { font-size:1.6rem; flex-shrink:0; }
+    .cat-info { flex:1; min-width:0; }
+    .cat-name { font-family:var(--font-d); font-weight:700; font-size:.95rem; letter-spacing:-.01em; }
+    .cat-count { font-size:.72rem; color:var(--muted); margin-top:2px; font-family:var(--font-m); }
+    .loading-spin { display:inline-block; width:22px; height:22px; border:3px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <h1 class="logo-text">Nexo Hub</h1>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/category/" class="nav-link nav-link--active">🗂️ Categories</a>
+        <a href="/tag/" class="nav-link">🏷️ Tags</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/import/" class="nav-link">📥 Import Bookmarks</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/settings/" class="nav-link">⚙️ Settings</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="cat-index-wrap">
+    <div class="cat-index-hero">
+      <h2 class="cat-index-title">🗂️ All Categories</h2>
+      <p class="cat-index-sub">490+ curated sites, organised into 25 categories</p>
+    </div>
+    <div class="cat-grid" id="catGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px"><span class="loading-spin"></span></div>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL='https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY='sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+    async function load(){
+      const [catsRes, countRes] = await Promise.all([
+        fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label,icon,sort_order&order=sort_order.asc`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}}),
+        fetch(`${SUPABASE_URL}/rest/v1/sites?select=category&status=eq.approved`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}})
+      ]);
+      const cats = await catsRes.json();
+      const sites = await countRes.json();
+      const counts={};
+      sites.forEach(s=>{counts[s.category]=(counts[s.category]||0)+1;});
+      document.getElementById('catGrid').innerHTML = cats.map((c,i)=>`
+        <a class="cat-card" href="/category/${esc(c.id)}/" style="animation-delay:${i*0.03}s">
+          <span class="cat-icon">${esc(c.icon)}</span>
+          <div class="cat-info">
+            <div class="cat-name">${esc(c.label)}</div>
+            <div class="cat-count">${(counts[c.id]||0).toLocaleString()} site${(counts[c.id]||0)!==1?'s':''}</div>
+          </div>
+        </a>`).join('');
+    }
+    load();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn)btn.addEventListener('click',function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('nexhub_theme',n);});
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function oM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function cM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham)ham.addEventListener('click',()=>ham.classList.contains('is-open')?cM():oM());
+      if(ov)ov.addEventListener('click',cM);
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')cM();});
+    });
+  </script>
+  <script src="/pwa-register.js" defer></script>
+</body>
+</html>

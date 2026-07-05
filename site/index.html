@@ -6,10 +6,10 @@
   <!-- Meta tags are written dynamically by JS once the site data loads -->
   <title>Loading… — Nexo Hub</title>
   <meta name="description" content="Nexo Hub — a curated directory of 490+ essential websites."/>
-  <link rel="canonical" href="https://nexohub.nexosites.xyz/site/"/>
+  <link rel="canonical" href="https://app.nexosites.xyz/site/"/>
   <meta property="og:title" content="Nexo Hub"/>
   <meta property="og:description" content="Curated directory of 490+ essential websites."/>
-  <meta property="og:image" content="https://nexohub.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:type" content="website"/>
@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../style.css?v=20260629-12"/>
+  <link rel="stylesheet" href="../style.css?v=20260629-14"/>
   <style>
     .site-detail-wrap {
       max-width: 760px; margin: 0 auto; padding: 40px 24px 80px;
@@ -152,6 +152,8 @@
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
         <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/category/" class="nav-link">🗂️ Categories</a>
+        <a href="/tag/" class="nav-link">🏷️ Tags</a>
         <a href="/pages/tools/" class="nav-link">🛠️ Mini Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
@@ -177,7 +179,7 @@
   <script>
     const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
-    const BASE = 'https://nexohub.nexosites.xyz';
+    const BASE = 'https://app.nexosites.xyz';
 
     function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
     function fav(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=64'; }catch{ return ''; } }
