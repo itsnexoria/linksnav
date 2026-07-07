@@ -887,3 +887,236 @@ kbd {
   cursor:pointer; transition:all .18s;
 }
 .shortcuts-hint-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); }
+
+/* ═══════════════════════════════════════════════════════════════
+   ✨ ANIMATIONS v2 — making the site feel alive
+═══════════════════════════════════════════════════════════════ */
+
+/* ── ANIMATED GRADIENT HEADING (homepage hero) ─────────────── */
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50% }
+  50%      { background-position: 100% 50% }
+}
+.gradient-text {
+  background: linear-gradient(270deg, var(--accent), var(--accent2), #06b6d4, var(--accent));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* ── FLOATING ORBS (ambient background) ───────────────────── */
+@keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(.97)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-25px,20px) scale(.96)}66%{transform:translate(20px,-15px) scale(1.04)} }
+@keyframes float3 { 0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(15px,-25px) scale(1.06)} }
+.orb {
+  position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+  filter: blur(80px); opacity: 0; transition: opacity 1s;
+}
+.orb-1 {
+  width: 520px; height: 520px; top: -100px; left: -100px;
+  background: radial-gradient(circle, rgba(124,92,252,0.18), transparent 70%);
+  animation: float1 18s ease-in-out infinite;
+}
+.orb-2 {
+  width: 420px; height: 420px; top: 30%; right: -80px;
+  background: radial-gradient(circle, rgba(236,72,153,0.12), transparent 70%);
+  animation: float2 22s ease-in-out infinite;
+}
+.orb-3 {
+  width: 350px; height: 350px; bottom: 10%; left: 30%;
+  background: radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%);
+  animation: float3 26s ease-in-out infinite;
+}
+[data-theme="dark"] .orb, [data-theme="midnight"] .orb { opacity: 1; }
+[data-theme="light"] .orb { opacity: 0.4; }
+[data-theme="slate"] .orb { opacity: 0.6; }
+
+/* ── SHIMMER SKELETON (card loading state) ─────────────────── */
+@keyframes shimmer {
+  0% { background-position: -400px 0 }
+  100% { background-position: 400px 0 }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius);
+}
+.skeleton-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  animation: cardIn .3s ease both;
+}
+.skeleton-line { height: 12px; }
+.skeleton-title { width: 60%; height: 14px; }
+.skeleton-short { width: 40%; height: 10px; }
+
+/* ── CARD REVEAL WITH BETTER STAGGER ──────────────────────── */
+@keyframes cardReveal {
+  from { opacity:0; transform:translateY(16px) scale(.98); }
+  to   { opacity:1; transform:none; }
+}
+.card-wrap {
+  animation: cardReveal .38s cubic-bezier(.22,.68,0,1.2) both;
+}
+
+/* ── MAGNETIC BUTTON EFFECT ───────────────────────────────── */
+.submit-nav-btn, .drop-btn, .sd-action-primary, .site-modal-visit, .notfound-btn {
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s, background .2s !important;
+}
+.submit-nav-btn:hover { transform: translateY(-2px) scale(1.03) !important; }
+.drop-btn:hover, .sd-action-primary:hover, .site-modal-visit:hover, .notfound-btn:hover {
+  transform: translateY(-3px) scale(1.04) !important;
+}
+.submit-nav-btn:active, .drop-btn:active, .sd-action-primary:active {
+  transform: scale(.96) !important;
+}
+
+/* ── SEARCH BAR GLOW ──────────────────────────────────────── */
+@keyframes searchGlow {
+  0%,100% { box-shadow: 0 0 0 3px var(--accent-dim); }
+  50%     { box-shadow: 0 0 0 5px var(--accent-dim), 0 0 20px rgba(124,92,252,.15); }
+}
+#searchInput:focus { animation: searchGlow 2s ease infinite; }
+
+/* ── HEADER SCROLL EFFECT ─────────────────────────────────── */
+.header { transition: background .3s, border-color .3s, box-shadow .3s; }
+.header.scrolled {
+  background: color-mix(in srgb, var(--bg2) 92%, transparent) !important;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 0 1px 0 var(--border), 0 4px 24px rgba(0,0,0,.12);
+}
+
+/* ── CAT NAV PILL ACTIVE INDICATOR ───────────────────────── */
+@keyframes pillPop { 0%{transform:scale(.9)} 60%{transform:scale(1.06)} 100%{transform:scale(1)} }
+.cat-btn.active { animation: pillPop .25s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ── FAVOURITE STAR BURST ─────────────────────────────────── */
+@keyframes starBurst {
+  0%  { transform:scale(1) rotate(0deg) }
+  30% { transform:scale(1.4) rotate(-15deg) }
+  60% { transform:scale(.85) rotate(10deg) }
+  100%{ transform:scale(1) rotate(0deg) }
+}
+.fav-btn--active { animation: starBurst .4s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ── TOAST SLIDE IN ───────────────────────────────────────── */
+@keyframes toastIn  { from{opacity:0;transform:translateY(16px) scale(.94)} to{opacity:1;transform:none} }
+@keyframes toastOut { to{opacity:0;transform:translateY(8px) scale(.97)} }
+.toast.show { animation: toastIn .28s cubic-bezier(.34,1.56,.64,1) both; }
+.toast:not(.show) { animation: toastOut .2s ease forwards; }
+
+/* ── COUNT-UP TICKER ──────────────────────────────────────── */
+@keyframes countTick { 0%{transform:translateY(4px);opacity:0} 100%{transform:none;opacity:1} }
+.updated { animation: countTick .35s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ── RANDOM BUTTON SPIN ON CLICK ──────────────────────────── */
+@keyframes spinOnce { to { transform: rotate(360deg) } }
+#randomBtn:active { animation: spinOnce .4s cubic-bezier(.34,1.56,.64,1); }
+
+/* ── HEALTH BADGE DOWN PULSE ──────────────────────────────── */
+@keyframes badgePulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+.health-badge { animation: badgePulse 2.4s ease-in-out infinite; }
+
+/* ── NAV LINK UNDERLINE SLIDE ─────────────────────────────── */
+.nav-link {
+  position: relative; overflow: hidden;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: 4px; left: 12px; right: 12px;
+  height: 2px; background: var(--accent); border-radius: 1px;
+  transform: scaleX(0); transform-origin: left; transition: transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.nav-link:hover::after, .nav-link--active::after { transform: scaleX(1); }
+
+/* ── FADE IN FOR DETAIL PAGES ─────────────────────────────── */
+.sd-hero, .sd-body, .sd-actions, .sd-meta-grid { animation: fadeUp .4s ease both; }
+.sd-body  { animation-delay: .05s; }
+.sd-actions { animation-delay: .1s; }
+.sd-meta-grid { animation-delay: .15s; }
+
+/* ── MODAL SPRING OPEN ────────────────────────────────────── */
+.site-modal {
+  transform: translateY(16px) scale(.95);
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1) !important;
+}
+.site-modal-overlay.show .site-modal { transform: none; }
+
+/* ── PAGE TRANSITION FADE ─────────────────────────────────── */
+@keyframes pageFadeIn { from{opacity:0} to{opacity:1} }
+body { animation: pageFadeIn .3s ease both; }
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+  .orb { opacity: 0 !important; }
+}
+
+/* ── CARD TILT ON HOVER (subtle 3D) ──────────────────────────── */
+.card-wrap {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.card-wrap:hover {
+  transform: translateY(-4px) rotateX(1.5deg);
+}
+
+/* ── RIPPLE ON CARD CLICK ─────────────────────────────────────── */
+@keyframes ripple {
+  from { transform: scale(0); opacity: .35; }
+  to   { transform: scale(4); opacity: 0; }
+}
+.ripple-circle {
+  position: absolute; border-radius: 50%;
+  width: 60px; height: 60px; margin-top: -30px; margin-left: -30px;
+  background: var(--accent); pointer-events: none;
+  animation: ripple .5s ease-out forwards;
+}
+
+/* ── STAGGER ANIMATION IMPROVEMENTS ──────────────────────────── */
+.card-wrap:nth-child(1)  { animation-delay: .03s }
+.card-wrap:nth-child(2)  { animation-delay: .06s }
+.card-wrap:nth-child(3)  { animation-delay: .09s }
+.card-wrap:nth-child(4)  { animation-delay: .12s }
+.card-wrap:nth-child(5)  { animation-delay: .15s }
+.card-wrap:nth-child(6)  { animation-delay: .18s }
+.card-wrap:nth-child(7)  { animation-delay: .21s }
+.card-wrap:nth-child(8)  { animation-delay: .24s }
+.card-wrap:nth-child(9)  { animation-delay: .27s }
+.card-wrap:nth-child(10) { animation-delay: .30s }
+.card-wrap:nth-child(11) { animation-delay: .33s }
+.card-wrap:nth-child(12) { animation-delay: .36s }
+.card-wrap:nth-child(n+13) { animation-delay: .38s }
+
+/* ── GRADIENT LOGO TEXT OVERRIDE ──────────────────────────────── */
+.logo-text.gradient-text {
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+/* ── CATEGORY NAV FADE EDGES ──────────────────────────────────── */
+.cat-nav-scroll-wrap {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 48px, black calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 48px, black calc(100% - 48px), transparent 100%);
+}
+
+/* ── HERO COUNTER GLOW ────────────────────────────────────────── */
+@keyframes counterGlow {
+  0%,100% { text-shadow: 0 0 0 transparent; }
+  50%     { text-shadow: 0 0 20px rgba(124,92,252,.4); }
+}
+#siteCount { animation: counterGlow 3s ease-in-out infinite; }
+
+/* ── FAV COUNT BOUNCE ─────────────────────────────────────────── */
+@keyframes favCountBounce { 0%{transform:scale(1)} 50%{transform:scale(1.18)} 100%{transform:scale(1)} }
+.fav-count-badge { animation: favCountBounce .3s ease; }
+
+/* ── SMOOTH SCROLL FOR WHOLE PAGE ─────────────────────────────── */
+html { scroll-behavior: smooth; }

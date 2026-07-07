@@ -15,7 +15,70 @@ const MAX_RECENTS = 24;
 /* Bump this any time you need to bust the browser/CDN cache on app.js/style.css. */
 const BUILD_VERSION = '20260626-1';
 
-/* ── SUPABASE CONFIG ────────────────────────────────────────── */
+/* ── ANIMATIONS INIT ─────────────────────────────────────────── */
+(function initAnimations(){
+  /* Header scroll glass effect */
+  const header = document.querySelector('.header');
+  if(header){
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* Skeleton placeholders while sites load */
+  const siteGridEl2 = document.getElementById('siteGrid');
+  if(siteGridEl2 && !siteGridEl2.children.length){
+    siteGridEl2.innerHTML = Array.from({length: 12}, () => `
+      <div class="skeleton-card">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line" style="width:85%"></div>
+        <div class="skeleton skeleton-short"></div>
+      </div>`).join('');
+  }
+
+  /* Smooth scroll for category nav arrows */
+  document.querySelectorAll('.scroll-arrow').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nav = document.getElementById('catNavInner');
+      if(!nav) return;
+      const dir = btn.dataset.dir === 'right' ? 1 : -1;
+      nav.scrollBy({ left: dir * 220, behavior: 'smooth' });
+    });
+  });
+
+  /* Ripple on card clicks */
+  const siteGridEl = document.getElementById('siteGrid');
+  if(siteGridEl){
+    siteGridEl.addEventListener('click', e => {
+      const card = e.target.closest('.card');
+      if(!card) return;
+      const r = document.createElement('span');
+      r.className = 'ripple-circle';
+      const rect = card.getBoundingClientRect();
+      r.style.left = (e.clientX - rect.left) + 'px';
+      r.style.top  = (e.clientY - rect.top) + 'px';
+      card.style.position = 'relative';
+      card.style.overflow = 'hidden';
+      card.appendChild(r);
+      r.addEventListener('animationend', () => r.remove());
+    });
+
+    /* 3D tilt on mouse move */
+    siteGridEl.addEventListener('mousemove', e => {
+      const wrap = e.target.closest('.card-wrap');
+      if(!wrap) return;
+      const rect = wrap.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width  - .5) * 7;
+      const y = ((e.clientY - rect.top)  / rect.height - .5) * -7;
+      wrap.style.transform = `translateY(-4px) rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+    siteGridEl.addEventListener('mouseleave', e => {
+      const wrap = e.target.closest('.card-wrap');
+      if(wrap) wrap.style.transform = '';
+    }, true);
+  }
+})();
 const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
 function sbHeaders(extra={}){
@@ -454,8 +517,11 @@ function render(){
   const label=document.getElementById('sectionLabel');
   const countEl=document.getElementById('siteCount');
   const grid=document.getElementById('cardsGrid');
+  const siteGrid=document.getElementById('siteGrid');
   const empty=document.getElementById('emptyState');
   const hint=document.getElementById('dragHint');
+  /* Clear skeleton placeholders on first real render */
+  if(siteGrid) siteGrid.querySelectorAll('.skeleton-card').forEach(s=>s.remove());
 
   if(activeCategory==='__favorites__') label.textContent='★ Favorites';
   else if(activeCategory==='__recent__') label.textContent='🕓 Recently Visited';
