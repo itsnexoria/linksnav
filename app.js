@@ -576,7 +576,7 @@ function cardHTML(s,draggable=false){
     return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
   }).join('');
   const imgSrc=fav(s.url);
-  const imgTag=imgSrc?`<img class="card-favicon" data-src="${esc(imgSrc)}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAI=" alt="" decoding="async" onerror="this.style.display='none'" width="22" height="22">`:'';
+  const imgTag=imgSrc?`<img class="card-favicon" data-src="${esc(imgSrc)}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAI=" alt="${esc(s.name)} favicon" decoding="async" onerror="this.style.display='none'" width="22" height="22">`:'';
   const dragAttr=draggable?'draggable="true"':'';
   const handleHTML=draggable?'<span class="drag-handle" aria-hidden="true">⠿</span>':'';
   const downBadge=isDown?`<span class="health-badge" title="This site failed its last automatic health check${s.last_checked_at?' ('+timeAgo(s.last_checked_at)+')':''} and may be temporarily down.">⚠ May be down</span>`:'';
@@ -783,7 +783,7 @@ window.openSiteModal = function(siteId, e){
     <div class="site-modal" role="dialog" aria-modal="true" aria-label="${esc(site.name)} details">
       <button class="site-modal-close" aria-label="Close">✕</button>
       <div class="site-modal-header">
-        ${faviconUrl?`<img class="site-modal-favicon" src="${esc(faviconUrl)}" alt="" onerror="this.style.display='none'"/>`:''}
+        ${faviconUrl?`<img class="site-modal-favicon" src="${esc(faviconUrl)}" alt="${esc(site.name)} favicon" onerror="this.style.display='none'"/>`:''}
         <div>
           <div class="site-modal-name">${esc(site.name)}</div>
           <a class="site-modal-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>

@@ -16,6 +16,9 @@
 # RSS feed
 /feed.xml         https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/rss-feed 302
 
+# Sites sitemap — generated dynamically from the sites table (real lastmod per site)
+/sitemap-sites.xml https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/sitemap-sites 302
+
 # Site detail pages — SPA rewrite: serves /site/index.html for any /site/* URL
 # Must come BEFORE any catch-all. No 404 fallback needed — Cloudflare auto-serves 404.html.
 /site             /site/           301

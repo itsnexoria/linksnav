@@ -219,6 +219,55 @@
     .delete-btn:active { transform: scale(.95); }
     .delete-btn.confirm { background: #ef4444; color: #fff; }
     .delete-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .edit-btn {
+      flex-shrink: 0; padding: 7px 14px; border-radius: var(--radius);
+      background: transparent; border: 1px solid var(--border2); color: var(--text2);
+      font-family: var(--font-m); font-size: .75rem; font-weight: 600;
+      cursor: pointer; transition: background .18s, border-color .18s, color .18s, transform .15s;
+    }
+    .edit-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .edit-btn:active { transform: scale(.95); }
+
+    /* ── EDIT MODAL ──────────────────────────────────── */
+    .edit-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 200;
+      animation: fadeUp .18s ease both;
+    }
+    .edit-modal {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;
+      padding: 26px; animation: popScale .2s ease both;
+    }
+    .edit-modal h2 { font-family: var(--font-d); font-size: 1.1rem; font-weight: 800; margin-bottom: 18px; }
+    .edit-field { margin-bottom: 14px; }
+    .edit-field label {
+      display: block; font-family: var(--font-m); font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 6px;
+    }
+    .edit-field input, .edit-field select, .edit-field textarea {
+      width: 100%; padding: 10px 12px; border-radius: var(--radius);
+      background: var(--bg2); border: 1px solid var(--border2); color: var(--text);
+      font-family: var(--font-m); font-size: .82rem;
+    }
+    .edit-field input:focus, .edit-field select:focus, .edit-field textarea:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .edit-field textarea { resize: vertical; min-height: 70px; font-family: inherit; }
+    .edit-field-hint { font-size: .68rem; color: var(--muted); margin-top: 5px; }
+    .edit-modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .edit-modal-actions button {
+      flex: 1; padding: 11px; border-radius: var(--radius); font-family: var(--font-m);
+      font-size: .82rem; font-weight: 700; cursor: pointer; border: none; transition: opacity .18s;
+    }
+    .edit-save-btn { background: linear-gradient(135deg,var(--accent),var(--accent2)); color: #fff; }
+    .edit-cancel-btn { background: var(--bg2); color: var(--text2); border: 1px solid var(--border2) !important; }
+    .edit-modal-actions button:disabled { opacity: .6; cursor: not-allowed; }
+    .edit-modal-close {
+      position: absolute; top: 16px; right: 16px; background: none; border: none;
+      color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1;
+    }
+    .edit-modal { position: relative; }
 
     .pagination {
       display: flex; justify-content: center; align-items: center; gap: 12px;
@@ -426,6 +475,103 @@
 
     function esc(s) {
       return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ── EDIT SITE MODAL ─────────────────────────────── */
+    let lastManageSites = [];
+    let allCatsForEdit = [];
+    const TAG_COLOR_PALETTE = ['#4f7fff','#00e5c3','#ff4b8a','#fbbf24','#60a5fa','#34d399','#f472b6','#a78bfa'];
+    function tagColorFor(tag){
+      let h = 0; for(let i=0;i<tag.length;i++) h = (h*31 + tag.charCodeAt(i)) >>> 0;
+      return TAG_COLOR_PALETTE[h % TAG_COLOR_PALETTE.length];
+    }
+
+    function openEditModal(id) {
+      const site = lastManageSites.find(s => s.id === id);
+      if (!site) return;
+      document.getElementById('editModalRoot')?.remove();
+
+      const catOptions = allCatsForEdit.map(c =>
+        `<option value="${esc(c.id)}"${c.id===site.category?' selected':''}>${esc(c.label)}</option>`
+      ).join('');
+
+      const overlay = document.createElement('div');
+      overlay.id = 'editModalRoot';
+      overlay.className = 'edit-modal-overlay';
+      overlay.innerHTML = `
+        <div class="edit-modal" role="dialog" aria-modal="true" aria-label="Edit ${esc(site.name)}">
+          <button class="edit-modal-close" aria-label="Close" onclick="closeEditModal()">✕</button>
+          <h2>Edit Site</h2>
+          <div class="edit-field">
+            <label for="efName">Name</label>
+            <input type="text" id="efName" value="${esc(site.name)}"/>
+          </div>
+          <div class="edit-field">
+            <label for="efUrl">URL</label>
+            <input type="text" id="efUrl" value="${esc(site.url)}"/>
+          </div>
+          <div class="edit-field">
+            <label for="efCategory">Category</label>
+            <select id="efCategory">${catOptions}</select>
+          </div>
+          <div class="edit-field">
+            <label for="efDescription">Description</label>
+            <textarea id="efDescription">${esc(site.description || '')}</textarea>
+          </div>
+          <div class="edit-field">
+            <label for="efTags">Tags (comma-separated)</label>
+            <input type="text" id="efTags" value="${esc((site.tags||[]).join(', '))}"/>
+            <div class="edit-field-hint">e.g. free, open-source, ai — colors are auto-assigned for any new tag</div>
+          </div>
+          <div class="edit-modal-actions">
+            <button class="edit-cancel-btn" onclick="closeEditModal()">Cancel</button>
+            <button class="edit-save-btn" id="efSaveBtn" onclick="saveEditModal('${esc(id)}')">Save Changes</button>
+          </div>
+        </div>`;
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeEditModal(); });
+      document.addEventListener('keydown', escCloseEditModal);
+    }
+
+    function escCloseEditModal(e){ if (e.key === 'Escape') closeEditModal(); }
+
+    function closeEditModal() {
+      document.getElementById('editModalRoot')?.remove();
+      document.removeEventListener('keydown', escCloseEditModal);
+    }
+
+    async function saveEditModal(id) {
+      const site = lastManageSites.find(s => s.id === id);
+      const btn = document.getElementById('efSaveBtn');
+      const name = document.getElementById('efName').value.trim();
+      const url = document.getElementById('efUrl').value.trim();
+      const category = document.getElementById('efCategory').value;
+      const description = document.getElementById('efDescription').value.trim();
+      const tags = document.getElementById('efTags').value.split(',').map(t => t.trim().toLowerCase().replace(/\s+/g,'-')).filter(Boolean);
+
+      if (!name) { showToast('Name is required', true); return; }
+      if (!/^https?:\/\//i.test(url)) { showToast('URL must start with http:// or https://', true); return; }
+
+      const existingColors = (site && site.tag_colors) || {};
+      const tagColors = {};
+      tags.forEach(t => { tagColors[t] = existingColors[t] || tagColorFor(t); });
+
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+      try {
+        await rpc('admin_update_site', {
+          input_key: getKey(), site_id: id,
+          p_name: name, p_url: url, p_description: description, p_category: category,
+          p_tags: tags, p_tag_colors: tagColors
+        });
+        showToast('Site updated');
+        closeEditModal();
+        loadManageSites();
+      } catch (e) {
+        showToast(e.message || 'Failed to update', true);
+        btn.disabled = false;
+        btn.textContent = 'Save Changes';
+      }
     }
 
     async function rpc(fnName, body) {
@@ -716,6 +862,7 @@
           headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
         });
         const cats = await res.json();
+        allCatsForEdit = cats;
         const sel = document.getElementById('manageCatFilter');
         const bulkSel = document.getElementById('bulkCatSelect');
         cats.forEach(c => {
@@ -818,6 +965,7 @@
     }
 
     function renderManageList(sites) {
+      lastManageSites = sites;
       const list = document.getElementById('manageList');
       if (sites.length === 0) {
         list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">🔍</div><p>No sites match your search.</p></div>`;
@@ -832,6 +980,7 @@
             <div class="manage-card-url">${esc(s.url)}</div>
           </div>
           <div class="manage-card-cat">${esc(s.category)}</div>
+          <button class="edit-btn" onclick="openEditModal('${esc(s.id)}')">✏️ Edit</button>
           <button class="delete-btn" onclick="confirmDelete(this, '${esc(s.id)}')">🗑 Delete</button>
         </div>
       `).join('');

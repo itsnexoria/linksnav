@@ -204,7 +204,7 @@
         <div class="card-wrap${isDown?' card-wrap--down':''}">
           <a class="card" href="${esc(href)}" ${isExternal?'target="_blank" rel="noopener noreferrer"':''} style="--card-color:${esc(s.color||'#4f7fff')}">
             <div class="card-top">
-              <img class="card-favicon" src="${esc(fav(s.url))}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'" width="22" height="22"/>
+              <img class="card-favicon" src="${esc(fav(s.url))}" alt="${esc(s.name)} favicon" loading="lazy" decoding="async" onerror="this.style.display='none'" width="22" height="22"/>
               <span class="card-name">${esc(s.name)}</span>
               <span class="card-arrow" aria-hidden="true">↗</span>
             </div>

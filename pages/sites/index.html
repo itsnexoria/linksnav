@@ -331,7 +331,7 @@
       : '';
     return '<a class="card" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="'+esc(site.name)+'">'
       +'<div class="card-header">'
-      +'<img class="card-favicon" src="'+esc(favicon)+'" alt="" width="16" height="16" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
+      +'<img class="card-favicon" src="'+esc(favicon)+'" alt="'+esc(site.name)+' favicon" width="16" height="16" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
       +'<span class="card-name">'+esc(site.name)+'</span>'
       +'</div>'
       +'<p class="card-desc">'+esc(site.description)+'</p>'

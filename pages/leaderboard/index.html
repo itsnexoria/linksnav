@@ -331,7 +331,7 @@
         return `
         <div class="lb-row rank-${rank}${rank<=3?' top3':''}">
           <div class="lb-rank">${medal}</div>
-          <img class="lb-site-favicon" src="${esc(fav(r.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+          <img class="lb-site-favicon" src="${esc(fav(r.url))}" alt="${esc(r.name)} favicon" loading="lazy" onerror="this.style.display='none'"/>
           <div class="lb-site-info">
             <a href="${esc(href)}" ${isExt?'target="_blank" rel="noopener noreferrer"':''}>
               <div class="lb-site-name">${esc(r.name)}</div>

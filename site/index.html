@@ -272,7 +272,7 @@
         if(!similar.length){ grid.style.display='none'; return; }
         grid.innerHTML = similar.map(s=>`
           <a class="sd-similar-card" href="${esc(s.slug ? '/site/'+s.slug+'/' : s.url)}" ${!s.slug?'target="_blank" rel="noopener noreferrer"':''}>
-            <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(new URL(s.url||'https://x.com').hostname)}&sz=32" alt="" loading="lazy" onerror="this.style.display='none'" class="sd-similar-fav"/>
+            <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(new URL(s.url||'https://x.com').hostname)}&sz=32" alt="${esc(s.name)} favicon" loading="lazy" onerror="this.style.display='none'" class="sd-similar-fav"/>
             <span>${esc(s.name)}</span>
             <span class="sd-similar-arrow">↗</span>
           </a>

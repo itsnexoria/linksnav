@@ -536,13 +536,14 @@
        edge function, instead of hardcoding a generic import blurb. */
     async function fetchMetaDescription(url){
       try{
-        const res = await fetch(`${SUPABASE_URL}/functions/v1/fetch-meta?url=${encodeURIComponent(url)}`, {
-          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/fetch-meta`, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
         });
         if(!res.ok) return null;
         const data = await res.json();
-        const desc = data.description || data.meta_description || data.ogDescription || data.og_description;
-        return desc ? desc.trim().slice(0,300) : null;
+        return data.description ? data.description.trim().slice(0,300) : null;
       }catch{ return null; }
     }
 
@@ -664,7 +665,7 @@
         document.getElementById('foundList').innerHTML = found.map(b=>`
           <div class="bookmark-item found">
             <div class="bookmark-row">
-              <img class="bookmark-favicon" src="${escI(favI(b.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+              <img class="bookmark-favicon" src="${escI(favI(b.url))}" alt="${escI(b.site.name)} favicon" loading="lazy" onerror="this.style.display='none'"/>
               <div class="bookmark-info">
                 <div class="bookmark-name">${escI(b.site.name)}</div>
                 <div class="bookmark-url">${escI(b.url)}</div>
@@ -681,7 +682,7 @@
           return `
           <div class="bookmark-item missing">
             <div class="bookmark-row">
-              <img class="bookmark-favicon" src="${escI(favI(b.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+              <img class="bookmark-favicon" src="${escI(favI(b.url))}" alt="${escI(b.name)} favicon" loading="lazy" onerror="this.style.display='none'"/>
               <div class="bookmark-info">
                 <div class="bookmark-name">${escI(b.name)}</div>
                 <div class="bookmark-url">${escI(b.url)}</div>
@@ -829,7 +830,7 @@
           const date = new Date(s.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
           return `
           <div class="sub-item">
-            <img class="sub-favicon" src="${favicon}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+            <img class="sub-favicon" src="${favicon}" alt="${escHtml(s.name||s.url)} favicon" loading="lazy" onerror="this.style.display='none'"/>
             <div class="sub-info">
               <div class="sub-name">${escHtml(s.name||s.url)}</div>
               <div class="sub-url">${escHtml(s.url)} · Submitted ${escHtml(date)}</div>
@@ -840,7 +841,7 @@
       }catch{
         list.innerHTML = subs.map(s=>`
           <div class="sub-item">
-            <img class="sub-favicon" src="https://www.google.com/s2/favicons?sz=32&domain=${encodeURIComponent(s.url)}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+            <img class="sub-favicon" src="https://www.google.com/s2/favicons?sz=32&domain=${encodeURIComponent(s.url)}" alt="${escHtml(s.name||s.url)} favicon" loading="lazy" onerror="this.style.display='none'"/>
             <div class="sub-info">
               <div class="sub-name">${escHtml(s.name||s.url)}</div>
               <div class="sub-url">${escHtml(s.url)}</div>

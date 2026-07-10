@@ -329,7 +329,7 @@
         if(!similar.length){ grid.style.display='none'; return; }
         grid.innerHTML = similar.map(s=>`
           <a class="sd-similar-card" href="${esc(s.slug?'/site/'+s.slug+'/':s.url)}" ${!s.slug?'target="_blank" rel="noopener noreferrer"':''}>
-            <img class="sd-similar-fav" src="${esc(fav(s.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+            <img class="sd-similar-fav" src="${esc(fav(s.url))}" alt="${esc(s.name)} favicon" loading="lazy" onerror="this.style.display='none'"/>
             <span>${esc(s.name)}</span>
             <span class="sd-similar-arrow">↗</span>
           </a>`).join('');
@@ -389,7 +389,9 @@
             { name:'Nexo Hub', url:BASE+'/' },
             { name:'Categories', url:BASE+'/category/' },
             { name:cat.label, url:`${BASE}/category/${catId}/` }
-          ]);
+          ],
+          `https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/og-collection-image?type=category&id=${encodeURIComponent(catId)}`,
+          `${cat.label} on Nexo Hub`);
 
         content.innerHTML = `<div class="ct-wrap">
           <nav class="breadcrumb-trail" aria-label="Breadcrumb">
@@ -428,7 +430,9 @@
             { name:'Nexo Hub', url:BASE+'/' },
             { name:'Tags', url:BASE+'/tag/' },
             { name:'#'+tag, url:`${BASE}/tag/${tag}/` }
-          ]);
+          ],
+          `https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/og-collection-image?type=tag&id=${encodeURIComponent(tag)}`,
+          `#${tag} on Nexo Hub`);
 
         content.innerHTML = `<div class="ct-wrap">
           <nav class="breadcrumb-trail" aria-label="Breadcrumb">
@@ -459,7 +463,7 @@
       return `<div class="ct-card" style="animation-delay:${Math.min(i*0.03,0.4)}s">
         <a class="ct-card-link" href="${href}" ${isExt?'target="_blank" rel="noopener noreferrer"':''}>
           <div class="ct-card-top">
-            <img class="ct-card-fav" src="${esc(fav_)}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+            <img class="ct-card-fav" src="${esc(fav_)}" alt="${esc(s.name)} favicon" loading="lazy" onerror="this.style.display='none'"/>
             <span class="ct-card-name">${esc(s.name)}</span>
             <span class="ct-card-arrow">↗</span>
           </div>
@@ -472,7 +476,7 @@
     /* Shared helpers */
     function sbH(){ return {'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}; }
 
-    function setHeadMeta(title, desc, canonical, breadcrumbItems){
+    function setHeadMeta(title, desc, canonical, breadcrumbItems, ogImage, ogImageAlt){
       document.title = title;
       let m = document.querySelector('meta[name="description"]');
       if(!m){m=document.createElement('meta');m.name='description';document.head.appendChild(m);} m.content=desc;
@@ -484,6 +488,17 @@
       if(!can){can=document.createElement('link');can.rel='canonical';document.head.appendChild(can);} can.href=canonical;
       let robots = document.querySelector('meta[name="robots"]');
       if(robots) robots.content='index,follow';
+
+      if(ogImage){
+        let ogi = document.querySelector('meta[property="og:image"]');
+        if(!ogi){ogi=document.createElement('meta');ogi.setAttribute('property','og:image');document.head.appendChild(ogi);} ogi.content=ogImage;
+        let ogia = document.querySelector('meta[property="og:image:alt"]');
+        if(!ogia){ogia=document.createElement('meta');ogia.setAttribute('property','og:image:alt');document.head.appendChild(ogia);} ogia.content=ogImageAlt||title;
+        let twi = document.querySelector('meta[name="twitter:image"]');
+        if(!twi){twi=document.createElement('meta');twi.name='twitter:image';document.head.appendChild(twi);} twi.content=ogImage;
+        let twc = document.querySelector('meta[name="twitter:card"]');
+        if(!twc){twc=document.createElement('meta');twc.name='twitter:card';document.head.appendChild(twc);} twc.content='summary_large_image';
+      }
 
       if(breadcrumbItems && breadcrumbItems.length){
         document.getElementById('breadcrumbLd')?.remove();
