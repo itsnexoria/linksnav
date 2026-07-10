@@ -797,6 +797,7 @@ window.openSiteModal = function(siteId, e){
       ${tagHTML?`<div class="site-modal-tags">${tagHTML}</div>`:''}
       <div class="site-modal-actions">
         <a class="site-modal-visit" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(site.url)}');addRecent('${esc(site.url)}')">↗ Visit Site</a>
+        ${site.slug ? `<a class="site-modal-btn" href="/site/${esc(site.slug)}/">📄 Details</a>` : ''}
         <button class="site-modal-btn" id="smFavBtn" onclick="toggleFav('${esc(site.url)}',event);this.textContent=favorites.has('${esc(site.url)}')?'★ Saved':'☆ Save'">
           ${favorites.has(site.url)?'★ Saved':'☆ Save'}
         </button>

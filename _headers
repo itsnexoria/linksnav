@@ -34,7 +34,6 @@
 
 # Sitemap / robots — short cache so crawlers see updates reasonably fast
 /sitemap.xml
-  Content-Type: application/xml
   Cache-Control: public, max-age=3600
 /robots.txt
   Cache-Control: public, max-age=3600
