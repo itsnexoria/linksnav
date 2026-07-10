@@ -50,6 +50,14 @@
     .sd-url { font-size: .78rem; color: var(--accent); text-decoration: none; word-break: break-all; }
     .sd-url:hover { text-decoration: underline; }
     .sd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+    .detail-cat-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .72rem; font-family: var(--font-m); font-weight: 600;
+      padding: 4px 12px; border-radius: 100px; text-decoration: none;
+      background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(124,92,252,.3);
+      transition: filter .18s, transform .18s;
+    }
+    a.detail-cat-badge:hover { filter: brightness(1.15); transform: translateY(-1px); }
 
     .sd-body {
       background: var(--surface); border: 1px solid var(--border);
@@ -279,7 +287,7 @@
       const faviconUrl = fav(site.url);
       const tags = (site.tags||[]).map(t=>{
         const bg=(site.tag_colors||{})[t]||'#6b7280';
-        return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+        return `<a class="tag" href="/tag/${esc(encodeURIComponent(t))}/" style="--tag-bg:${esc(bg)}">${esc(t)}</a>`;
       }).join('');
 
       const health = (()=>{
@@ -291,13 +299,16 @@
       const addedDate = site.created_at ? new Date(site.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '—';
 
       document.getElementById('sdContent').innerHTML = `
+        <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+          <a href="/">Home</a><span class="bc-sep">/</span><a href="/category/${esc(site.category)}/">${esc(catLabel)}</a><span class="bc-sep">/</span><span class="bc-current">${esc(site.name)}</span>
+        </nav>
         <div class="sd-hero">
           ${faviconUrl ? `<img class="sd-favicon" src="${esc(faviconUrl)}" alt="${esc(site.name)} favicon" onerror="this.style.display='none'"/>` : ''}
           <div>
             <h1 class="sd-title">${esc(site.name)}</h1>
             <a class="sd-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>
             <div class="sd-badges">
-              <span class="detail-cat-badge">${esc(catLabel)}</span>
+              <a class="detail-cat-badge" href="/category/${esc(site.category)}/">${esc(catLabel)}</a>
               ${health}
             </div>
           </div>

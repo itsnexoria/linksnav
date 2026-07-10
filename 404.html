@@ -51,6 +51,14 @@
     .sd-url { font-size:.78rem; color:var(--accent); text-decoration:none; word-break:break-all; }
     .sd-url:hover { text-decoration:underline; }
     .sd-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center; }
+    .detail-cat-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:.72rem; font-family:var(--font-m); font-weight:600;
+      padding:4px 12px; border-radius:100px; text-decoration:none;
+      background:var(--accent-dim); color:var(--accent); border:1px solid rgba(124,92,252,.3);
+      transition:filter .18s, transform .18s;
+    }
+    a.detail-cat-badge:hover { filter:brightness(1.15); transform:translateY(-1px); }
     .sd-body { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; margin-bottom:20px; animation:fadeUp .45s .05s ease both; }
     .sd-desc { font-size:.9rem; line-height:1.75; color:var(--text2); }
     .sd-section-label { font-family:var(--font-d); font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:20px 0 10px; }
@@ -264,7 +272,7 @@
       const faviconUrl = fav(site.url);
       const tags = (site.tags||[]).map(t=>{
         const bg=(site.tag_colors||{})[t]||'#6b7280';
-        return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+        return `<a class="tag" href="/tag/${esc(encodeURIComponent(t))}/" style="--tag-bg:${esc(bg)}">${esc(t)}</a>`;
       }).join('');
       const health = (()=>{
         if(!site.last_checked_at) return `<span class="sd-health sd-health--unknown">○ Not yet checked</span>`;
@@ -274,13 +282,16 @@
       const addedDate = site.created_at ? new Date(site.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '—';
 
       document.getElementById('sdContent').innerHTML = `
+        <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+          <a href="/">Home</a><span class="bc-sep">/</span><a href="/category/${esc(site.category)}/">${esc(catLabel)}</a><span class="bc-sep">/</span><span class="bc-current">${esc(site.name)}</span>
+        </nav>
         <div class="sd-hero">
           ${faviconUrl?`<img class="sd-favicon" src="${esc(faviconUrl)}" alt="${esc(site.name)} favicon" onerror="this.style.display='none'"/>`:''}
           <div>
             <h1 class="sd-title">${esc(site.name)}</h1>
             <a class="sd-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>
             <div class="sd-badges">
-              <span class="detail-cat-badge">${esc(catLabel)}</span>
+            <a class="detail-cat-badge" href="/category/${esc(site.category)}/">${esc(catLabel)}</a>
               ${health}
             </div>
           </div>
@@ -373,9 +384,17 @@
         document.title = `${cat.icon} ${cat.label} — Nexo Hub`;
         setHeadMeta(`${cat.icon} ${cat.label} — Nexo Hub`,
           `Browse ${sites.length} curated ${cat.label} sites on Nexo Hub — hand-picked and reviewed.`,
-          `https://app.nexosites.xyz/category/${catId}/`);
+          `https://app.nexosites.xyz/category/${catId}/`,
+          [
+            { name:'Nexo Hub', url:BASE+'/' },
+            { name:'Categories', url:BASE+'/category/' },
+            { name:cat.label, url:`${BASE}/category/${catId}/` }
+          ]);
 
         content.innerHTML = `<div class="ct-wrap">
+          <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="/">Home</a><span class="bc-sep">/</span><a href="/category/">Categories</a><span class="bc-sep">/</span><span class="bc-current">${esc(cat.label)}</span>
+          </nav>
           <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">← All Categories</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Category</div>
@@ -404,9 +423,17 @@
         document.title = `#${tag} — Nexo Hub`;
         setHeadMeta(`#${tag} — Nexo Hub`,
           `${sites.length} curated site${sites.length!==1?'s':''} tagged "${tag}" on Nexo Hub.`,
-          `https://app.nexosites.xyz/tag/${tag}/`);
+          `https://app.nexosites.xyz/tag/${tag}/`,
+          [
+            { name:'Nexo Hub', url:BASE+'/' },
+            { name:'Tags', url:BASE+'/tag/' },
+            { name:'#'+tag, url:`${BASE}/tag/${tag}/` }
+          ]);
 
         content.innerHTML = `<div class="ct-wrap">
+          <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="/">Home</a><span class="bc-sep">/</span><a href="/tag/">Tags</a><span class="bc-sep">/</span><span class="bc-current">#${esc(tag)}</span>
+          </nav>
           <a href="/tag/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">← All Tags</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Tag</div>
@@ -445,7 +472,7 @@
     /* Shared helpers */
     function sbH(){ return {'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}; }
 
-    function setHeadMeta(title, desc, canonical){
+    function setHeadMeta(title, desc, canonical, breadcrumbItems){
       document.title = title;
       let m = document.querySelector('meta[name="description"]');
       if(!m){m=document.createElement('meta');m.name='description';document.head.appendChild(m);} m.content=desc;
@@ -457,6 +484,18 @@
       if(!can){can=document.createElement('link');can.rel='canonical';document.head.appendChild(can);} can.href=canonical;
       let robots = document.querySelector('meta[name="robots"]');
       if(robots) robots.content='index,follow';
+
+      if(breadcrumbItems && breadcrumbItems.length){
+        document.getElementById('breadcrumbLd')?.remove();
+        const ld = document.createElement('script');
+        ld.type = 'application/ld+json';
+        ld.id = 'breadcrumbLd';
+        ld.textContent = JSON.stringify({
+          "@context":"https://schema.org","@type":"BreadcrumbList",
+          "itemListElement": breadcrumbItems.map((it,i)=>({"@type":"ListItem","position":i+1,"name":it.name,"item":it.url}))
+        });
+        document.head.appendChild(ld);
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════

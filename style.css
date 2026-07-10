@@ -443,6 +443,16 @@ body {
 }
 .card-footer { display:flex; flex-wrap:wrap; gap:4px; margin-top:3px }
 
+/* Breadcrumb trail — visible internal links for crawl paths + wayfinding */
+.breadcrumb-trail {
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+  font-size:.76rem; color:var(--muted); margin-bottom:20px;
+}
+.breadcrumb-trail a { color:var(--muted); text-decoration:none; transition:color .15s; }
+.breadcrumb-trail a:hover { color:var(--accent); }
+.breadcrumb-trail span.bc-sep { color:var(--border2); }
+.breadcrumb-trail span.bc-current { color:var(--text2); }
+
 /* Tags */
 .tag {
   --tag-bg:#6b7280;
@@ -453,8 +463,10 @@ body {
   color:color-mix(in srgb,var(--tag-bg) 80%,white 50%);
   border:1px solid color-mix(in srgb,var(--tag-bg) 25%,transparent);
   transition:transform .18s, background .18s;
+  text-decoration:none;
 }
 .card:hover .tag { transform:translateY(-1px) }
+a.tag:hover { filter:brightness(1.2); transform:translateY(-1px); }
 [data-theme="light"] .tag {
   background:color-mix(in srgb,var(--tag-bg) 10%,transparent);
   color:color-mix(in srgb,var(--tag-bg) 70%,black 30%);
