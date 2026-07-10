@@ -114,6 +114,93 @@
     }
     .clear-btn:hover { border-color: #ef4444; color: #ef4444; }
     .loading-spin { display:inline-block; width:16px; height:16px; border:2px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+
+    /* Import Bookmarks */
+    .import-how { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px; margin-bottom:16px; }
+    .import-how-title { font-family:var(--font-d); font-size:.76rem; font-weight:700; margin-bottom:10px; }
+    .import-steps { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:8px; }
+    .import-step { background:var(--bg3); border-radius:var(--radius); padding:10px 12px; font-size:.72rem; color:var(--text2); line-height:1.5; }
+    .import-step strong { display:block; color:var(--text); font-weight:700; margin-bottom:3px; }
+
+    .drop-zone {
+      border:2px dashed var(--border2); border-radius:var(--radius-lg); padding:36px 20px;
+      text-align:center; cursor:pointer; transition:all .2s;
+    }
+    .drop-zone:hover, .drop-zone.drag-over { border-color:var(--accent); background:var(--accent-dim); }
+    .drop-icon { font-size:2.2rem; margin-bottom:8px; }
+    .drop-title { font-family:var(--font-d); font-weight:700; font-size:.94rem; margin-bottom:5px; }
+    .drop-sub { font-size:.74rem; color:var(--muted); }
+    .drop-btn {
+      display:inline-flex; align-items:center; gap:7px; margin-top:14px; padding:9px 20px; border-radius:100px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border:none; cursor:pointer;
+      font-family:var(--font-m); font-size:.8rem; font-weight:600; transition:transform .18s,box-shadow .18s;
+    }
+    .drop-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(124,92,252,.3); }
+
+    .import-progress { display:none; text-align:center; padding:24px; }
+    .progress-bar-wrap { background:var(--border); border-radius:100px; height:6px; margin:12px 0; overflow:hidden; }
+    .progress-bar { background:linear-gradient(90deg,var(--accent),var(--accent2)); height:100%; border-radius:100px; width:0; transition:width .3s; }
+    .progress-label { font-size:.76rem; color:var(--muted); }
+
+    .import-results { display:none; }
+    .results-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+    .result-stat { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:14px; text-align:center; }
+    .result-stat-num { font-family:var(--font-d); font-size:1.5rem; font-weight:800; }
+    .result-stat-num.found { color:#22c55e; }
+    .result-stat-num.missing { color:var(--accent); }
+    .result-stat-num.total { color:var(--text); }
+    .result-stat-label { font-size:.66rem; color:var(--muted); margin-top:3px; font-family:var(--font-m); font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+
+    .result-section-title { font-family:var(--font-d); font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin:20px 0 10px; }
+
+    .bookmark-list { display:flex; flex-direction:column; gap:6px; }
+    .bookmark-item {
+      display:flex; flex-direction:column; gap:8px; padding:10px 14px;
+      background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+    }
+    .bookmark-item.found { border-left:3px solid #22c55e; }
+    .bookmark-item.missing { border-left:3px solid var(--accent); }
+    .bookmark-row { display:flex; align-items:center; gap:10px; }
+    .bookmark-favicon { width:22px; height:22px; border-radius:5px; flex-shrink:0; background:var(--bg3); }
+    .bookmark-info { flex:1; min-width:0; }
+    .bookmark-name { font-weight:600; font-size:.84rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bookmark-url { font-size:.7rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bookmark-badge { font-size:.62rem; font-family:var(--font-m); font-weight:700; padding:2px 8px; border-radius:100px; flex-shrink:0; white-space:nowrap; }
+    .bookmark-badge.found { background:rgba(34,197,94,.1); color:#22c55e; border:1px solid rgba(34,197,94,.25); }
+    .bookmark-actions { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+    .bookmark-tag-btn, .bookmark-submit-btn {
+      padding:5px 12px; border-radius:100px; border:1px solid rgba(124,92,252,.3);
+      background:var(--accent-dim); color:var(--accent); font-family:var(--font-m);
+      font-size:.7rem; font-weight:600; cursor:pointer; flex-shrink:0;
+      transition:all .18s; white-space:nowrap;
+    }
+    .bookmark-tag-btn { background:var(--bg3); color:var(--text2); border-color:var(--border2); }
+    .bookmark-tag-btn.has-tags { background:var(--accent-dim); color:var(--accent); border-color:rgba(124,92,252,.3); }
+    .bookmark-submit-btn:hover { background:var(--accent); color:#fff; }
+    .bookmark-submit-btn:disabled { opacity:.5; cursor:not-allowed; }
+    .bookmark-submit-btn.submitted { background:rgba(34,197,94,.1); color:#22c55e; border-color:rgba(34,197,94,.3); cursor:default; }
+
+    .tag-picker { display:none; flex-wrap:wrap; gap:6px; padding:10px; background:var(--bg3); border-radius:var(--radius); }
+    .tag-picker.open { display:flex; }
+    .tag-chip {
+      padding:4px 10px; border-radius:100px; border:1px solid var(--border2); background:var(--bg2);
+      color:var(--text2); font-family:var(--font-m); font-size:.68rem; font-weight:600; cursor:pointer;
+      transition:all .15s;
+    }
+    .tag-chip.selected { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .tag-chip-input {
+      padding:4px 10px; border-radius:100px; border:1px dashed var(--border2); background:transparent;
+      color:var(--text); font-family:var(--font-m); font-size:.68rem; width:110px;
+    }
+    .tag-chip-input:focus { outline:none; border-color:var(--accent); }
+
+    .import-again-btn {
+      margin-top:20px; padding:10px 24px; border-radius:100px;
+      border:1px solid var(--border2); background:var(--bg2);
+      font-family:var(--font-m); font-size:.8rem; font-weight:600; cursor:pointer; color:var(--text2);
+      transition:border-color .18s, color .18s;
+    }
+    .import-again-btn:hover { border-color:var(--accent); color:var(--accent); }
   </style>
   <script src="/nexo-prefs.js"></script>
 </head>
@@ -255,6 +342,59 @@
       </div>
     </div>
 
+    <!-- IMPORT BOOKMARKS -->
+    <div class="settings-section" id="import" style="animation-delay:.05s">
+      <div class="settings-section-title">Import Bookmarks</div>
+      <div class="settings-card" style="padding:20px">
+        <p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin:0 0 16px">Upload your browser's exported bookmarks file. We'll check which sites are already in Nexo Hub and let you submit the ones that aren't.</p>
+
+        <div class="import-how">
+          <div class="import-how-title">How to export your bookmarks</div>
+          <div class="import-steps">
+            <div class="import-step"><strong>Chrome / Edge</strong>Bookmarks → ⋮ menu → Export bookmarks</div>
+            <div class="import-step"><strong>Firefox</strong>Library → Bookmarks → Manage → Import & Backup → Export</div>
+            <div class="import-step"><strong>Safari</strong>File → Export Bookmarks</div>
+            <div class="import-step"><strong>Brave</strong>Settings → Bookmarks → Export bookmarks</div>
+          </div>
+        </div>
+
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-icon">📂</div>
+          <div class="drop-title">Drop your bookmarks file here</div>
+          <div class="drop-sub">Supports the standard HTML export format from all major browsers</div>
+          <button class="drop-btn" onclick="document.getElementById('fileInput').click()">📁 Choose File</button>
+          <input type="file" id="fileInput" accept=".html,.htm" style="display:none"/>
+        </div>
+
+        <div class="import-progress" id="importProgress">
+          <div class="drop-icon">🔍</div>
+          <div style="font-family:var(--font-d);font-weight:700;margin-bottom:8px" id="progressTitle">Reading bookmarks…</div>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+          <div class="progress-label" id="progressLabel">Getting started…</div>
+        </div>
+
+        <div class="import-results" id="importResults">
+          <div class="results-summary">
+            <div class="result-stat"><div class="result-stat-num total" id="rTotal">0</div><div class="result-stat-label">Bookmarks found</div></div>
+            <div class="result-stat"><div class="result-stat-num found" id="rFound">0</div><div class="result-stat-label">Already in Nexo Hub</div></div>
+            <div class="result-stat"><div class="result-stat-num missing" id="rMissing">0</div><div class="result-stat-label">Not yet listed</div></div>
+          </div>
+
+          <div id="foundSection" style="display:none">
+            <div class="result-section-title">✅ Already in Nexo Hub</div>
+            <div class="bookmark-list" id="foundList"></div>
+          </div>
+
+          <div id="missingSection" style="display:none">
+            <div class="result-section-title">✨ Not listed yet — submit them?</div>
+            <div class="bookmark-list" id="missingList"></div>
+          </div>
+
+          <button class="import-again-btn" onclick="resetImport()">↩ Import another file</button>
+        </div>
+      </div>
+    </div>
+
     <!-- DATA & PRIVACY -->
     <div class="settings-section" style="animation-delay:.05s">
       <div class="settings-section-title">Data & Privacy</div>
@@ -310,6 +450,277 @@
 
     function getPrefs(){ try{ return JSON.parse(localStorage.getItem(PREFS_KEY)||'{}'); }catch{ return {}; } }
     function savePrefs(p){ localStorage.setItem(PREFS_KEY, JSON.stringify(p)); }
+
+    /* ══════════════════════════════════════════════════════
+       IMPORT BOOKMARKS
+       ══════════════════════════════════════════════════════ */
+    const TAG_COLOR_PALETTE = ['#4f7fff','#00e5c3','#ff4b8a','#fbbf24','#60a5fa','#34d399','#f472b6','#a78bfa'];
+    let popularTags = [];
+    const bookmarkTags = {}; // url -> Set of tags
+
+    function escI(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function favI(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=32'; }catch{ return ''; } }
+
+    /* Pull the most-used tags across the directory so people can pick from
+       real tags instead of typing blind. Cached for an hour. */
+    async function loadPopularTags(){
+      try{
+        const cached = JSON.parse(localStorage.getItem('nexhub_popular_tags')||'null');
+        if(cached && Date.now() - cached.at < 3600000){ popularTags = cached.tags; return; }
+      }catch{}
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=tags&status=eq.approved`, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        if(!res.ok) return;
+        const rows = await res.json();
+        const counts = {};
+        rows.forEach(r => (r.tags||[]).forEach(t => { counts[t] = (counts[t]||0)+1; }));
+        popularTags = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]).slice(0,20);
+        localStorage.setItem('nexhub_popular_tags', JSON.stringify({ at: Date.now(), tags: popularTags }));
+      }catch{}
+    }
+
+    function tagColorFor(tag){
+      let h = 0; for(let i=0;i<tag.length;i++) h = (h*31 + tag.charCodeAt(i)) >>> 0;
+      return TAG_COLOR_PALETTE[h % TAG_COLOR_PALETTE.length];
+    }
+
+    /* Tag state is keyed by the bookmark's URL (the same key submitBookmark
+       uses), while `id` (e.g. "bm3") is just the DOM element id for that row. */
+    function toggleTagPicker(id, url){
+      const panel = document.getElementById('tags-'+id);
+      if(!panel) return;
+      const opening = !panel.classList.contains('open');
+      panel.classList.toggle('open');
+      if(opening && !panel.dataset.built){
+        panel.dataset.built = '1';
+        panel.innerHTML = popularTags.map(t=>`<span class="tag-chip" data-tag="${escI(t)}" onclick="toggleTag('${id}','${url.replace(/'/g,"\\'")}','${t.replace(/'/g,"\\'")}',this)">${escI(t)}</span>`).join('')
+          + `<input class="tag-chip-input" placeholder="+ custom tag" onkeydown="if(event.key==='Enter'){event.preventDefault();addCustomTag('${id}','${url.replace(/'/g,"\\'")}',this)}"/>`;
+      }
+    }
+
+    function toggleTag(id, url, tag, el){
+      if(!bookmarkTags[url]) bookmarkTags[url] = new Set();
+      const set = bookmarkTags[url];
+      if(set.has(tag)){ set.delete(tag); el.classList.remove('selected'); }
+      else { set.add(tag); el.classList.add('selected'); }
+      updateTagBtnLabel(id, url);
+    }
+
+    function addCustomTag(id, url, input){
+      const tag = input.value.trim().toLowerCase().replace(/\s+/g,'-');
+      if(!tag) return;
+      if(!bookmarkTags[url]) bookmarkTags[url] = new Set();
+      bookmarkTags[url].add(tag);
+      input.value = '';
+      const panel = document.getElementById('tags-'+id);
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip selected';
+      chip.dataset.tag = tag;
+      chip.textContent = tag;
+      chip.onclick = () => toggleTag(id, url, tag, chip);
+      panel.insertBefore(chip, input);
+      updateTagBtnLabel(id, url);
+    }
+
+    function updateTagBtnLabel(id, url){
+      const btn = document.getElementById('tagbtn-'+id);
+      if(!btn) return;
+      const n = bookmarkTags[url] ? bookmarkTags[url].size : 0;
+      btn.textContent = n ? `🏷️ ${n} tag${n!==1?'s':''}` : '🏷️ Tags';
+      btn.classList.toggle('has-tags', n>0);
+    }
+
+    /* Ping the site and pull its real meta description via the fetch-meta
+       edge function, instead of hardcoding a generic import blurb. */
+    async function fetchMetaDescription(url){
+      try{
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/fetch-meta?url=${encodeURIComponent(url)}`, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        if(!res.ok) return null;
+        const data = await res.json();
+        const desc = data.description || data.meta_description || data.ogDescription || data.og_description;
+        return desc ? desc.trim().slice(0,300) : null;
+      }catch{ return null; }
+    }
+
+    async function submitBookmark(btn, url, name){
+      btn.disabled = true; btn.textContent = 'Fetching info…';
+      const fp = btoa([navigator.language, screen.width+'x'+screen.height, new Date().getTimezoneOffset()].join('|')).slice(0,32);
+
+      const description = (await fetchMetaDescription(url)) || `Imported via bookmarks — ${new URL(url).hostname.replace(/^www\./,'')}.`;
+
+      const tags = bookmarkTags[url] ? Array.from(bookmarkTags[url]) : [];
+      const tagColors = {}; tags.forEach(t => tagColors[t] = tagColorFor(t));
+
+      btn.textContent = 'Submitting…';
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_site_safe`, {
+          method:'POST',
+          headers:{ 'apikey':SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({
+            p_name: name, p_url: url, p_description: description, p_category: 'tools',
+            p_tags: tags, p_tag_colors: tagColors, p_color: '#4f7fff',
+            p_submitted_by_name: null, p_submitted_by_email: null, p_submitted_note: 'Bookmarks import',
+            p_fingerprint: fp
+          })
+        });
+        if(res.ok){
+          btn.className = 'bookmark-submit-btn submitted'; btn.textContent = '✓ Submitted';
+          try{
+            const subs = JSON.parse(localStorage.getItem(SUBS_KEY)||'[]');
+            subs.unshift({ name, url, submittedAt: new Date().toISOString() });
+            localStorage.setItem(SUBS_KEY, JSON.stringify(subs.slice(0,50)));
+          }catch{}
+        } else {
+          const e = await res.json().catch(()=>({}));
+          if((e.message||'').includes('rate_limited')){ showToast('Rate limit reached — try again in an hour'); btn.disabled=false; btn.textContent='+ Submit'; }
+          else if((e.message||'').includes('duplicate_url')){ btn.className='bookmark-submit-btn submitted'; btn.textContent='Already listed'; }
+          else { showToast('Submission failed'); btn.disabled=false; btn.textContent='+ Submit'; }
+        }
+      }catch{ showToast('Submission failed'); btn.disabled=false; btn.textContent='+ Submit'; }
+    }
+
+    function parseBookmarks(html){
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const anchors = Array.from(doc.querySelectorAll('a[href]'));
+      const seen = new Set();
+      return anchors
+        .map(a => ({ name: a.textContent.trim() || a.href, url: a.href }))
+        .filter(b => {
+          if(!b.url.startsWith('http')) return false;
+          try{ const h = new URL(b.url).hostname.replace(/^www\./,''); if(seen.has(h)) return false; seen.add(h); return true; }
+          catch{ return false; }
+        });
+    }
+
+    async function checkAgainstDirectory(bookmarks){
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=name,url,slug,category&status=eq.approved`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if(!res.ok) throw new Error('Failed to load directory');
+      const sites = await res.json();
+
+      const siteMap = {};
+      sites.forEach(s => {
+        try{ siteMap[new URL(s.url).hostname.replace(/^www\./,'')] = s; }catch{}
+      });
+
+      const found = [], missing = [];
+      bookmarks.forEach(b => {
+        try{
+          const host = new URL(b.url).hostname.replace(/^www\./,'');
+          const match = siteMap[host] || siteMap[host.replace(/^[^.]+\./,'')];
+          if(match) found.push({ ...b, site: match });
+          else missing.push(b);
+        }catch{}
+      });
+      return { found, missing };
+    }
+
+    async function processImportFile(file){
+      if(!file.name.match(/\.html?$/i)){ showToast('Please upload an HTML bookmarks file'); return; }
+
+      document.getElementById('dropZone').style.display = 'none';
+      document.getElementById('importProgress').style.display = 'block';
+      setImportProgress(10, 'Reading file…');
+
+      const html = await file.text();
+      setImportProgress(30, 'Parsing bookmarks…');
+
+      const bookmarks = parseBookmarks(html);
+      if(!bookmarks.length){
+        showToast('No bookmarks found in this file');
+        resetImport(); return;
+      }
+      document.getElementById('progressTitle').textContent = `Found ${bookmarks.length} bookmarks`;
+      setImportProgress(55, `Checking ${bookmarks.length} sites against Nexo Hub…`);
+
+      await loadPopularTags();
+      const { found, missing } = await checkAgainstDirectory(bookmarks);
+      setImportProgress(100, 'Done!');
+      await new Promise(r=>setTimeout(r,400));
+
+      showImportResults(bookmarks.length, found, missing);
+    }
+
+    function setImportProgress(pct, label){
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressLabel').textContent = label;
+    }
+
+    function showImportResults(total, found, missing){
+      document.getElementById('importProgress').style.display = 'none';
+      const results = document.getElementById('importResults');
+      results.style.display = 'block';
+      document.getElementById('rTotal').textContent = total;
+      document.getElementById('rFound').textContent = found.length;
+      document.getElementById('rMissing').textContent = missing.length;
+
+      if(found.length){
+        document.getElementById('foundSection').style.display = 'block';
+        document.getElementById('foundList').innerHTML = found.map(b=>`
+          <div class="bookmark-item found">
+            <div class="bookmark-row">
+              <img class="bookmark-favicon" src="${escI(favI(b.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+              <div class="bookmark-info">
+                <div class="bookmark-name">${escI(b.site.name)}</div>
+                <div class="bookmark-url">${escI(b.url)}</div>
+              </div>
+              <span class="bookmark-badge found">✓ In Hub</span>
+            </div>
+          </div>`).join('');
+      }
+
+      if(missing.length){
+        document.getElementById('missingSection').style.display = 'block';
+        document.getElementById('missingList').innerHTML = missing.slice(0,50).map((b,i)=>{
+          const id = 'bm'+i;
+          return `
+          <div class="bookmark-item missing">
+            <div class="bookmark-row">
+              <img class="bookmark-favicon" src="${escI(favI(b.url))}" alt="" loading="lazy" onerror="this.style.display='none'"/>
+              <div class="bookmark-info">
+                <div class="bookmark-name">${escI(b.name)}</div>
+                <div class="bookmark-url">${escI(b.url)}</div>
+              </div>
+              <div class="bookmark-actions">
+                <button class="bookmark-tag-btn" id="tagbtn-${id}" onclick="toggleTagPicker('${id}','${escI(b.url).replace(/'/g,'\\x27')}')">🏷️ Tags</button>
+                <button class="bookmark-submit-btn" onclick="submitBookmark(this,'${escI(b.url).replace(/'/g,'\\x27')}','${escI(b.name).replace(/'/g,'\\x27')}')">+ Submit</button>
+              </div>
+            </div>
+            <div class="tag-picker" id="tags-${id}"></div>
+          </div>`;
+        }).join('')
+        + (missing.length > 50 ? `<div style="padding:10px;font-size:.75rem;color:var(--muted);text-align:center">…and ${missing.length-50} more not shown</div>` : '');
+      }
+    }
+
+    function resetImport(){
+      document.getElementById('dropZone').style.display = 'block';
+      document.getElementById('importProgress').style.display = 'none';
+      document.getElementById('importResults').style.display = 'none';
+      document.getElementById('foundSection').style.display = 'none';
+      document.getElementById('missingSection').style.display = 'none';
+      document.getElementById('fileInput').value = '';
+      setImportProgress(0,'');
+    }
+
+    function initImportDropzone(){
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+      if(!dropZone) return;
+      dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.classList.add('drag-over'); });
+      dropZone.addEventListener('dragleave', ()=>dropZone.classList.remove('drag-over'));
+      dropZone.addEventListener('drop', e=>{
+        e.preventDefault(); dropZone.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if(file) processImportFile(file);
+      });
+      fileInput.addEventListener('change', ()=>{ if(fileInput.files[0]) processImportFile(fileInput.files[0]); });
+    }
 
     /* ── THEME ─────────────────────────────────────────── */
     function setTheme(t){
@@ -481,6 +892,12 @@
 
       updateStats();
       loadSubmissions();
+      initImportDropzone();
+
+      if(location.hash === '#import'){
+        const el = document.getElementById('import');
+        if(el) setTimeout(()=>el.scrollIntoView({ behavior:'smooth', block:'start' }), 150);
+      }
     })();
 
     /* ── NAV / THEME TOGGLE ─────────────────────────────── */
