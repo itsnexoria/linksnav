@@ -66,6 +66,7 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="grid-bg" aria-hidden="true"></div>
 
@@ -110,7 +111,7 @@
   </div>
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
-  <main class="search-wrap">
+  <main class="search-wrap" id="main-content">
     <div class="search-hero">
       <h1>🔍 Search Nexo Hub</h1>
       <p>490+ curated websites across AI, dev tools, design, gaming, and more</p>
@@ -139,13 +140,39 @@
 
     let allSites = [];
     let debounceTimer;
+    let logDebounceTimer;
 
-    /* Load all approved sites once, then filter client-side for instant results */
+    /* Log search queries (debounced, fire-and-forget) so we can see what
+       people search for — especially terms that return zero results,
+       which is a direct signal for what to add to the directory next. */
+    function logSearchQuery(q, resultCount){
+      clearTimeout(logDebounceTimer);
+      logDebounceTimer = setTimeout(() => {
+        fetch(`${SUPABASE_URL}/rest/v1/rpc/log_search`, {
+          method:'POST',
+          headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({ p_query: q, p_result_count: resultCount })
+        }).catch(()=>{});
+      }, 900);
+    }
+
+    /* Load all approved sites once, then filter client-side for instant results.
+       Paged through PostgREST's default 1000-row cap so this keeps working as
+       the directory grows past that. */
     async function init(){
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=id,name,url,description,slug,category,tags,tag_colors,color,health_status&status=eq.approved&order=name.asc`, {
-        headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}` }
-      });
-      if(res.ok) allSites = await res.json();
+      const PAGE_SIZE = 500;
+      let offset = 0;
+      allSites = [];
+      while(true){
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=id,name,url,description,slug,category,tags,tag_colors,color,health_status&status=eq.approved&order=name.asc&limit=${PAGE_SIZE}&offset=${offset}`, {
+          headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        if(!res.ok) break;
+        const page = await res.json();
+        allSites = allSites.concat(page);
+        if(page.length < PAGE_SIZE) break;
+        offset += PAGE_SIZE;
+      }
 
       /* Read initial query from URL */
       const q = new URLSearchParams(location.search).get('q') || '';
@@ -174,6 +201,8 @@
         (s.category||'').toLowerCase().includes(clean) ||
         (s.tags||[]).some(t => t.toLowerCase().includes(clean))
       );
+
+      logSearchQuery(clean, results.length);
 
       const meta = document.getElementById('searchMeta');
       meta.innerHTML = results.length

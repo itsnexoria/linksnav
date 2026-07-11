@@ -165,18 +165,39 @@ function addRecent(url){
   saveRecents(arr);
 }
 
+/* ── PAGINATED FETCH ────────────────────────────────────────────
+   PostgREST caps unpaginated responses at 1000 rows by default. We're
+   under that today, but this pages through in batches so the directory
+   can grow past it without silently truncating results. */
+async function fetchAllSites(){
+  const PAGE_SIZE = 500;
+  let offset = 0;
+  let out = [];
+  while(true){
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/sites?select=*&status=eq.approved&order=name.asc&limit=${PAGE_SIZE}&offset=${offset}`,
+      { headers: sbHeaders() }
+    );
+    if(!res.ok) throw new Error('Supabase fetch failed');
+    const page = await res.json();
+    out = out.concat(page);
+    if(page.length < PAGE_SIZE) break; // last page
+    offset += PAGE_SIZE;
+  }
+  return out;
+}
+
 /* ── BOOT ───────────────────────────────────────────────────── */
 async function init(){
   try {
-    const [catsRes, sitesRes] = await Promise.all([
+    const [catsRes, sites] = await Promise.all([
       fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label,icon,sort_order&order=sort_order.asc`, { headers: sbHeaders() }),
-      fetch(`${SUPABASE_URL}/rest/v1/sites?select=*&status=eq.approved&order=name.asc`, { headers: sbHeaders() })
+      fetchAllSites()
     ]);
 
-    if (!catsRes.ok || !sitesRes.ok) throw new Error('Supabase fetch failed');
+    if (!catsRes.ok) throw new Error('Supabase fetch failed');
 
     const cats = await catsRes.json();
-    const sites = await sitesRes.json();
 
     allCategories = cats.map(c => ({ id: c.id, label: c.label, icon: c.icon || CAT_ICON_FALLBACK[c.id] || '🔗' }));
     allSites = sites.map(s => ({
@@ -349,6 +370,17 @@ function setupScrollArrows(){
 }
 
 /* ── SEARCH ─────────────────────────────────────────────────── */
+let logSearchTimer;
+function logSearchQuery(q, resultCount){
+  clearTimeout(logSearchTimer);
+  logSearchTimer=setTimeout(()=>{
+    fetch(`${SUPABASE_URL}/rest/v1/rpc/log_search`, {
+      method:'POST',
+      headers: sbHeaders({'Content-Type':'application/json'}),
+      body: JSON.stringify({ p_query: q, p_result_count: resultCount })
+    }).catch(()=>{});
+  },900);
+}
 function setupSearch(){
   const inp=document.getElementById('searchInput');
   let t;
@@ -359,6 +391,10 @@ function setupSearch(){
       visibleCount=PAGE_SIZE;
       if(searchQuery){activeCategory='all';setActive(document.querySelector('.cat-btn[data-cat="all"]'))}
       render();
+      if(searchQuery){
+        const matchCount=allSites.filter(s=>`${s.name} ${s.description} ${s.category} ${(s.tags||[]).join(' ')}`.toLowerCase().includes(searchQuery)).length;
+        logSearchQuery(searchQuery, matchCount);
+      }
     },130);
   });
   document.addEventListener('keydown',e=>{

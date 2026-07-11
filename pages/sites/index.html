@@ -170,6 +170,7 @@
   <script src="/nexo-prefs.js"></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="grid-bg" aria-hidden="true"></div>
 
@@ -218,7 +219,7 @@
   </div>
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
-  <div class="sites-wrap">
+  <div class="sites-wrap" id="main-content">
     <a href="/" class="back-link">← Back to Nexo Hub</a>
 
     <div class="page-header">
@@ -348,15 +349,30 @@
   var allSites=[], allCats=[], filtered=[], page=0;
   var activeCat='all', searchQ='', sortMode='default';
 
+  /* Pages through PostgREST's default 1000-row cap so this keeps working
+     as the directory grows past that. */
+  async function fetchAllSites(){
+    var PAGE_SIZE = 500, offset = 0, out = [];
+    while(true){
+      var res = await fetch(`${SUPABASE_URL}/rest/v1/sites?select=*&status=eq.approved&order=name.asc&limit=${PAGE_SIZE}&offset=${offset}`, { headers: sbHeaders() });
+      if(!res.ok) throw new Error('Failed to load directory');
+      var page = await res.json();
+      out = out.concat(page);
+      if(page.length < PAGE_SIZE) break;
+      offset += PAGE_SIZE;
+    }
+    return out;
+  }
+
   async function loadAll(){
     try{
-      var [catsRes, sitesRes] = await Promise.all([
+      var results = await Promise.all([
         fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label,icon,sort_order&order=sort_order.asc`, { headers: sbHeaders() }),
-        fetch(`${SUPABASE_URL}/rest/v1/sites?select=*&status=eq.approved&order=name.asc`, { headers: sbHeaders() })
+        fetchAllSites()
       ]);
-      if(!catsRes.ok || !sitesRes.ok) throw new Error('Failed to load directory');
+      var catsRes = results[0], sites = results[1];
+      if(!catsRes.ok) throw new Error('Failed to load directory');
       var cats = await catsRes.json();
-      var sites = await sitesRes.json();
 
       var catById = {};
       cats.forEach(function(c){ catById[c.id] = c; });

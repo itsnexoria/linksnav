@@ -1132,3 +1132,25 @@ body { animation: pageFadeIn .3s ease both; }
 
 /* ── SMOOTH SCROLL FOR WHOLE PAGE ─────────────────────────────── */
 html { scroll-behavior: smooth; }
+
+/* ── SKIP TO CONTENT LINK (a11y) ─────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 12px;
+  z-index: 10000;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: var(--font-m);
+  font-size: .82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top .18s ease;
+}
+.skip-link:focus {
+  top: 12px;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
