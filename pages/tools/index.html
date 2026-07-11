@@ -4,16 +4,21 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Mini Tools — Nexo Hub</title>
-  <meta name="description" content="Mini Tools inside Nexo Hub — font changers, word counters, text utilities, and more browser-based tools."/>
+  <title>Web Tools — Nexo Hub</title>
+  <meta name="description" content="Free browser-based web tools — word counters, color pickers, password generators, QR codes, converters, and more. No sign-up needed."/>
   <link rel="canonical" href="https://app.nexosites.xyz/pages/tools/"/>
-  <meta property="og:title" content="Mini Tools — Nexo Hub"/>
-  <meta property="og:description" content="Free browser-based mini tools. No sign-up needed."/>
+  <meta property="og:title" content="Web Tools — Nexo Hub"/>
+  <meta property="og:description" content="Free browser-based web tools. No sign-up needed."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/pages/tools/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Nexo Hub Mini Tools"/>
+  <meta property="og:image:alt" content="Nexo Hub Web Tools"/>
   <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
-    <link rel="alternate" type="application/rss+xml" title="Nexo Hub — What's New" href="/feed.xml"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Web Tools — Nexo Hub"/>
+  <meta name="twitter:description" content="Free browser-based web tools. No sign-up needed."/>
+  <link rel="alternate" type="application/rss+xml" title="Nexo Hub — What's New" href="/feed.xml"/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -22,178 +27,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../style.css?v=20260629-15"/>
-  <style>
-    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
-    @keyframes gradFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-
-    .tools-wrap {
-      position: relative; z-index: 1;
-      max-width: 880px; margin: 0 auto;
-      padding: 44px 24px 100px;
-    }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .75rem; font-family: 'Inter', system-ui, sans-serif; color: var(--muted);
-      text-decoration: none; margin-bottom: 44px;
-      transition: color .2s, gap .2s;
-    }
-    .back-link:hover { color: var(--accent); gap: 10px; }
-
-    .tools-hero {
-      text-align: center; margin-bottom: 48px;
-      animation: fadeUp .4s ease both;
-    }
-    @keyframes toolsIconFloat { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-5px) rotate(3deg)} }
-    .tools-hero-icon { font-size: 2.6rem; margin-bottom: 10px; display:inline-block; animation: toolsIconFloat 3.2s ease-in-out infinite; }
-    .tools-hero h1 {
-      font-family: var(--font-d); font-size: clamp(1.8rem,5vw,2.6rem);
-      font-weight: 800; letter-spacing: -.04em; color: var(--text);
-      margin: 0 0 10px;
-    }
-    .tools-hero p { font-size: .85rem; color: var(--text2); line-height: 1.7; max-width: 500px; margin: 0 auto; }
-
-    /* Tab bar */
-    .tool-tabs {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 32px; justify-content: center;
-      animation: slideDown .35s ease both;
-    }
-    .tool-tab {
-      padding: 7px 18px; border-radius: 999px; font-size: .8rem;
-      font-family: 'Inter', system-ui, sans-serif; border: 1px solid rgba(255,255,255,0.1);
-      background: transparent; color: var(--muted); cursor: pointer;
-      transition: border-color .18s, color .18s, background .18s, transform .15s;
-    }
-    .tool-tab:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .tool-tab:active { transform: translateY(0) scale(.95); }
-    .tool-tab.active {
-      background: var(--accent); border-color: var(--accent);
-      color: #fff;
-      animation: popScale .25s cubic-bezier(.34,1.56,.64,1);
-    }
-    [data-theme="light"] .tool-tab { border-color: rgba(0,0,0,0.1); }
-
-    /* Tool cards */
-    .tool-panel { display: none; animation: heroEnter .35s ease both; }
-    .tool-panel.active { display: block; }
-
-    .tool-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px;
-      margin-bottom: 20px;
-      animation: cardIn .35s ease both;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .tool-card:hover { border-color: var(--border2); box-shadow: var(--shadow-sm); }
-    .tool-card h2 {
-      font-family: var(--font-d); font-size: 1.1rem;
-      font-weight: 700; margin: 0 0 18px;
-      display: flex; align-items: center; gap: 10px;
-    }
-
-    /* Shared inputs */
-    .t-textarea {
-      width: 100%; box-sizing: border-box;
-      background: rgba(0,0,0,0.25); border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
-      padding: 14px; resize: vertical; min-height: 130px;
-      transition: border-color .2s;
-    }
-    .t-textarea:focus { outline: none; border-color: var(--accent); }
-    [data-theme="light"] .t-textarea { background: rgba(0,0,0,0.04); }
-
-    .t-input {
-      background: rgba(0,0,0,0.25); border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
-      padding: 10px 14px; width: 100%; box-sizing: border-box;
-      transition: border-color .2s;
-    }
-    .t-input:focus { outline: none; border-color: var(--accent); }
-    [data-theme="light"] .t-input { background: rgba(0,0,0,0.04); }
-
-    .t-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-    .t-btn {
-      padding: 8px 18px; border-radius: 8px; font-size: .8rem;
-      font-family: 'Inter', system-ui, sans-serif; border: 1px solid var(--accent);
-      background: transparent; color: var(--accent); cursor: pointer;
-      transition: background .18s, color .18s, transform .15s, box-shadow .18s;
-    }
-    .t-btn:hover { background: var(--accent); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
-    .t-btn:active { transform: translateY(0) scale(.95); }
-    .t-btn.primary { background: var(--accent); color: #fff; }
-    .t-btn.primary:hover { opacity: .85; }
-
-    .t-output {
-      margin-top: 14px; padding: 14px;
-      background: rgba(79,127,255,0.07);
-      border: 1px solid rgba(79,127,255,0.2);
-      border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
-      line-height: 1.7; white-space: pre-wrap; word-break: break-all;
-      min-height: 40px; color: var(--text);
-      animation: cardIn .25s ease both;
-    }
-
-    .t-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; }
-    .t-stat {
-      display: flex; flex-direction: column; align-items: center;
-      background: rgba(79,127,255,0.07); border: 1px solid rgba(79,127,255,0.2);
-      border-radius: 10px; padding: 10px 18px; min-width: 80px;
-    }
-    .t-stat-val { font-family: var(--font-d); font-size: 1.4rem; font-weight: 800; color: var(--accent); }
-    .t-stat-label { font-size: .7rem; color: var(--muted); margin-top: 2px; }
-
-    /* Font preview */
-    .font-select {
-      background: rgba(0,0,0,0.25); border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif; font-size: .88rem;
-      padding: 10px 14px; cursor: pointer;
-      transition: border-color .2s;
-    }
-    .font-select:focus { outline: none; border-color: var(--accent); }
-    [data-theme="light"] .font-select { background: rgba(0,0,0,0.04); }
-    .font-preview {
-      margin-top: 14px; padding: 20px;
-      background: rgba(0,0,0,0.2); border-radius: 10px;
-      font-size: 1.5rem; line-height: 1.5; color: var(--text);
-    }
-    [data-theme="light"] .font-preview { background: rgba(0,0,0,0.04); }
-
-    /* Color picker */
-    .color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .color-input-wrap { display: flex; align-items: center; gap: 12px; }
-    input[type="color"] {
-      width: 48px; height: 48px; border-radius: 10px;
-      border: 1px solid var(--border); cursor: pointer;
-      background: none; padding: 2px;
-    }
-    .color-values { font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; line-height: 2; }
-    .copy-val { cursor: pointer; color: var(--accent); }
-    .copy-val:hover { text-decoration: underline; }
-
-    /* Gradient */
-    .grad-preview {
-      height: 100px; border-radius: 12px; margin-top: 14px;
-      transition: all .3s;
-    }
-    .grad-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
-
-    /* Base64 */
-    .b64-mode-row { display: flex; gap: 8px; margin-bottom: 12px; }
-
-    .copied-toast {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
-      background: var(--accent); color: #fff; padding: 10px 22px;
-      border-radius: 999px; font-family: 'Inter', system-ui, sans-serif; font-size: .85rem;
-      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1); z-index: 999;
-      box-shadow: var(--shadow-md);
-    }
-    .copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  </style>
-  <script src="/nexo-prefs.js"></script>
+  <link rel="stylesheet" href="/tools-shared.css?v=20260711-1"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Web Tools — Nexo Hub",
+    "description": "A collection of free browser-based web tools.",
+    "url": "https://app.nexosites.xyz/pages/tools/"
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -228,7 +71,7 @@
         <a href="/" class="nav-link">🏠 Home</a>
         <a href="/category/" class="nav-link">🗂️ Categories</a>
         <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/pages/tools/" class="nav-link nav-link--active">🛠️ Mini Tools</a>
+        <a href="/pages/tools/" class="nav-link nav-link--active">🛠️ Web Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
@@ -247,502 +90,97 @@
 
     <div class="tools-hero">
       <div class="tools-hero-icon">🛠️</div>
-      <h1>Mini Tools</h1>
-      <p>Handy browser-based utilities — no sign-up, no tracking, instant results.</p>
+      <h1>Web Tools</h1>
+      <p>Handy browser-based utilities — no sign-up, no tracking, instant results. Each tool has its own page — pick one below.</p>
     </div>
 
-    <div class="tool-tabs" role="tablist">
-      <button class="tool-tab active" data-panel="text" role="tab">📝 Text</button>
-      <button class="tool-tab" data-panel="font" role="tab">🔤 Font Changer</button>
-      <button class="tool-tab" data-panel="color" role="tab">🎨 Colour Picker</button>
-      <button class="tool-tab" data-panel="gradient" role="tab">🌈 Gradient</button>
-      <button class="tool-tab" data-panel="palette" role="tab">🎭 Palette Generator</button>
-      <button class="tool-tab" data-panel="password" role="tab">🔑 Password</button>
-      <button class="tool-tab" data-panel="qr" role="tab">📷 QR Code</button>
-      <button class="tool-tab" data-panel="lorem" role="tab">📄 Lorem Ipsum</button>
-      <button class="tool-tab" data-panel="hash" role="tab">🔢 Hash</button>
-      <button class="tool-tab" data-panel="base64" role="tab">🔐 Base64</button>
-      <button class="tool-tab" data-panel="url" role="tab">🔗 URL Encode</button>
-      <button class="tool-tab" data-panel="units" role="tab">📐 Unit Converter</button>
-      <button class="tool-tab" data-panel="timestamp" role="tab">🕐 Timestamp</button>
-      <button class="tool-tab" data-panel="markdown" role="tab">📝 Markdown Preview</button>
-      <button class="tool-tab" data-panel="diff" role="tab">🔍 Text Diff</button>
-      <button class="tool-tab" data-panel="dice" role="tab">🎲 Dice Roller</button>
-      <button class="tool-tab" data-panel="imgb64" role="tab">🖼️ Image to Base64</button>
+    <div class="tools-hub-grid">
+      <a href="/tools/text-tools/" class="tools-hub-card">
+        <span class="thc-icon">📝</span>
+        <h2>Text Tools</h2>
+        <p>Word counter, case converter, and text cleaner.</p>
+      </a>
+      <a href="/tools/font-changer/" class="tools-hub-card">
+        <span class="thc-icon">🔤</span>
+        <h2>Font Changer</h2>
+        <p>Preview text in different fonts and Unicode styles.</p>
+      </a>
+      <a href="/tools/color-picker/" class="tools-hub-card">
+        <span class="thc-icon">🎨</span>
+        <h2>Colour Picker</h2>
+        <p>Pick colors and check accessibility contrast.</p>
+      </a>
+      <a href="/tools/gradient-generator/" class="tools-hub-card">
+        <span class="thc-icon">🌈</span>
+        <h2>Gradient Generator</h2>
+        <p>Build and export CSS gradients visually.</p>
+      </a>
+      <a href="/tools/base64-encoder/" class="tools-hub-card">
+        <span class="thc-icon">🔐</span>
+        <h2>Base64 Encoder / Decoder</h2>
+        <p>Encode or decode Base64 text instantly.</p>
+      </a>
+      <a href="/tools/url-encoder/" class="tools-hub-card">
+        <span class="thc-icon">🔗</span>
+        <h2>URL Encoder / Decoder</h2>
+        <p>Encode or decode special characters in URLs.</p>
+      </a>
+      <a href="/tools/password-generator/" class="tools-hub-card">
+        <span class="thc-icon">🔑</span>
+        <h2>Password Generator</h2>
+        <p>Generate strong random passwords and passphrases.</p>
+      </a>
+      <a href="/tools/qr-code-generator/" class="tools-hub-card">
+        <span class="thc-icon">📷</span>
+        <h2>QR Code Generator</h2>
+        <p>Turn any text or link into a scannable QR code.</p>
+      </a>
+      <a href="/tools/lorem-ipsum-generator/" class="tools-hub-card">
+        <span class="thc-icon">📄</span>
+        <h2>Lorem Ipsum Generator</h2>
+        <p>Generate placeholder text for mockups and layouts.</p>
+      </a>
+      <a href="/tools/hash-generator/" class="tools-hub-card">
+        <span class="thc-icon">🔢</span>
+        <h2>Hash Generator</h2>
+        <p>Generate MD5, SHA-1, and SHA-256 hashes.</p>
+      </a>
+      <a href="/tools/unit-converter/" class="tools-hub-card">
+        <span class="thc-icon">📐</span>
+        <h2>Unit Converter</h2>
+        <p>Convert length, weight, temperature, and volume.</p>
+      </a>
+      <a href="/tools/timestamp-converter/" class="tools-hub-card">
+        <span class="thc-icon">🕐</span>
+        <h2>Timestamp Converter</h2>
+        <p>Convert between Unix timestamps and readable dates.</p>
+      </a>
+      <a href="/tools/palette-generator/" class="tools-hub-card">
+        <span class="thc-icon">🎭</span>
+        <h2>Colour Palette Generator</h2>
+        <p>Generate a matching 5-color palette from one color.</p>
+      </a>
+      <a href="/tools/markdown-preview/" class="tools-hub-card">
+        <span class="thc-icon">📝</span>
+        <h2>Markdown Previewer</h2>
+        <p>Live preview of Markdown formatting as you type.</p>
+      </a>
+      <a href="/tools/text-diff/" class="tools-hub-card">
+        <span class="thc-icon">🔍</span>
+        <h2>Text Diff Checker</h2>
+        <p>Compare two blocks of text and see the differences.</p>
+      </a>
+      <a href="/tools/dice-roller/" class="tools-hub-card">
+        <span class="thc-icon">🎲</span>
+        <h2>Dice Roller</h2>
+        <p>Roll virtual dice for tabletop games.</p>
+      </a>
+      <a href="/tools/image-to-base64/" class="tools-hub-card">
+        <span class="thc-icon">🖼️</span>
+        <h2>Image to Base64</h2>
+        <p>Convert image files into Base64 data URIs.</p>
+      </a>
     </div>
-
-    <!-- TEXT TOOLS -->
-    <div class="tool-panel active" id="panel-text">
-      <div class="tool-card">
-        <h2>📊 Word &amp; Character Counter</h2>
-        <textarea class="t-textarea" id="wc-input" placeholder="Paste or type your text here…"></textarea>
-        <div class="t-stats">
-          <div class="t-stat"><span class="t-stat-val" id="wc-chars">0</span><span class="t-stat-label">Characters</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-words">0</span><span class="t-stat-label">Words</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-lines">0</span><span class="t-stat-label">Lines</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-sentences">0</span><span class="t-stat-label">Sentences</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-read">0</span><span class="t-stat-label">Min Read</span></div>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <h2>🔡 Case Converter</h2>
-        <textarea class="t-textarea" id="case-input" placeholder="Enter text to convert…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="convertCase('upper')">UPPER</button>
-          <button class="t-btn" onclick="convertCase('lower')">lower</button>
-          <button class="t-btn" onclick="convertCase('title')">Title Case</button>
-          <button class="t-btn" onclick="convertCase('sentence')">Sentence case</button>
-          <button class="t-btn" onclick="convertCase('camel')">camelCase</button>
-          <button class="t-btn" onclick="convertCase('snake')">snake_case</button>
-          <button class="t-btn" onclick="convertCase('kebab')">kebab-case</button>
-          <button class="t-btn" onclick="convertCase('reverse')">esreveR</button>
-        </div>
-        <div class="t-output" id="case-output" style="display:none"></div>
-        <div class="t-btn-row" id="case-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('case-output')">Copy</button>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <h2>✂️ Text Cleaner</h2>
-        <textarea class="t-textarea" id="clean-input" placeholder="Paste messy text…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="cleanText('trim')">Trim Spaces</button>
-          <button class="t-btn" onclick="cleanText('lines')">Remove Blank Lines</button>
-          <button class="t-btn" onclick="cleanText('dupes')">Remove Duplicate Lines</button>
-          <button class="t-btn" onclick="cleanText('punctuation')">Strip Punctuation</button>
-          <button class="t-btn" onclick="cleanText('numbers')">Remove Numbers</button>
-          <button class="t-btn" onclick="cleanText('sort')">Sort Lines A–Z</button>
-        </div>
-        <div class="t-output" id="clean-output" style="display:none"></div>
-        <div class="t-btn-row" id="clean-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('clean-output')">Copy</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- FONT CHANGER -->
-    <div class="tool-panel" id="panel-font">
-      <div class="tool-card">
-        <h2>🔤 Font Preview &amp; Changer</h2>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
-          <select class="font-select" id="fontSelect" onchange="updateFont()">
-            <option value="'Inter', system-ui, sans-serif">Syne (Nexo Hub default)</option>
-            <option value="'DM Mono', monospace">DM Mono</option>
-            <option value="Georgia, serif">Georgia</option>
-            <option value="'Times New Roman', serif">Times New Roman</option>
-            <option value="Arial, sans-serif">Arial</option>
-            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-            <option value="Impact, fantasy">Impact</option>
-            <option value="'Courier New', monospace">Courier New</option>
-            <option value="Verdana, sans-serif">Verdana</option>
-            <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
-            <option value="Palatino, serif">Palatino</option>
-            <option value="Garamond, serif">Garamond</option>
-          </select>
-          <input type="range" id="fontSizeSlider" min="12" max="64" value="24" oninput="updateFont()" style="flex:1;min-width:120px;accent-color:var(--accent)"/>
-          <span id="fontSizeLabel" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem;color:var(--muted);min-width:36px">24px</span>
-        </div>
-        <textarea class="t-textarea" id="fontText" oninput="updateFont()" placeholder="Type something to preview…" style="min-height:60px">The quick brown fox jumps over the lazy dog.</textarea>
-        <div class="font-preview" id="fontPreview">The quick brown fox jumps over the lazy dog.</div>
-        <p style="font-size:.75rem;color:var(--muted);margin-top:10px">💡 Try pasting a logo, headline, or paragraph to see how it looks in different fonts.</p>
-      </div>
-
-      <div class="tool-card">
-        <h2>✨ Unicode Text Styles</h2>
-        <input class="t-input" id="unicode-input" placeholder="Type text to transform…" oninput="updateUnicode()"/>
-        <div id="unicode-output" style="margin-top:16px;display:flex;flex-direction:column;gap:10px"></div>
-      </div>
-    </div>
-
-    <!-- COLOUR PICKER -->
-    <div class="tool-panel" id="panel-color">
-      <div class="tool-card">
-        <h2>🎨 Colour Picker</h2>
-        <div class="color-input-wrap" style="margin-bottom:20px">
-          <input type="color" id="colorPicker" value="#4f7fff" oninput="updateColor()"/>
-          <div class="color-values" id="colorValues"></div>
-        </div>
-        <div style="height:80px;border-radius:12px;transition:background .2s" id="colorSwatch"></div>
-        <div class="t-btn-row" style="margin-top:14px">
-          <button class="t-btn" onclick="copyColor('hex')">Copy HEX</button>
-          <button class="t-btn" onclick="copyColor('rgb')">Copy RGB</button>
-          <button class="t-btn" onclick="copyColor('hsl')">Copy HSL</button>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <h2>🎭 Contrast Checker</h2>
-        <div class="color-grid">
-          <div>
-            <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Foreground</p>
-            <div class="color-input-wrap"><input type="color" id="fg-color" value="#ffffff" oninput="checkContrast()"/><span id="fg-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#ffffff</span></div>
-          </div>
-          <div>
-            <p style="font-size:.8rem;color:var(--muted);margin:0 0 8px">Background</p>
-            <div class="color-input-wrap"><input type="color" id="bg-color" value="#4f7fff" oninput="checkContrast()"/><span id="bg-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#4f7fff</span></div>
-          </div>
-        </div>
-        <div id="contrast-preview" style="margin-top:16px;padding:20px;border-radius:12px;text-align:center;font-size:1.1rem;font-weight:700;transition:all .2s"></div>
-        <div id="contrast-result" style="margin-top:12px;font-family:'Inter', system-ui, sans-serif;font-size:.85rem;line-height:1.8"></div>
-      </div>
-    </div>
-
-    <!-- GRADIENT GENERATOR -->
-    <div class="tool-panel" id="panel-gradient">
-      <div class="tool-card">
-        <h2>🌈 CSS Gradient Generator</h2>
-        <div class="grad-row">
-          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
-            <label style="font-size:.75rem;color:var(--muted)">Colour 1</label>
-            <div class="color-input-wrap"><input type="color" id="g1" value="#4f7fff" oninput="updateGrad()"/><span id="g1-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#4f7fff</span></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
-            <label style="font-size:.75rem;color:var(--muted)">Colour 2</label>
-            <div class="color-input-wrap"><input type="color" id="g2" value="#4f7fff" oninput="updateGrad()"/><span id="g2-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#4f7fff</span></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
-            <label style="font-size:.75rem;color:var(--muted)">Colour 3 (optional)</label>
-            <div class="color-input-wrap"><input type="color" id="g3" value="#06b6d4" oninput="updateGrad()"/><span id="g3-hex" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem">#06b6d4</span></div>
-          </div>
-        </div>
-        <div class="grad-row" style="margin-top:16px">
-          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px">
-            <label style="font-size:.75rem;color:var(--muted)">Type</label>
-            <select class="font-select" id="gradType" onchange="updateGrad()">
-              <option value="linear">Linear</option>
-              <option value="radial">Radial</option>
-              <option value="conic">Conic</option>
-            </select>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px">
-            <label style="font-size:.75rem;color:var(--muted)">Angle (linear)</label>
-            <div style="display:flex;align-items:center;gap:10px">
-              <input type="range" id="gradAngle" min="0" max="360" value="135" oninput="updateGrad()" style="flex:1;accent-color:var(--accent)"/>
-              <span id="gradAngleLabel" style="font-family:'Inter', system-ui, sans-serif;font-size:.85rem;color:var(--muted);min-width:36px">135°</span>
-            </div>
-          </div>
-        </div>
-        <div class="grad-preview" id="gradPreview"></div>
-        <div class="t-output" id="gradCSS" style="margin-top:14px;cursor:pointer" onclick="copyOutput('gradCSS')" title="Click to copy"></div>
-        <div class="t-btn-row"><button class="t-btn primary" onclick="copyOutput('gradCSS')">Copy CSS</button></div>
-      </div>
-    </div>
-
-    <!-- BASE64 -->
-    <div class="tool-panel" id="panel-base64">
-      <div class="tool-card">
-        <h2>🔐 Base64 Encoder / Decoder</h2>
-        <div class="b64-mode-row">
-          <button class="t-btn primary" id="b64-enc-btn" onclick="setB64Mode('encode')">Encode</button>
-          <button class="t-btn" id="b64-dec-btn" onclick="setB64Mode('decode')">Decode</button>
-        </div>
-        <textarea class="t-textarea" id="b64-input" placeholder="Enter text to encode…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn primary" onclick="runB64()">Run</button>
-          <button class="t-btn" onclick="document.getElementById('b64-input').value='';document.getElementById('b64-output').style.display='none'">Clear</button>
-        </div>
-        <div class="t-output" id="b64-output" style="display:none"></div>
-        <div class="t-btn-row" id="b64-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('b64-output')">Copy Result</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- URL ENCODE -->
-    <div class="tool-panel" id="panel-url">
-      <div class="tool-card">
-        <h2>🔗 URL Encoder / Decoder</h2>
-        <div class="b64-mode-row">
-          <button class="t-btn primary" id="url-enc-btn" onclick="setUrlMode('encode')">Encode</button>
-          <button class="t-btn" id="url-dec-btn" onclick="setUrlMode('decode')">Decode</button>
-        </div>
-        <textarea class="t-textarea" id="url-input" placeholder="Enter URL or text to encode…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn primary" onclick="runUrl()">Run</button>
-          <button class="t-btn" onclick="document.getElementById('url-input').value='';document.getElementById('url-output').style.display='none'">Clear</button>
-        </div>
-        <div class="t-output" id="url-output" style="display:none"></div>
-        <div class="t-btn-row" id="url-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('url-output')">Copy Result</button>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <h2>🕵️ URL Parser</h2>
-        <input class="t-input" id="url-parse-input" placeholder="https://example.com/path?foo=bar&baz=qux#section" oninput="parseUrl()"/>
-        <div id="url-parse-output" style="margin-top:14px;font-family:'Inter', system-ui, sans-serif;font-size:.85rem;line-height:2;display:none"></div>
-      </div>
-    </div>
-
-    <!-- PASSWORD GENERATOR -->
-    <div class="tool-panel" id="panel-password">
-      <div class="tool-card">
-        <h2>🔑 Password Generator</h2>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-          <label style="font-size:.8rem;color:var(--muted);min-width:60px">Length: <b id="pwLenLabel">16</b></label>
-          <input type="range" id="pwLen" min="6" max="64" value="16" oninput="genPassword()" style="flex:1;min-width:120px;accent-color:var(--accent)"/>
-        </div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">
-          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwUpper" checked onchange="genPassword()"> Uppercase (A-Z)</label>
-          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwLower" checked onchange="genPassword()"> Lowercase (a-z)</label>
-          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwNums" checked onchange="genPassword()"> Numbers (0-9)</label>
-          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="pwSyms" checked onchange="genPassword()"> Symbols (!@#$)</label>
-        </div>
-        <div class="t-output" id="pw-output" style="font-size:1.1rem;letter-spacing:.05em;word-break:break-all;min-height:52px"></div>
-        <div id="pw-strength" style="margin-top:10px;height:6px;border-radius:3px;transition:all .3s;background:var(--border)"></div>
-        <p id="pw-strength-label" style="font-size:.75rem;color:var(--muted);margin-top:6px"></p>
-        <div class="t-btn-row" style="margin-top:12px">
-          <button class="t-btn primary" onclick="genPassword()">Regenerate</button>
-          <button class="t-btn" onclick="copyOutput('pw-output')">Copy</button>
-        </div>
-        <p style="font-size:.75rem;color:var(--muted);margin-top:14px">Passwords are generated in your browser and never sent to any server.</p>
-      </div>
-      <div class="tool-card">
-        <h2>🎲 Passphrase Generator</h2>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-          <label style="font-size:.8rem;color:var(--muted)">Words: <b id="ppCountLabel">4</b></label>
-          <input type="range" id="ppCount" min="3" max="8" value="4" oninput="genPassphrase()" style="flex:1;accent-color:var(--accent)"/>
-          <select class="font-select" id="ppSep" onchange="genPassphrase()" style="padding:6px 10px;font-size:.8rem">
-            <option value="-">Dashes</option>
-            <option value=".">Dots</option>
-            <option value=" ">Spaces</option>
-            <option value="_">Underscores</option>
-          </select>
-        </div>
-        <div class="t-output" id="pp-output" style="font-size:1rem;min-height:52px"></div>
-        <div class="t-btn-row" style="margin-top:12px">
-          <button class="t-btn primary" onclick="genPassphrase()">Regenerate</button>
-          <button class="t-btn" onclick="copyOutput('pp-output')">Copy</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- QR CODE -->
-    <div class="tool-panel" id="panel-qr">
-      <div class="tool-card">
-        <h2>📷 QR Code Generator</h2>
-        <textarea class="t-textarea" id="qr-input" placeholder="Enter a URL, text, phone number, or anything…" style="min-height:80px" oninput="debounceQR()"></textarea>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:center">
-          <label style="font-size:.8rem;color:var(--muted)">Size:</label>
-          <select class="font-select" id="qr-size" onchange="renderQR()" style="padding:6px 10px;font-size:.8rem">
-            <option value="200">200x200</option>
-            <option value="300" selected>300x300</option>
-            <option value="400">400x400</option>
-          </select>
-        </div>
-        <div id="qr-output" style="margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:14px">
-          <p style="color:var(--muted);font-size:.85rem">Enter text above to generate a QR code</p>
-        </div>
-        <div class="t-btn-row" id="qr-dl-row" style="display:none;margin-top:12px">
-          <button class="t-btn primary" onclick="downloadQR()">Download PNG</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- LOREM IPSUM -->
-    <div class="tool-panel" id="panel-lorem">
-      <div class="tool-card">
-        <h2>📄 Lorem Ipsum Generator</h2>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
-          <div style="display:flex;flex-direction:column;gap:4px">
-            <label style="font-size:.75rem;color:var(--muted)">Type</label>
-            <select class="font-select" id="lorem-type" style="padding:8px 12px;font-size:.85rem">
-              <option value="paragraphs">Paragraphs</option>
-              <option value="sentences">Sentences</option>
-              <option value="words">Words</option>
-            </select>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:4px">
-            <label style="font-size:.75rem;color:var(--muted)">Amount</label>
-            <input type="number" class="t-input" id="lorem-count" value="3" min="1" max="50" style="width:80px;text-align:center"/>
-          </div>
-          <label style="font-size:.85rem;display:flex;align-items:center;gap:6px;cursor:pointer;margin-top:16px"><input type="checkbox" id="lorem-start" checked> Start with "Lorem ipsum..."</label>
-        </div>
-        <div class="t-btn-row" style="margin-bottom:14px">
-          <button class="t-btn primary" onclick="genLorem()">Generate</button>
-        </div>
-        <div class="t-output" id="lorem-output" style="display:none;min-height:120px;line-height:1.8"></div>
-        <div class="t-btn-row" id="lorem-copy-row" style="display:none;margin-top:12px">
-          <button class="t-btn primary" onclick="copyOutput('lorem-output')">Copy Text</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- HASH -->
-    <div class="tool-panel" id="panel-hash">
-      <div class="tool-card">
-        <h2>🔢 Hash Generator</h2>
-        <p style="font-size:.8rem;color:var(--muted);margin:0 0 14px">Generate cryptographic hashes. Useful for checksums and data integrity checks.</p>
-        <textarea class="t-textarea" id="hash-input" placeholder="Enter text to hash…" style="min-height:80px"></textarea>
-        <div class="t-btn-row" style="margin-top:12px">
-          <button class="t-btn primary" onclick="runHash()">Generate Hashes</button>
-          <button class="t-btn" onclick="document.getElementById('hash-input').value='';document.getElementById('hash-results').style.display='none'">Clear</button>
-        </div>
-        <div id="hash-results" style="margin-top:16px;flex-direction:column;gap:10px"></div>
-        <p style="font-size:.75rem;color:var(--muted);margin-top:14px">Never use MD5 or SHA-1 for passwords — use bcrypt/argon2. These are for checksums only.</p>
-      </div>
-    </div>
-
-    <!-- UNIT CONVERTER -->
-    <div class="tool-panel" id="panel-units">
-      <div class="tool-card">
-        <h2>📐 Unit Converter</h2>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
-          <button class="t-btn active" id="unit-cat-btn-length" onclick="setUnitCat('length',this)">Length</button>
-          <button class="t-btn" id="unit-cat-btn-weight" onclick="setUnitCat('weight',this)">Weight</button>
-          <button class="t-btn" id="unit-cat-btn-temp" onclick="setUnitCat('temp',this)">Temperature</button>
-          <button class="t-btn" id="unit-cat-btn-data" onclick="setUnitCat('data',this)">Data</button>
-          <button class="t-btn" id="unit-cat-btn-speed" onclick="setUnitCat('speed',this)">Speed</button>
-          <button class="t-btn" id="unit-cat-btn-area" onclick="setUnitCat('area',this)">Area</button>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
-          <div style="flex:1;min-width:140px">
-            <label style="font-size:.75rem;color:var(--muted);display:block;margin-bottom:6px">From</label>
-            <select class="font-select" id="unit-from" style="width:100%" onchange="convertUnit()"></select>
-          </div>
-          <div style="padding-bottom:8px"><button class="t-btn" onclick="swapUnits()" style="padding:8px 12px">swap</button></div>
-          <div style="flex:1;min-width:140px">
-            <label style="font-size:.75rem;color:var(--muted);display:block;margin-bottom:6px">To</label>
-            <select class="font-select" id="unit-to" style="width:100%" onchange="convertUnit()"></select>
-          </div>
-        </div>
-        <input type="number" class="t-input" id="unit-input" placeholder="Enter value…" oninput="convertUnit()" style="margin-top:14px"/>
-        <div class="t-output" id="unit-output" style="display:none;font-size:1.2rem;font-weight:700;text-align:center;margin-top:14px"></div>
-      </div>
-    </div>
-
-    <!-- TIMESTAMP -->
-    <div class="tool-panel" id="panel-timestamp">
-      <div class="tool-card">
-        <h2>🕐 Timestamp Converter</h2>
-        <div style="text-align:center;padding:20px;background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.2);border-radius:12px;margin-bottom:20px">
-          <div style="font-size:2rem;font-weight:800;color:var(--accent)" id="live-clock"></div>
-          <div style="font-size:.8rem;color:var(--muted);margin-top:4px" id="live-unix"></div>
-        </div>
-        <div class="tool-card" style="margin-bottom:14px;padding:20px">
-          <h2 style="font-size:.95rem;margin-bottom:12px">Unix to Human</h2>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <input type="number" class="t-input" id="unix-input" placeholder="e.g. 1700000000" style="flex:1" oninput="unixToHuman()"/>
-            <button class="t-btn" onclick="document.getElementById('unix-input').value=Math.floor(Date.now()/1000);unixToHuman()">Now</button>
-          </div>
-          <div class="t-output" id="unix-output" style="display:none;margin-top:12px"></div>
-        </div>
-        <div class="tool-card" style="padding:20px">
-          <h2 style="font-size:.95rem;margin-bottom:12px">Human to Unix</h2>
-          <input type="datetime-local" class="t-input" id="dt-input" oninput="humanToUnix()" style="margin-bottom:10px"/>
-          <div class="t-output" id="dt-output" style="display:none"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PALETTE GENERATOR -->
-    <div class="tool-panel" id="panel-palette">
-      <div class="tool-card">
-        <h2>🎭 Colour Palette Generator</h2>
-        <p style="font-size:.8rem;color:var(--text2);margin:0 0 16px">Generate a harmonious 5-colour palette from a base colour, or roll a random one.</p>
-        <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap">
-          <input type="color" id="palette-base" value="#4f7fff" oninput="genPalette()"/>
-          <select class="font-select" id="palette-mode" onchange="genPalette()" style="padding:8px 12px;font-size:.85rem">
-            <option value="analogous">Analogous</option>
-            <option value="complementary">Complementary</option>
-            <option value="monochrome">Monochrome</option>
-            <option value="triadic">Triadic</option>
-          </select>
-          <button class="t-btn primary" onclick="randomPalette()">🎲 Random</button>
-        </div>
-        <div id="palette-output" style="display:flex;gap:6px;border-radius:12px;overflow:hidden;height:120px"></div>
-        <p style="font-size:.72rem;color:var(--text2);margin-top:10px;text-align:center">Click any swatch to copy its hex code</p>
-      </div>
-    </div>
-
-    <!-- MARKDOWN PREVIEW -->
-    <div class="tool-panel" id="panel-markdown">
-      <div class="tool-card">
-        <h2>📝 Markdown Previewer</h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-          <div>
-            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Markdown</p>
-            <textarea class="t-textarea" id="md-input" style="min-height:280px;font-family:monospace" placeholder="# Heading&#10;&#10;**Bold** and *italic* text.&#10;&#10;- List item one&#10;- List item two&#10;&#10;[A link](https://example.com)" oninput="renderMarkdown()"></textarea>
-          </div>
-          <div>
-            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Preview</p>
-            <div id="md-output" style="min-height:280px;background:rgba(79,127,255,0.05);border:1px solid rgba(79,127,255,0.15);border-radius:10px;padding:16px;font-size:.85rem;line-height:1.7;overflow-y:auto"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEXT DIFF -->
-    <div class="tool-panel" id="panel-diff">
-      <div class="tool-card">
-        <h2>🔍 Text Diff Checker</h2>
-        <p style="font-size:.8rem;color:var(--text2);margin:0 0 14px">Compare two pieces of text line by line. Added, removed, and unchanged lines are highlighted.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-          <div>
-            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Original</p>
-            <textarea class="t-textarea" id="diff-a" style="min-height:160px" placeholder="Paste original text…"></textarea>
-          </div>
-          <div>
-            <p style="font-size:.72rem;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Changed</p>
-            <textarea class="t-textarea" id="diff-b" style="min-height:160px" placeholder="Paste changed text…"></textarea>
-          </div>
-        </div>
-        <div class="t-btn-row">
-          <button class="t-btn primary" onclick="runDiff()">Compare</button>
-        </div>
-        <div id="diff-output" style="margin-top:14px;font-family:monospace;font-size:.8rem;line-height:1.7;display:none"></div>
-      </div>
-    </div>
-
-    <!-- DICE ROLLER -->
-    <div class="tool-panel" id="panel-dice">
-      <div class="tool-card">
-        <h2>🎲 Dice Roller &amp; Random Number Generator</h2>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
-          <button class="t-btn" onclick="rollDice(4)">d4</button>
-          <button class="t-btn" onclick="rollDice(6)">d6</button>
-          <button class="t-btn" onclick="rollDice(8)">d8</button>
-          <button class="t-btn" onclick="rollDice(10)">d10</button>
-          <button class="t-btn" onclick="rollDice(12)">d12</button>
-          <button class="t-btn" onclick="rollDice(20)">d20</button>
-          <button class="t-btn" onclick="rollDice(100)">d100</button>
-        </div>
-        <div id="dice-result" style="text-align:center;padding:30px;background:rgba(79,127,255,0.06);border:1px solid rgba(79,127,255,0.2);border-radius:14px;margin-bottom:20px">
-          <div style="font-family:var(--font-d);font-size:3rem;font-weight:800;color:var(--accent)" id="dice-num">—</div>
-          <div style="font-size:.75rem;color:var(--text2);margin-top:4px" id="dice-label">Roll a die above</div>
-        </div>
-        <h2 style="font-size:.95rem">🔢 Random Number Range</h2>
-        <div style="display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap">
-          <input type="number" class="t-input" id="rand-min" value="1" placeholder="Min" style="max-width:100px"/>
-          <span style="color:var(--text2)">to</span>
-          <input type="number" class="t-input" id="rand-max" value="100" placeholder="Max" style="max-width:100px"/>
-          <button class="t-btn primary" onclick="rollRandom()">Generate</button>
-        </div>
-        <div class="t-output" id="rand-output" style="display:none;text-align:center;font-size:1.3rem;font-weight:700;margin-top:14px"></div>
-      </div>
-    </div>
-
-    <!-- IMAGE TO BASE64 -->
-    <div class="tool-panel" id="panel-imgb64">
-      <div class="tool-card">
-        <h2>🖼️ Image to Base64 Converter</h2>
-        <p style="font-size:.8rem;color:var(--text2);margin:0 0 16px">Convert an image to a Base64 data URI for embedding directly in HTML/CSS. Processed entirely in your browser — nothing uploads anywhere.</p>
-        <div id="imgb64-drop" style="border:2px dashed var(--border2);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s">
-          <p style="color:var(--text2);font-size:.85rem">📁 Click to choose an image or drag and drop</p>
-          <input type="file" id="imgb64-input" accept="image/*" style="display:none" onchange="handleImgFile(this.files[0])"/>
-        </div>
-        <div id="imgb64-preview" style="display:none;margin-top:16px;text-align:center">
-          <img id="imgb64-img" style="max-width:100%;max-height:200px;border-radius:10px;border:1px solid var(--border)"/>
-        </div>
-        <div class="t-output" id="imgb64-output" style="display:none;max-height:160px;overflow-y:auto;font-size:.7rem"></div>
-        <div class="t-btn-row" id="imgb64-copy-row" style="display:none;margin-top:12px">
-          <button class="t-btn primary" onclick="copyOutput('imgb64-output')">Copy Data URI</button>
-        </div>
-      </div>
-    </div>
-
   </main>
 
   <footer class="footer" role="contentinfo">
@@ -758,6 +196,7 @@
 
   <div class="copied-toast" id="copiedToast">Copied!</div>
 
+  <script src="/nexo-prefs.js"></script>
   <script>
     // Theme toggle
     const root = document.documentElement;
@@ -798,17 +237,6 @@
         .then(ok => { if(ok === true) link.style.display = ''; })
         .catch(()=>{});
     })();
-
-    // Tabs
-    document.querySelectorAll('.tool-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tool-tab').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
-      });
-    });
-
     // Toast
     function showToast(msg = 'Copied!') {
       const t = document.getElementById('copiedToast');
@@ -818,575 +246,6 @@
     function copyOutput(id) {
       const el = document.getElementById(id);
       navigator.clipboard.writeText(el.textContent).then(() => showToast());
-    }
-
-    // ── WORD COUNTER ─────────────────────────────────────
-    const wcInput = document.getElementById('wc-input');
-    wcInput.addEventListener('input', () => {
-      const v = wcInput.value;
-      document.getElementById('wc-chars').textContent = v.length;
-      document.getElementById('wc-words').textContent = v.trim() ? v.trim().split(/\s+/).length : 0;
-      document.getElementById('wc-lines').textContent = v ? v.split('\n').length : 0;
-      document.getElementById('wc-sentences').textContent = (v.match(/[.!?]+/g) || []).length;
-      document.getElementById('wc-read').textContent = Math.max(1, Math.ceil((v.trim() ? v.trim().split(/\s+/).length : 0) / 200));
-    });
-
-    // ── CASE CONVERTER ───────────────────────────────────
-    function convertCase(mode) {
-      const v = document.getElementById('case-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'upper') result = v.toUpperCase();
-      else if (mode === 'lower') result = v.toLowerCase();
-      else if (mode === 'title') result = v.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
-      else if (mode === 'sentence') result = v.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
-      else if (mode === 'camel') result = v.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
-      else if (mode === 'snake') result = v.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-      else if (mode === 'kebab') result = v.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      else if (mode === 'reverse') result = v.split('').reverse().join('');
-      const out = document.getElementById('case-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('case-copy-row').style.display = 'flex';
-    }
-
-    // ── TEXT CLEANER ──────────────────────────────────────
-    function cleanText(mode) {
-      const v = document.getElementById('clean-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'trim') result = v.split('\n').map(l => l.trim()).join('\n');
-      else if (mode === 'lines') result = v.split('\n').filter(l => l.trim()).join('\n');
-      else if (mode === 'dupes') result = [...new Set(v.split('\n'))].join('\n');
-      else if (mode === 'punctuation') result = v.replace(/[^\w\s]/g, '');
-      else if (mode === 'numbers') result = v.replace(/\d/g, '');
-      else if (mode === 'sort') result = v.split('\n').sort((a,b) => a.localeCompare(b)).join('\n');
-      const out = document.getElementById('clean-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('clean-copy-row').style.display = 'flex';
-    }
-
-    // ── FONT CHANGER ──────────────────────────────────────
-    function updateFont() {
-      const font = document.getElementById('fontSelect').value;
-      const size = document.getElementById('fontSizeSlider').value;
-      const text = document.getElementById('fontText').value;
-      document.getElementById('fontSizeLabel').textContent = size + 'px';
-      const preview = document.getElementById('fontPreview');
-      preview.style.fontFamily = font;
-      preview.style.fontSize = size + 'px';
-      preview.textContent = text;
-    }
-
-    // ── UNICODE STYLES ────────────────────────────────────
-    const unicodeStyles = [
-      { name: '𝐁𝐨𝐥𝐝', fn: c => transcode(c, 'bold') },
-      { name: '𝘐𝘵𝘢𝘭𝘪𝘤', fn: c => transcode(c, 'italic') },
-      { name: '𝕯𝖔𝖚𝖇𝖑𝖊', fn: c => transcode(c, 'double') },
-      { name: '𝖒𝖊𝖉𝖎𝖊𝖛𝖆𝖑', fn: c => transcode(c, 'medieval') },
-      { name: '𝔪𝔬𝔫𝔬', fn: c => transcode(c, 'mono') },
-      { name: 'ⓈⓂⒶⓁⓁ', fn: c => transcode(c, 'circle') },
-    ];
-    const maps = {
-      bold: [0x1D400,0x1D41A], italic: [0x1D434,0x1D44E],
-      double: [0x1D538,0x1D552], medieval: [0x1D504,0x1D51E],
-      mono: [0x1D670,0x1D68A], circle: [0x24B6,0x24D0]
-    };
-    function transcode(str, style) {
-      const [upper, lower] = maps[style];
-      return str.split('').map(c => {
-        const code = c.charCodeAt(0);
-        if (code >= 65 && code <= 90) return String.fromCodePoint(upper + code - 65);
-        if (code >= 97 && code <= 122) return String.fromCodePoint(lower + code - 97);
-        return c;
-      }).join('');
-    }
-    function updateUnicode() {
-      const v = document.getElementById('unicode-input').value;
-      const container = document.getElementById('unicode-output');
-      container.innerHTML = '';
-      if (!v) return;
-      unicodeStyles.forEach(({ name, fn }) => {
-        const transformed = fn(v);
-        const row = document.createElement('div');
-        row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.15);border-radius:8px;gap:12px;flex-wrap:wrap';
-        row.innerHTML = `<span style="font-size:.85rem;color:var(--muted);font-family:'Inter', system-ui, sans-serif;min-width:70px">${name}</span><span style="flex:1;font-size:1rem">${transformed}</span>`;
-        const btn = document.createElement('button');
-        btn.className = 't-btn'; btn.textContent = 'Copy';
-        btn.onclick = () => { navigator.clipboard.writeText(transformed).then(() => showToast()); };
-        row.appendChild(btn);
-        container.appendChild(row);
-      });
-    }
-
-    // ── COLOUR PICKER ─────────────────────────────────────
-    function hexToRgb(hex) {
-      const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-      return { r, g, b };
-    }
-    function rgbToHsl(r,g,b) {
-      r/=255;g/=255;b/=255;
-      const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;
-      if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}
-      return {h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
-    }
-    let lastHex='#4f7fff',lastRgb,lastHsl;
-    function updateColor() {
-      const hex = document.getElementById('colorPicker').value;
-      lastHex = hex;
-      const {r,g,b} = hexToRgb(hex);
-      lastRgb = `rgb(${r}, ${g}, ${b})`;
-      const {h,s,l} = rgbToHsl(r,g,b);
-      lastHsl = `hsl(${h}, ${s}%, ${l}%)`;
-      document.getElementById('colorSwatch').style.background = hex;
-      document.getElementById('colorValues').innerHTML =
-        `<span style="color:var(--text)">HEX: <b>${hex}</b></span><br>
-         <span style="color:var(--text)">RGB: <b>${lastRgb}</b></span><br>
-         <span style="color:var(--text)">HSL: <b>${lastHsl}</b></span>`;
-    }
-    function copyColor(type) {
-      const val = type==='hex'?lastHex:type==='rgb'?lastRgb:lastHsl;
-      navigator.clipboard.writeText(val).then(() => showToast(type.toUpperCase() + ' copied!'));
-    }
-    updateColor();
-
-    // ── CONTRAST CHECKER ──────────────────────────────────
-    function luminance(hex) {
-      const {r,g,b} = hexToRgb(hex);
-      return [r,g,b].map(v => { v/=255; return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4); }).reduce((sum,v,i) => sum+v*[0.2126,0.7152,0.0722][i],0);
-    }
-    function checkContrast() {
-      const fg = document.getElementById('fg-color').value;
-      const bg = document.getElementById('bg-color').value;
-      document.getElementById('fg-hex').textContent = fg;
-      document.getElementById('bg-hex').textContent = bg;
-      const L1 = luminance(fg), L2 = luminance(bg);
-      const ratio = (Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05);
-      const r = ratio.toFixed(2);
-      const prev = document.getElementById('contrast-preview');
-      prev.style.background = bg; prev.style.color = fg;
-      prev.textContent = `Sample Text — ${r}:1 contrast ratio`;
-      const aa = ratio >= 4.5, aaa = ratio >= 7, aaLarge = ratio >= 3;
-      document.getElementById('contrast-result').innerHTML =
-        `<b>Ratio:</b> ${r}:1<br>
-        AA Normal: ${aa?'✅ Pass':'❌ Fail'} &nbsp;|&nbsp;
-        AA Large: ${aaLarge?'✅ Pass':'❌ Fail'} &nbsp;|&nbsp;
-        AAA: ${aaa?'✅ Pass':'❌ Fail'}`;
-    }
-    checkContrast();
-
-    // ── GRADIENT ──────────────────────────────────────────
-    function updateGrad() {
-      const g1 = document.getElementById('g1').value;
-      const g2 = document.getElementById('g2').value;
-      const g3 = document.getElementById('g3').value;
-      const type = document.getElementById('gradType').value;
-      const angle = document.getElementById('gradAngle').value;
-      document.getElementById('g1-hex').textContent = g1;
-      document.getElementById('g2-hex').textContent = g2;
-      document.getElementById('g3-hex').textContent = g3;
-      document.getElementById('gradAngleLabel').textContent = angle + '°';
-      let css;
-      if (type === 'linear') css = `linear-gradient(${angle}deg, ${g1}, ${g2}, ${g3})`;
-      else if (type === 'radial') css = `radial-gradient(circle, ${g1}, ${g2}, ${g3})`;
-      else css = `conic-gradient(from ${angle}deg, ${g1}, ${g2}, ${g3})`;
-      document.getElementById('gradPreview').style.background = css;
-      document.getElementById('gradCSS').textContent = `background: ${css};`;
-    }
-    updateGrad();
-
-    // ── BASE64 ────────────────────────────────────────────
-    let b64Mode = 'encode';
-    function setB64Mode(m) {
-      b64Mode = m;
-      document.getElementById('b64-enc-btn').className = m==='encode'?'t-btn primary':'t-btn';
-      document.getElementById('b64-dec-btn').className = m==='decode'?'t-btn primary':'t-btn';
-      document.getElementById('b64-input').placeholder = m==='encode'?'Enter text to encode…':'Enter Base64 to decode…';
-    }
-    function runB64() {
-      const v = document.getElementById('b64-input').value;
-      if (!v) return;
-      let result;
-      try { result = b64Mode==='encode' ? btoa(unescape(encodeURIComponent(v))) : decodeURIComponent(escape(atob(v))); }
-      catch(e) { result = 'Error: ' + e.message; }
-      const out = document.getElementById('b64-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('b64-copy-row').style.display = 'flex';
-    }
-
-    // ── URL ENCODE ────────────────────────────────────────
-    let urlMode = 'encode';
-    function setUrlMode(m) {
-      urlMode = m;
-      document.getElementById('url-enc-btn').className = m==='encode'?'t-btn primary':'t-btn';
-      document.getElementById('url-dec-btn').className = m==='decode'?'t-btn primary':'t-btn';
-      document.getElementById('url-input').placeholder = m==='encode'?'Enter URL or text to encode…':'Enter encoded URL to decode…';
-    }
-    function runUrl() {
-      const v = document.getElementById('url-input').value;
-      if (!v) return;
-      let result;
-      try { result = urlMode==='encode' ? encodeURIComponent(v) : decodeURIComponent(v); }
-      catch(e) { result = 'Error: ' + e.message; }
-      const out = document.getElementById('url-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('url-copy-row').style.display = 'flex';
-    }
-    function parseUrl() {
-      const v = document.getElementById('url-parse-input').value.trim();
-      const out = document.getElementById('url-parse-output');
-      if (!v) { out.style.display='none'; return; }
-      try {
-        const u = new URL(v);
-        const params = [...u.searchParams.entries()].map(([k,v]) => `<b>${k}</b> = ${v}`).join('<br>') || '<i style="color:var(--muted)">None</i>';
-        out.innerHTML =
-          `🌐 <b>Protocol:</b> ${u.protocol}<br>
-           🖥️ <b>Host:</b> ${u.hostname}${u.port?':'+u.port:''}<br>
-           📁 <b>Path:</b> ${u.pathname}<br>
-           🔍 <b>Params:</b><br>${params}<br>
-           ⚓ <b>Hash:</b> ${u.hash || '<i style="color:var(--muted)">None</i>'}`;
-        out.style.display = 'block';
-      } catch { out.innerHTML = '❌ Invalid URL — must include protocol (https://)'; out.style.display='block'; }
-    }
-
-    // ── PASSWORD GENERATOR ────────────────────────────────
-    function genPassword() {
-      const len = +document.getElementById('pwLen').value;
-      document.getElementById('pwLenLabel').textContent = len;
-      const sets = [];
-      if (document.getElementById('pwUpper').checked) sets.push('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-      if (document.getElementById('pwLower').checked) sets.push('abcdefghijklmnopqrstuvwxyz');
-      if (document.getElementById('pwNums').checked)  sets.push('0123456789');
-      if (document.getElementById('pwSyms').checked)  sets.push('!@#$%^&*()_+-=[]{}|;:,.<>?');
-      if (!sets.length) { document.getElementById('pw-output').textContent = 'Select at least one character type'; return; }
-      const pool = sets.join('');
-      let pw = '';
-      // Guarantee at least one char from each selected set
-      sets.forEach(s => pw += s[Math.floor(Math.random() * s.length)]);
-      const arr = new Uint32Array(len - sets.length);
-      crypto.getRandomValues(arr);
-      arr.forEach(n => pw += pool[n % pool.length]);
-      pw = pw.split('').sort(() => Math.random() - 0.5).join('');
-      document.getElementById('pw-output').textContent = pw;
-      // Strength
-      let score = 0;
-      if (len >= 12) score++; if (len >= 16) score++; if (len >= 20) score++;
-      if (sets.length >= 2) score++; if (sets.length >= 3) score++; if (sets.length === 4) score++;
-      const colours = ['#ef4444','#f97316','#eab308','#22c55e','#10b981'];
-      const labels  = ['Very Weak','Weak','Fair','Strong','Very Strong'];
-      const idx = Math.min(score - 1, 4);
-      document.getElementById('pw-strength').style.background = colours[Math.max(0,idx)];
-      document.getElementById('pw-strength').style.width = `${((idx+1)/5)*100}%`;
-      document.getElementById('pw-strength-label').textContent = 'Strength: ' + labels[Math.max(0,idx)];
-    }
-    genPassword();
-
-    // ── PASSPHRASE GENERATOR ──────────────────────────────
-    const wordList = ['apple','brave','cloud','delta','eagle','flame','grace','honey','ivory','jade','karma','lemon','magic','noble','ocean','pearl','quest','river','solar','tiger','ultra','vivid','water','xenon','yacht','zephyr','amber','brush','coral','dusty','ember','frost','globe','hatch','index','jolly','knack','lunar','marsh','nexus','orbit','pixel','quirk','rocky','storm','trace','unity','vapor','waltz','extra','young','zippy','abbey','bloom','crisp','derby','elite','forge','glyph','harsh','irony','joint','kingpin','lance','manor','nerve','optic','prism','quota','realm','swift','trend','urban','venom','wrath','xerox','yield','zones','acorn','bison','cedar','disco','epoch','fable','ghost','hyper','input','jewel','kiosk','latch','mango','niche','onion','piano','quartz','radar','slate','talon','ultra','vista','witch','xray','yeast','zebra'];
-    function genPassphrase() {
-      const count = +document.getElementById('ppCount').value;
-      document.getElementById('ppCountLabel').textContent = count;
-      const sep = document.getElementById('ppSep').value;
-      const words = [];
-      const arr = new Uint32Array(count);
-      crypto.getRandomValues(arr);
-      arr.forEach(n => words.push(wordList[n % wordList.length]));
-      // Add a random 2-digit number
-      const num = new Uint32Array(1);
-      crypto.getRandomValues(num);
-      words.push(String(10 + num[0] % 90));
-      document.getElementById('pp-output').textContent = words.join(sep);
-    }
-    genPassphrase();
-
-    // ── QR CODE ────────────────────────────────────────────
-    let qrDebounce;
-    function debounceQR() { clearTimeout(qrDebounce); qrDebounce = setTimeout(renderQR, 400); }
-    function renderQR() {
-      const v = document.getElementById('qr-input').value.trim();
-      const out = document.getElementById('qr-output');
-      const dlRow = document.getElementById('qr-dl-row');
-      if (!v) { out.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Enter text above to generate a QR code</p>'; dlRow.style.display='none'; return; }
-      const size = document.getElementById('qr-size').value;
-      const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(v)}&format=png&margin=10`;
-      out.innerHTML = `<img src="${url}" alt="QR Code" style="border-radius:12px;max-width:100%;border:1px solid var(--border)" width="${size}" height="${size}" id="qr-img"/>`;
-      dlRow.style.display = 'flex';
-    }
-    function downloadQR() {
-      const img = document.getElementById('qr-img');
-      if (!img) return;
-      const a = document.createElement('a');
-      a.href = img.src; a.download = 'qrcode.png'; a.click();
-    }
-
-    // ── LOREM IPSUM ────────────────────────────────────────
-    const loremWords = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa deserunt mollit anim id est laborum'.split(' ');
-    function pickWords(n) { return Array.from({length:n},()=>loremWords[Math.floor(Math.random()*loremWords.length)]).join(' '); }
-    function makeSentence() { const w=pickWords(6+Math.floor(Math.random()*12)); return w[0].toUpperCase()+w.slice(1)+'.'; }
-    function makeParagraph(first=false) {
-      const sCount = 4+Math.floor(Math.random()*4);
-      const sents = Array.from({length:sCount},(_,i)=>i===0&&first?'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '+makeSentence():makeSentence());
-      return sents.join(' ');
-    }
-    function genLorem() {
-      const type = document.getElementById('lorem-type').value;
-      const count = Math.min(50, Math.max(1, +document.getElementById('lorem-count').value || 1));
-      const startLoremIpsum = document.getElementById('lorem-start').checked;
-      let result = '';
-      if (type === 'paragraphs') result = Array.from({length:count},(_,i)=>makeParagraph(i===0&&startLoremIpsum)).join('\n\n');
-      else if (type === 'sentences') { const s=Array.from({length:count},(_,i)=>i===0&&startLoremIpsum?'Lorem ipsum dolor sit amet.':makeSentence()); result=s.join(' '); }
-      else { result=(startLoremIpsum?'lorem ipsum dolor sit amet ':'')+pickWords(count-(startLoremIpsum?5:0)); }
-      const out = document.getElementById('lorem-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('lorem-copy-row').style.display = 'flex';
-    }
-
-    // ── HASH GENERATOR ────────────────────────────────────
-    async function runHash() {
-      const v = document.getElementById('hash-input').value;
-      if (!v) return;
-      const container = document.getElementById('hash-results');
-      container.style.display = 'flex';
-      container.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Computing…</p>';
-      const enc = new TextEncoder().encode(v);
-      async function digest(algo) {
-        const buf = await crypto.subtle.digest(algo, enc);
-        return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-      }
-      const hashes = [
-        { label: 'SHA-256', val: await digest('SHA-256') },
-        { label: 'SHA-384', val: await digest('SHA-384') },
-        { label: 'SHA-512', val: await digest('SHA-512') },
-        { label: 'SHA-1 (weak)', val: await digest('SHA-1') },
-      ];
-      container.innerHTML = hashes.map(h => `
-        <div style="background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.2);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-          <span style="font-size:.78rem;color:var(--accent);font-weight:700;min-width:90px">${h.label}</span>
-          <span style="font-family:monospace;font-size:.75rem;flex:1;word-break:break-all">${h.val}</span>
-          <button class="t-btn" style="flex-shrink:0" onclick="navigator.clipboard.writeText('${h.val}').then(()=>showToast())">Copy</button>
-        </div>`).join('');
-    }
-
-    // ── UNIT CONVERTER ────────────────────────────────────
-    const unitDefs = {
-      length: { m:'Metres',km:'Kilometres',cm:'Centimetres',mm:'Millimetres',mi:'Miles',yd:'Yards',ft:'Feet',in:'Inches',nm:'Nautical Miles' },
-      weight: { kg:'Kilograms',g:'Grams',mg:'Milligrams',lb:'Pounds',oz:'Ounces',t:'Metric Tonnes',st:'Stones' },
-      temp:   { C:'Celsius',F:'Fahrenheit',K:'Kelvin' },
-      data:   { B:'Bytes',KB:'Kilobytes',MB:'Megabytes',GB:'Gigabytes',TB:'Terabytes',PB:'Petabytes',Kib:'Kibibytes',Mib:'Mebibytes',Gib:'Gibibytes' },
-      speed:  { 'km/h':'km/h','m/s':'m/s',mph:'mph',kn:'Knots','ft/s':'ft/s' },
-      area:   { 'm²':'m²','km²':'km²','cm²':'cm²','ft²':'ft²','in²':'in²','ac':'Acres','ha':'Hectares','mi²':'mi²' },
-    };
-    const toBase = {
-      length:{m:1,km:1000,cm:0.01,mm:0.001,mi:1609.344,yd:0.9144,ft:0.3048,in:0.0254,nm:1852},
-      weight:{kg:1,g:0.001,mg:0.000001,lb:0.45359237,oz:0.028349523125,t:1000,st:6.35029318},
-      data:{B:1,KB:1000,MB:1e6,GB:1e9,TB:1e12,PB:1e15,Kib:1024,Mib:1048576,Gib:1073741824},
-      speed:{'km/h':1,'m/s':3.6,mph:1.60934,kn:1.852,'ft/s':1.09728},
-      area:{'m²':1,'km²':1e6,'cm²':0.0001,'ft²':0.092903,'in²':0.00064516,ac:4046.86,ha:10000,'mi²':2589988},
-    };
-    let currentUnitCat = 'length';
-    function setUnitCat(cat, btn) {
-      currentUnitCat = cat;
-      document.querySelectorAll('[id^="unit-cat-btn-"]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      populateUnitSelects(cat);
-      convertUnit();
-    }
-    function populateUnitSelects(cat) {
-      const units = unitDefs[cat];
-      const keys = Object.keys(units);
-      ['unit-from','unit-to'].forEach((id,i) => {
-        const sel = document.getElementById(id);
-        sel.innerHTML = keys.map(k => `<option value="${k}">${units[k]}</option>`).join('');
-        sel.value = keys[i === 0 ? 0 : 1];
-      });
-    }
-    function convertUnit() {
-      const from = document.getElementById('unit-from').value;
-      const to   = document.getElementById('unit-to').value;
-      const val  = parseFloat(document.getElementById('unit-input').value);
-      const out  = document.getElementById('unit-output');
-      if (isNaN(val)) { out.style.display='none'; return; }
-      let result;
-      if (currentUnitCat === 'temp') {
-        let c;
-        if (from==='C') c=val; else if (from==='F') c=(val-32)*5/9; else c=val-273.15;
-        if (to==='C') result=c; else if (to==='F') result=c*9/5+32; else result=c+273.15;
-      } else {
-        const base = toBase[currentUnitCat];
-        result = (val * base[from]) / base[to];
-      }
-      const display = result % 1 === 0 ? result : parseFloat(result.toPrecision(8));
-      out.textContent = `${val} ${from} = ${display} ${to}`;
-      out.style.display = 'block';
-    }
-    function swapUnits() {
-      const f = document.getElementById('unit-from');
-      const t = document.getElementById('unit-to');
-      const tmp = f.value; f.value = t.value; t.value = tmp;
-      convertUnit();
-    }
-    populateUnitSelects('length');
-
-    // ── TIMESTAMP ─────────────────────────────────────────
-    function updateLiveClock() {
-      const now = new Date();
-      document.getElementById('live-clock').textContent = now.toLocaleTimeString('en-GB', {hour12:false}) + ' ' + now.toLocaleDateString('en-GB');
-      document.getElementById('live-unix').textContent = 'Unix: ' + Math.floor(Date.now()/1000);
-    }
-    updateLiveClock();
-    setInterval(updateLiveClock, 1000);
-    function unixToHuman() {
-      const v = document.getElementById('unix-input').value;
-      const out = document.getElementById('unix-output');
-      if (!v) { out.style.display='none'; return; }
-      const d = new Date(+v * 1000);
-      if (isNaN(d)) { out.textContent='Invalid timestamp'; out.style.display='block'; return; }
-      out.innerHTML = `UTC: <b>${d.toUTCString()}</b><br>Local: <b>${d.toLocaleString()}</b><br>ISO: <b>${d.toISOString()}</b>`;
-      out.style.display = 'block';
-    }
-    function humanToUnix() {
-      const v = document.getElementById('dt-input').value;
-      const out = document.getElementById('dt-output');
-      if (!v) { out.style.display='none'; return; }
-      const d = new Date(v);
-      out.innerHTML = `Unix timestamp: <b>${Math.floor(d.getTime()/1000)}</b><br>Milliseconds: <b>${d.getTime()}</b>`;
-      out.style.display = 'block';
-    }
-    // Set datetime-local default to now
-    const now = new Date(); now.setSeconds(0,0);
-    document.getElementById('dt-input').value = now.toISOString().slice(0,16);
-    humanToUnix();
-
-    // ── PALETTE GENERATOR ──────────────────────────────────
-    function hexToHsl(hex) {
-      const r = parseInt(hex.slice(1,3),16)/255, g = parseInt(hex.slice(3,5),16)/255, b = parseInt(hex.slice(5,7),16)/255;
-      const max=Math.max(r,g,b), min=Math.min(r,g,b); let h,s,l=(max+min)/2;
-      if(max===min){h=s=0} else { const d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
-        switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;} }
-      return [h*360, s*100, l*100];
-    }
-    function hslToHex(h,s,l) {
-      h=((h%360)+360)%360; s/=100; l/=100;
-      const c=(1-Math.abs(2*l-1))*s, x=c*(1-Math.abs((h/60)%2-1)), m=l-c/2;
-      let r,g,b;
-      if(h<60){r=c;g=x;b=0} else if(h<120){r=x;g=c;b=0} else if(h<180){r=0;g=c;b=x}
-      else if(h<240){r=0;g=x;b=c} else if(h<300){r=x;g=0;b=c} else {r=c;g=0;b=x}
-      const toHex=v=>Math.round((v+m)*255).toString(16).padStart(2,'0');
-      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-    }
-    function genPalette() {
-      const base = document.getElementById('palette-base').value;
-      const mode = document.getElementById('palette-mode').value;
-      const [h,s,l] = hexToHsl(base);
-      let colours = [];
-      if (mode === 'analogous') colours = [-40,-20,0,20,40].map(d => hslToHex(h+d, s, l));
-      else if (mode === 'complementary') colours = [0,0,0,180,180].map((d,i) => hslToHex(h+d, s, i%2===0?l+(i*5-5):l-(i*5)));
-      else if (mode === 'monochrome') colours = [-30,-15,0,15,30].map(d => hslToHex(h, s, Math.min(95,Math.max(8,l+d))));
-      else colours = [0,0,120,120,240].map((d,i) => hslToHex(h+d, s, i%2===0?l:Math.max(10,l-15)));
-      renderPalette(colours);
-    }
-    function randomPalette() {
-      document.getElementById('palette-base').value = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
-      const modes = ['analogous','complementary','monochrome','triadic'];
-      document.getElementById('palette-mode').value = modes[Math.floor(Math.random()*modes.length)];
-      genPalette();
-    }
-    function renderPalette(colours) {
-      const out = document.getElementById('palette-output');
-      out.innerHTML = colours.map(c => `
-        <div style="flex:1;background:${c};display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;transition:flex .2s"
-             onclick="navigator.clipboard.writeText('${c}').then(()=>showToast('${c} copied!'))"
-             onmouseover="this.style.flex='1.3'" onmouseout="this.style.flex='1'">
-          <span style="background:rgba(0,0,0,0.55);color:#fff;font-family:monospace;font-size:.68rem;padding:3px 7px;border-radius:5px">${c}</span>
-        </div>`).join('');
-    }
-    genPalette();
-
-    // ── MARKDOWN PREVIEW ───────────────────────────────────
-    function renderMarkdown() {
-      let md = document.getElementById('md-input').value;
-      let html = md
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-        .replace(/\*(.*?)\*/g, '<i>$1</i>')
-        .replace(/`(.*?)`/g, '<code style="background:rgba(0,0,0,.2);padding:2px 5px;border-radius:4px;font-size:.85em">$1</code>')
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" style="color:var(--accent)" target="_blank">$1</a>')
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/gims, '<ul style="margin-left:18px">$1</ul>')
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/\n/g, '<br>');
-      document.getElementById('md-output').innerHTML = `<p>${html}</p>`;
-    }
-    document.getElementById('md-input').value = '# Hello World\n\nThis is **bold** and this is *italic*.\n\n- First item\n- Second item\n\n[Visit Nexo Hub](https://app.nexosites.xyz)';
-    renderMarkdown();
-
-    // ── TEXT DIFF ──────────────────────────────────────────
-    function runDiff() {
-      const a = document.getElementById('diff-a').value.split('\n');
-      const b = document.getElementById('diff-b').value.split('\n');
-      const out = document.getElementById('diff-output');
-      const max = Math.max(a.length, b.length);
-      let html = '';
-      for (let i = 0; i < max; i++) {
-        const la = a[i], lb = b[i];
-        if (la === lb) html += `<div style="padding:2px 8px;color:var(--text2)">  ${esc(la||'')}</div>`;
-        else {
-          if (la !== undefined) html += `<div style="padding:2px 8px;background:rgba(239,68,68,.12);color:#ef4444">- ${esc(la)}</div>`;
-          if (lb !== undefined) html += `<div style="padding:2px 8px;background:rgba(34,197,94,.12);color:#22c55e">+ ${esc(lb)}</div>`;
-        }
-      }
-      out.innerHTML = html || '<p style="color:var(--text2)">No differences found.</p>';
-      out.style.display = 'block';
-    }
-    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-    // ── DICE ROLLER ────────────────────────────────────────
-    function rollDice(sides) {
-      const arr = new Uint32Array(1);
-      crypto.getRandomValues(arr);
-      const result = (arr[0] % sides) + 1;
-      const el = document.getElementById('dice-num');
-      el.style.transform = 'scale(0.7) rotate(-10deg)';
-      el.textContent = result;
-      document.getElementById('dice-label').textContent = `d${sides} roll`;
-      setTimeout(() => { el.style.transition='transform .3s cubic-bezier(.34,1.56,.64,1)'; el.style.transform='scale(1) rotate(0)'; }, 20);
-    }
-    function rollRandom() {
-      const min = parseInt(document.getElementById('rand-min').value) || 0;
-      const max = parseInt(document.getElementById('rand-max').value) || 100;
-      const arr = new Uint32Array(1);
-      crypto.getRandomValues(arr);
-      const result = min + (arr[0] % (max - min + 1));
-      const out = document.getElementById('rand-output');
-      out.textContent = result;
-      out.style.display = 'block';
-    }
-
-    // ── IMAGE TO BASE64 ────────────────────────────────────
-    const imgDrop = document.getElementById('imgb64-drop');
-    imgDrop.addEventListener('click', () => document.getElementById('imgb64-input').click());
-    imgDrop.addEventListener('dragover', e => { e.preventDefault(); imgDrop.style.borderColor='var(--accent)'; imgDrop.style.background='var(--accent-dim)'; });
-    imgDrop.addEventListener('dragleave', () => { imgDrop.style.borderColor='var(--border2)'; imgDrop.style.background='transparent'; });
-    imgDrop.addEventListener('drop', e => {
-      e.preventDefault();
-      imgDrop.style.borderColor='var(--border2)'; imgDrop.style.background='transparent';
-      if (e.dataTransfer.files[0]) handleImgFile(e.dataTransfer.files[0]);
-    });
-    function handleImgFile(file) {
-      if (!file || !file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        const dataUri = e.target.result;
-        document.getElementById('imgb64-img').src = dataUri;
-        document.getElementById('imgb64-preview').style.display = 'block';
-        const out = document.getElementById('imgb64-output');
-        out.textContent = dataUri;
-        out.style.display = 'block';
-        document.getElementById('imgb64-copy-row').style.display = 'flex';
-      };
-      reader.readAsDataURL(file);
     }
   </script>
   <script src="/pwa-register.js" defer></script>

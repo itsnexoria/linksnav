@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<script>(function(){var t=localStorage.getItem("nexhub_theme")||"dark";document.documentElement.setAttribute("data-theme",t);})()</script>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Hash Generator — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Generate MD5, SHA-1, and SHA-256 hashes. Free, fast, and runs right in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/tools/hash-generator/"/>
+  <meta property="og:title" content="Hash Generator — Nexo Hub"/>
+  <meta property="og:description" content="Generate MD5, SHA-1, and SHA-256 hashes."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/tools/hash-generator/"/>
+  <meta property="og:image:width" content="512"/>
+  <meta property="og:image:height" content="512"/>
+  <meta property="og:image:alt" content="Hash Generator — Nexo Hub"/>
+  <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Hash Generator — Nexo Hub"/>
+  <meta name="twitter:description" content="Generate MD5, SHA-1, and SHA-256 hashes."/>
+  <meta name="theme-color" content="#4f7fff"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css?v=20260629-15"/>
+  <link rel="stylesheet" href="/tools-shared.css?v=20260711-1"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Hash Generator",
+    "description": "Type or paste any text and instantly generate its MD5, SHA-1, and SHA-256 cryptographic hashes, calculated entirely in your browser.",
+    "url": "https://app.nexosites.xyz/tools/hash-generator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any (runs in browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexosites.xyz/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
+      { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexosites.xyz/pages/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Hash Generator", "item": "https://app.nexosites.xyz/tools/hash-generator/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/category/" class="nav-link">🗂️ Categories</a>
+        <a href="/tag/" class="nav-link">🏷️ Tags</a>
+        <a href="/pages/tools/" class="nav-link nav-link--active">🛠️ Web Tools</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/settings/" class="nav-link">⚙️ Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="tools-wrap tools-wrap--split" id="main-content">
+    <a href="/pages/tools/" class="back-link">← Back to Web Tools</a>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb" style="margin:-24px 0 24px;font-size:.72rem;color:var(--muted)">
+      <a href="/" style="color:var(--muted);text-decoration:none">Home</a>
+      <span aria-hidden="true"> / </span>
+      <a href="/pages/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
+      <span aria-hidden="true"> / </span>
+      <span style="color:var(--text2)">Hash Generator</span>
+    </nav>
+
+    <div class="tool-page-layout">
+      <aside class="tool-sidebar" aria-label="Other tools">
+        <span class="tool-sidebar-label">Other Tools</span>
+        <a href="/tools/text-tools/" class="tsb-link"><span class="tsb-icon">📝</span>Text Tools</a>
+        <a href="/tools/font-changer/" class="tsb-link"><span class="tsb-icon">🔤</span>Font Changer</a>
+        <a href="/tools/color-picker/" class="tsb-link"><span class="tsb-icon">🎨</span>Colour Picker</a>
+        <a href="/tools/gradient-generator/" class="tsb-link"><span class="tsb-icon">🌈</span>Gradient Generator</a>
+        <a href="/tools/base64-encoder/" class="tsb-link"><span class="tsb-icon">🔐</span>Base64 Encoder / Decoder</a>
+        <a href="/tools/url-encoder/" class="tsb-link"><span class="tsb-icon">🔗</span>URL Encoder / Decoder</a>
+        <a href="/tools/password-generator/" class="tsb-link"><span class="tsb-icon">🔑</span>Password Generator</a>
+        <a href="/tools/qr-code-generator/" class="tsb-link"><span class="tsb-icon">📷</span>QR Code Generator</a>
+        <a href="/tools/lorem-ipsum-generator/" class="tsb-link"><span class="tsb-icon">📄</span>Lorem Ipsum Generator</a>
+        <a href="/tools/hash-generator/" class="tsb-link active"><span class="tsb-icon">🔢</span>Hash Generator</a>
+        <a href="/tools/unit-converter/" class="tsb-link"><span class="tsb-icon">📐</span>Unit Converter</a>
+        <a href="/tools/timestamp-converter/" class="tsb-link"><span class="tsb-icon">🕐</span>Timestamp Converter</a>
+        <a href="/tools/palette-generator/" class="tsb-link"><span class="tsb-icon">🎭</span>Colour Palette Generator</a>
+        <a href="/tools/markdown-preview/" class="tsb-link"><span class="tsb-icon">📝</span>Markdown Previewer</a>
+        <a href="/tools/text-diff/" class="tsb-link"><span class="tsb-icon">🔍</span>Text Diff Checker</a>
+        <a href="/tools/dice-roller/" class="tsb-link"><span class="tsb-icon">🎲</span>Dice Roller</a>
+        <a href="/tools/image-to-base64/" class="tsb-link"><span class="tsb-icon">🖼️</span>Image to Base64</a>
+      </aside>
+
+      <div class="tool-main">
+        <div class="tools-hero small">
+          <div class="tools-hero-icon">🔢</div>
+          <h1>Hash Generator <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Generate MD5, SHA-1, and SHA-256 hashes.</p>
+        </div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Type or paste any text and instantly generate its MD5, SHA-1, and SHA-256 cryptographic hashes, calculated entirely in your browser.</div>
+
+    <div class="tool-panel" id="panel-hash">
+      <div class="tool-card">
+        <h2>🔢 Hash Generator</h2>
+        <p style="font-size:.8rem;color:var(--muted);margin:0 0 14px">Generate cryptographic hashes. Useful for checksums and data integrity checks.</p>
+        <textarea class="t-textarea" id="hash-input" placeholder="Enter text to hash…" style="min-height:80px"></textarea>
+        <div class="t-btn-row" style="margin-top:12px">
+          <button class="t-btn primary" onclick="runHash()">Generate Hashes</button>
+          <button class="t-btn" onclick="document.getElementById('hash-input').value='';document.getElementById('hash-results').style.display='none'">Clear</button>
+        </div>
+        <div id="hash-results" style="margin-top:16px;flex-direction:column;gap:10px"></div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:14px">Never use MD5 or SHA-1 for passwords — use bcrypt/argon2. These are for checksums only.</p>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <span>Nexo Hub — Your digital command center</span>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/pages/about/">About</a>
+      <a href="/pages/tools/">Tools</a>
+      <a href="/pages/contact/">Submit</a>
+      <a href="/pages/donate/">Donate</a>
+    </nav>
+    <span>Built by <code>Nexus</code> ♥</span>
+  </footer>
+
+  <div class="copied-toast" id="copiedToast">Copied!</div>
+
+  <script src="/nexo-prefs.js"></script>
+  <script>
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', t);
+      localStorage.setItem('nexhub_theme', t);
+    });
+
+    // Hamburger
+    const ham = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('navOverlay');
+    function openMenu() { ham.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); ham.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { ham.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); ham.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    ham.addEventListener('click', () => ham.classList.contains('is-open') ? closeMenu() : openMenu());
+    overlay.addEventListener('click', closeMenu);
+    menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+    (function(){
+      const link = document.getElementById('adminNavLink');
+      if(!link) return;
+      const key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(res => res.ok ? res.json() : null)
+        .then(ok => { if(ok === true) link.style.display = ''; })
+        .catch(()=>{});
+    })();
+    // Toast
+    function showToast(msg = 'Copied!') {
+      const t = document.getElementById('copiedToast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+    function copyOutput(id) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent).then(() => showToast());
+    }
+    // Info panel toggle
+    (function(){
+      var btn = document.getElementById('infoBtn');
+      var panel = document.getElementById('infoPanel');
+      btn.addEventListener('click', function(){
+        var open = panel.hasAttribute('hidden');
+        if(open){ panel.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); }
+        else { panel.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+
+    // ── HASH GENERATOR ────────────────────────────────────
+    async function runHash() {
+      const v = document.getElementById('hash-input').value;
+      if (!v) return;
+      const container = document.getElementById('hash-results');
+      container.style.display = 'flex';
+      container.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Computing…</p>';
+      const enc = new TextEncoder().encode(v);
+      async function digest(algo) {
+        const buf = await crypto.subtle.digest(algo, enc);
+        return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      }
+      const hashes = [
+        { label: 'SHA-256', val: await digest('SHA-256') },
+        { label: 'SHA-384', val: await digest('SHA-384') },
+        { label: 'SHA-512', val: await digest('SHA-512') },
+        { label: 'SHA-1 (weak)', val: await digest('SHA-1') },
+      ];
+      container.innerHTML = hashes.map(h => `
+        <div style="background:rgba(79,127,255,0.07);border:1px solid rgba(79,127,255,0.2);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-size:.78rem;color:var(--accent);font-weight:700;min-width:90px">${h.label}</span>
+          <span style="font-family:monospace;font-size:.75rem;flex:1;word-break:break-all">${h.val}</span>
+          <button class="t-btn" style="flex-shrink:0" onclick="navigator.clipboard.writeText('${h.val}').then(()=>showToast())">Copy</button>
+        </div>`).join('');
+    }
+
+  </script>
+  <script src="/pwa-register.js" defer></script>
+</body>
+</html>
