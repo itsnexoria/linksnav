@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Text Tools — Free Online Tool | Nexo Hub</title>
-  <meta name="description" content="Word counter, case converter, and text cleaner. Free, fast, and runs right in your browser — no sign-up needed."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/tools/text-tools/"/>
-  <meta property="og:title" content="Text Tools — Nexo Hub"/>
-  <meta property="og:description" content="Word counter, case converter, and text cleaner."/>
+  <title>JSON Formatter — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Format, minify, and validate JSON. Free, fast, and runs right in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/tools/json-formatter/"/>
+  <meta property="og:title" content="JSON Formatter — Nexo Hub"/>
+  <meta property="og:description" content="Format, minify, and validate JSON."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://app.nexosites.xyz/tools/text-tools/"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/tools/json-formatter/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Text Tools — Nexo Hub"/>
+  <meta property="og:image:alt" content="JSON Formatter — Nexo Hub"/>
   <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Text Tools — Nexo Hub"/>
-  <meta name="twitter:description" content="Word counter, case converter, and text cleaner."/>
+  <meta name="twitter:title" content="JSON Formatter — Nexo Hub"/>
+  <meta name="twitter:description" content="Format, minify, and validate JSON."/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -31,9 +31,9 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Text Tools",
-    "description": "Count words, characters, sentences, and estimated reading time as you type. Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or reversed. Clean up messy text by trimming spaces, removing blank or duplicate lines, stripping punctuation or numbers, or sorting lines alphabetically.",
-    "url": "https://app.nexosites.xyz/tools/text-tools/",
+    "name": "JSON Formatter",
+    "description": "Paste any JSON and instantly beautify it with proper indentation, minify it down to a single line, or validate it and get a clear error message pointing at what is wrong.",
+    "url": "https://app.nexosites.xyz/tools/json-formatter/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (runs in browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -47,7 +47,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
       { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexosites.xyz/pages/tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Text Tools", "item": "https://app.nexosites.xyz/tools/text-tools/" }
+      { "@type": "ListItem", "position": 3, "name": "JSON Formatter", "item": "https://app.nexosites.xyz/tools/json-formatter/" }
     ]
   }
   </script>
@@ -107,13 +107,13 @@
       <span aria-hidden="true"> / </span>
       <a href="/pages/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
       <span aria-hidden="true"> / </span>
-      <span style="color:var(--text2)">Text Tools</span>
+      <span style="color:var(--text2)">JSON Formatter</span>
     </nav>
 
     <div class="tool-page-layout">
       <aside class="tool-sidebar" aria-label="Other tools">
         <span class="tool-sidebar-label">Other Tools</span>
-        <a href="/tools/text-tools/" class="tsb-link active"><span class="tsb-icon">📝</span>Text Tools</a>
+        <a href="/tools/text-tools/" class="tsb-link"><span class="tsb-icon">📝</span>Text Tools</a>
         <a href="/tools/font-changer/" class="tsb-link"><span class="tsb-icon">🔤</span>Font Changer</a>
         <a href="/tools/color-picker/" class="tsb-link"><span class="tsb-icon">🎨</span>Colour Picker</a>
         <a href="/tools/gradient-generator/" class="tsb-link"><span class="tsb-icon">🌈</span>Gradient Generator</a>
@@ -130,7 +130,7 @@
         <a href="/tools/text-diff/" class="tsb-link"><span class="tsb-icon">🔍</span>Text Diff Checker</a>
         <a href="/tools/dice-roller/" class="tsb-link"><span class="tsb-icon">🎲</span>Dice Roller</a>
         <a href="/tools/image-to-base64/" class="tsb-link"><span class="tsb-icon">🖼️</span>Image to Base64</a>
-        <a href="/tools/json-formatter/" class="tsb-link"><span class="tsb-icon">🧾</span>JSON Formatter</a>
+        <a href="/tools/json-formatter/" class="tsb-link active"><span class="tsb-icon">🧾</span>JSON Formatter</a>
         <a href="/tools/uuid-generator/" class="tsb-link"><span class="tsb-icon">🆔</span>UUID Generator</a>
         <a href="/tools/slug-generator/" class="tsb-link"><span class="tsb-icon">🔗</span>Slug Generator</a>
         <a href="/tools/regex-tester/" class="tsb-link"><span class="tsb-icon">🧩</span>Regex Tester</a>
@@ -142,61 +142,25 @@
 
       <div class="tool-main">
         <div class="tools-hero small">
-          <div class="tools-hero-icon">📝</div>
-          <h1>Text Tools <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
-          <p>Word counter, case converter, and text cleaner.</p>
+          <div class="tools-hero-icon">🧾</div>
+          <h1>JSON Formatter <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Format, minify, and validate JSON.</p>
         </div>
-        <div class="tool-info-panel" id="infoPanel" hidden>Count words, characters, sentences, and estimated reading time as you type. Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or reversed. Clean up messy text by trimming spaces, removing blank or duplicate lines, stripping punctuation or numbers, or sorting lines alphabetically.</div>
-
-    <div class="tool-panel active" id="panel-text">
-      <div class="tool-card">
-        <h2>📊 Word &amp; Character Counter</h2>
-        <textarea class="t-textarea" id="wc-input" placeholder="Paste or type your text here…"></textarea>
-        <div class="t-stats">
-          <div class="t-stat"><span class="t-stat-val" id="wc-chars">0</span><span class="t-stat-label">Characters</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-words">0</span><span class="t-stat-label">Words</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-lines">0</span><span class="t-stat-label">Lines</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-sentences">0</span><span class="t-stat-label">Sentences</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-read">0</span><span class="t-stat-label">Min Read</span></div>
-        </div>
-      </div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Paste any JSON and instantly beautify it with proper indentation, minify it down to a single line, or validate it and get a clear error message pointing at what is wrong.</div>
 
       <div class="tool-card">
-        <h2>🔡 Case Converter</h2>
-        <textarea class="t-textarea" id="case-input" placeholder="Enter text to convert…"></textarea>
+        <h2>🧾 JSON Formatter</h2>
+        <textarea class="t-textarea" id="json-input" placeholder='Paste JSON here, e.g. {"name":"Nexo Hub","sites":623}' style="min-height:180px"></textarea>
         <div class="t-btn-row">
-          <button class="t-btn" onclick="convertCase('upper')">UPPER</button>
-          <button class="t-btn" onclick="convertCase('lower')">lower</button>
-          <button class="t-btn" onclick="convertCase('title')">Title Case</button>
-          <button class="t-btn" onclick="convertCase('sentence')">Sentence case</button>
-          <button class="t-btn" onclick="convertCase('camel')">camelCase</button>
-          <button class="t-btn" onclick="convertCase('snake')">snake_case</button>
-          <button class="t-btn" onclick="convertCase('kebab')">kebab-case</button>
-          <button class="t-btn" onclick="convertCase('reverse')">esreveR</button>
+          <button class="t-btn primary" onclick="formatJson('beautify')">Beautify</button>
+          <button class="t-btn" onclick="formatJson('minify')">Minify</button>
+          <button class="t-btn" onclick="formatJson('validate')">Validate Only</button>
         </div>
-        <div class="t-output" id="case-output" style="display:none"></div>
-        <div class="t-btn-row" id="case-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('case-output')">Copy</button>
+        <div class="t-output" id="json-output" style="display:none"></div>
+        <div class="t-btn-row" id="json-copy-row" style="display:none">
+          <button class="t-btn primary" onclick="copyOutput('json-output')">Copy</button>
         </div>
       </div>
-
-      <div class="tool-card">
-        <h2>✂️ Text Cleaner</h2>
-        <textarea class="t-textarea" id="clean-input" placeholder="Paste messy text…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="cleanText('trim')">Trim Spaces</button>
-          <button class="t-btn" onclick="cleanText('lines')">Remove Blank Lines</button>
-          <button class="t-btn" onclick="cleanText('dupes')">Remove Duplicate Lines</button>
-          <button class="t-btn" onclick="cleanText('punctuation')">Strip Punctuation</button>
-          <button class="t-btn" onclick="cleanText('numbers')">Remove Numbers</button>
-          <button class="t-btn" onclick="cleanText('sort')">Sort Lines A–Z</button>
-        </div>
-        <div class="t-output" id="clean-output" style="display:none"></div>
-        <div class="t-btn-row" id="clean-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('clean-output')">Copy</button>
-        </div>
-      </div>
-    </div>
 
       </div>
     </div>
@@ -277,49 +241,34 @@
       });
     })();
 
-    // ── WORD COUNTER ─────────────────────────────────────
-    const wcInput = document.getElementById('wc-input');
-    wcInput.addEventListener('input', () => {
-      const v = wcInput.value;
-      document.getElementById('wc-chars').textContent = v.length;
-      document.getElementById('wc-words').textContent = v.trim() ? v.trim().split(/\s+/).length : 0;
-      document.getElementById('wc-lines').textContent = v ? v.split('\n').length : 0;
-      document.getElementById('wc-sentences').textContent = (v.match(/[.!?]+/g) || []).length;
-      document.getElementById('wc-read').textContent = Math.max(1, Math.ceil((v.trim() ? v.trim().split(/\s+/).length : 0) / 200));
-    });
-
-    // ── CASE CONVERTER ───────────────────────────────────
-    function convertCase(mode) {
-      const v = document.getElementById('case-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'upper') result = v.toUpperCase();
-      else if (mode === 'lower') result = v.toLowerCase();
-      else if (mode === 'title') result = v.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
-      else if (mode === 'sentence') result = v.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
-      else if (mode === 'camel') result = v.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
-      else if (mode === 'snake') result = v.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-      else if (mode === 'kebab') result = v.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      else if (mode === 'reverse') result = v.split('').reverse().join('');
-      const out = document.getElementById('case-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('case-copy-row').style.display = 'flex';
-    }
-
-    // ── TEXT CLEANER ──────────────────────────────────────
-    function cleanText(mode) {
-      const v = document.getElementById('clean-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'trim') result = v.split('\n').map(l => l.trim()).join('\n');
-      else if (mode === 'lines') result = v.split('\n').filter(l => l.trim()).join('\n');
-      else if (mode === 'dupes') result = [...new Set(v.split('\n'))].join('\n');
-      else if (mode === 'punctuation') result = v.replace(/[^\w\s]/g, '');
-      else if (mode === 'numbers') result = v.replace(/\d/g, '');
-      else if (mode === 'sort') result = v.split('\n').sort((a,b) => a.localeCompare(b)).join('\n');
-      const out = document.getElementById('clean-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('clean-copy-row').style.display = 'flex';
+    // ── JSON FORMATTER ────────────────────────────────────
+    function formatJson(mode) {
+      const inputEl = document.getElementById('json-input');
+      const out = document.getElementById('json-output');
+      const copyRow = document.getElementById('json-copy-row');
+      const raw = inputEl.value.trim();
+      if (!raw) return;
+      out.style.display = 'block';
+      try {
+        const parsed = JSON.parse(raw);
+        if (mode === 'beautify') {
+          out.textContent = JSON.stringify(parsed, null, 2);
+          out.style.color = 'var(--text)';
+          copyRow.style.display = 'flex';
+        } else if (mode === 'minify') {
+          out.textContent = JSON.stringify(parsed);
+          out.style.color = 'var(--text)';
+          copyRow.style.display = 'flex';
+        } else {
+          out.textContent = '✓ Valid JSON';
+          out.style.color = '#22c55e';
+          copyRow.style.display = 'none';
+        }
+      } catch (e) {
+        out.textContent = '✕ Invalid JSON — ' + e.message;
+        out.style.color = '#ef4444';
+        copyRow.style.display = 'none';
+      }
     }
 
   </script>

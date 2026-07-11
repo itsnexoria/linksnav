@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Text Tools — Free Online Tool | Nexo Hub</title>
-  <meta name="description" content="Word counter, case converter, and text cleaner. Free, fast, and runs right in your browser — no sign-up needed."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/tools/text-tools/"/>
-  <meta property="og:title" content="Text Tools — Nexo Hub"/>
-  <meta property="og:description" content="Word counter, case converter, and text cleaner."/>
+  <title>Percentage Calculator — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Quick percentage math — of, is-what-percent, and change. Free, fast, and runs right in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/tools/percentage-calculator/"/>
+  <meta property="og:title" content="Percentage Calculator — Nexo Hub"/>
+  <meta property="og:description" content="Quick percentage math — of, is-what-percent, and change."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://app.nexosites.xyz/tools/text-tools/"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/tools/percentage-calculator/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Text Tools — Nexo Hub"/>
+  <meta property="og:image:alt" content="Percentage Calculator — Nexo Hub"/>
   <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Text Tools — Nexo Hub"/>
-  <meta name="twitter:description" content="Word counter, case converter, and text cleaner."/>
+  <meta name="twitter:title" content="Percentage Calculator — Nexo Hub"/>
+  <meta name="twitter:description" content="Quick percentage math — of, is-what-percent, and change."/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -31,9 +31,9 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Text Tools",
-    "description": "Count words, characters, sentences, and estimated reading time as you type. Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or reversed. Clean up messy text by trimming spaces, removing blank or duplicate lines, stripping punctuation or numbers, or sorting lines alphabetically.",
-    "url": "https://app.nexosites.xyz/tools/text-tools/",
+    "name": "Percentage Calculator",
+    "description": "Three common percentage calculations in one place: find X% of a number, work out what percent one number is of another, or calculate the percentage increase or decrease between two values.",
+    "url": "https://app.nexosites.xyz/tools/percentage-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (runs in browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -47,7 +47,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
       { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexosites.xyz/pages/tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Text Tools", "item": "https://app.nexosites.xyz/tools/text-tools/" }
+      { "@type": "ListItem", "position": 3, "name": "Percentage Calculator", "item": "https://app.nexosites.xyz/tools/percentage-calculator/" }
     ]
   }
   </script>
@@ -107,13 +107,13 @@
       <span aria-hidden="true"> / </span>
       <a href="/pages/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
       <span aria-hidden="true"> / </span>
-      <span style="color:var(--text2)">Text Tools</span>
+      <span style="color:var(--text2)">Percentage Calculator</span>
     </nav>
 
     <div class="tool-page-layout">
       <aside class="tool-sidebar" aria-label="Other tools">
         <span class="tool-sidebar-label">Other Tools</span>
-        <a href="/tools/text-tools/" class="tsb-link active"><span class="tsb-icon">📝</span>Text Tools</a>
+        <a href="/tools/text-tools/" class="tsb-link"><span class="tsb-icon">📝</span>Text Tools</a>
         <a href="/tools/font-changer/" class="tsb-link"><span class="tsb-icon">🔤</span>Font Changer</a>
         <a href="/tools/color-picker/" class="tsb-link"><span class="tsb-icon">🎨</span>Colour Picker</a>
         <a href="/tools/gradient-generator/" class="tsb-link"><span class="tsb-icon">🌈</span>Gradient Generator</a>
@@ -134,7 +134,7 @@
         <a href="/tools/uuid-generator/" class="tsb-link"><span class="tsb-icon">🆔</span>UUID Generator</a>
         <a href="/tools/slug-generator/" class="tsb-link"><span class="tsb-icon">🔗</span>Slug Generator</a>
         <a href="/tools/regex-tester/" class="tsb-link"><span class="tsb-icon">🧩</span>Regex Tester</a>
-        <a href="/tools/percentage-calculator/" class="tsb-link"><span class="tsb-icon">➗</span>Percentage Calculator</a>
+        <a href="/tools/percentage-calculator/" class="tsb-link active"><span class="tsb-icon">➗</span>Percentage Calculator</a>
         <a href="/tools/age-calculator/" class="tsb-link"><span class="tsb-icon">🎂</span>Age Calculator</a>
         <a href="/tools/stopwatch-timer/" class="tsb-link"><span class="tsb-icon">⏱️</span>Stopwatch & Timer</a>
         <a href="/tools/random-picker/" class="tsb-link"><span class="tsb-icon">🎯</span>Random Picker</a>
@@ -142,61 +142,44 @@
 
       <div class="tool-main">
         <div class="tools-hero small">
-          <div class="tools-hero-icon">📝</div>
-          <h1>Text Tools <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
-          <p>Word counter, case converter, and text cleaner.</p>
+          <div class="tools-hero-icon">➗</div>
+          <h1>Percentage Calculator <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Quick percentage math — of, is-what-percent, and change.</p>
         </div>
-        <div class="tool-info-panel" id="infoPanel" hidden>Count words, characters, sentences, and estimated reading time as you type. Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or reversed. Clean up messy text by trimming spaces, removing blank or duplicate lines, stripping punctuation or numbers, or sorting lines alphabetically.</div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Three common percentage calculations in one place: find X% of a number, work out what percent one number is of another, or calculate the percentage increase or decrease between two values.</div>
 
-    <div class="tool-panel active" id="panel-text">
       <div class="tool-card">
-        <h2>📊 Word &amp; Character Counter</h2>
-        <textarea class="t-textarea" id="wc-input" placeholder="Paste or type your text here…"></textarea>
-        <div class="t-stats">
-          <div class="t-stat"><span class="t-stat-val" id="wc-chars">0</span><span class="t-stat-label">Characters</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-words">0</span><span class="t-stat-label">Words</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-lines">0</span><span class="t-stat-label">Lines</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-sentences">0</span><span class="t-stat-label">Sentences</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-read">0</span><span class="t-stat-label">Min Read</span></div>
+        <h2>➗ X% of Y</h2>
+        <div class="grad-row" style="margin-top:0">
+          <input class="t-input" id="pc1-x" type="number" placeholder="e.g. 20" style="width:100px"/>
+          <span style="color:var(--text2);font-size:.85rem">% of</span>
+          <input class="t-input" id="pc1-y" type="number" placeholder="e.g. 150" style="width:110px"/>
+          <button class="t-btn primary" onclick="calcPercentOf()">Calculate</button>
         </div>
+        <div class="t-output" id="pc1-output" style="display:none"></div>
       </div>
 
       <div class="tool-card">
-        <h2>🔡 Case Converter</h2>
-        <textarea class="t-textarea" id="case-input" placeholder="Enter text to convert…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="convertCase('upper')">UPPER</button>
-          <button class="t-btn" onclick="convertCase('lower')">lower</button>
-          <button class="t-btn" onclick="convertCase('title')">Title Case</button>
-          <button class="t-btn" onclick="convertCase('sentence')">Sentence case</button>
-          <button class="t-btn" onclick="convertCase('camel')">camelCase</button>
-          <button class="t-btn" onclick="convertCase('snake')">snake_case</button>
-          <button class="t-btn" onclick="convertCase('kebab')">kebab-case</button>
-          <button class="t-btn" onclick="convertCase('reverse')">esreveR</button>
+        <h2>📊 X is what % of Y</h2>
+        <div class="grad-row" style="margin-top:0">
+          <input class="t-input" id="pc2-x" type="number" placeholder="e.g. 30" style="width:100px"/>
+          <span style="color:var(--text2);font-size:.85rem">is what % of</span>
+          <input class="t-input" id="pc2-y" type="number" placeholder="e.g. 150" style="width:110px"/>
+          <button class="t-btn primary" onclick="calcIsWhatPercent()">Calculate</button>
         </div>
-        <div class="t-output" id="case-output" style="display:none"></div>
-        <div class="t-btn-row" id="case-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('case-output')">Copy</button>
-        </div>
+        <div class="t-output" id="pc2-output" style="display:none"></div>
       </div>
 
       <div class="tool-card">
-        <h2>✂️ Text Cleaner</h2>
-        <textarea class="t-textarea" id="clean-input" placeholder="Paste messy text…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="cleanText('trim')">Trim Spaces</button>
-          <button class="t-btn" onclick="cleanText('lines')">Remove Blank Lines</button>
-          <button class="t-btn" onclick="cleanText('dupes')">Remove Duplicate Lines</button>
-          <button class="t-btn" onclick="cleanText('punctuation')">Strip Punctuation</button>
-          <button class="t-btn" onclick="cleanText('numbers')">Remove Numbers</button>
-          <button class="t-btn" onclick="cleanText('sort')">Sort Lines A–Z</button>
+        <h2>📈 % Change from X to Y</h2>
+        <div class="grad-row" style="margin-top:0">
+          <input class="t-input" id="pc3-x" type="number" placeholder="From, e.g. 80" style="width:110px"/>
+          <span style="color:var(--text2);font-size:.85rem">→</span>
+          <input class="t-input" id="pc3-y" type="number" placeholder="To, e.g. 100" style="width:110px"/>
+          <button class="t-btn primary" onclick="calcPercentChange()">Calculate</button>
         </div>
-        <div class="t-output" id="clean-output" style="display:none"></div>
-        <div class="t-btn-row" id="clean-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('clean-output')">Copy</button>
-        </div>
+        <div class="t-output" id="pc3-output" style="display:none"></div>
       </div>
-    </div>
 
       </div>
     </div>
@@ -277,49 +260,32 @@
       });
     })();
 
-    // ── WORD COUNTER ─────────────────────────────────────
-    const wcInput = document.getElementById('wc-input');
-    wcInput.addEventListener('input', () => {
-      const v = wcInput.value;
-      document.getElementById('wc-chars').textContent = v.length;
-      document.getElementById('wc-words').textContent = v.trim() ? v.trim().split(/\s+/).length : 0;
-      document.getElementById('wc-lines').textContent = v ? v.split('\n').length : 0;
-      document.getElementById('wc-sentences').textContent = (v.match(/[.!?]+/g) || []).length;
-      document.getElementById('wc-read').textContent = Math.max(1, Math.ceil((v.trim() ? v.trim().split(/\s+/).length : 0) / 200));
-    });
-
-    // ── CASE CONVERTER ───────────────────────────────────
-    function convertCase(mode) {
-      const v = document.getElementById('case-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'upper') result = v.toUpperCase();
-      else if (mode === 'lower') result = v.toLowerCase();
-      else if (mode === 'title') result = v.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
-      else if (mode === 'sentence') result = v.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
-      else if (mode === 'camel') result = v.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
-      else if (mode === 'snake') result = v.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-      else if (mode === 'kebab') result = v.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      else if (mode === 'reverse') result = v.split('').reverse().join('');
-      const out = document.getElementById('case-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('case-copy-row').style.display = 'flex';
+    // ── PERCENTAGE CALCULATOR ──────────────────────────────
+    function calcPercentOf() {
+      const x = parseFloat(document.getElementById('pc1-x').value);
+      const y = parseFloat(document.getElementById('pc1-y').value);
+      const out = document.getElementById('pc1-output');
+      out.style.display = 'block';
+      if (isNaN(x) || isNaN(y)) { out.textContent = 'Enter both numbers.'; return; }
+      out.textContent = `${x}% of ${y} = ${(x / 100 * y).toLocaleString(undefined, { maximumFractionDigits: 4 })}`;
     }
-
-    // ── TEXT CLEANER ──────────────────────────────────────
-    function cleanText(mode) {
-      const v = document.getElementById('clean-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'trim') result = v.split('\n').map(l => l.trim()).join('\n');
-      else if (mode === 'lines') result = v.split('\n').filter(l => l.trim()).join('\n');
-      else if (mode === 'dupes') result = [...new Set(v.split('\n'))].join('\n');
-      else if (mode === 'punctuation') result = v.replace(/[^\w\s]/g, '');
-      else if (mode === 'numbers') result = v.replace(/\d/g, '');
-      else if (mode === 'sort') result = v.split('\n').sort((a,b) => a.localeCompare(b)).join('\n');
-      const out = document.getElementById('clean-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('clean-copy-row').style.display = 'flex';
+    function calcIsWhatPercent() {
+      const x = parseFloat(document.getElementById('pc2-x').value);
+      const y = parseFloat(document.getElementById('pc2-y').value);
+      const out = document.getElementById('pc2-output');
+      out.style.display = 'block';
+      if (isNaN(x) || isNaN(y) || y === 0) { out.textContent = 'Enter both numbers (Y cannot be 0).'; return; }
+      out.textContent = `${x} is ${(x / y * 100).toLocaleString(undefined, { maximumFractionDigits: 4 })}% of ${y}`;
+    }
+    function calcPercentChange() {
+      const x = parseFloat(document.getElementById('pc3-x').value);
+      const y = parseFloat(document.getElementById('pc3-y').value);
+      const out = document.getElementById('pc3-output');
+      out.style.display = 'block';
+      if (isNaN(x) || isNaN(y) || x === 0) { out.textContent = 'Enter both numbers (From cannot be 0).'; return; }
+      const change = (y - x) / Math.abs(x) * 100;
+      const dir = change >= 0 ? 'increase' : 'decrease';
+      out.textContent = `${Math.abs(change).toLocaleString(undefined, { maximumFractionDigits: 4 })}% ${dir} (from ${x} to ${y})`;
     }
 
   </script>

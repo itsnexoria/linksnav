@@ -304,7 +304,7 @@
       width: 17px; height: 17px; flex-shrink: 0; cursor: pointer;
       accent-color: var(--accent); border-radius: 4px;
     }
-    .manage-item.is-selected { background: color-mix(in srgb, var(--accent) 6%, var(--surface)); border-color: var(--accent); }
+    .manage-card.is-selected, .pending-card.is-selected { background: color-mix(in srgb, var(--accent) 6%, var(--surface)); border-color: var(--accent); }
 
     .toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
@@ -322,6 +322,47 @@
       border-radius: 50%; animation: spin .7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Clear-selection button — was completely unstyled, looked broken next to the pill buttons beside it */
+    .cac-btn {
+      padding: 8px 16px; border-radius: var(--radius); border: 1px solid var(--border2);
+      background: transparent; color: var(--text2); font-family: var(--font-m);
+      font-size: .78rem; font-weight: 600; cursor: pointer;
+      transition: border-color .18s, color .18s;
+    }
+    .cac-btn:hover { border-color: var(--text2); color: var(--text); }
+
+    /* The bulk-select checkbox on pending cards had no layout of its own and rendered
+       as an orphaned element floating above the card content. Anchor it to the corner instead. */
+    .pending-card:has(.pending-check) { position: relative; padding-left: 52px; }
+    .pending-check { position: absolute; top: 22px; left: 20px; margin: 0; }
+
+    /* ── MOBILE ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .admin-wrap { padding: 24px 14px 80px; }
+      .admin-title { font-size: 1.2rem; }
+      .admin-tabs { gap: 2px; }
+      .admin-tab { padding: 8px 10px; font-size: .76rem; }
+
+      .manage-card {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      .manage-card-info { flex-basis: 100%; order: 1; }
+      .manage-card-cat { order: 2; }
+      .manage-item-check { order: 0; }
+      .manage-card > .edit-btn, .manage-card > .delete-btn { order: 3; }
+
+      .pending-card:has(.pending-check) { padding-left: 44px; }
+      .pending-check { top: 20px; left: 16px; }
+
+      .pc-actions, .bulk-toolbar { flex-direction: column; align-items: stretch; }
+      .pc-actions button, .bulk-toolbar button { width: 100%; justify-content: center; }
+      .bulk-toolbar .manage-cat-filter { width: 100% !important; }
+
+      .chart-bar-label { display: none; }
+      .chart-bar-wrap:nth-child(odd) .chart-bar-label { display: block; }
+    }
   </style>
 </head>
 <body>
