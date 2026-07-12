@@ -222,6 +222,26 @@ body {
 }
 .search-wrap:focus-within kbd { opacity:0 }
 
+.search-suggest {
+  position:absolute; top:calc(100% + 6px); left:0; right:0; z-index:60;
+  background:var(--surface2); border:1px solid var(--border2); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg,0 12px 32px rgba(0,0,0,.35)); overflow:hidden;
+  max-height:360px; overflow-y:auto;
+}
+.search-suggest[hidden] { display:none; }
+.ss-item {
+  display:flex; align-items:center; gap:10px; padding:9px 12px;
+  text-decoration:none; color:var(--text); cursor:pointer;
+  border-bottom:1px solid var(--border);
+}
+.ss-item:last-child { border-bottom:none; }
+.ss-item:hover, .ss-item.ss-active { background:var(--bg3); }
+.ss-fav { width:20px; height:20px; border-radius:5px; flex-shrink:0; background:var(--bg3); }
+.ss-info { flex:1; min-width:0; }
+.ss-name { font-size:.82rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ss-cat { font-size:.68rem; color:var(--muted); }
+.ss-more { font-size:.72rem; color:var(--muted); padding:8px 12px; text-align:center; }
+
 .site-count {
   font-size:.7rem; color:var(--muted);
   white-space:nowrap; font-family:var(--font-m);

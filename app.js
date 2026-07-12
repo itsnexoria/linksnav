@@ -340,6 +340,7 @@ function switchCat(id,btn){
   activeCategory=id;searchQuery='';visibleCount=PAGE_SIZE;
   const inp=document.getElementById('searchInput');
   if(inp)inp.value='';
+  hideSuggestions();
   /* Reset price filter */
   const ps=document.getElementById('priceSelect');
   if(ps){ps.value='all';currentPrice='all';}
@@ -381,6 +382,54 @@ function logSearchQuery(q, resultCount){
     }).catch(()=>{});
   },900);
 }
+/* ── SEARCH AUTOCOMPLETE ────────────────────────────────────── */
+let ssActiveIndex=-1, ssItems=[];
+function favSmall(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=32'; }catch{ return ''; } }
+function renderSuggestions(query){
+  const box=document.getElementById('searchSuggest');
+  const inp=document.getElementById('searchInput');
+  if(!box) return;
+  if(!query){ hideSuggestions(); return; }
+  const q=query.toLowerCase();
+  const starts=[], contains=[];
+  for(const s of allSites){
+    const name=(s.name||'').toLowerCase();
+    if(name.startsWith(q)) starts.push(s);
+    else if(name.includes(q)) contains.push(s);
+    if(starts.length+contains.length>=40) break;
+  }
+  ssItems=[...starts,...contains].slice(0,6);
+  ssActiveIndex=-1;
+  if(!ssItems.length){ hideSuggestions(); return; }
+  box.innerHTML=ssItems.map((s,i)=>{
+    const cat=allCategories.find(c=>c.id===s.category);
+    const catLabel=cat?`${cat.icon} ${cat.label}`:s.category;
+    return `<div class="ss-item" role="option" data-idx="${i}" data-href="${s.slug?('/site/'+s.slug+'/'):s.url}">
+      <img class="ss-fav" src="${favSmall(s.url)}" alt="" onerror="this.style.visibility='hidden'"/>
+      <div class="ss-info"><div class="ss-name">${(s.name||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div><div class="ss-cat">${catLabel}</div></div>
+    </div>`;
+  }).join('');
+  box.hidden=false;
+  inp.setAttribute('aria-expanded','true');
+  box.querySelectorAll('.ss-item').forEach(el=>{
+    el.addEventListener('mousedown', e=>{ e.preventDefault(); window.location.href = el.dataset.href; });
+    el.addEventListener('mouseenter', ()=>{ setSsActive(parseInt(el.dataset.idx,10)); });
+  });
+}
+function setSsActive(idx){
+  const box=document.getElementById('searchSuggest');
+  if(!box) return;
+  ssActiveIndex=idx;
+  box.querySelectorAll('.ss-item').forEach(el=>el.classList.toggle('ss-active', parseInt(el.dataset.idx,10)===idx));
+}
+function hideSuggestions(){
+  const box=document.getElementById('searchSuggest');
+  const inp=document.getElementById('searchInput');
+  if(box){ box.hidden=true; box.innerHTML=''; }
+  if(inp) inp.setAttribute('aria-expanded','false');
+  ssItems=[]; ssActiveIndex=-1;
+}
+
 function setupSearch(){
   const inp=document.getElementById('searchInput');
   let t;
@@ -391,18 +440,31 @@ function setupSearch(){
       visibleCount=PAGE_SIZE;
       if(searchQuery){activeCategory='all';setActive(document.querySelector('.cat-btn[data-cat="all"]'))}
       render();
+      renderSuggestions(inp.value.trim());
       if(searchQuery){
         const matchCount=allSites.filter(s=>`${s.name} ${s.description} ${s.category} ${(s.tags||[]).join(' ')}`.toLowerCase().includes(searchQuery)).length;
         logSearchQuery(searchQuery, matchCount);
       }
     },130);
   });
+  inp.addEventListener('blur',()=>{ setTimeout(hideSuggestions,120); });
+  inp.addEventListener('focus',()=>{ if(inp.value.trim()) renderSuggestions(inp.value.trim()); });
+  document.addEventListener('click',e=>{
+    const box=document.getElementById('searchSuggest');
+    if(box && !box.hidden && !box.contains(e.target) && e.target!==inp) hideSuggestions();
+  });
   document.addEventListener('keydown',e=>{
     const typing = document.activeElement===inp || document.activeElement.tagName==='SELECT' || document.activeElement.tagName==='TEXTAREA' || document.activeElement.isContentEditable;
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();inp.focus();inp.select()}
+    if(document.activeElement===inp && ssItems.length && !document.getElementById('searchSuggest').hidden){
+      if(e.key==='ArrowDown'){e.preventDefault();setSsActive((ssActiveIndex+1)%ssItems.length);return;}
+      if(e.key==='ArrowUp'){e.preventDefault();setSsActive((ssActiveIndex-1+ssItems.length)%ssItems.length);return;}
+      if(e.key==='Enter' && ssActiveIndex>=0){e.preventDefault();const s=ssItems[ssActiveIndex];window.location.href=s.slug?('/site/'+s.slug+'/'):s.url;return;}
+    }
     if(e.key==='Escape'){
       if(document.getElementById('shortcutsModal')){closeShortcutsModal();return;}
-      if(document.activeElement===inp){inp.blur();inp.value='';searchQuery='';visibleCount=PAGE_SIZE;render();}
+      if(document.activeElement===inp && ssItems.length && !document.getElementById('searchSuggest').hidden){ hideSuggestions(); return; }
+      if(document.activeElement===inp){inp.blur();inp.value='';searchQuery='';visibleCount=PAGE_SIZE;render();hideSuggestions();}
     }
     if(e.key==='?'&&!typing){e.preventDefault();openShortcutsModal();return;}
     /* [ and ] cycle through category tabs when not typing */

@@ -138,10 +138,15 @@
           <input type="search"
                  id="searchInput"
                  aria-label="Search sites"
-                 placeholder="Search 490+ sites…"
+                 placeholder="Search 620+ sites…"
                  autocomplete="off"
-                 spellcheck="false" />
+                 spellcheck="false"
+                 role="combobox"
+                 aria-expanded="false"
+                 aria-controls="searchSuggest"
+                 aria-autocomplete="list" />
           <kbd aria-hidden="true">Ctrl K</kbd>
+          <div class="search-suggest" id="searchSuggest" role="listbox" hidden></div>
         </div>
         <div class="site-count" id="siteCount" aria-live="polite">Loading…</div>
         <button class="random-btn" id="randomBtn" aria-label="Open a random site" title="Surprise me (press R)">
@@ -200,6 +205,7 @@
         <a href="/pages/tools/" class="nav-link">🛠️ Web Tools</a>
         <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
         <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/blog/" class="nav-link">📰 Blog</a>
         <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
         <a href="/pages/about/" class="nav-link">👤 About</a>
         <a href="/pages/donate/" class="nav-link">💜 Donate</a>
