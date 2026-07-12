@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Age Calculator — Free Online Tool | Nexo Hub</title>
-  <meta name="description" content="Calculate exact age between two dates. Free, fast, and runs right in your browser — no sign-up needed."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/tools/age-calculator/"/>
-  <meta property="og:title" content="Age Calculator — Nexo Hub"/>
-  <meta property="og:description" content="Calculate exact age between two dates."/>
+  <title>Public Holiday Checker — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Check public holidays for any country and year. Free, fast, and runs right in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/tools/holiday-checker/"/>
+  <meta property="og:title" content="Public Holiday Checker — Nexo Hub"/>
+  <meta property="og:description" content="Check public holidays for any country and year."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://app.nexosites.xyz/tools/age-calculator/"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/tools/holiday-checker/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Age Calculator — Nexo Hub"/>
+  <meta property="og:image:alt" content="Public Holiday Checker — Nexo Hub"/>
   <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Age Calculator — Nexo Hub"/>
-  <meta name="twitter:description" content="Calculate exact age between two dates."/>
+  <meta name="twitter:title" content="Public Holiday Checker — Nexo Hub"/>
+  <meta name="twitter:description" content="Check public holidays for any country and year."/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -31,9 +31,9 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Age Calculator",
-    "description": "Enter a birth date and get your exact age broken down into years, months, and days, plus the total number of days you have been alive — calculated as of today or any date you choose.",
-    "url": "https://app.nexosites.xyz/tools/age-calculator/",
+    "name": "Public Holiday Checker",
+    "description": "Pick a country and a year to see the full list of official public holidays, including the local name of each holiday and the day of the week it falls on.",
+    "url": "https://app.nexosites.xyz/tools/holiday-checker/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (runs in browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -47,7 +47,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
       { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexosites.xyz/pages/tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Age Calculator", "item": "https://app.nexosites.xyz/tools/age-calculator/" }
+      { "@type": "ListItem", "position": 3, "name": "Public Holiday Checker", "item": "https://app.nexosites.xyz/tools/holiday-checker/" }
     ]
   }
   </script>
@@ -107,7 +107,7 @@
       <span aria-hidden="true"> / </span>
       <a href="/pages/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
       <span aria-hidden="true"> / </span>
-      <span style="color:var(--text2)">Age Calculator</span>
+      <span style="color:var(--text2)">Public Holiday Checker</span>
     </nav>
 
     <div class="tool-page-layout">
@@ -135,49 +135,43 @@
         <a href="/tools/slug-generator/" class="tsb-link"><span class="tsb-icon">🔗</span>Slug Generator</a>
         <a href="/tools/regex-tester/" class="tsb-link"><span class="tsb-icon">🧩</span>Regex Tester</a>
         <a href="/tools/percentage-calculator/" class="tsb-link"><span class="tsb-icon">➗</span>Percentage Calculator</a>
-        <a href="/tools/age-calculator/" class="tsb-link active"><span class="tsb-icon">🎂</span>Age Calculator</a>
+        <a href="/tools/age-calculator/" class="tsb-link"><span class="tsb-icon">🎂</span>Age Calculator</a>
         <a href="/tools/stopwatch-timer/" class="tsb-link"><span class="tsb-icon">⏱️</span>Stopwatch & Timer</a>
         <a href="/tools/random-picker/" class="tsb-link"><span class="tsb-icon">🎯</span>Random Picker</a>
         <a href="/tools/currency-converter/" class="tsb-link"><span class="tsb-icon">💱</span>Currency Converter</a>
         <a href="/tools/ip-lookup/" class="tsb-link"><span class="tsb-icon">🌐</span>IP Address Lookup</a>
         <a href="/tools/word-lookup/" class="tsb-link"><span class="tsb-icon">📖</span>Dictionary Lookup</a>
         <a href="/tools/country-info/" class="tsb-link"><span class="tsb-icon">🌍</span>Country Info Lookup</a>
-        <a href="/tools/holiday-checker/" class="tsb-link"><span class="tsb-icon">📅</span>Public Holiday Checker</a>
+        <a href="/tools/holiday-checker/" class="tsb-link active"><span class="tsb-icon">📅</span>Public Holiday Checker</a>
         <a href="/tools/joke-generator/" class="tsb-link"><span class="tsb-icon">😂</span>Joke & Quote Generator</a>
         <a href="/tools/crypto-price/" class="tsb-link"><span class="tsb-icon">🪙</span>Crypto Price Checker</a>
       </aside>
 
       <div class="tool-main">
         <div class="tools-hero small">
-          <div class="tools-hero-icon">🎂</div>
-          <h1>Age Calculator <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
-          <p>Calculate exact age between two dates.</p>
+          <div class="tools-hero-icon">📅</div>
+          <h1>Public Holiday Checker <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Check public holidays for any country and year.</p>
         </div>
-        <div class="tool-info-panel" id="infoPanel" hidden>Enter a birth date and get your exact age broken down into years, months, and days, plus the total number of days you have been alive — calculated as of today or any date you choose.</div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Pick a country and a year to see the full list of official public holidays, including the local name of each holiday and the day of the week it falls on.</div>
 
+    <div class="tool-panel active" id="panel-holiday">
       <div class="tool-card">
-        <h2>🎂 Age Calculator</h2>
-        <div class="grad-row" style="margin-top:0">
-          <div>
-            <label style="font-size:.75rem;color:var(--text2);display:block;margin-bottom:6px">Date of birth</label>
-            <input class="t-input" id="age-dob" type="date"/>
+        <h2>📅 Public Holiday Checker</h2>
+        <div class="grad-row">
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px">
+            <label style="font-size:.75rem;color:var(--muted)">Country</label>
+            <select class="font-select" id="hcCountry"></select>
           </div>
-          <div>
-            <label style="font-size:.75rem;color:var(--text2);display:block;margin-bottom:6px">As of</label>
-            <input class="t-input" id="age-asof" type="date"/>
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:100px">
+            <label style="font-size:.75rem;color:var(--muted)">Year</label>
+            <input type="number" class="t-input" id="hcYear" value="2026" min="2000" max="2035"/>
           </div>
+          <button class="t-btn primary" style="align-self:flex-end;height:41px" onclick="lookupHolidays()">Check</button>
         </div>
-        <div class="t-btn-row">
-          <button class="t-btn primary" onclick="calcAge()">Calculate Age</button>
-        </div>
-        <div class="t-stats" id="age-stats" style="display:none">
-          <div class="t-stat"><span class="t-stat-val" id="age-years">0</span><span class="t-stat-label">Years</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-months">0</span><span class="t-stat-label">Months</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-days">0</span><span class="t-stat-label">Days</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-total-days">0</span><span class="t-stat-label">Total Days</span></div>
-        </div>
-        <div class="t-output" id="age-output" style="display:none"></div>
+        <div id="holiday-result"><div class="t-output">Pick a country and year, then hit Check.</div></div>
       </div>
+    </div>
 
       </div>
     </div>
@@ -258,40 +252,41 @@
       });
     })();
 
-    // ── AGE CALCULATOR ─────────────────────────────────────
-    (function(){
-      const asofEl = document.getElementById('age-asof');
-      if (asofEl && !asofEl.value) asofEl.value = new Date().toISOString().slice(0,10);
+    // ── PUBLIC HOLIDAY CHECKER ────────────────────────────
+    const hcCountries = {
+      US:"United States", GB:"United Kingdom", ZA:"South Africa", CA:"Canada", AU:"Australia",
+      DE:"Germany", FR:"France", IE:"Ireland", NZ:"New Zealand", IN:"India",
+      BR:"Brazil", MX:"Mexico", ES:"Spain", IT:"Italy", NL:"Netherlands",
+      JP:"Japan", SG:"Singapore", NG:"Nigeria", KE:"Kenya", CH:"Switzerland",
+      SE:"Sweden", NO:"Norway", PL:"Poland", PT:"Portugal", AE:"United Arab Emirates"
+    };
+    (function initHC(){
+      const sel = document.getElementById('hcCountry');
+      Object.entries(hcCountries).forEach(([code, name]) => sel.innerHTML += `<option value="${code}">${name}</option>`);
+      sel.value = 'US';
+      document.getElementById('hcYear').value = new Date().getFullYear();
     })();
-    function calcAge() {
-      const dobVal = document.getElementById('age-dob').value;
-      const asofVal = document.getElementById('age-asof').value || new Date().toISOString().slice(0,10);
-      const out = document.getElementById('age-output');
-      const stats = document.getElementById('age-stats');
-      if (!dobVal) { out.style.display = 'block'; stats.style.display = 'none'; out.textContent = 'Enter a date of birth.'; return; }
-      const dob = new Date(dobVal + 'T00:00:00');
-      const asof = new Date(asofVal + 'T00:00:00');
-      if (asof < dob) { out.style.display = 'block'; stats.style.display = 'none'; out.textContent = '"As of" date must be after the date of birth.'; return; }
-
-      let years = asof.getFullYear() - dob.getFullYear();
-      let months = asof.getMonth() - dob.getMonth();
-      let days = asof.getDate() - dob.getDate();
-      if (days < 0) {
-        months -= 1;
-        const prevMonth = new Date(asof.getFullYear(), asof.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) { years -= 1; months += 12; }
-      const totalDays = Math.floor((asof - dob) / 86400000);
-
-      document.getElementById('age-years').textContent = years;
-      document.getElementById('age-months').textContent = months;
-      document.getElementById('age-days').textContent = days;
-      document.getElementById('age-total-days').textContent = totalDays.toLocaleString();
-      stats.style.display = 'flex';
-      out.style.display = 'none';
+    function lookupHolidays(){
+      const country = document.getElementById('hcCountry').value;
+      const year = document.getElementById('hcYear').value;
+      const box = document.getElementById('holiday-result');
+      box.innerHTML = '<div class="t-output">Loading…</div>';
+      fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${country}`)
+        .then(r => { if(!r.ok) throw new Error('bad'); return r.json(); })
+        .then(data => {
+          if (!data.length) { box.innerHTML = '<div class="t-output">No public holidays found for that country and year.</div>'; return; }
+          const rows = data.map(h => {
+            const d = new Date(h.date + 'T00:00:00');
+            const label = d.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            return `<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
+              <span style="color:var(--text2)">${label}</span>
+              <span style="font-weight:600;text-align:right">${h.localName}${h.localName !== h.name ? ' <span style=\'color:var(--muted);font-weight:400\'>(' + h.name + ')</span>' : ''}</span>
+            </div>`;
+          }).join('');
+          box.innerHTML = `<div class="t-output" style="white-space:normal">${rows}</div>`;
+        })
+        .catch(() => { box.innerHTML = '<div class="t-output">Could not load holiday data right now. Please try again in a moment.</div>'; });
     }
-
   </script>
   <script src="/pwa-register.js" defer></script>
 </body>

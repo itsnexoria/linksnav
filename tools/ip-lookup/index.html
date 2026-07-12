@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Age Calculator — Free Online Tool | Nexo Hub</title>
-  <meta name="description" content="Calculate exact age between two dates. Free, fast, and runs right in your browser — no sign-up needed."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/tools/age-calculator/"/>
-  <meta property="og:title" content="Age Calculator — Nexo Hub"/>
-  <meta property="og:description" content="Calculate exact age between two dates."/>
+  <title>IP Address Lookup — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Look up geolocation and network details for any IP address. Free, fast, and runs right in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/tools/ip-lookup/"/>
+  <meta property="og:title" content="IP Address Lookup — Nexo Hub"/>
+  <meta property="og:description" content="Look up geolocation and network details for any IP address."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://app.nexosites.xyz/tools/age-calculator/"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/tools/ip-lookup/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Age Calculator — Nexo Hub"/>
+  <meta property="og:image:alt" content="IP Address Lookup — Nexo Hub"/>
   <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Age Calculator — Nexo Hub"/>
-  <meta name="twitter:description" content="Calculate exact age between two dates."/>
+  <meta name="twitter:title" content="IP Address Lookup — Nexo Hub"/>
+  <meta name="twitter:description" content="Look up geolocation and network details for any IP address."/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -31,9 +31,9 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Age Calculator",
-    "description": "Enter a birth date and get your exact age broken down into years, months, and days, plus the total number of days you have been alive — calculated as of today or any date you choose.",
-    "url": "https://app.nexosites.xyz/tools/age-calculator/",
+    "name": "IP Address Lookup",
+    "description": "Look up the approximate city, region, country, timezone, currency and ISP for any IPv4 or IPv6 address — or leave the field blank to check your own public IP as seen by this site.",
+    "url": "https://app.nexosites.xyz/tools/ip-lookup/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (runs in browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -47,7 +47,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
       { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexosites.xyz/pages/tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Age Calculator", "item": "https://app.nexosites.xyz/tools/age-calculator/" }
+      { "@type": "ListItem", "position": 3, "name": "IP Address Lookup", "item": "https://app.nexosites.xyz/tools/ip-lookup/" }
     ]
   }
   </script>
@@ -107,7 +107,7 @@
       <span aria-hidden="true"> / </span>
       <a href="/pages/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
       <span aria-hidden="true"> / </span>
-      <span style="color:var(--text2)">Age Calculator</span>
+      <span style="color:var(--text2)">IP Address Lookup</span>
     </nav>
 
     <div class="tool-page-layout">
@@ -135,11 +135,11 @@
         <a href="/tools/slug-generator/" class="tsb-link"><span class="tsb-icon">🔗</span>Slug Generator</a>
         <a href="/tools/regex-tester/" class="tsb-link"><span class="tsb-icon">🧩</span>Regex Tester</a>
         <a href="/tools/percentage-calculator/" class="tsb-link"><span class="tsb-icon">➗</span>Percentage Calculator</a>
-        <a href="/tools/age-calculator/" class="tsb-link active"><span class="tsb-icon">🎂</span>Age Calculator</a>
+        <a href="/tools/age-calculator/" class="tsb-link"><span class="tsb-icon">🎂</span>Age Calculator</a>
         <a href="/tools/stopwatch-timer/" class="tsb-link"><span class="tsb-icon">⏱️</span>Stopwatch & Timer</a>
         <a href="/tools/random-picker/" class="tsb-link"><span class="tsb-icon">🎯</span>Random Picker</a>
         <a href="/tools/currency-converter/" class="tsb-link"><span class="tsb-icon">💱</span>Currency Converter</a>
-        <a href="/tools/ip-lookup/" class="tsb-link"><span class="tsb-icon">🌐</span>IP Address Lookup</a>
+        <a href="/tools/ip-lookup/" class="tsb-link active"><span class="tsb-icon">🌐</span>IP Address Lookup</a>
         <a href="/tools/word-lookup/" class="tsb-link"><span class="tsb-icon">📖</span>Dictionary Lookup</a>
         <a href="/tools/country-info/" class="tsb-link"><span class="tsb-icon">🌍</span>Country Info Lookup</a>
         <a href="/tools/holiday-checker/" class="tsb-link"><span class="tsb-icon">📅</span>Public Holiday Checker</a>
@@ -149,35 +149,23 @@
 
       <div class="tool-main">
         <div class="tools-hero small">
-          <div class="tools-hero-icon">🎂</div>
-          <h1>Age Calculator <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
-          <p>Calculate exact age between two dates.</p>
+          <div class="tools-hero-icon">🌐</div>
+          <h1>IP Address Lookup <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Look up geolocation and network details for any IP address.</p>
         </div>
-        <div class="tool-info-panel" id="infoPanel" hidden>Enter a birth date and get your exact age broken down into years, months, and days, plus the total number of days you have been alive — calculated as of today or any date you choose.</div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Look up the approximate city, region, country, timezone, currency and ISP for any IPv4 or IPv6 address — or leave the field blank to check your own public IP as seen by this site.</div>
 
+    <div class="tool-panel active" id="panel-ip">
       <div class="tool-card">
-        <h2>🎂 Age Calculator</h2>
-        <div class="grad-row" style="margin-top:0">
-          <div>
-            <label style="font-size:.75rem;color:var(--text2);display:block;margin-bottom:6px">Date of birth</label>
-            <input class="t-input" id="age-dob" type="date"/>
-          </div>
-          <div>
-            <label style="font-size:.75rem;color:var(--text2);display:block;margin-bottom:6px">As of</label>
-            <input class="t-input" id="age-asof" type="date"/>
-          </div>
+        <h2>🌐 IP Address Lookup</h2>
+        <div class="grad-row">
+          <input type="text" class="t-input" id="ipInput" placeholder="Leave blank to look up your own IP" style="flex:1"/>
+          <button class="t-btn primary" style="align-self:stretch" onclick="lookupIP()">Lookup</button>
         </div>
-        <div class="t-btn-row">
-          <button class="t-btn primary" onclick="calcAge()">Calculate Age</button>
-        </div>
-        <div class="t-stats" id="age-stats" style="display:none">
-          <div class="t-stat"><span class="t-stat-val" id="age-years">0</span><span class="t-stat-label">Years</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-months">0</span><span class="t-stat-label">Months</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-days">0</span><span class="t-stat-label">Days</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-total-days">0</span><span class="t-stat-label">Total Days</span></div>
-        </div>
-        <div class="t-output" id="age-output" style="display:none"></div>
+        <div class="t-output" id="ip-output">Click Lookup to check your own IP, or enter an address above.</div>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:10px">Powered by ipwho.is. IP geolocation is approximate and should not be relied on for precise or security-critical decisions.</p>
       </div>
+    </div>
 
       </div>
     </div>
@@ -258,40 +246,30 @@
       });
     })();
 
-    // ── AGE CALCULATOR ─────────────────────────────────────
-    (function(){
-      const asofEl = document.getElementById('age-asof');
-      if (asofEl && !asofEl.value) asofEl.value = new Date().toISOString().slice(0,10);
-    })();
-    function calcAge() {
-      const dobVal = document.getElementById('age-dob').value;
-      const asofVal = document.getElementById('age-asof').value || new Date().toISOString().slice(0,10);
-      const out = document.getElementById('age-output');
-      const stats = document.getElementById('age-stats');
-      if (!dobVal) { out.style.display = 'block'; stats.style.display = 'none'; out.textContent = 'Enter a date of birth.'; return; }
-      const dob = new Date(dobVal + 'T00:00:00');
-      const asof = new Date(asofVal + 'T00:00:00');
-      if (asof < dob) { out.style.display = 'block'; stats.style.display = 'none'; out.textContent = '"As of" date must be after the date of birth.'; return; }
-
-      let years = asof.getFullYear() - dob.getFullYear();
-      let months = asof.getMonth() - dob.getMonth();
-      let days = asof.getDate() - dob.getDate();
-      if (days < 0) {
-        months -= 1;
-        const prevMonth = new Date(asof.getFullYear(), asof.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) { years -= 1; months += 12; }
-      const totalDays = Math.floor((asof - dob) / 86400000);
-
-      document.getElementById('age-years').textContent = years;
-      document.getElementById('age-months').textContent = months;
-      document.getElementById('age-days').textContent = days;
-      document.getElementById('age-total-days').textContent = totalDays.toLocaleString();
-      stats.style.display = 'flex';
-      out.style.display = 'none';
+    // ── IP ADDRESS LOOKUP ─────────────────────────────────
+    function lookupIP(){
+      const ip = document.getElementById('ipInput').value.trim();
+      const out = document.getElementById('ip-output');
+      out.textContent = 'Looking up…';
+      const url = ip ? `https://ipwho.is/${encodeURIComponent(ip)}` : 'https://ipwho.is/';
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          if (data.success === false) { out.textContent = data.message || 'Could not find that IP address.'; return; }
+          const flag = data.flag && data.flag.emoji ? data.flag.emoji : '';
+          const lines = [
+            `${flag} ${data.ip}`,
+            `${data.city || '—'}, ${data.region || '—'}, ${data.country || '—'}`,
+            `Postal code: ${data.postal || '—'}`,
+            `Timezone: ${data.timezone && data.timezone.id ? data.timezone.id : '—'} (${data.timezone && data.timezone.utc ? data.timezone.utc : '—'})`,
+            `Currency: ${data.currency && data.currency.name ? data.currency.name + ' (' + data.currency.code + ')' : '—'}`,
+            `ISP / Org: ${data.connection && data.connection.isp ? data.connection.isp : '—'}`,
+            `ASN: ${data.connection && data.connection.asn ? data.connection.asn : '—'}`
+          ];
+          out.textContent = lines.join('\n');
+        })
+        .catch(() => { out.textContent = 'Could not complete the lookup right now. Please try again in a moment.'; });
     }
-
   </script>
   <script src="/pwa-register.js" defer></script>
 </body>

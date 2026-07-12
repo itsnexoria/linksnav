@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Age Calculator — Free Online Tool | Nexo Hub</title>
-  <meta name="description" content="Calculate exact age between two dates. Free, fast, and runs right in your browser — no sign-up needed."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/tools/age-calculator/"/>
-  <meta property="og:title" content="Age Calculator — Nexo Hub"/>
-  <meta property="og:description" content="Calculate exact age between two dates."/>
+  <title>Country Info Lookup — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Look up the flag, capital, population, languages, and currency of any country. Free, fast, and runs right in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/tools/country-info/"/>
+  <meta property="og:title" content="Country Info Lookup — Nexo Hub"/>
+  <meta property="og:description" content="Look up the flag, capital, population, languages, and currency of any country."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://app.nexosites.xyz/tools/age-calculator/"/>
+  <meta property="og:url" content="https://app.nexosites.xyz/tools/country-info/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Age Calculator — Nexo Hub"/>
+  <meta property="og:image:alt" content="Country Info Lookup — Nexo Hub"/>
   <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Age Calculator — Nexo Hub"/>
-  <meta name="twitter:description" content="Calculate exact age between two dates."/>
+  <meta name="twitter:title" content="Country Info Lookup — Nexo Hub"/>
+  <meta name="twitter:description" content="Look up the flag, capital, population, languages, and currency of any country."/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -31,9 +31,9 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Age Calculator",
-    "description": "Enter a birth date and get your exact age broken down into years, months, and days, plus the total number of days you have been alive — calculated as of today or any date you choose.",
-    "url": "https://app.nexosites.xyz/tools/age-calculator/",
+    "name": "Country Info Lookup",
+    "description": "Search for any country in the world to see its flag, capital city, region, population, official languages, currencies, and local timezone at a glance.",
+    "url": "https://app.nexosites.xyz/tools/country-info/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (runs in browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -47,7 +47,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
       { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexosites.xyz/pages/tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Age Calculator", "item": "https://app.nexosites.xyz/tools/age-calculator/" }
+      { "@type": "ListItem", "position": 3, "name": "Country Info Lookup", "item": "https://app.nexosites.xyz/tools/country-info/" }
     ]
   }
   </script>
@@ -107,7 +107,7 @@
       <span aria-hidden="true"> / </span>
       <a href="/pages/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
       <span aria-hidden="true"> / </span>
-      <span style="color:var(--text2)">Age Calculator</span>
+      <span style="color:var(--text2)">Country Info Lookup</span>
     </nav>
 
     <div class="tool-page-layout">
@@ -135,13 +135,13 @@
         <a href="/tools/slug-generator/" class="tsb-link"><span class="tsb-icon">🔗</span>Slug Generator</a>
         <a href="/tools/regex-tester/" class="tsb-link"><span class="tsb-icon">🧩</span>Regex Tester</a>
         <a href="/tools/percentage-calculator/" class="tsb-link"><span class="tsb-icon">➗</span>Percentage Calculator</a>
-        <a href="/tools/age-calculator/" class="tsb-link active"><span class="tsb-icon">🎂</span>Age Calculator</a>
+        <a href="/tools/age-calculator/" class="tsb-link"><span class="tsb-icon">🎂</span>Age Calculator</a>
         <a href="/tools/stopwatch-timer/" class="tsb-link"><span class="tsb-icon">⏱️</span>Stopwatch & Timer</a>
         <a href="/tools/random-picker/" class="tsb-link"><span class="tsb-icon">🎯</span>Random Picker</a>
         <a href="/tools/currency-converter/" class="tsb-link"><span class="tsb-icon">💱</span>Currency Converter</a>
         <a href="/tools/ip-lookup/" class="tsb-link"><span class="tsb-icon">🌐</span>IP Address Lookup</a>
         <a href="/tools/word-lookup/" class="tsb-link"><span class="tsb-icon">📖</span>Dictionary Lookup</a>
-        <a href="/tools/country-info/" class="tsb-link"><span class="tsb-icon">🌍</span>Country Info Lookup</a>
+        <a href="/tools/country-info/" class="tsb-link active"><span class="tsb-icon">🌍</span>Country Info Lookup</a>
         <a href="/tools/holiday-checker/" class="tsb-link"><span class="tsb-icon">📅</span>Public Holiday Checker</a>
         <a href="/tools/joke-generator/" class="tsb-link"><span class="tsb-icon">😂</span>Joke & Quote Generator</a>
         <a href="/tools/crypto-price/" class="tsb-link"><span class="tsb-icon">🪙</span>Crypto Price Checker</a>
@@ -149,35 +149,22 @@
 
       <div class="tool-main">
         <div class="tools-hero small">
-          <div class="tools-hero-icon">🎂</div>
-          <h1>Age Calculator <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
-          <p>Calculate exact age between two dates.</p>
+          <div class="tools-hero-icon">🌍</div>
+          <h1>Country Info Lookup <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Look up the flag, capital, population, languages, and currency of any country.</p>
         </div>
-        <div class="tool-info-panel" id="infoPanel" hidden>Enter a birth date and get your exact age broken down into years, months, and days, plus the total number of days you have been alive — calculated as of today or any date you choose.</div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Search for any country in the world to see its flag, capital city, region, population, official languages, currencies, and local timezone at a glance.</div>
 
+    <div class="tool-panel active" id="panel-country">
       <div class="tool-card">
-        <h2>🎂 Age Calculator</h2>
-        <div class="grad-row" style="margin-top:0">
-          <div>
-            <label style="font-size:.75rem;color:var(--text2);display:block;margin-bottom:6px">Date of birth</label>
-            <input class="t-input" id="age-dob" type="date"/>
-          </div>
-          <div>
-            <label style="font-size:.75rem;color:var(--text2);display:block;margin-bottom:6px">As of</label>
-            <input class="t-input" id="age-asof" type="date"/>
-          </div>
+        <h2>🌍 Country Info Lookup</h2>
+        <div class="grad-row">
+          <input type="text" class="t-input" id="countryInput" placeholder="Enter a country name, e.g. Japan" style="flex:1" onkeydown="if(event.key==='Enter')lookupCountry()"/>
+          <button class="t-btn primary" style="align-self:stretch" onclick="lookupCountry()">Search</button>
         </div>
-        <div class="t-btn-row">
-          <button class="t-btn primary" onclick="calcAge()">Calculate Age</button>
-        </div>
-        <div class="t-stats" id="age-stats" style="display:none">
-          <div class="t-stat"><span class="t-stat-val" id="age-years">0</span><span class="t-stat-label">Years</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-months">0</span><span class="t-stat-label">Months</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-days">0</span><span class="t-stat-label">Days</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="age-total-days">0</span><span class="t-stat-label">Total Days</span></div>
-        </div>
-        <div class="t-output" id="age-output" style="display:none"></div>
+        <div id="country-result"></div>
       </div>
+    </div>
 
       </div>
     </div>
@@ -258,40 +245,38 @@
       });
     })();
 
-    // ── AGE CALCULATOR ─────────────────────────────────────
-    (function(){
-      const asofEl = document.getElementById('age-asof');
-      if (asofEl && !asofEl.value) asofEl.value = new Date().toISOString().slice(0,10);
-    })();
-    function calcAge() {
-      const dobVal = document.getElementById('age-dob').value;
-      const asofVal = document.getElementById('age-asof').value || new Date().toISOString().slice(0,10);
-      const out = document.getElementById('age-output');
-      const stats = document.getElementById('age-stats');
-      if (!dobVal) { out.style.display = 'block'; stats.style.display = 'none'; out.textContent = 'Enter a date of birth.'; return; }
-      const dob = new Date(dobVal + 'T00:00:00');
-      const asof = new Date(asofVal + 'T00:00:00');
-      if (asof < dob) { out.style.display = 'block'; stats.style.display = 'none'; out.textContent = '"As of" date must be after the date of birth.'; return; }
-
-      let years = asof.getFullYear() - dob.getFullYear();
-      let months = asof.getMonth() - dob.getMonth();
-      let days = asof.getDate() - dob.getDate();
-      if (days < 0) {
-        months -= 1;
-        const prevMonth = new Date(asof.getFullYear(), asof.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) { years -= 1; months += 12; }
-      const totalDays = Math.floor((asof - dob) / 86400000);
-
-      document.getElementById('age-years').textContent = years;
-      document.getElementById('age-months').textContent = months;
-      document.getElementById('age-days').textContent = days;
-      document.getElementById('age-total-days').textContent = totalDays.toLocaleString();
-      stats.style.display = 'flex';
-      out.style.display = 'none';
+    // ── COUNTRY INFO LOOKUP ───────────────────────────────
+    function lookupCountry(){
+      const name = document.getElementById('countryInput').value.trim();
+      const box = document.getElementById('country-result');
+      if (!name) { box.innerHTML = ''; return; }
+      box.innerHTML = '<div class="t-output">Searching…</div>';
+      fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(name)}?fields=name,capital,region,subregion,population,currencies,languages,flags,timezones`)
+        .then(r => { if(!r.ok) throw new Error('not found'); return r.json(); })
+        .then(data => {
+          const c = data[0];
+          const currencies = c.currencies ? Object.values(c.currencies).map(cur => `${cur.name} (${cur.symbol || ''})`).join(', ') : '—';
+          const languages = c.languages ? Object.values(c.languages).join(', ') : '—';
+          box.innerHTML = `
+            <div class="t-output" style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+              <img src="${c.flags.svg}" alt="Flag of ${c.name.common}" style="width:80px;border-radius:6px;border:1px solid var(--border)"/>
+              <div style="flex:1;min-width:200px">
+                <strong style="font-size:1.05rem">${c.name.common}</strong><br/>
+                <span style="color:var(--muted);font-size:.8rem">${c.name.official}</span>
+              </div>
+            </div>
+            <div class="t-stats">
+              <div class="t-stat"><span class="t-stat-val" style="font-size:.95rem">${c.capital ? c.capital[0] : '—'}</span><span class="t-stat-label">Capital</span></div>
+              <div class="t-stat"><span class="t-stat-val" style="font-size:.95rem">${c.region}</span><span class="t-stat-label">Region</span></div>
+              <div class="t-stat"><span class="t-stat-val" style="font-size:.95rem">${c.population.toLocaleString()}</span><span class="t-stat-label">Population</span></div>
+              <div class="t-stat"><span class="t-stat-val" style="font-size:.95rem">${c.timezones[0]}</span><span class="t-stat-label">Timezone</span></div>
+            </div>
+            <p style="font-size:.8rem;color:var(--text2);margin-top:14px"><strong>Languages:</strong> ${languages}</p>
+            <p style="font-size:.8rem;color:var(--text2);margin-top:6px"><strong>Currencies:</strong> ${currencies}</p>
+          `;
+        })
+        .catch(() => { box.innerHTML = `<div class="t-output">No country found matching "${name}". Check the spelling and try again.</div>`; });
     }
-
   </script>
   <script src="/pwa-register.js" defer></script>
 </body>
