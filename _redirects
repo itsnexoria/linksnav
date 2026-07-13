@@ -9,20 +9,24 @@
 /pages/sites      /pages/sites/    301
 /pages/settings   /pages/settings/ 301
 /pages/import     /pages/import/   301
+
+# Category detail pages — SPA rewrite for dynamic slugs only.
+# Bare /category/ is served natively by Cloudflare (real category/index.html file) —
+# do NOT add an explicit rewrite for it, it causes a redirect loop against
+# Cloudflare's own index.html -> clean-URL canonicalization.
 /category         /category/       301
-/category/        /category/index.html 200
 /category/:slug   /category/index.html 200
 /category/:slug/  /category/index.html 200
 
+# Tag detail pages — same pattern as category
 /tag              /tag/            301
-/tag/             /tag/index.html  200
 /tag/:slug        /tag/index.html  200
 /tag/:slug/       /tag/index.html  200
+
 /search           /search/         301
 
-# Blog post detail pages — SPA rewrite: serves /blog/index.html for any /blog/* URL
+# Blog post detail pages — same pattern as category/tag
 /blog             /blog/           301
-/blog/            /blog/index.html 200
 /blog/:slug       /blog/index.html 200
 /blog/:slug/      /blog/index.html 200
 
@@ -32,10 +36,8 @@
 # Sites sitemap — generated dynamically from the sites table (real lastmod per site)
 /sitemap-sites.xml https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/sitemap-sites 302
 
-# Site detail pages — SPA rewrite: serves /site/index.html for any /site/* URL
-# Must come BEFORE any catch-all. No 404 fallback needed — Cloudflare auto-serves 404.html.
+# Site detail pages — same pattern as category/tag/blog
 /site             /site/           301
-/site/            /site/index.html 200
 /site/:slug       /site/index.html 200
 /site/:slug/      /site/index.html 200
 
