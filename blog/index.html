@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <!-- Meta tags are written dynamically by JS once the post data loads -->
+  <title>Loading… — Nexo Hub Blog</title>
+  <meta name="description" content="Updates, changelog entries, and behind-the-scenes notes from Nexo Hub."/>
+  <link rel="canonical" href="https://app.nexosites.xyz/pages/blog/"/>
+  <meta property="og:title" content="Nexo Hub Blog"/>
+  <meta property="og:description" content="Updates, changelog entries, and behind-the-scenes notes from Nexo Hub."/>
+  <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:type" content="article"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#7c5cfc"/>
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css?v=20260629-15"/>
+  <style>
+    .bp-wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; position: relative; z-index: 1; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; color: var(--muted); text-decoration: none; margin-bottom: 32px; transition: color .18s, gap .18s; }
+    .back-link:hover { color: var(--accent); gap: 10px; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    .loading-spin { display:inline-block; width:24px; height:24px; border:3px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+    .bp-loading { display: flex; justify-content: center; padding: 80px 0; }
+
+    .bp-hero { margin-bottom: 24px; animation: fadeUp .4s ease both; }
+    .bp-emoji { font-size: 2.4rem; line-height: 1; margin-bottom: 10px; }
+    .bp-title { font-family: var(--font-d); font-size: clamp(1.6rem,4vw,2.2rem); font-weight: 800; letter-spacing: -.03em; margin: 0 0 10px; }
+    .bp-date { font-size: .78rem; color: var(--muted); }
+
+    .bp-body {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px; margin: 24px 0;
+      font-size: .92rem; line-height: 1.8; color: var(--text2);
+      animation: fadeUp .45s .05s ease both; opacity: 0; animation-fill-mode: both;
+    }
+    .bp-body p { margin: 0 0 14px; }
+    .bp-body p:last-child { margin-bottom: 0; }
+    .bp-body a { color: var(--accent); }
+    .bp-body ul, .bp-body ol { margin: 0 0 14px 20px; }
+    .bp-body code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-family: var(--font-m); font-size: .85em; }
+
+    .bp-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .bp-action-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 100px; text-decoration: none;
+      font-family: var(--font-m); font-size: .8rem; font-weight: 600;
+      transition: transform .18s, box-shadow .18s;
+      border: 1px solid var(--border2); cursor: pointer;
+      background: var(--surface); color: var(--text2);
+    }
+    .bp-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .bp-not-found { text-align: center; padding: 80px 20px; }
+    .bp-not-found h1 { font-family: var(--font-d); font-size: 1.5rem; margin: 12px 0 8px; }
+    .bp-not-found p { color: var(--muted); font-size: .85rem; }
+
+    .bp-section-label { font-family: var(--font-d); font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+    .bp-more-grid { display: flex; flex-direction: column; gap: 10px; animation: fadeUp .5s .1s ease both; opacity: 0; animation-fill-mode: both; }
+    .bp-more-card {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px 16px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--border);
+      text-decoration: none; color: inherit; font-size: .85rem;
+      transition: border-color .18s, transform .15s;
+    }
+    .bp-more-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .bp-more-emoji { flex-shrink: 0; }
+    .bp-more-title { font-weight: 600; color: var(--text); }
+  </style>
+  <script src="/nexo-prefs.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/category/" class="nav-link">🗂️ Categories</a>
+        <a href="/tag/" class="nav-link">🏷️ Tags</a>
+        <a href="/pages/tools/" class="nav-link">🛠️ Web Tools</a>
+        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
+        <a href="/pages/blog/" class="nav-link nav-link--active">📰 Blog</a>
+        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/pages/about/" class="nav-link">👤 About</a>
+        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="bp-wrap" id="main-content">
+    <a href="/pages/blog/" class="back-link">← All Posts</a>
+    <div id="bpContent">
+      <div class="bp-loading"><span class="loading-spin"></span></div>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+    const BASE = 'https://app.nexosites.xyz';
+
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); }
+
+    function setMeta(post){
+      document.title = `${post.title} — Nexo Hub Blog`;
+      const desc = post.excerpt || post.title;
+      document.querySelector('meta[name="description"]').content = desc;
+      document.querySelector('meta[property="og:title"]').content = `${post.title} — Nexo Hub Blog`;
+      document.querySelector('meta[property="og:description"]').content = desc;
+      const canonical = `${BASE}/blog/${post.slug}/`;
+      document.querySelector('link[rel="canonical"]').href = canonical;
+
+      const jsonld = document.createElement('script');
+      jsonld.type = 'application/ld+json';
+      jsonld.textContent = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"BlogPosting",
+        "headline": post.title,
+        "description": desc,
+        "datePublished": post.created_at,
+        "dateModified": post.updated_at || post.created_at,
+        "url": canonical,
+        "isPartOf": { "@type":"Blog", "name":"Nexo Hub Blog", "url": BASE+"/pages/blog/" },
+        "author": { "@type":"Person", "name":"Nexus" }
+      });
+      document.head.appendChild(jsonld);
+    }
+
+    async function load(){
+      /* Extract slug from any /blog/[slug] or /blog/[slug]/ URL */
+      const slug = location.pathname.split('/').filter(p => p && p !== 'blog')[0] || '';
+      if(!slug){ renderNotFound(); return; }
+
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_blog_post_by_slug`, {
+          method:'POST',
+          headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({ p_slug: slug })
+        });
+        if(!res.ok) throw new Error();
+        const posts = await res.json();
+        const post = Array.isArray(posts) ? posts[0] : posts;
+        if(!post){ renderNotFound(); return; }
+
+        setMeta(post);
+        renderPost(post);
+        loadMorePosts(post.slug);
+      }catch(e){
+        renderNotFound();
+      }
+    }
+
+    function renderPost(post){
+      document.getElementById('bpContent').innerHTML = `
+        <div class="bp-hero">
+          <div class="bp-emoji">${esc(post.emoji || '📰')}</div>
+          <h1 class="bp-title">${esc(post.title)}</h1>
+          <div class="bp-date">${esc(fmtDate(post.created_at))}</div>
+        </div>
+        <div class="bp-body">${post.body || ''}</div>
+        <div class="bp-actions">
+          <button class="bp-action-btn" onclick="copyLink()">🔗 Copy Link</button>
+          <a class="bp-action-btn" href="/pages/blog/">← All Posts</a>
+        </div>
+        <div class="bp-section-label">More from the blog</div>
+        <div class="bp-more-grid" id="moreGrid">
+          <div style="text-align:center;padding:10px"><span class="loading-spin"></span></div>
+        </div>`;
+    }
+
+    async function loadMorePosts(currentSlug){
+      const grid = document.getElementById('moreGrid');
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_blog_posts`, {
+          method:'POST', headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({ result_limit: 4, result_offset: 0 })
+        });
+        if(!res.ok) throw new Error();
+        const posts = (await res.json()).filter(p => p.slug !== currentSlug).slice(0, 3);
+        if(!posts.length){ grid.style.display = 'none'; return; }
+        grid.innerHTML = posts.map(p => `
+          <a class="bp-more-card" href="/blog/${esc(p.slug)}/">
+            <span class="bp-more-emoji">${esc(p.emoji || '📰')}</span>
+            <div>
+              <div class="bp-more-title">${esc(p.title)}</div>
+              <div style="color:var(--muted);font-size:.75rem;margin-top:2px">${esc(fmtDate(p.created_at))}</div>
+            </div>
+          </a>`).join('');
+      }catch{
+        grid.style.display = 'none';
+      }
+    }
+
+    function renderNotFound(){
+      document.title = 'Post not found — Nexo Hub Blog';
+      document.getElementById('bpContent').innerHTML = `
+        <div class="bp-not-found">
+          <div style="font-size:3rem">📰</div>
+          <h1>Post not found</h1>
+          <p>This post may have been removed or the URL is incorrect.</p>
+          <a class="bp-action-btn" href="/pages/blog/" style="margin-top:20px;display:inline-flex">← Back to Blog</a>
+        </div>`;
+    }
+
+    function copyLink(){
+      const url = location.href;
+      if(navigator.clipboard) navigator.clipboard.writeText(url).then(()=>alert('Link copied!')).catch(legacyCopy);
+      else legacyCopy();
+      function legacyCopy(){
+        const ta=document.createElement('textarea'); ta.value=url;
+        ta.style.position='fixed'; ta.style.left='-9999px';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); alert('Link copied!');
+      }
+    }
+
+    load();
+
+    /* Theme + nav */
+    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    document.addEventListener('DOMContentLoaded',function(){
+      var btn=document.getElementById('themeToggle');
+      if(btn) btn.addEventListener('click',function(){
+        var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',next);
+        localStorage.setItem('nexhub_theme',next);
+      });
+      var ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),ov=document.getElementById('navOverlay');
+      function openM(){ham.classList.add('is-open');menu.classList.add('is-open');ov.classList.add('is-open');ham.setAttribute('aria-expanded','true');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+      function closeM(){ham.classList.remove('is-open');menu.classList.remove('is-open');ov.classList.remove('is-open');ham.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      if(ham) ham.addEventListener('click',function(){ham.classList.contains('is-open')?closeM():openM();});
+      if(ov) ov.addEventListener('click',closeM);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+
+      /* Reveal Admin sidebar link if this browser has a verified admin key */
+      var link = document.getElementById('adminNavLink');
+      var key = link ? (sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key')) : null;
+      if(key){
+        fetch(`${SUPABASE_URL}/rest/v1/rpc/check_admin_key_status`, {
+          method:'POST', headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':`Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type':'application/json' },
+          body: JSON.stringify({ input_key: key })
+        }).then(r => r.ok ? r.json() : false).then(ok => { if(ok === true) link.style.display = ''; }).catch(()=>{});
+      }
+    });
+  </script>
+  <script src="/pwa-register.js" defer></script>
+</body>
+</html>

@@ -60,6 +60,7 @@
   <url><loc>https://app.nexosites.xyz/tools/text-to-speech/</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://app.nexosites.xyz/tools/password-strength-checker/</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://app.nexosites.xyz/tools/meme-generator/</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://app.nexosites.xyz/tools/random-meme-generator/</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://app.nexosites.xyz/tools/username-checker/</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url>
     <loc>https://app.nexosites.xyz/search/</loc>
@@ -88,6 +89,36 @@
   <url>
     <loc>https://app.nexosites.xyz/blog/welcome-to-the-nexo-hub-blog/</loc>
     <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/growing-the-directory-623-sites-35-categories/</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/web-tools-glow-up-25-tools/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/seo-fixes-sitemap-og-images/</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/moved-to-cloudflare-pages/</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/new-tool-random-meme-generator/</loc>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
