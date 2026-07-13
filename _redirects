@@ -13,23 +13,28 @@
 # Dynamic detail pages (site/category/tag/blog) — all routed through the single
 # router in 404.html, which already contains the full renderSiteDetailPage /
 # renderCategoryPage / renderTagPage / renderBlogPage implementation.
+# IMPORTANT: rewrite target is "/404" (NOT "/404.html") — Cloudflare Pages
+# unconditionally 301-redirects any resolved *.html file access to its
+# extension-less form, so a literal "/404.html" target causes every single
+# match to bounce to /404 in the address bar. "/404" is already the canonical
+# form, so no further redirect happens.
 # Bare index paths (/category/, /tag/, /blog/, /site/) are NOT rewritten here —
 # those are real files served natively by Cloudflare. Rewriting them to their
-# own index.html causes a redirect loop against Cloudflare's own
-# index.html -> clean-URL canonicalization, so leave them alone.
+# own index.html causes the same class of redirect loop (Cloudflare bounces
+# .../index.html back to its own canonical directory URL), so leave them alone.
 /category         /category/       301
-/category/:slug   /404.html        200
-/category/:slug/  /404.html        200
+/category/:slug   /404              200
+/category/:slug/  /404              200
 
 /tag              /tag/            301
-/tag/:slug        /404.html        200
-/tag/:slug/       /404.html        200
+/tag/:slug        /404              200
+/tag/:slug/       /404              200
 
 /search           /search/         301
 
 /blog             /blog/           301
-/blog/:slug       /404.html        200
-/blog/:slug/      /404.html        200
+/blog/:slug       /404              200
+/blog/:slug/      /404              200
 
 # RSS feed
 /feed.xml         https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/rss-feed 302
@@ -38,8 +43,8 @@
 /sitemap-sites.xml https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/sitemap-sites 302
 
 /site             /site/           301
-/site/:slug       /404.html        200
-/site/:slug/      /404.html        200
+/site/:slug       /404              200
+/site/:slug/      /404              200
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301
