@@ -117,7 +117,32 @@
     const SUPABASE_URL='https://tiupkpabwuefclbrpaef.supabase.co';
     const SUPABASE_ANON_KEY='sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-    async function load(){
+    function fav(url){try{const{hostname}=new URL(url);return'https://www.google.com/s2/favicons?domain='+hostname+'&sz=64'}catch{return''}}
+
+    function siteCardHTML(s){
+      const color=s.color||'#7c5cfc';
+      const imgSrc=fav(s.url);
+      const tagHTML=(s.tags||[]).map(t=>{
+        const bg=(s.tag_colors||{})[t]||'#6b7280';
+        return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+      }).join('');
+      return `<div class="card-wrap">
+        <a class="card" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" style="--card-color:${color}" aria-label="${esc(s.name)}">
+          <div class="card-top">
+            ${imgSrc?`<img class="card-favicon" src="${esc(imgSrc)}" alt="${esc(s.name)} favicon" width="22" height="22" loading="lazy">`:''}
+            <span class="card-name">${esc(s.name)}</span>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+          <p class="card-desc">${esc(s.description)}</p>
+          <div class="card-footer">${tagHTML}</div>
+        </a>
+        <div class="card-actions">
+          ${s.slug?`<a class="info-btn" href="/site/${esc(s.slug)}/" aria-label="More info about ${esc(s.name)}">ⓘ Info</a>`:''}
+        </div>
+      </div>`;
+    }
+
+    async function loadIndex(){
       const [catsRes, countRes] = await Promise.all([
         fetch(`${SUPABASE_URL}/rest/v1/categories?select=id,label,icon,sort_order&order=sort_order.asc`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}}),
         fetch(`${SUPABASE_URL}/rest/v1/sites?select=category&status=eq.approved`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}})
@@ -134,6 +159,54 @@
             <div class="cat-count">${(counts[c.id]||0).toLocaleString()} site${(counts[c.id]||0)!==1?'s':''}</div>
           </div>
         </a>`).join('');
+    }
+
+    async function loadCategoryDetail(slug){
+      const main = document.getElementById('main-content');
+      try{
+        const [catRes, sitesRes] = await Promise.all([
+          fetch(`${SUPABASE_URL}/rest/v1/categories?id=eq.${encodeURIComponent(slug)}&select=id,label,icon`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}}),
+          fetch(`${SUPABASE_URL}/rest/v1/sites?category=eq.${encodeURIComponent(slug)}&status=eq.approved&select=id,name,url,description,tags,tag_colors,color,slug&order=sort_order.asc`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}})
+        ]);
+        const cats = await catRes.json();
+        const cat = cats[0];
+        const sites = await sitesRes.json();
+        if(!cat){
+          main.innerHTML = `<div class="cat-index-wrap"><div style="text-align:center;padding:80px 20px">
+            <div style="font-size:3rem">🗂️</div>
+            <h1 style="font-family:var(--font-d);font-size:1.5rem;margin:12px 0 8px">Category not found</h1>
+            <p style="color:var(--muted);font-size:.85rem">This category may have been removed or the URL is incorrect.</p>
+            <a href="/category/" style="display:inline-block;margin-top:20px;padding:9px 20px;border-radius:100px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:600">← All Categories</a>
+          </div></div>`;
+          return;
+        }
+        document.title = `${cat.label} — Nexo Hub`;
+        const desc = `${sites.length} curated ${cat.label} sites on Nexo Hub.`;
+        document.querySelector('meta[name="description"]').content = desc;
+        document.querySelector('link[rel="canonical"]').href = `https://app.nexosites.xyz/category/${esc(cat.id)}/`;
+        document.querySelector('meta[property="og:title"]').content = `${cat.label} — Nexo Hub`;
+        document.querySelector('meta[property="og:description"]').content = desc;
+
+        main.innerHTML = `
+          <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:24px">← All Categories</a>
+          <div class="cat-index-hero">
+            <h1 class="cat-index-title">${esc(cat.icon)} ${esc(cat.label)}</h1>
+            <p class="cat-index-sub">${sites.length} curated site${sites.length!==1?'s':''}</p>
+          </div>
+          <div class="cat-grid" id="siteGrid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
+            ${sites.length ? sites.map(siteCardHTML).join('') : '<p style="color:var(--muted);font-size:.85rem;grid-column:1/-1">No sites in this category yet.</p>'}
+          </div>`;
+        main.id = 'main-content';
+        main.className = 'cat-index-wrap';
+      }catch(e){
+        main.innerHTML = `<div class="cat-index-wrap"><p style="text-align:center;padding:60px 20px;color:var(--muted)">Could not load this category right now. Please try again.</p></div>`;
+      }
+    }
+
+    function load(){
+      const slug = location.pathname.split('/').filter(p => p && p !== 'category')[0] || '';
+      if(slug) loadCategoryDetail(decodeURIComponent(slug));
+      else loadIndex();
     }
     load();
     document.addEventListener('DOMContentLoaded',function(){

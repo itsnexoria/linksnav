@@ -114,7 +114,32 @@
     const SUPABASE_URL='https://tiupkpabwuefclbrpaef.supabase.co';
     const SUPABASE_ANON_KEY='sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-    async function load(){
+    function fav(url){try{const{hostname}=new URL(url);return'https://www.google.com/s2/favicons?domain='+hostname+'&sz=64'}catch{return''}}
+
+    function siteCardHTML(s){
+      const color=s.color||'#7c5cfc';
+      const imgSrc=fav(s.url);
+      const tagHTML=(s.tags||[]).map(t=>{
+        const bg=(s.tag_colors||{})[t]||'#6b7280';
+        return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+      }).join('');
+      return `<div class="card-wrap">
+        <a class="card" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" style="--card-color:${color}" aria-label="${esc(s.name)}">
+          <div class="card-top">
+            ${imgSrc?`<img class="card-favicon" src="${esc(imgSrc)}" alt="${esc(s.name)} favicon" width="22" height="22" loading="lazy">`:''}
+            <span class="card-name">${esc(s.name)}</span>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+          <p class="card-desc">${esc(s.description)}</p>
+          <div class="card-footer">${tagHTML}</div>
+        </a>
+        <div class="card-actions">
+          ${s.slug?`<a class="info-btn" href="/site/${esc(s.slug)}/" aria-label="More info about ${esc(s.name)}">ⓘ Info</a>`:''}
+        </div>
+      </div>`;
+    }
+
+    async function loadIndex(){
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_all_tags`,{method:'POST',headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,'Content-Type':'application/json'},body:'{}'});
       const tags = await res.json();
       // tags is likely an array of {tag, count} or just strings — handle both
@@ -130,6 +155,47 @@
           🏷️ ${esc(t.tag)}
           ${t.site_count?`<span class="tag-pill-count">${t.site_count}</span>`:''}
         </a>`).join('');
+    }
+
+    async function loadTagDetail(slug){
+      const main = document.getElementById('main-content');
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/sites?tags=cs.{${encodeURIComponent(slug)}}&status=eq.approved&select=id,name,url,description,tags,tag_colors,color,slug&order=sort_order.asc`,{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`}});
+        const sites = await res.json();
+        if(!Array.isArray(sites) || !sites.length){
+          main.innerHTML = `<div class="tag-index-wrap"><div style="text-align:center;padding:80px 20px">
+            <div style="font-size:3rem">🏷️</div>
+            <h1 style="font-family:var(--font-d);font-size:1.5rem;margin:12px 0 8px">No sites found for "${esc(slug)}"</h1>
+            <p style="color:var(--muted);font-size:.85rem">This tag may have been removed or the URL is incorrect.</p>
+            <a href="/tag/" style="display:inline-block;margin-top:20px;padding:9px 20px;border-radius:100px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:600">← All Tags</a>
+          </div></div>`;
+          return;
+        }
+        document.title = `#${slug} — Nexo Hub`;
+        const desc = `${sites.length} curated sites tagged "${slug}" on Nexo Hub.`;
+        document.querySelector('meta[name="description"]').content = desc;
+        document.querySelector('link[rel="canonical"]').href = `https://app.nexosites.xyz/tag/${esc(slug)}/`;
+        document.querySelector('meta[property="og:title"]').content = `#${slug} — Nexo Hub`;
+        document.querySelector('meta[property="og:description"]').content = desc;
+
+        main.innerHTML = `
+          <a href="/tag/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:24px">← All Tags</a>
+          <div class="tag-index-hero">
+            <h1 class="tag-index-title">🏷️ ${esc(slug)}</h1>
+            <p class="tag-index-sub">${sites.length} curated site${sites.length!==1?'s':''}</p>
+          </div>
+          <div class="cat-grid" id="siteGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+            ${sites.map(siteCardHTML).join('')}
+          </div>`;
+      }catch(e){
+        main.innerHTML = `<div class="tag-index-wrap"><p style="text-align:center;padding:60px 20px;color:var(--muted)">Could not load this tag right now. Please try again.</p></div>`;
+      }
+    }
+
+    function load(){
+      const slug = location.pathname.split('/').filter(p => p && p !== 'tag')[0] || '';
+      if(slug) loadTagDetail(decodeURIComponent(slug));
+      else loadIndex();
     }
     load();
     document.addEventListener('DOMContentLoaded',function(){
