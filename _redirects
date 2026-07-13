@@ -10,25 +10,26 @@
 /pages/settings   /pages/settings/ 301
 /pages/import     /pages/import/   301
 
-# Category detail pages — SPA rewrite for dynamic slugs only.
-# Bare /category/ is served natively by Cloudflare (real category/index.html file) —
-# do NOT add an explicit rewrite for it, it causes a redirect loop against
-# Cloudflare's own index.html -> clean-URL canonicalization.
+# Dynamic detail pages (site/category/tag/blog) — all routed through the single
+# router in 404.html, which already contains the full renderSiteDetailPage /
+# renderCategoryPage / renderTagPage / renderBlogPage implementation.
+# Bare index paths (/category/, /tag/, /blog/, /site/) are NOT rewritten here —
+# those are real files served natively by Cloudflare. Rewriting them to their
+# own index.html causes a redirect loop against Cloudflare's own
+# index.html -> clean-URL canonicalization, so leave them alone.
 /category         /category/       301
-/category/:slug   /category/index.html 200
-/category/:slug/  /category/index.html 200
+/category/:slug   /404.html        200
+/category/:slug/  /404.html        200
 
-# Tag detail pages — same pattern as category
 /tag              /tag/            301
-/tag/:slug        /tag/index.html  200
-/tag/:slug/       /tag/index.html  200
+/tag/:slug        /404.html        200
+/tag/:slug/       /404.html        200
 
 /search           /search/         301
 
-# Blog post detail pages — same pattern as category/tag
 /blog             /blog/           301
-/blog/:slug       /blog/index.html 200
-/blog/:slug/      /blog/index.html 200
+/blog/:slug       /404.html        200
+/blog/:slug/      /404.html        200
 
 # RSS feed
 /feed.xml         https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/rss-feed 302
@@ -36,10 +37,9 @@
 # Sites sitemap — generated dynamically from the sites table (real lastmod per site)
 /sitemap-sites.xml https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/sitemap-sites 302
 
-# Site detail pages — same pattern as category/tag/blog
 /site             /site/           301
-/site/:slug       /site/index.html 200
-/site/:slug/      /site/index.html 200
+/site/:slug       /404.html        200
+/site/:slug/      /404.html        200
 
 # Legacy uppercase paths → lowercase
 /Pages/contact/*  /pages/contact/  301
