@@ -10,7 +10,14 @@
 /pages/settings   /pages/settings/ 301
 /pages/import     /pages/import/   301
 /category         /category/       301
+/category/        /category/index.html 200
+/category/:slug   /category/index.html 200
+/category/:slug/  /category/index.html 200
+
 /tag              /tag/            301
+/tag/             /tag/index.html  200
+/tag/:slug        /tag/index.html  200
+/tag/:slug/       /tag/index.html  200
 /search           /search/         301
 
 # RSS feed
