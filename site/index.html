@@ -143,7 +143,7 @@
         <span class="logo-text">Nexo Hub</span>
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
-        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+        <a href="/" class="submit-nav-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
       </div>
       <div class="header-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -160,17 +160,17 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -178,7 +178,7 @@
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
   <main class="site-detail-wrap" id="main-content">
-    <a href="/" class="back-link">← All Sites</a>
+    <a href="/" class="back-link"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Sites</a>
     <div id="sdContent">
       <div class="sd-loading"><span class="loading-spin"></span></div>
     </div>
@@ -355,10 +355,10 @@
       document.title = 'Site not found — Nexo Hub';
       document.getElementById('sdContent').innerHTML = `
         <div class="sd-not-found">
-          <div style="font-size:3rem">🔍</div>
+          <div style="font-size:3rem"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></div>
           <h1>Site not found</h1>
           <p>This listing may have been removed or the URL is incorrect.</p>
-          <a class="sd-action-btn sd-action-primary" href="/" style="margin-top:20px;display:inline-flex">← Browse all sites</a>
+          <a class="sd-action-btn sd-action-primary" href="/" style="margin-top:20px;display:inline-flex"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Browse all sites</a>
         </div>`;
     }
 
@@ -394,5 +394,7 @@
     });
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

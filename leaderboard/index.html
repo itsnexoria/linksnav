@@ -150,7 +150,7 @@
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
         <a href="/" class="submit-nav-btn" style="gap:7px">
-          <span aria-hidden="true">←</span> Back to Hub
+          <span aria-hidden="true"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i></span> Back to Hub
         </a>
       </div>
       <div class="header-right">
@@ -170,18 +170,18 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link nav-link--active">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link nav-link--active"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -189,18 +189,18 @@
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
   <main class="lb-wrap" id="main-content">
-    <a href="/" class="back-link">← Back to Nexo Hub</a>
+    <a href="/" class="back-link"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Nexo Hub</a>
 
     <div class="lb-hero">
-      <div class="lb-icon">🏆</div>
+      <div class="lb-icon"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i></div>
       <h1 class="lb-title">Leaderboard</h1>
       <p class="lb-sub">Top contributors, most-visited sites, and community favourites.</p>
     </div>
 
     <div class="lb-tabs">
-      <button class="lb-tab active" onclick="switchTab('contributors',this)">🏅 Top Contributors</button>
-      <button class="lb-tab" onclick="switchTab('visited',this)">👁 Most Visited</button>
-      <button class="lb-tab" onclick="switchTab('saved',this)">★ Most Saved</button>
+      <button class="lb-tab active" onclick="switchTab('contributors',this)"><i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i> Top Contributors</button>
+      <button class="lb-tab" onclick="switchTab('visited',this)"><i data-lucide="eye" class="lucide-ico" aria-hidden="true"></i> Most Visited</button>
+      <button class="lb-tab" onclick="switchTab('saved',this)"><i data-lucide="star" class="lucide-ico" aria-hidden="true"></i> Most Saved</button>
     </div>
 
     <div id="lbList">
@@ -209,7 +209,7 @@
 
     <div class="lb-cta">
       <p>Know a great site that's not listed yet?</p>
-      <a href="/contact/">📬 Submit a Site</a>
+      <a href="/contact/"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
     </div>
   </main>
 
@@ -241,7 +241,8 @@
         else if(tab === 'visited') await loadMostVisited();
         else await loadMostSaved();
       }catch{
-        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">⚠️</div><p>Failed to load — please refresh.</p></div>`;
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i></div><p>Failed to load — please refresh.</p></div>`;
+      if(window.lucide){lucide.createIcons();}
       }
     }
 
@@ -256,12 +257,13 @@
       const rows = await res.json();
       const list = document.getElementById('lbList');
       if(!rows.length){
-        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">🌱</div><p>No contributors yet — be the first!</p></div>`;
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon"><i data-lucide="sprout" class="lucide-ico" aria-hidden="true"></i></div><p>No contributors yet — be the first!</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
       list.innerHTML = `<div class="lb-list">${rows.map((r,i) => {
         const rank = i+1;
-        const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
+        const medal = rank===1?'<i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i>':rank===2?'<i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i>':rank===3?'<i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i>':rank;
         return `
         <div class="lb-row rank-${rank}${rank<=3?' top3':''}">
           <div class="lb-rank">${medal}</div>
@@ -297,7 +299,7 @@
         // No local favs — show globally most-visited as a fallback
         document.getElementById('lbList').innerHTML = `
           <div class="lb-empty">
-            <div class="lb-empty-icon">★</div>
+            <div class="lb-empty-icon"><i data-lucide="star" class="lucide-ico" aria-hidden="true"></i></div>
             <p>Save sites on the homepage to see your personal list here.<br/>
             Showing globally trending sites instead:</p>
           </div>`;
@@ -322,12 +324,13 @@
     function renderSiteRows(rows, metaFn){
       const list = document.getElementById('lbList');
       if(!rows.length){
-        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon">📊</div><p>No data yet — start browsing!</p></div>`;
+        list.innerHTML = `<div class="lb-empty"><div class="lb-empty-icon"><i data-lucide="bar-chart-3" class="lucide-ico" aria-hidden="true"></i></div><p>No data yet — start browsing!</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
       list.innerHTML = `<div class="lb-list">${rows.map((r,i) => {
         const rank = i+1;
-        const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
+        const medal = rank===1?'<i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i>':rank===2?'<i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i>':rank===3?'<i data-lucide="medal" class="lucide-ico" aria-hidden="true"></i>':rank;
         const href = r.slug ? `/site/${r.slug}/` : r.url;
         const isExt = !r.slug;
         return `
@@ -389,5 +392,7 @@
     })();
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

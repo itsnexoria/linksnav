@@ -37,11 +37,13 @@
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="offline-wrap" id="main-content">
-    <div class="offline-icon">📡</div>
+    <div class="offline-icon"><i data-lucide="radio-tower" class="lucide-ico" aria-hidden="true"></i></div>
     <h1 class="offline-title">You're offline</h1>
     <p class="offline-sub">Nexo Hub couldn't reach the network.<br/>Check your connection and try again — anything you'd already opened may still be cached.</p>
-    <button class="offline-btn" onclick="location.reload()">↻ Try again</button>
+    <button class="offline-btn" onclick="location.reload()"><i data-lucide="rotate-cw" class="lucide-ico" aria-hidden="true"></i> Try again</button>
   </div>
   <script>(function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();</script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

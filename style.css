@@ -1188,3 +1188,16 @@ html { scroll-behavior: smooth; }
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
+
+/* Lucide icon defaults (replaces emoji glyphs site-wide) */
+.lucide-ico {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  vertical-align: -0.15em;
+  flex-shrink: 0;
+}
+.nav-link .lucide-ico { width: 1.05em; height: 1.05em; margin-right: 2px; }
+.back-link .lucide-ico { margin-right: 2px; }

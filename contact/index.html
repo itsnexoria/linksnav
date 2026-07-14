@@ -284,7 +284,7 @@
       </a>
       <div style="margin-left:auto">
         <a href="/" class="submit-nav-btn" style="gap:7px">
-          <span aria-hidden="true">←</span> Back to Hub
+          <span aria-hidden="true"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i></span> Back to Hub
         </a>
       </div>
       <div class="header-right">
@@ -304,18 +304,18 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link nav-link--active"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -324,14 +324,14 @@
 
   <div class="sub-wrap" id="main-content">
     <a href="/" class="back-link">
-      <span class="back-arrow" aria-hidden="true">←</span> Back to Nexo Hub
+      <span class="back-arrow" aria-hidden="true"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i></span> Back to Nexo Hub
     </a>
 
     <!-- HERO -->
     <div class="hero">
       <div class="hero-orb-wrap" aria-hidden="true">
         <div class="hero-orb-bg"></div>
-        <div class="hero-emoji">🔗</div>
+        <div class="hero-emoji"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i></div>
       </div>
       <div>
         <h1 class="hero-title">Submit a Site</h1>
@@ -345,7 +345,7 @@
       <div class="step-line"  id="l1"></div>
       <div class="step"       id="s2"><div class="step-n">2</div><div class="step-lbl">Extra</div></div>
       <div class="step-line"  id="l2"></div>
-      <div class="step"       id="s3"><div class="step-n">3</div><div class="step-lbl">Done ✓</div></div>
+      <div class="step"       id="s3"><div class="step-n">3</div><div class="step-lbl">Done <i data-lucide="check" class="lucide-ico" aria-hidden="true"></i></div></div>
     </div>
 
     <!-- FORM CARD -->
@@ -361,7 +361,7 @@
             <div class="iw">
               <span class="ico" aria-hidden="true">◈</span>
               <input class="finput" type="text" id="siteName" name="site_name" placeholder="e.g. Bolt.new" autocomplete="off"/>
-              <span class="ok-badge" aria-hidden="true">✓</span>
+              <span class="ok-badge" aria-hidden="true"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i></span>
             </div>
             <span class="fhint">The display name of the website</span>
             <span class="ferr">Please enter the site name</span>
@@ -389,14 +389,14 @@
           <div class="fg full" id="g-url">
             <label class="flabel" for="siteUrl">URL <span class="req">*</span></label>
             <div class="iw">
-              <span class="ico" aria-hidden="true">🔗</span>
+              <span class="ico" aria-hidden="true"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i></span>
               <input class="finput" type="url" id="siteUrl" name="url" placeholder="https://example.com" autocomplete="off"/>
-              <span class="ok-badge" aria-hidden="true">✓</span>
+              <span class="ok-badge" aria-hidden="true"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i></span>
             </div>
             <span class="fhint">Full URL including https://</span>
             <span class="ferr">Please enter a valid URL (https://…)</span>
             <div class="dup-warning" id="dupWarning">
-              <span class="dup-icon">⚠️</span>
+              <span class="dup-icon"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i></span>
               <span id="dupWarningText">This site is already in the directory.</span>
             </div>
           </div>
@@ -415,11 +415,11 @@
           <div class="fg full">
             <label class="flabel">Pricing Model</label>
             <div class="tag-row" id="pricePicker">
-              <span class="tpill" data-v="free">💚 Free</span>
-              <span class="tpill" data-v="freemium">🔵 Freemium</span>
-              <span class="tpill" data-v="paid">🔴 Paid</span>
-              <span class="tpill" data-v="subscription">🟠 Subscription</span>
-              <span class="tpill" data-v="open-source">🟢 Open Source</span>
+              <span class="tpill" data-v="free"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Free</span>
+              <span class="tpill" data-v="freemium"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Freemium</span>
+              <span class="tpill" data-v="paid"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Paid</span>
+              <span class="tpill" data-v="subscription"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Subscription</span>
+              <span class="tpill" data-v="open-source"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Open Source</span>
             </div>
             <input type="hidden" id="pricingHidden" name="pricing"/>
           </div>
@@ -441,7 +441,7 @@
           <div class="fg" id="g-email">
             <label class="flabel" for="email">Email <span class="opt">(for reply)</span></label>
             <div class="iw">
-              <span class="ico" aria-hidden="true">✉</span>
+              <span class="ico" aria-hidden="true"><i data-lucide="mail" class="lucide-ico" aria-hidden="true"></i></span>
               <input class="finput" type="email" id="email" name="email" placeholder="you@example.com" autocomplete="off"/>
             </div>
           </div>
@@ -456,7 +456,7 @@
 
         <div style="margin-top:26px">
           <button type="submit" class="btn-sub" id="submitBtn">
-            <span class="btn-txt">🚀 Send Request</span>
+            <span class="btn-txt"><i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i> Send Request</span>
           </button>
         </div>
       </form>
@@ -470,7 +470,7 @@
         <p class="s-msg">Thanks — your submission is in the review queue. I'll check it out and it'll go live on the hub once approved.</p>
         <div class="s-btns">
           <button class="s-btn" onclick="resetForm()">Submit another</button>
-          <a href="/" class="s-btn">← Back to Hub</a>
+          <a href="/" class="s-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
         </div>
       </div>
     </div><!-- /form-card -->
@@ -486,7 +486,7 @@
   <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
     <span>Nexo Hub — Your digital command center</span>
-    <span>Built by <code>Nexus</code> ♥</span>
+    <span>Built by <code>Nexus</code> <i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i></span>
   </footer>
 
   <script>
@@ -837,5 +837,7 @@
     })();
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

@@ -401,11 +401,12 @@
       const el = document.getElementById('sdContent');
       if(el) el.innerHTML = `
         <div style="text-align:center;padding:80px 20px">
-          <div style="font-size:3rem">🔍</div>
+          <div style="font-size:3rem"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></div>
           <h1 style="font-family:var(--font-d);font-size:1.5rem;margin:12px 0 8px">Site not found</h1>
           <p style="color:var(--muted);font-size:.85rem">This listing may have been removed or the URL is incorrect.</p>
-          <a class="sd-action-btn sd-action-primary" href="/" style="margin-top:20px;display:inline-flex">← Browse all sites</a>
+          <a class="sd-action-btn sd-action-primary" href="/" style="margin-top:20px;display:inline-flex"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Browse all sites</a>
         </div>`;
+      if(window.lucide){lucide.createIcons();}
     }
 
     function copyLink(){
@@ -452,7 +453,7 @@
           `${cat.label} on Nexo Hub`);
 
         content.innerHTML = `<div class="ct-wrap">
-          <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">← All Categories</a>
+          <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Categories</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Category</div>
             <h1 class="ct-title">${esc(cat.icon)} ${esc(cat.label)}</h1>
@@ -490,10 +491,10 @@
           `#${tag} on Nexo Hub`);
 
         content.innerHTML = `<div class="ct-wrap">
-          <a href="/tag/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">← All Tags</a>
+          <a href="/tag/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Tags</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Tag</div>
-            <h1 class="ct-title">🏷️ ${esc(tag)}</h1>
+            <h1 class="ct-title"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> ${esc(tag)}</h1>
             <p class="ct-sub">${sites.length} site${sites.length!==1?'s':''} tagged <strong>${esc(tag)}</strong></p>
           </div>
           ${sites.length ? `<div class="ct-grid">${sites.map((s,i)=>siteCardHTML(s,i)).join('')}</div>`
@@ -558,20 +559,21 @@
         const dateStr = post.created_at ? new Date(post.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '';
 
         content.innerHTML = `<div class="ct-wrap" style="max-width:720px">
-          <a href="/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px">← All Posts</a>
+          <a href="/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Posts</a>
           <div class="sd-hero">
             <div>
-              <div style="font-size:2.2rem;line-height:1;margin-bottom:10px">${esc(post.emoji||'📰')}</div>
+              <div style="font-size:2.2rem;line-height:1;margin-bottom:10px">${esc(post.emoji||'<i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i>')}</div>
               <h1 class="sd-title">${esc(post.title)}</h1>
               <div style="font-size:.78rem;color:var(--muted);margin-top:6px">${esc(dateStr)}</div>
             </div>
           </div>
           <div class="sd-body" style="font-size:.92rem;line-height:1.8">${post.body||''}</div>
           <div class="sd-actions">
-            <button class="sd-action-btn sd-action-secondary" onclick="copyLink()">🔗 Copy Link</button>
-            <a class="sd-action-btn sd-action-secondary" href="/blog/">← All Posts</a>
+            <button class="sd-action-btn sd-action-secondary" onclick="copyLink()"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i> Copy Link</button>
+            <a class="sd-action-btn sd-action-secondary" href="/blog/"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Posts</a>
           </div>
         </div>`;
+      if(window.lucide){lucide.createIcons();}
       }catch{ render404(); }
     }
 
@@ -624,7 +626,7 @@
           <div class="notfound-code">404</div>
           <h1 class="notfound-title">Page not found</h1>
           <p class="notfound-sub">Looks like this URL doesn't exist.<br/>Let's get you back to the hub.</p>
-          <a href="/" class="notfound-btn">← Back to Nexo Hub</a>
+          <a href="/" class="notfound-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Nexo Hub</a>
         </div>`;
     }
 
@@ -656,5 +658,7 @@
     else                    { render404(); }
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

@@ -110,6 +110,29 @@
       font-family: var(--font-d); font-size: 1.8rem; font-weight: 800;
       color: var(--text); letter-spacing: -.02em;
     }
+
+    /* ── SEARCH INSIGHTS TABLE ───────────────────────── */
+    .si-table {
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden; background: var(--surface);
+    }
+    .si-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 10px; padding: 12px 16px; align-items: center;
+      border-bottom: 1px solid var(--border);
+      font-size: .85rem; color: var(--text);
+    }
+    .si-row:last-child { border-bottom: none; }
+    .si-head {
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+      font-weight: 700; color: var(--muted); background: var(--surface2);
+    }
+    .si-row.si-zero { color: #ef4444; font-weight: 700; }
+    .si-empty { padding: 24px 16px; text-align: center; color: var(--muted); font-size: .85rem; }
+    @media (max-width: 640px) {
+      .si-row { grid-template-columns: 1.5fr 1fr 1fr; font-size: .78rem; }
+      .si-row span:nth-child(4) { display: none; }
+    }
     .stat-card-value.accent { color: var(--accent); }
 
     .chart-card {
@@ -371,11 +394,11 @@
   <div class="grid-bg" aria-hidden="true"></div>
 
   <main class="admin-wrap" id="main-content">
-    <a href="/" class="back-link">← Back to Nexo Hub</a>
+    <a href="/" class="back-link"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Nexo Hub</a>
 
     <!-- LOGIN GATE -->
     <div class="gate" id="gate">
-      <div class="gate-icon">🔐</div>
+      <div class="gate-icon"><i data-lucide="lock" class="lucide-ico" aria-hidden="true"></i></div>
       <h1>Admin Access</h1>
       <p>Enter your admin key to manage Nexo Hub.</p>
       <input type="password" id="adminKeyInput" placeholder="Admin key" autocomplete="off"/>
@@ -387,7 +410,7 @@
     <div id="adminPanel" style="display:none">
       <div class="admin-header">
         <div>
-          <div class="admin-title">⚙️ Nexo Hub Admin</div>
+          <div class="admin-title"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Nexo Hub Admin</div>
           <div class="admin-sub" id="adminSub">Loading…</div>
         </div>
         <button class="logout-btn" onclick="logout()">Log out</button>
@@ -395,22 +418,28 @@
 
       <div class="admin-tabs">
         <button class="admin-tab active" data-tab="pending" onclick="switchTab('pending')">
-          📋 Pending <span class="tab-badge" id="pendingBadge">0</span>
+          <i data-lucide="clipboard" class="lucide-ico" aria-hidden="true"></i> Pending <span class="tab-badge" id="pendingBadge">0</span>
         </button>
         <button class="admin-tab" data-tab="reports" onclick="switchTab('reports')">
-          ⚠️ Reports <span class="tab-badge" id="reportsBadge">0</span>
+          <i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> Reports <span class="tab-badge" id="reportsBadge">0</span>
         </button>
         <button class="admin-tab" data-tab="manage" onclick="switchTab('manage')">
-          🗂️ Manage Sites
+          <i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Manage Sites
         </button>
         <button class="admin-tab" data-tab="stats" onclick="switchTab('stats')">
-          📊 Visitor Stats
+          <i data-lucide="bar-chart-3" class="lucide-ico" aria-hidden="true"></i> Visitor Stats
         </button>
         <button class="admin-tab" data-tab="health" onclick="switchTab('health')">
-          🩺 Health <span class="tab-badge" id="healthBadge">0</span>
+          <i data-lucide="stethoscope" class="lucide-ico" aria-hidden="true"></i> Health <span class="tab-badge" id="healthBadge">0</span>
         </button>
         <button class="admin-tab" data-tab="blog" onclick="switchTab('blog')">
-          📰 Blog
+          <i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog
+        </button>
+        <button class="admin-tab" data-tab="search" onclick="switchTab('search')">
+          <i data-lucide="search" class="lucide-ico" aria-hidden="true"></i> Search Insights
+        </button>
+        <button class="admin-tab" data-tab="quality" onclick="switchTab('quality')">
+          <i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> Data Quality <span class="tab-badge" id="qualityBadge">0</span>
         </button>
       </div>
 
@@ -418,9 +447,9 @@
       <div class="admin-panel-section active" id="tab-pending">
         <div class="bulk-toolbar" id="pendingBulkToolbar" style="display:none">
           <span class="bulk-count" id="pendingBulkCount">0 selected</span>
-          <button class="pc-btn approve" onclick="bulkApprovePending()" id="pendingBulkApproveBtn">✓ Approve All Selected</button>
-          <button class="pc-btn reject" onclick="bulkRejectPending()" id="pendingBulkRejectBtn">✕ Delete All Selected</button>
-          <button class="cac-btn" onclick="clearPendingSelection()">✕ Clear</button>
+          <button class="pc-btn approve" onclick="bulkApprovePending()" id="pendingBulkApproveBtn"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Approve All Selected</button>
+          <button class="pc-btn reject" onclick="bulkRejectPending()" id="pendingBulkRejectBtn"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i> Delete All Selected</button>
+          <button class="cac-btn" onclick="clearPendingSelection()"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i> Clear</button>
         </div>
         <div class="pending-list" id="pendingList"></div>
       </div>
@@ -449,28 +478,28 @@
         <!-- Bulk action toolbar — shown only when items are selected -->
         <div class="bulk-toolbar" id="bulkToolbar" style="display:none">
           <span class="bulk-count" id="bulkCount">0 selected</span>
-          <button class="pc-btn approve" onclick="bulkApprove()" id="bulkApproveBtn">✓ Approve</button>
-          <button class="pc-btn reject" onclick="bulkReject()" id="bulkRejectBtn">✕ Delete</button>
+          <button class="pc-btn approve" onclick="bulkApprove()" id="bulkApproveBtn"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Approve</button>
+          <button class="pc-btn reject" onclick="bulkReject()" id="bulkRejectBtn"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i> Delete</button>
           <div style="display:flex;align-items:center;gap:6px">
             <select class="manage-cat-filter" id="bulkCatSelect" style="width:140px">
               <option value="">Move to category…</option>
             </select>
             <button class="pc-btn" style="background:var(--surface2)" onclick="bulkRecategorize()">Move</button>
           </div>
-          <button class="cac-btn" onclick="clearBulkSelection()">✕ Clear</button>
+          <button class="cac-btn" onclick="clearBulkSelection()"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i> Clear</button>
         </div>
         <div class="manage-list" id="manageList"></div>
         <div class="pagination" id="managePagination" style="display:none">
-          <button class="page-btn" id="prevPageBtn" onclick="changePage(-1)">← Prev</button>
+          <button class="page-btn" id="prevPageBtn" onclick="changePage(-1)"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Prev</button>
           <span id="pageInfo">Page 1</span>
-          <button class="page-btn" id="nextPageBtn" onclick="changePage(1)">Next →</button>
+          <button class="page-btn" id="nextPageBtn" onclick="changePage(1)">Next <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i></button>
         </div>
       </div>
 
       <!-- STATS TAB -->
       <div class="admin-panel-section" id="tab-stats">
         <div class="stats-grid" id="statsGrid">
-          <div class="stat-card"><div class="stat-card-label">🟢 Active Now</div><div class="stat-card-value" style="color:#22c55e" id="statLive">—</div></div>
+          <div class="stat-card"><div class="stat-card-label"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Active Now</div><div class="stat-card-value" style="color:#22c55e" id="statLive">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Total Visits</div><div class="stat-card-value accent" id="statTotal">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Today</div><div class="stat-card-value" id="statToday">—</div></div>
           <div class="stat-card"><div class="stat-card-label">Last 7 Days</div><div class="stat-card-value" id="statWeek">—</div></div>
@@ -500,10 +529,38 @@
         <div class="pending-list" id="healthDownList"></div>
       </div>
 
+      <!-- SEARCH INSIGHTS TAB -->
+      <div class="admin-panel-section" id="tab-search">
+        <div class="stats-grid" id="searchStatsGrid">
+          <div class="stat-card"><div class="stat-card-label">Searches (30d)</div><div class="stat-card-value accent" id="searchTotal30">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Unique Queries</div><div class="stat-card-value" id="searchUnique">—</div></div>
+          <div class="stat-card"><div class="stat-card-label">Zero-Result Searches</div><div class="stat-card-value" style="color:#ef4444" id="searchZero">—</div></div>
+        </div>
+        <div class="manage-controls">
+          <span style="font-size:.78rem;color:var(--muted)">Top queries, last 30 days</span>
+          <button class="cac-btn" onclick="loadSearchInsights()"><i data-lucide="rotate-cw" class="lucide-ico" aria-hidden="true"></i> Refresh</button>
+        </div>
+        <div class="si-table" id="searchInsightsTable">
+          <div class="si-row si-head">
+            <span>Query</span><span>Searches</span><span>Zero Results</span><span>Avg Results</span>
+          </div>
+          <div id="searchInsightsBody"></div>
+        </div>
+      </div>
+
+      <!-- DATA QUALITY TAB -->
+      <div class="admin-panel-section" id="tab-quality">
+        <div class="manage-controls">
+          <span style="font-size:.78rem;color:var(--muted)">Approved sites missing a description, tags, or card color</span>
+          <button class="cac-btn" onclick="loadQualityIssues()"><i data-lucide="rotate-cw" class="lucide-ico" aria-hidden="true"></i> Refresh</button>
+        </div>
+        <div class="pending-list" id="qualityList"></div>
+      </div>
+
       <!-- BLOG TAB -->
       <div class="admin-panel-section" id="tab-blog">
         <div class="manage-controls">
-          <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" id="newPostBtn" onclick="toggleComposer()">✏️ New Post</button>
+          <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" id="newPostBtn" onclick="toggleComposer()"><i data-lucide="pencil" class="lucide-ico" aria-hidden="true"></i> New Post</button>
         </div>
         <div id="composerForm" style="display:none;flex-direction:column;gap:10px;margin-bottom:20px;padding:16px;border:1px solid var(--border2);border-radius:12px;background:var(--surface)">
           <input type="hidden" id="cpEditSlug" value=""/>
@@ -568,7 +625,7 @@
       overlay.className = 'edit-modal-overlay';
       overlay.innerHTML = `
         <div class="edit-modal" role="dialog" aria-modal="true" aria-label="Edit ${esc(site.name)}">
-          <button class="edit-modal-close" aria-label="Close" onclick="closeEditModal()">✕</button>
+          <button class="edit-modal-close" aria-label="Close" onclick="closeEditModal()"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i></button>
           <h2>Edit Site</h2>
           <div class="edit-field">
             <label for="efName">Name</label>
@@ -596,6 +653,7 @@
             <button class="edit-save-btn" id="efSaveBtn" onclick="saveEditModal('${esc(id)}')">Save Changes</button>
           </div>
         </div>`;
+      if(window.lucide){lucide.createIcons();}
       document.body.appendChild(overlay);
       overlay.addEventListener('click', e => { if (e.target === overlay) closeEditModal(); });
       document.addEventListener('keydown', escCloseEditModal);
@@ -716,6 +774,7 @@
       if (tab === 'reports') loadReports();
       if (tab === 'health') loadHealth();
       if (tab === 'blog') loadBlogAdmin();
+      if (tab === 'search') loadSearchInsights();
     }
 
     let selectedPendingIds = new Set();
@@ -774,7 +833,8 @@
       document.getElementById('pendingBadge').textContent = items.length;
 
       if (items.length === 0) {
-        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✨</div><p>All caught up — no pending submissions.</p></div>`;
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i></div><p>All caught up — no pending submissions.</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
 
@@ -799,8 +859,8 @@
           </div>
           ${item.submitted_note ? `<div class="pc-note">"${esc(item.submitted_note)}"</div>` : ''}
           <div class="pc-actions">
-            <button class="pc-btn approve" onclick="approveSite('${esc(item.id)}')">✓ Approve</button>
-            <button class="pc-btn reject" onclick="rejectSite('${esc(item.id)}')">✕ Reject</button>
+            <button class="pc-btn approve" onclick="approveSite('${esc(item.id)}')"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Approve</button>
+            <button class="pc-btn reject" onclick="rejectSite('${esc(item.id)}')"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i> Reject</button>
           </div>
         </div>`;
       }).join('');
@@ -874,7 +934,8 @@
     function renderReports(reports){
       const list = document.getElementById('reportsList');
       if(!reports.length){
-        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✨</div><p>No reports here.</p></div>`;
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i></div><p>No reports here.</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
       list.innerHTML = reports.map(r => {
@@ -894,8 +955,8 @@
           </div>
           ${r.status === 'open' ? `
           <div class="pc-actions">
-            <button class="pc-btn approve" onclick="updateReportStatus('${esc(r.report_id)}','resolved')">✓ Resolve</button>
-            <button class="pc-btn reject" onclick="updateReportStatus('${esc(r.report_id)}','dismissed')">✕ Dismiss</button>
+            <button class="pc-btn approve" onclick="updateReportStatus('${esc(r.report_id)}','resolved')"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Resolve</button>
+            <button class="pc-btn reject" onclick="updateReportStatus('${esc(r.report_id)}','dismissed')"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i> Dismiss</button>
           </div>` : ''}
         </div>`;
       }).join('');
@@ -938,14 +999,15 @@
     function renderBlogAdmin(posts){
       const list = document.getElementById('blogAdminList');
       if(!posts.length){
-        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">📰</div><p>No posts yet — click "New Post" to write one.</p></div>`;
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i></div><p>No posts yet — click "New Post" to write one.</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
       list.innerHTML = posts.map(p => `
         <div class="pending-card" data-post-id="${esc(p.id)}">
           <div class="pc-top">
             <div class="pc-name">${esc(p.emoji||'📰')} ${esc(p.title)}</div>
-            <div class="pc-cat">${p.published ? '🟢 Published' : '⚪ Draft'}</div>
+            <div class="pc-cat">${p.published ? '<i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true" style="color:#22c55e"></i> Published' : '<i data-lucide="circle" class="lucide-ico" aria-hidden="true"></i> Draft'}</div>
           </div>
           <a class="pc-url" href="/blog/${esc(p.slug)}/" target="_blank" rel="noopener noreferrer">/blog/${esc(p.slug)}/</a>
           <div class="pc-note">${esc(p.excerpt)}</div>
@@ -953,8 +1015,8 @@
             <span><b>Created:</b> ${esc(fmtDate(p.created_at))}</span>
           </div>
           <div class="pc-actions">
-            <button class="pc-btn approve" onclick='editPost(${JSON.stringify(p).replace(/'/g,"&apos;")})'>✏️ Edit</button>
-            <button class="pc-btn reject" onclick="deletePost('${esc(p.id)}','${esc(p.title)}')">🗑 Delete</button>
+            <button class="pc-btn approve" onclick='editPost(${JSON.stringify(p).replace(/'/g,"&apos;")})'><i data-lucide="pencil" class="lucide-ico" aria-hidden="true"></i> Edit</button>
+            <button class="pc-btn reject" onclick="deletePost('${esc(p.id)}','${esc(p.title)}')"><i data-lucide="trash-2" class="lucide-ico" aria-hidden="true"></i> Delete</button>
           </div>
         </div>`).join('');
     }
@@ -1149,7 +1211,8 @@
       lastManageSites = sites;
       const list = document.getElementById('manageList');
       if (sites.length === 0) {
-        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">🔍</div><p>No sites match your search.</p></div>`;
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></div><p>No sites match your search.</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
       list.innerHTML = sites.map(s => `
@@ -1161,8 +1224,8 @@
             <div class="manage-card-url">${esc(s.url)}</div>
           </div>
           <div class="manage-card-cat">${esc(s.category)}</div>
-          <button class="edit-btn" onclick="openEditModal('${esc(s.id)}')">✏️ Edit</button>
-          <button class="delete-btn" onclick="confirmDelete(this, '${esc(s.id)}')">🗑 Delete</button>
+          <button class="edit-btn" onclick="openEditModal('${esc(s.id)}')"><i data-lucide="pencil" class="lucide-ico" aria-hidden="true"></i> Edit</button>
+          <button class="delete-btn" onclick="confirmDelete(this, '${esc(s.id)}')"><i data-lucide="trash-2" class="lucide-ico" aria-hidden="true"></i> Delete</button>
         </div>
       `).join('');
     }
@@ -1296,6 +1359,36 @@
       }).join('');
     }
 
+    /* ── SEARCH INSIGHTS TAB ──────────────────────────────────── */
+    async function loadSearchInsights() {
+      const body = document.getElementById('searchInsightsBody');
+      body.innerHTML = '<div class="si-empty"><span class="loading-spin"></span></div>';
+      try {
+        const rows = await rpc('admin_get_search_stats', { input_key: getKey(), p_days: 30, p_limit: 25 });
+        const totalSearches = rows.reduce((sum, r) => sum + Number(r.searches), 0);
+        const totalZero = rows.reduce((sum, r) => sum + Number(r.zero_result_searches), 0);
+        document.getElementById('searchTotal30').textContent = totalSearches.toLocaleString();
+        document.getElementById('searchUnique').textContent = rows.length.toLocaleString();
+        document.getElementById('searchZero').textContent = totalZero.toLocaleString();
+
+        if (!rows.length) {
+          body.innerHTML = '<div class="si-empty">No searches logged in the last 30 days.</div>';
+          return;
+        }
+        body.innerHTML = rows.map(r => `
+          <div class="si-row${Number(r.zero_result_searches) > 0 ? ' si-zero' : ''}">
+            <span>${esc(r.query)}</span>
+            <span>${r.searches}</span>
+            <span>${r.zero_result_searches}</span>
+            <span>${r.avg_results ?? '—'}</span>
+          </div>`).join('');
+        if (window.lucide) lucide.createIcons();
+      } catch (e) {
+        body.innerHTML = '<div class="si-empty">Failed to load search insights.</div>';
+        showToast(e.message || 'Failed to load search insights', true);
+      }
+    }
+
     /* ── HEALTH TAB ────────────────────────────────────────────── */
     async function loadHealth() {
       const list = document.getElementById('healthDownList');
@@ -1322,7 +1415,8 @@
     function renderHealthDownList(sites) {
       const list = document.getElementById('healthDownList');
       if (!sites.length) {
-        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">✅</div><p>No sites are currently flagged as down.</p></div>`;
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon"><i data-lucide="circle-check" class="lucide-ico" aria-hidden="true"></i></div><p>No sites are currently flagged as down.</p></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
       list.innerHTML = sites.map(s => `
@@ -1334,8 +1428,8 @@
           <a class="hdc-url" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.url)}</a>
           <div class="hdc-meta">Last checked ${s.last_checked_at ? new Date(s.last_checked_at).toLocaleString() : 'never'} · ${esc(s.category)}</div>
           <div style="display:flex;gap:8px;margin-top:10px">
-            <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" class="pc-btn" style="text-decoration:none">↗ Check site</a>
-            <button class="pc-btn reject" onclick="deleteDownSite('${esc(s.id)}','${esc(s.name)}')">🗑 Delete listing</button>
+            <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" class="pc-btn" style="text-decoration:none"><i data-lucide="external-link" class="lucide-ico" aria-hidden="true"></i> Check site</a>
+            <button class="pc-btn reject" onclick="deleteDownSite('${esc(s.id)}','${esc(s.name)}')"><i data-lucide="trash-2" class="lucide-ico" aria-hidden="true"></i> Delete listing</button>
           </div>
         </div>
       `).join('');
@@ -1389,5 +1483,7 @@
     });
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

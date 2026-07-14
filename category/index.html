@@ -73,7 +73,7 @@
         <span class="logo-text">Nexo Hub</span>
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
-        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+        <a href="/" class="submit-nav-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
       </div>
       <div class="header-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -87,16 +87,16 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link nav-link--active">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link nav-link--active"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -105,7 +105,7 @@
 
   <main class="cat-index-wrap" id="main-content">
     <div class="cat-index-hero">
-      <h2 class="cat-index-title">🗂️ All Categories</h2>
+      <h2 class="cat-index-title"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> All Categories</h2>
       <p class="cat-index-sub">620+ curated sites, organised into 35 categories</p>
     </div>
     <div class="cat-grid" id="catGrid">
@@ -173,11 +173,12 @@
         const sites = await sitesRes.json();
         if(!cat){
           main.innerHTML = `<div class="cat-index-wrap"><div style="text-align:center;padding:80px 20px">
-            <div style="font-size:3rem">🗂️</div>
+            <div style="font-size:3rem"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i></div>
             <h1 style="font-family:var(--font-d);font-size:1.5rem;margin:12px 0 8px">Category not found</h1>
             <p style="color:var(--muted);font-size:.85rem">This category may have been removed or the URL is incorrect.</p>
-            <a href="/category/" style="display:inline-block;margin-top:20px;padding:9px 20px;border-radius:100px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:600">← All Categories</a>
+            <a href="/category/" style="display:inline-block;margin-top:20px;padding:9px 20px;border-radius:100px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:600"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Categories</a>
           </div></div>`;
+      if(window.lucide){lucide.createIcons();}
           return;
         }
         document.title = `${cat.label} — Nexo Hub`;
@@ -188,7 +189,7 @@
         document.querySelector('meta[property="og:description"]').content = desc;
 
         main.innerHTML = `
-          <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:24px">← All Categories</a>
+          <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:24px"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Categories</a>
           <div class="cat-index-hero">
             <h1 class="cat-index-title">${esc(cat.icon)} ${esc(cat.label)}</h1>
             <p class="cat-index-sub">${sites.length} curated site${sites.length!==1?'s':''}</p>
@@ -196,6 +197,7 @@
           <div class="cat-grid" id="siteGrid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
             ${sites.length ? sites.map(siteCardHTML).join('') : '<p style="color:var(--muted);font-size:.85rem;grid-column:1/-1">No sites in this category yet.</p>'}
           </div>`;
+      if(window.lucide){lucide.createIcons();}
         main.id = 'main-content';
         main.className = 'cat-index-wrap';
       }catch(e){
@@ -221,5 +223,7 @@
     });
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

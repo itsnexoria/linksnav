@@ -545,23 +545,23 @@
     <div class="nav-menu" id="mobileMenu" aria-hidden="true">
       <div class="nav-menu-inner">
         <nav class="nav-menu-links" aria-label="Site navigation">
-          <a href="/" class="nav-link">🏠 Home</a>
-          <a href="/category/" class="nav-link">🗂️ Categories</a>
-          <a href="/tag/" class="nav-link">🏷️ Tags</a>
-          <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-          <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-          <a href="/new/" class="nav-link">🆕 What's New</a>
-          <a href="/blog/" class="nav-link">📰 Blog</a>
-          <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-          <a href="/about/" class="nav-link">👤 About</a>
-          <a href="/donate/" class="nav-link nav-link--active">💜 Donate</a>
-          <a href="/settings/" class="nav-link">⚙️ Settings</a>
+          <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+          <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+          <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+          <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+          <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+          <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+          <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+          <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+          <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+          <a href="/donate/" class="nav-link nav-link--active"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+          <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
           <a
             href="/pages/admin/"
             class="nav-link"
             id="adminNavLink"
             style="display: none"
-            >⚙️ Admin</a
+            ><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Admin</a
           >
         </nav>
         <div class="nav-menu-footer">
@@ -572,10 +572,10 @@
     <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
     <main class="donate-wrap" id="main-content">
-      <a href="/" class="back-link">← Back to Nexo Hub</a>
+      <a href="/" class="back-link"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Nexo Hub</a>
 
       <div class="donate-hero">
-        <span class="heart-icon">💜</span>
+        <span class="heart-icon"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i></span>
         <h1>Support Nexo Hub</h1>
         <p>
           Nexo Hub is completely free with no ads, no paywalls, and no tracking.
@@ -585,31 +585,31 @@
       </div>
 
       <div class="perks">
-        <h2>✨ What your support pays for</h2>
+        <h2><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What your support pays for</h2>
         <ul class="perk-list">
           <li>
-            <span>🌐</span
+            <span><i data-lucide="globe" class="lucide-ico" aria-hidden="true"></i></span
             ><span
               >Domain renewals and Cloudflare hosting — keeping Nexo Hub fast
               and always online.</span
             >
           </li>
           <li>
-            <span>🔍</span
+            <span><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></span
             ><span
               >Ongoing curation — manually reviewing and adding new sites across
               all 25 categories.</span
             >
           </li>
           <li>
-            <span>🛠️</span
+            <span><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i></span
             ><span
               >New features — more tools, better search, dark/light polish, and
               whatever you suggest.</span
             >
           </li>
           <li>
-            <span>🚫</span
+            <span><i data-lucide="ban" class="lucide-ico" aria-hidden="true"></i></span
             ><span
               >Ad-free forever — donations mean I never need to sell your
               attention to advertisers.</span
@@ -623,35 +623,35 @@
 
         <div class="amount-grid" id="amountGrid">
           <button class="amount-btn" data-amount="2" onclick="selectAmount(2)">
-            $2<span class="amount-label">A coffee ☕</span>
+            $2<span class="amount-label">A coffee <i data-lucide="coffee" class="lucide-ico" aria-hidden="true"></i></span>
           </button>
           <button
             class="amount-btn selected"
             data-amount="5"
             onclick="selectAmount(5)"
           >
-            $5<span class="amount-label">A solid tip 🙌</span>
+            $5<span class="amount-label">A solid tip <i data-lucide="party-popper" class="lucide-ico" aria-hidden="true"></i></span>
           </button>
           <button
             class="amount-btn"
             data-amount="10"
             onclick="selectAmount(10)"
           >
-            $10<span class="amount-label">Big help 🔥</span>
+            $10<span class="amount-label">Big help <i data-lucide="flame" class="lucide-ico" aria-hidden="true"></i></span>
           </button>
           <button
             class="amount-btn"
             data-amount="20"
             onclick="selectAmount(20)"
           >
-            $20<span class="amount-label">Legendary 🏆</span>
+            $20<span class="amount-label">Legendary <i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i></span>
           </button>
           <button
             class="amount-btn"
             data-amount="50"
             onclick="selectAmount(50)"
           >
-            $50<span class="amount-label">Wow 🚀</span>
+            $50<span class="amount-label">Wow <i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i></span>
           </button>
           <button
             class="amount-btn"
@@ -659,7 +659,7 @@
             id="customBtn"
             onclick="selectAmount('custom')"
           >
-            Custom<span class="amount-label">Your choice 💜</span>
+            Custom<span class="amount-label">Your choice <i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i></span>
           </button>
         </div>
 
@@ -708,13 +708,13 @@
 
       <div class="tiers">
         <div class="tier-card">
-          <div class="tier-icon">☕</div>
+          <div class="tier-icon"><i data-lucide="coffee" class="lucide-ico" aria-hidden="true"></i></div>
           <div class="tier-name">Supporter</div>
           <div class="tier-amount">$2 – $9</div>
           <div class="tier-desc">Warm fuzzies and my genuine gratitude.</div>
         </div>
         <div class="tier-card">
-          <div class="tier-icon">🔥</div>
+          <div class="tier-icon"><i data-lucide="flame" class="lucide-ico" aria-hidden="true"></i></div>
           <div class="tier-name">Contributor</div>
           <div class="tier-amount">$10 – $49</div>
           <div class="tier-desc">
@@ -722,7 +722,7 @@
           </div>
         </div>
         <div class="tier-card">
-          <div class="tier-icon">🚀</div>
+          <div class="tier-icon"><i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i></div>
           <div class="tier-name">Legend</div>
           <div class="tier-amount">$50+</div>
           <div class="tier-desc">
@@ -740,7 +740,7 @@
         <a href="/contact/">Submit</a>
         <a href="/donate/">Donate</a>
       </nav>
-      <span>Built by <code>Nexus</code> ♥</span>
+      <span>Built by <code>Nexus</code> <i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i></span>
     </footer>
 
     <script>
@@ -874,5 +874,7 @@
       updateDonateLink();
     </script>
     <script src="/pwa-register.js" defer></script>
-  </body>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
+</body>
 </html>

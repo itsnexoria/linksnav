@@ -87,7 +87,7 @@
         <span class="logo-text">Nexo Hub</span>
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
-        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+        <a href="/" class="submit-nav-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
       </div>
       <div class="header-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -104,18 +104,18 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">🔐 Admin</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="lock" class="lucide-ico" aria-hidden="true"></i> Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -124,12 +124,12 @@
 
   <main class="search-wrap" id="main-content">
     <div class="search-hero">
-      <h1>🔍 Search Nexo Hub</h1>
+      <h1><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i> Search Nexo Hub</h1>
       <p>620+ curated websites across AI, dev tools, design, gaming, and more</p>
     </div>
 
     <div class="search-bar-wrap">
-      <span class="search-bar-icon">🔍</span>
+      <span class="search-bar-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></span>
       <input type="search" class="search-bar-input" id="searchInput"
              placeholder="Search sites, tags, categories…"
              autocomplete="off" spellcheck="false" autofocus/>
@@ -224,9 +224,10 @@
       const grid = document.getElementById('searchResults');
       if(!results.length){
         grid.innerHTML = `<div class="search-empty" style="grid-column:1/-1">
-          <div class="search-empty-icon">🔍</div>
+          <div class="search-empty-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></div>
           <p>No sites match that search.<br/>Try a broader term or <a href="/contact/" style="color:var(--accent)">submit a site</a>.</p>
         </div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
 
@@ -263,7 +264,7 @@
     function renderEmpty(){
       document.getElementById('searchMeta').innerHTML = '';
       document.getElementById('searchResults').innerHTML = `<div class="search-empty" style="grid-column:1/-1">
-        <div class="search-empty-icon">🔍</div>
+        <div class="search-empty-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></div>
         <p>Start typing to search across 620+ curated sites.</p>
       </div>`;
     }
@@ -293,5 +294,7 @@
     init();
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

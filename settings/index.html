@@ -226,7 +226,7 @@
         <span class="logo-text">Nexo Hub</span>
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
-        <a href="/" class="submit-nav-btn">← Back to Hub</a>
+        <a href="/" class="submit-nav-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
       </div>
       <div class="header-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -243,19 +243,19 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="#import" class="nav-link" onclick="document.getElementById('hamburger').classList.remove('is-open');document.getElementById('mobileMenu').classList.remove('is-open');document.getElementById('navOverlay').classList.remove('is-open');document.body.style.overflow='';">📥 Import Bookmarks</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/settings/" class="nav-link nav-link--active">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">🔐 Admin</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="#import" class="nav-link" onclick="document.getElementById('hamburger').classList.remove('is-open');document.getElementById('mobileMenu').classList.remove('is-open');document.getElementById('navOverlay').classList.remove('is-open');document.body.style.overflow='';"><i data-lucide="inbox" class="lucide-ico" aria-hidden="true"></i> Import Bookmarks</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/settings/" class="nav-link nav-link--active"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="lock" class="lucide-ico" aria-hidden="true"></i> Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -264,7 +264,7 @@
 
   <main class="settings-wrap" id="main-content">
     <div class="settings-hero">
-      <h1 class="settings-title">⚙️ Settings</h1>
+      <h1 class="settings-title"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</h1>
       <p class="settings-sub">Your preferences are saved locally in this browser.</p>
     </div>
 
@@ -417,7 +417,7 @@
           </label>
         </div>
 
-        <button class="settings-link-btn" onclick="resetCardEditor()" style="margin-top:14px">↺ Reset card style to default</button>
+        <button class="settings-link-btn" onclick="resetCardEditor()" style="margin-top:14px"><i data-lucide="rotate-ccw" class="lucide-ico" aria-hidden="true"></i> Reset card style to default</button>
       </div>
     </div>
 
@@ -430,23 +430,23 @@
         <div class="import-how">
           <div class="import-how-title">How to export your bookmarks</div>
           <div class="import-steps">
-            <div class="import-step"><strong>Chrome / Edge</strong>Bookmarks → ⋮ menu → Export bookmarks</div>
-            <div class="import-step"><strong>Firefox</strong>Library → Bookmarks → Manage → Import & Backup → Export</div>
-            <div class="import-step"><strong>Safari</strong>File → Export Bookmarks</div>
-            <div class="import-step"><strong>Brave</strong>Settings → Bookmarks → Export bookmarks</div>
+            <div class="import-step"><strong>Chrome / Edge</strong>Bookmarks <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> ⋮ menu <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Export bookmarks</div>
+            <div class="import-step"><strong>Firefox</strong>Library <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Bookmarks <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Manage <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Import & Backup <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Export</div>
+            <div class="import-step"><strong>Safari</strong>File <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Export Bookmarks</div>
+            <div class="import-step"><strong>Brave</strong>Settings <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Bookmarks <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Export bookmarks</div>
           </div>
         </div>
 
         <div class="drop-zone" id="dropZone">
-          <div class="drop-icon">📂</div>
+          <div class="drop-icon"><i data-lucide="folder-open" class="lucide-ico" aria-hidden="true"></i></div>
           <div class="drop-title">Drop your bookmarks file here</div>
           <div class="drop-sub">Supports the standard HTML export format from all major browsers</div>
-          <button class="drop-btn" onclick="document.getElementById('fileInput').click()">📁 Choose File</button>
+          <button class="drop-btn" onclick="document.getElementById('fileInput').click()"><i data-lucide="folder" class="lucide-ico" aria-hidden="true"></i> Choose File</button>
           <input type="file" id="fileInput" accept=".html,.htm" style="display:none"/>
         </div>
 
         <div class="import-progress" id="importProgress">
-          <div class="drop-icon">🔍</div>
+          <div class="drop-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></div>
           <div style="font-family:var(--font-d);font-weight:700;margin-bottom:8px" id="progressTitle">Reading bookmarks…</div>
           <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
           <div class="progress-label" id="progressLabel">Getting started…</div>
@@ -460,16 +460,16 @@
           </div>
 
           <div id="foundSection" style="display:none">
-            <div class="result-section-title">✅ Already in Nexo Hub</div>
+            <div class="result-section-title"><i data-lucide="circle-check" class="lucide-ico" aria-hidden="true"></i> Already in Nexo Hub</div>
             <div class="bookmark-list" id="foundList"></div>
           </div>
 
           <div id="missingSection" style="display:none">
-            <div class="result-section-title">✨ Not listed yet — submit them?</div>
+            <div class="result-section-title"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> Not listed yet — submit them?</div>
             <div class="bookmark-list" id="missingList"></div>
           </div>
 
-          <button class="import-again-btn" onclick="resetImport()">↩ Import another file</button>
+          <button class="import-again-btn" onclick="resetImport()"><i data-lucide="corner-down-left" class="lucide-ico" aria-hidden="true"></i> Import another file</button>
         </div>
       </div>
     </div>
@@ -859,13 +859,14 @@
           <a class="card" href="javascript:void(0)" style="--card-color:#7c5cfc" tabindex="-1">
             <div class="card-top">
               <span class="card-name">${s.name}</span>
-              <span class="card-arrow" aria-hidden="true">↗</span>
+              <span class="card-arrow" aria-hidden="true"><i data-lucide="external-link" class="lucide-ico" aria-hidden="true"></i></span>
             </div>
             <p class="card-desc">${s.description}</p>
             <div class="card-footer">${tagHTML}</div>
-            <div class="click-count" aria-label="Visit count"><span aria-hidden="true">👁</span><span>1.2k</span></div>
+            <div class="click-count" aria-label="Visit count"><span aria-hidden="true"><i data-lucide="eye" class="lucide-ico" aria-hidden="true"></i></span><span>1.2k</span></div>
           </a>
         </div>`;
+      if(window.lucide){lucide.createIcons();}
     }
 
     function setCardStyle(style){
@@ -949,7 +950,8 @@
       const list = document.getElementById('subList');
       const subs = JSON.parse(localStorage.getItem(SUBS_KEY)||'[]');
       if(!subs.length){
-        list.innerHTML = `<div class="sub-empty">You haven't submitted any sites from this browser yet.<br/><a href="/contact/" style="color:var(--accent)">Submit a site →</a></div>`;
+        list.innerHTML = `<div class="sub-empty">You haven't submitted any sites from this browser yet.<br/><a href="/contact/" style="color:var(--accent)">Submit a site <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i></a></div>`;
+      if(window.lucide){lucide.createIcons();}
         return;
       }
 
@@ -1078,5 +1080,7 @@
     });
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

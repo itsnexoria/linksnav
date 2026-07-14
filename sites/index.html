@@ -202,7 +202,7 @@
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
         <a href="/" class="submit-nav-btn" style="gap:7px">
-          <span aria-hidden="true">←</span> Back to Hub
+          <span aria-hidden="true"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i></span> Back to Hub
         </a>
       </div>
       <div class="header-right">
@@ -222,18 +222,18 @@
   <div class="nav-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-menu-inner">
       <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
     </div>
@@ -241,7 +241,7 @@
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
   <div class="sites-wrap" id="main-content">
-    <a href="/" class="back-link">← Back to Nexo Hub</a>
+    <a href="/" class="back-link"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Nexo Hub</a>
 
     <div class="page-header">
       <div class="page-header-left">
@@ -260,15 +260,15 @@
       </div>
       <select class="sort-select" id="sortSelect" aria-label="Sort sites">
         <option value="default">Sort: Default</option>
-        <option value="alpha">A → Z</option>
-        <option value="alpha-desc">Z → A</option>
+        <option value="alpha">A <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> Z</option>
+        <option value="alpha-desc">Z <i data-lucide="arrow-right" class="lucide-ico" aria-hidden="true"></i> A</option>
         <option value="most-visited">Most Visited</option>
       </select>
       <span class="results-info" id="resultsInfo" aria-live="polite">— sites</span>
     </div>
 
     <div class="cat-pills" id="catPills" aria-label="Category filters" role="group">
-      <button class="cat-pill active" data-cat="all">✦ All</button>
+      <button class="cat-pill active" data-cat="all"><i data-lucide="sparkle" class="lucide-ico" aria-hidden="true"></i> All</button>
     </div>
 
     <div class="sites-grid" id="sitesGrid" role="list">
@@ -293,7 +293,7 @@
       <a href="/about/">About</a>
       <a href="/contact/">Submit</a>
     </nav>
-    <span>Built by <code>Nexus</code> ♥</span>
+    <span>Built by <code>Nexus</code> <i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i></span>
   </footer>
 
   <script>
@@ -485,5 +485,7 @@
   });
   </script>
   <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>
