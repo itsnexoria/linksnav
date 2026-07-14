@@ -1,416 +1,878 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<script>(function(){var t=localStorage.getItem("nexhub_theme")||"dark";document.documentElement.setAttribute("data-theme",t);})()</script>
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Donate — Nexo Hub</title>
-  <meta name="description" content="Support Nexo Hub — help keep the directory free, ad-free, and growing with a small contribution."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/donate/"/>
-  <meta property="og:title" content="Donate — Nexo Hub"/>
-  <meta property="og:description" content="Support Nexo Hub and keep the directory free for everyone."/>
-  <meta property="og:image:width" content="512"/>
-  <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Support Nexo Hub"/>
-  <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Donate — Nexo Hub",
-    "url": "https://app.nexosites.xyz/donate/",
-    "description": "Support Nexo Hub — help keep the directory free, ad-free, and growing with a small contribution.",
-    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexosites.xyz/" }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
-      { "@type": "ListItem", "position": 2, "name": "Donate", "item": "https://app.nexosites.xyz/donate/" }
-    ]
-  }
-  </script>
-  <meta name="theme-color" content="#4f7fff"/>
-  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
-  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
-  <link rel="manifest" href="/manifest.webmanifest"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/style.css?v=20260714-1"/>
-  <style>
-    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);filter:blur(3px)} to{opacity:1;transform:none;filter:none} }
-    @keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    @keyframes gradFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-    @keyframes heartbeat { 0%,100%{transform:scale(1)} 14%{transform:scale(1.18)} 28%{transform:scale(1)} 42%{transform:scale(1.12)} 56%{transform:scale(1)} }
-    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-
-    .donate-wrap {
-      position: relative; z-index: 1;
-      max-width: 700px; margin: 0 auto;
-      padding: 44px 24px 100px;
-    }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .75rem; font-family: 'Inter', system-ui, sans-serif; color: var(--muted);
-      text-decoration: none; margin-bottom: 44px;
-      transition: color .2s, gap .2s;
-    }
-    .back-link:hover { color: var(--accent); gap: 10px; }
-
-    /* Hero */
-    .donate-hero {
-      text-align: center; margin-bottom: 48px;
-      animation: fadeUp .4s ease both;
-    }
-    @keyframes gentleBeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-    .heart-icon {
-      font-size: 3.4rem; display: block; margin-bottom: 14px;
-      animation: gentleBeat 2.6s ease-in-out infinite;
-    }
-    .donate-hero h1 {
-      font-family: var(--font-d); font-size: clamp(1.8rem,5vw,2.6rem);
-      font-weight: 800; letter-spacing: -.04em; color: var(--text);
-      margin: 0 0 12px;
-    }
-    .donate-hero p { font-size: .88rem; color: var(--text2); line-height: 1.8; max-width: 480px; margin: 0 auto; }
-
-    /* Perks list */
-    .perks {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px;
-      animation: fadeUp .4s .06s ease both;
-    }
-    .perks h2 {
-      font-family: var(--font-d); font-size: .95rem; font-weight: 700;
-      margin: 0 0 16px; color: var(--text);
-    }
-    .perk-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
-    .perk-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: .84rem; color: var(--text2); line-height: 1.6;
-    }
-    .perk-list li span:first-child { font-size: 1.1rem; flex-shrink: 0; margin-top: -1px; }
-
-    /* Donation card */
-    .donate-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 32px;
-      animation: fadeUp .4s .1s ease both;
-      position: relative;
-    }
-
-    .donate-card h2 {
-      font-family: var(--font-d); font-size: 1.1rem; font-weight: 700;
-      margin: 0 0 22px; text-align: center; color: var(--text);
-    }
-
-    /* Amount buttons */
-    .amount-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-      margin-bottom: 20px;
-    }
-    .amount-btn {
-      padding: 14px 10px; border-radius: 12px;
-      font-family: var(--font-d); font-size: 1rem; font-weight: 700;
-      border: 2px solid var(--border); background: transparent;
-      color: var(--text); cursor: pointer; transition: transform .15s, border-color .2s, background .2s, color .2s;
-      text-align: center;
-      animation: cardIn .35s ease both;
-    }
-    .amount-btn:nth-child(1){animation-delay:.02s} .amount-btn:nth-child(2){animation-delay:.05s}
-    .amount-btn:nth-child(3){animation-delay:.08s} .amount-btn:nth-child(4){animation-delay:.11s}
-    .amount-btn:nth-child(5){animation-delay:.14s} .amount-btn:nth-child(6){animation-delay:.17s}
-    .amount-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .amount-btn:active { transform: translateY(0) scale(.95); }
-    .amount-btn.selected {
-      border-color: var(--accent); background: rgba(79,127,255,0.15); color: var(--accent);
-      animation: popScale .25s cubic-bezier(.34,1.56,.64,1);
-    }
-    .amount-btn .amount-label { font-size: .7rem; font-family: 'Inter', system-ui, sans-serif; font-weight: 400; color: var(--muted); display: block; margin-top: 2px; }
-
-    /* Custom amount */
-    .custom-amount-wrap {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
-      animation: slideDown .3s ease both;
-    }
-    .custom-prefix {
-      font-family: var(--font-d); font-size: 1.2rem; font-weight: 700;
-      color: var(--muted);
-    }
-    .custom-amount-input {
-      flex: 1; background: rgba(0,0,0,0.25); border: 2px solid var(--border);
-      border-radius: 10px; color: var(--text); font-family: var(--font-d);
-      font-size: 1.1rem; font-weight: 700; padding: 12px 14px;
-      transition: border-color .2s, box-shadow .2s; text-align: center;
-    }
-    .custom-amount-input:focus { outline: none; border-color: var(--accent); box-shadow:0 0 0 3px var(--accent-dim); }
-    [data-theme="light"] .custom-amount-input { background: rgba(0,0,0,0.04); }
-
-    /* PayPal button */
-    .paypal-btn {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      width: 100%; padding: 18px; border-radius: 12px;
-      background: #0070ba; border: none; cursor: pointer;
-      font-family: var(--font-d); font-size: 1rem; font-weight: 700;
-      color: #fff; text-decoration: none;
-      transition: background .2s, transform .15s, box-shadow .2s; position: relative; overflow: hidden;
-    }
-    .paypal-btn:hover { background: #005ea6; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,112,186,0.4); }
-    .paypal-btn:active { transform: translateY(0) scale(.98); }
-    .paypal-logo {
-      display: flex; align-items: center; gap: 3px;
-      transition: transform .2s;
-    }
-    .paypal-btn:hover .paypal-logo { transform: scale(1.1) rotate(-4deg); }
-    .paypal-logo svg { width: 20px; height: 20px; }
-
-    .donate-note {
-      text-align: center; font-size: .75rem; color: var(--muted);
-      margin-top: 16px; line-height: 1.6;
-    }
-    .donate-note a { color: var(--accent); }
-
-    /* Tier badges */
-    .tiers {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px; margin-top: 28px;
-      animation: fadeUp .4s .15s ease both;
-    }
-    .tier-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 14px; padding: 20px; text-align: center;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
-    }
-    .tier-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-sm); }
-    .tier-icon { font-size: 2rem; margin-bottom: 8px; display:inline-block; transition: transform .3s; }
-    .tier-card:hover .tier-icon { transform: scale(1.2) rotate(-6deg); }
-    .tier-name { font-family: var(--font-d); font-size: .9rem; font-weight: 700; margin-bottom: 4px; }
-    .tier-amount { font-family: 'Inter', system-ui, sans-serif; font-size: .8rem; color: var(--accent); margin-bottom: 8px; }
-    .tier-desc { font-size: .75rem; color: var(--muted); line-height: 1.5; }
-  </style>
-  <script src="/nexo-prefs.js"></script>
-</head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to content</a>
-  <div class="noise-overlay" aria-hidden="true"></div>
-  <div class="grid-bg" aria-hidden="true"></div>
-
-  <header class="header" role="banner">
-    <div class="header-inner">
-      <a href="/" class="logo" aria-label="Nexo Hub home">
-        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
-        <span class="logo-text">Nexo Hub</span>
-      </a>
-      <div class="header-right">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
-          <span class="theme-icon theme-icon-dark" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </span>
-          <span class="theme-icon theme-icon-light" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
-          </span>
-        </button>
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
-    <div class="nav-menu-inner">
-      <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link nav-link--active">💜 Donate</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
-      </nav>
-      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
-    </div>
-  </div>
-  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
-
-  <main class="donate-wrap" id="main-content">
-    <a href="/" class="back-link">← Back to Nexo Hub</a>
-
-    <div class="donate-hero">
-      <span class="heart-icon">💜</span>
-      <h1>Support Nexo Hub</h1>
-      <p>Nexo Hub is completely free with no ads, no paywalls, and no tracking. If it's saved you time or helped you discover something useful, consider buying me a coffee — it keeps the lights on.</p>
-    </div>
-
-    <div class="perks">
-      <h2>✨ What your support pays for</h2>
-      <ul class="perk-list">
-        <li><span>🌐</span><span>Domain renewals and Cloudflare hosting — keeping Nexo Hub fast and always online.</span></li>
-        <li><span>🔍</span><span>Ongoing curation — manually reviewing and adding new sites across all 25 categories.</span></li>
-        <li><span>🛠️</span><span>New features — more tools, better search, dark/light polish, and whatever you suggest.</span></li>
-        <li><span>🚫</span><span>Ad-free forever — donations mean I never need to sell your attention to advertisers.</span></li>
-      </ul>
-    </div>
-
-    <div class="donate-card">
-      <h2>Choose an amount</h2>
-
-      <div class="amount-grid" id="amountGrid">
-        <button class="amount-btn" data-amount="2" onclick="selectAmount(2)">$2<span class="amount-label">A coffee ☕</span></button>
-        <button class="amount-btn selected" data-amount="5" onclick="selectAmount(5)">$5<span class="amount-label">A solid tip 🙌</span></button>
-        <button class="amount-btn" data-amount="10" onclick="selectAmount(10)">$10<span class="amount-label">Big help 🔥</span></button>
-        <button class="amount-btn" data-amount="20" onclick="selectAmount(20)">$20<span class="amount-label">Legendary 🏆</span></button>
-        <button class="amount-btn" data-amount="50" onclick="selectAmount(50)">$50<span class="amount-label">Wow 🚀</span></button>
-        <button class="amount-btn" data-amount="custom" id="customBtn" onclick="selectAmount('custom')">Custom<span class="amount-label">Your choice 💜</span></button>
-      </div>
-
-      <div class="custom-amount-wrap" id="customWrap" style="display:none">
-        <span class="custom-prefix">$</span>
-        <input type="number" class="custom-amount-input" id="customInput" min="1" placeholder="Enter amount" oninput="updateDonateLink()"/>
-      </div>
-
-      <a class="paypal-btn" id="paypalLink" href="#" target="_blank" rel="noopener noreferrer" onclick="handleDonate(event)">
-        <div class="paypal-logo">
-          <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-        </div>
-        <span id="donateLabel">Donate $5 via PayPal</span>
-      </a>
-
-      <p class="donate-note">
-        You'll be redirected to PayPal. No account needed — card payments accepted too.<br>
-        Donations are non-refundable and don't confer equity or special privileges.<br>
-        Questions? <a href="/contact/">Get in touch</a>.
-      </p>
-    </div>
-
-    <div class="tiers">
-      <div class="tier-card">
-        <div class="tier-icon">☕</div>
-        <div class="tier-name">Supporter</div>
-        <div class="tier-amount">$2 – $9</div>
-        <div class="tier-desc">Warm fuzzies and my genuine gratitude.</div>
-      </div>
-      <div class="tier-card">
-        <div class="tier-icon">🔥</div>
-        <div class="tier-name">Contributor</div>
-        <div class="tier-amount">$10 – $49</div>
-        <div class="tier-desc">Covers a month of hosting. You're the real MVP.</div>
-      </div>
-      <div class="tier-card">
-        <div class="tier-icon">🚀</div>
-        <div class="tier-name">Legend</div>
-        <div class="tier-amount">$50+</div>
-        <div class="tier-desc">You basically built this thing. Eternal respect.</div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <span>Nexo Hub — Your digital command center</span>
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="/about/">About</a>
-      <a href="/tools/">Tools</a>
-      <a href="/contact/">Submit</a>
-      <a href="/donate/">Donate</a>
-    </nav>
-    <span>Built by <code>Nexus</code> ♥</span>
-  </footer>
-
   <script>
-    // Theme
-    const root = document.documentElement;
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', t);
-      localStorage.setItem('nexhub_theme', t);
-    });
-
-    // Hamburger
-    const ham = document.getElementById('hamburger');
-    const menu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('navOverlay');
-    function openMenu() { ham.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); ham.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-    function closeMenu() { ham.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); ham.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    ham.addEventListener('click', () => ham.classList.contains('is-open') ? closeMenu() : openMenu());
-    overlay.addEventListener('click', closeMenu);
-    menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-
-    /* Reveal the Admin sidebar link if this browser has a verified admin key
-       stored from a previous /pages/admin/ login. Public visitors never see it. */
-    (function(){
-      const link = document.getElementById('adminNavLink');
-      if(!link) return;
-      const key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
-      if(!key) return;
-      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
-        method: 'POST',
-        headers: {
-          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
-          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ input_key: key })
-      }).then(res => res.ok ? res.json() : null)
-        .then(ok => { if(ok === true) link.style.display = ''; })
-        .catch(()=>{});
+    (function () {
+      var t = localStorage.getItem("nexhub_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t);
     })();
-
-    // Donation logic
-    // ← Change 'nexus' to your actual PayPal.me username
-    const PAYPAL_ME = 'nexus';
-    let currentAmount = 5;
-
-    function selectAmount(val) {
-      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-      if (val === 'custom') {
-        document.getElementById('customBtn').classList.add('selected');
-        document.getElementById('customWrap').style.display = 'flex';
-        const customVal = parseFloat(document.getElementById('customInput').value);
-        currentAmount = customVal || null;
-      } else {
-        document.querySelector(`[data-amount="${val}"]`).classList.add('selected');
-        document.getElementById('customWrap').style.display = 'none';
-        currentAmount = val;
-      }
-      updateDonateLink();
-    }
-
-    function updateDonateLink() {
-      const customVal = parseFloat(document.getElementById('customInput').value);
-      if (document.getElementById('customBtn').classList.contains('selected')) {
-        currentAmount = customVal || null;
-      }
-      const link = document.getElementById('paypalLink');
-      const label = document.getElementById('donateLabel');
-      if (!currentAmount || currentAmount < 1) {
-        label.textContent = 'Enter an amount above';
-        link.href = '#';
-        return;
-      }
-      const amt = parseFloat(currentAmount).toFixed(2);
-      const url = `https://www.paypal.me/${PAYPAL_ME}/${amt}`;
-      link.href = url;
-      label.textContent = `Donate $${amt} via PayPal`;
-    }
-
-    function handleDonate(e) {
-      if (!currentAmount || currentAmount < 1 || document.getElementById('paypalLink').href === '#' || document.getElementById('paypalLink').href.endsWith('#')) {
-        e.preventDefault();
-      }
-    }
-
-    updateDonateLink();
   </script>
-  <script src="/pwa-register.js" defer></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Donate — Nexo Hub</title>
+    <meta
+      name="description"
+      content="Support Nexo Hub — help keep the directory free, ad-free, and growing with a small contribution."
+    />
+    <link rel="canonical" href="https://app.nexosites.xyz/donate/" />
+    <meta property="og:title" content="Donate — Nexo Hub" />
+    <meta
+      property="og:description"
+      content="Support Nexo Hub and keep the directory free for everyone."
+    />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="Support Nexo Hub" />
+    <meta
+      property="og:image"
+      content="https://app.nexosites.xyz/assets/logo-512.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Donate — Nexo Hub",
+        "url": "https://app.nexosites.xyz/donate/",
+        "description": "Support Nexo Hub — help keep the directory free, ad-free, and growing with a small contribution.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Nexo Hub",
+          "url": "https://app.nexosites.xyz/"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://app.nexosites.xyz/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Donate",
+            "item": "https://app.nexosites.xyz/donate/"
+          }
+        ]
+      }
+    </script>
+    <meta name="theme-color" content="#4f7fff" />
+    <link
+      rel="icon"
+      href="/assets/favicon-32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="/assets/logo-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css?v=20260714-1" />
+    <style>
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+          filter: blur(3px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes gradFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.18);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.12);
+        }
+        56% {
+          transform: scale(1);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      .donate-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 44px 24px 100px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        font-family: "Inter", system-ui, sans-serif;
+        color: var(--muted);
+        text-decoration: none;
+        margin-bottom: 44px;
+        transition:
+          color 0.2s,
+          gap 0.2s;
+      }
+      .back-link:hover {
+        color: var(--accent);
+        gap: 10px;
+      }
+
+      /* Hero */
+      .donate-hero {
+        text-align: center;
+        margin-bottom: 48px;
+        animation: fadeUp 0.4s ease both;
+      }
+      @keyframes gentleBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+      }
+      .heart-icon {
+        font-size: 3.4rem;
+        display: block;
+        margin-bottom: 14px;
+        animation: gentleBeat 2.6s ease-in-out infinite;
+      }
+      .donate-hero h1 {
+        font-family: var(--font-d);
+        font-size: clamp(1.8rem, 5vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--text);
+        margin: 0 0 12px;
+      }
+      .donate-hero p {
+        font-size: 0.88rem;
+        color: var(--text2);
+        line-height: 1.8;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      /* Perks list */
+      .perks {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        margin-bottom: 24px;
+        animation: fadeUp 0.4s 0.06s ease both;
+      }
+      .perks h2 {
+        font-family: var(--font-d);
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0 0 16px;
+        color: var(--text);
+      }
+      .perk-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+      .perk-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.84rem;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+      .perk-list li span:first-child {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: -1px;
+      }
+
+      /* Donation card */
+      .donate-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        animation: fadeUp 0.4s 0.1s ease both;
+        position: relative;
+      }
+
+      .donate-card h2 {
+        font-family: var(--font-d);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 22px;
+        text-align: center;
+        color: var(--text);
+      }
+
+      /* Amount buttons */
+      .amount-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .amount-btn {
+        padding: 14px 10px;
+        border-radius: 12px;
+        font-family: var(--font-d);
+        font-size: 1rem;
+        font-weight: 700;
+        border: 2px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          border-color 0.2s,
+          background 0.2s,
+          color 0.2s;
+        text-align: center;
+        animation: cardIn 0.35s ease both;
+      }
+      .amount-btn:nth-child(1) {
+        animation-delay: 0.02s;
+      }
+      .amount-btn:nth-child(2) {
+        animation-delay: 0.05s;
+      }
+      .amount-btn:nth-child(3) {
+        animation-delay: 0.08s;
+      }
+      .amount-btn:nth-child(4) {
+        animation-delay: 0.11s;
+      }
+      .amount-btn:nth-child(5) {
+        animation-delay: 0.14s;
+      }
+      .amount-btn:nth-child(6) {
+        animation-delay: 0.17s;
+      }
+      .amount-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .amount-btn:active {
+        transform: translateY(0) scale(0.95);
+      }
+      .amount-btn.selected {
+        border-color: var(--accent);
+        background: rgba(79, 127, 255, 0.15);
+        color: var(--accent);
+        animation: popScale 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .amount-btn .amount-label {
+        font-size: 0.7rem;
+        font-family: "Inter", system-ui, sans-serif;
+        font-weight: 400;
+        color: var(--muted);
+        display: block;
+        margin-top: 2px;
+      }
+
+      /* Custom amount */
+      .custom-amount-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        animation: slideDown 0.3s ease both;
+      }
+      .custom-prefix {
+        font-family: var(--font-d);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--muted);
+      }
+      .custom-amount-input {
+        flex: 1;
+        background: rgba(0, 0, 0, 0.25);
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        color: var(--text);
+        font-family: var(--font-d);
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 12px 14px;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        text-align: center;
+      }
+      .custom-amount-input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-dim);
+      }
+      [data-theme="light"] .custom-amount-input {
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      /* PayPal button */
+      .paypal-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        padding: 18px;
+        border-radius: 12px;
+        background: #0070ba;
+        border: none;
+        cursor: pointer;
+        font-family: var(--font-d);
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .paypal-btn:hover {
+        background: #005ea6;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 112, 186, 0.4);
+      }
+      .paypal-btn:active {
+        transform: translateY(0) scale(0.98);
+      }
+      .paypal-logo {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        transition: transform 0.2s;
+      }
+      .paypal-btn:hover .paypal-logo {
+        transform: scale(1.1) rotate(-4deg);
+      }
+      .paypal-logo svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .donate-note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 16px;
+        line-height: 1.6;
+      }
+      .donate-note a {
+        color: var(--accent);
+      }
+
+      /* Tier badges */
+      .tiers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+        animation: fadeUp 0.4s 0.15s ease both;
+      }
+      .tier-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px;
+        text-align: center;
+        transition:
+          transform 0.2s,
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .tier-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: var(--shadow-sm);
+      }
+      .tier-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+        display: inline-block;
+        transition: transform 0.3s;
+      }
+      .tier-card:hover .tier-icon {
+        transform: scale(1.2) rotate(-6deg);
+      }
+      .tier-name {
+        font-family: var(--font-d);
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .tier-amount {
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 0.8rem;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .tier-desc {
+        font-size: 0.75rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+    </style>
+    <script src="/nexo-prefs.js"></script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="grid-bg" aria-hidden="true"></div>
+
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="/" class="logo" aria-label="Nexo Hub home">
+          <img
+            src="/assets/logo.png"
+            alt="Nexo Hub logo"
+            class="logo-img"
+            width="36"
+            height="36"
+            loading="eager"
+            decoding="async"
+          />
+          <span class="logo-text">Nexo Hub</span>
+        </a>
+        <div class="header-right">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle light/dark mode"
+          >
+            <span class="theme-icon theme-icon-dark" aria-hidden="true">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </span>
+            <span class="theme-icon theme-icon-light" aria-hidden="true">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+              </svg>
+            </span>
+          </button>
+          <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <span class="ham-bar"></span><span class="ham-bar"></span
+            ><span class="ham-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+      <div class="nav-menu-inner">
+        <nav class="nav-menu-links" aria-label="Site navigation">
+          <a href="/" class="nav-link">🏠 Home</a>
+          <a href="/category/" class="nav-link">🗂️ Categories</a>
+          <a href="/tag/" class="nav-link">🏷️ Tags</a>
+          <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
+          <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+          <a href="/new/" class="nav-link">🆕 What's New</a>
+          <a href="/blog/" class="nav-link">📰 Blog</a>
+          <a href="/contact/" class="nav-link">📬 Submit a Site</a>
+          <a href="/about/" class="nav-link">👤 About</a>
+          <a href="/donate/" class="nav-link nav-link--active">💜 Donate</a>
+          <a href="/settings/" class="nav-link">⚙️ Settings</a>
+          <a
+            href="/pages/admin/"
+            class="nav-link"
+            id="adminNavLink"
+            style="display: none"
+            >⚙️ Admin</a
+          >
+        </nav>
+        <div class="nav-menu-footer">
+          <span>Nexo Hub by <code>Nexus</code></span>
+        </div>
+      </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+    <main class="donate-wrap" id="main-content">
+      <a href="/" class="back-link">← Back to Nexo Hub</a>
+
+      <div class="donate-hero">
+        <span class="heart-icon">💜</span>
+        <h1>Support Nexo Hub</h1>
+        <p>
+          Nexo Hub is completely free with no ads, no paywalls, and no tracking.
+          If it's saved you time or helped you discover something useful,
+          consider buying me a coffee — it keeps the lights on.
+        </p>
+      </div>
+
+      <div class="perks">
+        <h2>✨ What your support pays for</h2>
+        <ul class="perk-list">
+          <li>
+            <span>🌐</span
+            ><span
+              >Domain renewals and Cloudflare hosting — keeping Nexo Hub fast
+              and always online.</span
+            >
+          </li>
+          <li>
+            <span>🔍</span
+            ><span
+              >Ongoing curation — manually reviewing and adding new sites across
+              all 25 categories.</span
+            >
+          </li>
+          <li>
+            <span>🛠️</span
+            ><span
+              >New features — more tools, better search, dark/light polish, and
+              whatever you suggest.</span
+            >
+          </li>
+          <li>
+            <span>🚫</span
+            ><span
+              >Ad-free forever — donations mean I never need to sell your
+              attention to advertisers.</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="donate-card">
+        <h2>Choose an amount</h2>
+
+        <div class="amount-grid" id="amountGrid">
+          <button class="amount-btn" data-amount="2" onclick="selectAmount(2)">
+            $2<span class="amount-label">A coffee ☕</span>
+          </button>
+          <button
+            class="amount-btn selected"
+            data-amount="5"
+            onclick="selectAmount(5)"
+          >
+            $5<span class="amount-label">A solid tip 🙌</span>
+          </button>
+          <button
+            class="amount-btn"
+            data-amount="10"
+            onclick="selectAmount(10)"
+          >
+            $10<span class="amount-label">Big help 🔥</span>
+          </button>
+          <button
+            class="amount-btn"
+            data-amount="20"
+            onclick="selectAmount(20)"
+          >
+            $20<span class="amount-label">Legendary 🏆</span>
+          </button>
+          <button
+            class="amount-btn"
+            data-amount="50"
+            onclick="selectAmount(50)"
+          >
+            $50<span class="amount-label">Wow 🚀</span>
+          </button>
+          <button
+            class="amount-btn"
+            data-amount="custom"
+            id="customBtn"
+            onclick="selectAmount('custom')"
+          >
+            Custom<span class="amount-label">Your choice 💜</span>
+          </button>
+        </div>
+
+        <div class="custom-amount-wrap" id="customWrap" style="display: none">
+          <span class="custom-prefix">$</span>
+          <input
+            type="number"
+            class="custom-amount-input"
+            id="customInput"
+            min="1"
+            placeholder="Enter amount"
+            oninput="updateDonateLink()"
+          />
+        </div>
+
+        <a
+          class="paypal-btn"
+          id="paypalLink"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          onclick="handleDonate(event)"
+        >
+          <div class="paypal-logo">
+            <svg
+              viewBox="0 0 24 24"
+              fill="#fff"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"
+              />
+            </svg>
+          </div>
+          <span id="donateLabel">Donate $5 via PayPal</span>
+        </a>
+
+        <p class="donate-note">
+          You'll be redirected to PayPal. No account needed — card payments
+          accepted too.<br />
+          Donations are non-refundable and don't confer equity or special
+          privileges.<br />
+          Questions? <a href="/contact/">Get in touch</a>.
+        </p>
+      </div>
+
+      <div class="tiers">
+        <div class="tier-card">
+          <div class="tier-icon">☕</div>
+          <div class="tier-name">Supporter</div>
+          <div class="tier-amount">$2 – $9</div>
+          <div class="tier-desc">Warm fuzzies and my genuine gratitude.</div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-icon">🔥</div>
+          <div class="tier-name">Contributor</div>
+          <div class="tier-amount">$10 – $49</div>
+          <div class="tier-desc">
+            Covers a month of hosting. You're the real MVP.
+          </div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-icon">🚀</div>
+          <div class="tier-name">Legend</div>
+          <div class="tier-amount">$50+</div>
+          <div class="tier-desc">
+            You basically built this thing. Eternal respect.
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <span>Nexo Hub — Your digital command center</span>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/about/">About</a>
+        <a href="/tools/">Tools</a>
+        <a href="/contact/">Submit</a>
+        <a href="/donate/">Donate</a>
+      </nav>
+      <span>Built by <code>Nexus</code> ♥</span>
+    </footer>
+
+    <script>
+      // Theme
+      const root = document.documentElement;
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const t = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", t);
+        localStorage.setItem("nexhub_theme", t);
+      });
+
+      // Hamburger
+      const ham = document.getElementById("hamburger");
+      const menu = document.getElementById("mobileMenu");
+      const overlay = document.getElementById("navOverlay");
+      function openMenu() {
+        ham.classList.add("is-open");
+        menu.classList.add("is-open");
+        overlay.classList.add("is-open");
+        ham.setAttribute("aria-expanded", "true");
+        menu.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        ham.classList.remove("is-open");
+        menu.classList.remove("is-open");
+        overlay.classList.remove("is-open");
+        ham.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+      ham.addEventListener("click", () =>
+        ham.classList.contains("is-open") ? closeMenu() : openMenu(),
+      );
+      overlay.addEventListener("click", closeMenu);
+      menu
+        .querySelectorAll(".nav-link")
+        .forEach((a) => a.addEventListener("click", closeMenu));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+      (function () {
+        const link = document.getElementById("adminNavLink");
+        if (!link) return;
+        const key =
+          sessionStorage.getItem("nexohub_admin_key") ||
+          localStorage.getItem("nexohub_admin_key");
+        if (!key) return;
+        fetch(
+          "https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status",
+          {
+            method: "POST",
+            headers: {
+              apikey: "sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r",
+              Authorization:
+                "Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ input_key: key }),
+          },
+        )
+          .then((res) => (res.ok ? res.json() : null))
+          .then((ok) => {
+            if (ok === true) link.style.display = "";
+          })
+          .catch(() => {});
+      })();
+
+      // Donation logic
+      // ← Change 'nexus' to your actual PayPal.me username
+      const PAYPAL_ME = "nxrealm08";
+      let currentAmount = 5;
+
+      function selectAmount(val) {
+        document
+          .querySelectorAll(".amount-btn")
+          .forEach((b) => b.classList.remove("selected"));
+        if (val === "custom") {
+          document.getElementById("customBtn").classList.add("selected");
+          document.getElementById("customWrap").style.display = "flex";
+          const customVal = parseFloat(
+            document.getElementById("customInput").value,
+          );
+          currentAmount = customVal || null;
+        } else {
+          document
+            .querySelector(`[data-amount="${val}"]`)
+            .classList.add("selected");
+          document.getElementById("customWrap").style.display = "none";
+          currentAmount = val;
+        }
+        updateDonateLink();
+      }
+
+      function updateDonateLink() {
+        const customVal = parseFloat(
+          document.getElementById("customInput").value,
+        );
+        if (
+          document.getElementById("customBtn").classList.contains("selected")
+        ) {
+          currentAmount = customVal || null;
+        }
+        const link = document.getElementById("paypalLink");
+        const label = document.getElementById("donateLabel");
+        if (!currentAmount || currentAmount < 1) {
+          label.textContent = "Enter an amount above";
+          link.href = "#";
+          return;
+        }
+        const amt = parseFloat(currentAmount).toFixed(2);
+        const url = `https://www.paypal.me/${PAYPAL_ME}/${amt}`;
+        link.href = url;
+        label.textContent = `Donate $${amt} via PayPal`;
+      }
+
+      function handleDonate(e) {
+        if (
+          !currentAmount ||
+          currentAmount < 1 ||
+          document.getElementById("paypalLink").href === "#" ||
+          document.getElementById("paypalLink").href.endsWith("#")
+        ) {
+          e.preventDefault();
+        }
+      }
+
+      updateDonateLink();
+    </script>
+    <script src="/pwa-register.js" defer></script>
+  </body>
 </html>

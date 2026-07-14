@@ -1,295 +1,533 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<script>(function(){var t=localStorage.getItem("nexhub_theme")||"dark";document.documentElement.setAttribute("data-theme",t);})()</script>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ── PRIMARY SEO ─────────────────────────────────── -->
-  <title>Nexo Hub — Your Digital Command Center</title>
-  <meta name="description" content="A curated, searchable directory of 620+ essential websites across AI, gaming, dev tools, design, music, finance, and more." />
-  <meta name="keywords"    content="web directory, useful websites, ai tools, dev tools, gaming sites, design resources, productivity apps, nexhub" />
-  <meta name="author"      content="Nexus" />
-  <link rel="canonical"    href="https://app.nexosites.xyz/" />
-
-  <!-- ── OPEN GRAPH ────────────────────────────────────── -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://app.nexosites.xyz/" />
-  <meta property="og:title"       content="Nexo Hub — Your Digital Command Center" />
-  <meta property="og:description" content="620+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools." />
-  <meta property="og:image:alt" content="Nexo Hub logo — curated web directory"/>
-  <meta property="og:image"       content="https://app.nexosites.xyz/assets/logo-512.png" />
-  <meta property="og:image:width"  content="512" />
-  <meta property="og:image:height" content="512" />
-  <meta property="og:site_name"   content="Nexo Hub" />
-  <meta property="og:locale"      content="en_US" />
-
-  <!-- ── TWITTER CARD ──────────────────────────────────── -->
-  <meta name="twitter:card"        content="summary" />
-  <meta name="twitter:title"       content="Nexo Hub — Your Digital Command Center" />
-  <meta name="twitter:description" content="620+ curated websites. Search, filter, favourite." />
-  <meta name="twitter:image"       content="https://app.nexosites.xyz/assets/logo-512.png" />
-
-  <!-- ── FAVICONS ──────────────────────────────────────── -->
-  <link rel="icon"             href="assets/favicon-32.png" sizes="32x32"  type="image/png" />
-  <link rel="icon"             href="assets/favicon-64.png" sizes="64x64"  type="image/png" />
-  <link rel="apple-touch-icon" href="assets/logo-192.png" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="alternate" type="application/rss+xml" title="Nexo Hub — What's New" href="/feed.xml"/>
-  <meta name="theme-color"     content="#7c5cfc" />
-
-  <!-- ── JSON-LD ───────────────────────────────────────── -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Nexo Hub",
-    "url": "https://app.nexosites.xyz/",
-    "description": "Curated directory of 620+ essential websites across AI, gaming, dev tools, design, music, finance, health, travel, writing, and photography.",
-    "author": { "@type": "Person", "name": "Nexus" },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": { "@type": "EntryPoint", "urlTemplate": "https://app.nexosites.xyz/search/?q={search_term_string}" },
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Nexo Hub",
-    "url": "https://app.nexosites.xyz/",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Any",
-    "description": "A curated, searchable directory of 620+ essential websites across AI, gaming, dev tools, design, and more — installable as a free progressive web app.",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "creator": { "@type": "Person", "name": "Nexus" }
-  }
-  </script>
-
-  <!-- ── FONTS ─────────────────────────────────────────── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-  <!-- Preconnect to favicon CDN -->
-  <link rel="preconnect" href="https://www.google.com" crossorigin/>
-  <link rel="dns-prefetch" href="https://www.google.com"/>
-  <!-- ── STYLES ────────────────────────────────────────── -->
   <script>
-    (function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+    (function () {
+      var t = localStorage.getItem("nexhub_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
-  <script src="/nexo-prefs.js"></script>
-  <link rel="stylesheet" href="style.css?v=20260714-1" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    @keyframes skeletonPulse {
-      0%, 100% { opacity: 0.4; }
-      50%       { opacity: 0.8; }
-    }
-    .skeleton-card {
-      background: var(--surface, #1c2030);
-      border: 1px solid var(--border, rgba(255,255,255,0.07));
-      border-radius: 14px; padding: 18px; height: 148px;
-      animation: skeletonPulse 1.5s ease-in-out infinite;
-    }
-    .skeleton-card:nth-child(2) { animation-delay:.1s }
-    .skeleton-card:nth-child(3) { animation-delay:.2s }
-    .skeleton-card:nth-child(4) { animation-delay:.3s }
-    .skeleton-card:nth-child(5) { animation-delay:.4s }
-    .skeleton-card:nth-child(6) { animation-delay:.5s }
-    .skeleton-line { height:10px; border-radius:5px; background:var(--border2, rgba(255,255,255,0.1)); margin-bottom:10px; }
-    .skeleton-line.w60 { width:60% }
-    .skeleton-line.w80 { width:80% }
-    .skeleton-line.w40 { width:40% }
-  </style>
-</head>
-<body>
-  <a href="#main" class="skip-link">Skip to content</a>
-  <div class="noise-overlay" aria-hidden="true"></div>
-  <div class="grid-bg"       aria-hidden="true"></div>
-  <div class="orb orb-1" aria-hidden="true"></div>
-  <div class="orb orb-2" aria-hidden="true"></div>
-  <div class="orb orb-3" aria-hidden="true"></div>
+    <!-- ── PRIMARY SEO ─────────────────────────────────── -->
+    <title>Nexo Hub — Your Digital Command Center</title>
+    <meta
+      name="description"
+      content="A curated, searchable directory of 620+ essential websites across AI, gaming, dev tools, design, music, finance, and more."
+    />
+    <meta
+      name="keywords"
+      content="web directory, useful websites, ai tools, dev tools, gaming sites, design resources, productivity apps, nexhub"
+    />
+    <meta name="author" content="Nexus" />
+    <meta name="yandex-verification" content="6529042ea3a83148" />
+    <link rel="canonical" href="https://app.nexosites.xyz/" />
 
-  <!-- ── HEADER ────────────────────────────────────────── -->
-  <header class="header" role="banner">
-    <div class="header-inner">
+    <!-- ── OPEN GRAPH ────────────────────────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://app.nexosites.xyz/" />
+    <meta
+      property="og:title"
+      content="Nexo Hub — Your Digital Command Center"
+    />
+    <meta
+      property="og:description"
+      content="620+ curated websites across AI, gaming, dev tools, design, music, and more. Search, filter, and favourite the web's best tools."
+    />
+    <meta
+      property="og:image:alt"
+      content="Nexo Hub logo — curated web directory"
+    />
+    <meta
+      property="og:image"
+      content="https://app.nexosites.xyz/assets/logo-512.png"
+    />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:site_name" content="Nexo Hub" />
+    <meta property="og:locale" content="en_US" />
 
-      <!-- Logo -->
-      <a href="/" class="logo" aria-label="Nexo Hub home">
-        <img src="assets/logo.png"
-             alt="Nexo Hub logo"
-             class="logo-img"
-             width="36" height="36"
-             loading="eager"
-             decoding="async" />
-        <h1 class="logo-text gradient-text">Nexo Hub</h1>
-      </a>
+    <!-- ── TWITTER CARD ──────────────────────────────────── -->
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Nexo Hub — Your Digital Command Center"
+    />
+    <meta
+      name="twitter:description"
+      content="620+ curated websites. Search, filter, favourite."
+    />
+    <meta
+      name="twitter:image"
+      content="https://app.nexosites.xyz/assets/logo-512.png"
+    />
 
-      <!-- Controls (search + count + submit) -->
-      <div class="header-controls" role="search">
-        <div class="search-wrap">
-          <svg class="search-icon" aria-hidden="true" width="15" height="15" viewBox="0 0 20 20" fill="none">
-            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
-            <path d="m15 15 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <input type="search"
-                 id="searchInput"
-                 aria-label="Search sites"
-                 placeholder="Search 620+ sites…"
-                 autocomplete="off"
-                 spellcheck="false"
-                 role="combobox"
-                 aria-expanded="false"
-                 aria-controls="searchSuggest"
-                 aria-autocomplete="list" />
-          <kbd aria-hidden="true">Ctrl K</kbd>
-          <div class="search-suggest" id="searchSuggest" role="listbox" hidden></div>
-        </div>
-        <div class="site-count" id="siteCount" aria-live="polite">Loading…</div>
-        <button class="random-btn" id="randomBtn" aria-label="Open a random site" title="Surprise me (press R)">
-          <span aria-hidden="true">🎲</span>
-        </button>
-        <a href="/contact/" class="submit-nav-btn" aria-label="Submit a site">
-          <span class="submit-nav-icon" aria-hidden="true">+</span>
-          <span class="submit-nav-label">Submit</span>
+    <!-- ── FAVICONS ──────────────────────────────────────── -->
+    <link
+      rel="icon"
+      href="assets/favicon-32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="assets/favicon-64.png"
+      sizes="64x64"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Nexo Hub — What's New"
+      href="/feed.xml"
+    />
+    <meta name="theme-color" content="#7c5cfc" />
+
+    <!-- ── JSON-LD ───────────────────────────────────────── -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Nexo Hub",
+        "url": "https://app.nexosites.xyz/",
+        "description": "Curated directory of 620+ essential websites across AI, gaming, dev tools, design, music, finance, health, travel, writing, and photography.",
+        "author": { "@type": "Person", "name": "Nexus" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://app.nexosites.xyz/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Nexo Hub",
+        "url": "https://app.nexosites.xyz/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "description": "A curated, searchable directory of 620+ essential websites across AI, gaming, dev tools, design, and more — installable as a free progressive web app.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "creator": { "@type": "Person", "name": "Nexus" }
+      }
+    </script>
+
+    <!-- ── FONTS ─────────────────────────────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preconnect to favicon CDN -->
+    <link rel="preconnect" href="https://www.google.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <!-- ── STYLES ────────────────────────────────────────── -->
+    <script>
+      (function () {
+        var t = localStorage.getItem("nexhub_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+    <script src="/nexo-prefs.js"></script>
+    <link rel="stylesheet" href="style.css?v=20260714-1" />
+
+    <style>
+      @keyframes skeletonPulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+      .skeleton-card {
+        background: var(--surface, #1c2030);
+        border: 1px solid var(--border, rgba(255, 255, 255, 0.07));
+        border-radius: 14px;
+        padding: 18px;
+        height: 148px;
+        animation: skeletonPulse 1.5s ease-in-out infinite;
+      }
+      .skeleton-card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .skeleton-card:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .skeleton-card:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      .skeleton-card:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      .skeleton-card:nth-child(6) {
+        animation-delay: 0.5s;
+      }
+      .skeleton-line {
+        height: 10px;
+        border-radius: 5px;
+        background: var(--border2, rgba(255, 255, 255, 0.1));
+        margin-bottom: 10px;
+      }
+      .skeleton-line.w60 {
+        width: 60%;
+      }
+      .skeleton-line.w80 {
+        width: 80%;
+      }
+      .skeleton-line.w40 {
+        width: 40%;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <!-- ── HEADER ────────────────────────────────────────── -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <!-- Logo -->
+        <a href="/" class="logo" aria-label="Nexo Hub home">
+          <img
+            src="assets/logo.png"
+            alt="Nexo Hub logo"
+            class="logo-img"
+            width="36"
+            height="36"
+            loading="eager"
+            decoding="async"
+          />
+          <h1 class="logo-text gradient-text">Nexo Hub</h1>
         </a>
-      </div>
 
-      <!-- Right side: theme toggle + hamburger -->
-      <div class="header-right">
-        <button class="shortcuts-hint-btn" onclick="openShortcutsModal()" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">?</button>
-        <!-- Light/Dark toggle -->
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
-          <span class="theme-icon theme-icon-dark" aria-hidden="true">
-            <!-- Moon -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        <!-- Controls (search + count + submit) -->
+        <div class="header-controls" role="search">
+          <div class="search-wrap">
+            <svg
+              class="search-icon"
+              aria-hidden="true"
+              width="15"
+              height="15"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <circle
+                cx="9"
+                cy="9"
+                r="6"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m15 15 3 3"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
             </svg>
-          </span>
-          <span class="theme-icon theme-icon-light" aria-hidden="true">
-            <!-- Sun -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-          </span>
-        </button>
+            <input
+              type="search"
+              id="searchInput"
+              aria-label="Search sites"
+              placeholder="Search 620+ sites…"
+              autocomplete="off"
+              spellcheck="false"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="searchSuggest"
+              aria-autocomplete="list"
+            />
+            <kbd aria-hidden="true">Ctrl K</kbd>
+            <div
+              class="search-suggest"
+              id="searchSuggest"
+              role="listbox"
+              hidden
+            ></div>
+          </div>
+          <div class="site-count" id="siteCount" aria-live="polite">
+            Loading…
+          </div>
+          <button
+            class="random-btn"
+            id="randomBtn"
+            aria-label="Open a random site"
+            title="Surprise me (press R)"
+          >
+            <span aria-hidden="true">🎲</span>
+          </button>
+          <a href="/contact/" class="submit-nav-btn" aria-label="Submit a site">
+            <span class="submit-nav-icon" aria-hidden="true">+</span>
+            <span class="submit-nav-label">Submit</span>
+          </a>
+        </div>
 
-        <!-- Hamburger button -->
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <span class="ham-bar"></span>
-          <span class="ham-bar"></span>
-          <span class="ham-bar"></span>
-        </button>
+        <!-- Right side: theme toggle + hamburger -->
+        <div class="header-right">
+          <button
+            class="shortcuts-hint-btn"
+            onclick="openShortcutsModal()"
+            aria-label="Keyboard shortcuts"
+            title="Keyboard shortcuts (?)"
+          >
+            ?
+          </button>
+          <!-- Light/Dark toggle -->
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle light/dark mode"
+            title="Toggle theme"
+          >
+            <span class="theme-icon theme-icon-dark" aria-hidden="true">
+              <!-- Moon -->
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </span>
+            <span class="theme-icon theme-icon-light" aria-hidden="true">
+              <!-- Sun -->
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            </span>
+          </button>
+
+          <!-- Hamburger button -->
+          <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <span class="ham-bar"></span>
+            <span class="ham-bar"></span>
+            <span class="ham-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── MOBILE / DESKTOP MENU ─────────────────────────── -->
+    <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+      <div class="nav-menu-inner">
+        <nav class="nav-menu-links" aria-label="Site navigation">
+          <a href="/" class="nav-link nav-link--active">🏠 Home</a>
+          <a href="/category/" class="nav-link">🗂️ Categories</a>
+          <a href="/tag/" class="nav-link">🏷️ Tags</a>
+          <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
+          <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+          <a href="/new/" class="nav-link">🆕 What's New</a>
+          <a href="/blog/" class="nav-link">📰 Blog</a>
+          <a href="/contact/" class="nav-link">📬 Submit a Site</a>
+          <a href="/about/" class="nav-link">👤 About</a>
+          <a href="/donate/" class="nav-link">💜 Donate</a>
+          <a href="/settings/" class="nav-link">⚙️ Settings</a>
+          <a
+            href="/pages/admin/"
+            class="nav-link"
+            id="adminNavLink"
+            style="display: none"
+            >⚙️ Admin</a
+          >
+        </nav>
+        <div class="nav-menu-footer">
+          <span>Nexo Hub by <code>Nexus</code></span>
+        </div>
       </div>
     </div>
-  </header>
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
-  <!-- ── MOBILE / DESKTOP MENU ─────────────────────────── -->
-  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
-    <div class="nav-menu-inner">
-      <nav class="nav-menu-links" aria-label="Site navigation">
-        <a href="/" class="nav-link nav-link--active">🏠 Home</a>
-        <a href="/category/" class="nav-link">🗂️ Categories</a>
-        <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/new/" class="nav-link">🆕 What's New</a>
-        <a href="/blog/" class="nav-link">📰 Blog</a>
-        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/about/" class="nav-link">👤 About</a>
-        <a href="/donate/" class="nav-link">💜 Donate</a>
-        <a href="/settings/" class="nav-link">⚙️ Settings</a>
-        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
-      </nav>
-      <div class="nav-menu-footer">
-        <span>Nexo Hub by <code>Nexus</code></span>
+    <!-- ── CATEGORY NAV ──────────────────────────────────── -->
+    <nav class="cat-nav" id="catNav" aria-label="Site categories">
+      <button
+        class="cat-scroll-btn"
+        id="scrollLeft"
+        aria-label="Scroll categories left"
+      >
+        ‹
+      </button>
+      <div class="cat-nav-inner" id="catNavInner" role="tablist">
+        <button
+          class="cat-btn active"
+          data-cat="all"
+          role="tab"
+          aria-selected="true"
+        >
+          ✦ All
+        </button>
       </div>
-    </div>
-  </div>
-  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
-
-  <!-- ── CATEGORY NAV ──────────────────────────────────── -->
-  <nav class="cat-nav" id="catNav" aria-label="Site categories">
-    <button class="cat-scroll-btn" id="scrollLeft"  aria-label="Scroll categories left">‹</button>
-    <div class="cat-nav-inner" id="catNavInner" role="tablist">
-      <button class="cat-btn active" data-cat="all" role="tab" aria-selected="true">✦ All</button>
-    </div>
-    <button class="cat-scroll-btn" id="scrollRight" aria-label="Scroll categories right">›</button>
-  </nav>
-
-  <!-- ── MAIN ──────────────────────────────────────────── -->
-  <main class="main" id="main">
-    <h2 class="section-label" id="sectionLabel" aria-live="polite">All Sites</h2>
-
-    <div class="filter-bar" id="filterBar" role="toolbar" aria-label="Filter and sort options">
-      <span class="filter-bar-label">Sort</span>
-      <select class="filter-select" id="sortSelect" onchange="onSortChange(this.value)" aria-label="Sort order">
-        <option value="default">Default</option>
-        <option value="az">A → Z</option>
-        <option value="za">Z → A</option>
-        <option value="visits">Most Visited</option>
-      </select>
-      <div class="filter-sep"></div>
-      <span class="filter-bar-label">Price</span>
-      <select class="filter-select" id="priceSelect" onchange="onPriceChange(this.value)" aria-label="Price filter">
-        <option value="all">All</option>
-        <option value="free">Free</option>
-        <option value="freemium">Freemium</option>
-        <option value="paid">Paid</option>
-      </select>
-      <div class="filter-sep"></div>
-      <span class="filter-bar-label">Tag</span>
-      <select class="filter-select" id="tagSelect" onchange="onTagChange(this.value)" aria-label="Tag filter">
-        <option value="">All tags</option>
-      </select>
-      <span class="filter-drag-hint" id="dragHint">Drag to reorder</span>
-      <button class="clear-recents-btn" id="clearRecentsBtn" onclick="clearRecents()" style="display:none">Clear history</button>
-    </div>
-
-    <div class="cards-grid" id="cardsGrid" role="list">
-      <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w40"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line w40"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
-    </div>
-
-    <div class="empty-state" id="emptyState" style="display:none" role="status">
-      <div class="empty-icon">◌</div>
-      <p>Nothing found for "<span id="emptyQuery"></span>"</p>
-    </div>
-  </main>
-
-  <!-- ── FOOTER ────────────────────────────────────────── -->
-  <footer class="footer" role="contentinfo">
-    <span>Nexo Hub — Your digital command center</span>
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="/sites/">All Sites</a>
-      <a href="/category/">Categories</a>
-      <a href="/tag/">Tags</a>
-      <a href="/about/">About</a>
-      <a href="/tools/">Tools</a>
-      <a href="/contact/">Submit</a>
-      <a href="/donate/">Donate</a>
+      <button
+        class="cat-scroll-btn"
+        id="scrollRight"
+        aria-label="Scroll categories right"
+      >
+        ›
+      </button>
     </nav>
-    <span>Built by <code>Nexus</code> ♥</span>
-  </footer>
 
-  <div class="toast" id="toast" aria-live="polite"></div>
+    <!-- ── MAIN ──────────────────────────────────────────── -->
+    <main class="main" id="main">
+      <h2 class="section-label" id="sectionLabel" aria-live="polite">
+        All Sites
+      </h2>
 
-  <script src="app.js?v=20260714-1" defer></script>
-  <script src="/pwa-register.js" defer></script>
-</body>
+      <div
+        class="filter-bar"
+        id="filterBar"
+        role="toolbar"
+        aria-label="Filter and sort options"
+      >
+        <span class="filter-bar-label">Sort</span>
+        <select
+          class="filter-select"
+          id="sortSelect"
+          onchange="onSortChange(this.value)"
+          aria-label="Sort order"
+        >
+          <option value="default">Default</option>
+          <option value="az">A → Z</option>
+          <option value="za">Z → A</option>
+          <option value="visits">Most Visited</option>
+        </select>
+        <div class="filter-sep"></div>
+        <span class="filter-bar-label">Price</span>
+        <select
+          class="filter-select"
+          id="priceSelect"
+          onchange="onPriceChange(this.value)"
+          aria-label="Price filter"
+        >
+          <option value="all">All</option>
+          <option value="free">Free</option>
+          <option value="freemium">Freemium</option>
+          <option value="paid">Paid</option>
+        </select>
+        <div class="filter-sep"></div>
+        <span class="filter-bar-label">Tag</span>
+        <select
+          class="filter-select"
+          id="tagSelect"
+          onchange="onTagChange(this.value)"
+          aria-label="Tag filter"
+        >
+          <option value="">All tags</option>
+        </select>
+        <span class="filter-drag-hint" id="dragHint">Drag to reorder</span>
+        <button
+          class="clear-recents-btn"
+          id="clearRecentsBtn"
+          onclick="clearRecents()"
+          style="display: none"
+        >
+          Clear history
+        </button>
+      </div>
+
+      <div class="cards-grid" id="cardsGrid" role="list">
+        <div class="skeleton-card">
+          <div class="skeleton-line w60"></div>
+          <div class="skeleton-line w80"></div>
+          <div class="skeleton-line w40"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line w40"></div>
+          <div class="skeleton-line w80"></div>
+          <div class="skeleton-line w60"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line w80"></div>
+          <div class="skeleton-line w60"></div>
+          <div class="skeleton-line w40"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line w60"></div>
+          <div class="skeleton-line w40"></div>
+          <div class="skeleton-line w80"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line w40"></div>
+          <div class="skeleton-line w80"></div>
+          <div class="skeleton-line w60"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line w80"></div>
+          <div class="skeleton-line w60"></div>
+          <div class="skeleton-line w40"></div>
+        </div>
+      </div>
+
+      <div
+        class="empty-state"
+        id="emptyState"
+        style="display: none"
+        role="status"
+      >
+        <div class="empty-icon">◌</div>
+        <p>Nothing found for "<span id="emptyQuery"></span>"</p>
+      </div>
+    </main>
+
+    <!-- ── FOOTER ────────────────────────────────────────── -->
+    <footer class="footer" role="contentinfo">
+      <span>Nexo Hub — Your digital command center</span>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/sites/">All Sites</a>
+        <a href="/category/">Categories</a>
+        <a href="/tag/">Tags</a>
+        <a href="/about/">About</a>
+        <a href="/tools/">Tools</a>
+        <a href="/contact/">Submit</a>
+        <a href="/donate/">Donate</a>
+      </nav>
+      <span>Built by <code>Nexus</code> ♥</span>
+    </footer>
+
+    <div class="toast" id="toast" aria-live="polite"></div>
+
+    <script src="app.js?v=20260714-1" defer></script>
+    <script src="/pwa-register.js" defer></script>
+  </body>
 </html>
