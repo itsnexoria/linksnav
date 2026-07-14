@@ -57,7 +57,6 @@
 /feed.xml         https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/rss-feed 302
 
 # Sites sitemap — generated dynamically from the sites table (real lastmod per site)
-/sitemap-sites.xml https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/sitemap-sites 302
 
 /site             /site/           301
 /site/:slug       /404              200
