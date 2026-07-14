@@ -296,6 +296,13 @@
               </div>
               Slate
             </button>
+            <button class="theme-opt" id="themeRed" onclick="setTheme('red')">
+              <div class="theme-swatch" style="background:#150708">
+                <div class="theme-swatch-bar" style="background:#ef4444"></div>
+                <div class="theme-swatch-bar" style="background:#241010"></div>
+              </div>
+              Red
+            </button>
           </div>
         </div>
 
@@ -734,7 +741,7 @@
     }
     function updateThemeUI(t){
       document.querySelectorAll('.theme-opt').forEach(b => b.classList.remove('active'));
-      const map = { dark:'themeDark', light:'themeLight', midnight:'themeMidnight', slate:'themeSlate' };
+      const map = { dark:'themeDark', light:'themeLight', midnight:'themeMidnight', slate:'themeSlate', red:'themeRed' };
       const el = document.getElementById(map[t]);
       if(el) el.classList.add('active');
     }

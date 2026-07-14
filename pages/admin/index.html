@@ -409,6 +409,9 @@
         <button class="admin-tab" data-tab="health" onclick="switchTab('health')">
           🩺 Health <span class="tab-badge" id="healthBadge">0</span>
         </button>
+        <button class="admin-tab" data-tab="blog" onclick="switchTab('blog')">
+          📰 Blog
+        </button>
       </div>
 
       <!-- PENDING TAB -->
@@ -495,6 +498,29 @@
           <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" id="runHealthBtn" onclick="runHealthCheckNow()">▶ Run Check Now</button>
         </div>
         <div class="pending-list" id="healthDownList"></div>
+      </div>
+
+      <!-- BLOG TAB -->
+      <div class="admin-panel-section" id="tab-blog">
+        <div class="manage-controls">
+          <button class="pc-btn approve" style="flex:0 0 auto;padding:9px 18px" id="newPostBtn" onclick="toggleComposer()">✏️ New Post</button>
+        </div>
+        <div id="composerForm" style="display:none;flex-direction:column;gap:10px;margin-bottom:20px;padding:16px;border:1px solid var(--border2);border-radius:12px;background:var(--surface)">
+          <input type="hidden" id="cpEditSlug" value=""/>
+          <input type="text" id="cpTitle" placeholder="Title" style="padding:10px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text)"/>
+          <input type="text" id="cpExcerpt" placeholder="Short excerpt (shown in the list)" style="padding:10px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text)"/>
+          <textarea id="cpBody" placeholder="Post body (HTML allowed, e.g. <p>...</p>)" rows="7" style="padding:10px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font-family:inherit"></textarea>
+          <div style="display:flex;gap:10px">
+            <input type="text" id="cpEmoji" placeholder="Emoji (default 📰)" style="padding:10px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);max-width:160px"/>
+            <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2)"><input type="checkbox" id="cpPublished" checked/> Published</label>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="pc-btn approve" id="cpSubmit" onclick="submitPost()">Publish</button>
+            <button class="cac-btn" onclick="cancelComposer()">Cancel</button>
+          </div>
+          <div id="cpStatus" style="font-size:.78rem;color:var(--muted)"></div>
+        </div>
+        <div class="pending-list" id="blogAdminList"></div>
       </div>
     </div>
   </main>
@@ -689,6 +715,7 @@
       if (tab === 'stats') loadStats();
       if (tab === 'reports') loadReports();
       if (tab === 'health') loadHealth();
+      if (tab === 'blog') loadBlogAdmin();
     }
 
     let selectedPendingIds = new Set();
@@ -892,6 +919,118 @@
       }
     }
 
+    /* ── BLOG TAB ─────────────────────────────────────────── */
+    function slugify(s){ return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'').slice(0,80); }
+    function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }
+
+    async function loadBlogAdmin(){
+      const list = document.getElementById('blogAdminList');
+      list.innerHTML = `<div style="text-align:center;padding:40px"><span class="loading-spin"></span></div>`;
+      try{
+        const posts = await rpc('admin_list_blog_posts', { input_key: getKey() });
+        renderBlogAdmin(posts);
+      }catch(e){
+        list.innerHTML = `<div class="empty-pending"><p>Failed to load posts.</p></div>`;
+        showToast(e.message || 'Failed to load posts', true);
+      }
+    }
+
+    function renderBlogAdmin(posts){
+      const list = document.getElementById('blogAdminList');
+      if(!posts.length){
+        list.innerHTML = `<div class="empty-pending"><div class="empty-pending-icon">📰</div><p>No posts yet — click "New Post" to write one.</p></div>`;
+        return;
+      }
+      list.innerHTML = posts.map(p => `
+        <div class="pending-card" data-post-id="${esc(p.id)}">
+          <div class="pc-top">
+            <div class="pc-name">${esc(p.emoji||'📰')} ${esc(p.title)}</div>
+            <div class="pc-cat">${p.published ? '🟢 Published' : '⚪ Draft'}</div>
+          </div>
+          <a class="pc-url" href="/blog/${esc(p.slug)}/" target="_blank" rel="noopener noreferrer">/blog/${esc(p.slug)}/</a>
+          <div class="pc-note">${esc(p.excerpt)}</div>
+          <div class="pc-meta">
+            <span><b>Created:</b> ${esc(fmtDate(p.created_at))}</span>
+          </div>
+          <div class="pc-actions">
+            <button class="pc-btn approve" onclick='editPost(${JSON.stringify(p).replace(/'/g,"&apos;")})'>✏️ Edit</button>
+            <button class="pc-btn reject" onclick="deletePost('${esc(p.id)}','${esc(p.title)}')">🗑 Delete</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function toggleComposer(){
+      const form = document.getElementById('composerForm');
+      const opening = form.style.display === 'none';
+      if(opening) resetComposer();
+      form.style.display = opening ? 'flex' : 'none';
+    }
+    function cancelComposer(){ document.getElementById('composerForm').style.display = 'none'; resetComposer(); }
+    function resetComposer(){
+      document.getElementById('cpEditSlug').value = '';
+      document.getElementById('cpTitle').value = '';
+      document.getElementById('cpExcerpt').value = '';
+      document.getElementById('cpBody').value = '';
+      document.getElementById('cpEmoji').value = '';
+      document.getElementById('cpPublished').checked = true;
+      document.getElementById('cpStatus').textContent = '';
+      document.getElementById('cpSubmit').textContent = 'Publish';
+    }
+    function editPost(p){
+      document.getElementById('composerForm').style.display = 'flex';
+      document.getElementById('cpEditSlug').value = p.id;
+      document.getElementById('cpTitle').value = p.title;
+      document.getElementById('cpExcerpt').value = p.excerpt;
+      document.getElementById('cpBody').value = p.body;
+      document.getElementById('cpEmoji').value = p.emoji || '';
+      document.getElementById('cpPublished').checked = !!p.published;
+      document.getElementById('cpSubmit').textContent = 'Save Changes';
+      document.getElementById('composerForm').scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    async function submitPost(){
+      const editId = document.getElementById('cpEditSlug').value;
+      const title = document.getElementById('cpTitle').value.trim();
+      const excerpt = document.getElementById('cpExcerpt').value.trim();
+      const body = document.getElementById('cpBody').value.trim();
+      const emoji = document.getElementById('cpEmoji').value.trim() || '📰';
+      const published = document.getElementById('cpPublished').checked;
+      const status = document.getElementById('cpStatus');
+      if(!title || !body){ status.textContent = 'Title and body are required.'; return; }
+      status.textContent = editId ? 'Saving…' : 'Publishing…';
+      try{
+        if(editId){
+          await rpc('admin_update_blog_post', {
+            input_key: getKey(), p_id: editId, p_slug: null, p_title: title,
+            p_excerpt: excerpt || title, p_body: body, p_emoji: emoji, p_published: published
+          });
+          showToast('Post updated!');
+        } else {
+          await rpc('admin_create_blog_post', {
+            input_key: getKey(), p_slug: slugify(title)+'-'+Date.now().toString(36).slice(-4),
+            p_title: title, p_excerpt: excerpt || title, p_body: body, p_emoji: emoji, p_published: published
+          });
+          showToast('Post published!');
+        }
+        document.getElementById('composerForm').style.display = 'none';
+        resetComposer();
+        loadBlogAdmin();
+      }catch(e){
+        status.textContent = 'Could not save — please try again.';
+        showToast(e.message || 'Failed to save post', true);
+      }
+    }
+
+    async function deletePost(id, title){
+      if(!confirm(`Delete "${title}"? This can't be undone.`)) return;
+      try{
+        await rpc('admin_delete_blog_post', { input_key: getKey(), p_id: id });
+        showToast('Post deleted');
+        loadBlogAdmin();
+      }catch(e){
+        showToast(e.message || 'Failed to delete post', true);
+      }
+    }
     let manageLoadedOnce = false;
     let managePage = 0;
     const MANAGE_PAGE_SIZE = 25;
