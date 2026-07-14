@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://app.nexosites.xyz/blog/</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -119,6 +119,30 @@
   <url>
     <loc>https://app.nexosites.xyz/blog/new-tool-random-meme-generator/</loc>
     <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/cleaner-urls-no-more-pages-prefix/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/card-editor-customize-your-cards/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/seo-cleanup-duplicate-content-and-dead-links/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://app.nexosites.xyz/blog/mobile-and-tablet-pass/</loc>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

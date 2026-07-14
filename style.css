@@ -443,10 +443,10 @@ body {
 .card-wrap--down { border-color:rgba(239,68,68,0.25) }
 
 /* ── CARD APPEARANCE (user-customizable via Settings → Card Editor) ── */
-[data-card-style="bordered"] .card-wrap { border-width:2px }
-[data-card-style="elevated"] .card-wrap { border-color:transparent; box-shadow:var(--shadow-sm) }
-[data-card-style="elevated"] .card-wrap:hover { box-shadow:var(--shadow-md) }
-[data-card-style="flat"] .card-wrap { background:transparent; border-color:transparent }
+[data-card-style="bordered"] .card-wrap { border-width:2px; border-color:var(--border2) }
+[data-card-style="elevated"] .card-wrap { border-color:transparent; box-shadow:var(--shadow-md); background:var(--surface) }
+[data-card-style="elevated"] .card-wrap:hover { box-shadow:var(--shadow-lg); transform:translateY(-5px) }
+[data-card-style="flat"] .card-wrap { background:transparent; border-color:transparent; box-shadow:none }
 [data-card-style="flat"] .card-wrap:hover { background:var(--surface) }
 .hide-card-desc .card-desc { display:none }
 .hide-card-count .click-count { display:none }

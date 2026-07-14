@@ -227,6 +227,10 @@
   transition: background .15s, color .15s, border-color .15s;
   flex-shrink: 0;
 }
+/* Cancel the ⓘ icon that style.css injects via ::before for the directory's
+   info-btn — this page's info-btn already renders its own "?" content and
+   doesn't want the global icon on top of it. */
+.info-btn::before { content: none; }
 .info-btn:hover, .info-btn[aria-expanded="true"] {
   background: var(--accent); color: #fff; border-color: var(--accent);
 }

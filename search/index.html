@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script src="/nexo-prefs.js"></script>
-  <link rel="stylesheet" href="../style.css?v=20260629-15"/>
+  <link rel="stylesheet" href="../style.css?v=20260714-1"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
     @keyframes spin { to { transform:rotate(360deg) } }
@@ -254,7 +254,7 @@
           </a>
           <div class="card-actions">
             <span style="font-size:.68rem;color:var(--muted);font-family:var(--font-m)">${esc(s.category)}</span>
-            ${s.slug?`<a class="info-btn" href="${esc(href)}">Info</a>`:''}
+            ${s.slug?`<a class="info-btn" href="${esc(href)}" aria-label="More info about ${esc(s.name)}"></a>`:''}
           </div>
         </div>`;
       }).join('');

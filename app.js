@@ -698,7 +698,7 @@ function cardHTML(s,draggable=false){
               aria-label="${isFav?'Remove from':'Add to'} favorites">
         ${isFav?'★ Saved':'☆ Save'}
       </button>
-      ${s.id?`<button class="info-btn" onclick="openSiteModal('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}">ⓘ Info</button>`:''}
+      ${s.id?`<button class="info-btn" onclick="openSiteModal('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}"></button>`:''}
     </div>
   </div>`;
 }

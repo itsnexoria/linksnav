@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script src="/nexo-prefs.js"></script>
-  <link rel="stylesheet" href="/style.css?v=20260629-15"/>
+  <link rel="stylesheet" href="/style.css?v=20260714-1"/>
 
   <!-- ── SITE DETAIL PAGE STYLES (used when path is /site/[slug]/) ── -->
   <style>
@@ -452,9 +452,6 @@
           `${cat.label} on Nexo Hub`);
 
         content.innerHTML = `<div class="ct-wrap">
-          <nav class="breadcrumb-trail" aria-label="Breadcrumb">
-            <a href="/">Home</a><span class="bc-sep">/</span><a href="/category/">Categories</a><span class="bc-sep">/</span><span class="bc-current">${esc(cat.label)}</span>
-          </nav>
           <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">← All Categories</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Category</div>
@@ -493,9 +490,6 @@
           `#${tag} on Nexo Hub`);
 
         content.innerHTML = `<div class="ct-wrap">
-          <nav class="breadcrumb-trail" aria-label="Breadcrumb">
-            <a href="/">Home</a><span class="bc-sep">/</span><a href="/tag/">Tags</a><span class="bc-sep">/</span><span class="bc-current">#${esc(tag)}</span>
-          </nav>
           <a href="/tag/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">← All Tags</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Tag</div>
@@ -564,9 +558,6 @@
         const dateStr = post.created_at ? new Date(post.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '';
 
         content.innerHTML = `<div class="ct-wrap" style="max-width:720px">
-          <nav class="breadcrumb-trail" aria-label="Breadcrumb">
-            <a href="/">Home</a><span class="bc-sep">/</span><a href="/blog/">Blog</a><span class="bc-sep">/</span><span class="bc-current">${esc(post.title)}</span>
-          </nav>
           <a href="/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px">← All Posts</a>
           <div class="sd-hero">
             <div>
