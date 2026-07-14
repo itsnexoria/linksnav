@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Settings — Nexo Hub</title>
   <meta name="description" content="Customise your Nexo Hub experience — theme, display preferences, and view sites you've submitted."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/pages/settings/"/>
+  <link rel="canonical" href="https://app.nexosites.xyz/settings/"/>
   <meta name="robots" content="noindex"/>
-  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
-  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
   <link rel="manifest" href="/manifest.webmanifest"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260629-15"/>
+  <link rel="stylesheet" href="/style.css?v=20260629-15"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
     @keyframes spin { to { transform:rotate(360deg) } }
@@ -78,6 +78,16 @@
     }
     .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
     .toggle-switch input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+    /* Card editor */
+    .settings-link-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-m); font-size: .74rem; font-weight: 600;
+      color: var(--muted); padding: 0; transition: color .18s;
+    }
+    .settings-link-btn:hover { color: var(--accent); }
+    .card-preview-wrap { pointer-events: none; user-select: none; }
+    .card-preview-wrap .card-wrap { animation: none; opacity: 1; }
 
     /* Accent color picker */
     .accent-options { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -212,7 +222,7 @@
   <header class="header" role="banner">
     <div class="header-inner">
       <a href="/" class="logo" aria-label="Nexo Hub home">
-        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
         <span class="logo-text">Nexo Hub</span>
       </a>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
@@ -236,15 +246,15 @@
         <a href="/" class="nav-link">🏠 Home</a>
         <a href="/category/" class="nav-link">🗂️ Categories</a>
         <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/pages/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
-        <a href="/pages/blog/" class="nav-link">📰 Blog</a>
+        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
+        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/new/" class="nav-link">🆕 What's New</a>
+        <a href="/blog/" class="nav-link">📰 Blog</a>
         <a href="#import" class="nav-link" onclick="document.getElementById('hamburger').classList.remove('is-open');document.getElementById('mobileMenu').classList.remove('is-open');document.getElementById('navOverlay').classList.remove('is-open');document.body.style.overflow='';">📥 Import Bookmarks</a>
-        <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
-        <a href="/pages/about/" class="nav-link">👤 About</a>
-        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
-        <a href="/pages/settings/" class="nav-link nav-link--active">⚙️ Settings</a>
+        <a href="/contact/" class="nav-link">📬 Submit a Site</a>
+        <a href="/about/" class="nav-link">👤 About</a>
+        <a href="/donate/" class="nav-link">💜 Donate</a>
+        <a href="/settings/" class="nav-link nav-link--active">⚙️ Settings</a>
         <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">🔐 Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
@@ -348,6 +358,66 @@
             <span class="toggle-slider"></span>
           </label>
         </div>
+      </div>
+    </div>
+
+    <!-- CARD EDITOR -->
+    <div class="settings-section" id="card-editor" style="animation-delay:.12s">
+      <div class="settings-section-title">Card Editor</div>
+      <div class="settings-card" style="padding:20px">
+        <p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin:0 0 16px">
+          Customize how site cards look across the whole directory. Changes apply instantly and are saved on this device only.
+        </p>
+
+        <div class="card-preview-wrap" id="cardPreviewWrap">
+          <div class="cards-grid" id="cardPreviewGrid" style="grid-template-columns:1fr;max-width:280px;margin:0 auto 22px"></div>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Card Style</div>
+            <div class="settings-row-desc">Flat, bordered, or elevated with a shadow</div>
+          </div>
+          <div class="theme-options" id="cardStylePicker">
+            <button class="theme-opt active" data-style="default" onclick="setCardStyle('default')">Default</button>
+            <button class="theme-opt" data-style="flat" onclick="setCardStyle('flat')">Flat</button>
+            <button class="theme-opt" data-style="bordered" onclick="setCardStyle('bordered')">Bordered</button>
+            <button class="theme-opt" data-style="elevated" onclick="setCardStyle('elevated')">Elevated</button>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Corner Roundness</div>
+            <div class="settings-row-desc">How rounded the card corners are — <span id="radiusVal">14</span>px</div>
+          </div>
+          <input type="range" id="radiusSlider" min="0" max="24" step="1" value="14"
+                 oninput="setCardRadius(this.value)" style="width:140px;accent-color:var(--accent)"/>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Show Description</div>
+            <div class="settings-row-desc">Site description text under each card title</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="descToggle" checked onchange="setCardVisibility('hideCardDesc', !this.checked)"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row" style="border-bottom:none">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Show Visit Count</div>
+            <div class="settings-row-desc">The eye icon + view counter on each card</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="countToggle" checked onchange="setCardVisibility('hideCardCount', !this.checked)"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <button class="settings-link-btn" onclick="resetCardEditor()" style="margin-top:14px">↺ Reset card style to default</button>
       </div>
     </div>
 
@@ -770,6 +840,67 @@
       if(key==='animations') document.documentElement.classList.toggle('no-animations', !val);
     }
 
+    /* ── CARD EDITOR ─────────────────────────────────────
+       Site-wide card look (style, radius, description/count visibility).
+       Applied live here via nexo-prefs.js on every page — no reload needed. */
+    const CARD_PREVIEW_SITE = {
+      name: 'Example Site', url: 'https://example.com',
+      description: 'This is a live preview — your changes apply instantly to every card on the site.',
+      tags: ['productivity','free']
+    };
+
+    function renderCardPreview(){
+      const grid = document.getElementById('cardPreviewGrid');
+      if(!grid) return;
+      const s = CARD_PREVIEW_SITE;
+      const tagHTML = s.tags.map(t => `<span class="tag" style="--tag-bg:#7c5cfc">${t}</span>`).join('');
+      grid.innerHTML = `
+        <div class="card-wrap">
+          <a class="card" href="javascript:void(0)" style="--card-color:#7c5cfc" tabindex="-1">
+            <div class="card-top">
+              <span class="card-name">${s.name}</span>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="card-desc">${s.description}</p>
+            <div class="card-footer">${tagHTML}</div>
+            <div class="click-count" aria-label="Visit count"><span aria-hidden="true">👁</span><span>1.2k</span></div>
+          </a>
+        </div>`;
+    }
+
+    function setCardStyle(style){
+      const prefs = getPrefs(); prefs.cardStyle = style; savePrefs(prefs);
+      document.querySelectorAll('#cardStylePicker .theme-opt').forEach(b => b.classList.toggle('active', b.dataset.style===style));
+      if(style === 'default') document.documentElement.removeAttribute('data-card-style');
+      else document.documentElement.setAttribute('data-card-style', style);
+    }
+
+    function setCardRadius(px){
+      const prefs = getPrefs(); prefs.cardRadius = Number(px); savePrefs(prefs);
+      document.documentElement.style.setProperty('--card-radius', px + 'px');
+      document.getElementById('radiusVal').textContent = px;
+    }
+
+    function setCardVisibility(key, hidden){
+      const prefs = getPrefs(); prefs[key] = hidden; savePrefs(prefs);
+      const cls = key === 'hideCardDesc' ? 'hide-card-desc' : 'hide-card-count';
+      document.documentElement.classList.toggle(cls, hidden);
+    }
+
+    function resetCardEditor(){
+      const prefs = getPrefs();
+      delete prefs.cardStyle; delete prefs.cardRadius; delete prefs.hideCardDesc; delete prefs.hideCardCount;
+      savePrefs(prefs);
+      document.documentElement.removeAttribute('data-card-style');
+      document.documentElement.style.removeProperty('--card-radius');
+      document.documentElement.classList.remove('hide-card-desc','hide-card-count');
+      document.querySelectorAll('#cardStylePicker .theme-opt').forEach(b => b.classList.toggle('active', b.dataset.style==='default'));
+      document.getElementById('radiusSlider').value = 14;
+      document.getElementById('radiusVal').textContent = 14;
+      document.getElementById('descToggle').checked = true;
+      document.getElementById('countToggle').checked = true;
+    }
+
     /* ── DATA STATS ─────────────────────────────────────── */
     function updateStats(){
       try{
@@ -818,7 +949,7 @@
       const list = document.getElementById('subList');
       const subs = JSON.parse(localStorage.getItem(SUBS_KEY)||'[]');
       if(!subs.length){
-        list.innerHTML = `<div class="sub-empty">You haven't submitted any sites from this browser yet.<br/><a href="/pages/contact/" style="color:var(--accent)">Submit a site →</a></div>`;
+        list.innerHTML = `<div class="sub-empty">You haven't submitted any sites from this browser yet.<br/><a href="/contact/" style="color:var(--accent)">Submit a site →</a></div>`;
         return;
       }
 
@@ -899,6 +1030,16 @@
       const animOn = prefs.animations !== false;
       document.getElementById('animToggle').checked = animOn;
       if(!animOn) document.documentElement.classList.add('no-animations');
+
+      // Card editor
+      const cardStyle = prefs.cardStyle || 'default';
+      document.querySelectorAll('#cardStylePicker .theme-opt').forEach(b => b.classList.toggle('active', b.dataset.style===cardStyle));
+      const cardRadius = prefs.cardRadius !== undefined ? prefs.cardRadius : 14;
+      document.getElementById('radiusSlider').value = cardRadius;
+      document.getElementById('radiusVal').textContent = cardRadius;
+      document.getElementById('descToggle').checked = !prefs.hideCardDesc;
+      document.getElementById('countToggle').checked = !prefs.hideCardCount;
+      renderCardPreview();
 
       updateStats();
       loadSubmissions();

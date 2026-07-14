@@ -219,12 +219,12 @@
               <a href="/" class="nav-link">🏠 Home</a>
               <a href="/category/" class="nav-link">🗂️ Categories</a>
               <a href="/tag/" class="nav-link">🏷️ Tags</a>
-              <a href="/pages/tools/" class="nav-link">🛠️ Web Tools</a>
-              <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-              <a href="/pages/new/" class="nav-link">🆕 What's New</a>
-              <a href="/pages/contact/" class="nav-link">📬 Submit a Site</a>
-              <a href="/pages/about/" class="nav-link">👤 About</a>
-              <a href="/pages/settings/" class="nav-link">⚙️ Settings</a>
+              <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
+              <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+              <a href="/new/" class="nav-link">🆕 What's New</a>
+              <a href="/contact/" class="nav-link">📬 Submit a Site</a>
+              <a href="/about/" class="nav-link">👤 About</a>
+              <a href="/settings/" class="nav-link">⚙️ Settings</a>
             </nav>
             <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
           </div>
@@ -556,7 +556,7 @@
           `https://app.nexosites.xyz/blog/${slug}/`,
           [
             { name:'Nexo Hub', url:BASE+'/' },
-            { name:'Blog', url:BASE+'/pages/blog/' },
+            { name:'Blog', url:BASE+'/blog/' },
             { name:post.title, url:`${BASE}/blog/${slug}/` }
           ],
           `${BASE}/assets/logo-512.png`, post.title);
@@ -565,9 +565,9 @@
 
         content.innerHTML = `<div class="ct-wrap" style="max-width:720px">
           <nav class="breadcrumb-trail" aria-label="Breadcrumb">
-            <a href="/">Home</a><span class="bc-sep">/</span><a href="/pages/blog/">Blog</a><span class="bc-sep">/</span><span class="bc-current">${esc(post.title)}</span>
+            <a href="/">Home</a><span class="bc-sep">/</span><a href="/blog/">Blog</a><span class="bc-sep">/</span><span class="bc-current">${esc(post.title)}</span>
           </nav>
-          <a href="/pages/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px">← All Posts</a>
+          <a href="/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px">← All Posts</a>
           <div class="sd-hero">
             <div>
               <div style="font-size:2.2rem;line-height:1;margin-bottom:10px">${esc(post.emoji||'📰')}</div>
@@ -578,7 +578,7 @@
           <div class="sd-body" style="font-size:.92rem;line-height:1.8">${post.body||''}</div>
           <div class="sd-actions">
             <button class="sd-action-btn sd-action-secondary" onclick="copyLink()">🔗 Copy Link</button>
-            <a class="sd-action-btn sd-action-secondary" href="/pages/blog/">← All Posts</a>
+            <a class="sd-action-btn sd-action-secondary" href="/blog/">← All Posts</a>
           </div>
         </div>`;
       }catch{ render404(); }

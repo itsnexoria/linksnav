@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /pages/admin/
-Disallow: /pages/contact/
+Disallow: /contact/
+Disallow: /settings/
 
 Sitemap: https://app.nexosites.xyz/sitemap.xml
 Sitemap: https://app.nexosites.xyz/sitemap-sites.xml

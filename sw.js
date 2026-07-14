@@ -22,10 +22,10 @@ const CORE_ASSETS = [
   '/assets/logo-512.png',
   '/assets/favicon-32.png',
   '/assets/favicon-64.png',
-  '/pages/tools/',
-  '/pages/about/',
-  '/pages/new/',
-  '/pages/leaderboard/',
+  '/tools/',
+  '/about/',
+  '/new/',
+  '/leaderboard/',
 ];
 
 self.addEventListener('install', (event) => {

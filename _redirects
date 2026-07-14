@@ -1,14 +1,31 @@
-# Clean URL trailing slash normalization
-/pages/contact    /pages/contact/  301
-/pages/about      /pages/about/    301
-/pages/tools      /pages/tools/    301
-/pages/donate     /pages/donate/   301
-/pages/admin      /pages/admin/    301
-/pages/new        /pages/new/      301
-/pages/leaderboard /pages/leaderboard/ 301
-/pages/sites      /pages/sites/    301
-/pages/settings   /pages/settings/ 301
-/pages/import     /pages/import/   301
+# ── Clean URL trailing slash normalization (public pages) ──────────
+/about            /about/           301
+/contact          /contact/         301
+/tools            /tools/           301
+/donate           /donate/          301
+/sites            /sites/           301
+/leaderboard      /leaderboard/     301
+/new              /new/             301
+/settings         /settings/        301
+
+# ── Admin-only page stays under /pages/ (not indexed, unlisted) ────
+/pages/admin      /pages/admin/     301
+
+# Legacy bookmark-import page — feature now lives inside Settings
+/pages/import     /settings/#import 301
+/pages/import/*   /settings/#import 301
+
+# ── Legacy /pages/* URLs → new clean URLs (301, preserves SEO/link equity
+#    from anything already indexed or linked under the old paths) ──
+/pages/about/*        /about/         301
+/pages/contact/*      /contact/       301
+/pages/tools/*        /tools/         301
+/pages/donate/*       /donate/        301
+/pages/sites/*        /sites/         301
+/pages/leaderboard/*  /leaderboard/   301
+/pages/new/*          /new/           301
+/pages/settings/*     /settings/      301
+/pages/blog/*         /blog/          301
 
 # Dynamic detail pages (site/category/tag/blog) — all routed through the single
 # router in 404.html, which already contains the full renderSiteDetailPage /
@@ -47,8 +64,8 @@
 /site/:slug/      /404              200
 
 # Legacy uppercase paths → lowercase
-/Pages/contact/*  /pages/contact/  301
-/Pages/about/*    /pages/about/    301
-/Pages/tools/*    /pages/tools/    301
-/Pages/donate/*   /pages/donate/   301
+/Pages/contact/*  /contact/        301
+/Pages/about/*    /about/          301
+/Pages/tools/*    /tools/          301
+/Pages/donate/*   /donate/         301
 /Pages/admin/*    /pages/admin/    301

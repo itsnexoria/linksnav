@@ -8,16 +8,36 @@
   <title>Submit a Site — Nexo Hub</title>
   <meta name="description" content="Submit a site to Nexo Hub. All submissions are reviewed manually before being added to the directory."/>
   <meta name="robots" content="noindex"/>
-  <link rel="canonical" href="https://app.nexosites.xyz/pages/contact/"/>
+  <link rel="canonical" href="https://app.nexosites.xyz/contact/"/>
   <meta property="og:title"       content="Submit a Site — Nexo Hub"/>
   <meta property="og:description" content="Suggest a site for the Nexo Hub directory."/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
   <meta property="og:image:alt" content="Submit a Site to Nexo Hub"/>
   <meta property="og:image"       content="https://app.nexosites.xyz/assets/logo-512.png"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Submit a Site — Nexo Hub",
+    "url": "https://app.nexosites.xyz/contact/",
+    "description": "Submit a site to Nexo Hub. All submissions are reviewed manually before being added to the directory.",
+    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexosites.xyz/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexosites.xyz/" },
+      { "@type": "ListItem", "position": 2, "name": "Submit a Site", "item": "https://app.nexosites.xyz/contact/" }
+    ]
+  }
+  </script>
   <meta name="theme-color"        content="#4f7fff"/>
-  <link rel="icon"             href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
-  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="icon"             href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/logo-192.png"/>
   <link rel="manifest" href="/manifest.webmanifest"/>
 
   <!-- Fonts -->
@@ -26,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="../../style.css?v=20260629-15"/>
+  <link rel="stylesheet" href="/style.css?v=20260629-15"/>
 
   <style>
     /* ── PAGE-SPECIFIC ANIMATIONS ─────────────────────── */
@@ -244,6 +264,8 @@
       .form-grid{grid-template-columns:1fr}
       .steps{display:none}
       .hero-title{font-size:1.5rem}
+      /* 16px min on all text inputs prevents iOS Safari's auto-zoom-on-focus */
+      .finput,.fselect,.ftextarea{font-size:16px}
     }
   </style>
   <script src="/nexo-prefs.js"></script>
@@ -257,7 +279,7 @@
   <header class="header" role="banner">
     <div class="header-inner">
       <a href="/" class="logo" aria-label="Nexo Hub home">
-        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <img src="/assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
         <span class="logo-text">Nexo Hub</span>
       </a>
       <div style="margin-left:auto">
@@ -285,14 +307,14 @@
         <a href="/" class="nav-link">🏠 Home</a>
         <a href="/category/" class="nav-link">🗂️ Categories</a>
         <a href="/tag/" class="nav-link">🏷️ Tags</a>
-        <a href="/pages/tools/" class="nav-link">🛠️ Web Tools</a>
-        <a href="/pages/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-        <a href="/pages/new/" class="nav-link">🆕 What's New</a>
-        <a href="/pages/blog/" class="nav-link">📰 Blog</a>
-        <a href="/pages/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
-        <a href="/pages/about/" class="nav-link">👤 About</a>
-        <a href="/pages/donate/" class="nav-link">💜 Donate</a>
-        <a href="/pages/settings/" class="nav-link">⚙️ Settings</a>
+        <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
+        <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
+        <a href="/new/" class="nav-link">🆕 What's New</a>
+        <a href="/blog/" class="nav-link">📰 Blog</a>
+        <a href="/contact/" class="nav-link nav-link--active">📬 Submit a Site</a>
+        <a href="/about/" class="nav-link">👤 About</a>
+        <a href="/donate/" class="nav-link">💜 Donate</a>
+        <a href="/settings/" class="nav-link">⚙️ Settings</a>
         <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none">⚙️ Admin</a>
       </nav>
       <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>

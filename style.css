@@ -263,7 +263,6 @@ body {
 .ss-info { flex:1; min-width:0; }
 .ss-name { font-size:.82rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .ss-cat { font-size:.68rem; color:var(--muted); }
-.ss-more { font-size:.72rem; color:var(--muted); padding:8px 12px; text-align:center; }
 
 .site-count {
   font-size:.7rem; color:var(--muted);
@@ -423,9 +422,9 @@ body {
 .card-wrap {
   position:relative; display:flex; flex-direction:column;
   background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-lg); overflow:hidden;
+  border-radius:var(--card-radius, var(--radius-lg)); overflow:hidden;
   opacity:0; animation:cardIn .3s ease both;
-  transition:transform .2s ease, border-color .2s, box-shadow .2s, background .2s;
+  transition:transform .2s ease, border-color .2s, box-shadow .2s, background .2s, border-radius .2s;
   height:100%;
 }
 .card-wrap:hover {
@@ -442,6 +441,15 @@ body {
 }
 .card-wrap--fav { border-color:rgba(245,158,11,0.3) }
 .card-wrap--down { border-color:rgba(239,68,68,0.25) }
+
+/* ── CARD APPEARANCE (user-customizable via Settings → Card Editor) ── */
+[data-card-style="bordered"] .card-wrap { border-width:2px }
+[data-card-style="elevated"] .card-wrap { border-color:transparent; box-shadow:var(--shadow-sm) }
+[data-card-style="elevated"] .card-wrap:hover { box-shadow:var(--shadow-md) }
+[data-card-style="flat"] .card-wrap { background:transparent; border-color:transparent }
+[data-card-style="flat"] .card-wrap:hover { background:var(--surface) }
+.hide-card-desc .card-desc { display:none }
+.hide-card-count .click-count { display:none }
 
 /* Stagger animation on the wrap, not the inner card */
 .card-wrap:nth-child(1){animation-delay:.02s}.card-wrap:nth-child(2){animation-delay:.04s}
@@ -538,29 +546,6 @@ a.tag:hover { filter:brightness(1.2); transform:translateY(-1px); }
 .fav-btn--active { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.3); color:#f59e0b }
 .fav-btn--active:hover { background:rgba(245,158,11,0.04); border-color:rgba(245,158,11,0.15); color:var(--muted) }
 
-/* Pinned header */
-.pinned-header {
-  display:flex; align-items:center; gap:8px;
-  padding:0 2px 12px;
-  font-family:var(--font-m); font-size:.68rem; font-weight:700;
-  letter-spacing:.1em; color:#f59e0b; text-transform:uppercase;
-  animation:fadeIn .3s ease both;
-}
-.pinned-header span:first-child { display:inline-block; animation:wiggle 3.5s ease-in-out infinite }
-.pinned-header-count {
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:18px; height:18px; padding:0 5px;
-  background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25);
-  border-radius:100px; font-size:.6rem; color:#f59e0b;
-}
-.grid-divider-cell { grid-column:1/-1; padding:8px 0 16px }
-.grid-divider { position:relative; border-top:1px solid var(--border); text-align:center }
-.grid-divider span {
-  position:absolute; top:-9px; left:50%; transform:translateX(-50%);
-  background:var(--bg); padding:0 12px;
-  font-size:.6rem; font-family:var(--font-m); letter-spacing:.12em; color:var(--muted); text-transform:uppercase;
-}
-
 /* ── EMPTY STATE ─────────────────────────────────────────────── */
 .empty-state { text-align:center; padding:80px 20px; color:var(--muted); animation:cardIn .3s ease both }
 .empty-icon { font-size:2.5rem; margin-bottom:14px; opacity:.3; animation:float-y 2.6s ease-in-out infinite }
@@ -607,6 +592,14 @@ a.tag:hover { filter:brightness(1.2); transform:translateY(-1px); }
 ::-webkit-scrollbar-thumb:hover { background:var(--accent) }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
+/* Tablet (iPad-ish widths) — tighten spacing/columns between the full
+   desktop layout and the single-column phone layout below */
+@media(max-width:1024px) and (min-width:681px) {
+  .main { padding:24px 20px 56px }
+  .cards-grid { grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px }
+  .header-inner { padding:0 20px }
+}
+
 @media(max-width:680px) {
   .header-inner { padding:0 14px }
   .header-controls { max-width:none }
@@ -618,7 +611,15 @@ a.tag:hover { filter:brightness(1.2); transform:translateY(-1px); }
   .cards-grid { grid-template-columns:1fr; gap:9px }
   .footer { flex-direction:column; text-align:center }
   .filter-bar { gap:8px }
-  .filter-select { min-width:120px; font-size:.75rem }
+  .filter-select { min-width:120px; font-size:16px }
+  /* 16px min on all text inputs prevents iOS Safari's auto-zoom-on-focus */
+  .search-wrap input { font-size:16px }
+}
+
+/* Touch devices (any width) — enforce a minimum 44px tap target on
+   the primary icon buttons, per WCAG 2.5.5 / Apple & Google HIG guidance */
+@media (hover:none) and (pointer:coarse) {
+  .theme-toggle, .hamburger { min-width:44px; min-height:44px }
 }
 
 /* ── THEME TOGGLE ────────────────────────────────────────────── */
@@ -1156,22 +1157,12 @@ body { animation: pageFadeIn .3s ease both; }
   letter-spacing: inherit;
 }
 
-/* ── CATEGORY NAV FADE EDGES ──────────────────────────────────── */
-.cat-nav-scroll-wrap {
-  -webkit-mask-image: linear-gradient(to right, transparent 0, black 48px, black calc(100% - 48px), transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, black 48px, black calc(100% - 48px), transparent 100%);
-}
-
 /* ── HERO COUNTER GLOW ────────────────────────────────────────── */
 @keyframes counterGlow {
   0%,100% { text-shadow: 0 0 0 transparent; }
   50%     { text-shadow: 0 0 20px rgba(124,92,252,.4); }
 }
 #siteCount { animation: counterGlow 3s ease-in-out infinite; }
-
-/* ── FAV COUNT BOUNCE ─────────────────────────────────────────── */
-@keyframes favCountBounce { 0%{transform:scale(1)} 50%{transform:scale(1.18)} 100%{transform:scale(1)} }
-.fav-count-badge { animation: favCountBounce .3s ease; }
 
 /* ── SMOOTH SCROLL FOR WHOLE PAGE ─────────────────────────────── */
 html { scroll-behavior: smooth; }
