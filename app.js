@@ -113,6 +113,27 @@ const CAT_ICON_FALLBACK = {
   'storage':'📁','streaming':'📺','tools':'⚙️'
 };
 
+/* Maps the emoji glyphs stored in the categories table (and the fallback
+   list above) to Lucide icon names, so the UI renders crisp icons instead
+   of emoji. Falls back to a generic folder icon for anything unmapped. */
+const EMOJI_TO_LUCIDE = {
+  '🤖':'bot','🧸':'gamepad-2','🏢':'building-2','🎨':'palette','🛠️':'wrench','🛠':'wrench',
+  '⬇️':'arrow-down','⬇':'arrow-down','💳':'credit-card','🎮':'gamepad-2','🔵':'circle-dot',
+  '☁️':'cloud','☁':'cloud','📚':'book-open','⛏️':'pickaxe','⛏':'pickaxe','🎬':'clapperboard',
+  '🎵':'music','🌐':'globe','📰':'newspaper','📋':'clipboard','🔒':'lock','🛒':'shopping-cart',
+  '📱':'smartphone','📁':'folder','📺':'tv','⚙️':'settings','⚙':'settings','⚡':'zap',
+  '📖':'book-open','🍳':'utensils-crossed','💪':'dumbbell','💼':'briefcase','🗺️':'map','🗺':'map',
+  '📷':'camera','🎙️':'mic','🎙':'mic','🏠':'home','🔬':'microscope','🏆':'trophy',
+  '✈️':'plane','✈':'plane','⛅':'cloud-sun','✏️':'pencil','✏':'pencil','🔗':'link',
+  '★':'star','☆':'star','🕓':'clock'
+};
+function catIconHTML(emoji){
+  const name = EMOJI_TO_LUCIDE[emoji] || 'folder';
+  return `<i data-lucide="${name}" class="lucide-ico" aria-hidden="true"></i>`;
+}
+/* Call after any innerHTML/appendChild that introduces new data-lucide elements */
+function refreshIcons(){ if(window.lucide){ lucide.createIcons(); } }
+
 /* ── FAVOURITES ─────────────────────────────────────────────── */
 function loadFavs(){ try{return new Set(JSON.parse(localStorage.getItem(FAVS_KEY)||'[]'))}catch{return new Set()} }
 function saveFavs(){ localStorage.setItem(FAVS_KEY,JSON.stringify([...favorites])) }
@@ -320,19 +341,20 @@ function rollCount(from,to){
 /* ── CATEGORY NAV ───────────────────────────────────────────── */
 function buildNav(){
   const inner=document.getElementById('catNavInner');
-  const favBtn=mkBtn('cat-btn cat-btn-fav','__favorites__','★ Favorites');
+  const favBtn=mkBtn('cat-btn cat-btn-fav','__favorites__',catIconHTML('★'),'Favorites');
   inner.querySelector('[data-cat="all"]').insertAdjacentElement('afterend',favBtn);
-  const recentBtn=mkBtn('cat-btn cat-btn-recent','__recent__','🕓 Recent');
+  const recentBtn=mkBtn('cat-btn cat-btn-recent','__recent__',catIconHTML('🕓'),'Recent');
   favBtn.insertAdjacentElement('afterend',recentBtn);
   const frag=document.createDocumentFragment();
-  allCategories.forEach(cat=>frag.appendChild(mkBtn('cat-btn',cat.id,`${cat.icon} ${cat.label}`)));
+  allCategories.forEach(cat=>frag.appendChild(mkBtn('cat-btn',cat.id,catIconHTML(cat.icon),cat.label)));
   inner.appendChild(frag);
+  refreshIcons();
 }
-function mkBtn(cls,catId,label){
+function mkBtn(cls,catId,iconHTML,text){
   const b=document.createElement('button');
   b.className=cls;b.dataset.cat=catId;
   b.setAttribute('role','tab');b.setAttribute('aria-selected','false');
-  b.textContent=label;
+  b.innerHTML=`${iconHTML} <span>${esc(text)}</span>`;
   b.addEventListener('click',()=>switchCat(catId,b));
   return b;
 }
@@ -403,7 +425,7 @@ function renderSuggestions(query){
   if(!ssItems.length){ hideSuggestions(); return; }
   box.innerHTML=ssItems.map((s,i)=>{
     const cat=allCategories.find(c=>c.id===s.category);
-    const catLabel=cat?`${cat.icon} ${cat.label}`:s.category;
+    const catLabel=cat?`${catIconHTML(cat.icon)} ${esc(cat.label)}`:esc(s.category);
     return `<div class="ss-item" role="option" data-idx="${i}" data-href="${s.slug?('/site/'+s.slug+'/'):s.url}">
       <img class="ss-fav" src="${favSmall(s.url)}" alt="" onerror="this.style.visibility='hidden'"/>
       <div class="ss-info"><div class="ss-name">${(s.name||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div><div class="ss-cat">${catLabel}</div></div>
@@ -411,6 +433,7 @@ function renderSuggestions(query){
   }).join('');
   box.hidden=false;
   inp.setAttribute('aria-expanded','true');
+  refreshIcons();
   box.querySelectorAll('.ss-item').forEach(el=>{
     el.addEventListener('mousedown', e=>{ e.preventDefault(); window.location.href = el.dataset.href; });
     el.addEventListener('mouseenter', ()=>{ setSsActive(parseInt(el.dataset.idx,10)); });
@@ -503,8 +526,8 @@ function openShortcutsModal(){
   overlay.innerHTML = `
     <div class="shortcuts-modal" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
       <div class="shortcuts-header">
-        <span class="shortcuts-title">⌨️ Keyboard Shortcuts</span>
-        <button class="shortcuts-close" onclick="closeShortcutsModal()" aria-label="Close">✕</button>
+        <span class="shortcuts-title"><i data-lucide="keyboard" class="lucide-ico" aria-hidden="true"></i> Keyboard Shortcuts</span>
+        <button class="shortcuts-close" onclick="closeShortcutsModal()" aria-label="Close"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i></button>
       </div>
       <div class="shortcuts-list">
         ${SHORTCUTS.map(([key,desc])=>`
@@ -516,6 +539,7 @@ function openShortcutsModal(){
       <div class="shortcuts-footer">Press <kbd>Esc</kbd> or <kbd>?</kbd> to close</div>
     </div>`;
   document.body.appendChild(overlay);
+  refreshIcons();
   requestAnimationFrame(()=>overlay.classList.add('show'));
   overlay.addEventListener('click',e=>{ if(e.target===overlay) closeShortcutsModal(); });
 }
@@ -621,11 +645,12 @@ function render(){
   /* Clear skeleton placeholders on first real render */
   if(siteGrid) siteGrid.querySelectorAll('.skeleton-card').forEach(s=>s.remove());
 
-  if(activeCategory==='__favorites__') label.textContent='★ Favorites';
-  else if(activeCategory==='__recent__') label.textContent='🕓 Recently Visited';
+  if(activeCategory==='__favorites__') label.innerHTML=`${catIconHTML('★')} Favorites`;
+  else if(activeCategory==='__recent__') label.innerHTML=`${catIconHTML('🕓')} Recently Visited`;
   else if(searchQuery) label.textContent=`Results for "${searchQuery}"`;
   else if(activeCategory==='all') label.textContent='All Sites';
-  else{const c=allCategories.find(c=>c.id===activeCategory);label.textContent=c?`${c.icon} ${c.label}`:activeCategory}
+  else{const c=allCategories.find(c=>c.id===activeCategory);label.innerHTML=c?`${catIconHTML(c.icon)} ${esc(c.label)}`:esc(activeCategory)}
+  refreshIcons();
   countEl.textContent=`${filtered.length} site${filtered.length!==1?'s':''}`;
 
   document.getElementById('loadMoreWrap')?.remove();
@@ -648,6 +673,7 @@ function render(){
   empty.style.display='none';grid.style.display='';
 
   grid.replaceChildren(buildFrag(filtered.slice(0,visibleCount),canDrag));
+  refreshIcons();
   if(visibleCount<filtered.length)mkLoadMore(filtered.length,filtered.length-visibleCount);
 
   if(canDrag)initDrag(grid);
@@ -677,7 +703,7 @@ function cardHTML(s,draggable=false){
   const imgTag=imgSrc?`<img class="card-favicon" data-src="${esc(imgSrc)}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAI=" alt="${esc(s.name)} favicon" decoding="async" onerror="this.style.display='none'" width="22" height="22">`:'';
   const dragAttr=draggable?'draggable="true"':'';
   const handleHTML=draggable?'<span class="drag-handle" aria-hidden="true">⠿</span>':'';
-  const downBadge=isDown?`<span class="health-badge" title="This site failed its last automatic health check${s.last_checked_at?' ('+timeAgo(s.last_checked_at)+')':''} and may be temporarily down.">⚠ May be down</span>`:'';
+  const downBadge=isDown?`<span class="health-badge" title="This site failed its last automatic health check${s.last_checked_at?' ('+timeAgo(s.last_checked_at)+')':''} and may be temporarily down."><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> May be down</span>`:'';
 
   return `<div class="card-wrap${isFav?' card-wrap--fav':''}${isDown?' card-wrap--down':''}" data-url="${esc(s.url)}" data-id="${esc(s.id||'')}" ${dragAttr}>
     ${handleHTML}
@@ -686,17 +712,17 @@ function cardHTML(s,draggable=false){
       <div class="card-top">
         ${imgTag}
         <span class="card-name">${esc(s.name)}</span>
-        <span class="card-arrow" aria-hidden="true">↗</span>
+        <span class="card-arrow" aria-hidden="true"><i data-lucide="arrow-up-right" class="lucide-ico"></i></span>
       </div>
       <p class="card-desc">${esc(s.description)}</p>
       <div class="card-footer">${tagHTML}${downBadge}</div>
-      <div class="click-count" aria-label="Visit count"><span aria-hidden="true">👁</span><span class="click-count-num">${fmtCount(getCount(s.url))}</span></div>
+      <div class="click-count" aria-label="Visit count"><span aria-hidden="true"><i data-lucide="eye" class="lucide-ico"></i></span><span class="click-count-num">${fmtCount(getCount(s.url))}</span></div>
     </a>
     <div class="card-actions">
       <button class="fav-btn${isFav?' fav-btn--active':''}"
               onclick="toggleFav('${esc(s.url)}',event)"
               aria-label="${isFav?'Remove from':'Add to'} favorites">
-        ${isFav?'★ Saved':'☆ Save'}
+        ${isFav?catIconHTML('★')+' Saved':catIconHTML('☆')+' Save'}
       </button>
       ${s.id?`<button class="info-btn" onclick="openSiteModal('${esc(s.id)}',event)" aria-label="More info about ${esc(s.name)}"></button>`:''}
     </div>
@@ -865,13 +891,13 @@ window.openSiteModal = function(siteId, e){
     return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
   }).join('');
   const cat = allCategories.find(c=>c.id===site.category);
-  const catLabel = cat?`${cat.icon} ${cat.label}`:site.category;
+  const catLabel = cat?`${catIconHTML(cat.icon)} ${esc(cat.label)}`:esc(site.category);
   const faviconUrl = fav(site.url);
   const healthHTML = (()=>{
-    if(!site.last_checked_at) return `<span class="modal-health unknown">○ Not checked</span>`;
+    if(!site.last_checked_at) return `<span class="modal-health unknown"><i data-lucide="circle" class="lucide-ico" aria-hidden="true"></i> Not checked</span>`;
     const ago = timeAgo(site.last_checked_at);
-    if(site.health_status==='up') return `<span class="modal-health up">● Healthy · ${esc(ago)}</span>`;
-    return `<span class="modal-health down">⚠ May be down · ${esc(ago)}</span>`;
+    if(site.health_status==='up') return `<span class="modal-health up"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Healthy · ${esc(ago)}</span>`;
+    return `<span class="modal-health down"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> May be down · ${esc(ago)}</span>`;
   })();
 
   const overlay = document.createElement('div');
@@ -879,14 +905,14 @@ window.openSiteModal = function(siteId, e){
   overlay.className = 'site-modal-overlay';
   overlay.innerHTML = `
     <div class="site-modal" role="dialog" aria-modal="true" aria-label="${esc(site.name)} details">
-      <button class="site-modal-close" aria-label="Close">✕</button>
+      <button class="site-modal-close" aria-label="Close"><i data-lucide="x" class="lucide-ico" aria-hidden="true"></i></button>
       <div class="site-modal-header">
         ${faviconUrl?`<img class="site-modal-favicon" src="${esc(faviconUrl)}" alt="${esc(site.name)} favicon" onerror="this.style.display='none'"/>`:''}
         <div>
           <div class="site-modal-name">${esc(site.name)}</div>
           <a class="site-modal-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>
           <div class="site-modal-badges">
-            <span class="detail-cat-badge">${esc(catLabel)}</span>
+            <span class="detail-cat-badge">${catLabel}</span>
             ${healthHTML}
           </div>
         </div>
@@ -894,27 +920,27 @@ window.openSiteModal = function(siteId, e){
       <p class="site-modal-desc">${esc(site.description)}</p>
       ${tagHTML?`<div class="site-modal-tags">${tagHTML}</div>`:''}
       <div class="site-modal-actions">
-        <a class="site-modal-visit" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(site.url)}');addRecent('${esc(site.url)}')">↗ Visit Site</a>
-        ${site.slug ? `<a class="site-modal-btn" href="/site/${esc(site.slug)}/">📄 Details</a>` : ''}
-        <button class="site-modal-btn" id="smFavBtn" onclick="toggleFav('${esc(site.url)}',event);this.textContent=favorites.has('${esc(site.url)}')?'★ Saved':'☆ Save'">
-          ${favorites.has(site.url)?'★ Saved':'☆ Save'}
+        <a class="site-modal-visit" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer" onclick="bumpCount('${esc(site.url)}');addRecent('${esc(site.url)}')"><i data-lucide="external-link" class="lucide-ico" aria-hidden="true"></i> Visit Site</a>
+        ${site.slug ? `<a class="site-modal-btn" href="/site/${esc(site.slug)}/"><i data-lucide="file" class="lucide-ico" aria-hidden="true"></i> Details</a>` : ''}
+        <button class="site-modal-btn" id="smFavBtn" onclick="toggleFav('${esc(site.url)}',event);this.innerHTML=favorites.has('${esc(site.url)}')?catIconHTML('★')+' Saved':catIconHTML('☆')+' Save';refreshIcons()">
+          ${favorites.has(site.url)?catIconHTML('★')+' Saved':catIconHTML('☆')+' Save'}
         </button>
-        <button class="site-modal-btn" id="smCopyBtn" onclick="smCopyLink('${esc(site.url)}')">🔗 Copy Link</button>
+        <button class="site-modal-btn" id="smCopyBtn" onclick="smCopyLink('${esc(site.url)}')"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i> Copy Link</button>
         <button class="site-modal-btn" onclick="smShareTwitter('${esc(site.url)}','${esc(site.name)}')">𝕏 Share</button>
-        <button class="site-modal-btn" onclick="smShareWhatsApp('${esc(site.url)}','${esc(site.name)}')">💬 WhatsApp</button>
-        <button class="site-modal-btn site-modal-btn--danger" id="smReportBtn" onclick="smToggleReport()">⚠ Report</button>
+        <button class="site-modal-btn" onclick="smShareWhatsApp('${esc(site.url)}','${esc(site.name)}')"><i data-lucide="message-circle" class="lucide-ico" aria-hidden="true"></i> WhatsApp</button>
+        <button class="site-modal-btn site-modal-btn--danger" id="smReportBtn" onclick="smToggleReport()"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> Report</button>
       </div>
 
       <!-- Inline report form — hidden until Report is clicked -->
       <div class="sm-report-form" id="smReportForm" style="display:none">
         <div class="sm-report-label">What's the issue?</div>
         <div class="sm-report-reasons">
-          <button class="sm-reason-btn" data-reason="broken_link" onclick="smSelectReason(this)">🔗 Broken link</button>
-          <button class="sm-reason-btn" data-reason="wrong_info" onclick="smSelectReason(this)">📝 Wrong info</button>
-          <button class="sm-reason-btn" data-reason="spam_or_scam" onclick="smSelectReason(this)">🚫 Spam/scam</button>
-          <button class="sm-reason-btn" data-reason="duplicate" onclick="smSelectReason(this)">📋 Duplicate</button>
-          <button class="sm-reason-btn" data-reason="site_down" onclick="smSelectReason(this)">⛔ Site is down</button>
-          <button class="sm-reason-btn" data-reason="other" onclick="smSelectReason(this)">❓ Other</button>
+          <button class="sm-reason-btn" data-reason="broken_link" onclick="smSelectReason(this)"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i> Broken link</button>
+          <button class="sm-reason-btn" data-reason="wrong_info" onclick="smSelectReason(this)"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i> Wrong info</button>
+          <button class="sm-reason-btn" data-reason="spam_or_scam" onclick="smSelectReason(this)"><i data-lucide="ban" class="lucide-ico" aria-hidden="true"></i> Spam/scam</button>
+          <button class="sm-reason-btn" data-reason="duplicate" onclick="smSelectReason(this)"><i data-lucide="clipboard" class="lucide-ico" aria-hidden="true"></i> Duplicate</button>
+          <button class="sm-reason-btn" data-reason="site_down" onclick="smSelectReason(this)"><i data-lucide="ban" class="lucide-ico" aria-hidden="true"></i> Site is down</button>
+          <button class="sm-reason-btn" data-reason="other" onclick="smSelectReason(this)"><i data-lucide="circle-help" class="lucide-ico" aria-hidden="true"></i> Other</button>
         </div>
         <textarea class="sm-report-note" id="smReportNote" placeholder="Optional details… (max 500 chars)" maxlength="500"></textarea>
         <button class="sm-report-submit" id="smReportSubmit" onclick="smSubmitReport('${esc(site.id)}')" disabled>Submit Report</button>
@@ -922,6 +948,7 @@ window.openSiteModal = function(siteId, e){
     </div>`;
 
   document.body.appendChild(overlay);
+  refreshIcons();
   document.body.style.overflow = 'hidden';
   requestAnimationFrame(()=>overlay.classList.add('show'));
 
@@ -949,7 +976,7 @@ window.smShareWhatsApp = function(url, name){
 };
 window.smCopyLink = function(url){
   const btn = document.getElementById('smCopyBtn');
-  function onCopied(){ showToast('Link copied!'); if(btn){ btn.textContent='✓ Copied'; setTimeout(()=>btn.textContent='🔗 Copy Link',2000); } }
+  function onCopied(){ showToast('Link copied!'); if(btn){ btn.innerHTML='<i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Copied'; refreshIcons(); setTimeout(()=>{ btn.innerHTML='<i data-lucide="link" class="lucide-ico" aria-hidden="true"></i> Copy Link'; refreshIcons(); },2000); } }
   if(navigator.clipboard){ navigator.clipboard.writeText(url).then(onCopied).catch(()=>legacyCopy(url,onCopied)); }
   else legacyCopy(url, onCopied);
   function legacyCopy(u,cb){ const ta=document.createElement('textarea');ta.value=u;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);cb(); }
@@ -981,7 +1008,8 @@ window.smSubmitReport = async function(siteId){
       body: JSON.stringify({ input_site_id: siteId, input_reason: reason, input_note: note })
     });
     if(!res.ok) throw new Error();
-    document.getElementById('smReportForm').innerHTML = '<div class="sm-report-success">✓ Thanks — we\'ll look into it.</div>';
+    document.getElementById('smReportForm').innerHTML = '<div class="sm-report-success"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Thanks — we\'ll look into it.</div>';
+    refreshIcons();
     showToast('Report submitted — thank you!');
   }catch{
     btn.disabled = false; btn.textContent = 'Submit Report';

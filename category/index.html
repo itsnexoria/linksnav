@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>All Categories — Nexo Hub</title>
   <meta name="description" content="Browse all 35 categories on Nexo Hub — AI, gaming, dev tools, design, music, health, travel, writing, photography, and more."/>
-  <link rel="canonical" href="https://app.nexosites.xyz/category/"/>
+  <link rel="canonical" href="https://app.nexorealm.org/category/"/>
   <meta property="og:title" content="All Categories — Nexo Hub"/>
   <meta property="og:description" content="Browse 620+ curated sites across 35 categories including AI, gaming, dev tools, design, music, health, and travel."/>
-  <meta property="og:image" content="https://app.nexosites.xyz/assets/logo-512.png"/>
+  <meta property="og:image" content="https://app.nexorealm.org/assets/logo-512.png"/>
   <meta property="og:image:alt" content="Nexo Hub Categories"/>
   <meta name="theme-color" content="#7c5cfc"/>
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
@@ -25,9 +25,9 @@
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "All Categories — Nexo Hub",
-    "url": "https://app.nexosites.xyz/category/",
+    "url": "https://app.nexorealm.org/category/",
     "description": "Browse 620+ curated websites organised across 35 categories.",
-    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexosites.xyz/" }
+    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexorealm.org/" }
   }
   </script>
   <script type="application/ld+json">
@@ -35,8 +35,8 @@
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Nexo Hub", "item": "https://app.nexosites.xyz/" },
-      { "@type": "ListItem", "position": 2, "name": "Categories", "item": "https://app.nexosites.xyz/category/" }
+      { "@type": "ListItem", "position": 1, "name": "Nexo Hub", "item": "https://app.nexorealm.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Categories", "item": "https://app.nexorealm.org/category/" }
     ]
   }
   </script>
@@ -118,6 +118,8 @@
     const SUPABASE_ANON_KEY='sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
     function fav(url){try{const{hostname}=new URL(url);return'https://www.google.com/s2/favicons?domain='+hostname+'&sz=64'}catch{return''}}
+    const EMOJI_TO_LUCIDE={'🤖':'bot','🧸':'gamepad-2','🏢':'building-2','🎨':'palette','🛠️':'wrench','🛠':'wrench','⬇️':'arrow-down','⬇':'arrow-down','💳':'credit-card','🎮':'gamepad-2','🔵':'circle-dot','☁️':'cloud','☁':'cloud','📚':'book-open','⛏️':'pickaxe','⛏':'pickaxe','🎬':'clapperboard','🎵':'music','🌐':'globe','📰':'newspaper','📋':'clipboard','🔒':'lock','🛒':'shopping-cart','📱':'smartphone','📁':'folder','📺':'tv','⚙️':'settings','⚙':'settings','⚡':'zap','📖':'book-open','🍳':'utensils-crossed','💪':'dumbbell','💼':'briefcase','🗺️':'map','🗺':'map','📷':'camera','🎙️':'mic','🎙':'mic','🏠':'home','🔬':'microscope','🏆':'trophy','✈️':'plane','✈':'plane','⛅':'cloud-sun','✏️':'pencil','✏':'pencil','🔗':'link'};
+    function catIconHTML(emoji){return `<i data-lucide="${EMOJI_TO_LUCIDE[emoji]||'folder'}" class="lucide-ico" aria-hidden="true"></i>`;}
 
     function siteCardHTML(s){
       const color=s.color||'#7c5cfc';
@@ -153,12 +155,13 @@
       sites.forEach(s=>{counts[s.category]=(counts[s.category]||0)+1;});
       document.getElementById('catGrid').innerHTML = cats.map((c,i)=>`
         <a class="cat-card" href="/category/${esc(c.id)}/" style="animation-delay:${i*0.03}s">
-          <span class="cat-icon">${esc(c.icon)}</span>
+          <span class="cat-icon">${catIconHTML(c.icon)}</span>
           <div class="cat-info">
             <div class="cat-name">${esc(c.label)}</div>
             <div class="cat-count">${(counts[c.id]||0).toLocaleString()} site${(counts[c.id]||0)!==1?'s':''}</div>
           </div>
         </a>`).join('');
+      if(window.lucide){lucide.createIcons();}
     }
 
     async function loadCategoryDetail(slug){
@@ -184,14 +187,14 @@
         document.title = `${cat.label} — Nexo Hub`;
         const desc = `${sites.length} curated ${cat.label} sites on Nexo Hub.`;
         document.querySelector('meta[name="description"]').content = desc;
-        document.querySelector('link[rel="canonical"]').href = `https://app.nexosites.xyz/category/${esc(cat.id)}/`;
+        document.querySelector('link[rel="canonical"]').href = `https://app.nexorealm.org/category/${esc(cat.id)}/`;
         document.querySelector('meta[property="og:title"]').content = `${cat.label} — Nexo Hub`;
         document.querySelector('meta[property="og:description"]').content = desc;
 
         main.innerHTML = `
           <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:24px"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Categories</a>
           <div class="cat-index-hero">
-            <h1 class="cat-index-title">${esc(cat.icon)} ${esc(cat.label)}</h1>
+            <h1 class="cat-index-title">${catIconHTML(cat.icon)} ${esc(cat.label)}</h1>
             <p class="cat-index-sub">${sites.length} curated site${sites.length!==1?'s':''}</p>
           </div>
           <div class="cat-grid" id="siteGrid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">

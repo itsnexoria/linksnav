@@ -108,7 +108,7 @@
     .ct-card-desc { font-size:.76rem; color:var(--text2); line-height:1.55; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
     .ct-card-tags { display:flex; flex-wrap:wrap; gap:4px; padding:0 14px 10px; border-top:1px solid var(--border); padding-top:8px; }
     .ct-empty { text-align:center; padding:60px 20px; }
-    .ct-empty-icon { font-size:2.5rem; margin-bottom:12px; opacity:.4; }
+    .ct-empty-icon { margin-bottom:12px; opacity:.4; display:flex; justify-content:center; }
   </style>
 </head>
 <body>
@@ -137,9 +137,11 @@
     ═══════════════════════════════════════════════════════════ */
     const SUPABASE_URL = 'https://tiupkpabwuefclbrpaef.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
-    const BASE = 'https://app.nexosites.xyz';
+    const BASE = 'https://app.nexorealm.org';
 
     function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    const EMOJI_TO_LUCIDE={'🤖':'bot','🧸':'gamepad-2','🏢':'building-2','🎨':'palette','🛠️':'wrench','🛠':'wrench','⬇️':'arrow-down','⬇':'arrow-down','💳':'credit-card','🎮':'gamepad-2','🔵':'circle-dot','☁️':'cloud','☁':'cloud','📚':'book-open','⛏️':'pickaxe','⛏':'pickaxe','🎬':'clapperboard','🎵':'music','🌐':'globe','📰':'newspaper','📋':'clipboard','🔒':'lock','🛒':'shopping-cart','📱':'smartphone','📁':'folder','📺':'tv','⚙️':'settings','⚙':'settings','⚡':'zap','📖':'book-open','🍳':'utensils-crossed','💪':'dumbbell','💼':'briefcase','🗺️':'map','🗺':'map','📷':'camera','🎙️':'mic','🎙':'mic','🏠':'home','🔬':'microscope','🏆':'trophy','✈️':'plane','✈':'plane','⛅':'cloud-sun','✏️':'pencil','✏':'pencil','🔗':'link'};
+    function catIconHTML(emoji){return `<i data-lucide="${EMOJI_TO_LUCIDE[emoji]||'folder'}" class="lucide-ico" aria-hidden="true"></i>`;}
     function fav(url){ try{ return 'https://www.google.com/s2/favicons?domain='+new URL(url).hostname+'&sz=64'; }catch{ return ''; } }
     function timeAgo(iso){
       const m=Math.round((Date.now()-new Date(iso).getTime())/60000);
@@ -262,25 +264,26 @@
         if(!site){ renderSiteNotFound(); return; }
 
         const cat = cats.find(c=>c.id===site.category);
-        const catLabel = cat ? `${cat.icon} ${cat.label}` : site.category;
+        const catLabel = cat ? cat.label : site.category;
+        const catIcon = cat ? cat.icon : null;
         setMeta(site, cat ? cat.label : site.category);
-        renderSite(site, catLabel);
+        renderSite(site, catLabel, catIcon);
         loadSimilarSites(site.id);
       }catch{
         renderSiteNotFound();
       }
     }
 
-    function renderSite(site, catLabel){
+    function renderSite(site, catLabel, catIcon){
       const faviconUrl = fav(site.url);
       const tags = (site.tags||[]).map(t=>{
         const bg=(site.tag_colors||{})[t]||'#6b7280';
         return `<a class="tag" href="/tag/${esc(encodeURIComponent(t))}/" style="--tag-bg:${esc(bg)}">${esc(t)}</a>`;
       }).join('');
       const health = (()=>{
-        if(!site.last_checked_at) return `<span class="sd-health sd-health--unknown">○ Not yet checked</span>`;
-        if(site.health_status==='up') return `<span class="sd-health sd-health--up">● Healthy · checked ${esc(timeAgo(site.last_checked_at))}</span>`;
-        return `<span class="sd-health sd-health--down">⚠ May be down · HTTP ${site.http_status||'no response'} · checked ${esc(timeAgo(site.last_checked_at))}</span>`;
+        if(!site.last_checked_at) return `<span class="sd-health sd-health--unknown"><i data-lucide="circle" class="lucide-ico" aria-hidden="true"></i> Not yet checked</span>`;
+        if(site.health_status==='up') return `<span class="sd-health sd-health--up"><i data-lucide="circle-dot" class="lucide-ico" aria-hidden="true"></i> Healthy · checked ${esc(timeAgo(site.last_checked_at))}</span>`;
+        return `<span class="sd-health sd-health--down"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> May be down · HTTP ${site.http_status||'no response'} · checked ${esc(timeAgo(site.last_checked_at))}</span>`;
       })();
       const addedDate = site.created_at ? new Date(site.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '—';
 
@@ -294,7 +297,7 @@
             <h1 class="sd-title">${esc(site.name)}</h1>
             <a class="sd-url" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">${esc(site.url)}</a>
             <div class="sd-badges">
-            <a class="detail-cat-badge" href="/category/${esc(site.category)}/">${esc(catLabel)}</a>
+            <a class="detail-cat-badge" href="/category/${esc(site.category)}/">${catIcon?catIconHTML(catIcon):''} ${esc(catLabel)}</a>
               ${health}
             </div>
           </div>
@@ -305,35 +308,36 @@
           ${tags?`<div class="sd-section-label">Tags</div><div class="sd-tags">${tags}</div>`:''}
         </div>
         <div class="sd-actions">
-          <a class="sd-action-btn sd-action-primary" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">↗ Visit Site</a>
-          <button class="sd-action-btn sd-action-secondary" onclick="copyLink()">🔗 Copy Link</button>
+          <a class="sd-action-btn sd-action-primary" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="lucide-ico" aria-hidden="true"></i> Visit Site</a>
+          <button class="sd-action-btn sd-action-secondary" onclick="copyLink()"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i> Copy Link</button>
           <button class="sd-action-btn sd-action-secondary" onclick="shareTwitter('${esc(site.url)}','${esc(site.name)}')">𝕏 Share</button>
-          <button class="sd-action-btn sd-action-secondary" onclick="shareWhatsApp('${esc(site.url)}','${esc(site.name)}')">💬 WhatsApp</button>
-          <button class="sd-action-btn sd-action-secondary" id="sdReportBtn" onclick="toggleReport()">⚠ Report</button>
-          <a class="sd-action-btn sd-action-secondary" href="/">← Back to Hub</a>
+          <button class="sd-action-btn sd-action-secondary" onclick="shareWhatsApp('${esc(site.url)}','${esc(site.name)}')"><i data-lucide="message-circle" class="lucide-ico" aria-hidden="true"></i> WhatsApp</button>
+          <button class="sd-action-btn sd-action-secondary" id="sdReportBtn" onclick="toggleReport()"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> Report</button>
+          <a class="sd-action-btn sd-action-secondary" href="/"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
         </div>
         <div class="sm-report-form" id="sdReportForm" style="display:none;margin-bottom:24px">
           <div class="sm-report-label">What's the issue?</div>
           <div class="sm-report-reasons">
-            <button class="sm-reason-btn" data-reason="broken_link" onclick="selectReason(this)">🔗 Broken link</button>
-            <button class="sm-reason-btn" data-reason="wrong_info" onclick="selectReason(this)">📝 Wrong info</button>
-            <button class="sm-reason-btn" data-reason="spam_or_scam" onclick="selectReason(this)">🚫 Spam/scam</button>
-            <button class="sm-reason-btn" data-reason="duplicate" onclick="selectReason(this)">📋 Duplicate</button>
-            <button class="sm-reason-btn" data-reason="site_down" onclick="selectReason(this)">⛔ Site is down</button>
-            <button class="sm-reason-btn" data-reason="other" onclick="selectReason(this)">❓ Other</button>
+            <button class="sm-reason-btn" data-reason="broken_link" onclick="selectReason(this)"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i> Broken link</button>
+            <button class="sm-reason-btn" data-reason="wrong_info" onclick="selectReason(this)"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i> Wrong info</button>
+            <button class="sm-reason-btn" data-reason="spam_or_scam" onclick="selectReason(this)"><i data-lucide="ban" class="lucide-ico" aria-hidden="true"></i> Spam/scam</button>
+            <button class="sm-reason-btn" data-reason="duplicate" onclick="selectReason(this)"><i data-lucide="clipboard" class="lucide-ico" aria-hidden="true"></i> Duplicate</button>
+            <button class="sm-reason-btn" data-reason="site_down" onclick="selectReason(this)"><i data-lucide="ban" class="lucide-ico" aria-hidden="true"></i> Site is down</button>
+            <button class="sm-reason-btn" data-reason="other" onclick="selectReason(this)"><i data-lucide="circle-help" class="lucide-ico" aria-hidden="true"></i> Other</button>
           </div>
           <textarea class="sm-report-note" id="sdReportNote" placeholder="Optional details… (max 500 chars)" maxlength="500"></textarea>
           <button class="sm-report-submit" id="sdReportSubmit" onclick="submitReport('${esc(site.id)}')" disabled>Submit Report</button>
         </div>
         <div class="sd-section-label" style="margin-top:28px">About this listing</div>
         <div class="sd-meta-grid">
-          <div class="sd-meta-card"><div class="sd-meta-label">Category</div><div class="sd-meta-value">${esc(catLabel)}</div></div>
+          <div class="sd-meta-card"><div class="sd-meta-label">Category</div><div class="sd-meta-value">${catIcon?catIconHTML(catIcon):''} ${esc(catLabel)}</div></div>
           <div class="sd-meta-card"><div class="sd-meta-label">Added to Nexo Hub</div><div class="sd-meta-value">${esc(addedDate)}</div></div>
         </div>
         <div class="sd-section-label" style="margin-top:28px">You might also like</div>
         <div class="sd-similar-grid" id="similarGrid">
           <div style="grid-column:1/-1;text-align:center;padding:20px"><span class="loading-spin"></span></div>
         </div>`;
+      if(window.lucide){lucide.createIcons();}
     }
 
     function shareTwitter(url, name){
@@ -443,7 +447,7 @@
         document.title = `${cat.icon} ${cat.label} — Nexo Hub`;
         setHeadMeta(`${cat.icon} ${cat.label} — Nexo Hub`,
           `Browse ${sites.length} curated ${cat.label} sites on Nexo Hub — hand-picked and reviewed.`,
-          `https://app.nexosites.xyz/category/${catId}/`,
+          `https://app.nexorealm.org/category/${catId}/`,
           [
             { name:'Nexo Hub', url:BASE+'/' },
             { name:'Categories', url:BASE+'/category/' },
@@ -456,12 +460,13 @@
           <a href="/category/" style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);text-decoration:none;margin-bottom:28px;transition:color .18s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> All Categories</a>
           <div class="ct-hero">
             <div class="ct-eyebrow">Category</div>
-            <h1 class="ct-title">${esc(cat.icon)} ${esc(cat.label)}</h1>
+            <h1 class="ct-title">${catIconHTML(cat.icon)} ${esc(cat.label)}</h1>
             <p class="ct-sub">${sites.length} curated site${sites.length!==1?'s':''} in ${esc(cat.label)}</p>
           </div>
           ${sites.length ? `<div class="ct-grid">${sites.map((s,i)=>siteCardHTML(s,i)).join('')}</div>`
-            : `<div class="ct-empty"><div class="ct-empty-icon">🌱</div><p style="color:var(--muted)">No sites in this category yet.</p></div>`}
+            : `<div class="ct-empty"><div class="ct-empty-icon"><i data-lucide="sprout" class="lucide-ico" aria-hidden="true" style="width:2rem;height:2rem"></i></div><p style="color:var(--muted)">No sites in this category yet.</p></div>`}
         </div>`;
+        if(window.lucide){lucide.createIcons();}
       }catch{ render404(); }
     }
 
@@ -481,7 +486,7 @@
         document.title = `#${tag} — Nexo Hub`;
         setHeadMeta(`#${tag} — Nexo Hub`,
           `${sites.length} curated site${sites.length!==1?'s':''} tagged "${tag}" on Nexo Hub.`,
-          `https://app.nexosites.xyz/tag/${tag}/`,
+          `https://app.nexorealm.org/tag/${tag}/`,
           [
             { name:'Nexo Hub', url:BASE+'/' },
             { name:'Tags', url:BASE+'/tag/' },
@@ -498,8 +503,9 @@
             <p class="ct-sub">${sites.length} site${sites.length!==1?'s':''} tagged <strong>${esc(tag)}</strong></p>
           </div>
           ${sites.length ? `<div class="ct-grid">${sites.map((s,i)=>siteCardHTML(s,i)).join('')}</div>`
-            : `<div class="ct-empty"><div class="ct-empty-icon">🔍</div><p style="color:var(--muted)">No sites found for this tag.</p></div>`}
+            : `<div class="ct-empty"><div class="ct-empty-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true" style="width:2rem;height:2rem"></i></div><p style="color:var(--muted)">No sites found for this tag.</p></div>`}
         </div>`;
+        if(window.lucide){lucide.createIcons();}
       }catch{ render404(); }
     }
 
@@ -512,7 +518,7 @@
       }).join('');
       const href = s.slug ? `/site/${esc(s.slug)}/` : esc(s.url);
       const isExt = !s.slug;
-      const downBadge = s.health_status==='down'?`<span class="health-badge">⚠ May be down</span>`:'';
+      const downBadge = s.health_status==='down'?`<span class="health-badge"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> May be down</span>`:'';
       return `<div class="ct-card" style="animation-delay:${Math.min(i*0.03,0.4)}s">
         <a class="ct-card-link" href="${href}" ${isExt?'target="_blank" rel="noopener noreferrer"':''}>
           <div class="ct-card-top">
@@ -548,7 +554,7 @@
         const desc = post.excerpt || post.title;
         document.title = `${post.title} — Nexo Hub Blog`;
         setHeadMeta(`${post.title} — Nexo Hub Blog`, desc,
-          `https://app.nexosites.xyz/blog/${slug}/`,
+          `https://app.nexorealm.org/blog/${slug}/`,
           [
             { name:'Nexo Hub', url:BASE+'/' },
             { name:'Blog', url:BASE+'/blog/' },

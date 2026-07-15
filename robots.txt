@@ -4,5 +4,5 @@ Disallow: /pages/admin/
 Disallow: /contact/
 Disallow: /settings/
 
-Sitemap: https://app.nexosites.xyz/sitemap.xml
-Sitemap: https://app.nexosites.xyz/sitemap-sites.xml
+Sitemap: https://app.nexorealm.org/sitemap.xml
+Sitemap: https://app.nexorealm.org/sitemap-sites.xml

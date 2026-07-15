@@ -748,7 +748,7 @@ a.tag:hover { filter:brightness(1.2); transform:translateY(-1px); }
 }
 /* ── CARD ACTIONS ROW (integrated footer bar inside card-wrap) ─ */
 .card-actions {
-  display:flex; align-items:center; gap:6px;
+  display:flex; align-items:center; gap:6px; justify-content:flex-start;
   padding:7px 12px 9px;
   border-top:1px solid var(--border);
   background:color-mix(in srgb, var(--bg3) 50%, transparent);
