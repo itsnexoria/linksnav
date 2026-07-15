@@ -278,9 +278,10 @@ body {
   width:34px; height:34px; flex-shrink:0;
   background:var(--surface); border:1px solid var(--border2);
   border-radius:var(--radius); cursor:pointer; font-size:1rem;
-  transition:background .2s, border-color .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
+  color:var(--muted);
+  transition:background .2s, border-color .2s, transform .25s cubic-bezier(.34,1.56,.64,1), color .2s;
 }
-.random-btn:hover { background:var(--surface2); border-color:var(--accent); transform:rotate(-12deg) scale(1.08) }
+.random-btn:hover { background:var(--surface2); border-color:var(--accent); color:var(--accent); transform:rotate(-12deg) scale(1.08) }
 .random-btn:active { transform:rotate(10deg) scale(.9) }
 .random-btn.rolling { animation:diceRoll .5s ease }
 @keyframes diceRoll { 0%{transform:rotate(0)} 25%{transform:rotate(-25deg) scale(1.1)} 50%{transform:rotate(20deg) scale(1.15)} 75%{transform:rotate(-10deg) scale(1.05)} 100%{transform:rotate(0) scale(1)} }

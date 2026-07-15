@@ -648,6 +648,11 @@
             <input type="text" id="efTags" value="${esc((site.tags||[]).join(', '))}"/>
             <div class="edit-field-hint">e.g. free, open-source, ai — colors are auto-assigned for any new tag</div>
           </div>
+          <div class="edit-field">
+            <label for="efYoutube">YouTube video (optional)</label>
+            <input type="text" id="efYoutube" value="${esc(site.youtube_url || '')}" placeholder="https://www.youtube.com/watch?v=..."/>
+            <div class="edit-field-hint">If set, this plays on the site's detail page instead of the auto-generated preview card</div>
+          </div>
           <div class="edit-modal-actions">
             <button class="edit-cancel-btn" onclick="closeEditModal()">Cancel</button>
             <button class="edit-save-btn" id="efSaveBtn" onclick="saveEditModal('${esc(id)}')">Save Changes</button>
@@ -674,9 +679,13 @@
       const category = document.getElementById('efCategory').value;
       const description = document.getElementById('efDescription').value.trim();
       const tags = document.getElementById('efTags').value.split(',').map(t => t.trim().toLowerCase().replace(/\s+/g,'-')).filter(Boolean);
+      const youtubeUrl = document.getElementById('efYoutube').value.trim();
 
       if (!name) { showToast('Name is required', true); return; }
       if (!/^https?:\/\//i.test(url)) { showToast('URL must start with http:// or https://', true); return; }
+      if (youtubeUrl && !/^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(youtubeUrl)) {
+        showToast('YouTube video must be a youtube.com or youtu.be link', true); return;
+      }
 
       const existingColors = (site && site.tag_colors) || {};
       const tagColors = {};
@@ -688,7 +697,7 @@
         await rpc('admin_update_site', {
           input_key: getKey(), site_id: id,
           p_name: name, p_url: url, p_description: description, p_category: category,
-          p_tags: tags, p_tag_colors: tagColors
+          p_tags: tags, p_tag_colors: tagColors, p_youtube_url: youtubeUrl
         });
         showToast('Site updated');
         closeEditModal();
