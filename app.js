@@ -515,6 +515,7 @@ function openShortcutsModal(){
   const SHORTCUTS = [
     ['Ctrl K', 'Open search'],
     ['?', 'Show this panel'],
+    ['G', 'Open the site guide'],
     ['R', 'Open a random site'],
     ['F', 'Jump to Favourites'],
     ['[ ]', 'Cycle categories left / right'],

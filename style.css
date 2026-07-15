@@ -945,6 +945,73 @@ kbd {
 }
 .shortcuts-hint-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); }
 
+/* ── SITE GUIDE MODAL ───────────────────────────────────────── */
+.guide-overlay {
+  position:fixed; inset:0; z-index:9200;
+  background:rgba(0,0,0,.65); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; opacity:0; transition:opacity .2s;
+}
+.guide-overlay.show { opacity:1; }
+.guide-modal {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:var(--radius-lg); padding:0;
+  width:100%; max-width:520px; max-height:min(640px,86vh);
+  display:flex; flex-direction:column; overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.5);
+  transform:translateY(10px) scale(.98); transition:transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.guide-overlay.show .guide-modal { transform:none; }
+.guide-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 20px 14px; border-bottom:1px solid var(--border); flex-shrink:0;
+}
+.guide-title {
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-d); font-weight:800; font-size:.98rem; letter-spacing:-.01em;
+}
+.guide-title .lucide-ico { width:18px; height:18px; color:var(--accent); }
+.guide-close {
+  width:26px; height:26px; border-radius:50%; border:1px solid var(--border2);
+  background:var(--bg3); color:var(--muted); cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:all .15s;
+}
+.guide-close:hover { background:var(--surface2); color:var(--text); }
+.guide-body { padding:6px 0; overflow-y:auto; }
+.guide-row {
+  display:flex; align-items:flex-start; gap:14px;
+  padding:12px 20px; transition:background .15s;
+}
+.guide-row:hover { background:var(--surface2); }
+.guide-row-icon {
+  flex-shrink:0; width:34px; height:34px; border-radius:9px;
+  background:var(--accent-dim); color:var(--accent);
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+.guide-row-icon .lucide-ico { width:17px; height:17px; }
+.guide-row-title { font-weight:700; font-size:.85rem; color:var(--text); margin-bottom:3px; }
+.guide-row-desc { font-size:.8rem; color:var(--text2); line-height:1.55; }
+.guide-row-desc kbd { min-width:22px; height:20px; padding:0 6px; font-size:.66rem; margin:0 1px; }
+.guide-plus { color:var(--muted); font-size:.7rem; font-weight:600; margin:0 2px; }
+.guide-footer {
+  padding:12px 20px; border-top:1px solid var(--border); flex-shrink:0;
+  font-size:.72rem; color:var(--muted); text-align:center;
+}
+.guide-footer kbd { min-width:22px; height:20px; font-size:.64rem; }
+
+/* ── SITE GUIDE FLOATING BUTTON ─────────────────────────────── */
+.guide-fab {
+  position:fixed; right:20px; bottom:20px; z-index:500;
+  width:42px; height:42px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--border2);
+  color:var(--text2); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25); transition:all .18s;
+}
+.guide-fab:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); transform:translateY(-2px); }
+.guide-fab .lucide-ico { width:19px; height:19px; }
+@media (max-width:640px) { .guide-fab { right:14px; bottom:14px; width:38px; height:38px; } }
+
 /* ═══════════════════════════════════════════════════════════════
    ✨ ANIMATIONS v2 — making the site feel alive
 ═══════════════════════════════════════════════════════════════ */
