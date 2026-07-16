@@ -15,6 +15,7 @@
     }
     if(p.compact) document.documentElement.classList.add('compact-cards');
     if(p.animations === false) document.documentElement.classList.add('no-animations');
+    if(p.fabEnabled === false) document.documentElement.classList.add('no-fab');
 
     if(p.cardRadius !== undefined) document.documentElement.style.setProperty('--card-radius', p.cardRadius + 'px');
     if(p.cardStyle && p.cardStyle !== 'default') document.documentElement.setAttribute('data-card-style', p.cardStyle);

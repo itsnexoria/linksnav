@@ -106,23 +106,109 @@
   window.openGuideModal = openGuideModal;
   window.closeGuideModal = closeGuideModal;
 
+  var NETWORK_LINKS = [
+    { icon: 'globe', label: 'Nexo Realm', desc: 'The main Nexo network hub', href: 'https://nexorealm.org' },
+    { icon: 'rocket', label: 'Nexo Boost', desc: 'Boost & growth tools', href: 'https://boost.nexorealm.org' },
+    { icon: 'layout-grid', label: 'NexoSites', desc: 'Where Nexo Hub lives', href: 'https://nexosites.xyz' },
+    { icon: 'clapperboard', label: 'Watch Log', desc: 'Track what you watch', href: 'https://list.nexosites.xyz' }
+  ];
+  var DISCORD_LINK = { icon: 'message-square', label: 'Join our Discord', desc: 'Chat with the community', href: 'https://discord.gg/JFz3mVpCUm' };
+
+  function fabEnabled() {
+    try {
+      var p = JSON.parse(localStorage.getItem('nexhub_prefs') || '{}');
+      return p.fabEnabled !== false;
+    } catch (e) { return true; }
+  }
+
+  function closeNetworkMenu() {
+    var m = document.getElementById('nexoNetworkMenu');
+    var fab = document.getElementById('nexoFab');
+    if (m) m.classList.remove('show');
+    if (fab) { fab.classList.remove('open'); fab.setAttribute('aria-expanded', 'false'); }
+    setTimeout(function () { if (m) m.remove(); }, 180);
+    document.removeEventListener('click', onOutsideClick, true);
+  }
+
+  function onOutsideClick(e) {
+    var m = document.getElementById('nexoNetworkMenu');
+    var fab = document.getElementById('nexoFab');
+    if (!m) return;
+    if (m.contains(e.target) || (fab && fab.contains(e.target))) return;
+    closeNetworkMenu();
+  }
+
+  function linkRow(item, extraClass) {
+    return '<a class="nexo-menu-row' + (extraClass ? ' ' + extraClass : '') + '" href="' + item.href + '" target="_blank" rel="noopener">' +
+      '<span class="nexo-menu-row-icon"><i data-lucide="' + item.icon + '" class="lucide-ico" aria-hidden="true"></i></span>' +
+      '<span class="nexo-menu-row-text"><span class="nexo-menu-row-label">' + item.label + '</span><span class="nexo-menu-row-desc">' + item.desc + '</span></span>' +
+      '<i data-lucide="arrow-up-right" class="lucide-ico nexo-menu-row-go" aria-hidden="true"></i>' +
+    '</a>';
+  }
+
+  function openNetworkMenu() {
+    if (document.getElementById('nexoNetworkMenu')) return;
+    var menu = document.createElement('div');
+    menu.id = 'nexoNetworkMenu';
+    menu.className = 'nexo-network-menu';
+    menu.innerHTML =
+      '<div class="nexo-menu-title">Nexo Network</div>' +
+      '<button class="nexo-menu-row nexo-menu-guide" id="nexoMenuGuideBtn" type="button">' +
+        '<span class="nexo-menu-row-icon"><i data-lucide="compass" class="lucide-ico" aria-hidden="true"></i></span>' +
+        '<span class="nexo-menu-row-text"><span class="nexo-menu-row-label">Site Guide</span><span class="nexo-menu-row-desc">How Nexo Hub works</span></span>' +
+      '</button>' +
+      '<div class="nexo-menu-divider"></div>' +
+      NETWORK_LINKS.map(function (i) { return linkRow(i); }).join('') +
+      '<div class="nexo-menu-divider"></div>' +
+      linkRow(DISCORD_LINK, 'nexo-menu-discord');
+    document.body.appendChild(menu);
+    refreshIcons();
+    requestAnimationFrame(function () { menu.classList.add('show'); });
+
+    document.getElementById('nexoMenuGuideBtn').addEventListener('click', function () {
+      closeNetworkMenu();
+      openGuideModal();
+    });
+    setTimeout(function () { document.addEventListener('click', onOutsideClick, true); }, 0);
+
+    var fab = document.getElementById('nexoFab');
+    if (fab) { fab.classList.add('open'); fab.setAttribute('aria-expanded', 'true'); }
+  }
+
+  function toggleNetworkMenu() {
+    if (document.getElementById('nexoNetworkMenu')) closeNetworkMenu();
+    else openNetworkMenu();
+  }
+
   function buildFab() {
-    if (document.getElementById('guideFab')) return;
+    if (document.getElementById('nexoFab')) return;
+    if (!fabEnabled()) return;
     var btn = document.createElement('button');
-    btn.id = 'guideFab';
+    btn.id = 'nexoFab';
     btn.className = 'guide-fab';
-    btn.setAttribute('aria-label', 'Open site guide');
-    btn.setAttribute('title', 'Site guide (press G)');
-    btn.innerHTML = '<i data-lucide="compass" class="lucide-ico" aria-hidden="true"></i>';
-    btn.addEventListener('click', openGuideModal);
+    btn.setAttribute('aria-label', 'Nexo network');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('title', 'Nexo Network');
+    btn.innerHTML = '<i data-lucide="boxes" class="lucide-ico" aria-hidden="true"></i>';
+    btn.addEventListener('click', toggleNetworkMenu);
     document.body.appendChild(btn);
     refreshIcons();
   }
 
+  function removeFab() {
+    var fab = document.getElementById('nexoFab');
+    if (fab) fab.remove();
+    closeNetworkMenu();
+  }
+
+  window.nexoSetFabEnabled = function (val) {
+    if (val) buildFab(); else removeFab();
+  };
+
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && document.getElementById('guideModal')) {
-      closeGuideModal();
-      return;
+    if (e.key === 'Escape') {
+      if (document.getElementById('nexoNetworkMenu')) { closeNetworkMenu(); return; }
+      if (document.getElementById('guideModal')) { closeGuideModal(); return; }
     }
     if ((e.key === 'g' || e.key === 'G') && !isTyping() && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault();

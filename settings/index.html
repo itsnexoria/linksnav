@@ -358,6 +358,17 @@
             <span class="toggle-slider"></span>
           </label>
         </div>
+
+        <div class="settings-row">
+          <div class="settings-row-info">
+            <div class="settings-row-label">Floating Network Button</div>
+            <div class="settings-row-desc">The corner button linking to the site guide, Nexo network, and Discord</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="fabToggle" onchange="setSetting('fabEnabled', this.checked)" checked/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
       </div>
     </div>
 
@@ -838,6 +849,10 @@
       const prefs = getPrefs(); prefs[key] = val; savePrefs(prefs);
       if(key==='compact') document.documentElement.classList.toggle('compact-cards', val);
       if(key==='animations') document.documentElement.classList.toggle('no-animations', !val);
+      if(key==='fabEnabled'){
+        document.documentElement.classList.toggle('no-fab', !val);
+        if(window.nexoSetFabEnabled) window.nexoSetFabEnabled(val);
+      }
     }
 
     /* ── CARD EDITOR ─────────────────────────────────────
@@ -1032,6 +1047,11 @@
       const animOn = prefs.animations !== false;
       document.getElementById('animToggle').checked = animOn;
       if(!animOn) document.documentElement.classList.add('no-animations');
+
+      // Floating network button (default on)
+      const fabOn = prefs.fabEnabled !== false;
+      document.getElementById('fabToggle').checked = fabOn;
+      if(!fabOn) document.documentElement.classList.add('no-fab');
 
       // Card editor
       const cardStyle = prefs.cardStyle || 'default';
