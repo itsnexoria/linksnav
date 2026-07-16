@@ -228,6 +228,8 @@ function hashStr(s){
 }
 function pickSiteOfWeek(sites){
   if(!sites||!sites.length) return null;
+  const pinned=sites.find(s=>s.featured);
+  if(pinned) return pinned;
   const eligible=sites.filter(s=>s.description&&s.description.length>20&&s.health_status!=='down');
   const pool=eligible.length?eligible:sites;
   const idx=hashStr(isoWeekKey())%pool.length;
@@ -287,7 +289,8 @@ async function init(){
       slug: s.slug,
       health_status: s.health_status,
       http_status: s.http_status,
-      last_checked_at: s.last_checked_at
+      last_checked_at: s.last_checked_at,
+      featured: !!s.featured
     }));
   } catch (err) {
     console.error('Failed to load sites from Supabase:', err);
