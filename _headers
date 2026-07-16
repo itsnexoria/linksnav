@@ -2,16 +2,23 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# JS and CSS — cache for 1 day
+# JS and CSS — versioned via ?v= query strings on every reference, so a
+# cache-busted URL only ever points at one immutable payload. Safe to cache
+# hard and skip revalidation entirely; bumping the ?v= is what invalidates it.
 /*.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=31536000, immutable
 
-# nexo-prefs runs in <head> synchronously — keep cache short so pref changes apply quickly
+# nexo-prefs runs in <head> synchronously and isn't cache-busted — keep this
+# one short so pref changes apply quickly instead of the year-long rule above.
 /nexo-prefs.js
   Cache-Control: public, max-age=3600
 
+# pwa-register.js is also unversioned (no ?v=) — same reasoning as above.
+/pwa-register.js
+  Cache-Control: public, max-age=3600
+
 /*.css
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=31536000, immutable
 
 # HTML — no cache (always fresh)
 /*.html

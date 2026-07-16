@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/style.css?v=20260716-4"/>
   <style>
     .offline-wrap {
       min-height: 100vh; display:flex; flex-direction:column;
@@ -43,7 +43,7 @@
     <button class="offline-btn" onclick="location.reload()"><i data-lucide="rotate-cw" class="lucide-ico" aria-hidden="true"></i> Try again</button>
   </div>
   <script>(function(){ var t=localStorage.getItem('nexhub_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();</script>
-  <script src="https://unpkg.com/lucide@1.24.0"></script>
+  <script src="https://unpkg.com/lucide@1.24.0" defer></script>
   <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>

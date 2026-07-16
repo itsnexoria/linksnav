@@ -8,8 +8,10 @@
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../style.css?v=20260716-2"/>
+  <link rel="stylesheet" href="../../style.css?v=20260716-4"/>
   <style>
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
     @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
@@ -250,27 +252,6 @@
     }
     .edit-btn:hover { border-color: var(--accent); color: var(--accent); }
     .edit-btn:active { transform: scale(.95); }
-    .star-btn {
-      flex-shrink: 0; width: 32px; height: 32px; padding: 0; border-radius: var(--radius);
-      background: transparent; border: 1px solid var(--border2); color: var(--text2);
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
-      transition: background .18s, border-color .18s, color .18s, transform .15s;
-    }
-    .star-btn .lucide-ico { width: 15px; height: 15px; }
-    .star-btn:hover { border-color: #fbbf24; color: #fbbf24; }
-    .star-btn:active { transform: scale(.9); }
-    .star-btn.is-active { background: #fbbf24; border-color: #fbbf24; color: #1a1500; }
-    .star-btn.is-active .lucide-ico { fill: currentColor; }
-    .manage-card.is-featured { border-color: #fbbf24; background: color-mix(in srgb, #fbbf24 6%, var(--surface)); }
-    .featured-badge { display: inline-block; }
-    .edit-field-checkbox { display: flex; flex-direction: column; }
-    .edit-checkbox-label {
-      display: flex !important; align-items: center; gap: 8px; cursor: pointer;
-      font-family: var(--font-m); font-size: .82rem; font-weight: 600;
-      text-transform: none !important; letter-spacing: normal !important; color: var(--text) !important;
-      margin-bottom: 0 !important;
-    }
-    .edit-checkbox-label input[type="checkbox"] { width: 16px; height: 16px; accent-color: #fbbf24; cursor: pointer; }
 
     /* ── EDIT MODAL ──────────────────────────────────── */
     .edit-modal-overlay {
@@ -395,7 +376,7 @@
       .manage-card-info { flex-basis: 100%; order: 1; }
       .manage-card-cat { order: 2; }
       .manage-item-check { order: 0; }
-      .manage-card > .star-btn, .manage-card > .edit-btn, .manage-card > .delete-btn { order: 3; }
+      .manage-card > .edit-btn, .manage-card > .delete-btn { order: 3; }
 
       .pending-card:has(.pending-check) { padding-left: 44px; }
       .pending-check { top: 20px; left: 16px; }
@@ -674,13 +655,6 @@
             <input type="text" id="efYoutube" value="${esc(site.youtube_url || '')}" placeholder="https://www.youtube.com/watch?v=..."/>
             <div class="edit-field-hint">If set, this plays on the site's detail page instead of the auto-generated preview card</div>
           </div>
-          <div class="edit-field edit-field-checkbox">
-            <label class="edit-checkbox-label">
-              <input type="checkbox" id="efFeatured" ${site.featured ? 'checked' : ''}/>
-              <span>⭐ Feature as Site of the Week</span>
-            </label>
-            <div class="edit-field-hint">Overrides the automatic weekly rotation on the homepage. Only one site can be featured at a time — picking this one unpins any other.</div>
-          </div>
           <div class="edit-modal-actions">
             <button class="edit-cancel-btn" onclick="closeEditModal()">Cancel</button>
             <button class="edit-save-btn" id="efSaveBtn" onclick="saveEditModal('${esc(id)}')">Save Changes</button>
@@ -708,7 +682,6 @@
       const description = document.getElementById('efDescription').value.trim();
       const tags = document.getElementById('efTags').value.split(',').map(t => t.trim().toLowerCase().replace(/\s+/g,'-')).filter(Boolean);
       const youtubeUrl = document.getElementById('efYoutube').value.trim();
-      const featured = document.getElementById('efFeatured').checked;
 
       if (!name) { showToast('Name is required', true); return; }
       if (!/^https?:\/\//i.test(url)) { showToast('URL must start with http:// or https://', true); return; }
@@ -726,7 +699,7 @@
         await rpc('admin_update_site', {
           input_key: getKey(), site_id: id,
           p_name: name, p_url: url, p_description: description, p_category: category,
-          p_tags: tags, p_tag_colors: tagColors, p_youtube_url: youtubeUrl, p_featured: featured
+          p_tags: tags, p_tag_colors: tagColors, p_youtube_url: youtubeUrl
         });
         showToast('Site updated');
         closeEditModal();
@@ -1254,30 +1227,19 @@
         return;
       }
       list.innerHTML = sites.map(s => `
-        <div class="manage-card${selectedIds.has(s.id)?' is-selected':''}${s.featured?' is-featured':''}" data-id="${esc(s.id)}">
+        <div class="manage-card${selectedIds.has(s.id)?' is-selected':''}" data-id="${esc(s.id)}">
           <input type="checkbox" class="manage-item-check" ${selectedIds.has(s.id)?'checked':''} 
                  onchange="toggleSelectItem('${esc(s.id)}', this.checked)" aria-label="Select ${esc(s.name)}"/>
           <div class="manage-card-info">
-            <div class="manage-card-name">${s.featured ? '<span class="featured-badge" title="Current Site of the Week">⭐</span> ' : ''}${esc(s.name)}</div>
+            <div class="manage-card-name">${esc(s.name)}</div>
             <div class="manage-card-url">${esc(s.url)}</div>
           </div>
           <div class="manage-card-cat">${esc(s.category)}</div>
-          <button class="star-btn${s.featured?' is-active':''}" onclick="toggleFeatured('${esc(s.id)}', ${!s.featured})" title="${s.featured ? 'Unpin from Site of the Week' : 'Set as Site of the Week'}"><i data-lucide="star" class="lucide-ico" aria-hidden="true"></i></button>
           <button class="edit-btn" onclick="openEditModal('${esc(s.id)}')"><i data-lucide="pencil" class="lucide-ico" aria-hidden="true"></i> Edit</button>
           <button class="delete-btn" onclick="confirmDelete(this, '${esc(s.id)}')"><i data-lucide="trash-2" class="lucide-ico" aria-hidden="true"></i> Delete</button>
         </div>
       `).join('');
       if(window.lucide){lucide.createIcons();}
-    }
-
-    async function toggleFeatured(id, makeFeatured) {
-      try {
-        await rpc('admin_set_featured_site', { input_key: getKey(), site_id: id, p_featured: makeFeatured });
-        showToast(makeFeatured ? 'Set as Site of the Week' : 'Unpinned from Site of the Week');
-        loadManageSites();
-      } catch (e) {
-        showToast(e.message || 'Failed to update', true);
-      }
     }
 
     function confirmDelete(btn, id) {
@@ -1533,7 +1495,7 @@
     });
   </script>
   <script src="/pwa-register.js" defer></script>
-  <script src="https://unpkg.com/lucide@1.24.0"></script>
+  <script src="https://unpkg.com/lucide@1.24.0" defer></script>
   <script>if(window.lucide){lucide.createIcons();}</script>
 </body>
 </html>
