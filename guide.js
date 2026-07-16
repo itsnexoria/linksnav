@@ -29,7 +29,7 @@
     {
       icon: 'wrench',
       title: 'Free Web Tools',
-      body: 'Head to <strong>Tools</strong> for 43 free utilities — QR codes, password generators, JSON formatters, converters and more. All run instantly in your browser.'
+      body: 'Head to <strong>Tools</strong> for 44 free utilities — QR codes, password generators, JSON formatters, converters and more. All run instantly in your browser.'
     },
     {
       icon: 'plus-circle',

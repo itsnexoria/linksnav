@@ -208,6 +208,59 @@ async function fetchAllSites(){
   return out;
 }
 
+/* ── SITE OF THE WEEK ───────────────────────────────────────────
+   Deterministic weekly spotlight — same site shown to everyone for
+   the whole ISO week, then automatically rotates. No admin table,
+   no extra Supabase calls: picked client-side from allSites once
+   it's loaded, hashed off the ISO week number so it's stable. */
+function isoWeekKey(d=new Date()){
+  const date=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const dayNum=(date.getUTCDay()+6)%7;
+  date.setUTCDate(date.getUTCDate()-dayNum+3);
+  const firstThursday=new Date(Date.UTC(date.getUTCFullYear(),0,4));
+  const week=1+Math.round(((date-firstThursday)/86400000-3+((firstThursday.getUTCDay()+6)%7))/7);
+  return `${date.getUTCFullYear()}-W${week}`;
+}
+function hashStr(s){
+  let h=0;
+  for(let i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0}
+  return Math.abs(h);
+}
+function pickSiteOfWeek(sites){
+  if(!sites||!sites.length) return null;
+  const eligible=sites.filter(s=>s.description&&s.description.length>20&&s.health_status!=='down');
+  const pool=eligible.length?eligible:sites;
+  const idx=hashStr(isoWeekKey())%pool.length;
+  return pool[idx];
+}
+function renderSiteOfWeek(){
+  const el=document.getElementById('siteOfWeek');
+  if(!el) return;
+  const s=pickSiteOfWeek(allSites);
+  if(!s){ el.style.display='none'; return; }
+  const color=s.color||'#7c5cfc';
+  const tagHTML=(s.tags||[]).slice(0,3).map(t=>{
+    const bg=(s.tag_colors||{})[t]||'#6b7280';
+    return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
+  }).join('');
+  const imgSrc=fav(s.url);
+  el.innerHTML=`
+    <div class="sow-badge"><i data-lucide="star" class="lucide-ico" aria-hidden="true"></i> Site of the Week</div>
+    <a class="sow-body" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer"
+       style="--card-color:${color}" aria-label="${esc(s.name)} — Site of the Week"
+       onclick="bumpCount('${esc(s.url)}');addRecent('${esc(s.url)}')">
+      <img class="sow-favicon" src="${esc(imgSrc)}" alt="" loading="lazy" decoding="async" width="40" height="40" onerror="this.style.display='none'">
+      <div class="sow-info">
+        <span class="sow-name">${esc(s.name)}</span>
+        <p class="sow-desc">${esc(s.description||'')}</p>
+        <div class="sow-tags">${tagHTML}</div>
+      </div>
+      <span class="sow-go" aria-hidden="true"><i data-lucide="arrow-up-right" class="lucide-ico"></i></span>
+    </a>`;
+  el.style.display='';
+  refreshIcons();
+}
+
 /* ── BOOT ───────────────────────────────────────────────────── */
 async function init(){
   try {
@@ -252,6 +305,7 @@ async function init(){
 
   buildNav();
   render();
+  renderSiteOfWeek();
   setupSearch();
   setupScrollArrows();
   populateTagFilter();
