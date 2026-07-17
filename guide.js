@@ -9,7 +9,7 @@
     {
       icon: 'compass',
       title: 'What is Nexo Hub?',
-      body: 'A hand-curated directory of 620+ genuinely useful websites across 35 categories — plus 43 free browser-based tools. No sign-up, no clutter, no dead links (we check).'
+      body: 'A hand-curated directory of 677+ genuinely useful websites across 42 categories — plus 44 free browser-based tools. No sign-up, no clutter, no dead links (we check).'
     },
     {
       icon: 'search',
