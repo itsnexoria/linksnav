@@ -112,7 +112,7 @@
     { icon: 'layout-grid', label: 'NexoSites', desc: 'Where Nexo Hub lives', href: 'https://nexosites.xyz' },
     { icon: 'clapperboard', label: 'Watch Log', desc: 'Track what you watch', href: 'https://list.nexosites.xyz' }
   ];
-  var DISCORD_LINK = { icon: 'message-square', label: 'Join our Discord', desc: 'Chat with the community', href: 'https://discord.gg/JFz3mVpCUm' };
+  var DISCORD_LINK = { icon: 'message-square', label: 'Join our Discord', desc: 'Chat with the community', href: 'https://discord.gg/NTFhj44pXR' };
 
   function fabEnabled() {
     try {
