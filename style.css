@@ -58,6 +58,19 @@
 
 /* ── RESET ──────────────────────────────────────────────────── */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+
+/* ── MOBILE OVERFLOW SAFETY NET ─────────────────────────────────
+   Any embedded media, table, or long unbroken string (a raw URL,
+   hash, or token dropped into a card/description with no spaces)
+   can force the whole page wider than the viewport, which is what
+   makes a page look "stretched" or zoomed-out on a phone. These
+   rules make that structurally impossible, so no single component
+   can blow out the layout no matter what content lands in it. */
+img, video, canvas, iframe { max-width:100%; height:auto; display:block }
+svg:not(.lucide-ico) { max-width:100% }
+table { max-width:100%; display:block; overflow-x:auto }
+pre, code { overflow-wrap:break-word; word-break:break-word }
+
 html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
 body {
   background:var(--bg); color:var(--text);

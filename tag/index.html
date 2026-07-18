@@ -154,9 +154,10 @@
       if(!items.length){ document.getElementById('tagCloud').innerHTML='<p style="color:var(--muted)">No tags found.</p>'; return; }
       document.getElementById('tagCloud').innerHTML = items.map((t,i)=>`
         <a class="tag-pill" href="/tag/${esc(t.tag)}/" style="animation-delay:${i*0.015}s">
-          🏷️ ${esc(t.tag)}
+          <i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> ${esc(t.tag)}
           ${t.site_count?`<span class="tag-pill-count">${t.site_count}</span>`:''}
         </a>`).join('');
+      if(window.lucide){ lucide.createIcons(); }
     }
 
     async function loadTagDetail(slug){

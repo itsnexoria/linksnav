@@ -48,7 +48,6 @@
     .back-link { display:inline-flex; align-items:center; gap:6px; font-size:.78rem; color:var(--muted); text-decoration:none; margin-bottom:32px; transition:color .18s, gap .18s; }
     .back-link:hover { color:var(--accent); gap:10px; }
     .sd-hero { display:flex; align-items:flex-start; gap:20px; margin-bottom:28px; animation:fadeUp .4s ease both; }
-    .sd-preview { width:100%; max-height:320px; object-fit:cover; border-radius:var(--radius-lg); border:1px solid var(--border); margin-bottom:24px; display:block; animation:fadeUp .45s .03s ease both; }
     .sd-video-wrap { position:relative; width:100%; padding-top:56.25%; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border); margin-bottom:24px; background:#000; animation:fadeUp .45s .03s ease both; }
     .sd-video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .sd-favicon { width:56px; height:56px; border-radius:14px; flex-shrink:0; background:var(--surface); border:1px solid var(--border); object-fit:contain; padding:4px; }
@@ -235,15 +234,18 @@
         <div class="nav-menu" id="mobileMenu" aria-hidden="true">
           <div class="nav-menu-inner">
             <nav class="nav-menu-links" aria-label="Site navigation">
-              <a href="/" class="nav-link">🏠 Home</a>
-              <a href="/category/" class="nav-link">🗂️ Categories</a>
-              <a href="/tag/" class="nav-link">🏷️ Tags</a>
-              <a href="/tools/" class="nav-link">🛠️ Web Tools</a>
-              <a href="/leaderboard/" class="nav-link">🏆 Leaderboard</a>
-              <a href="/new/" class="nav-link">🆕 What's New</a>
-              <a href="/contact/" class="nav-link">📬 Submit a Site</a>
-              <a href="/about/" class="nav-link">👤 About</a>
-              <a href="/settings/" class="nav-link">⚙️ Settings</a>
+              <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+              <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+              <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+              <a href="/tools/" class="nav-link"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+              <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+              <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+              <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+              <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+              <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+              <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+              <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+              <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="shield" class="lucide-ico" aria-hidden="true"></i> Admin</a>
             </nav>
             <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
           </div>
@@ -322,7 +324,7 @@
         ${(()=>{ const yid = youtubeId(site.youtube_url);
           return yid
             ? `<div class="sd-video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/${esc(yid)}" title="${esc(site.name)} video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
-            : `<img class="sd-preview" src="https://tiupkpabwuefclbrpaef.supabase.co/functions/v1/og-image?slug=${esc(site.slug)}" alt="${esc(site.name)} preview" loading="lazy" onerror="this.remove()"/>`;
+            : '';
         })()}
         <div class="sd-body">
           <p class="sd-desc">${esc(site.description)}</p>
@@ -393,7 +395,8 @@
           body: JSON.stringify({ input_site_id: siteId, input_reason: reason, input_note: note })
         });
         if(!res.ok) throw new Error();
-        document.getElementById('sdReportForm').innerHTML = '<div class="sm-report-success">✓ Thanks — we\'ll look into it.</div>';
+        document.getElementById('sdReportForm').innerHTML = '<div class="sm-report-success"><i data-lucide="check" class="lucide-ico" aria-hidden="true"></i> Thanks — we\'ll look into it.</div>';
+        if(window.lucide){ lucide.createIcons(); }
       }catch{
         btn.disabled = false; btn.textContent = 'Submit Report';
       }
@@ -657,8 +660,30 @@
         </div>`;
     }
 
+    /* If a valid admin key is already stored in this browser, quietly reveal
+       the Admin link — verified against the server, never trusted on presence
+       alone, so a stale/cleared key won't show a dead link. */
+    async function revealAdminLinkIfAuthenticated(){
+      const link = document.getElementById('adminNavLink');
+      if(!link) return;
+      const key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/check_admin_key_status`, {
+          method: 'POST', headers: { ...sbH(), 'Content-Type':'application/json' },
+          body: JSON.stringify({ input_key: key })
+        });
+        if(res.ok){
+          const ok = await res.json();
+          if(ok === true) link.style.display = '';
+        }
+      }catch{}
+    }
+
     /* ── NAV INIT ─────────────────────────────────────────────── */
     function initNav(){
+      if(window.lucide){ lucide.createIcons(); }
+      revealAdminLinkIfAuthenticated();
       const btn=document.getElementById('themeToggle');
       if(btn) btn.addEventListener('click',function(){
         const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';

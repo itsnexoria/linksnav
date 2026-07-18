@@ -271,6 +271,7 @@
     }
   </style>
   <script src="/nexo-prefs.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -456,7 +457,11 @@
           <input type="text" id="hp_website" name="website" tabindex="-1" autocomplete="off"/>
         </div>
 
-        <div style="margin-top:26px">
+        <div style="margin-top:22px;display:flex;justify-content:center">
+          <div class="cf-turnstile" id="turnstileWidget" data-sitekey="0x4AAAAAAD4qMpjTARd8XdII" data-theme="auto" data-callback="onTurnstileVerified" data-expired-callback="onTurnstileExpired"></div>
+        </div>
+
+        <div style="margin-top:16px">
           <button type="submit" class="btn-sub" id="submitBtn">
             <span class="btn-txt"><i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i> Send Request</span>
           </button>
@@ -642,6 +647,11 @@
       c.animate(kf,{duration:360,easing:'ease'});
     }
 
+    /* ── CAPTCHA (Cloudflare Turnstile) ─────────────────── */
+    let turnstileToken = '';
+    function onTurnstileVerified(token){ turnstileToken = token; }
+    function onTurnstileExpired(){ turnstileToken = ''; }
+
     /* ── SUBMIT ──────────────────────────────────────── */
     /* Map the form's display category labels to the DB's lowercase category ids */
     const CATEGORY_ID_MAP = {
@@ -662,8 +672,15 @@
       if(isDuplicateUrl){setErr(ul,'g-url');ul.classList.add('dup');ok=false}
       if(!ok){shake();return}
 
+      if(!document.getElementById('hp_website').value.trim() && !turnstileToken){
+        alert('Please complete the "Verify you are human" check before submitting.');
+        shake();
+        return;
+      }
+
       const btn=document.getElementById('submitBtn');
-      btn.disabled=true;btn.querySelector('.btn-txt').textContent='⏳ Checking…';
+      btn.disabled=true;btn.querySelector('.btn-txt').innerHTML='<i data-lucide="loader-2" class="lucide-ico" style="animation:spin .7s linear infinite"></i> Checking…';
+      if(window.lucide){lucide.createIcons();}
 
       /* Final duplicate re-check right before insert — covers the case where
          someone else submitted the same URL in the seconds since the user typed it. */
@@ -683,14 +700,16 @@
           if (row && row.exists_already) {
             showDupWarning(row.existing_name, row.existing_status);
             btn.disabled=false;
-            btn.querySelector('.btn-txt').textContent='🚀 Send Request';
+            btn.querySelector('.btn-txt').innerHTML='<i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i> Send Request';
+            if(window.lucide){lucide.createIcons();}
             shake();
             return;
           }
         }
       } catch { /* if the check itself fails, fall through — the DB constraint is the final backstop */ }
 
-      btn.querySelector('.btn-txt').textContent='⏳ Sending…';
+      btn.querySelector('.btn-txt').innerHTML='<i data-lucide="loader-2" class="lucide-ico" style="animation:spin .7s linear infinite"></i> Sending…';
+      if(window.lucide){lucide.createIcons();}
 
       /* Honeypot check — if the hidden field was filled, silently fake success */
       if(document.getElementById('hp_website').value.trim()){
@@ -724,7 +743,10 @@
       ].join('|')).slice(0,32);
 
       try{
-        const res=await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_site_safe`,{
+        /* Submissions route through the submit-site edge function, which
+           verifies the Turnstile token server-side (the secret key can't
+           live in this file) before forwarding to submit_site_safe. */
+        const res=await fetch(`${SUPABASE_URL}/functions/v1/submit-site`,{
           method:'POST',
           headers:{
             'apikey': SUPABASE_ANON_KEY,
@@ -732,6 +754,7 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
+            turnstile_token: turnstileToken,
             p_name: nm.value.trim(),
             p_url: ul.value.trim(),
             p_description: ds.value.trim(),
@@ -765,7 +788,9 @@
         } else {
           const errBody = await res.json().catch(()=>({}));
           const msg = errBody.message || '';
-          if(msg.includes('rate_limited')){
+          if(msg.includes('turnstile')){
+            throw new Error('The human-verification check failed or expired — please try it again.');
+          } else if(msg.includes('rate_limited')){
             throw new Error('You\'ve submitted several sites recently — please wait an hour before submitting again.');
           } else if(msg.includes('duplicate_url')){
             showDupWarning(nm.value.trim() || 'This site', 'approved');
@@ -777,7 +802,10 @@
         }
       } catch(err){
         btn.disabled=false;
-        btn.querySelector('.btn-txt').textContent='🚀 Send Request';
+        btn.querySelector('.btn-txt').innerHTML='<i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i> Send Request';
+        if(window.lucide){lucide.createIcons();}
+        if(window.turnstile){ turnstile.reset('turnstileWidget'); }
+        turnstileToken='';
         alert(err.message || 'Something went wrong — please try again or contact me directly.');
       }
     });
@@ -788,7 +816,10 @@
       document.getElementById('formGrid').style.display='';
       const btn=document.getElementById('submitBtn');
       btn.style.display='';btn.disabled=false;
-      btn.querySelector('.btn-txt').textContent='🚀 Send Request';
+      btn.querySelector('.btn-txt').innerHTML='<i data-lucide="rocket" class="lucide-ico" aria-hidden="true"></i> Send Request';
+      if(window.lucide){lucide.createIcons();}
+      if(window.turnstile){ turnstile.reset('turnstileWidget'); }
+      turnstileToken='';
       document.getElementById('successState').classList.remove('show');
       document.getElementById('pricingHidden').value='';picked='';
       document.querySelectorAll('.tpill').forEach(p=>p.classList.remove('sel'));

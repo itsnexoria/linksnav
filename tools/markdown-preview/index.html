@@ -281,7 +281,7 @@
         .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
         .replace(/\*(.*?)\*/g, '<i>$1</i>')
         .replace(/`(.*?)`/g, '<code style="background:rgba(0,0,0,.2);padding:2px 5px;border-radius:4px;font-size:.85em">$1</code>')
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" style="color:var(--accent)" target="_blank">$1</a>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" style="color:var(--accent)" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^\- (.*$)/gim, '<li>$1</li>')
         .replace(/(<li>.*<\/li>)/gims, '<ul style="margin-left:18px">$1</ul>')
         .replace(/\n\n/g, '</p><p>')
