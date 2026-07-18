@@ -9,7 +9,7 @@
     {
       icon: 'compass',
       title: 'What is Nexo Hub?',
-      body: 'A hand-curated directory of 677+ genuinely useful websites across 42 categories — plus 44 free browser-based tools. No sign-up, no clutter, no dead links (we check).'
+      body: 'A hand-curated directory of 677+ genuinely useful websites across 42 categories — plus 47 free browser-based tools. No sign-up, no clutter, no dead links (we check).'
     },
     {
       icon: 'search',
@@ -29,7 +29,7 @@
     {
       icon: 'wrench',
       title: 'Free Web Tools',
-      body: 'Head to <strong>Tools</strong> for 44 free utilities — QR codes, password generators, JSON formatters, converters and more. All run instantly in your browser.'
+      body: 'Head to <strong>Tools</strong> for 47 free utilities — QR codes, password generators, JSON formatters, converters and more. All run instantly in your browser.'
     },
     {
       icon: 'plus-circle',

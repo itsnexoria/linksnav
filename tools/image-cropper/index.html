@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Text Tools — Free Online Tool | Nexo Hub</title>
-  <meta name="description" content="Word counter, case converter, and text cleaner. Free, fast, and runs right in your browser — no sign-up needed."/>
-  <link rel="canonical" href="https://app.nexorealm.org/tools/text-tools/"/>
-  <meta property="og:title" content="Text Tools — Nexo Hub"/>
-  <meta property="og:description" content="Word counter, case converter, and text cleaner."/>
+  <title>Image Cropper — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Crop images to any region or a common aspect ratio, right in your browser. Free, fast, no uploads."/>
+  <link rel="canonical" href="https://app.nexorealm.org/tools/image-cropper/"/>
+  <meta property="og:title" content="Image Cropper — Nexo Hub"/>
+  <meta property="og:description" content="Crop images to any region or a common aspect ratio."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://app.nexorealm.org/tools/text-tools/"/>
+  <meta property="og:url" content="https://app.nexorealm.org/tools/image-cropper/"/>
   <meta property="og:image:width" content="512"/>
   <meta property="og:image:height" content="512"/>
-  <meta property="og:image:alt" content="Text Tools — Nexo Hub"/>
+  <meta property="og:image:alt" content="Image Cropper — Nexo Hub"/>
   <meta property="og:image" content="https://app.nexorealm.org/assets/logo-512.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Text Tools — Nexo Hub"/>
-  <meta name="twitter:description" content="Word counter, case converter, and text cleaner."/>
+  <meta name="twitter:title" content="Image Cropper — Nexo Hub"/>
+  <meta name="twitter:description" content="Crop images to any region or a common aspect ratio."/>
   <meta name="theme-color" content="#4f7fff"/>
   <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
@@ -33,9 +33,9 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Text Tools",
-    "description": "Count words, characters, sentences, and estimated reading time as you type. Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or reversed. Clean up messy text by trimming spaces, removing blank or duplicate lines, stripping punctuation or numbers, or sorting lines alphabetically.",
-    "url": "https://app.nexorealm.org/tools/text-tools/",
+    "name": "Image Cropper",
+    "description": "Upload an image, draw a crop area (or pick a preset ratio like 1:1 or 16:9), then export just that region. Drag inside the selection to move it, drag the corner handle to resize it. Processed entirely client-side — your image never leaves your device.",
+    "url": "https://app.nexorealm.org/tools/image-cropper/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (runs in browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -49,7 +49,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexorealm.org/" },
       { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexorealm.org/tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Text Tools", "item": "https://app.nexorealm.org/tools/text-tools/" }
+      { "@type": "ListItem", "position": 3, "name": "Image Cropper", "item": "https://app.nexorealm.org/tools/image-cropper/" }
     ]
   }
   </script>
@@ -110,13 +110,13 @@
       <span aria-hidden="true"> / </span>
       <a href="/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
       <span aria-hidden="true"> / </span>
-      <span style="color:var(--text2)">Text Tools</span>
+      <span style="color:var(--text2)">Image Cropper</span>
     </nav>
 
     <div class="tool-page-layout">
       <aside class="tool-sidebar" aria-label="Other tools">
         <span class="tool-sidebar-label">Other Tools</span>
-        <a href="/tools/text-tools/" class="tsb-link active"><span class="tsb-icon"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i></span>Text Tools</a>
+        <a href="/tools/text-tools/" class="tsb-link"><span class="tsb-icon"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i></span>Text Tools</a>
         <a href="/tools/font-changer/" class="tsb-link"><span class="tsb-icon"><i data-lucide="type" class="lucide-ico" aria-hidden="true"></i></span>Font Changer</a>
         <a href="/tools/color-picker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="palette" class="lucide-ico" aria-hidden="true"></i></span>Colour Picker</a>
         <a href="/tools/gradient-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="rainbow" class="lucide-ico" aria-hidden="true"></i></span>Gradient Generator</a>
@@ -161,64 +161,56 @@
         <a href="/tools/random-meme-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="laugh" class="lucide-ico" aria-hidden="true"></i></span>Random Meme</a>
         <a href="/tools/username-checker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></span>Username Checker</a>
         <a href="/tools/image-resizer/" class="tsb-link"><span class="tsb-icon"><i data-lucide="maximize" class="lucide-ico" aria-hidden="true"></i></span>Image Resizer</a>
-        <a href="/tools/image-cropper/" class="tsb-link"><span class="tsb-icon"><i data-lucide="crop" class="lucide-ico" aria-hidden="true"></i></span>Image Cropper</a>
+        <a href="/tools/image-cropper/" class="tsb-link active"><span class="tsb-icon"><i data-lucide="crop" class="lucide-ico" aria-hidden="true"></i></span>Image Cropper</a>
         <a href="/tools/image-compressor/" class="tsb-link"><span class="tsb-icon"><i data-lucide="minimize-2" class="lucide-ico" aria-hidden="true"></i></span>Image Compressor</a>
       </aside>
 
       <div class="tool-main">
         <div class="tools-hero small">
-          <div class="tools-hero-icon"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i></div>
-          <h1>Text Tools <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
-          <p>Word counter, case converter, and text cleaner.</p>
+          <div class="tools-hero-icon"><i data-lucide="crop" class="lucide-ico" aria-hidden="true"></i></div>
+          <h1>Image Cropper <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Crop images to any region or a common aspect ratio.</p>
         </div>
-        <div class="tool-info-panel" id="infoPanel" hidden>Count words, characters, sentences, and estimated reading time as you type. Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or reversed. Clean up messy text by trimming spaces, removing blank or duplicate lines, stripping punctuation or numbers, or sorting lines alphabetically.</div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Upload an image, draw a crop area (or pick a preset ratio like 1:1 or 16:9), then export just that region. Drag inside the selection to move it, drag the corner handle to resize it. Processed entirely client-side — your image never leaves your device.</div>
 
-    <div class="tool-panel active" id="panel-text">
+    <div class="tool-panel active" id="panel-crop">
       <div class="tool-card">
-        <h2><i data-lucide="bar-chart-3" class="lucide-ico" aria-hidden="true"></i> Word &amp; Character Counter</h2>
-        <textarea class="t-textarea" id="wc-input" placeholder="Paste or type your text here…"></textarea>
-        <div class="t-stats">
-          <div class="t-stat"><span class="t-stat-val" id="wc-chars">0</span><span class="t-stat-label">Characters</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-words">0</span><span class="t-stat-label">Words</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-lines">0</span><span class="t-stat-label">Lines</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-sentences">0</span><span class="t-stat-label">Sentences</span></div>
-          <div class="t-stat"><span class="t-stat-val" id="wc-read">0</span><span class="t-stat-label">Min Read</span></div>
+        <h2><i data-lucide="crop" class="lucide-ico" aria-hidden="true"></i> Image Cropper</h2>
+        <p style="font-size:.8rem;color:var(--text2);margin:0 0 16px">Draw a crop area or pick a preset ratio, then export just that region. Processed entirely in your browser — nothing uploads anywhere.</p>
+        <div id="crp-drop" style="border:2px dashed var(--border2);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s">
+          <p style="color:var(--text2);font-size:.85rem"><i data-lucide="folder" class="lucide-ico" aria-hidden="true"></i> Click to choose an image or drag and drop</p>
+          <input type="file" id="crp-input" accept="image/*" style="display:none" onchange="handleCrpFile(this.files[0])"/>
         </div>
-      </div>
 
-      <div class="tool-card">
-        <h2><i data-lucide="case-lower" class="lucide-ico" aria-hidden="true"></i> Case Converter</h2>
-        <textarea class="t-textarea" id="case-input" placeholder="Enter text to convert…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="convertCase('upper')">UPPER</button>
-          <button class="t-btn" onclick="convertCase('lower')">lower</button>
-          <button class="t-btn" onclick="convertCase('title')">Title Case</button>
-          <button class="t-btn" onclick="convertCase('sentence')">Sentence case</button>
-          <button class="t-btn" onclick="convertCase('camel')">camelCase</button>
-          <button class="t-btn" onclick="convertCase('snake')">snake_case</button>
-          <button class="t-btn" onclick="convertCase('kebab')">kebab-case</button>
-          <button class="t-btn" onclick="convertCase('reverse')">esreveR</button>
-        </div>
-        <div class="t-output" id="case-output" style="display:none"></div>
-        <div class="t-btn-row" id="case-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('case-output')">Copy</button>
-        </div>
-      </div>
+        <div id="crp-controls" style="display:none;margin-top:18px">
+          <div class="t-btn-row" style="margin-top:0;margin-bottom:12px">
+            <button class="t-btn primary" onclick="crpSetAspect(0)">Free</button>
+            <button class="t-btn" onclick="crpSetAspect(1)">1:1</button>
+            <button class="t-btn" onclick="crpSetAspect(4/3)">4:3</button>
+            <button class="t-btn" onclick="crpSetAspect(16/9)">16:9</button>
+            <button class="t-btn" onclick="crpSetAspect(9/16)">9:16</button>
+          </div>
+          <p style="font-size:.7rem;color:var(--muted);margin:0 0 8px">Drag to draw a selection, drag inside it to move, drag the corner handle to resize.</p>
 
-      <div class="tool-card">
-        <h2><i data-lucide="scissors" class="lucide-ico" aria-hidden="true"></i> Text Cleaner</h2>
-        <textarea class="t-textarea" id="clean-input" placeholder="Paste messy text…"></textarea>
-        <div class="t-btn-row">
-          <button class="t-btn" onclick="cleanText('trim')">Trim Spaces</button>
-          <button class="t-btn" onclick="cleanText('lines')">Remove Blank Lines</button>
-          <button class="t-btn" onclick="cleanText('dupes')">Remove Duplicate Lines</button>
-          <button class="t-btn" onclick="cleanText('punctuation')">Strip Punctuation</button>
-          <button class="t-btn" onclick="cleanText('numbers')">Remove Numbers</button>
-          <button class="t-btn" onclick="cleanText('sort')">Sort Lines A–Z</button>
-        </div>
-        <div class="t-output" id="clean-output" style="display:none"></div>
-        <div class="t-btn-row" id="clean-copy-row" style="display:none">
-          <button class="t-btn primary" onclick="copyOutput('clean-output')">Copy</button>
+          <div id="crp-stage" style="position:relative;display:inline-block;max-width:100%;user-select:none;touch-action:none;border-radius:8px;overflow:hidden">
+            <img id="crp-img" style="display:block;max-width:100%;max-height:420px;pointer-events:none"/>
+            <div id="crp-box" style="position:absolute;border:2px solid var(--accent);box-shadow:0 0 0 2000px rgba(0,0,0,.45);cursor:move;display:none">
+              <div id="crp-handle" style="position:absolute;right:-6px;bottom:-6px;width:14px;height:14px;background:var(--accent);border-radius:50%;cursor:nwse-resize;border:2px solid #fff"></div>
+            </div>
+          </div>
+
+          <div class="t-btn-row" style="margin-top:16px;margin-bottom:14px">
+            <button class="t-btn primary" onclick="renderCrop()"><i data-lucide="crop" class="lucide-ico" aria-hidden="true"></i> Crop & Preview</button>
+          </div>
+
+          <div id="crp-preview-wrap" style="display:none;text-align:center">
+            <img id="crp-preview" style="max-width:100%;max-height:260px;border-radius:10px;border:1px solid var(--border);background:repeating-conic-gradient(#8883 0% 25%,transparent 0% 50%) 50%/16px 16px"/>
+            <p style="font-size:.72rem;color:var(--muted);margin:10px 0 0">Cropped size: <strong id="crp-new-dims" style="color:var(--text)">–</strong></p>
+          </div>
+
+          <div class="t-btn-row" id="crp-download-row" style="display:none">
+            <button class="t-btn primary" onclick="downloadCrop()"><i data-lucide="download" class="lucide-ico" aria-hidden="true"></i> Download</button>
+          </div>
         </div>
       </div>
     </div>
@@ -304,49 +296,152 @@
       });
     })();
 
-    // ── WORD COUNTER ─────────────────────────────────────
-    const wcInput = document.getElementById('wc-input');
-    wcInput.addEventListener('input', () => {
-      const v = wcInput.value;
-      document.getElementById('wc-chars').textContent = v.length;
-      document.getElementById('wc-words').textContent = v.trim() ? v.trim().split(/\s+/).length : 0;
-      document.getElementById('wc-lines').textContent = v ? v.split('\n').length : 0;
-      document.getElementById('wc-sentences').textContent = (v.match(/[.!?]+/g) || []).length;
-      document.getElementById('wc-read').textContent = Math.max(1, Math.ceil((v.trim() ? v.trim().split(/\s+/).length : 0) / 200));
+    // ── IMAGE CROPPER ────────────────────────────────────
+    const crpDrop = document.getElementById('crp-drop');
+    crpDrop.addEventListener('click', () => document.getElementById('crp-input').click());
+    crpDrop.addEventListener('dragover', e => { e.preventDefault(); crpDrop.style.borderColor='var(--accent)'; crpDrop.style.background='var(--accent-dim)'; });
+    crpDrop.addEventListener('dragleave', () => { crpDrop.style.borderColor='var(--border2)'; crpDrop.style.background='transparent'; });
+    crpDrop.addEventListener('drop', e => {
+      e.preventDefault();
+      crpDrop.style.borderColor='var(--border2)'; crpDrop.style.background='transparent';
+      if (e.dataTransfer.files[0]) handleCrpFile(e.dataTransfer.files[0]);
     });
 
-    // ── CASE CONVERTER ───────────────────────────────────
-    function convertCase(mode) {
-      const v = document.getElementById('case-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'upper') result = v.toUpperCase();
-      else if (mode === 'lower') result = v.toLowerCase();
-      else if (mode === 'title') result = v.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
-      else if (mode === 'sentence') result = v.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
-      else if (mode === 'camel') result = v.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
-      else if (mode === 'snake') result = v.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-      else if (mode === 'kebab') result = v.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      else if (mode === 'reverse') result = v.split('').reverse().join('');
-      const out = document.getElementById('case-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('case-copy-row').style.display = 'flex';
+    let crpImg = null, crpAspect = 0, crpBlobUrl = null, crpDownloadBlob = null;
+    let crpBox = { x: 0, y: 0, w: 0, h: 0 };
+    let crpMode = null, crpStartPt = null, crpBoxStart = null;
+
+    const crpStage = document.getElementById('crp-stage');
+    const crpImgEl = document.getElementById('crp-img');
+    const crpBoxEl = document.getElementById('crp-box');
+    const crpHandle = document.getElementById('crp-handle');
+
+    function handleCrpFile(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          crpImg = img;
+          crpImgEl.src = e.target.result;
+          document.getElementById('crp-controls').style.display = 'block';
+          document.getElementById('crp-preview-wrap').style.display = 'none';
+          document.getElementById('crp-download-row').style.display = 'none';
+          requestAnimationFrame(() => {
+            const dw = crpImgEl.clientWidth, dh = crpImgEl.clientHeight;
+            const w = dw * 0.8, h = dh * 0.8;
+            crpBox = { x: (dw - w) / 2, y: (dh - h) / 2, w, h };
+            crpBoxEl.style.display = 'block';
+            paintCrpBox();
+          });
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
 
-    // ── TEXT CLEANER ──────────────────────────────────────
-    function cleanText(mode) {
-      const v = document.getElementById('clean-input').value;
-      if (!v) return;
-      let result = v;
-      if (mode === 'trim') result = v.split('\n').map(l => l.trim()).join('\n');
-      else if (mode === 'lines') result = v.split('\n').filter(l => l.trim()).join('\n');
-      else if (mode === 'dupes') result = [...new Set(v.split('\n'))].join('\n');
-      else if (mode === 'punctuation') result = v.replace(/[^\w\s]/g, '');
-      else if (mode === 'numbers') result = v.replace(/\d/g, '');
-      else if (mode === 'sort') result = v.split('\n').sort((a,b) => a.localeCompare(b)).join('\n');
-      const out = document.getElementById('clean-output');
-      out.textContent = result; out.style.display = 'block';
-      document.getElementById('clean-copy-row').style.display = 'flex';
+    function paintCrpBox() {
+      crpBoxEl.style.left = crpBox.x + 'px';
+      crpBoxEl.style.top = crpBox.y + 'px';
+      crpBoxEl.style.width = crpBox.w + 'px';
+      crpBoxEl.style.height = crpBox.h + 'px';
+    }
+
+    function crpSetAspect(ratio) {
+      crpAspect = ratio;
+      document.querySelectorAll('#panel-crop .t-btn-row:first-of-type .t-btn').forEach(b => b.classList.remove('primary'));
+      if (window.event && window.event.target) {
+        const btn = window.event.target.closest('button');
+        if (btn) btn.classList.add('primary');
+      }
+      if (!crpImg || !crpBoxEl.style.display || crpBoxEl.style.display === 'none') return;
+      if (ratio > 0) {
+        const cx = crpBox.x + crpBox.w / 2, cy = crpBox.y + crpBox.h / 2;
+        let w = crpBox.w, h = w / ratio;
+        const dw = crpImgEl.clientWidth, dh = crpImgEl.clientHeight;
+        if (h > dh) { h = dh * 0.9; w = h * ratio; }
+        crpBox = { x: clamp(cx - w / 2, 0, dw - w), y: clamp(cy - h / 2, 0, dh - h), w, h };
+        paintCrpBox();
+      }
+    }
+
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+    function stagePoint(e) {
+      const r = crpStage.getBoundingClientRect();
+      return { x: clamp(e.clientX - r.left, 0, r.width), y: clamp(e.clientY - r.top, 0, r.height) };
+    }
+
+    crpStage.addEventListener('pointerdown', e => {
+      if (!crpImg) return;
+      const pt = stagePoint(e);
+      if (e.target === crpHandle) {
+        crpMode = 'resize';
+      } else if (e.target === crpBoxEl && crpBoxEl.style.display !== 'none') {
+        crpMode = 'move';
+      } else {
+        crpMode = 'draw';
+        crpBox = { x: pt.x, y: pt.y, w: 0, h: 0 };
+        crpBoxEl.style.display = 'block';
+      }
+      crpStartPt = pt;
+      crpBoxStart = { ...crpBox };
+      crpStage.setPointerCapture(e.pointerId);
+    });
+
+    crpStage.addEventListener('pointermove', e => {
+      if (!crpMode) return;
+      const pt = stagePoint(e);
+      const dw = crpImgEl.clientWidth, dh = crpImgEl.clientHeight;
+
+      if (crpMode === 'draw') {
+        let x = Math.min(crpStartPt.x, pt.x), y = Math.min(crpStartPt.y, pt.y);
+        let w = Math.abs(pt.x - crpStartPt.x), h = Math.abs(pt.y - crpStartPt.y);
+        if (crpAspect > 0) { h = w / crpAspect; if (pt.y < crpStartPt.y) y = crpStartPt.y - h; }
+        crpBox = { x: clamp(x,0,dw), y: clamp(y,0,dh), w: Math.min(w, dw - x), h: Math.min(h, dh - y) };
+      } else if (crpMode === 'move') {
+        let x = crpBoxStart.x + (pt.x - crpStartPt.x);
+        let y = crpBoxStart.y + (pt.y - crpStartPt.y);
+        crpBox.x = clamp(x, 0, dw - crpBox.w);
+        crpBox.y = clamp(y, 0, dh - crpBox.h);
+      } else if (crpMode === 'resize') {
+        let w = clamp(pt.x - crpBox.x, 20, dw - crpBox.x);
+        let h = crpAspect > 0 ? w / crpAspect : clamp(pt.y - crpBox.y, 20, dh - crpBox.y);
+        if (crpBox.y + h > dh) { h = dh - crpBox.y; if (crpAspect > 0) w = h * crpAspect; }
+        crpBox.w = w; crpBox.h = h;
+      }
+      paintCrpBox();
+    });
+
+    ['pointerup','pointercancel'].forEach(evt => crpStage.addEventListener(evt, () => { crpMode = null; }));
+
+    function renderCrop() {
+      if (!crpImg || crpBox.w < 4 || crpBox.h < 4) return;
+      const scale = crpImg.naturalWidth / crpImgEl.clientWidth;
+      const sx = crpBox.x * scale, sy = crpBox.y * scale, sw = crpBox.w * scale, sh = crpBox.h * scale;
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(sw); canvas.height = Math.round(sh);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(crpImg, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        if (crpBlobUrl) URL.revokeObjectURL(crpBlobUrl);
+        crpBlobUrl = URL.createObjectURL(blob);
+        document.getElementById('crp-preview').src = crpBlobUrl;
+        document.getElementById('crp-preview-wrap').style.display = 'block';
+        document.getElementById('crp-new-dims').textContent = canvas.width + ' × ' + canvas.height + ' px';
+        document.getElementById('crp-download-row').style.display = 'flex';
+        crpDownloadBlob = blob;
+      }, 'image/png');
+    }
+
+    function downloadCrop() {
+      if (!crpDownloadBlob) return;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(crpDownloadBlob);
+      a.download = 'cropped-image.png';
+      a.click();
+      showToast('Downloaded!');
     }
 
   </script>
