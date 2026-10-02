@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link rel="preconnect" href="https://unpkg.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/style.css?v=20260716-4"/>
+  <link rel="stylesheet" href="/style.css?v=20260716-5"/>
   <link rel="stylesheet" href="/tools-shared.css?v=20260714-1"/>
   <script type="application/ld+json">
   {
@@ -96,6 +96,8 @@
       <h1>Web Tools</h1>
       <p>Handy browser-based utilities — no sign-up, no tracking, instant results. Each tool has its own page — pick one below.</p>
     </div>
+
+    <div id="recentTools"></div>
 
     <div class="tools-hub-grid">
       <a href="/tools/text-tools/" class="tools-hub-card">
@@ -333,6 +335,36 @@
         <h2>Image Compressor</h2>
         <p>Shrink image file size with an adjustable quality slider.</p>
       </a>
+      <a href="/tools/word-counter/" class="tools-hub-card">
+        <span class="thc-icon"><i data-lucide="text-cursor-input" class="lucide-ico" aria-hidden="true"></i></span>
+        <h2>Word Counter</h2>
+        <p>Count words, characters, sentences and reading time.</p>
+      </a>
+      <a href="/tools/jwt-decoder/" class="tools-hub-card">
+        <span class="thc-icon"><i data-lucide="key-round" class="lucide-ico" aria-hidden="true"></i></span>
+        <h2>JWT Decoder</h2>
+        <p>Decode JSON Web Tokens and check expiry.</p>
+      </a>
+      <a href="/tools/css-minifier/" class="tools-hub-card">
+        <span class="thc-icon"><i data-lucide="minimize" class="lucide-ico" aria-hidden="true"></i></span>
+        <h2>CSS Minifier</h2>
+        <p>Minify CSS to shrink file size.</p>
+      </a>
+      <a href="/tools/image-converter/" class="tools-hub-card">
+        <span class="thc-icon"><i data-lucide="file-image" class="lucide-ico" aria-hidden="true"></i></span>
+        <h2>Image Format Converter</h2>
+        <p>Convert images between PNG, JPEG and WebP.</p>
+      </a>
+      <a href="/tools/cron-explainer/" class="tools-hub-card">
+        <span class="thc-icon"><i data-lucide="calendar-clock" class="lucide-ico" aria-hidden="true"></i></span>
+        <h2>Cron Expression Explainer</h2>
+        <p>Translate cron expressions into plain English.</p>
+      </a>
+      <a href="/tools/pdf-merge-split/" class="tools-hub-card">
+        <span class="thc-icon"><i data-lucide="files" class="lucide-ico" aria-hidden="true"></i></span>
+        <h2>PDF Merge & Split</h2>
+        <p>Merge PDFs or extract pages — in your browser.</p>
+      </a>
     </div>
   </main>
 
@@ -407,6 +439,7 @@
   <script src="https://unpkg.com/lucide@1.24.0" defer></script>
   <script>if(window.lucide){lucide.createIcons();}</script>
   <script src="/guide.js?v=20260825-1" defer></script>
-<script src="/ads.js?v=1" defer></script>
+<script src="/ads.js?v=2" defer></script>
+<script src="/tools-recent.js?v=1" defer></script>
 </body>
 </html>

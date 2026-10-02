@@ -7,7 +7,7 @@
      go stale because of the service worker.
 */
 
-const SW_VERSION   = 'v2';
+const SW_VERSION   = 'v3';
 const CACHE_NAME   = `nexohub-${SW_VERSION}`;
 const OFFLINE_URL  = '/offline.html';
 

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<script>(function(){var t=localStorage.getItem("nexhub_theme")||"dark";document.documentElement.setAttribute("data-theme",t);})()</script>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>JWT Decoder — Free Online Tool | Nexo Hub</title>
+  <meta name="description" content="Decode JSON Web Tokens and check expiry. Free, fast, and runs in your browser — no sign-up needed."/>
+  <link rel="canonical" href="https://app.nexorealm.org/tools/jwt-decoder/"/>
+  <meta property="og:title" content="JWT Decoder — Nexo Hub"/>
+  <meta property="og:description" content="Decode JSON Web Tokens and check expiry."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://app.nexorealm.org/tools/jwt-decoder/"/>
+  <meta property="og:image:width" content="512"/>
+  <meta property="og:image:height" content="512"/>
+  <meta property="og:image:alt" content="JWT Decoder — Nexo Hub"/>
+  <meta property="og:image" content="https://app.nexorealm.org/assets/logo-512.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="JWT Decoder — Nexo Hub"/>
+  <meta name="twitter:description" content="Decode JSON Web Tokens and check expiry."/>
+  <meta name="theme-color" content="#4f7fff"/>
+  <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="../../assets/logo-192.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../style.css?v=20260716-5"/>
+  <link rel="stylesheet" href="../../tools-shared.css?v=20260714-1"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "JWT Decoder",
+    "description": "Paste a JSON Web Token to read its header and payload and see whether it has expired. Decoding happens locally in your browser — the token is never sent anywhere. This tool does not verify signatures.",
+    "url": "https://app.nexorealm.org/tools/jwt-decoder/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any (runs in browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Nexo Hub", "url": "https://app.nexorealm.org/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.nexorealm.org/" },
+      { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://app.nexorealm.org/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "JWT Decoder", "item": "https://app.nexorealm.org/tools/jwt-decoder/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Nexo Hub home">
+        <img src="../../assets/logo.png" alt="Nexo Hub logo" class="logo-img" width="36" height="36" loading="eager" decoding="async"/>
+        <span class="logo-text">Nexo Hub</span>
+      </a>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-menu-inner">
+      <nav class="nav-menu-links" aria-label="Site navigation">
+        <a href="/" class="nav-link"><i data-lucide="home" class="lucide-ico" aria-hidden="true"></i> Home</a>
+        <a href="/category/" class="nav-link"><i data-lucide="layout-grid" class="lucide-ico" aria-hidden="true"></i> Categories</a>
+        <a href="/tag/" class="nav-link"><i data-lucide="tag" class="lucide-ico" aria-hidden="true"></i> Tags</a>
+        <a href="/tools/" class="nav-link nav-link--active"><i data-lucide="wrench" class="lucide-ico" aria-hidden="true"></i> Web Tools</a>
+        <a href="/leaderboard/" class="nav-link"><i data-lucide="trophy" class="lucide-ico" aria-hidden="true"></i> Leaderboard</a>
+        <a href="/new/" class="nav-link"><i data-lucide="sparkles" class="lucide-ico" aria-hidden="true"></i> What's New</a>
+        <a href="/blog/" class="nav-link"><i data-lucide="newspaper" class="lucide-ico" aria-hidden="true"></i> Blog</a>
+        <a href="/contact/" class="nav-link"><i data-lucide="send" class="lucide-ico" aria-hidden="true"></i> Submit a Site</a>
+        <a href="/about/" class="nav-link"><i data-lucide="user" class="lucide-ico" aria-hidden="true"></i> About</a>
+        <a href="/donate/" class="nav-link"><i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i> Donate</a>
+        <a href="/settings/" class="nav-link"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Settings</a>
+        <a href="/pages/admin/" class="nav-link" id="adminNavLink" style="display:none"><i data-lucide="settings" class="lucide-ico" aria-hidden="true"></i> Admin</a>
+      </nav>
+      <div class="nav-menu-footer"><span>Nexo Hub by <code>Nexus</code></span></div>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main class="tools-wrap tools-wrap--split" id="main-content">
+    <a href="/tools/" class="back-link"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Web Tools</a>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb" style="margin:-24px 0 24px;font-size:.72rem;color:var(--muted)">
+      <a href="/" style="color:var(--muted);text-decoration:none">Home</a>
+      <span aria-hidden="true"> / </span>
+      <a href="/tools/" style="color:var(--muted);text-decoration:none">Web Tools</a>
+      <span aria-hidden="true"> / </span>
+      <span style="color:var(--text2)">JWT Decoder</span>
+    </nav>
+
+    <div class="tool-page-layout">
+      <aside class="tool-sidebar" aria-label="Other tools">
+        <span class="tool-sidebar-label">Other Tools</span>
+        <a href="/tools/text-tools/" class="tsb-link"><span class="tsb-icon"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i></span>Text Tools</a>
+        <a href="/tools/font-changer/" class="tsb-link"><span class="tsb-icon"><i data-lucide="type" class="lucide-ico" aria-hidden="true"></i></span>Font Changer</a>
+        <a href="/tools/color-picker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="palette" class="lucide-ico" aria-hidden="true"></i></span>Colour Picker</a>
+        <a href="/tools/gradient-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="rainbow" class="lucide-ico" aria-hidden="true"></i></span>Gradient Generator</a>
+        <a href="/tools/base64-encoder/" class="tsb-link"><span class="tsb-icon"><i data-lucide="lock" class="lucide-ico" aria-hidden="true"></i></span>Base64 Encoder / Decoder</a>
+        <a href="/tools/url-encoder/" class="tsb-link"><span class="tsb-icon"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i></span>URL Encoder / Decoder</a>
+        <a href="/tools/password-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="key" class="lucide-ico" aria-hidden="true"></i></span>Password Generator</a>
+        <a href="/tools/qr-code-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="camera" class="lucide-ico" aria-hidden="true"></i></span>QR Code Generator</a>
+        <a href="/tools/lorem-ipsum-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="file" class="lucide-ico" aria-hidden="true"></i></span>Lorem Ipsum Generator</a>
+        <a href="/tools/hash-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="hash" class="lucide-ico" aria-hidden="true"></i></span>Hash Generator</a>
+        <a href="/tools/unit-converter/" class="tsb-link"><span class="tsb-icon"><i data-lucide="ruler" class="lucide-ico" aria-hidden="true"></i></span>Unit Converter</a>
+        <a href="/tools/timestamp-converter/" class="tsb-link"><span class="tsb-icon"><i data-lucide="clock" class="lucide-ico" aria-hidden="true"></i></span>Timestamp Converter</a>
+        <a href="/tools/palette-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="drama" class="lucide-ico" aria-hidden="true"></i></span>Colour Palette Generator</a>
+        <a href="/tools/markdown-preview/" class="tsb-link"><span class="tsb-icon"><i data-lucide="file-text" class="lucide-ico" aria-hidden="true"></i></span>Markdown Previewer</a>
+        <a href="/tools/text-diff/" class="tsb-link"><span class="tsb-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></span>Text Diff Checker</a>
+        <a href="/tools/dice-roller/" class="tsb-link"><span class="tsb-icon"><i data-lucide="dices" class="lucide-ico" aria-hidden="true"></i></span>Dice Roller</a>
+        <a href="/tools/image-to-base64/" class="tsb-link"><span class="tsb-icon"><i data-lucide="image" class="lucide-ico" aria-hidden="true"></i></span>Image to Base64</a>
+        <a href="/tools/json-formatter/" class="tsb-link"><span class="tsb-icon"><i data-lucide="receipt" class="lucide-ico" aria-hidden="true"></i></span>JSON Formatter</a>
+        <a href="/tools/jwt-decoder/" class="tsb-link active"><span class="tsb-icon"><i data-lucide="id-card" class="lucide-ico" aria-hidden="true"></i></span>JWT Decoder</a>
+        <a href="/tools/slug-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="link" class="lucide-ico" aria-hidden="true"></i></span>Slug Generator</a>
+        <a href="/tools/regex-tester/" class="tsb-link"><span class="tsb-icon"><i data-lucide="puzzle" class="lucide-ico" aria-hidden="true"></i></span>Regex Tester</a>
+        <a href="/tools/percentage-calculator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="divide" class="lucide-ico" aria-hidden="true"></i></span>Percentage Calculator</a>
+        <a href="/tools/age-calculator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="cake" class="lucide-ico" aria-hidden="true"></i></span>Age Calculator</a>
+        <a href="/tools/stopwatch-timer/" class="tsb-link"><span class="tsb-icon"><i data-lucide="timer" class="lucide-ico" aria-hidden="true"></i></span>Stopwatch & Timer</a>
+        <a href="/tools/random-picker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="target" class="lucide-ico" aria-hidden="true"></i></span>Random Picker</a>
+        <a href="/tools/currency-converter/" class="tsb-link"><span class="tsb-icon"><i data-lucide="repeat" class="lucide-ico" aria-hidden="true"></i></span>Currency Converter</a>
+        <a href="/tools/ip-lookup/" class="tsb-link"><span class="tsb-icon"><i data-lucide="globe" class="lucide-ico" aria-hidden="true"></i></span>IP Address Lookup</a>
+        <a href="/tools/word-lookup/" class="tsb-link"><span class="tsb-icon"><i data-lucide="book-open-text" class="lucide-ico" aria-hidden="true"></i></span>Dictionary Lookup</a>
+        <a href="/tools/country-info/" class="tsb-link"><span class="tsb-icon"><i data-lucide="globe" class="lucide-ico" aria-hidden="true"></i></span>Country Info Lookup</a>
+        <a href="/tools/holiday-checker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="calendar" class="lucide-ico" aria-hidden="true"></i></span>Public Holiday Checker</a>
+        <a href="/tools/joke-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="laugh" class="lucide-ico" aria-hidden="true"></i></span>Joke & Quote Generator</a>
+        <a href="/tools/crypto-price/" class="tsb-link"><span class="tsb-icon"><i data-lucide="wallet" class="lucide-ico" aria-hidden="true"></i></span>Crypto Price Checker</a>
+        <a href="/tools/weather-checker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="cloud-sun" class="lucide-ico" aria-hidden="true"></i></span>Weather Checker</a>
+        <a href="/tools/world-clock/" class="tsb-link"><span class="tsb-icon"><i data-lucide="clock" class="lucide-ico" aria-hidden="true"></i></span>World Clock</a>
+        <a href="/tools/dog-image-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="dog" class="lucide-ico" aria-hidden="true"></i></span>Random Dog Image</a>
+        <a href="/tools/cat-facts/" class="tsb-link"><span class="tsb-icon"><i data-lucide="cat" class="lucide-ico" aria-hidden="true"></i></span>Random Cat Fact</a>
+        <a href="/tools/github-user-lookup/" class="tsb-link"><span class="tsb-icon"><i data-lucide="github" class="lucide-ico" aria-hidden="true"></i></span>GitHub User Lookup</a>
+        <a href="/tools/avatar-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="user-check" class="lucide-ico" aria-hidden="true"></i>‍<i data-lucide="palette" class="lucide-ico" aria-hidden="true"></i></span>Avatar Generator</a>
+        <a href="/tools/random-wikipedia/" class="tsb-link"><span class="tsb-icon"><i data-lucide="book-open" class="lucide-ico" aria-hidden="true"></i></span>Random Wikipedia Article</a>
+        <a href="/tools/text-to-speech/" class="tsb-link"><span class="tsb-icon"><i data-lucide="volume-2" class="lucide-ico" aria-hidden="true"></i></span>Text to Speech</a>
+        <a href="/tools/password-strength-checker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="shield" class="lucide-ico" aria-hidden="true"></i></span>Password Strength Checker</a>
+        <a href="/tools/meme-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="image" class="lucide-ico" aria-hidden="true"></i></span>Meme Generator</a>
+        <a href="/tools/random-meme-generator/" class="tsb-link"><span class="tsb-icon"><i data-lucide="laugh" class="lucide-ico" aria-hidden="true"></i></span>Random Meme</a>
+        <a href="/tools/username-checker/" class="tsb-link"><span class="tsb-icon"><i data-lucide="search" class="lucide-ico" aria-hidden="true"></i></span>Username Checker</a>
+        <a href="/tools/image-resizer/" class="tsb-link"><span class="tsb-icon"><i data-lucide="maximize" class="lucide-ico" aria-hidden="true"></i></span>Image Resizer</a>
+        <a href="/tools/image-cropper/" class="tsb-link"><span class="tsb-icon"><i data-lucide="crop" class="lucide-ico" aria-hidden="true"></i></span>Image Cropper</a>
+        <a href="/tools/image-compressor/" class="tsb-link"><span class="tsb-icon"><i data-lucide="minimize-2" class="lucide-ico" aria-hidden="true"></i></span>Image Compressor</a>
+        <a href="/tools/word-counter/" class="tsb-link"><span class="tsb-icon"><i data-lucide="text-cursor-input" class="lucide-ico" aria-hidden="true"></i></span>Word Counter</a>
+        <a href="/tools/css-minifier/" class="tsb-link"><span class="tsb-icon"><i data-lucide="minimize" class="lucide-ico" aria-hidden="true"></i></span>CSS Minifier</a>
+        <a href="/tools/image-converter/" class="tsb-link"><span class="tsb-icon"><i data-lucide="file-image" class="lucide-ico" aria-hidden="true"></i></span>Image Format Converter</a>
+        <a href="/tools/cron-explainer/" class="tsb-link"><span class="tsb-icon"><i data-lucide="calendar-clock" class="lucide-ico" aria-hidden="true"></i></span>Cron Expression Explainer</a>
+        <a href="/tools/pdf-merge-split/" class="tsb-link"><span class="tsb-icon"><i data-lucide="files" class="lucide-ico" aria-hidden="true"></i></span>PDF Merge & Split</a>
+      </aside>
+
+      <div class="tool-main">
+        <div class="tools-hero small">
+          <div class="tools-hero-icon"><i data-lucide="key-round" class="lucide-ico" aria-hidden="true"></i></div>
+          <h1>JWT Decoder <button class="info-btn" id="infoBtn" aria-expanded="false" aria-controls="infoPanel" aria-label="What is this tool for?">?</button></h1>
+          <p>Decode JSON Web Tokens and check expiry.</p>
+        </div>
+        <div class="tool-info-panel" id="infoPanel" hidden>Paste a JSON Web Token to read its header and payload and see whether it has expired. Decoding happens locally in your browser — the token is never sent anywhere. This tool does not verify signatures.</div>
+
+      <div class="tool-card">
+  <h2><i data-lucide="key-round" class="lucide-ico" aria-hidden="true"></i> JWT Decoder</h2>
+  <textarea class="t-textarea" id="jwt-input" rows="5" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…" oninput="jwtRun()"></textarea>
+  <div id="jwt-status" style="margin:12px 0;font-size:.85rem"></div>
+  <label style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Header</label>
+  <div class="t-output" id="jwt-header" style="display:block;min-height:40px;white-space:pre-wrap"></div>
+  <label style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-top:12px">Payload</label>
+  <div class="t-output" id="jwt-payload" style="display:block;min-height:40px;white-space:pre-wrap"></div>
+  <div class="t-btn-row"><button class="t-btn" onclick="copyOutput('jwt-payload')">Copy payload</button></div>
+  <p style="font-size:.75rem;color:var(--muted);margin-top:10px">Signature is not verified. Never paste production secrets into untrusted sites.</p>
+</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <span>Nexo Hub — Your digital command center</span>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/about/">About</a>
+      <a href="/tools/">Tools</a>
+      <a href="/contact/">Submit</a>
+      <a href="/donate/">Donate</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+    <span>Built by <code>Nexus</code> <i data-lucide="heart" class="lucide-ico" aria-hidden="true"></i></span>
+  </footer>
+
+  <div class="copied-toast" id="copiedToast">Copied!</div>
+
+  <script src="/nexo-prefs.js"></script>
+  <script>
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', t);
+      localStorage.setItem('nexhub_theme', t);
+    });
+
+    // Hamburger
+    const ham = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('navOverlay');
+    function openMenu() { ham.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); ham.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { ham.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); ham.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    ham.addEventListener('click', () => ham.classList.contains('is-open') ? closeMenu() : openMenu());
+    overlay.addEventListener('click', closeMenu);
+    menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    /* Reveal the Admin sidebar link if this browser has a verified admin key
+       stored from a previous /pages/admin/ login. Public visitors never see it. */
+    (function(){
+      const link = document.getElementById('adminNavLink');
+      if(!link) return;
+      const key = sessionStorage.getItem('nexohub_admin_key') || localStorage.getItem('nexohub_admin_key');
+      if(!key) return;
+      fetch('https://tiupkpabwuefclbrpaef.supabase.co/rest/v1/rpc/check_admin_key_status', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Authorization': 'Bearer sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input_key: key })
+      }).then(res => res.ok ? res.json() : null)
+        .then(ok => { if(ok === true) link.style.display = ''; })
+        .catch(()=>{});
+    })();
+    // Toast
+    function showToast(msg = 'Copied!') {
+      const t = document.getElementById('copiedToast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+    function copyOutput(id) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent).then(() => showToast());
+    }
+    // Info panel toggle
+    (function(){
+      var btn = document.getElementById('infoBtn');
+      var panel = document.getElementById('infoPanel');
+      btn.addEventListener('click', function(){
+        var open = panel.hasAttribute('hidden');
+        if(open){ panel.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); }
+        else { panel.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+
+    // ── JWT DECODER
+function b64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(atob(s).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''))}
+function jwtRun(){
+  const v=document.getElementById('jwt-input').value.trim();
+  const h=document.getElementById('jwt-header'),p=document.getElementById('jwt-payload'),st=document.getElementById('jwt-status');
+  if(!v){h.textContent='';p.textContent='';st.textContent='';return}
+  const parts=v.split('.');
+  if(parts.length!==3){h.textContent='';p.textContent='';st.textContent='Not a valid JWT (expected 3 dot-separated parts).';return}
+  try{
+    const hd=JSON.parse(b64u(parts[0])),pl=JSON.parse(b64u(parts[1]));
+    h.textContent=JSON.stringify(hd,null,2);p.textContent=JSON.stringify(pl,null,2);
+    const lines=[];const now=Date.now()/1000;
+    if(pl.exp){lines.push((pl.exp<now?'Expired ':'Expires ')+new Date(pl.exp*1000).toLocaleString()+(pl.exp<now?' ❌':' ✅'))}
+    if(pl.iat)lines.push('Issued '+new Date(pl.iat*1000).toLocaleString());
+    if(pl.nbf)lines.push('Not before '+new Date(pl.nbf*1000).toLocaleString());
+    st.textContent=lines.join(' · ')||'Decoded (no exp/iat claims).';
+  }catch(e){h.textContent='';p.textContent='';st.textContent='Could not decode: token is malformed.'}
+}
+
+  </script>
+  <script src="/pwa-register.js" defer></script>
+  <script src="https://unpkg.com/lucide@1.24.0" defer></script>
+  <script>if(window.lucide){lucide.createIcons();}</script>
+  <script src="/guide.js?v=20260825-1" defer></script>
+<script src="/ads.js?v=2" defer></script>
+<script src="/tools-recent.js?v=1" defer></script>
+</body>
+</html>

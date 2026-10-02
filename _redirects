@@ -49,6 +49,9 @@
 
 /search           /search/         301
 
+/compare          /compare/        301
+/random           /random/         301
+
 /blog             /blog/           301
 /blog/:slug       /404              200
 /blog/:slug/      /404              200

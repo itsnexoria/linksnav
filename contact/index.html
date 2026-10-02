@@ -48,7 +48,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="/style.css?v=20260716-4"/>
+  <link rel="stylesheet" href="/style.css?v=20260716-5"/>
 
   <style>
     /* ── PAGE-SPECIFIC ANIMATIONS ─────────────────────── */
@@ -449,6 +449,12 @@
             </div>
           </div>
 
+        <!-- Featured listing (optional, paid) -->
+          <div class="fg" style="grid-column:1/-1" id="g-featured">
+            <label class="flabel">Want more visibility? <span class="opt">(optional)</span></label>
+            <div id="featuredPlans" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px"></div>
+            <p style="font-size:.72rem;color:var(--muted);margin:8px 0 0">Featured listings are pinned to the top of the hub with a ★ badge. Every site is still reviewed first, and payment is only requested after you submit.</p>
+          </div>
         </div><!-- /form-grid -->
 
         <!-- Honeypot — hidden from real users, filled by bots -->
@@ -475,6 +481,7 @@
         </div>
         <div class="s-title">Submitted for Review!</div>
         <p class="s-msg">Thanks — your submission is in the review queue. I'll check it out and it'll go live on the hub once approved.</p>
+        <div id="featuredPay" style="display:none;margin:14px 0;font-size:.85rem"></div>
         <div class="s-btns">
           <button class="s-btn" onclick="resetForm()">Submit another</button>
           <a href="/" class="s-btn"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
@@ -662,6 +669,22 @@
       'Storage':'storage','Streaming':'streaming','Tools':'tools','Other':'tools'
     };
 
+    /* ── Featured listing plans — edit prices/labels here ── */
+    const PAYPAL_ME='nxrealm08';
+    const FEATURED_PLANS=[
+      {id:'none',label:'Standard',price:0,desc:'Free, reviewed manually'},
+      {id:'7d',label:'Featured · 7 days',price:5,desc:'Pinned to the top + ★ badge'},
+      {id:'30d',label:'Featured · 30 days',price:15,desc:'Best value — a full month'}
+    ];
+    (function(){
+      const box=document.getElementById('featuredPlans');if(!box)return;
+      box.innerHTML=FEATURED_PLANS.map((p,i)=>`<label style="display:block;cursor:pointer;border:1px solid var(--border2);border-radius:12px;padding:12px 14px">
+        <input type="radio" name="featuredPlan" value="${p.id}" ${i===0?'checked':''} style="margin-right:6px"/>
+        <strong>${p.label}</strong>${p.price?` <span style="color:var(--accent)">$${p.price}</span>`:''}
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px">${p.desc}</div></label>`).join('');
+    })();
+    function selectedPlan(){const v=(document.querySelector('input[name="featuredPlan"]:checked')||{}).value;return FEATURED_PLANS.find(p=>p.id===v)||FEATURED_PLANS[0]}
+
     document.getElementById('subForm').addEventListener('submit',async e=>{
       e.preventDefault();
       let ok=true;
@@ -764,7 +787,7 @@
             p_color: '#4f7fff',
             p_submitted_by_name: submittedBy,
             p_submitted_by_email: email,
-            p_submitted_note: whyAdd || null,
+            p_submitted_note: ((selectedPlan().price?`[FEATURED REQUEST: ${selectedPlan().label} — $${selectedPlan().price}] `:'')+whyAdd) || null,
             p_fingerprint: fp
           })
         });
@@ -783,6 +806,16 @@
           document.getElementById('s3').classList.add('active');
           document.getElementById('formGrid').style.display='none';
           btn.style.display='none';
+          const plan=selectedPlan(), pay=document.getElementById('featuredPay');
+          if(plan.price){
+            pay.style.display='block';
+            pay.innerHTML='';
+            const p=document.createElement('p');p.style.margin='0 0 8px';
+            p.textContent='To activate "'+plan.label+'", complete payment once your site is approved. Put your site name in the PayPal note.';
+            const a=document.createElement('a');a.className='s-btn';a.target='_blank';a.rel='noopener noreferrer';
+            a.href='https://www.paypal.me/'+PAYPAL_ME+'/'+plan.price;a.textContent='Pay $'+plan.price+' via PayPal';
+            pay.append(p,a);
+          } else pay.style.display='none';
           document.getElementById('successState').classList.add('show');
           blast();
         } else {

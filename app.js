@@ -13,7 +13,7 @@ const ORDER_KEY  = 'nexhub_order';
 const RECENTS_KEY = 'nexhub_recents';
 const MAX_RECENTS = 24;
 /* Bump this any time you need to bust the browser/CDN cache on app.js/style.css. */
-const BUILD_VERSION = '20260825-1';
+const BUILD_VERSION = '20260826-1';
 
 /* ── ANIMATIONS INIT ─────────────────────────────────────────── */
 (function initAnimations(){
@@ -275,7 +275,7 @@ async function populateTagFilter(){
     tags = Object.entries(counts).map(([tag,site_count])=>({tag,site_count})).sort((a,b)=>b.site_count-a.site_count);
   }
   /* Skip the price tags since they already have their own dedicated dropdown */
-  const priceTags = new Set(['free','freemium','paid']);
+  const priceTags = new Set(['free','freemium','paid','featured']);
   const frag = document.createDocumentFragment();
   tags.filter(t=>!priceTags.has(t.tag)).forEach(t=>{
     const opt = document.createElement('option');
@@ -614,7 +614,13 @@ function getFiltered(){
   if(currentSort==='default'&&!searchQuery&&activeCategory!=='__recent__'){
     base=applyOrder(base,activeCategory);
   }
-  return sortSites(base);
+  base=sortSites(base);
+  /* Featured listings (tag "featured") float to the top of the default view */
+  if(currentSort==='default'&&!searchQuery&&activeCategory!=='__recent__'&&activeCategory!=='__favorites__'){
+    const isF=s=>(s.tags||[]).some(t=>String(t).toLowerCase()==='featured');
+    base=[...base.filter(isF),...base.filter(s=>!isF(s))];
+  }
+  return base;
 }
 
 /* ── FAVICON ────────────────────────────────────────────────── */
@@ -695,7 +701,8 @@ function cardHTML(s,draggable=false){
   const color=s.color||'#7c5cfc';
   const isFav=favorites.has(s.url);
   const isDown=s.health_status==='down';
-  const tagHTML=(s.tags||[]).map(t=>{
+  const isFeatured=(s.tags||[]).some(t=>String(t).toLowerCase()==='featured');
+  const tagHTML=(s.tags||[]).filter(t=>String(t).toLowerCase()!=='featured').map(t=>{
     const bg=(s.tag_colors||{})[t]||'#6b7280';
     return `<span class="tag" style="--tag-bg:${esc(bg)}">${esc(t)}</span>`;
   }).join('');
@@ -711,7 +718,7 @@ function cardHTML(s,draggable=false){
        style="--card-color:${color}" aria-label="${esc(s.name)}">
       <div class="card-top">
         ${imgTag}
-        <span class="card-name">${esc(s.name)}</span>
+        <span class="card-name">${esc(s.name)}</span>${isFeatured?'<span class="feat-badge" title="Featured listing">★ Featured</span>':''}
         <span class="card-arrow" aria-hidden="true"><i data-lucide="arrow-up-right" class="lucide-ico"></i></span>
       </div>
       <p class="card-desc">${esc(s.description)}</p>
@@ -735,7 +742,13 @@ function mkLoadMore(total,rem){
   const wrap=document.createElement('div');
   wrap.id='loadMoreWrap';wrap.className='load-more-wrap';
   wrap.innerHTML=`<button class="load-more-btn">Load more <span class="load-more-count">${rem} remaining</span></button>`;
-  wrap.querySelector('button').addEventListener('click',()=>{visibleCount+=PAGE_SIZE;render()});
+  const btn=wrap.querySelector('button');
+  btn.addEventListener('click',()=>{visibleCount+=PAGE_SIZE;render()});
+  /* Auto-load the next page when the button scrolls into view */
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); btn.click(); } },{rootMargin:'400px'});
+    requestAnimationFrame(()=>io.observe(wrap));
+  }
   document.getElementById('main').appendChild(wrap);
 }
 

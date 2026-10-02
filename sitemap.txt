@@ -171,3 +171,10 @@
     <priority>0.3</priority>
   </url>
 </urlset>
+https://app.nexorealm.org/tools/word-counter/
+https://app.nexorealm.org/tools/jwt-decoder/
+https://app.nexorealm.org/tools/css-minifier/
+https://app.nexorealm.org/tools/image-converter/
+https://app.nexorealm.org/tools/cron-explainer/
+https://app.nexorealm.org/tools/pdf-merge-split/
+https://app.nexorealm.org/compare/

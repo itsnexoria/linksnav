@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://tiupkpabwuefclbrpaef.supabase.co"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script src="/nexo-prefs.js"></script>
-  <link rel="stylesheet" href="/style.css?v=20260716-4"/>
+  <link rel="stylesheet" href="/style.css?v=20260716-5"/>
 
   <!-- ── SITE DETAIL PAGE STYLES (used when path is /site/[slug]/) ── -->
   <style>
@@ -293,6 +293,37 @@
       }
     }
 
+    function siteInsights(site, catLabel){
+      const PRICE=['free','freemium','paid'];
+      const tags=(site.tags||[]);
+      const price=tags.find(t=>PRICE.includes(String(t).toLowerCase()));
+      const topics=tags.filter(t=>!PRICE.includes(String(t).toLowerCase()));
+      let host=''; try{ host=new URL(site.url).hostname.replace(/^www\./,''); }catch{}
+      const priceTxt = price==='free' ? 'free to use' : price==='freemium' ? 'free to start, with paid upgrades' : price==='paid' ? 'a paid service' : 'listed without pricing details';
+      const added = site.created_at ? new Date(site.created_at).toLocaleDateString('en-GB',{month:'long',year:'numeric'}) : null;
+      const about = `${site.name} is ${priceTxt} in the ${catLabel} category on Nexo Hub${topics.length?`, covering ${topics.slice(0,4).join(', ')}`:''}. `+
+        `${host?`You can find it at ${host}. `:''}${added?`It was added to the directory in ${added}.`:''}`;
+      const status = !site.last_checked_at ? 'has not been through an automatic health check yet'
+        : site.health_status==='up' ? `passed its last automatic health check ${timeAgo(site.last_checked_at)}`
+        : `failed its last automatic health check ${timeAgo(site.last_checked_at)} and may be temporarily down`;
+      const faqs = [
+        [`What is ${site.name}?`, `${site.description||''} ${about}`.trim()],
+        [`Is ${site.name} free?`, price==='free' ? `Yes — ${site.name} is tagged as free on Nexo Hub.` : price==='freemium' ? `${site.name} has a free tier, with paid options for extra features.` : price==='paid' ? `No — ${site.name} is tagged as a paid service. Check ${host||'its website'} for current pricing.` : `Nexo Hub doesn't list pricing for ${site.name}. Check ${host||'its website'} for current details.`],
+        [`Is ${site.name} working right now?`, `${site.name} ${status}. Use the Report button on this page if you find a problem.`],
+        [`What are alternatives to ${site.name}?`, `Browse more ${catLabel} sites in the category page, or see the similar sites suggested below.`]
+      ];
+      try{
+        const ld=document.createElement('script'); ld.type='application/ld+json';
+        ld.textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":faqs.map(([q,a])=>({"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}}))});
+        document.head.appendChild(ld);
+      }catch{}
+      const facts=[['Category',catLabel],['Pricing',price||'Not listed'],['Domain',host||'—'],['Link status',!site.last_checked_at?'Not yet checked':site.health_status==='up'?'Healthy':'May be down']];
+      return `<div class="sd-section-label" style="margin-top:28px">Quick facts</div>
+        <div class="sd-meta-grid">${facts.map(([k,v])=>`<div class="sd-meta-card"><div class="sd-meta-label">${esc(k)}</div><div class="sd-meta-value">${esc(v)}</div></div>`).join('')}</div>
+        <div class="sd-section-label" style="margin-top:28px">Frequently asked questions</div>
+        <div class="sd-body" style="animation:none;opacity:1">${faqs.map(([q,a])=>`<details style="padding:8px 0;border-bottom:1px solid var(--border)"><summary style="cursor:pointer;font-weight:600;font-size:.9rem">${esc(q)}</summary><p class="sd-desc" style="margin:8px 0 4px">${esc(a)}</p></details>`).join('')}</div>`;
+    }
+
     function renderSite(site, catLabel, catIcon){
       const faviconUrl = fav(site.url);
       const tags = (site.tags||[]).map(t=>{
@@ -336,6 +367,8 @@
           <button class="sd-action-btn sd-action-secondary" onclick="shareTwitter('${esc(site.url)}','${esc(site.name)}')">𝕏 Share</button>
           <button class="sd-action-btn sd-action-secondary" onclick="shareWhatsApp('${esc(site.url)}','${esc(site.name)}')"><i data-lucide="message-circle" class="lucide-ico" aria-hidden="true"></i> WhatsApp</button>
           <button class="sd-action-btn sd-action-secondary" id="sdReportBtn" onclick="toggleReport()"><i data-lucide="alert-triangle" class="lucide-ico" aria-hidden="true"></i> Report</button>
+          <a class="sd-action-btn sd-action-secondary" href="/compare/?a=${esc(encodeURIComponent(site.slug||''))}"><i data-lucide="columns" class="lucide-ico" aria-hidden="true"></i> Compare</a>
+          <a class="sd-action-btn sd-action-secondary" href="/random/"><i data-lucide="shuffle" class="lucide-ico" aria-hidden="true"></i> Random site</a>
           <a class="sd-action-btn sd-action-secondary" href="/"><i data-lucide="arrow-left" class="lucide-ico" aria-hidden="true"></i> Back to Hub</a>
         </div>
         <div class="sm-report-form" id="sdReportForm" style="display:none;margin-bottom:24px">
@@ -356,6 +389,7 @@
           <div class="sd-meta-card"><div class="sd-meta-label">Category</div><div class="sd-meta-value">${catIcon?catIconHTML(catIcon):''} ${esc(catLabel)}</div></div>
           <div class="sd-meta-card"><div class="sd-meta-label">Added to Nexo Hub</div><div class="sd-meta-value">${esc(addedDate)}</div></div>
         </div>
+        ${siteInsights(site, catLabel)}
         <div class="sd-section-label" style="margin-top:28px">You might also like</div>
         <div class="sd-similar-grid" id="similarGrid">
           <div style="grid-column:1/-1;text-align:center;padding:20px"><span class="loading-spin"></span></div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="robots" content="noindex"/>
+  <title>Random Site — Nexo Hub</title>
+  <link rel="stylesheet" href="/style.css?v=20260716-5"/>
+</head>
+<body style="display:grid;place-items:center;min-height:100vh;margin:0">
+  <p id="msg" style="color:var(--text2);font-family:Inter,system-ui,sans-serif">Finding something interesting…</p>
+  <noscript><a href="/">Back to Nexo Hub</a></noscript>
+  <script>
+    (function(){
+      var t=localStorage.getItem('nexhub_theme')||'dark';document.documentElement.setAttribute('data-theme',t);
+      var U='https://tiupkpabwuefclbrpaef.supabase.co',K='sb_publishable_Ut5Qh9mJNfK3qaltXgCH6g_Phryct7r';
+      fetch(U+'/rest/v1/sites?status=eq.approved&slug=not.is.null&select=slug&limit=2000',{headers:{apikey:K,Authorization:'Bearer '+K}})
+        .then(function(r){return r.ok?r.json():[]})
+        .then(function(a){
+          if(!a.length)throw 0;
+          var last=sessionStorage.getItem('nexo_last_random'),s;
+          do{s=a[Math.floor(Math.random()*a.length)].slug}while(a.length>1&&s===last);
+          sessionStorage.setItem('nexo_last_random',s);
+          location.replace('/site/'+encodeURIComponent(s)+'/');
+        })
+        .catch(function(){document.getElementById('msg').innerHTML='Couldn\u2019t load a site. <a href="/">Back to Nexo Hub</a>'});
+    })();
+  </script>
+</body>
+</html>

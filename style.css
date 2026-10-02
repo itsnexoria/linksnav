@@ -1323,3 +1323,9 @@ html { scroll-behavior: smooth; }
 }
 .nav-link .lucide-ico { width: 1.05em; height: 1.05em; margin-right: 2px; }
 .back-link .lucide-ico { margin-right: 2px; }
+
+
+/* ── Perf: skip rendering off-screen cards ─────────────────── */
+.card-wrap{content-visibility:auto;contain-intrinsic-size:auto 190px}
+/* ── Featured listing badge ────────────────────────────────── */
+.feat-badge{margin-left:8px;padding:2px 8px;border-radius:100px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;color:#f59e0b;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35)}

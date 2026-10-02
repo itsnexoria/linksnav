@@ -28,11 +28,15 @@
   var main = document.querySelector('main');
   if (!main) return;
 
-  var top = makeSlot('banner');
-  var anchor = main.querySelector('.tool-page-layout, #cardsGrid, .cards-grid');
-  if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(top, anchor);
-  else if (main.children[1]) main.insertBefore(top, main.children[1]);
-  else main.appendChild(top);
+  var isHome = location.pathname === '/' || location.pathname === '/index.html';
+  var top = null;
+  if (!isHome) {
+    top = makeSlot('banner');
+    var anchor = main.querySelector('.tool-page-layout, #cardsGrid, .cards-grid');
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(top, anchor);
+    else if (main.children[1]) main.insertBefore(top, main.children[1]);
+    else main.appendChild(top);
+  }
 
   var bottom = makeSlot('rect');
   main.appendChild(bottom);
@@ -65,6 +69,7 @@
       }, { rootMargin: '300px' })
     : null;
   [top, bottom].forEach(function (s) {
+    if (!s) return;
     if (io) io.observe(s); else { queue.push(s); next(); }
   });
 })();
